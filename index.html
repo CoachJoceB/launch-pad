@@ -1,0 +1,1188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Legacy Lab — Game Plan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#0A0A0A;
+    --navy-2:#1A1A1A;
+    --board:#EEE7D6;
+    --board-2:#E6DDC8;
+    --ink:#111111;
+    --ink-soft:#5B5955;
+    --orange:#E8622A;
+    --amber:#F2A93C;
+    --green:#3F8F5F;
+    --chalk:#F7F5EF;
+    --line-dark: rgba(247,245,239,.14);
+    --line-light: rgba(17,17,17,.14);
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{background:var(--navy);font-family:'Oswald',sans-serif;color:var(--ink);min-height:100vh;}
+  .wordmark{font-family:'Oswald',sans-serif;letter-spacing:.14em;text-transform:uppercase;}
+
+  header.scoreboard{
+    background:linear-gradient(180deg,var(--navy) 0%, var(--navy-2) 100%);
+    color:var(--chalk);padding:18px 28px;display:flex;align-items:center;justify-content:space-between;
+    gap:16px;border-bottom:3px solid var(--orange);flex-wrap:wrap;
+  }
+  .sb-left{display:flex;flex-direction:column;gap:2px;}
+  .sb-brand{font-size:13px;color:var(--amber);font-weight:600;}
+  .sb-date{font-family:'Oswald',sans-serif;font-size:clamp(20px,2.6vw,30px);font-weight:600;text-transform:uppercase;letter-spacing:.03em;}
+  .sb-sub{font-family:'Oswald',sans-serif;font-size:12px;color:rgba(247,245,239,.7);}
+  .sb-center{display:flex;flex-direction:column;align-items:center;gap:2px;}
+  .live-clock{font-family:'Oswald',sans-serif;font-size:clamp(26px,3.4vw,40px);font-weight:700;color:var(--chalk);letter-spacing:.02em;}
+  .live-clock-label{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:rgba(247,245,239,.5);}
+  .sb-right{display:flex;align-items:center;gap:12px;flex-wrap:wrap;}
+  .buzzer{font-family:'Oswald',sans-serif;text-align:right;}
+  .buzzer .label{font-size:10px;color:rgba(247,245,239,.55);letter-spacing:.08em;text-transform:uppercase;}
+  .buzzer .time{font-size:19px;color:var(--amber);font-weight:700;}
+  .icon-btn{
+    background:transparent;border:1.5px solid var(--line-dark);color:var(--chalk);width:38px;height:38px;
+    border-radius:9px;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;transition:.15s;
+  }
+  .icon-btn:hover{border-color:var(--orange);color:var(--orange);}
+
+  main.board{
+    background:linear-gradient(var(--line-light) 1px, transparent 1px) 0 0/100% 42px, var(--board);
+    padding:26px 28px 60px;
+  }
+  .weekend-card{
+    max-width:640px;margin:60px auto;text-align:center;background:var(--chalk);
+    border:2px dashed var(--ink-soft);border-radius:16px;padding:44px 32px;
+  }
+  .weekend-card h2{font-family:'Oswald',sans-serif;text-transform:uppercase;font-size:28px;margin:0 0 8px;}
+  .weekend-card p{color:var(--ink-soft);margin:0;}
+
+  section.qtr{max-width:1400px;margin:0 auto 34px;}
+  .qtr-head{display:flex;align-items:baseline;gap:10px;margin-bottom:14px;flex-wrap:wrap;}
+  .qtr-tag{
+    font-family:'Oswald',sans-serif;background:var(--ink);color:var(--chalk);font-size:13px;
+    letter-spacing:.1em;text-transform:uppercase;padding:5px 11px;border-radius:5px;
+  }
+  .qtr-title{font-family:'Oswald',sans-serif;font-size:clamp(20px,2.4vw,28px);text-transform:uppercase;letter-spacing:.02em;font-weight:600;}
+  .qtr-hint{font-size:13px;color:var(--ink-soft);margin-left:auto;}
+
+  .devo-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:16px;}
+  @media (max-width:900px){.devo-grid{grid-template-columns:1fr;}}
+  .card{background:var(--chalk);border:1.5px solid var(--line-light);border-radius:14px;padding:20px 22px;}
+  .word-badge{
+    display:inline-block;font-family:'Oswald',sans-serif;font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--orange);border:1.5px solid var(--orange);padding:3px 10px;border-radius:999px;margin-bottom:10px;
+  }
+  .devo-word{font-family:'Oswald',sans-serif;font-size:26px;text-transform:uppercase;margin:0 0 10px;}
+  .devo-scripture{font-style:italic;color:var(--ink-soft);border-left:3px solid var(--amber);padding-left:12px;margin:0 0 12px;font-size:15px;}
+  .devo-row{margin-bottom:10px;}
+  .devo-row .lbl{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-soft);font-weight:600;}
+  .devo-row .val{font-size:15px;margin-top:2px;}
+  .intention-card{
+    background:var(--ink);color:var(--chalk);border-radius:14px;padding:22px;display:flex;flex-direction:column;
+    justify-content:center;position:relative;overflow:hidden;
+  }
+  .intention-card::before{
+    content:"";position:absolute;right:-30px;top:-30px;width:140px;height:140px;border-radius:50%;
+    background:radial-gradient(circle, rgba(232,98,42,.35), transparent 70%);
+  }
+  .intention-tag{font-family:'Oswald',sans-serif;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--amber);margin-bottom:8px;}
+  .intention-text{font-family:'Oswald',sans-serif;font-size:clamp(20px,2.2vw,26px);line-height:1.3;font-weight:500;}
+
+  .students-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+  @media (max-width:1100px){.students-grid{grid-template-columns:1fr;}}
+  .student-card{background:var(--chalk);border:1.5px solid var(--line-light);border-radius:14px;overflow:hidden;}
+  .student-head{background:var(--navy-2);color:var(--chalk);padding:12px 16px;display:flex;align-items:center;justify-content:space-between;}
+  .student-name{font-family:'Oswald',sans-serif;font-size:18px;text-transform:uppercase;letter-spacing:.02em;}
+  .grade-badge{font-family:'Oswald',sans-serif;font-size:11px;background:var(--orange);padding:3px 8px;border-radius:5px;}
+  .student-body{padding:16px;}
+  .collapse-head{
+    display:flex;align-items:center;justify-content:space-between;cursor:pointer;
+    margin:12px 0 6px;user-select:none;
+  }
+  .collapse-head:first-child{margin-top:0;}
+  .mini-lbl{font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-soft);font-weight:700;}
+  .chevron{font-size:11px;color:var(--ink-soft);transition:transform .15s;}
+  .chevron.collapsed{transform:rotate(-90deg);}
+  .collapse-body{overflow:hidden;max-height:600px;transition:max-height .2s ease;}
+  .collapse-body.collapsed{max-height:0;}
+  .info-line{display:flex;justify-content:space-between;font-size:13.5px;padding:4px 0;border-bottom:1px dashed var(--line-light);}
+  .info-line span:first-child{color:var(--ink-soft);}
+  .info-line span:last-child{font-weight:600;text-align:right;}
+  .vocab-box{margin-top:14px;background:var(--board-2);border-radius:10px;padding:12px 14px;border:1.5px solid var(--line-light);}
+  .vocab-word{font-family:'Oswald',sans-serif;font-size:19px;text-transform:uppercase;text-decoration:underline;text-decoration-color:var(--orange);text-decoration-thickness:2.5px;text-underline-offset:4px;}
+  .vocab-row{font-size:13px;margin-top:6px;line-height:1.4;}
+  .vocab-row b{color:var(--ink-soft);font-weight:700;}
+  .syn-ant{display:flex;gap:14px;margin-top:8px;font-size:12.5px;}
+  .syn-ant span b{color:var(--green);}
+  .syn-ant span.ant b{color:var(--orange);}
+  .test-badge{
+    background:var(--amber);color:var(--ink);font-family:'Oswald',sans-serif;font-size:12px;letter-spacing:.08em;
+    text-transform:uppercase;padding:4px 10px;border-radius:6px;display:inline-block;margin-bottom:8px;
+  }
+  .test-list{list-style:none;padding:0;margin:0;}
+  .test-list li{font-family:'Oswald',sans-serif;font-size:17px;text-transform:uppercase;padding:6px 0;border-bottom:1px dashed var(--line-light);}
+
+  .subjects-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
+  @media (max-width:1000px){.subjects-grid{grid-template-columns:repeat(2,1fr);}}
+  @media (max-width:560px){.subjects-grid{grid-template-columns:1fr;}}
+  .subj-card{background:var(--chalk);border:1.5px solid var(--line-light);border-radius:14px;padding:16px;display:flex;flex-direction:column;gap:8px;position:relative;}
+  .subj-card.done{opacity:.55;}
+  .subj-top{display:flex;justify-content:space-between;align-items:flex-start;}
+  .subj-name{font-family:'Oswald',sans-serif;font-size:15px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);}
+  .subj-topic{font-size:16px;font-weight:600;line-height:1.35;}
+  .check{
+    width:24px;height:24px;border-radius:6px;border:2px solid var(--ink-soft);display:flex;align-items:center;
+    justify-content:center;cursor:pointer;flex-shrink:0;font-size:14px;color:var(--chalk);
+  }
+  .check.checked{background:var(--green);border-color:var(--green);}
+
+  footer.buzzer-strip{
+    max-width:1400px;margin:10px auto 0;background:var(--ink);color:var(--chalk);border-radius:14px;
+    padding:16px 22px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;
+  }
+  .buzzer-strip .msg{font-family:'Oswald',sans-serif;text-transform:uppercase;letter-spacing:.03em;font-size:15px;}
+  .buzzer-strip .msg b{color:var(--amber);}
+  .link-btn{background:none;border:none;color:var(--amber);text-decoration:underline;cursor:pointer;font-family:'Oswald';font-size:13px;}
+
+  .modal-overlay{
+    display:none;position:fixed;inset:0;background:rgba(16,22,29,.72);align-items:flex-start;justify-content:center;
+    padding:30px 16px;overflow-y:auto;z-index:50;
+  }
+  .modal-overlay.open{display:flex;}
+  .modal{background:var(--chalk);border-radius:16px;max-width:780px;width:100%;padding:26px 26px 22px;margin:auto;}
+  .modal.wide{max-width:980px;}
+  .modal h3{font-family:'Oswald',sans-serif;text-transform:uppercase;margin:0 0 4px;font-size:22px;}
+  .modal .sub{color:var(--ink-soft);font-size:13px;margin-bottom:18px;}
+  .modal label{display:block;font-size:11.5px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--ink-soft);margin:12px 0 4px;}
+  .modal input[type=text], .modal textarea, .modal select{
+    width:100%;padding:9px 11px;border:1.5px solid var(--line-light);border-radius:8px;font-family:'Oswald';
+    font-size:14px;background:#fff;color:var(--ink);
+  }
+  .modal textarea{resize:vertical;min-height:44px;}
+  .field-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 14px;}
+  .field-grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0 14px;}
+  .field-grid-4{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:0 14px;}
+  @media (max-width:640px){.field-grid,.field-grid-3,.field-grid-4{grid-template-columns:1fr;}}
+  .modal-tabs{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap;}
+  .modal-tab{
+    font-family:'Oswald',sans-serif;font-size:13px;text-transform:uppercase;letter-spacing:.04em;padding:7px 14px;
+    border-radius:999px;border:1.5px solid var(--line-light);cursor:pointer;background:#fff;
+  }
+  .modal-tab.active{background:var(--ink);color:var(--chalk);border-color:var(--ink);}
+  .tab-panel{display:none;}
+  .tab-panel.active{display:block;}
+  .modal-actions{display:flex;justify-content:flex-end;gap:10px;margin-top:22px;flex-wrap:wrap;}
+  .btn{font-family:'Oswald',sans-serif;text-transform:uppercase;letter-spacing:.04em;font-size:13px;padding:10px 18px;border-radius:9px;border:none;cursor:pointer;}
+  .btn-primary{background:var(--orange);color:#fff;}
+  .btn-ghost{background:transparent;color:var(--ink-soft);border:1.5px solid var(--line-light);}
+  .divider{border:none;border-top:1.5px solid var(--line-light);margin:18px 0;}
+  .save-toast{
+    position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--green);color:#fff;padding:10px 20px;
+    border-radius:999px;font-family:'Oswald',sans-serif;font-size:13px;letter-spacing:.04em;text-transform:uppercase;
+    opacity:0;pointer-events:none;transition:opacity .25s;z-index:60;
+  }
+  .save-toast.show{opacity:1;}
+
+  .extra-subj-row{display:flex;gap:8px;align-items:center;margin-bottom:8px;}
+  .extra-subj-row input{padding:8px 10px;border:1.5px solid var(--line-light);border-radius:8px;font-size:13.5px;}
+  .extra-subj-row .en{flex:1;}
+  .extra-subj-row .et{flex:2;}
+  .extra-remove{
+    width:32px;height:32px;flex-shrink:0;border-radius:8px;border:1.5px solid var(--line-light);background:#fff;
+    cursor:pointer;color:var(--ink-soft);font-size:14px;
+  }
+  .add-extra-btn{margin-top:2px;}
+
+  .archive-layout{display:flex;gap:18px;min-height:320px;}
+  .archive-weeks{width:200px;flex-shrink:0;display:flex;flex-direction:column;gap:6px;max-height:520px;overflow-y:auto;}
+  .archive-week-btn{
+    text-align:left;background:#fff;border:1.5px solid var(--line-light);border-radius:9px;padding:9px 11px;
+    cursor:pointer;font-size:12.5px;font-family:'Oswald',sans-serif;
+  }
+  .archive-week-btn.active{background:var(--ink);color:var(--chalk);border-color:var(--ink);}
+  .archive-days{flex:1;display:flex;flex-direction:column;gap:10px;max-height:600px;overflow-y:auto;padding-right:4px;}
+  .archive-day-card{background:#fff;border:1.5px solid var(--line-light);border-radius:12px;}
+  .archive-day-card .collapse-body{transition:none;}
+  .archive-day-title{font-family:'Oswald',sans-serif;text-transform:uppercase;font-size:14px;margin-bottom:6px;color:var(--ink-soft);}
+  .archive-day-word{font-family:'Oswald',sans-serif;font-size:17px;text-transform:uppercase;margin-bottom:4px;}
+  .archive-day-line{font-size:12.5px;margin:3px 0;color:var(--ink-soft);}
+  .archive-day-line b{color:var(--ink);}
+  .archive-empty{color:var(--ink-soft);font-size:14px;text-align:center;padding:60px 20px;}
+  @media (max-width:700px){.archive-layout{flex-direction:column;}.archive-weeks{width:100%;flex-direction:row;flex-wrap:wrap;max-height:none;}}
+</style>
+</head>
+<body>
+
+<header class="scoreboard">
+  <div class="sb-left">
+    <div class="sb-brand wordmark">Legacy Lab Academy</div>
+    <div class="sb-date" id="sbDate">—</div>
+    <div class="sb-sub" id="sbSub">—</div>
+  </div>
+  <div class="sb-center">
+    <div class="live-clock" id="liveClock">--:--:--</div>
+    <div class="live-clock-label">Right Now</div>
+  </div>
+  <div class="sb-right">
+    <div class="buzzer">
+      <div class="label">Final Buzzer</div>
+      <div class="time" id="buzzerTime">2:00:00 PM</div>
+    </div>
+    <button class="icon-btn" id="openArchive" title="View archive">📁</button>
+    <button class="icon-btn" id="openStudents" title="Edit student profiles">👤</button>
+    <button class="icon-btn" id="openToday" title="Edit today">✏️</button>
+    <button class="icon-btn" id="openTemplate" title="Edit weekly plan">🗓️</button>
+  </div>
+</header>
+
+<main class="board" id="board"></main>
+
+<!-- TODAY EDIT MODAL -->
+<div class="modal-overlay" id="todayOverlay">
+  <div class="modal">
+    <h3>Edit Today</h3>
+    <div class="sub" id="todaySub">Changes apply only to today's date.</div>
+    <div class="modal-tabs">
+      <div class="modal-tab active" data-tab="t-devo">Devotional</div>
+      <div class="modal-tab" data-tab="t-vocab">Vocabulary</div>
+      <div class="modal-tab" data-tab="t-subj">Subjects</div>
+    </div>
+    <div id="t-devo" class="tab-panel active"></div>
+    <div id="t-vocab" class="tab-panel"></div>
+    <div id="t-subj" class="tab-panel"></div>
+    <div class="modal-actions">
+      <button class="btn btn-ghost" id="resetToday">Reset to weekly plan</button>
+      <button class="btn btn-ghost" data-close>Cancel</button>
+      <button class="btn btn-primary" id="saveToday">Save changes</button>
+    </div>
+  </div>
+</div>
+
+<!-- WEEKLY TEMPLATE MODAL -->
+<div class="modal-overlay" id="templateOverlay">
+  <div class="modal">
+    <h3>Weekly Game Plan</h3>
+    <div class="sub">This is the recurring Monday–Friday default. Days already auto-saved won't change unless you reset them.</div>
+    <div class="modal-tabs" id="weekdayTabs"></div>
+    <div id="weekdayPanels"></div>
+    <div class="modal-actions">
+      <button class="btn btn-ghost" data-close>Cancel</button>
+      <button class="btn btn-primary" id="saveTemplate">Save weekly plan</button>
+    </div>
+  </div>
+</div>
+
+<!-- STUDENTS MODAL -->
+<div class="modal-overlay" id="studentsOverlay">
+  <div class="modal">
+    <h3>Student Profiles</h3>
+    <div class="sub">Personal info practice pulls from here. Stored only on this device/account.</div>
+    <div class="mini-lbl" style="margin-bottom:8px;">Field Labels (shared across all students)</div>
+    <div class="field-grid-3" id="addrLabelFields"></div>
+    <div class="field-grid-4" style="margin-top:6px;" id="phoneLabelFields"></div>
+    <hr class="divider">
+    <div class="modal-tabs" id="studentTabs"></div>
+    <div id="studentPanels"></div>
+    <div class="modal-actions">
+      <button class="btn btn-ghost" data-close>Cancel</button>
+      <button class="btn btn-primary" id="saveStudents">Save profiles</button>
+    </div>
+  </div>
+</div>
+
+<!-- ARCHIVE MODAL -->
+<div class="modal-overlay" id="archiveOverlay">
+  <div class="modal wide">
+    <h3>Archive</h3>
+    <div class="sub">Every school day auto-saves here at the moment it's viewed, grouped by week.</div>
+    <div class="archive-layout">
+      <div class="archive-weeks" id="archiveWeeks"></div>
+      <div class="archive-days" id="archiveDays"><div class="archive-empty">Loading…</div></div>
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-ghost" data-close>Close</button>
+    </div>
+  </div>
+</div>
+
+<div class="save-toast" id="toast">Saved</div>
+
+<script>
+/* ========================= CONFIG / DEFAULTS ========================= */
+const SWITCH_HOUR = 5;   // 5am rollover
+const BUZZER_HOUR = 14;  // 2:00pm end of school day
+const SCHOOL_DAYS = [1,2,3,4,5]; // Mon-Fri
+
+function defaultFieldLabels(){
+  return { addr1:"Home Address", addr2:"Mom's Address", addr3:"Dad's Address",
+           phone1:'Pooh', phone2:'Mom', phone3:'Dad', phone4:'My Phone' };
+}
+function defaultStudents(){
+  return [
+    { id:'s1', name:'Student One', grade:'5th', addr:{a1:'',a2:'',a3:''}, phone:{p1:'',p2:'',p3:'',p4:''} },
+    { id:'s2', name:'Student Two', grade:'8th', addr:{a1:'',a2:'',a3:''}, phone:{p1:'',p2:'',p3:'',p4:''} },
+    { id:'s3', name:'Student Three', grade:'10th', addr:{a1:'',a2:'',a3:''}, phone:{p1:'',p2:'',p3:'',p4:''} },
+  ];
+}
+function normalizeStudent(s){
+  if(s.addr && s.phone) return s;
+  // migrate from older shape if present
+  return {
+    id: s.id, name: s.name, grade: s.grade,
+    addr:{ a1: s.addresses?.home||'', a2: s.addresses?.mom||'', a3: s.addresses?.dad||'' },
+    phone:{ p1: s.phones?.pooh||'', p2: s.phones?.mom||'', p3: s.phones?.dad||'', p4: s.phones?.own||'' }
+  };
+}
+
+function v(word,def,sent,syn,ant){ return {word,def,sent,syn,ant}; }
+
+function defaultTemplate(){
+  return {
+    1:{
+      devotional:{ wordOfDay:'Resilience',
+        scripture:'"I can do all things through Christ who strengthens me." — Philippians 4:13',
+        reflection:'When something feels hard today, what will you tell yourself instead of quitting?',
+        prayer:'Lord, give me strength to keep going when today gets tough. Help me trust You with my effort. Amen.',
+        intention:'Today I bounce back quickly when something doesn\u2019t go my way.' },
+      vocab:{ '5th': v('Resilient','Able to recover quickly from difficulty.','She was resilient after losing the first game and came back stronger.','tough','fragile'),
+        '8th': v('Tenacity','Firmness in holding to a course of action.','His tenacity on defense wore the other team down.','persistence','weakness'),
+        '10th': v('Fortitude','Courage and strength in facing pain or adversity.','It took fortitude to keep training after the injury.','resolve','cowardice') },
+      subjects:{ math:'Fractions review', scienceHistoryType:'Science', scienceHistoryTopic:'Intro to forces & motion', reading:'Chapter 4 — guided reading', spanish:'Greetings & introductions' },
+      extraSubjects:[]
+    },
+    2:{
+      devotional:{ wordOfDay:'Discipline',
+        scripture:'"No discipline seems pleasant at the time, but painful. Later it produces a harvest of righteousness." — Hebrews 12:11',
+        reflection:'What is one small habit you can stick to today, even when no one is watching?',
+        prayer:'God, help me do the right thing consistently, not just when it\u2019s easy. Amen.',
+        intention:'Today I follow through on my routine, even the boring parts.' },
+      vocab:{ '5th': v('Discipline','Training to act in a controlled, correct way.','Discipline helped him finish his homework before practice.','self-control','carelessness'),
+        '8th': v('Composure','Calmness and control, especially in a difficult situation.','She kept her composure at the free-throw line.','calm','panic'),
+        '10th': v('Discernment','The ability to judge well.','Discernment helped her choose the smarter play, not just the fastest one.','judgment','confusion') },
+      subjects:{ math:'Multi-digit multiplication', scienceHistoryType:'History', scienceHistoryTopic:'Colonial America overview', reading:'Chapter 5 — vocabulary in context', spanish:'Numbers 1–20' },
+      extraSubjects:[]
+    },
+    3:{
+      devotional:{ wordOfDay:'Integrity',
+        scripture:'"The integrity of the upright guides them." — Proverbs 11:3',
+        reflection:'Would you make the same choice if no one were watching?',
+        prayer:'Lord, let my actions match my words today, in the classroom and on the court. Amen.',
+        intention:'Today I do the right thing even when it\u2019s inconvenient.' },
+      vocab:{ '5th': v('Integrity','Doing the right thing even when no one is watching.','He called his own foul because of his integrity.','honesty','dishonesty'),
+        '8th': v('Adversity','Difficulties or misfortune.','The team faced adversity but stayed focused on the plan.','hardship','ease'),
+        '10th': v('Resolute','Admirably purposeful, determined, unwavering.','She stayed resolute in her training schedule all season.','determined','wavering') },
+      subjects:{ math:'Long division practice', scienceHistoryType:'Science', scienceHistoryTopic:'States of matter', reading:'Chapter 6 — main idea & detail', spanish:'Family vocabulary' },
+      extraSubjects:[]
+    },
+    4:{
+      devotional:{ wordOfDay:'Perseverance',
+        scripture:'"Let us not become weary in doing good, for at the proper time we will reap a harvest." — Galatians 6:9',
+        reflection:'What\u2019s something you almost gave up on that you\u2019re glad you kept doing?',
+        prayer:'God, help me keep going one more rep, one more page, one more try. Amen.',
+        intention:'Today I finish what I start, even when it gets hard partway through.' },
+      vocab:{ '5th': v('Perseverance','Continuing on a task despite difficulty.','Her perseverance paid off when she finally made the shot.','persistence','quitting'),
+        '8th': v('Accountability','Being responsible for your actions and choices.','Accountability meant admitting the mistake and fixing it.','responsibility','irresponsibility'),
+        '10th': v('Meticulous','Showing great attention to detail.','His meticulous film study helped the whole team improve.','careful','sloppy') },
+      subjects:{ math:'Geometry — angles & shapes', scienceHistoryType:'History', scienceHistoryTopic:'Causes of the American Revolution', reading:'Chapter 7 — author\u2019s purpose', spanish:'Days of the week & calendar' },
+      extraSubjects:[]
+    },
+    5:{
+      devotional:{ wordOfDay:'Test Day',
+        scripture:'"She is clothed with strength and dignity; she can laugh at the days to come." — Proverbs 31:25',
+        reflection:'Which of this week\u2019s words describes how you want to show up today?',
+        prayer:'Lord, help me show what I\u2019ve learned this week with confidence, not fear. Amen.',
+        intention:'Today I show what I\u2019ve built all week — in the classroom and on the court.' },
+      vocab:{},
+      subjects:{ math:'Weekly review & mixed practice', scienceHistoryType:'Science', scienceHistoryTopic:'Week review / lab', reading:'Chapter review + comprehension check', spanish:'Weekly vocabulary quiz' },
+      extraSubjects:[]
+    }
+  };
+}
+
+/* ========================= STORAGE HELPERS ========================= */
+async function storageGet(key){
+  try{ const r = await window.storage.get(key,false); return r ? JSON.parse(r.value) : null; }
+  catch(e){ return null; }
+}
+async function storageSet(key,value){
+  try{ await window.storage.set(key, JSON.stringify(value), false); return true; }
+  catch(e){ console.error('storage set failed',e); return false; }
+}
+async function storageDelete(key){ try{ await window.storage.delete(key,false); }catch(e){} }
+async function storageList(prefix){
+  try{ const r = await window.storage.list(prefix,false); return (r && r.keys) ? r.keys : []; }
+  catch(e){ return []; }
+}
+
+const TEMPLATE_KEY = 'weekly-template';
+const STUDENTS_KEY = 'student-profiles';
+const LABELS_KEY = 'field-labels';
+function dayKey(dateStr){ return 'day-override:'+dateStr; }
+function checksKey(dateStr){ return 'day-checks:'+dateStr; }
+
+/* ========================= DATE / SCHOOL DAY LOGIC ========================= */
+function pad(n){return n<10?'0'+n:''+n;}
+function toDateStr(d){ return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate()); }
+function getSchoolDate(now){
+  const d = new Date(now);
+  if(d.getHours() < SWITCH_HOUR){ d.setDate(d.getDate()-1); }
+  d.setHours(12,0,0,0);
+  return d;
+}
+function mondayOfWeek(schoolDate){
+  const d = new Date(schoolDate);
+  const day = d.getDay();
+  const diff = day===0 ? -6 : (1-day);
+  d.setDate(d.getDate()+diff);
+  return d;
+}
+
+/* ========================= APP STATE ========================= */
+let state = {
+  template:null, students:null, fieldLabels:null,
+  schoolDate:null, weekdayNum:null, dateStr:null,
+  todayOverride:null, weekWords:{}, checks:{}
+};
+let collapseState = {}; // in-memory only, per session
+
+async function loadAll(){
+  state.template = (await storageGet(TEMPLATE_KEY)) || defaultTemplate();
+  const rawStudents = (await storageGet(STUDENTS_KEY)) || defaultStudents();
+  state.students = rawStudents.map(normalizeStudent);
+  state.fieldLabels = (await storageGet(LABELS_KEY)) || defaultFieldLabels();
+
+  const now = new Date();
+  state.schoolDate = getSchoolDate(now);
+  const dow = state.schoolDate.getDay();
+  state.weekdayNum = dow;
+  const dstr = toDateStr(state.schoolDate);
+  state.dateStr = dstr;
+  state.todayOverride = await storageGet(dayKey(dstr));
+  state.checks = (await storageGet(checksKey(dstr))) || {};
+
+  // AUTO-SAVE: the first time a school day is viewed, snapshot the ENTIRE
+  // page for that day permanently (devotional, vocab, subjects, student
+  // profiles, and field labels as they were) so it can always be referenced
+  // exactly as shown, even if the weekly template or profiles change later.
+  if(SCHOOL_DAYS.includes(state.weekdayNum) && !state.todayOverride){
+    const resolved = JSON.parse(JSON.stringify(state.template[state.weekdayNum] || {}));
+    if(resolved && Object.keys(resolved).length){
+      resolved.students = JSON.parse(JSON.stringify(state.students));
+      resolved.fieldLabels = JSON.parse(JSON.stringify(state.fieldLabels));
+      state.todayOverride = resolved;
+      await storageSet(dayKey(dstr), resolved);
+    }
+  } else if(state.todayOverride && (!state.todayOverride.students || !state.todayOverride.fieldLabels)){
+    // Backfill snapshots for days saved before this feature existed.
+    state.todayOverride.students = state.todayOverride.students || JSON.parse(JSON.stringify(state.students));
+    state.todayOverride.fieldLabels = state.todayOverride.fieldLabels || JSON.parse(JSON.stringify(state.fieldLabels));
+    await storageSet(dayKey(dstr), state.todayOverride);
+  }
+
+  if(state.weekdayNum === 5){ state.weekWords = await computeWeekWordsFor(mondayOfWeek(state.schoolDate)); }
+}
+
+async function computeWeekWordsFor(mon){
+  const grades = ['5th','8th','10th'];
+  const result = {'5th':[], '8th':[], '10th':[]};
+  for(let i=0;i<4;i++){
+    const d = new Date(mon); d.setDate(mon.getDate()+i);
+    const ds = toDateStr(d);
+    const override = await storageGet(dayKey(ds));
+    const wd = i+1;
+    const content = override || state.template[wd];
+    if(content && content.vocab){
+      grades.forEach(g=>{ if(content.vocab[g]) result[g].push(content.vocab[g].word); });
+    }
+  }
+  return result;
+}
+
+function todayContent(){ return state.todayOverride || state.template[state.weekdayNum] || null; }
+
+function allSubjects(c){
+  const subj = c.subjects || {};
+  const base = [
+    {id:'math', name:'Math', topic:subj.math},
+    {id:'sciHist', name: subj.scienceHistoryType || 'Science', topic:subj.scienceHistoryTopic},
+    {id:'reading', name:'Reading', topic:subj.reading},
+    {id:'spanish', name:'Spanish', topic:subj.spanish},
+  ];
+  const extra = (c.extraSubjects||[]).map(e=>({id:e.id, name:e.name, topic:e.topic}));
+  return base.concat(extra);
+}
+
+/* ========================= RENDER: HEADER ========================= */
+function renderHeader(){
+  const opts = {weekday:'long', month:'long', day:'numeric'};
+  document.getElementById('sbDate').textContent = state.schoolDate.toLocaleDateString('en-US', opts);
+  const wd = state.weekdayNum;
+  const isSchool = SCHOOL_DAYS.includes(wd);
+  document.getElementById('sbSub').textContent = isSchool
+    ? `School Day ${wd} of 5 this week` + (wd===5 ? ' · Test Day' : '')
+    : 'Weekend — no school day scheduled';
+  tickClock();
+  updateBuzzer();
+}
+function tickClock(){
+  const now = new Date();
+  document.getElementById('liveClock').textContent = now.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit',second:'2-digit'});
+}
+function updateBuzzer(){
+  const now = new Date();
+  const buzzer = new Date(state.schoolDate);
+  buzzer.setHours(BUZZER_HOUR,0,0,0);
+  const el = document.getElementById('buzzerTime');
+  if(!SCHOOL_DAYS.includes(state.weekdayNum)){ el.textContent = '—'; return; }
+  const diffMs = buzzer - now;
+  if(diffMs <= 0){ el.textContent = 'Afternoon Activities'; return; }
+  const totalSec = Math.floor(diffMs/1000);
+  const h = Math.floor(totalSec/3600);
+  const m = Math.floor((totalSec%3600)/60);
+  const s = totalSec%60;
+  el.textContent = h>0 ? `${h}:${pad(m)}:${pad(s)}` : `${m}:${pad(s)}`;
+}
+
+/* ========================= RENDER: BOARD ========================= */
+function esc(s){ return (s||'').toString().replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+function escAttr(s){ return esc(s).replace(/"/g,'&quot;'); }
+
+function renderBoard(){
+  const board = document.getElementById('board');
+  const wd = state.weekdayNum;
+
+  if(!SCHOOL_DAYS.includes(wd)){
+    board.innerHTML = `<div class="weekend-card">
+      <h2>No School Day Scheduled</h2>
+      <p>The command center runs Monday–Friday and switches automatically at 5:00 AM. Enjoy the weekend! 🏀</p>
+    </div>`;
+    return;
+  }
+
+  const c = todayContent();
+  if(!c){ board.innerHTML = `<div class="weekend-card"><h2>Nothing planned yet</h2><p>Use the calendar icon above to build this weekday's plan.</p></div>`; return; }
+
+  const devo = c.devotional;
+  const isTestDay = wd===5;
+  const fl = state.fieldLabels;
+
+  const studentsHTML = state.students.map((s)=>{
+    const grade = s.grade;
+    let vocabHTML = '';
+    if(isTestDay){
+      const words = (state.weekWords[grade]||[]);
+      vocabHTML = `<div class="vocab-box">
+        <span class="test-badge">Test Day</span>
+        <ul class="test-list">${words.map(w=>`<li>${esc(w)}</li>`).join('') || '<li style="text-transform:none;font-family:Oswald;font-size:13px;color:var(--ink-soft)">No words logged this week yet</li>'}</ul>
+      </div>`;
+    } else {
+      const word = c.vocab && c.vocab[grade];
+      if(word){
+        vocabHTML = `<div class="vocab-box">
+          <div class="vocab-word">${esc(word.word)}</div>
+          <div class="vocab-row"><b>Define:</b> ${esc(word.def)}</div>
+          <div class="vocab-row"><b>Use it:</b> ${esc(word.sent)}</div>
+          <div class="syn-ant"><span><b>Syn</b> ${esc(word.syn)}</span><span class="ant"><b>Ant</b> ${esc(word.ant)}</span></div>
+        </div>`;
+      }
+    }
+
+    const infoCollapsed = collapseState[s.id+'-info'] ? 'collapsed' : '';
+    const phoneCollapsed = collapseState[s.id+'-phone'] ? 'collapsed' : '';
+
+    return `<div class="student-card">
+      <div class="student-head">
+        <div class="student-name">${esc(s.name)}</div>
+        <div class="grade-badge">${esc(s.grade)} GRADE</div>
+      </div>
+      <div class="student-body">
+        <div class="collapse-head" data-collapse="${s.id}-info">
+          <div class="mini-lbl">Personal Info</div><div class="chevron ${infoCollapsed}">▾</div>
+        </div>
+        <div class="collapse-body ${infoCollapsed}" data-collapsebody="${s.id}-info">
+          <div class="info-line"><span>Full name</span><span>${esc(s.name)}</span></div>
+          <div class="info-line"><span>${esc(fl.addr1)}</span><span>${esc(s.addr.a1)||'—'}</span></div>
+          <div class="info-line"><span>${esc(fl.addr2)}</span><span>${esc(s.addr.a2)||'—'}</span></div>
+          <div class="info-line"><span>${esc(fl.addr3)}</span><span>${esc(s.addr.a3)||'—'}</span></div>
+        </div>
+        <div class="collapse-head" data-collapse="${s.id}-phone">
+          <div class="mini-lbl">Phone Numbers</div><div class="chevron ${phoneCollapsed}">▾</div>
+        </div>
+        <div class="collapse-body ${phoneCollapsed}" data-collapsebody="${s.id}-phone">
+          <div class="info-line"><span>${esc(fl.phone1)}</span><span>${esc(s.phone.p1)||'—'}</span></div>
+          <div class="info-line"><span>${esc(fl.phone2)}</span><span>${esc(s.phone.p2)||'—'}</span></div>
+          <div class="info-line"><span>${esc(fl.phone3)}</span><span>${esc(s.phone.p3)||'—'}</span></div>
+          <div class="info-line"><span>${esc(fl.phone4)}</span><span>${esc(s.phone.p4)||'—'}</span></div>
+        </div>
+        <div class="mini-lbl" style="margin-top:12px;">Vocabulary ${isTestDay ? '— Test' : '('+grade+' grade)'}</div>
+        ${vocabHTML}
+      </div>
+    </div>`;
+  }).join('');
+
+  const subjList = allSubjects(c);
+  const subjectsHTML = subjList.map(sub=>{
+    const checked = !!state.checks[sub.id];
+    return `<div class="subj-card ${checked?'done':''}">
+      <div class="subj-top">
+        <div class="subj-name">${esc(sub.name)||'Subject'}</div>
+        <div class="check ${checked?'checked':''}" data-subj="${sub.id}">${checked?'✓':''}</div>
+      </div>
+      <div class="subj-topic">${esc(sub.topic)||'No topic set'}</div>
+    </div>`;
+  }).join('');
+
+  board.innerHTML = `
+    <section class="qtr">
+      <div class="qtr-head"><div class="qtr-tag">Q1</div><div class="qtr-title">Warm-Up · Devotional</div><div class="qtr-hint">Sets today's intention</div></div>
+      <div class="devo-grid">
+        <div class="card">
+          <div class="word-badge">Word of the Day</div>
+          <div class="devo-word">${esc(devo.wordOfDay)}</div>
+          <p class="devo-scripture">${esc(devo.scripture)}</p>
+          <div class="devo-row"><div class="lbl">Reflection Question</div><div class="val">${esc(devo.reflection)}</div></div>
+          <div class="devo-row"><div class="lbl">Prayer</div><div class="val">${esc(devo.prayer)}</div></div>
+        </div>
+        <div class="intention-card">
+          <div class="intention-tag">Today's Intention</div>
+          <div class="intention-text">${esc(devo.intention)}</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="qtr">
+      <div class="qtr-head"><div class="qtr-tag">Q2</div><div class="qtr-title">Skills Drill</div><div class="qtr-hint">Tap a header to collapse</div></div>
+      <div class="students-grid">${studentsHTML}</div>
+    </section>
+
+    <section class="qtr">
+      <div class="qtr-head"><div class="qtr-tag">Q3–Q4</div><div class="qtr-title">Game Plan · Core Subjects</div><div class="qtr-hint">Tap a box to mark complete</div></div>
+      <div class="subjects-grid">${subjectsHTML}</div>
+    </section>
+
+    <footer class="buzzer-strip">
+      <div class="msg">Final buzzer <b>2:00 PM</b> — afternoon activities begin</div>
+      <button class="link-btn" id="openTodayFooter">Edit today's plan</button>
+    </footer>
+  `;
+
+  board.querySelectorAll('.check').forEach(el=>{
+    el.addEventListener('click', async ()=>{
+      const key = el.dataset.subj;
+      state.checks[key] = !state.checks[key];
+      await storageSet(checksKey(state.dateStr), state.checks);
+      renderBoard();
+    });
+  });
+  board.querySelectorAll('[data-collapse]').forEach(el=>{
+    el.addEventListener('click', ()=>{
+      const key = el.dataset.collapse;
+      collapseState[key] = !collapseState[key];
+      const body = board.querySelector(`[data-collapsebody="${key}"]`);
+      const chev = el.querySelector('.chevron');
+      body.classList.toggle('collapsed', collapseState[key]);
+      chev.classList.toggle('collapsed', collapseState[key]);
+    });
+  });
+  const footerBtn = document.getElementById('openTodayFooter');
+  if(footerBtn) footerBtn.addEventListener('click', openTodayModal);
+}
+
+/* ========================= EXTRA SUBJECTS EDITOR ========================= */
+function makeExtraSubjectsEditor(container, arr){
+  function render(){
+    container.innerHTML = arr.map((item,i)=>`
+      <div class="extra-subj-row">
+        <input type="text" class="en" data-i="${i}" data-f="name" placeholder="Subject name" value="${escAttr(item.name)}">
+        <input type="text" class="et" data-i="${i}" data-f="topic" placeholder="Topic" value="${escAttr(item.topic)}">
+        <button type="button" class="extra-remove" data-i="${i}">✕</button>
+      </div>`).join('') + `<button type="button" class="btn btn-ghost add-extra-btn">+ Add Subject</button>`;
+    container.querySelectorAll('input').forEach(inp=>{
+      inp.addEventListener('input', ()=>{ arr[+inp.dataset.i][inp.dataset.f] = inp.value; });
+    });
+    container.querySelectorAll('.extra-remove').forEach(btn=>{
+      btn.addEventListener('click', ()=>{ arr.splice(+btn.dataset.i,1); render(); });
+    });
+    container.querySelector('.add-extra-btn').addEventListener('click', ()=>{
+      arr.push({id:'extra-'+Date.now()+'-'+Math.random().toString(36).slice(2,6), name:'', topic:''});
+      render();
+    });
+  }
+  render();
+}
+
+/* ========================= TODAY MODAL ========================= */
+let todayExtraSubjects = [];
+function openTodayModal(){
+  const c = JSON.parse(JSON.stringify(todayContent() || state.template[state.weekdayNum] || state.template[1]));
+  document.getElementById('todaySub').textContent =
+    `Editing ${state.schoolDate.toLocaleDateString('en-US',{weekday:'long', month:'long', day:'numeric'})} only.`;
+
+  document.getElementById('t-devo').innerHTML = `
+    <label>Word of the Day</label><input type="text" id="f-word" value="${escAttr(c.devotional.wordOfDay)}">
+    <label>Scripture</label><textarea id="f-scripture">${esc(c.devotional.scripture)}</textarea>
+    <label>Reflection Question</label><textarea id="f-reflect">${esc(c.devotional.reflection)}</textarea>
+    <label>Prayer</label><textarea id="f-prayer">${esc(c.devotional.prayer)}</textarea>
+    <label>Today's Intention</label><textarea id="f-intent">${esc(c.devotional.intention)}</textarea>
+  `;
+
+  const grades = ['5th','8th','10th'];
+  document.getElementById('t-vocab').innerHTML = state.weekdayNum===5
+    ? `<p style="color:var(--ink-soft);font-size:14px;">Friday auto-pulls this week's words for testing — nothing to set here.</p>`
+    : grades.map(g=>{
+        const w = (c.vocab && c.vocab[g]) || {word:'',def:'',sent:'',syn:'',ant:''};
+        return `<div style="margin-bottom:14px;padding-bottom:10px;border-bottom:1.5px solid var(--line-light)">
+          <label>${g} Grade Word</label><input type="text" id="v-${g}-word" value="${escAttr(w.word)}">
+          <div class="field-grid">
+            <div><label>Definition</label><textarea id="v-${g}-def">${esc(w.def)}</textarea></div>
+            <div><label>Used in a sentence</label><textarea id="v-${g}-sent">${esc(w.sent)}</textarea></div>
+          </div>
+          <div class="field-grid">
+            <div><label>Synonym</label><input type="text" id="v-${g}-syn" value="${escAttr(w.syn)}"></div>
+            <div><label>Antonym</label><input type="text" id="v-${g}-ant" value="${escAttr(w.ant)}"></div>
+          </div>
+        </div>`;
+      }).join('');
+
+  document.getElementById('t-subj').innerHTML = `
+    <label>Math Topic</label><input type="text" id="s-math" value="${escAttr(c.subjects.math)}">
+    <div class="field-grid">
+      <div><label>History or Science</label>
+        <select id="s-type"><option ${c.subjects.scienceHistoryType==='Science'?'selected':''}>Science</option><option ${c.subjects.scienceHistoryType==='History'?'selected':''}>History</option></select>
+      </div>
+      <div><label>Topic</label><input type="text" id="s-scihist" value="${escAttr(c.subjects.scienceHistoryTopic)}"></div>
+    </div>
+    <label>Reading Topic</label><input type="text" id="s-reading" value="${escAttr(c.subjects.reading)}">
+    <label>Spanish Topic</label><input type="text" id="s-spanish" value="${escAttr(c.subjects.spanish)}">
+    <hr class="divider">
+    <div class="mini-lbl" style="margin-bottom:8px;">Additional Subjects</div>
+    <div id="today-extra-subjects"></div>
+  `;
+  todayExtraSubjects = JSON.parse(JSON.stringify(c.extraSubjects||[]));
+  makeExtraSubjectsEditor(document.getElementById('today-extra-subjects'), todayExtraSubjects);
+
+  switchModalTab(document.getElementById('todayOverlay'), 't-devo');
+  document.getElementById('todayOverlay').classList.add('open');
+}
+function collectTodayForm(){
+  const g5w = document.getElementById('v-5th-word');
+  const vocab = {};
+  if(g5w){
+    ['5th','8th','10th'].forEach(g=>{
+      vocab[g] = { word:document.getElementById(`v-${g}-word`).value, def:document.getElementById(`v-${g}-def`).value,
+        sent:document.getElementById(`v-${g}-sent`).value, syn:document.getElementById(`v-${g}-syn`).value, ant:document.getElementById(`v-${g}-ant`).value };
+    });
+  }
+  return {
+    devotional:{ wordOfDay:document.getElementById('f-word').value, scripture:document.getElementById('f-scripture').value,
+      reflection:document.getElementById('f-reflect').value, prayer:document.getElementById('f-prayer').value, intention:document.getElementById('f-intent').value },
+    vocab,
+    subjects:{ math:document.getElementById('s-math').value, scienceHistoryType:document.getElementById('s-type').value,
+      scienceHistoryTopic:document.getElementById('s-scihist').value, reading:document.getElementById('s-reading').value, spanish:document.getElementById('s-spanish').value },
+    extraSubjects: todayExtraSubjects.filter(e=>e.name.trim()!=='' || e.topic.trim()!=='')
+  };
+}
+
+/* ========================= TEMPLATE MODAL ========================= */
+const WEEKDAY_LABELS = {1:'Monday',2:'Tuesday',3:'Wednesday',4:'Thursday',5:'Friday (Test Day)'};
+let templateExtraSubjects = {};
+function openTemplateModal(){
+  const tabsEl = document.getElementById('weekdayTabs');
+  const panelsEl = document.getElementById('weekdayPanels');
+  tabsEl.innerHTML = Object.keys(WEEKDAY_LABELS).map((k,i)=>`<div class="modal-tab ${i===0?'active':''}" data-wtab="w-${k}">${WEEKDAY_LABELS[k]}</div>`).join('');
+
+  templateExtraSubjects = {};
+  panelsEl.innerHTML = Object.keys(WEEKDAY_LABELS).map((k,i)=>{
+    const c = state.template[k];
+    const grades = ['5th','8th','10th'];
+    const vocabBlock = (k==='5')
+      ? `<p style="color:var(--ink-soft);font-size:13px;">Friday tests words from Mon–Thu automatically.</p>`
+      : grades.map(g=>{
+          const w = c.vocab[g] || {word:'',def:'',sent:'',syn:'',ant:''};
+          return `<div style="margin-bottom:12px;padding-bottom:10px;border-bottom:1.5px solid var(--line-light)">
+            <label>${g} Grade Word</label><input type="text" id="w-${k}-${g}-word" value="${escAttr(w.word)}">
+            <div class="field-grid">
+              <div><label>Definition</label><textarea id="w-${k}-${g}-def">${esc(w.def)}</textarea></div>
+              <div><label>Sentence</label><textarea id="w-${k}-${g}-sent">${esc(w.sent)}</textarea></div>
+            </div>
+            <div class="field-grid">
+              <div><label>Synonym</label><input type="text" id="w-${k}-${g}-syn" value="${escAttr(w.syn)}"></div>
+              <div><label>Antonym</label><input type="text" id="w-${k}-${g}-ant" value="${escAttr(w.ant)}"></div>
+            </div>
+          </div>`;
+        }).join('');
+
+    return `<div class="tab-panel ${i===0?'active':''}" id="w-${k}">
+      <div class="mini-lbl" style="margin-top:0">Devotional</div>
+      <label>Word of the Day</label><input type="text" id="w-${k}-word" value="${escAttr(c.devotional.wordOfDay)}">
+      <label>Scripture</label><textarea id="w-${k}-scripture">${esc(c.devotional.scripture)}</textarea>
+      <label>Reflection Question</label><textarea id="w-${k}-reflect">${esc(c.devotional.reflection)}</textarea>
+      <label>Prayer</label><textarea id="w-${k}-prayer">${esc(c.devotional.prayer)}</textarea>
+      <label>Intention</label><textarea id="w-${k}-intent">${esc(c.devotional.intention)}</textarea>
+      <hr class="divider">
+      <div class="mini-lbl" style="margin-top:0">Vocabulary</div>
+      ${vocabBlock}
+      <hr class="divider">
+      <div class="mini-lbl" style="margin-top:0">Core Subjects</div>
+      <label>Math Topic</label><input type="text" id="w-${k}-math" value="${escAttr(c.subjects.math)}">
+      <div class="field-grid">
+        <div><label>History or Science</label>
+          <select id="w-${k}-type"><option ${c.subjects.scienceHistoryType==='Science'?'selected':''}>Science</option><option ${c.subjects.scienceHistoryType==='History'?'selected':''}>History</option></select>
+        </div>
+        <div><label>Topic</label><input type="text" id="w-${k}-scihist" value="${escAttr(c.subjects.scienceHistoryTopic)}"></div>
+      </div>
+      <label>Reading Topic</label><input type="text" id="w-${k}-reading" value="${escAttr(c.subjects.reading)}">
+      <label>Spanish Topic</label><input type="text" id="w-${k}-spanish" value="${escAttr(c.subjects.spanish)}">
+      <div class="mini-lbl" style="margin:14px 0 8px;">Additional Subjects</div>
+      <div id="w-${k}-extra-subjects"></div>
+    </div>`;
+  }).join('');
+
+  Object.keys(WEEKDAY_LABELS).forEach(k=>{
+    templateExtraSubjects[k] = JSON.parse(JSON.stringify(state.template[k].extraSubjects||[]));
+    makeExtraSubjectsEditor(document.getElementById(`w-${k}-extra-subjects`), templateExtraSubjects[k]);
+  });
+
+  tabsEl.querySelectorAll('.modal-tab').forEach(t=>{
+    t.addEventListener('click', ()=>{
+      tabsEl.querySelectorAll('.modal-tab').forEach(x=>x.classList.remove('active'));
+      panelsEl.querySelectorAll('.tab-panel').forEach(x=>x.classList.remove('active'));
+      t.classList.add('active');
+      document.getElementById(t.dataset.wtab).classList.add('active');
+    });
+  });
+
+  document.getElementById('templateOverlay').classList.add('open');
+}
+function collectTemplateForm(){
+  const tmpl = {};
+  Object.keys(WEEKDAY_LABELS).forEach(k=>{
+    let vocab = {};
+    if(k!=='5'){
+      ['5th','8th','10th'].forEach(g=>{
+        vocab[g] = { word:document.getElementById(`w-${k}-${g}-word`).value, def:document.getElementById(`w-${k}-${g}-def`).value,
+          sent:document.getElementById(`w-${k}-${g}-sent`).value, syn:document.getElementById(`w-${k}-${g}-syn`).value, ant:document.getElementById(`w-${k}-${g}-ant`).value };
+      });
+    }
+    tmpl[k] = {
+      devotional:{ wordOfDay:document.getElementById(`w-${k}-word`).value, scripture:document.getElementById(`w-${k}-scripture`).value,
+        reflection:document.getElementById(`w-${k}-reflect`).value, prayer:document.getElementById(`w-${k}-prayer`).value, intention:document.getElementById(`w-${k}-intent`).value },
+      vocab,
+      subjects:{ math:document.getElementById(`w-${k}-math`).value, scienceHistoryType:document.getElementById(`w-${k}-type`).value,
+        scienceHistoryTopic:document.getElementById(`w-${k}-scihist`).value, reading:document.getElementById(`w-${k}-reading`).value, spanish:document.getElementById(`w-${k}-spanish`).value },
+      extraSubjects: (templateExtraSubjects[k]||[]).filter(e=>e.name.trim()!=='' || e.topic.trim()!=='')
+    };
+  });
+  return tmpl;
+}
+
+/* ========================= STUDENTS MODAL ========================= */
+function openStudentsModal(){
+  const fl = state.fieldLabels;
+  document.getElementById('addrLabelFields').innerHTML = `
+    <div><label>Address 1 Label</label><input type="text" id="lbl-addr1" value="${escAttr(fl.addr1)}"></div>
+    <div><label>Address 2 Label</label><input type="text" id="lbl-addr2" value="${escAttr(fl.addr2)}"></div>
+    <div><label>Address 3 Label</label><input type="text" id="lbl-addr3" value="${escAttr(fl.addr3)}"></div>
+  `;
+  document.getElementById('phoneLabelFields').innerHTML = `
+    <div><label>Phone 1 Label</label><input type="text" id="lbl-phone1" value="${escAttr(fl.phone1)}"></div>
+    <div><label>Phone 2 Label</label><input type="text" id="lbl-phone2" value="${escAttr(fl.phone2)}"></div>
+    <div><label>Phone 3 Label</label><input type="text" id="lbl-phone3" value="${escAttr(fl.phone3)}"></div>
+    <div><label>Phone 4 Label</label><input type="text" id="lbl-phone4" value="${escAttr(fl.phone4)}"></div>
+  `;
+
+  const tabsEl = document.getElementById('studentTabs');
+  const panelsEl = document.getElementById('studentPanels');
+  tabsEl.innerHTML = state.students.map((s,i)=>`<div class="modal-tab ${i===0?'active':''}" data-stab="stu-${s.id}">${esc(s.name)||'Student '+(i+1)}</div>`).join('');
+
+  panelsEl.innerHTML = state.students.map((s,i)=>`
+    <div class="tab-panel ${i===0?'active':''}" id="stu-${s.id}">
+      <div class="field-grid">
+        <div><label>Full Name</label><input type="text" id="p-${s.id}-name" value="${escAttr(s.name)}"></div>
+        <div><label>Grade</label><input type="text" id="p-${s.id}-grade" value="${escAttr(s.grade)}"></div>
+      </div>
+      <div class="mini-lbl" style="margin-top:14px" id="p-${s.id}-addr1-lbl">${esc(fl.addr1)}</div>
+      <input type="text" id="p-${s.id}-addr-a1" value="${escAttr(s.addr.a1)}">
+      <div class="mini-lbl" style="margin-top:10px" id="p-${s.id}-addr2-lbl">${esc(fl.addr2)}</div>
+      <input type="text" id="p-${s.id}-addr-a2" value="${escAttr(s.addr.a2)}">
+      <div class="mini-lbl" style="margin-top:10px" id="p-${s.id}-addr3-lbl">${esc(fl.addr3)}</div>
+      <input type="text" id="p-${s.id}-addr-a3" value="${escAttr(s.addr.a3)}">
+      <div class="mini-lbl" style="margin-top:14px">Phone Numbers</div>
+      <div class="field-grid-4">
+        <div><label id="p-${s.id}-phone1-lbl">${esc(fl.phone1)}</label><input type="text" id="p-${s.id}-phone-p1" value="${escAttr(s.phone.p1)}"></div>
+        <div><label id="p-${s.id}-phone2-lbl">${esc(fl.phone2)}</label><input type="text" id="p-${s.id}-phone-p2" value="${escAttr(s.phone.p2)}"></div>
+        <div><label id="p-${s.id}-phone3-lbl">${esc(fl.phone3)}</label><input type="text" id="p-${s.id}-phone-p3" value="${escAttr(s.phone.p3)}"></div>
+        <div><label id="p-${s.id}-phone4-lbl">${esc(fl.phone4)}</label><input type="text" id="p-${s.id}-phone-p4" value="${escAttr(s.phone.p4)}"></div>
+      </div>
+    </div>
+  `).join('');
+
+  // Live-update the mini labels in each student panel as the shared labels are edited
+  ['addr1','addr2','addr3','phone1','phone2','phone3','phone4'].forEach(fkey=>{
+    const input = document.getElementById('lbl-'+fkey);
+    input.addEventListener('input', ()=>{
+      state.students.forEach(s=>{
+        const el = document.getElementById(`p-${s.id}-${fkey}-lbl`);
+        if(el) el.textContent = input.value || fkey;
+      });
+    });
+  });
+
+  tabsEl.querySelectorAll('.modal-tab').forEach(t=>{
+    t.addEventListener('click', ()=>{
+      tabsEl.querySelectorAll('.modal-tab').forEach(x=>x.classList.remove('active'));
+      panelsEl.querySelectorAll('.tab-panel').forEach(x=>x.classList.remove('active'));
+      t.classList.add('active');
+      document.getElementById(t.dataset.stab).classList.add('active');
+    });
+  });
+
+  document.getElementById('studentsOverlay').classList.add('open');
+}
+function collectFieldLabels(){
+  return {
+    addr1: document.getElementById('lbl-addr1').value, addr2: document.getElementById('lbl-addr2').value, addr3: document.getElementById('lbl-addr3').value,
+    phone1: document.getElementById('lbl-phone1').value, phone2: document.getElementById('lbl-phone2').value,
+    phone3: document.getElementById('lbl-phone3').value, phone4: document.getElementById('lbl-phone4').value,
+  };
+}
+function collectStudentsForm(){
+  return state.students.map(s=>({
+    id:s.id, name:document.getElementById(`p-${s.id}-name`).value, grade:document.getElementById(`p-${s.id}-grade`).value,
+    addr:{ a1:document.getElementById(`p-${s.id}-addr-a1`).value, a2:document.getElementById(`p-${s.id}-addr-a2`).value, a3:document.getElementById(`p-${s.id}-addr-a3`).value },
+    phone:{ p1:document.getElementById(`p-${s.id}-phone-p1`).value, p2:document.getElementById(`p-${s.id}-phone-p2`).value,
+      p3:document.getElementById(`p-${s.id}-phone-p3`).value, p4:document.getElementById(`p-${s.id}-phone-p4`).value }
+  }));
+}
+
+/* ========================= ARCHIVE MODAL — full page snapshots ========================= */
+function buildFullDayHTML(dateObj, content, checks, weekWords){
+  const devo = content.devotional || {};
+  const wd = dateObj.getDay();
+  const isTestDay = wd===5;
+  const fl = content.fieldLabels || state.fieldLabels;
+  const students = content.students || state.students;
+
+  const studentsHTML = students.map(s=>{
+    const grade = s.grade;
+    let vocabHTML = '';
+    if(isTestDay){
+      const words = (weekWords && weekWords[grade]) || [];
+      vocabHTML = `<div class="vocab-box"><span class="test-badge">Test Day</span>
+        <ul class="test-list">${words.map(w=>`<li>${esc(w)}</li>`).join('') || '<li style="text-transform:none;font-family:Oswald;font-size:13px;color:var(--ink-soft)">No words logged this week</li>'}</ul></div>`;
+    } else {
+      const word = content.vocab && content.vocab[grade];
+      if(word){
+        vocabHTML = `<div class="vocab-box">
+          <div class="vocab-word">${esc(word.word)}</div>
+          <div class="vocab-row"><b>Define:</b> ${esc(word.def)}</div>
+          <div class="vocab-row"><b>Use it:</b> ${esc(word.sent)}</div>
+          <div class="syn-ant"><span><b>Syn</b> ${esc(word.syn)}</span><span class="ant"><b>Ant</b> ${esc(word.ant)}</span></div>
+        </div>`;
+      }
+    }
+    return `<div class="student-card">
+      <div class="student-head"><div class="student-name">${esc(s.name)}</div><div class="grade-badge">${esc(s.grade)} GRADE</div></div>
+      <div class="student-body">
+        <div class="mini-lbl">Personal Info</div>
+        <div class="info-line"><span>Full name</span><span>${esc(s.name)}</span></div>
+        <div class="info-line"><span>${esc(fl.addr1)}</span><span>${esc(s.addr.a1)||'—'}</span></div>
+        <div class="info-line"><span>${esc(fl.addr2)}</span><span>${esc(s.addr.a2)||'—'}</span></div>
+        <div class="info-line"><span>${esc(fl.addr3)}</span><span>${esc(s.addr.a3)||'—'}</span></div>
+        <div class="mini-lbl" style="margin-top:12px;">Phone Numbers</div>
+        <div class="info-line"><span>${esc(fl.phone1)}</span><span>${esc(s.phone.p1)||'—'}</span></div>
+        <div class="info-line"><span>${esc(fl.phone2)}</span><span>${esc(s.phone.p2)||'—'}</span></div>
+        <div class="info-line"><span>${esc(fl.phone3)}</span><span>${esc(s.phone.p3)||'—'}</span></div>
+        <div class="info-line"><span>${esc(fl.phone4)}</span><span>${esc(s.phone.p4)||'—'}</span></div>
+        <div class="mini-lbl" style="margin-top:12px;">Vocabulary ${isTestDay ? '— Test' : '('+grade+' grade)'}</div>
+        ${vocabHTML}
+      </div>
+    </div>`;
+  }).join('');
+
+  const subjList = allSubjects(content);
+  const subjectsHTML = subjList.map(sub=>{
+    const checked = !!(checks && checks[sub.id]);
+    return `<div class="subj-card ${checked?'done':''}">
+      <div class="subj-top"><div class="subj-name">${esc(sub.name)||'Subject'}</div><div class="check ${checked?'checked':''}">${checked?'✓':''}</div></div>
+      <div class="subj-topic">${esc(sub.topic)||'No topic set'}</div>
+    </div>`;
+  }).join('');
+
+  return `
+    <section class="qtr" style="margin-bottom:20px;">
+      <div class="qtr-head"><div class="qtr-tag">Q1</div><div class="qtr-title" style="font-size:18px;">Warm-Up · Devotional</div></div>
+      <div class="devo-grid">
+        <div class="card">
+          <div class="word-badge">Word of the Day</div>
+          <div class="devo-word">${esc(devo.wordOfDay)}</div>
+          <p class="devo-scripture">${esc(devo.scripture)}</p>
+          <div class="devo-row"><div class="lbl">Reflection Question</div><div class="val">${esc(devo.reflection)}</div></div>
+          <div class="devo-row"><div class="lbl">Prayer</div><div class="val">${esc(devo.prayer)}</div></div>
+        </div>
+        <div class="intention-card"><div class="intention-tag">Today's Intention</div><div class="intention-text">${esc(devo.intention)}</div></div>
+      </div>
+    </section>
+    <section class="qtr" style="margin-bottom:20px;">
+      <div class="qtr-head"><div class="qtr-tag">Q2</div><div class="qtr-title" style="font-size:18px;">Skills Drill</div></div>
+      <div class="students-grid">${studentsHTML}</div>
+    </section>
+    <section class="qtr" style="margin-bottom:4px;">
+      <div class="qtr-head"><div class="qtr-tag">Q3–Q4</div><div class="qtr-title" style="font-size:18px;">Game Plan · Core Subjects</div></div>
+      <div class="subjects-grid">${subjectsHTML}</div>
+    </section>
+  `;
+}
+
+async function openArchiveModal(){
+  document.getElementById('archiveOverlay').classList.add('open');
+  const weeksEl = document.getElementById('archiveWeeks');
+  const daysEl = document.getElementById('archiveDays');
+  weeksEl.innerHTML = '';
+  daysEl.innerHTML = `<div class="archive-empty">Loading…</div>`;
+
+  const keys = await storageList('day-override:');
+  if(!keys.length){ daysEl.innerHTML = `<div class="archive-empty">No archived days yet. Days save automatically as you view them.</div>`; return; }
+
+  const dates = keys.map(k=>k.replace('day-override:','')).filter(d=>/^\d{4}-\d{2}-\d{2}$/.test(d)).sort();
+  const weekMap = {};
+  dates.forEach(ds=>{
+    const [y,m,d] = ds.split('-').map(Number);
+    const dateObj = new Date(y, m-1, d, 12);
+    const monStr = toDateStr(mondayOfWeek(dateObj));
+    (weekMap[monStr] = weekMap[monStr]||[]).push(ds);
+  });
+  const weekKeys = Object.keys(weekMap).sort().reverse();
+
+  function fmtRange(monStr){
+    const [y,m,d] = monStr.split('-').map(Number);
+    const mon = new Date(y,m-1,d,12);
+    const fri = new Date(mon); fri.setDate(mon.getDate()+4);
+    const opt = {month:'short', day:'numeric'};
+    return mon.toLocaleDateString('en-US',opt) + ' – ' + fri.toLocaleDateString('en-US',opt);
+  }
+
+  weeksEl.innerHTML = weekKeys.map((wk,i)=>`<button type="button" class="archive-week-btn ${i===0?'active':''}" data-wk="${wk}">${fmtRange(wk)}</button>`).join('');
+
+  async function showWeek(monStr){
+    weeksEl.querySelectorAll('.archive-week-btn').forEach(b=>b.classList.toggle('active', b.dataset.wk===monStr));
+    const ds = weekMap[monStr].sort();
+    daysEl.innerHTML = `<div class="archive-empty">Loading…</div>`;
+    const [my,mm,md] = monStr.split('-').map(Number);
+    const monDateObj = new Date(my,mm-1,md,12);
+    const weekWords = await computeWeekWordsFor(monDateObj);
+
+    const blocks = [];
+    for(let i=0;i<ds.length;i++){
+      const d = ds[i];
+      const content = await storageGet(dayKey(d));
+      if(!content) continue;
+      const [y,mo,da] = d.split('-').map(Number);
+      const dateObj = new Date(y,mo-1,da,12);
+      const label = dateObj.toLocaleDateString('en-US',{weekday:'long', month:'long', day:'numeric'});
+      const checks = (await storageGet(checksKey(d))) || {};
+      const bodyId = 'arch-body-'+d;
+      const expanded = i===ds.length-1; // most recent day open by default
+      blocks.push(`
+        <div class="archive-day-card" style="padding:0;overflow:hidden;">
+          <div class="collapse-head" data-archtoggle="${bodyId}" style="padding:14px 16px;margin:0;background:var(--board-2);">
+            <div class="archive-day-title" style="margin:0;">${label}${wd_test(dateObj)?' · Test Day':''}</div>
+            <div class="chevron ${expanded?'':'collapsed'}">▾</div>
+          </div>
+          <div class="collapse-body ${expanded?'':'collapsed'}" style="max-height:${expanded?'6000px':'0'};padding:0 16px;" id="${bodyId}">
+            <div style="padding-top:14px;">${buildFullDayHTML(dateObj, content, checks, weekWords)}</div>
+          </div>
+        </div>`);
+    }
+    daysEl.innerHTML = blocks.join('') || `<div class="archive-empty">No saved content for this week.</div>`;
+
+    daysEl.querySelectorAll('[data-archtoggle]').forEach(head=>{
+      head.addEventListener('click', ()=>{
+        const id = head.dataset.archtoggle;
+        const body = document.getElementById(id);
+        const chev = head.querySelector('.chevron');
+        const collapsed = body.classList.toggle('collapsed');
+        chev.classList.toggle('collapsed', collapsed);
+        body.style.maxHeight = collapsed ? '0' : '6000px';
+      });
+    });
+  }
+  function wd_test(dateObj){ return dateObj.getDay()===5; }
+
+  weeksEl.querySelectorAll('.archive-week-btn').forEach(b=>{ b.addEventListener('click', ()=> showWeek(b.dataset.wk)); });
+  if(weekKeys.length) showWeek(weekKeys[0]);
+}
+
+/* ========================= MODAL SHARED ========================= */
+function switchModalTab(overlay, tabId){
+  overlay.querySelectorAll('.modal-tab').forEach(t=>t.classList.toggle('active', t.dataset.tab===tabId));
+  overlay.querySelectorAll('.tab-panel').forEach(p=>p.classList.toggle('active', p.id===tabId));
+}
+function closeAllModals(){ document.querySelectorAll('.modal-overlay').forEach(o=>o.classList.remove('open')); }
+function showToast(msg){
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'), 1800);
+}
+
+/* ========================= WIRE UP ========================= */
+document.querySelectorAll('[data-close]').forEach(b=>b.addEventListener('click', closeAllModals));
+document.querySelectorAll('.modal-overlay').forEach(o=>{ o.addEventListener('click', (e)=>{ if(e.target===o) closeAllModals(); }); });
+document.querySelectorAll('#todayOverlay .modal-tab').forEach(t=>{ t.addEventListener('click', ()=> switchModalTab(document.getElementById('todayOverlay'), t.dataset.tab)); });
+
+document.getElementById('openToday').addEventListener('click', openTodayModal);
+document.getElementById('openTemplate').addEventListener('click', openTemplateModal);
+document.getElementById('openStudents').addEventListener('click', openStudentsModal);
+document.getElementById('openArchive').addEventListener('click', openArchiveModal);
+
+document.getElementById('saveToday').addEventListener('click', async ()=>{
+  const data = collectTodayForm();
+  state.todayOverride = data;
+  await storageSet(dayKey(state.dateStr), data);
+  closeAllModals(); showToast("Today's plan saved");
+  await loadAndRender();
+});
+document.getElementById('resetToday').addEventListener('click', async ()=>{
+  await storageDelete(dayKey(state.dateStr));
+  state.todayOverride = null;
+  closeAllModals(); showToast('Reset to weekly plan');
+  await loadAndRender();
+});
+document.getElementById('saveTemplate').addEventListener('click', async ()=>{
+  const tmpl = collectTemplateForm();
+  state.template = tmpl;
+  await storageSet(TEMPLATE_KEY, tmpl);
+  closeAllModals(); showToast('Weekly plan saved');
+  await loadAndRender();
+});
+document.getElementById('saveStudents').addEventListener('click', async ()=>{
+  const labels = collectFieldLabels();
+  const students = collectStudentsForm();
+  state.fieldLabels = labels;
+  state.students = students;
+  await storageSet(LABELS_KEY, labels);
+  await storageSet(STUDENTS_KEY, students);
+  closeAllModals(); showToast('Profiles saved');
+  await loadAndRender();
+});
+
+/* ========================= INIT + LIVE REFRESH ========================= */
+async function loadAndRender(){
+  await loadAll();
+  renderHeader();
+  renderBoard();
+}
+loadAndRender();
+
+setInterval(()=>{ tickClock(); updateBuzzer(); }, 1000);
+
+setInterval(async ()=>{
+  const freshSchoolDate = getSchoolDate(new Date());
+  if(toDateStr(freshSchoolDate) !== state.dateStr){ await loadAndRender(); }
+}, 60000);
+</script>
+</body>
+</html>
