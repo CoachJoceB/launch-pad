@@ -131,6 +131,9 @@
   @media (max-width:560px){.subjects-grid{grid-template-columns:1fr;}}
   .subj-card{background:var(--chalk);border:1.5px solid var(--line-light);border-radius:14px;padding:16px;display:flex;flex-direction:column;gap:8px;position:relative;}
   .subj-card.done{opacity:.55;}
+  .subj-card.dragging{opacity:.4;box-shadow:0 6px 18px rgba(0,0,0,.15);cursor:grabbing;z-index:5;}
+  .drag-handle{cursor:grab;color:var(--ink-soft);font-size:16px;line-height:1;padding:2px 4px;touch-action:none;user-select:none;}
+  .drag-handle:active{cursor:grabbing;}
   .subj-top{display:flex;justify-content:space-between;align-items:flex-start;}
   .subj-name{font-family:'Oswald',sans-serif;font-size:15px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);}
   .subj-topic{font-size:16px;font-weight:600;line-height:1.35;}
@@ -385,6 +388,7 @@ function defaultBuzzerTime(){ return {hour:14, minute:30}; } // 2:30 PM
 
 const TIMEZONE_KEY = 'timezone-setting';
 function defaultTimezone(){ return 'America/Chicago'; } // Pensacola, FL
+const SUBJECT_ORDER_KEY = 'subject-order';
 const TIMEZONE_OPTIONS = [
   { value:'America/New_York',    label:'Eastern Time' },
   { value:'America/Chicago',     label:'Central Time' },
@@ -655,7 +659,7 @@ function mondayOfWeek(schoolDate){
 
 /* ========================= APP STATE ========================= */
 let state = {
-  weeks:null, students:null, fieldLabels:null, cycleStartMonday:null, buzzerTime:null, timezone:null,
+  weeks:null, students:null, fieldLabels:null, cycleStartMonday:null, buzzerTime:null, timezone:null, subjectOrder:null,
   schoolDate:null, weekdayNum:null, dateStr:null,
   todayOverride:null, weekWords:{}, checks:{}
 };
@@ -668,6 +672,7 @@ async function loadAll(){
   state.students = rawStudents.map(normalizeStudent);
   state.fieldLabels = (await storageGet(LABELS_KEY)) || defaultFieldLabels();
   state.buzzerTime = (await storageGet(BUZZER_KEY)) || defaultBuzzerTime();
+  state.subjectOrder = (await storageGet(SUBJECT_ORDER_KEY)) || [];
 
   const now = new Date();
   state.schoolDate = getSchoolDate(now);
@@ -878,13 +883,16 @@ function renderBoard(){
     </div>`;
   }).join('');
 
-  const subjList = allSubjects(c);
+  const subjList = applySubjectOrder(allSubjects(c));
   const subjectsHTML = subjList.map(sub=>{
     const checked = !!state.checks[sub.id];
-    return `<div class="subj-card ${checked?'done':''}">
+    return `<div class="subj-card ${checked?'done':''}" data-subjname="${escAttr(sub.name||'')}">
       <div class="subj-top">
         <div class="subj-name">${esc(sub.name)||'Subject'}</div>
-        <div class="check ${checked?'checked':''}" data-subj="${sub.id}">${checked?'✓':''}</div>
+        <div style="display:flex;align-items:center;gap:8px;">
+          <div class="drag-handle" data-draghandle title="Drag to reorder">⠿</div>
+          <div class="check ${checked?'checked':''}" data-subj="${sub.id}">${checked?'✓':''}</div>
+        </div>
       </div>
       <div class="subj-topic">${esc(sub.topic)||'No topic set'}</div>
     </div>`;
@@ -909,13 +917,13 @@ function renderBoard(){
     </section>
 
     <section class="qtr">
-      <div class="qtr-head"><div class="qtr-tag">Q2</div><div class="qtr-title">Skills Drill</div><div class="qtr-hint">Tap a header to collapse</div></div>
+      <div class="qtr-head"><div class="qtr-tag">Q2</div><div class="qtr-title">Skills Drill</div><div class="qtr-hint">Tap a header to collapse · double-click to collapse all</div></div>
       <div class="students-grid">${studentsHTML}</div>
     </section>
 
     <section class="qtr">
-      <div class="qtr-head"><div class="qtr-tag">Q3–Q4</div><div class="qtr-title">Game Plan · Core Subjects</div><div class="qtr-hint">Tap a box to mark complete</div></div>
-      <div class="subjects-grid">${subjectsHTML}</div>
+      <div class="qtr-head"><div class="qtr-tag">Q3–Q4</div><div class="qtr-title">Game Plan · Core Subjects</div><div class="qtr-hint">Tap to complete · drag ⠿ to reorder</div></div>
+      <div class="subjects-grid" id="subjectsGrid">${subjectsHTML}</div>
     </section>
 
     <footer class="buzzer-strip">
@@ -941,9 +949,87 @@ function renderBoard(){
       body.classList.toggle('collapsed', collapseState[key]);
       chev.classList.toggle('collapsed', collapseState[key]);
     });
+    el.addEventListener('dblclick', (e)=>{
+      e.preventDefault();
+      allSectionsCollapsed = !allSectionsCollapsed;
+      board.querySelectorAll('[data-collapse]').forEach(head=>{
+        const k = head.dataset.collapse;
+        collapseState[k] = allSectionsCollapsed;
+        const body = board.querySelector(`[data-collapsebody="${k}"]`);
+        const chev = head.querySelector('.chevron');
+        body.classList.toggle('collapsed', allSectionsCollapsed);
+        chev.classList.toggle('collapsed', allSectionsCollapsed);
+      });
+    });
   });
+  wireSubjectDragReorder();
   const footerBtn = document.getElementById('openTodayFooter');
   if(footerBtn) footerBtn.addEventListener('click', ()=> requireEditAccess(openTodayModal));
+}
+let allSectionsCollapsed = false;
+
+/* ========================= SUBJECT DRAG-TO-REORDER =========================
+   Works with mouse, touch, and pen via Pointer Events (native HTML5 drag
+   doesn't work reliably on touchscreens, and this is meant for a tablet). */
+function applySubjectOrder(list){
+  if(!state.subjectOrder || !state.subjectOrder.length) return list;
+  const idx = name => { const i = state.subjectOrder.indexOf(name); return i===-1 ? 9999 : i; };
+  return list.map((item,i)=>({item,i})).sort((a,b)=>{
+    const d = idx(a.item.name) - idx(b.item.name);
+    return d!==0 ? d : a.i-b.i;
+  }).map(x=>x.item);
+}
+
+function wireSubjectDragReorder(){
+  const grid = document.getElementById('subjectsGrid');
+  if(!grid) return;
+  let draggingCard = null;
+
+  function getClosestCard(x, y){
+    const cards = [...grid.querySelectorAll('.subj-card')].filter(c=>c!==draggingCard);
+    let closest = null, closestDist = Infinity;
+    cards.forEach(card=>{
+      const box = card.getBoundingClientRect();
+      const cx = box.left + box.width/2, cy = box.top + box.height/2;
+      const dist = Math.hypot(x-cx, y-cy);
+      if(dist < closestDist){ closestDist = dist; closest = card; }
+    });
+    return closest;
+  }
+
+  grid.querySelectorAll('[data-draghandle]').forEach(handle=>{
+    handle.addEventListener('pointerdown', (e)=>{
+      const card = handle.closest('.subj-card');
+      if(!card) return;
+      draggingCard = card;
+      card.classList.add('dragging');
+      try{ card.setPointerCapture(e.pointerId); }catch(err){ /* not supported everywhere; drag still works */ }
+      e.preventDefault();
+
+      function onMove(ev){
+        if(!draggingCard) return;
+        const target = getClosestCard(ev.clientX, ev.clientY);
+        if(target && target!==draggingCard){
+          const targetBox = target.getBoundingClientRect();
+          const before = ev.clientX < targetBox.left + targetBox.width/2;
+          grid.insertBefore(draggingCard, before ? target : target.nextSibling);
+        }
+      }
+      function onUp(){
+        card.classList.remove('dragging');
+        card.removeEventListener('pointermove', onMove);
+        card.removeEventListener('pointerup', onUp);
+        card.removeEventListener('pointercancel', onUp);
+        const order = [...grid.querySelectorAll('.subj-card')].map(c=>c.dataset.subjname);
+        state.subjectOrder = order;
+        storageSet(SUBJECT_ORDER_KEY, order);
+        draggingCard = null;
+      }
+      card.addEventListener('pointermove', onMove);
+      card.addEventListener('pointerup', onUp);
+      card.addEventListener('pointercancel', onUp);
+    });
+  });
 }
 
 /* ========================= EXTRA SUBJECTS EDITOR ========================= */
