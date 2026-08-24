@@ -206,6 +206,7 @@
   .archive-week-btn.active{background:var(--ink);color:var(--chalk);border-color:var(--ink);}
   .archive-days{flex:1;display:flex;flex-direction:column;gap:10px;max-height:600px;overflow-y:auto;padding-right:4px;}
   .archive-day-card{background:#fff;border:1.5px solid var(--line-light);border-radius:12px;}
+  .day-row-clickable:hover{border-color:var(--orange);}
   .archive-day-card .collapse-body{transition:none;}
   .archive-day-title{font-family:'Oswald',sans-serif;text-transform:uppercase;font-size:14px;margin-bottom:6px;color:var(--ink-soft);}
   .archive-day-word{font-family:'Oswald',sans-serif;font-size:17px;text-transform:uppercase;margin-bottom:4px;}
@@ -239,10 +240,10 @@
       <div class="label">Final Buzzer</div>
       <div class="time" id="buzzerTime">2:00:00 PM</div>
     </div>
-    <button class="icon-btn" id="openArchive" title="View archive">📁</button>
+    <button class="icon-btn" id="openArchive" title="Archive & upcoming weeks">📅</button>
     <button class="icon-btn" id="openStudents" title="Edit student profiles">👤</button>
     <button class="icon-btn" id="openToday" title="Edit today">✏️</button>
-    <button class="icon-btn" id="openTemplate" title="Edit weekly plan">🗓️</button>
+    <button class="icon-btn" id="openTemplate" title="Edit 5-week plan">🗓️</button>
   </div>
 </header>
 
@@ -269,16 +270,16 @@
   </div>
 </div>
 
-<!-- WEEKLY TEMPLATE MODAL -->
+<!-- 5-WEEK PLAN MODAL -->
 <div class="modal-overlay" id="templateOverlay">
-  <div class="modal">
-    <h3>Weekly Game Plan</h3>
-    <div class="sub">This is the recurring Monday–Friday default. Days already auto-saved won't change unless you reset them.</div>
-    <div class="modal-tabs" id="weekdayTabs"></div>
-    <div id="weekdayPanels"></div>
+  <div class="modal wide">
+    <h3>5-Week Game Plan</h3>
+    <div class="sub">This rotates on repeat, forever — Week 5 is followed by Week 1 again. Days already auto-saved to the archive won't change unless you reset them individually.</div>
+    <div class="modal-tabs" id="weekLevelTabs"></div>
+    <div id="weekLevelGroups"></div>
     <div class="modal-actions">
       <button class="btn btn-ghost" data-close>Cancel</button>
-      <button class="btn btn-primary" id="saveTemplate">Save weekly plan</button>
+      <button class="btn btn-primary" id="saveTemplate">Save 5-week plan</button>
     </div>
   </div>
 </div>
@@ -301,14 +302,22 @@
   </div>
 </div>
 
-<!-- ARCHIVE MODAL -->
+<!-- ARCHIVE / UPCOMING MODAL -->
 <div class="modal-overlay" id="archiveOverlay">
   <div class="modal wide">
-    <h3>Archive</h3>
-    <div class="sub">Every school day auto-saves here at the moment it's viewed, grouped by week.</div>
-    <div class="archive-layout">
+    <h3>Plan Calendar</h3>
+    <div class="sub">Past days auto-save exactly as shown. Upcoming days preview the 5-week rotation. Click any day to open it.</div>
+    <div class="modal-tabs">
+      <div class="modal-tab active" data-cal-tab="archive-view">Archive</div>
+      <div class="modal-tab" data-cal-tab="upcoming-view">Upcoming</div>
+    </div>
+    <div class="archive-layout" id="archive-view">
       <div class="archive-weeks" id="archiveWeeks"></div>
       <div class="archive-days" id="archiveDays"><div class="archive-empty">Loading…</div></div>
+    </div>
+    <div class="archive-layout" id="upcoming-view" style="display:none;">
+      <div class="archive-weeks" id="upcomingWeeks"></div>
+      <div class="archive-days" id="upcomingDays"><div class="archive-empty">Loading…</div></div>
     </div>
     <div class="modal-actions">
       <button class="btn btn-ghost" data-close>Close</button>
@@ -316,8 +325,40 @@
   </div>
 </div>
 
+<!-- DAY DETAIL LIGHTBOX -->
+<div class="modal-overlay" id="dayLightboxOverlay">
+  <div class="modal wide">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px;flex-wrap:wrap;">
+      <div>
+        <h3 id="lightboxTitle">Day Detail</h3>
+        <div class="sub" id="lightboxSub"></div>
+      </div>
+      <div style="display:flex;gap:8px;">
+        <button class="btn btn-primary" id="downloadDayImg">⬇ Download Image</button>
+        <button class="btn btn-ghost" data-close>Close</button>
+      </div>
+    </div>
+    <div id="lightboxContent" style="background:var(--board);border-radius:12px;padding:16px;margin-top:10px;"></div>
+  </div>
+</div>
+
 <div class="save-toast" id="toast">Saved</div>
 
+<!-- PIN DIALOG -->
+<div class="modal-overlay" id="pinOverlay">
+  <div class="modal" style="max-width:340px;text-align:center;">
+    <h3 style="margin-bottom:4px;">Enter PIN</h3>
+    <div class="sub" style="margin-bottom:16px;">This area is locked to prevent accidental edits.</div>
+    <input type="password" inputmode="numeric" id="pinInput" placeholder="••••" style="text-align:center;font-size:22px;letter-spacing:6px;font-family:'Oswald',sans-serif;padding:12px;border:1.5px solid var(--line-light);border-radius:8px;width:100%;">
+    <div id="pinError" style="display:none;color:var(--orange);font-size:12.5px;margin-top:8px;">Incorrect PIN — try again.</div>
+    <div class="modal-actions" style="justify-content:center;margin-top:18px;">
+      <button class="btn btn-ghost" id="pinCancel">Cancel</button>
+      <button class="btn btn-primary" id="pinSubmit">Unlock</button>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
 <script>
 /* ========================= CONFIG / DEFAULTS ========================= */
 const SWITCH_HOUR = 5;   // 5am rollover
@@ -346,66 +387,137 @@ function normalizeStudent(s){
 }
 
 function v(word,def,sent,syn,ant){ return {word,def,sent,syn,ant}; }
+function mkDay(devotional, vocab, shType, shTopic){
+  return {
+    devotional,
+    vocab,
+    subjects:{ math:'Independent work - 1 lesson', scienceHistoryType:shType, scienceHistoryTopic:shTopic, reading:'30 mins', spanish:'Duolingo' },
+    extraSubjects:[{id:'geo', name:'Geography', topic:'US States and Capitals'}]
+  };
+}
+function devo(wordOfDay, scripture, reflection, prayer, intention){ return {wordOfDay, scripture, reflection, prayer, intention}; }
 
-function defaultTemplate(){
+function defaultWeeks(){
   return {
     1:{
-      devotional:{ wordOfDay:'Resilience',
-        scripture:'"I can do all things through Christ who strengthens me." — Philippians 4:13',
-        reflection:'When something feels hard today, what will you tell yourself instead of quitting?',
-        prayer:'Lord, give me strength to keep going when today gets tough. Help me trust You with my effort. Amen.',
-        intention:'Today I bounce back quickly when something doesn\u2019t go my way.' },
-      vocab:{ '5th': v('Resilient','Able to recover quickly from difficulty.','She was resilient after losing the first game and came back stronger.','tough','fragile'),
-        '8th': v('Tenacity','Firmness in holding to a course of action.','His tenacity on defense wore the other team down.','persistence','weakness'),
-        '10th': v('Fortitude','Courage and strength in facing pain or adversity.','It took fortitude to keep training after the injury.','resolve','cowardice') },
-      subjects:{ math:'Fractions review', scienceHistoryType:'Science', scienceHistoryTopic:'Intro to forces & motion', reading:'Chapter 4 — guided reading', spanish:'Greetings & introductions' },
-      extraSubjects:[]
+      1: mkDay(devo('Resilience','"I can do all things through Christ who strengthens me." — Philippians 4:13','When something feels hard today, what will you tell yourself instead of quitting?','Lord, give me strength to keep going when today gets tough. Help me trust You with my effort. Amen.','Today I bounce back quickly when something doesn\u2019t go my way.'),
+          {'5th':v('Resilient','Able to recover quickly from difficulty.','She was resilient after losing the first game and came back stronger.','tough','fragile'),
+           '8th':v('Tenacity','Firmness in holding to a course of action.','His tenacity on defense wore the other team down.','persistence','weakness'),
+           '10th':v('Fortitude','Courage and strength in facing pain or adversity.','It took fortitude to keep training after the injury.','resolve','cowardice')},
+          'Science','Intro to forces & motion'),
+      2: mkDay(devo('Discipline','"No discipline seems pleasant at the time, but painful. Later it produces a harvest of righteousness." — Hebrews 12:11','What is one small habit you can stick to today, even when no one is watching?','God, help me do the right thing consistently, not just when it\u2019s easy. Amen.','Today I follow through on my routine, even the boring parts.'),
+          {'5th':v('Discipline','Training to act in a controlled, correct way.','Discipline helped him finish his homework before practice.','self-control','carelessness'),
+           '8th':v('Composure','Calmness and control, especially in a difficult situation.','She kept her composure at the free-throw line.','calm','panic'),
+           '10th':v('Discernment','The ability to judge well.','Discernment helped her choose the smarter play, not just the fastest one.','judgment','confusion')},
+          'History','Colonial America overview'),
+      3: mkDay(devo('Integrity','"The integrity of the upright guides them." — Proverbs 11:3','Would you make the same choice if no one were watching?','Lord, let my actions match my words today, in the classroom and on the court. Amen.','Today I do the right thing even when it\u2019s inconvenient.'),
+          {'5th':v('Integrity','Doing the right thing even when no one is watching.','He called his own foul because of his integrity.','honesty','dishonesty'),
+           '8th':v('Adversity','Difficulties or misfortune.','The team faced adversity but stayed focused on the plan.','hardship','ease'),
+           '10th':v('Resolute','Admirably purposeful, determined, unwavering.','She stayed resolute in her training schedule all season.','determined','wavering')},
+          'Science','States of matter'),
+      4: mkDay(devo('Perseverance','"Let us not become weary in doing good, for at the proper time we will reap a harvest." — Galatians 6:9','What\u2019s something you almost gave up on that you\u2019re glad you kept doing?','God, help me keep going one more rep, one more page, one more try. Amen.','Today I finish what I start, even when it gets hard partway through.'),
+          {'5th':v('Perseverance','Continuing on a task despite difficulty.','Her perseverance paid off when she finally made the shot.','persistence','quitting'),
+           '8th':v('Accountability','Being responsible for your actions and choices.','Accountability meant admitting the mistake and fixing it.','responsibility','irresponsibility'),
+           '10th':v('Meticulous','Showing great attention to detail.','His meticulous film study helped the whole team improve.','careful','sloppy')},
+          'History','Causes of the American Revolution'),
+      5: mkDay(devo('Test Day','"She is clothed with strength and dignity; she can laugh at the days to come." — Proverbs 31:25','Which of this week\u2019s words describes how you want to show up today?','Lord, help me show what I\u2019ve learned this week with confidence, not fear. Amen.','Today I show what I\u2019ve built all week — in the classroom and on the court.'),
+          {}, 'Science','Week review / lab'),
     },
     2:{
-      devotional:{ wordOfDay:'Discipline',
-        scripture:'"No discipline seems pleasant at the time, but painful. Later it produces a harvest of righteousness." — Hebrews 12:11',
-        reflection:'What is one small habit you can stick to today, even when no one is watching?',
-        prayer:'God, help me do the right thing consistently, not just when it\u2019s easy. Amen.',
-        intention:'Today I follow through on my routine, even the boring parts.' },
-      vocab:{ '5th': v('Discipline','Training to act in a controlled, correct way.','Discipline helped him finish his homework before practice.','self-control','carelessness'),
-        '8th': v('Composure','Calmness and control, especially in a difficult situation.','She kept her composure at the free-throw line.','calm','panic'),
-        '10th': v('Discernment','The ability to judge well.','Discernment helped her choose the smarter play, not just the fastest one.','judgment','confusion') },
-      subjects:{ math:'Multi-digit multiplication', scienceHistoryType:'History', scienceHistoryTopic:'Colonial America overview', reading:'Chapter 5 — vocabulary in context', spanish:'Numbers 1–20' },
-      extraSubjects:[]
+      1: mkDay(devo('Focus','"Fix your eyes straight ahead; look only where you\u2019re headed." — Proverbs 4:25','What is distracting you from doing your best today, and how can you set it aside?','Lord, help me keep my eyes on what matters and not get pulled off course today. Amen.','Today I lock in on one task at a time instead of rushing between things.'),
+          {'5th':v('Focus','Paying close attention to one thing.','She kept her focus on the ball the whole game.','concentration','distraction'),
+           '8th':v('Concentration','Deep, careful attention to a task.','His concentration during the test never wavered.','attention','carelessness'),
+           '10th':v('Diligence','Careful and persistent effort.','Her diligence in film study set her apart from teammates.','attentiveness','negligence')},
+          'History','Revolutionary War: key battles'),
+      2: mkDay(devo('Confidence','"The Lord is my strength and my shield; my heart trusts in him." — Psalm 28:7','What is one thing you\u2019re good at that you can remind yourself of today?','God, help me trust the work I\u2019ve put in and play free today. Amen.','Today I trust my preparation and don\u2019t let mistakes shake me.'),
+          {'5th':v('Confident','Sure of yourself and your abilities.','He walked up to the free-throw line feeling confident.','self-assured','unsure'),
+           '8th':v('Assurance','A feeling of certainty about something.','Her assurance on defense came from hours of practice.','certainty','doubt'),
+           '10th':v('Poise','Graceful and confident behavior under pressure.','She played the final minute with total poise.','composure','anxiety')},
+          'Science','Simple machines'),
+      3: mkDay(devo('Patience','"Be patient, bearing with one another in love." — Ephesians 4:2','When is it hardest for you to wait, and how can you handle that better?','Lord, slow me down and help me trust Your timing today. Amen.','Today I stay calm even when things don\u2019t happen as fast as I want.'),
+          {'5th':v('Patient','Able to wait calmly without getting upset.','She was patient while waiting her turn to shoot.','calm','impatient'),
+           '8th':v('Endurance','The ability to keep going through a long or hard process.','His endurance during conditioning drills impressed the coach.','stamina','fatigue'),
+           '10th':v('Steadfast','Firm and unwavering, especially in loyalty or belief.','She remained steadfast in her training plan despite setbacks.','unwavering','fickle')},
+          'History','The Declaration of Independence'),
+      4: mkDay(devo('Effort','"Whatever you do, work at it with all your heart." — Colossians 3:23','Did you give your full effort today, or were you holding something back?','God, let my effort today honor the gifts You\u2019ve given me. Amen.','Today I give full effort in every drill, not just the ones I like.'),
+          {'5th':v('Effort','Hard work put toward a goal.','Her effort in practice earned her more playing time.','exertion','laziness'),
+           '8th':v('Initiative','The ability to start something on your own.','He showed initiative by staying late to work on free throws.','drive','passivity'),
+           '10th':v('Exertion','Physical or mental effort.','The exertion of a full practice left the team exhausted but proud.','effort','idleness')},
+          'Science','Energy: potential & kinetic'),
+      5: mkDay(devo('Test Day','"Whatever you have learned or received... put it into practice." — Philippians 4:9','Which of this week\u2019s words — focus, confidence, patience, or effort — do you need most today?','Lord, help me show what I\u2019ve built this week with a clear head. Amen.','Today I put this week\u2019s words into action, not just my memory.'),
+          {}, 'History','Week review / quiz'),
     },
     3:{
-      devotional:{ wordOfDay:'Integrity',
-        scripture:'"The integrity of the upright guides them." — Proverbs 11:3',
-        reflection:'Would you make the same choice if no one were watching?',
-        prayer:'Lord, let my actions match my words today, in the classroom and on the court. Amen.',
-        intention:'Today I do the right thing even when it\u2019s inconvenient.' },
-      vocab:{ '5th': v('Integrity','Doing the right thing even when no one is watching.','He called his own foul because of his integrity.','honesty','dishonesty'),
-        '8th': v('Adversity','Difficulties or misfortune.','The team faced adversity but stayed focused on the plan.','hardship','ease'),
-        '10th': v('Resolute','Admirably purposeful, determined, unwavering.','She stayed resolute in her training schedule all season.','determined','wavering') },
-      subjects:{ math:'Long division practice', scienceHistoryType:'Science', scienceHistoryTopic:'States of matter', reading:'Chapter 6 — main idea & detail', spanish:'Family vocabulary' },
-      extraSubjects:[]
+      1: mkDay(devo('Teamwork','"Two are better than one... if either falls down, one can help the other up." — Ecclesiastes 4:9-10','How can you make a teammate or sibling better today?','God, help me care about the team\u2019s success as much as my own today. Amen.','Today I look for ways to help someone else succeed.'),
+          {'5th':v('Teamwork','Working together toward a shared goal.','Good teamwork helped them win the close game.','cooperation','rivalry'),
+           '8th':v('Collaboration','Working jointly with others on a task.','Their collaboration on the group project made it stronger.','partnership','competition'),
+           '10th':v('Synergy','The extra energy created when people work well together.','The team\u2019s synergy was obvious in the fourth quarter.','cooperation','discord')},
+          'Science','Ecosystems & food chains'),
+      2: mkDay(devo('Leadership','"Whoever wants to become great among you must be your servant." — Matthew 20:26','What\u2019s one way you can lead by example today, even without a title?','Lord, let me lead by serving others today, not by demanding attention. Amen.','Today I lead with my actions before I lead with my words.'),
+          {'5th':v('Leader','Someone who guides or directs others.','The point guard was a natural leader on the court.','guide','follower'),
+           '8th':v('Influence','The power to affect someone\u2019s actions or thinking.','Her positive attitude had a big influence on the team.','impact','insignificance'),
+           '10th':v('Decisiveness','The ability to make decisions quickly and confidently.','Her decisiveness in the final seconds won the game.','resolve','hesitation')},
+          'History','The U.S. Constitution'),
+      3: mkDay(devo('Respect','"Show proper respect to everyone." — 1 Peter 2:17','Who is someone you can show extra respect to today, even if it\u2019s hard?','God, help me treat referees, coaches, and teammates with respect today, win or lose. Amen.','Today I speak to others the way I want to be spoken to.'),
+          {'5th':v('Respect','Treating someone with consideration and honor.','He showed respect by shaking hands after the game.','courtesy','disrespect'),
+           '8th':v('Courtesy','Polite behavior and consideration for others.','Her courtesy toward the new player made him feel welcome.','politeness','rudeness'),
+           '10th':v('Deference','Respectful yielding to another\u2019s opinion or authority.','He showed deference to his coach\u2019s game plan.','respect','disregard')},
+          'Science','Weather & climate patterns'),
+      4: mkDay(devo('Humility','"Humble yourselves before the Lord, and he will lift you up." — James 4:10','How can you celebrate a win today without putting anyone else down?','Lord, keep me humble in success and steady in failure today. Amen.','Today I let my play speak instead of my words.'),
+          {'5th':v('Humble','Not thinking too highly of yourself.','She stayed humble even after scoring the winning basket.','modest','arrogant'),
+           '8th':v('Modesty','A lack of excessive pride or self-importance.','His modesty after the win impressed the coaches.','humility','conceit'),
+           '10th':v('Unassuming','Not pretentious or arrogant; modest.','Despite being the star player, she stayed unassuming.','humble','boastful')},
+          'History','The Bill of Rights'),
+      5: mkDay(devo('Test Day','"Iron sharpens iron, and one person sharpens another." — Proverbs 27:17','How did teamwork, leadership, respect, or humility show up in your week?','God, thank You for the people who sharpen me. Help me show what I\u2019ve learned today. Amen.','Today I show this week\u2019s words weren\u2019t just talk.'),
+          {}, 'Science','Week review / lab'),
     },
     4:{
-      devotional:{ wordOfDay:'Perseverance',
-        scripture:'"Let us not become weary in doing good, for at the proper time we will reap a harvest." — Galatians 6:9',
-        reflection:'What\u2019s something you almost gave up on that you\u2019re glad you kept doing?',
-        prayer:'God, help me keep going one more rep, one more page, one more try. Amen.',
-        intention:'Today I finish what I start, even when it gets hard partway through.' },
-      vocab:{ '5th': v('Perseverance','Continuing on a task despite difficulty.','Her perseverance paid off when she finally made the shot.','persistence','quitting'),
-        '8th': v('Accountability','Being responsible for your actions and choices.','Accountability meant admitting the mistake and fixing it.','responsibility','irresponsibility'),
-        '10th': v('Meticulous','Showing great attention to detail.','His meticulous film study helped the whole team improve.','careful','sloppy') },
-      subjects:{ math:'Geometry — angles & shapes', scienceHistoryType:'History', scienceHistoryTopic:'Causes of the American Revolution', reading:'Chapter 7 — author\u2019s purpose', spanish:'Days of the week & calendar' },
-      extraSubjects:[]
+      1: mkDay(devo('Growth','"I press on toward the goal." — Philippians 3:14','What\u2019s one skill you\u2019ve gotten better at this month?','Lord, help me see mistakes today as steps toward growth, not reasons to quit. Amen.','Today I focus on getting 1% better, not being perfect.'),
+          {'5th':v('Growth','The process of developing or improving.','His growth as a shooter showed in every game.','improvement','decline'),
+           '8th':v('Progress','Forward movement toward a goal.','Her progress in reading comprehension was clear this month.','advancement','regression'),
+           '10th':v('Development','The process of growing or improving over time.','Coaches tracked each athlete\u2019s development across the season.','advancement','stagnation')},
+          'History','Early U.S. presidents'),
+      2: mkDay(devo('Courage','"Be strong and courageous... the Lord your God will be with you." — Joshua 1:9','What\u2019s something a little scary you can try today anyway?','God, give me courage to take the hard shot and ask the hard question today. Amen.','Today I do the brave thing, not just the easy thing.'),
+          {'5th':v('Courage','The ability to do something that frightens you.','It took courage to take the last shot.','bravery','cowardice'),
+           '8th':v('Boldness','Confidence and willingness to take risks.','Her boldness on defense created three turnovers.','daring','timidity'),
+           '10th':v('Valor','Great courage in the face of danger or difficulty.','His valor during the toughest drill inspired the team.','bravery','cowardice')},
+          'Science','Plant & animal cells'),
+      3: mkDay(devo('Gratitude','"Give thanks in all circumstances." — 1 Thessalonians 5:18','What\u2019s one thing about today you can be thankful for, even if it\u2019s a hard day?','Lord, thank You for the chance to learn and play today. Keep my heart grateful. Amen.','Today I notice and say thank you for at least one thing.'),
+          {'5th':v('Grateful','Feeling or showing thanks.','She was grateful for her coach\u2019s extra help.','thankful','ungrateful'),
+           '8th':v('Appreciation','Recognition of the value of something.','His appreciation for his teammates grew after the injury.','gratitude','disregard'),
+           '10th':v('Gratitude','The quality of being thankful.','Her gratitude for the opportunity showed in her work ethic.','thankfulness','ingratitude')},
+          'History','The Louisiana Purchase'),
+      4: mkDay(devo('Consistency','"Whoever can be trusted with very little can also be trusted with much." — Luke 16:10','What\u2019s one habit you can do the same way every single day?','God, help me show up the same way today as I did yesterday. Amen.','Today I do the small things right, even when no one is watching.'),
+          {'5th':v('Consistent','Acting or performing in the same way over time.','Her consistent free-throw form paid off in games.','steady','erratic'),
+           '8th':v('Reliability','The quality of being trustworthy and consistent.','His reliability made him a coach\u2019s favorite.','dependability','unpredictability'),
+           '10th':v('Constancy','Steadiness and firmness over time.','Her constancy in training never wavered, win or lose.','steadiness','inconsistency')},
+          'Science','Circuits & electricity basics'),
+      5: mkDay(devo('Test Day','"Well done, good and faithful servant." — Matthew 25:21','Which of this week\u2019s words — growth, courage, gratitude, consistency — did you live out best?','Lord, help me finish this week strong and show what I\u2019ve built. Amen.','Today I show my consistency by finishing the week as strong as I started it.'),
+          {}, 'History','Week review / quiz'),
     },
     5:{
-      devotional:{ wordOfDay:'Test Day',
-        scripture:'"She is clothed with strength and dignity; she can laugh at the days to come." — Proverbs 31:25',
-        reflection:'Which of this week\u2019s words describes how you want to show up today?',
-        prayer:'Lord, help me show what I\u2019ve learned this week with confidence, not fear. Amen.',
-        intention:'Today I show what I\u2019ve built all week — in the classroom and on the court.' },
-      vocab:{},
-      subjects:{ math:'Weekly review & mixed practice', scienceHistoryType:'Science', scienceHistoryTopic:'Week review / lab', reading:'Chapter review + comprehension check', spanish:'Weekly vocabulary quiz' },
-      extraSubjects:[]
+      1: mkDay(devo('Excellence','"Let your light shine before others." — Matthew 5:16','What would it look like to do your best work today, not just enough to get by?','God, help me chase excellence, not perfection, in everything I do today. Amen.','Today I do my very best, even in the small stuff.'),
+          {'5th':v('Excellent','Extremely good; outstanding.','Her excellent footwork made her hard to guard.','outstanding','poor'),
+           '8th':v('Mastery','Complete skill or knowledge in a subject.','Years of practice led to his mastery of the crossover.','expertise','incompetence'),
+           '10th':v('Proficiency','A high degree of skill or competence.','Her proficiency in both hands made her unpredictable.','skillfulness','ineptitude')},
+          'Science','The solar system'),
+      2: mkDay(devo('Selflessness','"Value others above yourselves." — Philippians 2:3','What\u2019s one way you can put someone else\u2019s needs before your own today?','Lord, help me want good things for others as much as I want them for myself. Amen.','Today I make someone else look good, not just myself.'),
+          {'5th':v('Selfless','Concerned more with others\u2019 needs than your own.','His selfless pass set up the winning shot.','generous','selfish'),
+           '8th':v('Generosity','Willingness to give or share.','Her generosity with her time helped the younger players.','giving','stinginess'),
+           '10th':v('Altruism','Unselfish concern for the well-being of others.','His altruism showed in how he mentored younger teammates.','selflessness','selfishness')},
+          'History','Westward expansion'),
+      3: mkDay(devo('Positivity','"A cheerful heart is good medicine." — Proverbs 17:22','How does your attitude affect the people around you today?','God, let my attitude lift others up today, even when things go wrong. Amen.','Today my attitude is a gift to the people around me, not a burden.'),
+          {'5th':v('Positive','Having a hopeful, constructive attitude.','Her positive energy kept the team loose under pressure.','optimistic','negative'),
+           '8th':v('Optimism','Hopefulness and confidence about the future.','His optimism never wavered, even after a tough loss.','hopefulness','pessimism'),
+           '10th':v('Buoyancy','The ability to stay cheerful and resilient.','Her buoyancy after mistakes kept the whole team confident.','resilience','despondency')},
+          'Science','The rock cycle'),
+      4: mkDay(devo('Commitment','"Commit to the Lord whatever you do, and he will establish your plans." — Proverbs 16:3','What\u2019s something you\u2019ve committed to that\u2019s worth sticking with, even when it\u2019s hard?','Lord, help me finish what I\u2019ve started today, all the way through. Amen.','Today I follow through on my commitments, big and small.'),
+          {'5th':v('Committed','Dedicated to a cause or activity.','She stayed committed to her training even during the off-season.','dedicated','uncommitted'),
+           '8th':v('Dedication','Deep commitment to a task or purpose.','His dedication to conditioning showed in the fourth quarter.','commitment','indifference'),
+           '10th':v('Devotion','Strong love, loyalty, or commitment.','Her devotion to the sport was clear in every early practice.','loyalty','apathy')},
+          'History','Causes of the Civil War'),
+      5: mkDay(devo('Test Day','"Run in such a way as to get the prize." — 1 Corinthians 9:24','Out of everything you\u2019ve learned these five weeks, what matters most to you?','Lord, thank You for five weeks of growth. Help me carry these words forward. Amen.','Today I finish this cycle strong and get ready to build on it.'),
+          {}, 'Science','Week review / lab'),
     }
   };
 }
@@ -450,19 +562,36 @@ async function storageList(prefix){
 
 /* ========================= EDIT PIN GATE =========================
    Soft gate only — kids can freely check off subjects, but opening the
-   Today / Weekly Plan / Profiles editors asks for this PIN first. Since
+   Today / 5-Week Plan / Profiles editors asks for this PIN first. Since
    this is plain client-side code, anyone who views page source can see
    it — it stops accidental edits, it isn't real security. Change it
-   below before you deploy. */
-const EDIT_PIN = '1234';
+   below before you deploy. Uses a custom in-page dialog (not the
+   browser's native prompt) so it also works inside sandboxed preview
+   frames that block native dialogs. */
+const EDIT_PIN = '2633';
 function requireEditAccess(action){
-  const entered = window.prompt('Enter the plan PIN to make changes:');
-  if(entered === null) return;
-  if(entered === EDIT_PIN){ action(); }
-  else { window.alert('That PIN is incorrect.'); }
+  const overlay = document.getElementById('pinOverlay');
+  const input = document.getElementById('pinInput');
+  const err = document.getElementById('pinError');
+  const submitBtn = document.getElementById('pinSubmit');
+  const cancelBtn = document.getElementById('pinCancel');
+  input.value = '';
+  err.style.display = 'none';
+  overlay.classList.add('open');
+  input.focus();
+
+  function cleanup(){ overlay.classList.remove('open'); }
+  function onSubmit(){
+    if(input.value === EDIT_PIN){ cleanup(); action(); }
+    else { err.style.display = 'block'; input.value=''; input.focus(); }
+  }
+  submitBtn.onclick = onSubmit;
+  cancelBtn.onclick = cleanup;
+  input.onkeydown = (e)=>{ if(e.key==='Enter') onSubmit(); if(e.key==='Escape') cleanup(); };
 }
 
-const TEMPLATE_KEY = 'weekly-template';
+const WEEKS_KEY = 'multi-week-plan';
+const CYCLE_START_KEY = 'cycle-start-monday';
 const STUDENTS_KEY = 'student-profiles';
 const LABELS_KEY = 'field-labels';
 function dayKey(dateStr){ return 'day-override:'+dateStr; }
@@ -487,14 +616,14 @@ function mondayOfWeek(schoolDate){
 
 /* ========================= APP STATE ========================= */
 let state = {
-  template:null, students:null, fieldLabels:null,
+  weeks:null, students:null, fieldLabels:null, cycleStartMonday:null,
   schoolDate:null, weekdayNum:null, dateStr:null,
   todayOverride:null, weekWords:{}, checks:{}
 };
 let collapseState = {}; // in-memory only, per session
 
 async function loadAll(){
-  state.template = (await storageGet(TEMPLATE_KEY)) || defaultTemplate();
+  state.weeks = (await storageGet(WEEKS_KEY)) || defaultWeeks();
   const rawStudents = (await storageGet(STUDENTS_KEY)) || defaultStudents();
   state.students = rawStudents.map(normalizeStudent);
   state.fieldLabels = (await storageGet(LABELS_KEY)) || defaultFieldLabels();
@@ -505,15 +634,26 @@ async function loadAll(){
   state.weekdayNum = dow;
   const dstr = toDateStr(state.schoolDate);
   state.dateStr = dstr;
+
+  // Cycle anchor: the Monday the 5-week rotation started. Created once,
+  // then reused forever so the rotation stays stable across devices.
+  let cycleStart = await storageGet(CYCLE_START_KEY);
+  if(!cycleStart){
+    cycleStart = toDateStr(mondayOfWeek(state.schoolDate));
+    await storageSet(CYCLE_START_KEY, cycleStart);
+  }
+  state.cycleStartMonday = cycleStart;
+
   state.todayOverride = await storageGet(dayKey(dstr));
   state.checks = (await storageGet(checksKey(dstr))) || {};
 
   // AUTO-SAVE: the first time a school day is viewed, snapshot the ENTIRE
   // page for that day permanently (devotional, vocab, subjects, student
   // profiles, and field labels as they were) so it can always be referenced
-  // exactly as shown, even if the weekly template or profiles change later.
+  // exactly as shown, even if the plan or profiles change later.
   if(SCHOOL_DAYS.includes(state.weekdayNum) && !state.todayOverride){
-    const resolved = JSON.parse(JSON.stringify(state.template[state.weekdayNum] || {}));
+    const wi = weekIndexForDate(state.schoolDate);
+    const resolved = JSON.parse(JSON.stringify((state.weeks[wi] && state.weeks[wi][state.weekdayNum]) || {}));
     if(resolved && Object.keys(resolved).length){
       resolved.students = JSON.parse(JSON.stringify(state.students));
       resolved.fieldLabels = JSON.parse(JSON.stringify(state.fieldLabels));
@@ -530,15 +670,24 @@ async function loadAll(){
   if(state.weekdayNum === 5){ state.weekWords = await computeWeekWordsFor(mondayOfWeek(state.schoolDate)); }
 }
 
+// Which of the 5 built weeks (1-5) applies to a given date, rotating forever.
+function weekIndexForDate(dateObj){
+  const mon = mondayOfWeek(dateObj);
+  const startMs = new Date(state.cycleStartMonday + 'T12:00:00').getTime();
+  const diffWeeks = Math.round((mon.getTime() - startMs) / (7*24*3600*1000));
+  return (((diffWeeks % 5) + 5) % 5) + 1;
+}
+
 async function computeWeekWordsFor(mon){
   const grades = ['5th','8th','10th'];
   const result = {'5th':[], '8th':[], '10th':[]};
+  const wi = weekIndexForDate(mon);
   for(let i=0;i<4;i++){
-    const d = new Date(mon); d.setDate(mon.getDate()+i);
-    const ds = toDateStr(d);
+    const dt = new Date(mon); dt.setDate(mon.getDate()+i);
+    const ds = toDateStr(dt);
     const override = await storageGet(dayKey(ds));
     const wd = i+1;
-    const content = override || state.template[wd];
+    const content = override || (state.weeks[wi] && state.weeks[wi][wd]);
     if(content && content.vocab){
       grades.forEach(g=>{ if(content.vocab[g]) result[g].push(content.vocab[g].word); });
     }
@@ -546,7 +695,11 @@ async function computeWeekWordsFor(mon){
   return result;
 }
 
-function todayContent(){ return state.todayOverride || state.template[state.weekdayNum] || null; }
+function todayContent(){
+  if(state.todayOverride) return state.todayOverride;
+  const wi = weekIndexForDate(state.schoolDate);
+  return (state.weeks[wi] && state.weeks[wi][state.weekdayNum]) || null;
+}
 
 function allSubjects(c){
   const subj = c.subjects || {};
@@ -759,10 +912,80 @@ function makeExtraSubjectsEditor(container, arr){
   render();
 }
 
+/* ========================= SHARED: SINGLE-DAY EDIT FORM ========================= */
+let editorExtraSubjects = {}; // prefix -> array reference used by that form's extra-subjects editor
+
+function dayEditFormHTML(prefix, c, isFriday){
+  const grades = ['5th','8th','10th'];
+  const vocabBlock = isFriday
+    ? `<p style="color:var(--ink-soft);font-size:13px;">Friday auto-pulls this week's words for testing — nothing to set here.</p>`
+    : grades.map(g=>{
+        const w = (c.vocab && c.vocab[g]) || {word:'',def:'',sent:'',syn:'',ant:''};
+        return `<div style="margin-bottom:12px;padding-bottom:10px;border-bottom:1.5px solid var(--line-light)">
+          <label>${g} Grade Word</label><input type="text" id="${prefix}-v-${g}-word" value="${escAttr(w.word)}">
+          <div class="field-grid">
+            <div><label>Definition</label><textarea id="${prefix}-v-${g}-def">${esc(w.def)}</textarea></div>
+            <div><label>Used in a sentence</label><textarea id="${prefix}-v-${g}-sent">${esc(w.sent)}</textarea></div>
+          </div>
+          <div class="field-grid">
+            <div><label>Synonym</label><input type="text" id="${prefix}-v-${g}-syn" value="${escAttr(w.syn)}"></div>
+            <div><label>Antonym</label><input type="text" id="${prefix}-v-${g}-ant" value="${escAttr(w.ant)}"></div>
+          </div>
+        </div>`;
+      }).join('');
+
+  return `
+    <div class="mini-lbl" style="margin-top:0">Devotional</div>
+    <label>Word of the Day</label><input type="text" id="${prefix}-word" value="${escAttr(c.devotional.wordOfDay)}">
+    <label>Scripture</label><textarea id="${prefix}-scripture">${esc(c.devotional.scripture)}</textarea>
+    <label>Reflection Question</label><textarea id="${prefix}-reflect">${esc(c.devotional.reflection)}</textarea>
+    <label>Prayer</label><textarea id="${prefix}-prayer">${esc(c.devotional.prayer)}</textarea>
+    <label>Intention</label><textarea id="${prefix}-intent">${esc(c.devotional.intention)}</textarea>
+    <hr class="divider">
+    <div class="mini-lbl" style="margin-top:0">Vocabulary</div>
+    ${vocabBlock}
+    <hr class="divider">
+    <div class="mini-lbl" style="margin-top:0">Core Subjects</div>
+    <label>Math Topic</label><input type="text" id="${prefix}-math" value="${escAttr(c.subjects.math)}">
+    <div class="field-grid">
+      <div><label>History or Science</label>
+        <select id="${prefix}-type"><option ${c.subjects.scienceHistoryType==='Science'?'selected':''}>Science</option><option ${c.subjects.scienceHistoryType==='History'?'selected':''}>History</option></select>
+      </div>
+      <div><label>Topic</label><input type="text" id="${prefix}-scihist" value="${escAttr(c.subjects.scienceHistoryTopic)}"></div>
+    </div>
+    <label>Reading Topic</label><input type="text" id="${prefix}-reading" value="${escAttr(c.subjects.reading)}">
+    <label>Spanish Topic</label><input type="text" id="${prefix}-spanish" value="${escAttr(c.subjects.spanish)}">
+    <div class="mini-lbl" style="margin:14px 0 8px;">Additional Subjects</div>
+    <div id="${prefix}-extra-subjects"></div>
+  `;
+}
+
+function initDayEditor(prefix, c){
+  editorExtraSubjects[prefix] = JSON.parse(JSON.stringify(c.extraSubjects||[]));
+  makeExtraSubjectsEditor(document.getElementById(`${prefix}-extra-subjects`), editorExtraSubjects[prefix]);
+}
+
+function collectDayForm(prefix, isFriday){
+  const vocab = {};
+  if(!isFriday){
+    ['5th','8th','10th'].forEach(g=>{
+      vocab[g] = { word:document.getElementById(`${prefix}-v-${g}-word`).value, def:document.getElementById(`${prefix}-v-${g}-def`).value,
+        sent:document.getElementById(`${prefix}-v-${g}-sent`).value, syn:document.getElementById(`${prefix}-v-${g}-syn`).value, ant:document.getElementById(`${prefix}-v-${g}-ant`).value };
+    });
+  }
+  return {
+    devotional:{ wordOfDay:document.getElementById(`${prefix}-word`).value, scripture:document.getElementById(`${prefix}-scripture`).value,
+      reflection:document.getElementById(`${prefix}-reflect`).value, prayer:document.getElementById(`${prefix}-prayer`).value, intention:document.getElementById(`${prefix}-intent`).value },
+    vocab,
+    subjects:{ math:document.getElementById(`${prefix}-math`).value, scienceHistoryType:document.getElementById(`${prefix}-type`).value,
+      scienceHistoryTopic:document.getElementById(`${prefix}-scihist`).value, reading:document.getElementById(`${prefix}-reading`).value, spanish:document.getElementById(`${prefix}-spanish`).value },
+    extraSubjects: (editorExtraSubjects[prefix]||[]).filter(e=>e.name.trim()!=='' || e.topic.trim()!=='')
+  };
+}
+
 /* ========================= TODAY MODAL ========================= */
-let todayExtraSubjects = [];
 function openTodayModal(){
-  const c = JSON.parse(JSON.stringify(todayContent() || state.template[state.weekdayNum] || state.template[1]));
+  const c = JSON.parse(JSON.stringify(todayContent() || (state.weeks[1] && state.weeks[1][state.weekdayNum])));
   document.getElementById('todaySub').textContent =
     `Editing ${state.schoolDate.toLocaleDateString('en-US',{weekday:'long', month:'long', day:'numeric'})} only.`;
 
@@ -806,8 +1029,8 @@ function openTodayModal(){
     <div class="mini-lbl" style="margin-bottom:8px;">Additional Subjects</div>
     <div id="today-extra-subjects"></div>
   `;
-  todayExtraSubjects = JSON.parse(JSON.stringify(c.extraSubjects||[]));
-  makeExtraSubjectsEditor(document.getElementById('today-extra-subjects'), todayExtraSubjects);
+  editorExtraSubjects['today'] = JSON.parse(JSON.stringify(c.extraSubjects||[]));
+  makeExtraSubjectsEditor(document.getElementById('today-extra-subjects'), editorExtraSubjects['today']);
 
   switchModalTab(document.getElementById('todayOverlay'), 't-devo');
   document.getElementById('todayOverlay').classList.add('open');
@@ -827,102 +1050,71 @@ function collectTodayForm(){
     vocab,
     subjects:{ math:document.getElementById('s-math').value, scienceHistoryType:document.getElementById('s-type').value,
       scienceHistoryTopic:document.getElementById('s-scihist').value, reading:document.getElementById('s-reading').value, spanish:document.getElementById('s-spanish').value },
-    extraSubjects: todayExtraSubjects.filter(e=>e.name.trim()!=='' || e.topic.trim()!=='')
+    extraSubjects: (editorExtraSubjects['today']||[]).filter(e=>e.name.trim()!=='' || e.topic.trim()!=='')
   };
 }
 
-/* ========================= TEMPLATE MODAL ========================= */
+/* ========================= WEEKS PLAN MODAL (5-week rotation) ========================= */
 const WEEKDAY_LABELS = {1:'Monday',2:'Tuesday',3:'Wednesday',4:'Thursday',5:'Friday (Test Day)'};
-let templateExtraSubjects = {};
 function openTemplateModal(){
-  const tabsEl = document.getElementById('weekdayTabs');
-  const panelsEl = document.getElementById('weekdayPanels');
-  tabsEl.innerHTML = Object.keys(WEEKDAY_LABELS).map((k,i)=>`<div class="modal-tab ${i===0?'active':''}" data-wtab="w-${k}">${WEEKDAY_LABELS[k]}</div>`).join('');
+  const weekTabsEl = document.getElementById('weekLevelTabs');
+  const weekGroupsEl = document.getElementById('weekLevelGroups');
 
-  templateExtraSubjects = {};
-  panelsEl.innerHTML = Object.keys(WEEKDAY_LABELS).map((k,i)=>{
-    const c = state.template[k];
-    const grades = ['5th','8th','10th'];
-    const vocabBlock = (k==='5')
-      ? `<p style="color:var(--ink-soft);font-size:13px;">Friday tests words from Mon–Thu automatically.</p>`
-      : grades.map(g=>{
-          const w = c.vocab[g] || {word:'',def:'',sent:'',syn:'',ant:''};
-          return `<div style="margin-bottom:12px;padding-bottom:10px;border-bottom:1.5px solid var(--line-light)">
-            <label>${g} Grade Word</label><input type="text" id="w-${k}-${g}-word" value="${escAttr(w.word)}">
-            <div class="field-grid">
-              <div><label>Definition</label><textarea id="w-${k}-${g}-def">${esc(w.def)}</textarea></div>
-              <div><label>Sentence</label><textarea id="w-${k}-${g}-sent">${esc(w.sent)}</textarea></div>
-            </div>
-            <div class="field-grid">
-              <div><label>Synonym</label><input type="text" id="w-${k}-${g}-syn" value="${escAttr(w.syn)}"></div>
-              <div><label>Antonym</label><input type="text" id="w-${k}-${g}-ant" value="${escAttr(w.ant)}"></div>
-            </div>
-          </div>`;
-        }).join('');
+  weekTabsEl.innerHTML = [1,2,3,4,5].map((w,i)=>`<div class="modal-tab ${i===0?'active':''}" data-wk-level="wkgroup-${w}">Week ${w}</div>`).join('');
 
-    return `<div class="tab-panel ${i===0?'active':''}" id="w-${k}">
-      <div class="mini-lbl" style="margin-top:0">Devotional</div>
-      <label>Word of the Day</label><input type="text" id="w-${k}-word" value="${escAttr(c.devotional.wordOfDay)}">
-      <label>Scripture</label><textarea id="w-${k}-scripture">${esc(c.devotional.scripture)}</textarea>
-      <label>Reflection Question</label><textarea id="w-${k}-reflect">${esc(c.devotional.reflection)}</textarea>
-      <label>Prayer</label><textarea id="w-${k}-prayer">${esc(c.devotional.prayer)}</textarea>
-      <label>Intention</label><textarea id="w-${k}-intent">${esc(c.devotional.intention)}</textarea>
-      <hr class="divider">
-      <div class="mini-lbl" style="margin-top:0">Vocabulary</div>
-      ${vocabBlock}
-      <hr class="divider">
-      <div class="mini-lbl" style="margin-top:0">Core Subjects</div>
-      <label>Math Topic</label><input type="text" id="w-${k}-math" value="${escAttr(c.subjects.math)}">
-      <div class="field-grid">
-        <div><label>History or Science</label>
-          <select id="w-${k}-type"><option ${c.subjects.scienceHistoryType==='Science'?'selected':''}>Science</option><option ${c.subjects.scienceHistoryType==='History'?'selected':''}>History</option></select>
-        </div>
-        <div><label>Topic</label><input type="text" id="w-${k}-scihist" value="${escAttr(c.subjects.scienceHistoryTopic)}"></div>
-      </div>
-      <label>Reading Topic</label><input type="text" id="w-${k}-reading" value="${escAttr(c.subjects.reading)}">
-      <label>Spanish Topic</label><input type="text" id="w-${k}-spanish" value="${escAttr(c.subjects.spanish)}">
-      <div class="mini-lbl" style="margin:14px 0 8px;">Additional Subjects</div>
-      <div id="w-${k}-extra-subjects"></div>
+  weekGroupsEl.innerHTML = [1,2,3,4,5].map((w,i)=>{
+    const dayTabs = Object.keys(WEEKDAY_LABELS).map((k,j)=>`<div class="modal-tab ${j===0?'active':''}" data-wtab="w-${w}-${k}">${WEEKDAY_LABELS[k]}</div>`).join('');
+    const dayPanels = Object.keys(WEEKDAY_LABELS).map((k,j)=>{
+      const c = state.weeks[w][k];
+      const prefix = `w-${w}-${k}`;
+      return `<div class="tab-panel ${j===0?'active':''}" id="${prefix}">${dayEditFormHTML(prefix, c, k==='5')}</div>`;
+    }).join('');
+    return `<div class="week-group" id="wkgroup-${w}" style="display:${i===0?'block':'none'};">
+      <div class="modal-tabs">${dayTabs}</div>
+      ${dayPanels}
     </div>`;
   }).join('');
 
-  Object.keys(WEEKDAY_LABELS).forEach(k=>{
-    templateExtraSubjects[k] = JSON.parse(JSON.stringify(state.template[k].extraSubjects||[]));
-    makeExtraSubjectsEditor(document.getElementById(`w-${k}-extra-subjects`), templateExtraSubjects[k]);
+  // init extra-subject editors for all 25 days
+  [1,2,3,4,5].forEach(w=>{
+    Object.keys(WEEKDAY_LABELS).forEach(k=>{
+      initDayEditor(`w-${w}-${k}`, state.weeks[w][k]);
+    });
   });
 
-  tabsEl.querySelectorAll('.modal-tab').forEach(t=>{
+  // week-level tab switching
+  weekTabsEl.querySelectorAll('.modal-tab').forEach(t=>{
     t.addEventListener('click', ()=>{
-      tabsEl.querySelectorAll('.modal-tab').forEach(x=>x.classList.remove('active'));
-      panelsEl.querySelectorAll('.tab-panel').forEach(x=>x.classList.remove('active'));
+      weekTabsEl.querySelectorAll('.modal-tab').forEach(x=>x.classList.remove('active'));
       t.classList.add('active');
-      document.getElementById(t.dataset.wtab).classList.add('active');
+      weekGroupsEl.querySelectorAll('.week-group').forEach(g=> g.style.display = (g.id===t.dataset.wkLevel ? 'block':'none'));
+    });
+  });
+  // day-level tab switching within each week group
+  weekGroupsEl.querySelectorAll('.week-group').forEach(group=>{
+    group.querySelectorAll('.modal-tab').forEach(t=>{
+      t.addEventListener('click', ()=>{
+        group.querySelectorAll('.modal-tab').forEach(x=>x.classList.remove('active'));
+        group.querySelectorAll('.tab-panel').forEach(x=>x.classList.remove('active'));
+        t.classList.add('active');
+        document.getElementById(t.dataset.wtab).classList.add('active');
+      });
     });
   });
 
   document.getElementById('templateOverlay').classList.add('open');
 }
 function collectTemplateForm(){
-  const tmpl = {};
-  Object.keys(WEEKDAY_LABELS).forEach(k=>{
-    let vocab = {};
-    if(k!=='5'){
-      ['5th','8th','10th'].forEach(g=>{
-        vocab[g] = { word:document.getElementById(`w-${k}-${g}-word`).value, def:document.getElementById(`w-${k}-${g}-def`).value,
-          sent:document.getElementById(`w-${k}-${g}-sent`).value, syn:document.getElementById(`w-${k}-${g}-syn`).value, ant:document.getElementById(`w-${k}-${g}-ant`).value };
-      });
-    }
-    tmpl[k] = {
-      devotional:{ wordOfDay:document.getElementById(`w-${k}-word`).value, scripture:document.getElementById(`w-${k}-scripture`).value,
-        reflection:document.getElementById(`w-${k}-reflect`).value, prayer:document.getElementById(`w-${k}-prayer`).value, intention:document.getElementById(`w-${k}-intent`).value },
-      vocab,
-      subjects:{ math:document.getElementById(`w-${k}-math`).value, scienceHistoryType:document.getElementById(`w-${k}-type`).value,
-        scienceHistoryTopic:document.getElementById(`w-${k}-scihist`).value, reading:document.getElementById(`w-${k}-reading`).value, spanish:document.getElementById(`w-${k}-spanish`).value },
-      extraSubjects: (templateExtraSubjects[k]||[]).filter(e=>e.name.trim()!=='' || e.topic.trim()!=='')
-    };
+  const weeks = {};
+  [1,2,3,4,5].forEach(w=>{
+    weeks[w] = {};
+    Object.keys(WEEKDAY_LABELS).forEach(k=>{
+      weeks[w][k] = collectDayForm(`w-${w}-${k}`, k==='5');
+    });
   });
-  return tmpl;
+  return weeks;
 }
+
 
 /* ========================= STUDENTS MODAL ========================= */
 function openStudentsModal(){
@@ -1084,6 +1276,23 @@ function buildFullDayHTML(dateObj, content, checks, weekWords){
 
 async function openArchiveModal(){
   document.getElementById('archiveOverlay').classList.add('open');
+  await loadArchiveTab();
+  await loadUpcomingTab();
+}
+
+function dayRowHTML(dateObj, wordOfDay, isTest, rowId){
+  const label = dateObj.toLocaleDateString('en-US',{weekday:'long', month:'long', day:'numeric'});
+  return `<div class="archive-day-card day-row-clickable" data-rowid="${rowId}" style="padding:14px 16px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;">
+    <div>
+      <div class="archive-day-title" style="margin:0 0 2px;">${label}${isTest?' · Test Day':''}</div>
+      <div style="font-family:'Oswald',sans-serif;font-size:15px;text-transform:uppercase;">${esc(wordOfDay)}</div>
+    </div>
+    <div style="color:var(--orange);font-size:20px;">›</div>
+  </div>`;
+}
+
+/* ---- Archive (past, saved) tab ---- */
+async function loadArchiveTab(){
   const weeksEl = document.getElementById('archiveWeeks');
   const daysEl = document.getElementById('archiveDays');
   weeksEl.innerHTML = '';
@@ -1092,19 +1301,19 @@ async function openArchiveModal(){
   const keys = await storageList('day-override:');
   if(!keys.length){ daysEl.innerHTML = `<div class="archive-empty">No archived days yet. Days save automatically as you view them.</div>`; return; }
 
-  const dates = keys.map(k=>k.replace('day-override:','')).filter(d=>/^\d{4}-\d{2}-\d{2}$/.test(d)).sort();
+  const dates = keys.map(k=>k.replace('day-override:','')).filter(dd=>/^\d{4}-\d{2}-\d{2}$/.test(dd)).sort();
   const weekMap = {};
   dates.forEach(ds=>{
-    const [y,m,d] = ds.split('-').map(Number);
-    const dateObj = new Date(y, m-1, d, 12);
+    const [y,m,dn] = ds.split('-').map(Number);
+    const dateObj = new Date(y, m-1, dn, 12);
     const monStr = toDateStr(mondayOfWeek(dateObj));
     (weekMap[monStr] = weekMap[monStr]||[]).push(ds);
   });
   const weekKeys = Object.keys(weekMap).sort().reverse();
 
   function fmtRange(monStr){
-    const [y,m,d] = monStr.split('-').map(Number);
-    const mon = new Date(y,m-1,d,12);
+    const [y,m,dn] = monStr.split('-').map(Number);
+    const mon = new Date(y,m-1,dn,12);
     const fri = new Date(mon); fri.setDate(mon.getDate()+4);
     const opt = {month:'short', day:'numeric'};
     return mon.toLocaleDateString('en-US',opt) + ' – ' + fri.toLocaleDateString('en-US',opt);
@@ -1116,49 +1325,120 @@ async function openArchiveModal(){
     weeksEl.querySelectorAll('.archive-week-btn').forEach(b=>b.classList.toggle('active', b.dataset.wk===monStr));
     const ds = weekMap[monStr].sort();
     daysEl.innerHTML = `<div class="archive-empty">Loading…</div>`;
-    const [my,mm,md] = monStr.split('-').map(Number);
-    const monDateObj = new Date(my,mm-1,md,12);
-    const weekWords = await computeWeekWordsFor(monDateObj);
 
-    const blocks = [];
+    const rows = [];
+    const dayData = {};
     for(let i=0;i<ds.length;i++){
-      const d = ds[i];
-      const content = await storageGet(dayKey(d));
+      const dstr = ds[i];
+      const content = await storageGet(dayKey(dstr));
       if(!content) continue;
-      const [y,mo,da] = d.split('-').map(Number);
+      const [y,mo,da] = dstr.split('-').map(Number);
       const dateObj = new Date(y,mo-1,da,12);
-      const label = dateObj.toLocaleDateString('en-US',{weekday:'long', month:'long', day:'numeric'});
-      const checks = (await storageGet(checksKey(d))) || {};
-      const bodyId = 'arch-body-'+d;
-      const expanded = i===ds.length-1; // most recent day open by default
-      blocks.push(`
-        <div class="archive-day-card" style="padding:0;overflow:hidden;">
-          <div class="collapse-head" data-archtoggle="${bodyId}" style="padding:14px 16px;margin:0;background:var(--board-2);">
-            <div class="archive-day-title" style="margin:0;">${label}${wd_test(dateObj)?' · Test Day':''}</div>
-            <div class="chevron ${expanded?'':'collapsed'}">▾</div>
-          </div>
-          <div class="collapse-body ${expanded?'':'collapsed'}" style="max-height:${expanded?'6000px':'0'};padding:0 16px;" id="${bodyId}">
-            <div style="padding-top:14px;">${buildFullDayHTML(dateObj, content, checks, weekWords)}</div>
-          </div>
-        </div>`);
+      const checks = (await storageGet(checksKey(dstr))) || {};
+      const rowId = 'arch-'+dstr;
+      dayData[rowId] = {dateObj, content, checks};
+      rows.push(dayRowHTML(dateObj, content.devotional?.wordOfDay||'', dateObj.getDay()===5, rowId));
     }
-    daysEl.innerHTML = blocks.join('') || `<div class="archive-empty">No saved content for this week.</div>`;
+    daysEl.innerHTML = rows.join('') || `<div class="archive-empty">No saved content for this week.</div>`;
 
-    daysEl.querySelectorAll('[data-archtoggle]').forEach(head=>{
-      head.addEventListener('click', ()=>{
-        const id = head.dataset.archtoggle;
-        const body = document.getElementById(id);
-        const chev = head.querySelector('.chevron');
-        const collapsed = body.classList.toggle('collapsed');
-        chev.classList.toggle('collapsed', collapsed);
-        body.style.maxHeight = collapsed ? '0' : '6000px';
+    daysEl.querySelectorAll('[data-rowid]').forEach(row=>{
+      row.addEventListener('click', async ()=>{
+        const {dateObj, content, checks} = dayData[row.dataset.rowid];
+        const wi = weekIndexForDate(dateObj);
+        const weekWords = dateObj.getDay()===5 ? await computeWeekWordsFor(mondayOfWeek(dateObj)) : null;
+        openDayLightbox(dateObj, content, checks, weekWords, false);
       });
     });
   }
-  function wd_test(dateObj){ return dateObj.getDay()===5; }
 
   weeksEl.querySelectorAll('.archive-week-btn').forEach(b=>{ b.addEventListener('click', ()=> showWeek(b.dataset.wk)); });
   if(weekKeys.length) showWeek(weekKeys[0]);
+}
+
+/* ---- Upcoming (future, computed from the 5-week rotation) tab ---- */
+async function loadUpcomingTab(){
+  const weeksEl = document.getElementById('upcomingWeeks');
+  const daysEl = document.getElementById('upcomingDays');
+
+  const thisMonday = mondayOfWeek(state.schoolDate);
+  const upcomingMondays = [];
+  for(let i=0;i<6;i++){ // this week + next 5
+    const m = new Date(thisMonday); m.setDate(thisMonday.getDate() + i*7);
+    upcomingMondays.push(m);
+  }
+
+  function fmtRange(mon){
+    const fri = new Date(mon); fri.setDate(mon.getDate()+4);
+    const opt = {month:'short', day:'numeric'};
+    return mon.toLocaleDateString('en-US',opt) + ' – ' + fri.toLocaleDateString('en-US',opt);
+  }
+
+  weeksEl.innerHTML = upcomingMondays.map((mon,i)=>{
+    const label = i===0 ? 'This Week' : fmtRange(mon);
+    return `<button type="button" class="archive-week-btn ${i===0?'active':''}" data-idx="${i}">${label}</button>`;
+  }).join('');
+
+  async function showUpcomingWeek(idx){
+    weeksEl.querySelectorAll('.archive-week-btn').forEach(b=>b.classList.toggle('active', +b.dataset.idx===idx));
+    const mon = upcomingMondays[idx];
+    daysEl.innerHTML = `<div class="archive-empty">Loading…</div>`;
+    const wi = weekIndexForDate(mon);
+    const weekWords = await computeWeekWordsFor(mon);
+
+    const rows = [];
+    const dayData = {};
+    for(let i=0;i<5;i++){
+      const dateObj = new Date(mon); dateObj.setDate(mon.getDate()+i);
+      const wd = i+1;
+      const override = await storageGet(dayKey(toDateStr(dateObj)));
+      const content = override || state.weeks[wi][wd];
+      const rowId = 'up-'+toDateStr(dateObj);
+      dayData[rowId] = {dateObj, content};
+      rows.push(dayRowHTML(dateObj, content.devotional?.wordOfDay||'', wd===5, rowId));
+    }
+    daysEl.innerHTML = `<div class="archive-empty" style="padding:8px 4px 14px;text-align:left;">Week ${wi} of the rotation</div>` + rows.join('');
+
+    daysEl.querySelectorAll('[data-rowid]').forEach(row=>{
+      row.addEventListener('click', ()=>{
+        const {dateObj, content} = dayData[row.dataset.rowid];
+        openDayLightbox(dateObj, content, {}, dateObj.getDay()===5 ? weekWords : null, true);
+      });
+    });
+  }
+
+  weeksEl.querySelectorAll('.archive-week-btn').forEach(b=>{ b.addEventListener('click', ()=> showUpcomingWeek(+b.dataset.idx)); });
+  showUpcomingWeek(0);
+}
+
+/* ---- Day detail lightbox + image download ---- */
+function openDayLightbox(dateObj, content, checks, weekWords, isUpcoming){
+  const title = dateObj.toLocaleDateString('en-US',{weekday:'long', month:'long', day:'numeric'});
+  document.getElementById('lightboxTitle').textContent = title;
+  document.getElementById('lightboxSub').textContent = isUpcoming
+    ? 'Preview — this hasn\u2019t happened yet, so nothing is checked off.'
+    : 'Archived exactly as it appeared that day.';
+  const contentEl = document.getElementById('lightboxContent');
+  contentEl.innerHTML = buildFullDayHTML(dateObj, content, checks, weekWords);
+  document.getElementById('dayLightboxOverlay').classList.add('open');
+
+  const dlBtn = document.getElementById('downloadDayImg');
+  dlBtn.onclick = async ()=>{
+    dlBtn.disabled = true;
+    const origText = dlBtn.textContent;
+    dlBtn.textContent = 'Preparing…';
+    try{
+      const canvas = await html2canvas(contentEl, {backgroundColor: '#EEE7D6', scale: 2});
+      const link = document.createElement('a');
+      link.download = `legacy-lab-${toDateStr(dateObj)}.png`;
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+    }catch(e){
+      console.error('image export failed', e);
+      showToast('Image download failed — please try again.');
+    }
+    dlBtn.disabled = false;
+    dlBtn.textContent = origText;
+  };
 }
 
 /* ========================= MODAL SHARED ========================= */
@@ -1177,6 +1457,14 @@ function showToast(msg){
 document.querySelectorAll('[data-close]').forEach(b=>b.addEventListener('click', closeAllModals));
 document.querySelectorAll('.modal-overlay').forEach(o=>{ o.addEventListener('click', (e)=>{ if(e.target===o) closeAllModals(); }); });
 document.querySelectorAll('#todayOverlay .modal-tab').forEach(t=>{ t.addEventListener('click', ()=> switchModalTab(document.getElementById('todayOverlay'), t.dataset.tab)); });
+document.querySelectorAll('[data-cal-tab]').forEach(t=>{
+  t.addEventListener('click', ()=>{
+    document.querySelectorAll('[data-cal-tab]').forEach(x=>x.classList.remove('active'));
+    t.classList.add('active');
+    document.getElementById('archive-view').style.display = t.dataset.calTab==='archive-view' ? 'flex' : 'none';
+    document.getElementById('upcoming-view').style.display = t.dataset.calTab==='upcoming-view' ? 'flex' : 'none';
+  });
+});
 
 document.getElementById('openToday').addEventListener('click', ()=> requireEditAccess(openTodayModal));
 document.getElementById('openTemplate').addEventListener('click', ()=> requireEditAccess(openTemplateModal));
@@ -1193,14 +1481,14 @@ document.getElementById('saveToday').addEventListener('click', async ()=>{
 document.getElementById('resetToday').addEventListener('click', async ()=>{
   await storageDelete(dayKey(state.dateStr));
   state.todayOverride = null;
-  closeAllModals(); showToast('Reset to weekly plan');
+  closeAllModals(); showToast('Reset to the 5-week plan');
   await loadAndRender();
 });
 document.getElementById('saveTemplate').addEventListener('click', async ()=>{
-  const tmpl = collectTemplateForm();
-  state.template = tmpl;
-  await storageSet(TEMPLATE_KEY, tmpl);
-  closeAllModals(); showToast('Weekly plan saved');
+  const weeks = collectTemplateForm();
+  state.weeks = weeks;
+  await storageSet(WEEKS_KEY, weeks);
+  closeAllModals(); showToast('5-week plan saved');
   await loadAndRender();
 });
 document.getElementById('saveStudents').addEventListener('click', async ()=>{
