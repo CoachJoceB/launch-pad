@@ -238,9 +238,10 @@
   <div class="sb-right">
     <div class="buzzer">
       <div class="label">Final Buzzer</div>
-      <div class="time" id="buzzerTime">2:00:00 PM</div>
+      <div class="time" id="buzzerTime">2:30:00 PM</div>
     </div>
     <button class="icon-btn" id="openArchive" title="Archive & upcoming weeks">📅</button>
+    <button class="icon-btn" id="openBuzzerSettings" title="Day settings (buzzer time & timezone)">⏰</button>
     <button class="icon-btn" id="openStudents" title="Edit student profiles">👤</button>
     <button class="icon-btn" id="openToday" title="Edit today">✏️</button>
     <button class="icon-btn" id="openTemplate" title="Edit 5-week plan">🗓️</button>
@@ -342,6 +343,23 @@
   </div>
 </div>
 
+<!-- DAY SETTINGS MODAL -->
+<div class="modal-overlay" id="buzzerOverlay">
+  <div class="modal" style="max-width:400px;">
+    <h3>Day Settings</h3>
+    <div class="sub">Controls when the school day ends and which timezone the whole plan runs on.</div>
+    <label>End-of-day (final buzzer) time</label>
+    <input type="time" id="buzzerTimeInput" style="font-family:'Oswald',sans-serif;font-size:18px;padding:10px;">
+    <label>Timezone</label>
+    <select id="timezoneInput"></select>
+    <div class="sub" style="margin-top:8px;margin-bottom:0;">Days switch over at midnight in this timezone, and the buzzer countdown runs on it too — the same for every device, no matter where it's opened.</div>
+    <div class="modal-actions">
+      <button class="btn btn-ghost" data-close>Cancel</button>
+      <button class="btn btn-primary" id="saveBuzzer">Save</button>
+    </div>
+  </div>
+</div>
+
 <div class="save-toast" id="toast">Saved</div>
 
 <!-- PIN DIALOG -->
@@ -361,9 +379,22 @@
 <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
 <script>
 /* ========================= CONFIG / DEFAULTS ========================= */
-const SWITCH_HOUR = 5;   // 5am rollover
-const BUZZER_HOUR = 14;  // 2:00pm end of school day
 const SCHOOL_DAYS = [1,2,3,4,5]; // Mon-Fri
+const BUZZER_KEY = 'buzzer-time';
+function defaultBuzzerTime(){ return {hour:14, minute:30}; } // 2:30 PM
+
+const TIMEZONE_KEY = 'timezone-setting';
+function defaultTimezone(){ return 'America/Chicago'; } // Pensacola, FL
+const TIMEZONE_OPTIONS = [
+  { value:'America/New_York',    label:'Eastern Time' },
+  { value:'America/Chicago',     label:'Central Time' },
+  { value:'America/Denver',      label:'Mountain Time' },
+  { value:'America/Phoenix',     label:'Arizona (no DST)' },
+  { value:'America/Los_Angeles', label:'Pacific Time' },
+  { value:'America/Anchorage',   label:'Alaska Time' },
+  { value:'Pacific/Honolulu',    label:'Hawaii Time' },
+  { value:'UTC',                 label:'UTC' },
+];
 
 function defaultFieldLabels(){
   return { addr1:"Home Address", addr2:"Mom's Address", addr3:"Dad's Address",
@@ -600,11 +631,19 @@ function checksKey(dateStr){ return 'day-checks:'+dateStr; }
 /* ========================= DATE / SCHOOL DAY LOGIC ========================= */
 function pad(n){return n<10?'0'+n:''+n;}
 function toDateStr(d){ return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate()); }
+
+// The school day is whatever calendar date it currently is in the chosen
+// timezone (state.timezone, editable in Settings) — so it flips over at
+// midnight in that timezone no matter what timezone the viewing device is
+// set to. Falls back to the default timezone if settings haven't loaded yet.
 function getSchoolDate(now){
-  const d = new Date(now);
-  if(d.getHours() < SWITCH_HOUR){ d.setDate(d.getDate()-1); }
-  d.setHours(12,0,0,0);
-  return d;
+  const tz = (state && state.timezone) || defaultTimezone();
+  const fmt = new Intl.DateTimeFormat('en-US', { timeZone: tz, year:'numeric', month:'2-digit', day:'2-digit' });
+  const parts = fmt.formatToParts(now);
+  const y = +parts.find(p=>p.type==='year').value;
+  const m = +parts.find(p=>p.type==='month').value;
+  const dd = +parts.find(p=>p.type==='day').value;
+  return new Date(y, m-1, dd, 12, 0, 0, 0);
 }
 function mondayOfWeek(schoolDate){
   const d = new Date(schoolDate);
@@ -616,17 +655,19 @@ function mondayOfWeek(schoolDate){
 
 /* ========================= APP STATE ========================= */
 let state = {
-  weeks:null, students:null, fieldLabels:null, cycleStartMonday:null,
+  weeks:null, students:null, fieldLabels:null, cycleStartMonday:null, buzzerTime:null, timezone:null,
   schoolDate:null, weekdayNum:null, dateStr:null,
   todayOverride:null, weekWords:{}, checks:{}
 };
 let collapseState = {}; // in-memory only, per session
 
 async function loadAll(){
+  state.timezone = (await storageGet(TIMEZONE_KEY)) || defaultTimezone();
   state.weeks = (await storageGet(WEEKS_KEY)) || defaultWeeks();
   const rawStudents = (await storageGet(STUDENTS_KEY)) || defaultStudents();
   state.students = rawStudents.map(normalizeStudent);
   state.fieldLabels = (await storageGet(LABELS_KEY)) || defaultFieldLabels();
+  state.buzzerTime = (await storageGet(BUZZER_KEY)) || defaultBuzzerTime();
 
   const now = new Date();
   state.schoolDate = getSchoolDate(now);
@@ -729,19 +770,34 @@ function tickClock(){
   const now = new Date();
   document.getElementById('liveClock').textContent = now.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit',second:'2-digit'});
 }
+// Current wall-clock time in the chosen timezone, independent of the
+// viewing device's own timezone — so the buzzer countdown is the same
+// for every device.
+function centralNowParts(){
+  const tz = (state && state.timezone) || defaultTimezone();
+  const fmt = new Intl.DateTimeFormat('en-US', { timeZone: tz, hour12:false, hour:'2-digit', minute:'2-digit', second:'2-digit' });
+  const parts = fmt.formatToParts(new Date());
+  const get = t => +parts.find(p=>p.type===t).value;
+  return { h: get('hour')%24, m: get('minute'), s: get('second') };
+}
+function formatBuzzerTime(){
+  let {hour, minute} = state.buzzerTime;
+  const ampm = hour>=12 ? 'PM' : 'AM';
+  let h12 = hour % 12; if(h12===0) h12 = 12;
+  return `${h12}:${pad(minute)} ${ampm}`;
+}
 function updateBuzzer(){
-  const now = new Date();
-  const buzzer = new Date(state.schoolDate);
-  buzzer.setHours(BUZZER_HOUR,0,0,0);
   const el = document.getElementById('buzzerTime');
   if(!SCHOOL_DAYS.includes(state.weekdayNum)){ el.textContent = '—'; return; }
-  const diffMs = buzzer - now;
-  if(diffMs <= 0){ el.textContent = 'Afternoon Activities'; return; }
-  const totalSec = Math.floor(diffMs/1000);
-  const h = Math.floor(totalSec/3600);
-  const m = Math.floor((totalSec%3600)/60);
-  const s = totalSec%60;
-  el.textContent = h>0 ? `${h}:${pad(m)}:${pad(s)}` : `${m}:${pad(s)}`;
+  const {h,m,s} = centralNowParts();
+  const nowSec = h*3600 + m*60 + s;
+  const targetSec = state.buzzerTime.hour*3600 + state.buzzerTime.minute*60;
+  const diffSec = targetSec - nowSec;
+  if(diffSec <= 0){ el.textContent = 'Afternoon Activities'; return; }
+  const hh = Math.floor(diffSec/3600);
+  const mm = Math.floor((diffSec%3600)/60);
+  const ss = diffSec%60;
+  el.textContent = hh>0 ? `${hh}:${pad(mm)}:${pad(ss)}` : `${mm}:${pad(ss)}`;
 }
 
 /* ========================= RENDER: BOARD ========================= */
@@ -753,9 +809,10 @@ function renderBoard(){
   const wd = state.weekdayNum;
 
   if(!SCHOOL_DAYS.includes(wd)){
+    const tzLabel = (TIMEZONE_OPTIONS.find(o=>o.value===state.timezone)||{}).label || state.timezone;
     board.innerHTML = `<div class="weekend-card">
       <h2>No School Day Scheduled</h2>
-      <p>The command center runs Monday–Friday and switches automatically at 5:00 AM. Enjoy the weekend! 🏀</p>
+      <p>The command center runs Monday–Friday and switches automatically at midnight ${esc(tzLabel)}. Enjoy the weekend! 🏀</p>
     </div>`;
     return;
   }
@@ -862,7 +919,7 @@ function renderBoard(){
     </section>
 
     <footer class="buzzer-strip">
-      <div class="msg">Final buzzer <b>2:00 PM</b> — afternoon activities begin</div>
+      <div class="msg">Final buzzer <b>${formatBuzzerTime()}</b> — afternoon activities begin</div>
       <button class="link-btn" id="openTodayFooter">Edit today's plan</button>
     </footer>
   `;
@@ -1470,6 +1527,31 @@ document.getElementById('openToday').addEventListener('click', ()=> requireEditA
 document.getElementById('openTemplate').addEventListener('click', ()=> requireEditAccess(openTemplateModal));
 document.getElementById('openStudents').addEventListener('click', ()=> requireEditAccess(openStudentsModal));
 document.getElementById('openArchive').addEventListener('click', openArchiveModal);
+document.getElementById('openBuzzerSettings').addEventListener('click', ()=> requireEditAccess(openBuzzerModal));
+
+function openBuzzerModal(){
+  const hh = pad(state.buzzerTime.hour);
+  const mm = pad(state.buzzerTime.minute);
+  document.getElementById('buzzerTimeInput').value = `${hh}:${mm}`;
+
+  const tzSelect = document.getElementById('timezoneInput');
+  tzSelect.innerHTML = TIMEZONE_OPTIONS.map(o=>`<option value="${o.value}" ${o.value===state.timezone?'selected':''}>${o.label}</option>`).join('');
+
+  document.getElementById('buzzerOverlay').classList.add('open');
+}
+document.getElementById('saveBuzzer').addEventListener('click', async ()=>{
+  const val = document.getElementById('buzzerTimeInput').value; // "HH:MM" 24h
+  if(!val){ return; }
+  const [hh, mm] = val.split(':').map(Number);
+  const bt = { hour: hh, minute: mm };
+  const tz = document.getElementById('timezoneInput').value;
+  state.buzzerTime = bt;
+  state.timezone = tz;
+  await storageSet(BUZZER_KEY, bt);
+  await storageSet(TIMEZONE_KEY, tz);
+  closeAllModals(); showToast('Day settings saved');
+  await loadAndRender();
+});
 
 document.getElementById('saveToday').addEventListener('click', async ()=>{
   const data = collectTodayForm();
