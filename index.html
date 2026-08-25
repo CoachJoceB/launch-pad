@@ -126,25 +126,25 @@
   .test-list{list-style:none;padding:0;margin:0;}
   .test-list li{font-family:'Oswald',sans-serif;font-size:17px;text-transform:uppercase;padding:6px 0;border-bottom:1px dashed var(--line-light);}
 
-  .subjects-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
+  .subjects-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;}
   @media (max-width:1000px){.subjects-grid{grid-template-columns:repeat(2,1fr);}}
   @media (max-width:560px){.subjects-grid{grid-template-columns:1fr;}}
-  .subj-card{background:var(--chalk);border:1.5px solid var(--line-light);border-radius:14px;padding:16px;display:flex;flex-direction:column;gap:8px;position:relative;}
+  .subj-card{background:var(--chalk);border:1.5px solid var(--line-light);border-radius:10px;padding:10px 12px;display:flex;flex-direction:column;gap:4px;position:relative;}
   .subj-card.done{opacity:.55;}
   .subj-card.move-flash{border-color:var(--orange);}
   .move-btn{
-    width:24px;height:24px;border-radius:6px;border:1.5px solid var(--line-light);background:#fff;
-    color:var(--ink-soft);font-size:11px;display:flex;align-items:center;justify-content:center;cursor:pointer;padding:0;
+    width:19px;height:19px;border-radius:5px;border:1.5px solid var(--line-light);background:#fff;
+    color:var(--ink-soft);font-size:9.5px;display:flex;align-items:center;justify-content:center;cursor:pointer;padding:0;
   }
   .move-btn:hover{border-color:var(--orange);color:var(--orange);}
   .move-btn:disabled{opacity:.3;cursor:default;}
   .move-btn:disabled:hover{border-color:var(--line-light);color:var(--ink-soft);}
   .subj-top{display:flex;justify-content:space-between;align-items:flex-start;}
-  .subj-name{font-family:'Oswald',sans-serif;font-size:15px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);}
-  .subj-topic{font-size:16px;font-weight:600;line-height:1.35;}
+  .subj-name{font-family:'Oswald',sans-serif;font-size:12.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-soft);}
+  .subj-topic{font-size:13.5px;font-weight:600;line-height:1.3;}
   .check{
-    width:24px;height:24px;border-radius:6px;border:2px solid var(--ink-soft);display:flex;align-items:center;
-    justify-content:center;cursor:pointer;flex-shrink:0;font-size:14px;color:var(--chalk);
+    width:19px;height:19px;border-radius:5px;border:2px solid var(--ink-soft);display:flex;align-items:center;
+    justify-content:center;cursor:pointer;flex-shrink:0;font-size:12px;color:var(--chalk);
   }
   .check.checked{background:var(--green);border-color:var(--green);}
 
@@ -1030,7 +1030,10 @@ async function loadSeuToday(){
   for(const course of courses){
     const tasks = (await seuGet('tasks:'+course.id)) || [];
     const dueToday = tasks.filter(t=>{
-      try{ return toDateStr(new Date(t.dueDate)) === todayStr; }catch(e){ return false; }
+      // Interpret the task's due date through the same timezone-aware
+      // "school date" logic the rest of the app uses, so it only ever
+      // shows on the one day it's actually due here.
+      try{ return toDateStr(getSchoolDate(new Date(t.dueDate))) === todayStr; }catch(e){ return false; }
     });
     if(dueToday.length) groups.push({ course, tasks: dueToday });
   }
