@@ -260,6 +260,960 @@ let courses = [];
 let tasksByCourse = {};
 let screen = 'schedule'; // 'schedule' | 'courses'
 let activeCourseId = null;
+let activeWeek = null; // null = default to the current calendar week
+
+const DAY_NAMES = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
+function dayIndex(name){
+  if(!name) return 4;
+  const i = DAY_NAMES.findIndex(d => d.toLowerCase() === String(name).trim().toLowerCase());
+  return i === -1 ? 4 : i;
+}
+function fmtDate(d){ return d.toLocaleDateString(undefined,{weekday:'short', month:'short', day:'numeric'}); }
+function addDays(date, n){ const d = new Date(date); d.setDate(d.getDate()+n); return d; }
+function startOfDay(d){ const x=new Date(d); x.setHours(0,0,0,0); return x; }
+function todayStart(){ return startOfDay(new Date()); }
+function sameDay(a,b){ return startOfDay(a).getTime() === startOfDay(b).getTime(); }
+
+/* =========================================================
+   INIT / LOAD
+========================================================= */
+async function loadAll(){
+  courses = (await S.get('courses')) || [];
+  tasksByCourse = {};
+  for(const c of courses){
+    tasksByCourse[c.id] = (await S.get('tasks:'+c.id)) || [];
+  }
+  render();
+}
+async function saveCourses(){ await S.set('courses', courses); }
+async function saveTasks(courseId){ await S.set('tasks:'+courseId, tasksByCourse[courseId] || []); }
+
+/* =========================================================
+   SCHEDULE COMPRESSION
+   8-week SEU term -> modules 1-7 map 1:1 onto 7 calendar weeks;
+   module 8's work folds into week 7. Every task lands on a real
+   Monday-Friday day for that calendar week — never a weekend —
+   and exams always land on the last working day of their week,
+   after the regular work that leads up to them.
+========================================================= */
+function compressedWeekOf(week){ return Math.min(7, Math.ceil(week * 7/8)); }
+
+function getCourseWeekDates(course){
+  const weeks = [];
+  let cursor = startOfDay(new Date(course.startDate + 'T00:00:00'));
+  const dow0 = cursor.getDay();
+  if(dow0 === 0) cursor = addDays(cursor, 1);
+  else if(dow0 === 6) cursor = addDays(cursor, 2);
+  for(let w=0; w<7; w++){
+    const startDow = cursor.getDay();
+    const daysToFriday = 5 - startDow;
+    const weekdays = [];
+    for(let i=0; i<=daysToFriday; i++) weekdays.push(addDays(cursor, i));
+    weeks.push(weekdays);
+    let next = addDays(weekdays[weekdays.length-1], 1);
+    while(next.getDay() !== 1) next = addDays(next, 1);
+    cursor = next;
+  }
+  return weeks;
+}
+
+function dateForNamedDay(weekdays, dayName, fallbackIndex){
+  const idx = dayIndex(dayName);
+  const jsDay = (idx + 1) % 7;
+  const match = weekdays.find(d => d.getDay() === jsDay);
+  return match || weekdays[fallbackIndex % weekdays.length];
+}
+
+// Builds the task list for a course from an extracted syllabus item
+// array. Regular items with no stated day are spread across the
+// week's working days in their ORIGINAL ORDER using a proportional
+// (non-wrapping) mapping, so item 6 of 6 never jumps back to Monday
+// ahead of item 5 — order is always preserved. Exams always land on
+// the last working day of the week.
+function buildTasksFromExtraction(course, extractedRaw){
+  const weekDates = getCourseWeekDates(course);
+  const extracted = extractedRaw.map((item, idx) => ({
+    ...item,
+    week: Math.min(8, Math.max(1, parseInt(item.week) || 1)),
+    _orderIndex: idx
+  }));
+
+  const byCW = {};
+  for(const item of extracted){
+    const cw = compressedWeekOf(item.week);
+    (byCW[cw] = byCW[cw] || []).push(item);
+  }
+
+  for(const cw of Object.keys(byCW)){
+    const weekdays = weekDates[cw-1];
+    const itemsInWeek = byCW[cw];
+    const hasAutoExam = itemsInWeek.some(it => it.type==='exam' && !it.dueDayOfWeek);
+    const pool = (hasAutoExam && weekdays.length > 1) ? weekdays.slice(0,-1) : weekdays;
+    const regularAuto = itemsInWeek.filter(it =>
+      !it.dueDayOfWeek && it.type !== 'exam' &&
+      !(it.type === 'discussion' && (it.initialPostDay || it.replyDay))
+    );
+    const N = regularAuto.length, D = pool.length;
+    regularAuto.forEach((item, i) => {
+      const dayIdx = D > 0 ? Math.min(D-1, Math.floor(i * D / N)) : 0;
+      item._autoDate = pool[dayIdx];
+    });
+  }
+
+  const tasks = [];
+  let counter = 0;
+  for(const item of extracted){
+    const week = item.week;
+    const cw = compressedWeekOf(week);
+    const weekdays = weekDates[cw-1];
+    const baseId = course.id + '-' + (counter++) + '-' + Date.now();
+    if(item.type === 'discussion' && (item.initialPostDay || item.replyDay)){
+      const initDay = item.initialPostDay || 'Thursday';
+      const replyDay = item.replyDay || 'Friday';
+      tasks.push({
+        id: baseId+'-init', courseId: course.id, week, orderIndex: item._orderIndex,
+        title: item.title + ' — initial post', type: 'discussion',
+        dueDate: dateForNamedDay(weekdays, initDay, 0).toISOString(),
+        explicitDay: initDay, done: false, notes: item.notes || ''
+      });
+      tasks.push({
+        id: baseId+'-reply', courseId: course.id, week, orderIndex: item._orderIndex,
+        title: item.title + ' — replies', type: 'discussion',
+        dueDate: dateForNamedDay(weekdays, replyDay, 0).toISOString(),
+        explicitDay: replyDay, done: false, notes: item.notes || ''
+      });
+    } else {
+      const explicitDay = item.dueDayOfWeek || null;
+      let d;
+      if(explicitDay) d = dateForNamedDay(weekdays, explicitDay, 0);
+      else if(item.type === 'exam') d = weekdays[weekdays.length-1];
+      else d = item._autoDate || weekdays[0];
+      tasks.push({
+        id: baseId, courseId: course.id, week, orderIndex: item._orderIndex,
+        title: item.title, type: item.type || 'assignment',
+        dueDate: d.toISOString(), explicitDay, done: false, notes: item.notes || ''
+      });
+    }
+  }
+  tasks.sort((a,b)=> new Date(a.dueDate) - new Date(b.dueDate));
+  return tasks;
+}
+
+function recomputeCourseDates(courseId){
+  const course = courses.find(c=>c.id===courseId);
+  const tasks = tasksByCourse[courseId] || [];
+  const weekDates = getCourseWeekDates(course);
+  const byCW = {};
+  for(const t of tasks){
+    const cw = compressedWeekOf(t.week);
+    (byCW[cw] = byCW[cw] || []).push(t);
+  }
+  for(const cw of Object.keys(byCW)){
+    const weekdays = weekDates[cw-1];
+    const itemsInWeek = byCW[cw].slice().sort((a,b)=> (a.orderIndex ?? 0) - (b.orderIndex ?? 0));
+    const hasAutoExam = itemsInWeek.some(t => t.type==='exam' && !t.explicitDay);
+    const pool = (hasAutoExam && weekdays.length > 1) ? weekdays.slice(0,-1) : weekdays;
+    const regularAuto = itemsInWeek.filter(t => !t.explicitDay && t.type !== 'exam');
+    const N = regularAuto.length, D = pool.length;
+    regularAuto.forEach((t, i) => {
+      const dayIdx = D > 0 ? Math.min(D-1, Math.floor(i * D / N)) : 0;
+      t.dueDate = pool[dayIdx].toISOString();
+    });
+    for(const t of itemsInWeek){
+      if(t.explicitDay) t.dueDate = dateForNamedDay(weekdays, t.explicitDay, 0).toISOString();
+      else if(t.type === 'exam') t.dueDate = weekdays[weekdays.length-1].toISOString();
+    }
+  }
+}
+
+/* =========================================================
+   PRELOADED FALL '26 SEU COURSES
+   Built directly from the College Composition (ENGL 1113) and
+   College Algebra (MATH 1213) syllabi + grade item exports. Both
+   are self-paced CBE courses (module = week), so no per-item
+   weekday is stated — items are auto-spread across Monday-Friday
+   in syllabus order within their module week, alternating between
+   subjects so both classes get worked on daily, with exams always
+   landing after that week's homework.
+========================================================= */
+const COMPOSITION_SEED = [
+  {week:1, title:"Double Introduction", type:"assignment"},
+  {week:1, title:"Rhetorical Analysis and Revision: University Communication", type:"assignment"},
+  {week:1, title:"Knowledge Check: Rhetorical Awareness", type:"quiz"},
+  {week:2, title:"Checkpoint 1: Rhetorical Personal Narrative", type:"assignment"},
+  {week:2, title:"Knowledge Check: Writing With Purpose", type:"quiz"},
+  {week:3, title:"Writing Exercise: Anchor Text 2", type:"assignment"},
+  {week:3, title:"Knowledge Check: Rhetorical Reading Check", type:"quiz"},
+  {week:4, title:"Checkpoint 2: Response Op-Ed Essay", type:"assignment"},
+  {week:4, title:"Knowledge Check: Responding to an Argument", type:"quiz"},
+  {week:5, title:"Practicing the Quote Sandwich", type:"assignment"},
+  {week:5, title:"Knowledge Check: Using Evidence", type:"quiz"},
+  {week:6, title:"Checkpoint 3: RAFT Advice Column", type:"assignment"},
+  {week:6, title:"Knowledge Check: Building an Argument", type:"quiz"},
+  {week:7, title:"Scholarly Article Skimming", type:"assignment"},
+  {week:7, title:"Knowledge Check: Scholarly Sources", type:"quiz"},
+  {week:8, title:"Research Integration Assignment", type:"assignment"},
+  {week:8, title:"Knowledge Check: Academic Conversations", type:"quiz"}
+];
+
+const ALGEBRA_SEED = [
+  {week:1, title:"Homework: Are You Ready for College Algebra?", type:"assignment"},
+  {week:2, title:"Homework 1.1: Graphs & Graphing Utilities", type:"assignment"},
+  {week:2, title:"Homework 1.2: Linear Equations & Rational Equations", type:"assignment"},
+  {week:2, title:"Homework 1.4: Complex Numbers", type:"assignment"},
+  {week:2, title:"Homework 1.5: Quadratic Equations", type:"assignment"},
+  {week:2, title:"Homework 1.6: Other Types of Equations", type:"assignment"},
+  {week:2, title:"Week 2 Test (Ch. 1)", type:"exam"},
+  {week:3, title:"Homework 2.1: Basics of Functions & Their Graphs", type:"assignment"},
+  {week:3, title:"Homework 2.2: More on Functions & Their Graphs", type:"assignment"},
+  {week:3, title:"Homework 2.3: Linear Functions & Slope", type:"assignment"},
+  {week:3, title:"Homework 2.4: More on Slope", type:"assignment"},
+  {week:3, title:"Week 3 Test (2.1–2.4)", type:"exam"},
+  {week:4, title:"Homework 2.5: Transformations of Functions", type:"assignment"},
+  {week:4, title:"Homework 2.6: Combinations & Composite Functions", type:"assignment"},
+  {week:4, title:"Homework 2.7: Inverse Functions", type:"assignment"},
+  {week:4, title:"Week 4 Test (2.5–2.7)", type:"exam"},
+  {week:5, title:"Homework 3.1: Quadratic Functions", type:"assignment"},
+  {week:5, title:"Homework 3.2: Polynomial Functions & Their Graphs", type:"assignment"},
+  {week:5, title:"Homework 3.3: Dividing Polynomials; Remainder & Factor Theorems", type:"assignment"},
+  {week:5, title:"Week 5 Test (3.1–3.3)", type:"exam"},
+  {week:6, title:"Homework 3.4: Zeros of Polynomial Functions", type:"assignment"},
+  {week:6, title:"Homework 3.5: Rational Functions & Their Graphs", type:"assignment"},
+  {week:6, title:"Week 6 Test (3.4–3.5)", type:"exam"},
+  {week:7, title:"Homework 4.1: Exponential Functions", type:"assignment"},
+  {week:7, title:"Homework 4.2: Logarithmic Functions", type:"assignment"},
+  {week:7, title:"Homework 4.3: Properties of Logarithms", type:"assignment"},
+  {week:7, title:"Homework 4.4: Exponential & Logarithmic Equations", type:"assignment"},
+  {week:7, title:"Week 7 Test (Ch. 4)", type:"exam"},
+  {week:8, title:"Final Exam (cumulative)", type:"exam"}
+];
+
+async function seedFall26(){
+  if(courses.some(c=>c.code==='ENGL 1113' || c.code==='MATH 1213')){
+    if(!confirm('Composition and/or Algebra already look loaded. Add another copy anyway?')) return;
+  }
+  const startDate = '2026-08-26';
+  const comp = {id:'comp'+Date.now(), name:'College Composition', code:'ENGL 1113', startDate};
+  const alg = {id:'alg'+(Date.now()+1), name:'College Algebra', code:'MATH 1213', startDate};
+  courses.push(comp, alg);
+  tasksByCourse[comp.id] = buildTasksFromExtraction(comp, COMPOSITION_SEED);
+  tasksByCourse[alg.id] = buildTasksFromExtraction(alg, ALGEBRA_SEED);
+  await saveCourses();
+  await saveTasks(comp.id);
+  await saveTasks(alg.id);
+  screen = 'schedule';
+  activeWeek = null;
+  render();
+}
+
+/* =========================================================
+   AI SYLLABUS PARSING
+========================================================= */
+async function parseSyllabusText(rawText){
+  const system = `You extract a structured task list from a college course syllabus for an accelerated 8-week SEU (Southeastern University) online term.
+Return ONLY valid JSON — no markdown fences, no preamble, no commentary. The JSON must be an array of objects with this exact shape:
+[{"week": 1, "title": "string", "type": "discussion"|"assignment"|"quiz"|"exam"|"reading"|"other", "dueDayOfWeek": "Monday".."Sunday" or null, "initialPostDay": "Monday".."Sunday" or null, "replyDay": "Monday".."Sunday" or null, "notes": "string, short"}]
+Rules:
+- Include every graded item: discussion boards, quizzes, exams, papers, assignments, projects.
+- For discussion board items, if the syllabus states separate initial-post and reply deadlines, fill initialPostDay and replyDay and leave dueDayOfWeek null. If only one deadline is given, use dueDayOfWeek and leave the other two null.
+- "week" is the module/week number (1-8) the item belongs to, inferred from the syllabus structure.
+- If a day of week isn't stated, use null — do not guess. (The app auto-spreads unstated days across Mon-Fri, and always schedules exams after that week's other work.)
+- Keep "notes" under 12 words (e.g. page count, submission format).
+- Do not invent items that aren't in the text.`;
+
+  const resp = await fetch("https://api.anthropic.com/v1/messages", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      model: "claude-sonnet-4-6",
+      max_tokens: 4000,
+      system,
+      messages: [{ role: "user", content: rawText.slice(0, 40000) }]
+    })
+  });
+  const data = await resp.json();
+  const textBlocks = (data.content || []).filter(b=>b.type==='text').map(b=>b.text).join('\n');
+  let clean = textBlocks.trim().replace(/^```json/i,'').replace(/^```/,'').replace(/```$/,'').trim();
+  const parsed = JSON.parse(clean);
+  if(!Array.isArray(parsed)) throw new Error('Unexpected response shape');
+  return parsed;
+}
+
+/* =========================================================
+   SHARED DISPLAY HELPERS
+========================================================= */
+function allTasksFlat(){
+  let all = [];
+  for(const c of courses){
+    for(const t of (tasksByCourse[c.id]||[])){
+      all.push({...t, courseName: c.name, courseCode: c.code});
+    }
+  }
+  return all;
+}
+
+function typeLabel(type){
+  const map = {discussion:'Discussion', assignment:'Assignment', quiz:'Quiz', exam:'Exam', reading:'Reading', other:'Task'};
+  return map[type] || 'Task';
+}
+
+function escapeHtml(str){ const d = document.createElement('div'); d.textContent = str||''; return d.innerHTML; }
+
+function taskRow(t, overdue){
+  const d = new Date(t.dueDate);
+  const statusBadge = overdue ? `<span class="badge overdue">Overdue</span>` :
+    sameDay(d, todayStart()) ? `<span class="badge today">Today</span>` : '';
+  return `
+    <div class="task">
+      <div class="check ${t.done?'done':''}" onclick="toggleDone('${t.courseId}','${t.id}')">${t.done?'✓':''}</div>
+      <div class="task-body">
+        <div class="task-title ${t.done?'done':''}">${escapeHtml(t.title)}</div>
+        <div class="task-meta">
+          <span class="badge ${t.type}">${typeLabel(t.type)}</span>
+          ${statusBadge}
+          <span class="course-chip">${escapeHtml(t.courseCode||t.courseName||'')}</span>
+          <span class="mono">· ${fmtDate(d)}</span>
+        </div>
+        ${t.notes?`<div class="helper">${escapeHtml(t.notes)}</div>`:''}
+      </div>
+    </div>`;
+}
+
+async function toggleDone(courseId, taskId){
+  const list = tasksByCourse[courseId];
+  const t = list.find(x=>x.id===taskId);
+  if(!t) return;
+  t.done = !t.done;
+  await saveTasks(courseId);
+  render();
+}
+
+function groupTasksByCourse(list){
+  const groups = {};
+  for(const c of courses) groups[c.id] = [];
+  for(const t of list){ (groups[t.courseId] = groups[t.courseId] || []).push(t); }
+  return groups;
+}
+
+function renderSubjectGroups(list, overdue){
+  if(!list.length) return '';
+  const groups = groupTasksByCourse(list);
+  let html = '';
+  for(const c of courses){
+    const items = groups[c.id] || [];
+    if(!items.length) continue;
+    html += `<div class="subject-label">${escapeHtml(c.name)}</div>`;
+    html += `<div class="card">${items.map(t=>taskRow(t, overdue)).join('')}</div>`;
+  }
+  return html;
+}
+
+function renderDayByDayGroups(list){
+  const byDate = {};
+  for(const t of list){
+    const key = startOfDay(new Date(t.dueDate)).toISOString();
+    (byDate[key] = byDate[key] || []).push(t);
+  }
+  const keys = Object.keys(byDate).sort();
+  let html = '';
+  for(const key of keys){
+    const d = new Date(key);
+    html += `<div class="day-block">
+      <div class="day-heading">${d.toLocaleDateString(undefined,{weekday:'long'})} <span class="date-mono">${d.toLocaleDateString(undefined,{month:'short', day:'numeric'})}</span></div>
+      ${renderSubjectGroups(byDate[key])}
+    </div>`;
+  }
+  return html;
+}
+
+/* =========================================================
+   TOP-LEVEL RENDER
+========================================================= */
+function render(){
+  if(screen === 'courses') renderCoursesScreen();
+  else renderSchedulePage();
+}
+
+function toggleScreen(){
+  screen = (screen === 'schedule') ? 'courses' : 'schedule';
+  activeCourseId = null;
+  render();
+}
+
+/* =========================================================
+   SCHEDULE SCREEN — continuous Week 1-7 scroll
+========================================================= */
+function renderSchedulePage(){
+  document.getElementById('headerActionBtn').textContent = '⚙ Courses';
+
+  if(courses.length === 0){
+    document.getElementById('scoreboardTitle').textContent = 'Game Plan';
+    document.getElementById('scoreboardSub').textContent = 'No courses loaded yet';
+    document.getElementById('chipRow').innerHTML = '';
+    document.getElementById('mainContent').innerHTML = `
+      <div class="empty">
+        <span class="wordmark">No game plan yet</span>
+        <p>Add his first SEU course and load the syllabus to build the 7-week schedule.</p>
+        <button class="btn gold" onclick="openAddCourse()">+ Add a course</button>
+        <button class="btn ghost" style="margin-top:10px;" onclick="seedFall26()">Preload Fall '26: Composition &amp; Algebra</button>
+      </div>`;
+    return;
+  }
+
+  const course0 = courses[0];
+  const weekDatesAll = getCourseWeekDates(course0);
+  const now = todayStart();
+  let currentIdx = weekDatesAll.findIndex(wd => now >= wd[0] && now <= wd[wd.length-1]);
+  if(currentIdx === -1) currentIdx = (now < weekDatesAll[0][0]) ? 0 : 6;
+
+  const all = allTasksFlat();
+  const overdue = all.filter(t=>!t.done && startOfDay(new Date(t.dueDate)) < now);
+  const doneCount = all.filter(t=>t.done).length;
+
+  document.getElementById('scoreboardTitle').textContent = `Week ${currentIdx+1} of 7`;
+  document.getElementById('scoreboardSub').textContent = `${doneCount}/${all.length} complete · ${overdue.length} overdue`;
+
+  if(activeWeek === null) activeWeek = currentIdx+1;
+
+  let chipHtml = '';
+  for(let w=1; w<=7; w++){
+    const label = w===7 ? 'Wk 7' : `Wk ${w}`;
+    chipHtml += `<div class="wk-chip ${w===activeWeek?'current':''}" onclick="selectWeek(${w})">${label}</div>`;
+  }
+  document.getElementById('chipRow').innerHTML = chipHtml;
+
+  let html = '';
+  if(overdue.length){
+    html += `<div class="section-label">⏱ Overdue — catch up</div>`;
+    html += renderSubjectGroups(overdue, true);
+  }
+
+  const w = activeWeek;
+  const weekdays = weekDatesAll[w-1];
+  const rangeStart = weekdays[0], rangeEnd = weekdays[weekdays.length-1];
+  const weekTasks = all.filter(t=>{
+    const d = startOfDay(new Date(t.dueDate));
+    return d >= rangeStart && d <= rangeEnd;
+  });
+  const wDone = weekTasks.filter(t=>t.done).length;
+  html += `<section class="qtr" id="week-section-${w}">
+    <div class="qtr-head">
+      <div class="qtr-tag">WK ${w}</div>
+      <div class="qtr-title">${w===7 ? 'Modules 7–8' : 'Module '+w}</div>
+      <div class="qtr-hint">${fmtDate(rangeStart)} – ${fmtDate(rangeEnd)} · ${wDone}/${weekTasks.length} done</div>
+    </div>
+    ${weekTasks.length ? renderDayByDayGroups(weekTasks) : `<div class="card" style="padding:12px; color:var(--ink-soft); font-size:13.5px;">Nothing scheduled this week yet.</div>`}
+  </section>`;
+
+  document.getElementById('mainContent').innerHTML = html;
+}
+
+function selectWeek(w){
+  activeWeek = w;
+  renderSchedulePage();
+}
+
+/* =========================================================
+   COURSES SCREEN — add / edit / preload / parse
+========================================================= */
+function renderCoursesScreen(){
+  document.getElementById('headerActionBtn').textContent = '📅 Schedule';
+  document.getElementById('chipRow').innerHTML = '';
+
+  if(activeCourseId){
+    renderCourseDetail(activeCourseId);
+    return;
+  }
+
+  document.getElementById('scoreboardTitle').textContent = 'Courses';
+  document.getElementById('scoreboardSub').textContent = `${courses.length} class${courses.length===1?'':'es'} this term`;
+
+  let html = '';
+  for(const c of courses){
+    const tasks = tasksByCourse[c.id] || [];
+    const done = tasks.filter(t=>t.done).length;
+    const pct = tasks.length ? Math.round(done/tasks.length*100) : 0;
+    html += `
+      <div class="card course-card" style="padding:14px 16px;" onclick="openCourseDetail('${c.id}')">
+        <div>
+          <div class="name">${escapeHtml(c.name)}</div>
+          <div class="code">${escapeHtml(c.code||'')} · starts ${fmtDate(new Date(c.startDate+'T00:00:00'))}</div>
+          <div class="progress-track"><div class="progress-fill" style="width:${pct}%"></div></div>
+          <div class="helper">${tasks.length ? `${done}/${tasks.length} tasks complete` : 'No syllabus loaded yet'}</div>
+        </div>
+        <div class="arrow">›</div>
+      </div>`;
+  }
+  html += `<button class="btn ghost" style="margin-top:8px;" onclick="openAddCourse()">+ Add another course</button>`;
+  html += `<button class="btn ghost" style="margin-top:8px;" onclick="seedFall26()">Preload Fall '26: Composition &amp; Algebra</button>`;
+  document.getElementById('mainContent').innerHTML = html;
+}
+
+function openCourseDetail(id){ activeCourseId = id; render(); }
+function backToCourseList(){ activeCourseId = null; render(); }
+
+function renderCourseDetail(id){
+  const c = courses.find(x=>x.id===id);
+  if(!c){ activeCourseId=null; render(); return; }
+  const tasks = tasksByCourse[id] || [];
+
+  let html = `<button class="link-btn" onclick="backToCourseList()">‹ All courses</button>`;
+  html += `<div class="section-label">${escapeHtml(c.name)}</div>`;
+  html += `<div class="card" style="padding:12px 14px;">
+      <div class="helper">${escapeHtml(c.code||'')} · 8-week SEU term starting ${fmtDate(new Date(c.startDate+'T00:00:00'))}, target finish by end of week 7</div>
+      <button class="link-btn" style="margin-top:8px;" onclick="openEditCourse('${c.id}')">Edit name / start date</button>
+    </div>`;
+
+  if(!tasks.length){
+    html += `
+      <div class="section-label">Load the syllabus</div>
+      <div class="card" style="padding:14px;">
+        <p class="helper" style="margin-top:0;">Upload the syllabus PDF, or paste its text below.</p>
+        <label class="field-label">Upload PDF</label>
+        <input type="file" id="syllabusPdfInput" accept="application/pdf" onchange="handlePdfUpload(event,'${c.id}')">
+        <div id="pdfStatus" class="helper"></div>
+        <label class="field-label" style="margin-top:16px;">Or paste syllabus text</label>
+        <textarea id="syllabusText" placeholder="Paste syllabus text here…"></textarea>
+        <div id="parseError" style="color:var(--danger); font-size:13px; margin-top:6px;"></div>
+        <button class="btn gold" style="margin-top:10px;" id="parseBtn" onclick="handleParse('${c.id}')">Parse syllabus</button>
+      </div>`;
+  } else {
+    html += `<div class="section-label">Full schedule (${tasks.length} items)</div>`;
+    html += `<div class="card">`;
+    let lastWeek = null;
+    for(const t of tasks.slice().sort((a,b)=>new Date(a.dueDate)-new Date(b.dueDate))){
+      if(t.week !== lastWeek){
+        html += `<div class="subject-label" style="margin-top:10px;">Module ${t.week}</div>`;
+        lastWeek = t.week;
+      }
+      html += taskRow({...t, courseCode:c.code, courseName:c.name});
+    }
+    html += `</div>`;
+    html += `<button class="btn danger-ghost" style="margin-top:10px;" onclick="resetCourseTasks('${c.id}')">Re-parse syllabus (replaces current schedule)</button>`;
+  }
+
+  html += `<button class="btn ghost" style="margin-top:20px;" onclick="deleteCourse('${c.id}')">Remove this course</button>`;
+  document.getElementById('mainContent').innerHTML = html;
+}
+
+async function resetCourseTasks(courseId){
+  if(!confirm('This clears the current schedule for this course so you can paste a new syllabus. Continue?')) return;
+  tasksByCourse[courseId] = [];
+  await saveTasks(courseId);
+  render();
+}
+
+async function deleteCourse(courseId){
+  if(!confirm('Remove this course and its schedule? This cannot be undone.')) return;
+  courses = courses.filter(c=>c.id!==courseId);
+  delete tasksByCourse[courseId];
+  await saveCourses();
+  activeCourseId = null;
+  activeWeek = null;
+  render();
+}
+
+/* =========================================================
+   PDF UPLOAD -> TEXT EXTRACTION (pdf.js, runs client-side)
+========================================================= */
+if(window.pdfjsLib){
+  pdfjsLib.GlobalWorkerOptions.workerSrc = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+}
+
+async function handlePdfUpload(evt, courseId){
+  const file = evt.target.files[0];
+  const statusEl = document.getElementById('pdfStatus');
+  const ta = document.getElementById('syllabusText');
+  if(!file) return;
+  if(file.type !== 'application/pdf' && !file.name.toLowerCase().endsWith('.pdf')){
+    statusEl.textContent = 'That file isn\'t a PDF — try again.';
+    statusEl.style.color = 'var(--danger)';
+    return;
+  }
+  statusEl.style.color = 'var(--ink-soft)';
+  statusEl.innerHTML = `<span class="spinner" style="border-top-color:var(--navy); border-color:rgba(16,22,29,0.25);"></span> Reading PDF…`;
+  try{
+    const buf = await file.arrayBuffer();
+    const pdf = await pdfjsLib.getDocument({data: buf}).promise;
+    let fullText = '';
+    for(let p = 1; p <= pdf.numPages; p++){
+      const page = await pdf.getPage(p);
+      const content = await page.getTextContent();
+      const pageText = content.items.map(it => it.str).join(' ');
+      fullText += pageText + '\n\n';
+    }
+    fullText = fullText.trim();
+    if(fullText.length < 40){
+      statusEl.textContent = 'Couldn\'t find readable text in that PDF (it may be a scanned image) — try pasting the text instead.';
+      statusEl.style.color = 'var(--danger)';
+      return;
+    }
+    ta.value = fullText;
+    statusEl.textContent = `Loaded ${pdf.numPages} page${pdf.numPages===1?'':'s'} from "${file.name}". Review below, then parse.`;
+    statusEl.style.color = 'var(--green)';
+  }catch(e){
+    console.error(e);
+    statusEl.textContent = 'Couldn\'t read that PDF — try pasting the syllabus text instead.';
+    statusEl.style.color = 'var(--danger)';
+  }
+}
+
+/* =========================================================
+   PARSE FLOW (with review-before-save modal)
+========================================================= */
+async function handleParse(courseId){
+  const c = courses.find(x=>x.id===courseId);
+  const ta = document.getElementById('syllabusText');
+  const btn = document.getElementById('parseBtn');
+  const errEl = document.getElementById('parseError');
+  const text = ta.value.trim();
+  errEl.textContent = '';
+  if(text.length < 40){
+    errEl.textContent = 'Paste more of the syllabus — need the module/week list with due dates.';
+    return;
+  }
+  btn.disabled = true;
+  btn.innerHTML = `<span class="spinner"></span> Reading syllabus…`;
+  try{
+    const extracted = await parseSyllabusText(text);
+    if(!extracted.length){
+      errEl.textContent = "Couldn't find any graded items in that text — try pasting the full module breakdown.";
+      btn.disabled = false; btn.textContent = 'Parse syllabus';
+      return;
+    }
+    showReviewModal(c, extracted);
+  }catch(e){
+    console.error(e);
+    errEl.textContent = 'Something went wrong reading that syllabus. Try again, or paste a shorter section.';
+    btn.disabled = false; btn.textContent = 'Parse syllabus';
+  }
+}
+
+function showReviewModal(course, extracted){
+  const root = document.getElementById('modalRoot');
+  const rows = extracted.map((it)=>`
+    <div class="review-item">
+      <div class="rtitle">${escapeHtml(it.title)}</div>
+      <div class="rmeta">Module ${it.week} · ${typeLabel(it.type)}${
+        it.initialPostDay ? ` · post ${it.initialPostDay}, reply ${it.replyDay||'—'}` :
+        it.dueDayOfWeek ? ` · due ${it.dueDayOfWeek}` : ' · no day stated (auto-spread Mon–Fri)'
+      }</div>
+    </div>`).join('');
+  root.innerHTML = `
+    <div class="modal-overlay">
+      <div class="modal">
+        <h2>Found ${extracted.length} items</h2>
+        <p class="helper">Review before building the schedule. Items spread across Monday–Friday of each module's week; exams always land after that week's other work.</p>
+        <div style="max-height:42vh; overflow-y:auto; margin-top:10px;">${rows}</div>
+        <div class="row-actions">
+          <button class="btn ghost" onclick="closeModal()">Cancel</button>
+          <button class="btn gold" onclick='confirmBuildSchedule(${JSON.stringify(course.id)})'>Build schedule</button>
+        </div>
+      </div>
+    </div>`;
+  window._pendingExtraction = extracted;
+}
+
+async function confirmBuildSchedule(courseId){
+  const c = courses.find(x=>x.id===courseId);
+  const extracted = window._pendingExtraction || [];
+  const tasks = buildTasksFromExtraction(c, extracted);
+  tasksByCourse[courseId] = tasks;
+  await saveTasks(courseId);
+  closeModal();
+  render();
+}
+
+function closeModal(){
+  document.getElementById('modalRoot').innerHTML = '';
+  window._pendingExtraction = null;
+}
+
+/* =========================================================
+   ADD / EDIT COURSE
+========================================================= */
+function openAddCourse(){
+  const root = document.getElementById('modalRoot');
+  root.innerHTML = `
+    <div class="modal-overlay">
+      <div class="modal" style="position:relative;">
+        <button class="close-x" onclick="closeModal()">×</button>
+        <h2>Add a course</h2>
+        <p class="helper">Set the term start date — the plan schedules everything to wrap by end of week 7.</p>
+        <label class="field-label">Course name</label>
+        <input type="text" id="newCourseName" placeholder="e.g. American Government">
+        <label class="field-label">Course code (optional)</label>
+        <input type="text" id="newCourseCode" placeholder="e.g. POS1041">
+        <label class="field-label">Term start date</label>
+        <input type="date" id="newCourseStart" value="2026-08-26">
+        <div class="row-actions">
+          <button class="btn ghost" onclick="closeModal()">Cancel</button>
+          <button class="btn gold" onclick="submitAddCourse()">Add course</button>
+        </div>
+      </div>
+    </div>`;
+}
+
+async function submitAddCourse(){
+  const name = document.getElementById('newCourseName').value.trim();
+  const code = document.getElementById('newCourseCode').value.trim();
+  const start = document.getElementById('newCourseStart').value;
+  if(!name || !start){ alert('Give it a name and a start date.'); return; }
+  const id = 'c' + Date.now();
+  courses.push({id, name, code, startDate: start});
+  tasksByCourse[id] = [];
+  await saveCourses();
+  await saveTasks(id);
+  closeModal();
+  activeCourseId = id;
+  render();
+}
+
+function openEditCourse(courseId){
+  const c = courses.find(x=>x.id===courseId);
+  if(!c) return;
+  const root = document.getElementById('modalRoot');
+  root.innerHTML = `
+    <div class="modal-overlay">
+      <div class="modal" style="position:relative;">
+        <button class="close-x" onclick="closeModal()">×</button>
+        <h2>Edit course</h2>
+        <p class="helper">Changing the start date reschedules every task in this course, keeping each item in its same module/week.</p>
+        <label class="field-label">Course name</label>
+        <input type="text" id="editCourseName" value="${escapeHtml(c.name)}">
+        <label class="field-label">Course code (optional)</label>
+        <input type="text" id="editCourseCode" value="${escapeHtml(c.code||'')}">
+        <label class="field-label">Term start date</label>
+        <input type="date" id="editCourseStart" value="${c.startDate}">
+        <div class="row-actions">
+          <button class="btn ghost" onclick="closeModal()">Cancel</button>
+          <button class="btn gold" onclick="submitEditCourse('${c.id}')">Save changes</button>
+        </div>
+      </div>
+    </div>`;
+}
+
+async function submitEditCourse(courseId){
+  const c = courses.find(x=>x.id===courseId);
+  if(!c) return;
+  const name = document.getElementById('editCourseName').value.trim();
+  const code = document.getElementById('editCourseCode').value.trim();
+  const start = document.getElementById('editCourseStart').value;
+  if(!name || !start){ alert('Give it a name and a start date.'); return; }
+  const dateChanged = start !== c.startDate;
+  c.name = name; c.code = code; c.startDate = start;
+  await saveCourses();
+  if(dateChanged){
+    recomputeCourseDates(courseId);
+    await saveTasks(courseId);
+    activeWeek = null;
+  }
+  closeModal();
+  render();
+}
+
+loadAll();
+</script>
+</body>
+</html>
+    background:rgba(255,255,255,0.06);
+    border:1px solid rgba(242,169,60,0.25);
+    border-radius:8px;
+    padding:7px 12px;
+    color:var(--chalk);
+    white-space:nowrap;
+    cursor:pointer;
+  }
+  .wk-chip.current{background:var(--orange); color:#fff; border-color:var(--orange);}
+
+  main{padding:16px; max-width:680px; margin:0 auto;}
+
+  .section-label{
+    font-family:'Oswald',sans-serif; font-size:11.5px; text-transform:uppercase; letter-spacing:.12em;
+    color:var(--ink-soft); margin:20px 0 10px; display:flex; align-items:center; gap:8px;
+  }
+  .section-label::after{content:"";flex:1;height:1px;background:var(--line-light);}
+
+  /* ===== "QTR" WEEK SECTIONS ===== */
+  .qtr{
+    background:var(--board-2);
+    border:1px solid var(--line-light);
+    border-radius:16px;
+    padding:16px 16px 18px;
+    margin-bottom:18px;
+    scroll-margin-top:190px;
+  }
+  .qtr-head{
+    display:flex; align-items:baseline; gap:10px; flex-wrap:wrap; margin-bottom:12px;
+    padding-bottom:10px; border-bottom:2px solid rgba(27,37,48,0.1);
+  }
+  .qtr-tag{
+    font-family:'Oswald',sans-serif; font-weight:700; font-size:13px; letter-spacing:.06em;
+    background:var(--navy); color:var(--amber);
+    padding:4px 10px; border-radius:6px;
+  }
+  .qtr-title{font-family:'Oswald',sans-serif; font-size:17px; font-weight:600; text-transform:uppercase; letter-spacing:.01em;}
+  .qtr-hint{font-family:'Space Mono',monospace; font-size:11.5px; color:var(--ink-soft); width:100%; margin-top:2px;}
+
+  .day-block{margin-bottom:14px;}
+  .day-block:last-child{margin-bottom:0;}
+  .day-heading{
+    font-family:'Oswald',sans-serif; font-size:13px; font-weight:600; text-transform:uppercase; letter-spacing:.06em;
+    color:var(--navy-2); margin-bottom:6px; display:flex; align-items:baseline; gap:8px;
+  }
+  .day-heading .date-mono{font-family:'Space Mono',monospace; font-size:11px; color:var(--ink-soft); font-weight:400; letter-spacing:0;}
+  .subject-label{
+    font-family:'Oswald',sans-serif; font-size:10.5px; font-weight:600; text-transform:uppercase; letter-spacing:.08em;
+    color:var(--ink-soft); margin:8px 0 3px;
+  }
+
+  .card{
+    background:var(--chalk);
+    border:1px solid var(--line-light);
+    border-radius:10px;
+    padding:2px 12px;
+    margin-bottom:8px;
+  }
+
+  .task{
+    display:flex; align-items:flex-start; gap:11px;
+    padding:10px 2px;
+    border-bottom:1px solid var(--line-light);
+  }
+  .task:last-child{border-bottom:none;}
+  .check{
+    flex:0 0 auto; width:24px; height:24px; border-radius:6px;
+    border:2px solid var(--navy-2); background:#fff;
+    display:flex; align-items:center; justify-content:center;
+    cursor:pointer; margin-top:1px; font-size:14px; color:#fff; font-weight:700;
+  }
+  .check.done{background:var(--green); border-color:var(--green);}
+  .task-body{flex:1; min-width:0;}
+  .task-title{font-size:14.5px; font-weight:600; line-height:1.3;}
+  .task-title.done{text-decoration:line-through; color:var(--ink-soft);}
+  .task-meta{font-size:12px; color:var(--ink-soft); margin-top:3px; display:flex; flex-wrap:wrap; gap:6px; align-items:center;}
+  .badge{
+    display:inline-flex; align-items:center; gap:4px;
+    padding:2px 8px; border-radius:999px; font-size:10.5px; font-weight:700;
+    text-transform:uppercase; letter-spacing:.03em;
+  }
+  .badge.discussion{background:#e7effa; color:#2b5a9e;}
+  .badge.quiz{background:#fbeadb; color:var(--orange);}
+  .badge.exam{background:#fbe4e0; color:var(--danger);}
+  .badge.assignment{background:#eaf3ee; color:var(--green);}
+  .badge.reading{background:#f1eef7; color:#6a4f9e;}
+  .badge.overdue{background:var(--danger); color:#fff;}
+  .badge.today{background:var(--amber); color:var(--navy);}
+  .course-chip{font-size:10.5px; color:var(--ink-soft); font-weight:600;}
+  .helper{font-size:12.5px; color:var(--ink-soft); margin-top:4px; line-height:1.4;}
+
+  .empty{text-align:center; padding:48px 20px; color:var(--ink-soft);}
+  .empty .wordmark{font-size:20px; color:var(--navy-2); margin-bottom:8px; display:block;}
+
+  .btn{
+    display:inline-flex; align-items:center; justify-content:center; gap:6px;
+    background:var(--navy); color:#fff; border:none;
+    padding:12px 18px; border-radius:10px; font-size:14px; font-weight:700;
+    font-family:'Oswald',sans-serif; text-transform:uppercase; letter-spacing:.04em;
+    cursor:pointer; width:100%;
+  }
+  .btn.gold{background:var(--orange); color:#fff;}
+  .btn.ghost{background:transparent; color:var(--navy); border:1.5px solid var(--navy-2);}
+  .btn.danger-ghost{background:transparent; color:var(--danger); border:1.5px solid var(--danger);}
+  .btn:disabled{opacity:.5;}
+
+  input[type=text], input[type=date], textarea, select{
+    width:100%; padding:11px 12px; border:1.5px solid var(--line-light); border-radius:10px;
+    font-size:15px; font-family:'Inter',sans-serif; background:#fff; color:var(--ink);
+  }
+  textarea{min-height:160px; resize:vertical; line-height:1.4;}
+  label.field-label{
+    display:block; font-family:'Oswald',sans-serif; font-size:11px; font-weight:600; color:var(--ink-soft);
+    text-transform:uppercase; letter-spacing:.06em; margin:14px 0 6px;
+  }
+
+  .course-card{display:flex; justify-content:space-between; align-items:center; cursor:pointer;}
+  .course-card .name{font-family:'Oswald',sans-serif; font-size:16px; font-weight:600; text-transform:uppercase;}
+  .course-card .code{font-family:'Space Mono',monospace; font-size:11.5px; color:var(--ink-soft);}
+  .course-card .arrow{color:var(--orange); font-size:20px;}
+  .progress-track{height:7px; background:var(--line-light); border-radius:99px; overflow:hidden; margin-top:8px;}
+  .progress-fill{height:100%; background:var(--orange);}
+
+  .modal-overlay{
+    position:fixed; inset:0; background:rgba(16,22,29,0.6); z-index:50;
+    display:flex; align-items:flex-end; justify-content:center;
+  }
+  .modal{
+    background:var(--board); width:100%; max-width:680px;
+    border-radius:20px 20px 0 0; padding:20px 18px calc(20px + env(safe-area-inset-bottom));
+    max-height:90vh; overflow-y:auto;
+  }
+  .modal h2{font-family:'Oswald',sans-serif; text-transform:uppercase; margin:0 0 4px; font-size:19px;}
+  .modal .close-x{position:absolute; top:14px; right:16px; font-size:22px; color:var(--ink-soft); background:none; border:none; cursor:pointer;}
+  .row-actions{display:flex; gap:10px; margin-top:18px;}
+  .row-actions .btn{flex:1;}
+  .spinner{width:18px; height:18px; border:2.5px solid rgba(255,255,255,0.4); border-top-color:#fff; border-radius:50%; animation:spin .7s linear infinite;}
+  @keyframes spin{to{transform:rotate(360deg);}}
+  .review-item{border:1px solid var(--line-light); border-radius:10px; padding:10px 12px; margin-bottom:8px; background:#fff;}
+  .review-item .rtitle{font-weight:700; font-size:14px;}
+  .review-item .rmeta{font-size:12px; color:var(--ink-soft); margin-top:2px;}
+  .link-btn{background:none; border:none; color:var(--navy-2); font-family:'Oswald',sans-serif; font-weight:600; font-size:13px; text-transform:uppercase; letter-spacing:.04em; text-decoration:underline; cursor:pointer; padding:0;}
+</style>
+</head>
+<body>
+
+<header class="scoreboard">
+  <div class="sb-top">
+    <div>
+      <a href="index.html" class="link-btn" style="color:var(--amber);text-decoration:none;font-size:11px;">← Command Center</a>
+      <div class="sb-brand">Legacy Lab</div>
+      <div class="sb-title" id="scoreboardTitle">Game Plan</div>
+      <div class="sb-sub" id="scoreboardSub">Loading…</div>
+    </div>
+    <button class="sb-btn" id="headerActionBtn" onclick="toggleScreen()">⚙ Courses</button>
+  </div>
+  <div class="chip-row" id="chipRow"></div>
+</header>
+
+<main id="mainContent"></main>
+
+<div id="modalRoot"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<script>
+/* =========================================================
+   STORAGE HELPERS
+========================================================= */
+const SUPABASE_URL = 'https://gwahlqvngjfhslqqprzl.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imd3YWhscXZuZ2pmaHNscXFwcnpsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODcxNDU5NzIsImV4cCI6MjEwMjcyMTk3Mn0.bx2skjuZUNVXVplQNg-OaleXVYQ8D6R2Ej6xr1rBZYk';
+const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+// Same shared cloud table the command center uses, so this is part of the
+// same system and reachable from any device — keys prefixed "seu:" so they
+// never collide with the command center's own keys.
+const S = {
+  async get(key){
+    try{
+      const { data, error } = await sb.from('command_center').select('value').eq('key','seu:'+key).maybeSingle();
+      if(error) throw error;
+      return data ? data.value : null;
+    }catch(e){ console.error('storage get failed', e); return null; }
+  },
+  async set(key, val){
+    try{
+      const { error } = await sb.from('command_center').upsert({ key:'seu:'+key, value: val, updated_at: new Date().toISOString() });
+      if(error) throw error;
+    }catch(e){ console.error('storage set failed', e); }
+  }
+};
+
+/* =========================================================
+   STATE
+========================================================= */
+let courses = [];
+let tasksByCourse = {};
+let screen = 'schedule'; // 'schedule' | 'courses'
+let activeCourseId = null;
 let hasAutoScrolled = false;
 
 const DAY_NAMES = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
