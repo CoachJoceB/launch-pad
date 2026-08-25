@@ -1,1679 +1,1018 @@
-    font-family:'Oswald',sans-serif;background:var(--ink);color:var(--chalk);font-size:13px;
-    letter-spacing:.1em;text-transform:uppercase;padding:5px 11px;border-radius:5px;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Legacy Lab · Game Plan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<style>
+  :root{
+    --navy:#10161D;
+    --navy-2:#1B2530;
+    --board:#EEE7D6;
+    --board-2:#E6DDC8;
+    --ink:#1B2530;
+    --ink-soft:#5B6472;
+    --orange:#E8622A;
+    --amber:#F2A93C;
+    --green:#3F8F5F;
+    --chalk:#F7F5EF;
+    --danger:#C0392B;
+    --line-dark: rgba(247,245,239,.14);
+    --line-light: rgba(27,37,48,.14);
+    --radius:12px;
   }
-  .qtr-title{font-family:'Oswald',sans-serif;font-size:clamp(20px,2.4vw,28px);text-transform:uppercase;letter-spacing:.02em;font-weight:600;}
-  .qtr-hint{font-size:13px;color:var(--ink-soft);margin-left:auto;}
+  *{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--board);
+    color:var(--ink);
+    font-family:'Inter',-apple-system,sans-serif;
+    min-height:100vh;
+  }
+  .wordmark{font-family:'Oswald',sans-serif; letter-spacing:.14em; text-transform:uppercase;}
+  .mono{font-family:'Space Mono',monospace;}
 
-  .devo-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:16px;}
-  @media (max-width:900px){.devo-grid{grid-template-columns:1fr;}}
-  .card{background:var(--chalk);border:1.5px solid var(--line-light);border-radius:14px;padding:20px 22px;}
-  .word-badge{
-    display:inline-block;font-family:'Oswald',sans-serif;font-size:11px;letter-spacing:.1em;text-transform:uppercase;
-    color:var(--orange);border:1.5px solid var(--orange);padding:3px 10px;border-radius:999px;margin-bottom:10px;
+  /* ===== SCOREBOARD HEADER ===== */
+  header.scoreboard{
+    background:linear-gradient(180deg,var(--navy) 0%, var(--navy-2) 100%);
+    color:var(--chalk);
+    padding:16px 18px 14px;
+    position:sticky; top:0; z-index:20;
+    border-bottom:3px solid var(--orange);
   }
-  .devo-word{font-family:'Oswald',sans-serif;font-size:26px;text-transform:uppercase;margin:0 0 10px;}
-  .devo-scripture{font-style:italic;color:var(--ink-soft);border-left:3px solid var(--amber);padding-left:12px;margin:0 0 12px;font-size:15px;}
-  .devo-row{margin-bottom:10px;}
-  .devo-row .lbl{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-soft);font-weight:600;}
-  .devo-row .val{font-size:15px;margin-top:2px;}
-  .intention-card{
-    background:var(--ink);color:var(--chalk);border-radius:14px;padding:22px;display:flex;flex-direction:column;
-    justify-content:center;position:relative;overflow:hidden;
+  .sb-top{display:flex; align-items:center; justify-content:space-between; gap:10px;}
+  .sb-brand{font-family:'Oswald',sans-serif; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:var(--amber); font-weight:600;}
+  .sb-title{font-family:'Oswald',sans-serif; font-size:24px; font-weight:600; text-transform:uppercase; letter-spacing:.02em; margin-top:2px; color:#fff;}
+  .sb-sub{font-family:'Space Mono',monospace; font-size:12.5px; color:#A9BCD6; margin-top:3px;}
+  .sb-btn{
+    flex:0 0 auto;
+    background:rgba(255,255,255,0.08);
+    border:1.5px solid rgba(242,169,60,0.4);
+    color:var(--amber);
+    font-family:'Oswald',sans-serif;
+    font-size:12px; letter-spacing:.08em; text-transform:uppercase; font-weight:600;
+    padding:9px 14px; border-radius:9px; cursor:pointer;
   }
-  .intention-card::before{
-    content:"";position:absolute;right:-30px;top:-30px;width:140px;height:140px;border-radius:50%;
-    background:radial-gradient(circle, rgba(232,98,42,.35), transparent 70%);
+  .chip-row{
+    display:flex; gap:8px; margin-top:14px; overflow-x:auto; padding-bottom:2px;
   }
-  .intention-tag{font-family:'Oswald',sans-serif;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--amber);margin-bottom:8px;}
-  .intention-text{font-family:'Oswald',sans-serif;font-size:clamp(20px,2.2vw,26px);line-height:1.3;font-weight:500;}
+  .wk-chip{
+    flex:0 0 auto;
+    font-family:'Oswald',sans-serif; font-size:12px; font-weight:600; letter-spacing:.04em;
+    background:rgba(255,255,255,0.06);
+    border:1px solid rgba(242,169,60,0.25);
+    border-radius:8px;
+    padding:7px 12px;
+    color:var(--chalk);
+    white-space:nowrap;
+    cursor:pointer;
+  }
+  .wk-chip.current{background:var(--orange); color:#fff; border-color:var(--orange);}
 
-  .students-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
-  @media (max-width:1100px){.students-grid{grid-template-columns:1fr;}}
-  .student-card{background:var(--chalk);border:1.5px solid var(--line-light);border-radius:14px;overflow:hidden;}
-  .student-head{background:var(--navy-2);color:var(--chalk);padding:12px 16px;display:flex;align-items:center;justify-content:space-between;}
-  .student-name{font-family:'Oswald',sans-serif;font-size:18px;text-transform:uppercase;letter-spacing:.02em;}
-  .grade-badge{font-family:'Oswald',sans-serif;font-size:11px;background:var(--orange);padding:3px 8px;border-radius:5px;}
-  .student-body{padding:16px;}
-  .collapse-head{
-    display:flex;align-items:center;justify-content:space-between;cursor:pointer;
-    margin:12px 0 6px;user-select:none;
-  }
-  .collapse-head:first-child{margin-top:0;}
-  .mini-lbl{font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-soft);font-weight:700;}
-  .chevron{font-size:11px;color:var(--ink-soft);transition:transform .15s;}
-  .chevron.collapsed{transform:rotate(-90deg);}
-  .collapse-body{overflow:hidden;max-height:600px;transition:max-height .2s ease;}
-  .collapse-body.collapsed{max-height:0;}
-  .info-line{display:flex;justify-content:space-between;font-size:13.5px;padding:4px 0;border-bottom:1px dashed var(--line-light);}
-  .info-line span:first-child{color:var(--ink-soft);}
-  .info-line span:last-child{font-weight:600;text-align:right;}
-  .vocab-box{margin-top:14px;background:var(--board-2);border-radius:10px;padding:12px 14px;border:1.5px solid var(--line-light);}
-  .vocab-word{font-family:'Oswald',sans-serif;font-size:19px;text-transform:uppercase;text-decoration:underline;text-decoration-color:var(--orange);text-decoration-thickness:2.5px;text-underline-offset:4px;}
-  .vocab-row{font-size:13px;margin-top:6px;line-height:1.4;}
-  .vocab-row b{color:var(--ink-soft);font-weight:700;}
-  .syn-ant{display:flex;gap:14px;margin-top:8px;font-size:12.5px;}
-  .syn-ant span b{color:var(--green);}
-  .syn-ant span.ant b{color:var(--orange);}
-  .test-badge{
-    background:var(--amber);color:var(--ink);font-family:'Oswald',sans-serif;font-size:12px;letter-spacing:.08em;
-    text-transform:uppercase;padding:4px 10px;border-radius:6px;display:inline-block;margin-bottom:8px;
-  }
-  .test-list{list-style:none;padding:0;margin:0;}
-  .test-list li{font-family:'Oswald',sans-serif;font-size:17px;text-transform:uppercase;padding:6px 0;border-bottom:1px dashed var(--line-light);}
+  main{padding:16px; max-width:680px; margin:0 auto;}
 
-  .subjects-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;}
-  @media (max-width:1000px){.subjects-grid{grid-template-columns:repeat(2,1fr);}}
-  @media (max-width:560px){.subjects-grid{grid-template-columns:1fr;}}
-  .subj-card{background:var(--chalk);border:1.5px solid var(--line-light);border-radius:10px;padding:10px 12px;display:flex;flex-direction:column;gap:4px;position:relative;}
-  .subj-card.done{opacity:.55;}
-  .subj-card.move-flash{border-color:var(--orange);}
-  .move-btn{
-    width:19px;height:19px;border-radius:5px;border:1.5px solid var(--line-light);background:#fff;
-    color:var(--ink-soft);font-size:9.5px;display:flex;align-items:center;justify-content:center;cursor:pointer;padding:0;
+  .section-label{
+    font-family:'Oswald',sans-serif; font-size:11.5px; text-transform:uppercase; letter-spacing:.12em;
+    color:var(--ink-soft); margin:20px 0 10px; display:flex; align-items:center; gap:8px;
   }
-  .move-btn:hover{border-color:var(--orange);color:var(--orange);}
-  .move-btn:disabled{opacity:.3;cursor:default;}
-  .move-btn:disabled:hover{border-color:var(--line-light);color:var(--ink-soft);}
-  .subj-top{display:flex;justify-content:space-between;align-items:flex-start;}
-  .subj-name{font-family:'Oswald',sans-serif;font-size:12.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-soft);}
-  .subj-topic{font-size:13.5px;font-weight:600;line-height:1.3;}
+  .section-label::after{content:"";flex:1;height:1px;background:var(--line-light);}
+
+  /* ===== "QTR" WEEK SECTIONS ===== */
+  .qtr{
+    background:var(--board-2);
+    border:1px solid var(--line-light);
+    border-radius:16px;
+    padding:16px 16px 18px;
+    margin-bottom:18px;
+    scroll-margin-top:190px;
+  }
+  .qtr-head{
+    display:flex; align-items:baseline; gap:10px; flex-wrap:wrap; margin-bottom:12px;
+    padding-bottom:10px; border-bottom:2px solid rgba(27,37,48,0.1);
+  }
+  .qtr-tag{
+    font-family:'Oswald',sans-serif; font-weight:700; font-size:13px; letter-spacing:.06em;
+    background:var(--navy); color:var(--amber);
+    padding:4px 10px; border-radius:6px;
+  }
+  .qtr-title{font-family:'Oswald',sans-serif; font-size:17px; font-weight:600; text-transform:uppercase; letter-spacing:.01em;}
+  .qtr-hint{font-family:'Space Mono',monospace; font-size:11.5px; color:var(--ink-soft); width:100%; margin-top:2px;}
+
+  .day-block{margin-bottom:14px;}
+  .day-block:last-child{margin-bottom:0;}
+  .day-heading{
+    font-family:'Oswald',sans-serif; font-size:13px; font-weight:600; text-transform:uppercase; letter-spacing:.06em;
+    color:var(--navy-2); margin-bottom:6px; display:flex; align-items:baseline; gap:8px;
+  }
+  .day-heading .date-mono{font-family:'Space Mono',monospace; font-size:11px; color:var(--ink-soft); font-weight:400; letter-spacing:0;}
+  .subject-label{
+    font-family:'Oswald',sans-serif; font-size:10.5px; font-weight:600; text-transform:uppercase; letter-spacing:.08em;
+    color:var(--ink-soft); margin:8px 0 3px;
+  }
+
+  .card{
+    background:var(--chalk);
+    border:1px solid var(--line-light);
+    border-radius:10px;
+    padding:2px 12px;
+    margin-bottom:8px;
+  }
+
+  .task{
+    display:flex; align-items:flex-start; gap:11px;
+    padding:10px 2px;
+    border-bottom:1px solid var(--line-light);
+  }
+  .task:last-child{border-bottom:none;}
   .check{
-    width:19px;height:19px;border-radius:5px;border:2px solid var(--ink-soft);display:flex;align-items:center;
-    justify-content:center;cursor:pointer;flex-shrink:0;font-size:12px;color:var(--chalk);
+    flex:0 0 auto; width:24px; height:24px; border-radius:6px;
+    border:2px solid var(--navy-2); background:#fff;
+    display:flex; align-items:center; justify-content:center;
+    cursor:pointer; margin-top:1px; font-size:14px; color:#fff; font-weight:700;
   }
-  .check.checked{background:var(--green);border-color:var(--green);}
+  .check.done{background:var(--green); border-color:var(--green);}
+  .task-body{flex:1; min-width:0;}
+  .task-title{font-size:14.5px; font-weight:600; line-height:1.3;}
+  .task-title.done{text-decoration:line-through; color:var(--ink-soft);}
+  .task-meta{font-size:12px; color:var(--ink-soft); margin-top:3px; display:flex; flex-wrap:wrap; gap:6px; align-items:center;}
+  .badge{
+    display:inline-flex; align-items:center; gap:4px;
+    padding:2px 8px; border-radius:999px; font-size:10.5px; font-weight:700;
+    text-transform:uppercase; letter-spacing:.03em;
+  }
+  .badge.discussion{background:#e7effa; color:#2b5a9e;}
+  .badge.quiz{background:#fbeadb; color:var(--orange);}
+  .badge.exam{background:#fbe4e0; color:var(--danger);}
+  .badge.assignment{background:#eaf3ee; color:var(--green);}
+  .badge.reading{background:#f1eef7; color:#6a4f9e;}
+  .badge.overdue{background:var(--danger); color:#fff;}
+  .badge.today{background:var(--amber); color:var(--navy);}
+  .course-chip{font-size:10.5px; color:var(--ink-soft); font-weight:600;}
+  .helper{font-size:12.5px; color:var(--ink-soft); margin-top:4px; line-height:1.4;}
 
-  footer.buzzer-strip{
-    max-width:1400px;margin:10px auto 0;background:var(--ink);color:var(--chalk);border-radius:14px;
-    padding:16px 22px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;
+  .empty{text-align:center; padding:48px 20px; color:var(--ink-soft);}
+  .empty .wordmark{font-size:20px; color:var(--navy-2); margin-bottom:8px; display:block;}
+
+  .btn{
+    display:inline-flex; align-items:center; justify-content:center; gap:6px;
+    background:var(--navy); color:#fff; border:none;
+    padding:12px 18px; border-radius:10px; font-size:14px; font-weight:700;
+    font-family:'Oswald',sans-serif; text-transform:uppercase; letter-spacing:.04em;
+    cursor:pointer; width:100%;
   }
-  .buzzer-strip .msg{font-family:'Oswald',sans-serif;text-transform:uppercase;letter-spacing:.03em;font-size:15px;}
-  .buzzer-strip .msg b{color:var(--amber);}
-  .link-btn{background:none;border:none;color:var(--amber);text-decoration:underline;cursor:pointer;font-family:'Oswald';font-size:13px;}
+  .btn.gold{background:var(--orange); color:#fff;}
+  .btn.ghost{background:transparent; color:var(--navy); border:1.5px solid var(--navy-2);}
+  .btn.danger-ghost{background:transparent; color:var(--danger); border:1.5px solid var(--danger);}
+  .btn:disabled{opacity:.5;}
+
+  input[type=text], input[type=date], textarea, select{
+    width:100%; padding:11px 12px; border:1.5px solid var(--line-light); border-radius:10px;
+    font-size:15px; font-family:'Inter',sans-serif; background:#fff; color:var(--ink);
+  }
+  textarea{min-height:160px; resize:vertical; line-height:1.4;}
+  label.field-label{
+    display:block; font-family:'Oswald',sans-serif; font-size:11px; font-weight:600; color:var(--ink-soft);
+    text-transform:uppercase; letter-spacing:.06em; margin:14px 0 6px;
+  }
+
+  .course-card{display:flex; justify-content:space-between; align-items:center; cursor:pointer;}
+  .course-card .name{font-family:'Oswald',sans-serif; font-size:16px; font-weight:600; text-transform:uppercase;}
+  .course-card .code{font-family:'Space Mono',monospace; font-size:11.5px; color:var(--ink-soft);}
+  .course-card .arrow{color:var(--orange); font-size:20px;}
+  .progress-track{height:7px; background:var(--line-light); border-radius:99px; overflow:hidden; margin-top:8px;}
+  .progress-fill{height:100%; background:var(--orange);}
 
   .modal-overlay{
-    display:none;position:fixed;inset:0;background:rgba(16,22,29,.72);align-items:flex-start;justify-content:center;
-    padding:30px 16px;overflow-y:auto;z-index:50;
+    position:fixed; inset:0; background:rgba(16,22,29,0.6); z-index:50;
+    display:flex; align-items:flex-end; justify-content:center;
   }
-  .modal-overlay.open{display:flex;}
-  .modal{background:var(--chalk);border-radius:16px;max-width:780px;width:100%;padding:26px 26px 22px;margin:auto;}
-  .modal.wide{max-width:980px;}
-  .modal h3{font-family:'Oswald',sans-serif;text-transform:uppercase;margin:0 0 4px;font-size:22px;}
-  .modal .sub{color:var(--ink-soft);font-size:13px;margin-bottom:18px;}
-  .modal label{display:block;font-size:11.5px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--ink-soft);margin:12px 0 4px;}
-  .modal input[type=text], .modal textarea, .modal select{
-    width:100%;padding:9px 11px;border:1.5px solid var(--line-light);border-radius:8px;font-family:'Oswald';
-    font-size:14px;background:#fff;color:var(--ink);
+  .modal{
+    background:var(--board); width:100%; max-width:680px;
+    border-radius:20px 20px 0 0; padding:20px 18px calc(20px + env(safe-area-inset-bottom));
+    max-height:90vh; overflow-y:auto;
   }
-  .modal textarea{resize:vertical;min-height:44px;}
-  .field-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 14px;}
-  .field-grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0 14px;}
-  .field-grid-4{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:0 14px;}
-  @media (max-width:640px){.field-grid,.field-grid-3,.field-grid-4{grid-template-columns:1fr;}}
-  .modal-tabs{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap;}
-  .modal-tab{
-    font-family:'Oswald',sans-serif;font-size:13px;text-transform:uppercase;letter-spacing:.04em;padding:7px 14px;
-    border-radius:999px;border:1.5px solid var(--line-light);cursor:pointer;background:#fff;
-  }
-  .modal-tab.active{background:var(--ink);color:var(--chalk);border-color:var(--ink);}
-  .tab-panel{display:none;}
-  .tab-panel.active{display:block;}
-  .modal-actions{display:flex;justify-content:flex-end;gap:10px;margin-top:22px;flex-wrap:wrap;}
-  .btn{font-family:'Oswald',sans-serif;text-transform:uppercase;letter-spacing:.04em;font-size:13px;padding:10px 18px;border-radius:9px;border:none;cursor:pointer;}
-  .btn-primary{background:var(--orange);color:#fff;}
-  .btn-ghost{background:transparent;color:var(--ink-soft);border:1.5px solid var(--line-light);}
-  .divider{border:none;border-top:1.5px solid var(--line-light);margin:18px 0;}
-  .save-toast{
-    position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--green);color:#fff;padding:10px 20px;
-    border-radius:999px;font-family:'Oswald',sans-serif;font-size:13px;letter-spacing:.04em;text-transform:uppercase;
-    opacity:0;pointer-events:none;transition:opacity .25s;z-index:60;
-  }
-  .save-toast.show{opacity:1;}
-
-  .extra-subj-row{display:flex;gap:8px;align-items:center;margin-bottom:8px;}
-  .extra-subj-row input{padding:8px 10px;border:1.5px solid var(--line-light);border-radius:8px;font-size:13.5px;}
-  .extra-subj-row .en{flex:1;}
-  .extra-subj-row .et{flex:2;}
-  .extra-remove{
-    width:32px;height:32px;flex-shrink:0;border-radius:8px;border:1.5px solid var(--line-light);background:#fff;
-    cursor:pointer;color:var(--ink-soft);font-size:14px;
-  }
-  .add-extra-btn{margin-top:2px;}
-
-  .archive-layout{display:flex;gap:18px;min-height:320px;}
-  .archive-weeks{width:200px;flex-shrink:0;display:flex;flex-direction:column;gap:6px;max-height:520px;overflow-y:auto;}
-  .archive-week-btn{
-    text-align:left;background:#fff;border:1.5px solid var(--line-light);border-radius:9px;padding:9px 11px;
-    cursor:pointer;font-size:12.5px;font-family:'Oswald',sans-serif;
-  }
-  .archive-week-btn.active{background:var(--ink);color:var(--chalk);border-color:var(--ink);}
-  .archive-days{flex:1;display:flex;flex-direction:column;gap:10px;max-height:600px;overflow-y:auto;padding-right:4px;}
-  .archive-day-card{background:#fff;border:1.5px solid var(--line-light);border-radius:12px;}
-  .day-row-clickable:hover{border-color:var(--orange);}
-  .archive-day-card .collapse-body{transition:none;}
-  .archive-day-title{font-family:'Oswald',sans-serif;text-transform:uppercase;font-size:14px;margin-bottom:6px;color:var(--ink-soft);}
-  .archive-day-word{font-family:'Oswald',sans-serif;font-size:17px;text-transform:uppercase;margin-bottom:4px;}
-  .archive-day-line{font-size:12.5px;margin:3px 0;color:var(--ink-soft);}
-  .archive-day-line b{color:var(--ink);}
-  .archive-empty{color:var(--ink-soft);font-size:14px;text-align:center;padding:60px 20px;}
-  @media (max-width:700px){.archive-layout{flex-direction:column;}.archive-weeks{width:100%;flex-direction:row;flex-wrap:wrap;max-height:none;}}
+  .modal h2{font-family:'Oswald',sans-serif; text-transform:uppercase; margin:0 0 4px; font-size:19px;}
+  .modal .close-x{position:absolute; top:14px; right:16px; font-size:22px; color:var(--ink-soft); background:none; border:none; cursor:pointer;}
+  .row-actions{display:flex; gap:10px; margin-top:18px;}
+  .row-actions .btn{flex:1;}
+  .spinner{width:18px; height:18px; border:2.5px solid rgba(255,255,255,0.4); border-top-color:#fff; border-radius:50%; animation:spin .7s linear infinite;}
+  @keyframes spin{to{transform:rotate(360deg);}}
+  .review-item{border:1px solid var(--line-light); border-radius:10px; padding:10px 12px; margin-bottom:8px; background:#fff;}
+  .review-item .rtitle{font-weight:700; font-size:14px;}
+  .review-item .rmeta{font-size:12px; color:var(--ink-soft); margin-top:2px;}
+  .link-btn{background:none; border:none; color:var(--navy-2); font-family:'Oswald',sans-serif; font-weight:600; font-size:13px; text-transform:uppercase; letter-spacing:.04em; text-decoration:underline; cursor:pointer; padding:0;}
 </style>
 </head>
 <body>
 
-<div id="setupBanner" style="display:none;position:fixed;inset:0;background:#0A0A0A;color:#F7F5EF;z-index:100;padding:40px 24px;font-family:'Inter',sans-serif;">
-  <div style="max-width:560px;margin:40px auto;">
-    <h2 style="font-family:'Oswald',sans-serif;text-transform:uppercase;color:#F2A93C;margin-bottom:6px;">Cloud Setup Needed</h2>
-    <p style="color:#CFCAC0;line-height:1.6;">This page is ready for Supabase but doesn't have credentials yet. Open the file, find <code style="background:#1A1A1A;padding:2px 6px;border-radius:4px;">SUPABASE_URL</code> and <code style="background:#1A1A1A;padding:2px 6px;border-radius:4px;">SUPABASE_ANON_KEY</code> near the top of the script, and paste in your Project URL and anon public key from Supabase → Project Settings → API. Then re-upload/redeploy.</p>
-  </div>
-</div>
-
 <header class="scoreboard">
-  <div class="sb-left">
-    <div class="sb-brand wordmark">Legacy Lab Academy</div>
-    <div class="sb-date" id="sbDate">—</div>
-    <div class="sb-sub" id="sbSub">—</div>
-  </div>
-  <div class="sb-center">
-    <div class="live-clock" id="liveClock">--:--:--</div>
-    <div class="live-clock-label">Right Now</div>
-  </div>
-  <div class="sb-right">
-    <div class="buzzer">
-      <div class="label">Final Buzzer</div>
-      <div class="time" id="buzzerTime">2:30:00 PM</div>
+  <div class="sb-top">
+    <div>
+      <a href="index.html" class="link-btn" style="color:var(--amber);text-decoration:none;font-size:11px;">← Command Center</a>
+      <div class="sb-brand">Legacy Lab</div>
+      <div class="sb-title" id="scoreboardTitle">Game Plan</div>
+      <div class="sb-sub" id="scoreboardSub">Loading…</div>
     </div>
-    <button class="icon-btn" id="openArchive" title="Archive & upcoming weeks">📅</button>
-    <a class="icon-btn" href="courses.html" title="College coursework (SEU dual enrollment)" style="text-decoration:none;">🎓</a>
-    <button class="icon-btn" id="openBuzzerSettings" title="Day settings (buzzer time & timezone)">⏰</button>
-    <button class="icon-btn" id="openStudents" title="Edit student profiles">👤</button>
-    <button class="icon-btn" id="openToday" title="Edit today">✏️</button>
-    <button class="icon-btn" id="openTemplate" title="Edit 5-week plan">🗓️</button>
+    <button class="sb-btn" id="headerActionBtn" onclick="toggleScreen()">⚙ Courses</button>
   </div>
+  <div class="chip-row" id="chipRow"></div>
 </header>
 
-<main class="board" id="board"></main>
+<main id="mainContent"></main>
 
-<!-- TODAY EDIT MODAL -->
-<div class="modal-overlay" id="todayOverlay">
-  <div class="modal">
-    <h3>Edit Today</h3>
-    <div class="sub" id="todaySub">Changes apply only to today's date.</div>
-    <div class="modal-tabs">
-      <div class="modal-tab active" data-tab="t-devo">Devotional</div>
-      <div class="modal-tab" data-tab="t-vocab">Vocabulary</div>
-      <div class="modal-tab" data-tab="t-subj">Subjects</div>
-    </div>
-    <div id="t-devo" class="tab-panel active"></div>
-    <div id="t-vocab" class="tab-panel"></div>
-    <div id="t-subj" class="tab-panel"></div>
-    <div class="modal-actions">
-      <button class="btn btn-ghost" id="resetToday">Reset to weekly plan</button>
-      <button class="btn btn-ghost" data-close>Cancel</button>
-      <button class="btn btn-primary" id="saveToday">Save changes</button>
-    </div>
-  </div>
-</div>
+<div id="modalRoot"></div>
 
-<!-- 5-WEEK PLAN MODAL -->
-<div class="modal-overlay" id="templateOverlay">
-  <div class="modal wide">
-    <h3>5-Week Game Plan</h3>
-    <div class="sub">This rotates on repeat, forever — Week 5 is followed by Week 1 again. Days already auto-saved to the archive won't change unless you reset them individually.</div>
-    <div class="modal-tabs" id="weekLevelTabs"></div>
-    <div id="weekLevelGroups"></div>
-    <div class="modal-actions">
-      <button class="btn btn-ghost" data-close>Cancel</button>
-      <button class="btn btn-primary" id="saveTemplate">Save 5-week plan</button>
-    </div>
-  </div>
-</div>
-
-<!-- STUDENTS MODAL -->
-<div class="modal-overlay" id="studentsOverlay">
-  <div class="modal">
-    <h3>Student Profiles</h3>
-    <div class="sub">Personal info practice pulls from here. Stored only on this device/account.</div>
-    <div class="mini-lbl" style="margin-bottom:8px;">Field Labels (shared across all students)</div>
-    <div class="field-grid-3" id="addrLabelFields"></div>
-    <div class="field-grid-4" style="margin-top:6px;" id="phoneLabelFields"></div>
-    <hr class="divider">
-    <div class="modal-tabs" id="studentTabs"></div>
-    <div id="studentPanels"></div>
-    <div class="modal-actions">
-      <button class="btn btn-ghost" data-close>Cancel</button>
-      <button class="btn btn-primary" id="saveStudents">Save profiles</button>
-    </div>
-  </div>
-</div>
-
-<!-- ARCHIVE / UPCOMING MODAL -->
-<div class="modal-overlay" id="archiveOverlay">
-  <div class="modal wide">
-    <h3>Plan Calendar</h3>
-    <div class="sub">Past days auto-save exactly as shown. Upcoming days preview the 5-week rotation. Click any day to open it.</div>
-    <div class="modal-tabs">
-      <div class="modal-tab active" data-cal-tab="archive-view">Archive</div>
-      <div class="modal-tab" data-cal-tab="upcoming-view">Upcoming</div>
-    </div>
-    <div class="archive-layout" id="archive-view">
-      <div class="archive-weeks" id="archiveWeeks"></div>
-      <div class="archive-days" id="archiveDays"><div class="archive-empty">Loading…</div></div>
-    </div>
-    <div class="archive-layout" id="upcoming-view" style="display:none;">
-      <div class="archive-weeks" id="upcomingWeeks"></div>
-      <div class="archive-days" id="upcomingDays"><div class="archive-empty">Loading…</div></div>
-    </div>
-    <div class="modal-actions">
-      <button class="btn btn-ghost" data-close>Close</button>
-    </div>
-  </div>
-</div>
-
-<!-- DAY DETAIL LIGHTBOX -->
-<div class="modal-overlay" id="dayLightboxOverlay">
-  <div class="modal wide">
-    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px;flex-wrap:wrap;">
-      <div>
-        <h3 id="lightboxTitle">Day Detail</h3>
-        <div class="sub" id="lightboxSub"></div>
-      </div>
-      <div style="display:flex;gap:8px;">
-        <button class="btn btn-primary" id="downloadDayImg">⬇ Download Image</button>
-        <button class="btn btn-ghost" data-close>Close</button>
-      </div>
-    </div>
-    <div id="lightboxContent" style="background:var(--board);border-radius:12px;padding:16px;margin-top:10px;"></div>
-  </div>
-</div>
-
-<!-- DAY SETTINGS MODAL -->
-<div class="modal-overlay" id="buzzerOverlay">
-  <div class="modal" style="max-width:400px;">
-    <h3>Day Settings</h3>
-    <div class="sub">Controls when the school day ends and which timezone the whole plan runs on.</div>
-    <label>End-of-day (final buzzer) time</label>
-    <input type="time" id="buzzerTimeInput" style="font-family:'Oswald',sans-serif;font-size:18px;padding:10px;">
-    <label>Timezone</label>
-    <select id="timezoneInput"></select>
-    <div class="sub" style="margin-top:8px;margin-bottom:0;">Days switch over at midnight in this timezone, and the buzzer countdown runs on it too — the same for every device, no matter where it's opened.</div>
-    <div class="modal-actions">
-      <button class="btn btn-ghost" data-close>Cancel</button>
-      <button class="btn btn-primary" id="saveBuzzer">Save</button>
-    </div>
-  </div>
-</div>
-
-<div class="save-toast" id="toast">Saved</div>
-
-<!-- PIN DIALOG -->
-<div class="modal-overlay" id="pinOverlay">
-  <div class="modal" style="max-width:340px;text-align:center;">
-    <h3 style="margin-bottom:4px;">Enter PIN</h3>
-    <div class="sub" style="margin-bottom:16px;">This area is locked to prevent accidental edits.</div>
-    <input type="password" inputmode="numeric" id="pinInput" placeholder="••••" style="text-align:center;font-size:22px;letter-spacing:6px;font-family:'Oswald',sans-serif;padding:12px;border:1.5px solid var(--line-light);border-radius:8px;width:100%;">
-    <div id="pinError" style="display:none;color:var(--orange);font-size:12.5px;margin-top:8px;">Incorrect PIN — try again.</div>
-    <div class="modal-actions" style="justify-content:center;margin-top:18px;">
-      <button class="btn btn-ghost" id="pinCancel">Cancel</button>
-      <button class="btn btn-primary" id="pinSubmit">Unlock</button>
-    </div>
-  </div>
-</div>
-
-<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
 <script>
-/* ========================= CONFIG / DEFAULTS ========================= */
-const SCHOOL_DAYS = [1,2,3,4,5]; // Mon-Fri
-const BUZZER_KEY = 'buzzer-time';
-function defaultBuzzerTime(){ return {hour:14, minute:30}; } // 2:30 PM
-
-const TIMEZONE_KEY = 'timezone-setting';
-function defaultTimezone(){ return 'America/Chicago'; } // Pensacola, FL
-const SUBJECT_ORDER_KEY = 'subject-order';
-const TIMEZONE_OPTIONS = [
-  { value:'America/New_York',    label:'Eastern Time' },
-  { value:'America/Chicago',     label:'Central Time' },
-  { value:'America/Denver',      label:'Mountain Time' },
-  { value:'America/Phoenix',     label:'Arizona (no DST)' },
-  { value:'America/Los_Angeles', label:'Pacific Time' },
-  { value:'America/Anchorage',   label:'Alaska Time' },
-  { value:'Pacific/Honolulu',    label:'Hawaii Time' },
-  { value:'UTC',                 label:'UTC' },
-];
-
-function defaultFieldLabels(){
-  return { addr1:"Home Address", addr2:"Mom's Address", addr3:"Dad's Address",
-           phone1:'Pooh', phone2:'Mom', phone3:'Dad', phone4:'My Phone' };
-}
-function defaultStudents(){
-  return [
-    { id:'s1', name:'Student One', grade:'5th', addr:{a1:'',a2:'',a3:''}, phone:{p1:'',p2:'',p3:'',p4:''} },
-    { id:'s2', name:'Student Two', grade:'8th', addr:{a1:'',a2:'',a3:''}, phone:{p1:'',p2:'',p3:'',p4:''} },
-    { id:'s3', name:'Student Three', grade:'10th', addr:{a1:'',a2:'',a3:''}, phone:{p1:'',p2:'',p3:'',p4:''} },
-  ];
-}
-function normalizeStudent(s){
-  if(s.addr && s.phone) return s;
-  // migrate from older shape if present
-  return {
-    id: s.id, name: s.name, grade: s.grade,
-    addr:{ a1: s.addresses?.home||'', a2: s.addresses?.mom||'', a3: s.addresses?.dad||'' },
-    phone:{ p1: s.phones?.pooh||'', p2: s.phones?.mom||'', p3: s.phones?.dad||'', p4: s.phones?.own||'' }
-  };
-}
-
-function v(word,def,sent,syn,ant){ return {word,def,sent,syn,ant}; }
-function mkDay(devotional, vocab, shType, shTopic){
-  return {
-    devotional,
-    vocab,
-    subjects:{ math:'Independent work - 1 lesson', scienceHistoryType:shType, scienceHistoryTopic:shTopic, reading:'30 mins', spanish:'Duolingo' },
-    extraSubjects:[{id:'geo', name:'Geography', topic:'US States and Capitals'}]
-  };
-}
-function devo(wordOfDay, scripture, reflection, prayer, intention){ return {wordOfDay, scripture, reflection, prayer, intention}; }
-
-function defaultWeeks(){
-  return {
-    1:{
-      1: mkDay(devo('Resilience','"I can do all things through Christ who strengthens me." — Philippians 4:13','When something feels hard today, what will you tell yourself instead of quitting?','Lord, give me strength to keep going when today gets tough. Help me trust You with my effort. Amen.','Today I bounce back quickly when something doesn\u2019t go my way.'),
-          {'5th':v('Resilient','Able to recover quickly from difficulty.','She was resilient after losing the first game and came back stronger.','tough','fragile'),
-           '8th':v('Tenacity','Firmness in holding to a course of action.','His tenacity on defense wore the other team down.','persistence','weakness'),
-           '10th':v('Fortitude','Courage and strength in facing pain or adversity.','It took fortitude to keep training after the injury.','resolve','cowardice')},
-          'Science','Intro to forces & motion'),
-      2: mkDay(devo('Discipline','"No discipline seems pleasant at the time, but painful. Later it produces a harvest of righteousness." — Hebrews 12:11','What is one small habit you can stick to today, even when no one is watching?','God, help me do the right thing consistently, not just when it\u2019s easy. Amen.','Today I follow through on my routine, even the boring parts.'),
-          {'5th':v('Discipline','Training to act in a controlled, correct way.','Discipline helped him finish his homework before practice.','self-control','carelessness'),
-           '8th':v('Composure','Calmness and control, especially in a difficult situation.','She kept her composure at the free-throw line.','calm','panic'),
-           '10th':v('Discernment','The ability to judge well.','Discernment helped her choose the smarter play, not just the fastest one.','judgment','confusion')},
-          'History','Colonial America overview'),
-      3: mkDay(devo('Integrity','"The integrity of the upright guides them." — Proverbs 11:3','Would you make the same choice if no one were watching?','Lord, let my actions match my words today, in the classroom and on the court. Amen.','Today I do the right thing even when it\u2019s inconvenient.'),
-          {'5th':v('Integrity','Doing the right thing even when no one is watching.','He called his own foul because of his integrity.','honesty','dishonesty'),
-           '8th':v('Adversity','Difficulties or misfortune.','The team faced adversity but stayed focused on the plan.','hardship','ease'),
-           '10th':v('Resolute','Admirably purposeful, determined, unwavering.','She stayed resolute in her training schedule all season.','determined','wavering')},
-          'Science','States of matter'),
-      4: mkDay(devo('Perseverance','"Let us not become weary in doing good, for at the proper time we will reap a harvest." — Galatians 6:9','What\u2019s something you almost gave up on that you\u2019re glad you kept doing?','God, help me keep going one more rep, one more page, one more try. Amen.','Today I finish what I start, even when it gets hard partway through.'),
-          {'5th':v('Perseverance','Continuing on a task despite difficulty.','Her perseverance paid off when she finally made the shot.','persistence','quitting'),
-           '8th':v('Accountability','Being responsible for your actions and choices.','Accountability meant admitting the mistake and fixing it.','responsibility','irresponsibility'),
-           '10th':v('Meticulous','Showing great attention to detail.','His meticulous film study helped the whole team improve.','careful','sloppy')},
-          'History','Causes of the American Revolution'),
-      5: mkDay(devo('Test Day','"She is clothed with strength and dignity; she can laugh at the days to come." — Proverbs 31:25','Which of this week\u2019s words describes how you want to show up today?','Lord, help me show what I\u2019ve learned this week with confidence, not fear. Amen.','Today I show what I\u2019ve built all week — in the classroom and on the court.'),
-          {}, 'Science','Week review / lab'),
-    },
-    2:{
-      1: mkDay(devo('Focus','"Fix your eyes straight ahead; look only where you\u2019re headed." — Proverbs 4:25','What is distracting you from doing your best today, and how can you set it aside?','Lord, help me keep my eyes on what matters and not get pulled off course today. Amen.','Today I lock in on one task at a time instead of rushing between things.'),
-          {'5th':v('Focus','Paying close attention to one thing.','She kept her focus on the ball the whole game.','concentration','distraction'),
-           '8th':v('Concentration','Deep, careful attention to a task.','His concentration during the test never wavered.','attention','carelessness'),
-           '10th':v('Diligence','Careful and persistent effort.','Her diligence in film study set her apart from teammates.','attentiveness','negligence')},
-          'History','Revolutionary War: key battles'),
-      2: mkDay(devo('Confidence','"The Lord is my strength and my shield; my heart trusts in him." — Psalm 28:7','What is one thing you\u2019re good at that you can remind yourself of today?','God, help me trust the work I\u2019ve put in and play free today. Amen.','Today I trust my preparation and don\u2019t let mistakes shake me.'),
-          {'5th':v('Confident','Sure of yourself and your abilities.','He walked up to the free-throw line feeling confident.','self-assured','unsure'),
-           '8th':v('Assurance','A feeling of certainty about something.','Her assurance on defense came from hours of practice.','certainty','doubt'),
-           '10th':v('Poise','Graceful and confident behavior under pressure.','She played the final minute with total poise.','composure','anxiety')},
-          'Science','Simple machines'),
-      3: mkDay(devo('Patience','"Be patient, bearing with one another in love." — Ephesians 4:2','When is it hardest for you to wait, and how can you handle that better?','Lord, slow me down and help me trust Your timing today. Amen.','Today I stay calm even when things don\u2019t happen as fast as I want.'),
-          {'5th':v('Patient','Able to wait calmly without getting upset.','She was patient while waiting her turn to shoot.','calm','impatient'),
-           '8th':v('Endurance','The ability to keep going through a long or hard process.','His endurance during conditioning drills impressed the coach.','stamina','fatigue'),
-           '10th':v('Steadfast','Firm and unwavering, especially in loyalty or belief.','She remained steadfast in her training plan despite setbacks.','unwavering','fickle')},
-          'History','The Declaration of Independence'),
-      4: mkDay(devo('Effort','"Whatever you do, work at it with all your heart." — Colossians 3:23','Did you give your full effort today, or were you holding something back?','God, let my effort today honor the gifts You\u2019ve given me. Amen.','Today I give full effort in every drill, not just the ones I like.'),
-          {'5th':v('Effort','Hard work put toward a goal.','Her effort in practice earned her more playing time.','exertion','laziness'),
-           '8th':v('Initiative','The ability to start something on your own.','He showed initiative by staying late to work on free throws.','drive','passivity'),
-           '10th':v('Exertion','Physical or mental effort.','The exertion of a full practice left the team exhausted but proud.','effort','idleness')},
-          'Science','Energy: potential & kinetic'),
-      5: mkDay(devo('Test Day','"Whatever you have learned or received... put it into practice." — Philippians 4:9','Which of this week\u2019s words — focus, confidence, patience, or effort — do you need most today?','Lord, help me show what I\u2019ve built this week with a clear head. Amen.','Today I put this week\u2019s words into action, not just my memory.'),
-          {}, 'History','Week review / quiz'),
-    },
-    3:{
-      1: mkDay(devo('Teamwork','"Two are better than one... if either falls down, one can help the other up." — Ecclesiastes 4:9-10','How can you make a teammate or sibling better today?','God, help me care about the team\u2019s success as much as my own today. Amen.','Today I look for ways to help someone else succeed.'),
-          {'5th':v('Teamwork','Working together toward a shared goal.','Good teamwork helped them win the close game.','cooperation','rivalry'),
-           '8th':v('Collaboration','Working jointly with others on a task.','Their collaboration on the group project made it stronger.','partnership','competition'),
-           '10th':v('Synergy','The extra energy created when people work well together.','The team\u2019s synergy was obvious in the fourth quarter.','cooperation','discord')},
-          'Science','Ecosystems & food chains'),
-      2: mkDay(devo('Leadership','"Whoever wants to become great among you must be your servant." — Matthew 20:26','What\u2019s one way you can lead by example today, even without a title?','Lord, let me lead by serving others today, not by demanding attention. Amen.','Today I lead with my actions before I lead with my words.'),
-          {'5th':v('Leader','Someone who guides or directs others.','The point guard was a natural leader on the court.','guide','follower'),
-           '8th':v('Influence','The power to affect someone\u2019s actions or thinking.','Her positive attitude had a big influence on the team.','impact','insignificance'),
-           '10th':v('Decisiveness','The ability to make decisions quickly and confidently.','Her decisiveness in the final seconds won the game.','resolve','hesitation')},
-          'History','The U.S. Constitution'),
-      3: mkDay(devo('Respect','"Show proper respect to everyone." — 1 Peter 2:17','Who is someone you can show extra respect to today, even if it\u2019s hard?','God, help me treat referees, coaches, and teammates with respect today, win or lose. Amen.','Today I speak to others the way I want to be spoken to.'),
-          {'5th':v('Respect','Treating someone with consideration and honor.','He showed respect by shaking hands after the game.','courtesy','disrespect'),
-           '8th':v('Courtesy','Polite behavior and consideration for others.','Her courtesy toward the new player made him feel welcome.','politeness','rudeness'),
-           '10th':v('Deference','Respectful yielding to another\u2019s opinion or authority.','He showed deference to his coach\u2019s game plan.','respect','disregard')},
-          'Science','Weather & climate patterns'),
-      4: mkDay(devo('Humility','"Humble yourselves before the Lord, and he will lift you up." — James 4:10','How can you celebrate a win today without putting anyone else down?','Lord, keep me humble in success and steady in failure today. Amen.','Today I let my play speak instead of my words.'),
-          {'5th':v('Humble','Not thinking too highly of yourself.','She stayed humble even after scoring the winning basket.','modest','arrogant'),
-           '8th':v('Modesty','A lack of excessive pride or self-importance.','His modesty after the win impressed the coaches.','humility','conceit'),
-           '10th':v('Unassuming','Not pretentious or arrogant; modest.','Despite being the star player, she stayed unassuming.','humble','boastful')},
-          'History','The Bill of Rights'),
-      5: mkDay(devo('Test Day','"Iron sharpens iron, and one person sharpens another." — Proverbs 27:17','How did teamwork, leadership, respect, or humility show up in your week?','God, thank You for the people who sharpen me. Help me show what I\u2019ve learned today. Amen.','Today I show this week\u2019s words weren\u2019t just talk.'),
-          {}, 'Science','Week review / lab'),
-    },
-    4:{
-      1: mkDay(devo('Growth','"I press on toward the goal." — Philippians 3:14','What\u2019s one skill you\u2019ve gotten better at this month?','Lord, help me see mistakes today as steps toward growth, not reasons to quit. Amen.','Today I focus on getting 1% better, not being perfect.'),
-          {'5th':v('Growth','The process of developing or improving.','His growth as a shooter showed in every game.','improvement','decline'),
-           '8th':v('Progress','Forward movement toward a goal.','Her progress in reading comprehension was clear this month.','advancement','regression'),
-           '10th':v('Development','The process of growing or improving over time.','Coaches tracked each athlete\u2019s development across the season.','advancement','stagnation')},
-          'History','Early U.S. presidents'),
-      2: mkDay(devo('Courage','"Be strong and courageous... the Lord your God will be with you." — Joshua 1:9','What\u2019s something a little scary you can try today anyway?','God, give me courage to take the hard shot and ask the hard question today. Amen.','Today I do the brave thing, not just the easy thing.'),
-          {'5th':v('Courage','The ability to do something that frightens you.','It took courage to take the last shot.','bravery','cowardice'),
-           '8th':v('Boldness','Confidence and willingness to take risks.','Her boldness on defense created three turnovers.','daring','timidity'),
-           '10th':v('Valor','Great courage in the face of danger or difficulty.','His valor during the toughest drill inspired the team.','bravery','cowardice')},
-          'Science','Plant & animal cells'),
-      3: mkDay(devo('Gratitude','"Give thanks in all circumstances." — 1 Thessalonians 5:18','What\u2019s one thing about today you can be thankful for, even if it\u2019s a hard day?','Lord, thank You for the chance to learn and play today. Keep my heart grateful. Amen.','Today I notice and say thank you for at least one thing.'),
-          {'5th':v('Grateful','Feeling or showing thanks.','She was grateful for her coach\u2019s extra help.','thankful','ungrateful'),
-           '8th':v('Appreciation','Recognition of the value of something.','His appreciation for his teammates grew after the injury.','gratitude','disregard'),
-           '10th':v('Gratitude','The quality of being thankful.','Her gratitude for the opportunity showed in her work ethic.','thankfulness','ingratitude')},
-          'History','The Louisiana Purchase'),
-      4: mkDay(devo('Consistency','"Whoever can be trusted with very little can also be trusted with much." — Luke 16:10','What\u2019s one habit you can do the same way every single day?','God, help me show up the same way today as I did yesterday. Amen.','Today I do the small things right, even when no one is watching.'),
-          {'5th':v('Consistent','Acting or performing in the same way over time.','Her consistent free-throw form paid off in games.','steady','erratic'),
-           '8th':v('Reliability','The quality of being trustworthy and consistent.','His reliability made him a coach\u2019s favorite.','dependability','unpredictability'),
-           '10th':v('Constancy','Steadiness and firmness over time.','Her constancy in training never wavered, win or lose.','steadiness','inconsistency')},
-          'Science','Circuits & electricity basics'),
-      5: mkDay(devo('Test Day','"Well done, good and faithful servant." — Matthew 25:21','Which of this week\u2019s words — growth, courage, gratitude, consistency — did you live out best?','Lord, help me finish this week strong and show what I\u2019ve built. Amen.','Today I show my consistency by finishing the week as strong as I started it.'),
-          {}, 'History','Week review / quiz'),
-    },
-    5:{
-      1: mkDay(devo('Excellence','"Let your light shine before others." — Matthew 5:16','What would it look like to do your best work today, not just enough to get by?','God, help me chase excellence, not perfection, in everything I do today. Amen.','Today I do my very best, even in the small stuff.'),
-          {'5th':v('Excellent','Extremely good; outstanding.','Her excellent footwork made her hard to guard.','outstanding','poor'),
-           '8th':v('Mastery','Complete skill or knowledge in a subject.','Years of practice led to his mastery of the crossover.','expertise','incompetence'),
-           '10th':v('Proficiency','A high degree of skill or competence.','Her proficiency in both hands made her unpredictable.','skillfulness','ineptitude')},
-          'Science','The solar system'),
-      2: mkDay(devo('Selflessness','"Value others above yourselves." — Philippians 2:3','What\u2019s one way you can put someone else\u2019s needs before your own today?','Lord, help me want good things for others as much as I want them for myself. Amen.','Today I make someone else look good, not just myself.'),
-          {'5th':v('Selfless','Concerned more with others\u2019 needs than your own.','His selfless pass set up the winning shot.','generous','selfish'),
-           '8th':v('Generosity','Willingness to give or share.','Her generosity with her time helped the younger players.','giving','stinginess'),
-           '10th':v('Altruism','Unselfish concern for the well-being of others.','His altruism showed in how he mentored younger teammates.','selflessness','selfishness')},
-          'History','Westward expansion'),
-      3: mkDay(devo('Positivity','"A cheerful heart is good medicine." — Proverbs 17:22','How does your attitude affect the people around you today?','God, let my attitude lift others up today, even when things go wrong. Amen.','Today my attitude is a gift to the people around me, not a burden.'),
-          {'5th':v('Positive','Having a hopeful, constructive attitude.','Her positive energy kept the team loose under pressure.','optimistic','negative'),
-           '8th':v('Optimism','Hopefulness and confidence about the future.','His optimism never wavered, even after a tough loss.','hopefulness','pessimism'),
-           '10th':v('Buoyancy','The ability to stay cheerful and resilient.','Her buoyancy after mistakes kept the whole team confident.','resilience','despondency')},
-          'Science','The rock cycle'),
-      4: mkDay(devo('Commitment','"Commit to the Lord whatever you do, and he will establish your plans." — Proverbs 16:3','What\u2019s something you\u2019ve committed to that\u2019s worth sticking with, even when it\u2019s hard?','Lord, help me finish what I\u2019ve started today, all the way through. Amen.','Today I follow through on my commitments, big and small.'),
-          {'5th':v('Committed','Dedicated to a cause or activity.','She stayed committed to her training even during the off-season.','dedicated','uncommitted'),
-           '8th':v('Dedication','Deep commitment to a task or purpose.','His dedication to conditioning showed in the fourth quarter.','commitment','indifference'),
-           '10th':v('Devotion','Strong love, loyalty, or commitment.','Her devotion to the sport was clear in every early practice.','loyalty','apathy')},
-          'History','Causes of the Civil War'),
-      5: mkDay(devo('Test Day','"Run in such a way as to get the prize." — 1 Corinthians 9:24','Out of everything you\u2019ve learned these five weeks, what matters most to you?','Lord, thank You for five weeks of growth. Help me carry these words forward. Amen.','Today I finish this cycle strong and get ready to build on it.'),
-          {}, 'Science','Week review / lab'),
-    }
-  };
-}
-
-/* ========================= STORAGE HELPERS =========================
-   Cloud-backed via Supabase, so any device (yours or your kids') sees
-   the same plan. Falls back gracefully with a setup banner if the
-   credentials below haven't been filled in yet. */
+/* =========================================================
+   STORAGE HELPERS
+========================================================= */
 const SUPABASE_URL = 'https://gwahlqvngjfhslqqprzl.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imd3YWhscXZuZ2pmaHNscXFwcnpsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODcxNDU5NzIsImV4cCI6MjEwMjcyMTk3Mn0.bx2skjuZUNVXVplQNg-OaleXVYQ8D6R2Ej6xr1rBZYk';
-const SUPABASE_CONFIGURED = !SUPABASE_URL.includes('YOUR_SUPABASE_URL') && !SUPABASE_ANON_KEY.includes('YOUR_SUPABASE_ANON_KEY');
-const sb = SUPABASE_CONFIGURED ? supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
+const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-async function storageGet(key){
-  if(!sb) return null;
-  try{
-    const {data, error} = await sb.from('command_center').select('value').eq('key',key).maybeSingle();
-    if(error) throw error;
-    return data ? data.value : null;
-  }catch(e){ console.error('storage get failed', e); return null; }
-}
-async function storageSet(key,value){
-  if(!sb) return false;
-  try{
-    const {error} = await sb.from('command_center').upsert({ key, value, updated_at: new Date().toISOString() });
-    if(error) throw error;
-    return true;
-  }catch(e){ console.error('storage set failed', e); return false; }
-}
-async function storageDelete(key){
-  if(!sb) return;
-  try{ await sb.from('command_center').delete().eq('key',key); }catch(e){ console.error('storage delete failed', e); }
-}
-async function storageList(prefix){
-  if(!sb) return [];
-  try{
-    const {data, error} = await sb.from('command_center').select('key').like('key', prefix+'%');
-    if(error) throw error;
-    return (data||[]).map(r=>r.key);
-  }catch(e){ console.error('storage list failed', e); return []; }
-}
-
-/* ========================= EDIT PIN GATE =========================
-   Soft gate only — kids can freely check off subjects, but opening the
-   Today / 5-Week Plan / Profiles editors asks for this PIN first. Since
-   this is plain client-side code, anyone who views page source can see
-   it — it stops accidental edits, it isn't real security. Change it
-   below before you deploy. Uses a custom in-page dialog (not the
-   browser's native prompt) so it also works inside sandboxed preview
-   frames that block native dialogs. */
-const EDIT_PIN = '2633';
-function requireEditAccess(action){
-  const overlay = document.getElementById('pinOverlay');
-  const input = document.getElementById('pinInput');
-  const err = document.getElementById('pinError');
-  const submitBtn = document.getElementById('pinSubmit');
-  const cancelBtn = document.getElementById('pinCancel');
-  input.value = '';
-  err.style.display = 'none';
-  overlay.classList.add('open');
-  input.focus();
-
-  function cleanup(){ overlay.classList.remove('open'); }
-  function onSubmit(){
-    if(input.value === EDIT_PIN){ cleanup(); action(); }
-    else { err.style.display = 'block'; input.value=''; input.focus(); }
+// Same shared cloud table the command center uses, so this is part of the
+// same system and reachable from any device — keys prefixed "seu:" so they
+// never collide with the command center's own keys.
+const S = {
+  async get(key){
+    try{
+      const { data, error } = await sb.from('command_center').select('value').eq('key','seu:'+key).maybeSingle();
+      if(error) throw error;
+      return data ? data.value : null;
+    }catch(e){ console.error('storage get failed', e); return null; }
+  },
+  async set(key, val){
+    try{
+      const { error } = await sb.from('command_center').upsert({ key:'seu:'+key, value: val, updated_at: new Date().toISOString() });
+      if(error) throw error;
+    }catch(e){ console.error('storage set failed', e); }
   }
-  submitBtn.onclick = onSubmit;
-  cancelBtn.onclick = cleanup;
-  input.onkeydown = (e)=>{ if(e.key==='Enter') onSubmit(); if(e.key==='Escape') cleanup(); };
-}
-
-const WEEKS_KEY = 'multi-week-plan';
-const CYCLE_START_KEY = 'cycle-start-monday';
-const STUDENTS_KEY = 'student-profiles';
-const LABELS_KEY = 'field-labels';
-function dayKey(dateStr){ return 'day-override:'+dateStr; }
-function checksKey(dateStr){ return 'day-checks:'+dateStr; }
-
-/* ========================= DATE / SCHOOL DAY LOGIC ========================= */
-function pad(n){return n<10?'0'+n:''+n;}
-function toDateStr(d){ return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate()); }
-
-// The school day is whatever calendar date it currently is in the chosen
-// timezone (state.timezone, editable in Settings) — so it flips over at
-// midnight in that timezone no matter what timezone the viewing device is
-// set to. Falls back to the default timezone if settings haven't loaded yet.
-function getSchoolDate(now){
-  const tz = (state && state.timezone) || defaultTimezone();
-  const fmt = new Intl.DateTimeFormat('en-US', { timeZone: tz, year:'numeric', month:'2-digit', day:'2-digit' });
-  const parts = fmt.formatToParts(now);
-  const y = +parts.find(p=>p.type==='year').value;
-  const m = +parts.find(p=>p.type==='month').value;
-  const dd = +parts.find(p=>p.type==='day').value;
-  return new Date(y, m-1, dd, 12, 0, 0, 0);
-}
-function mondayOfWeek(schoolDate){
-  const d = new Date(schoolDate);
-  const day = d.getDay();
-  const diff = day===0 ? -6 : (1-day);
-  d.setDate(d.getDate()+diff);
-  return d;
-}
-
-/* ========================= APP STATE ========================= */
-let state = {
-  weeks:null, students:null, fieldLabels:null, cycleStartMonday:null, buzzerTime:null, timezone:null, subjectOrder:null,
-  schoolDate:null, weekdayNum:null, dateStr:null,
-  todayOverride:null, weekWords:{}, checks:{}
 };
-let collapseState = {}; // in-memory only, per session
 
+/* =========================================================
+   STATE
+========================================================= */
+let courses = [];
+let tasksByCourse = {};
+let screen = 'schedule'; // 'schedule' | 'courses'
+let activeCourseId = null;
+let activeWeek = null; // null = default to the current calendar week
+
+const DAY_NAMES = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
+function dayIndex(name){
+  if(!name) return 4;
+  const i = DAY_NAMES.findIndex(d => d.toLowerCase() === String(name).trim().toLowerCase());
+  return i === -1 ? 4 : i;
+}
+function fmtDate(d){ return d.toLocaleDateString(undefined,{weekday:'short', month:'short', day:'numeric'}); }
+function addDays(date, n){ const d = new Date(date); d.setDate(d.getDate()+n); return d; }
+function startOfDay(d){ const x=new Date(d); x.setHours(0,0,0,0); return x; }
+function todayStart(){ return startOfDay(new Date()); }
+function sameDay(a,b){ return startOfDay(a).getTime() === startOfDay(b).getTime(); }
+
+/* =========================================================
+   INIT / LOAD
+========================================================= */
 async function loadAll(){
-  state.timezone = (await storageGet(TIMEZONE_KEY)) || defaultTimezone();
-  state.weeks = (await storageGet(WEEKS_KEY)) || defaultWeeks();
-  const rawStudents = (await storageGet(STUDENTS_KEY)) || defaultStudents();
-  state.students = rawStudents.map(normalizeStudent);
-  state.fieldLabels = (await storageGet(LABELS_KEY)) || defaultFieldLabels();
-  state.buzzerTime = (await storageGet(BUZZER_KEY)) || defaultBuzzerTime();
-  state.subjectOrder = (await storageGet(SUBJECT_ORDER_KEY)) || [];
-
-  const now = new Date();
-  state.schoolDate = getSchoolDate(now);
-  const dow = state.schoolDate.getDay();
-  state.weekdayNum = dow;
-  const dstr = toDateStr(state.schoolDate);
-  state.dateStr = dstr;
-
-  // Cycle anchor: the Monday the 5-week rotation started. Created once,
-  // then reused forever so the rotation stays stable across devices.
-  let cycleStart = await storageGet(CYCLE_START_KEY);
-  if(!cycleStart){
-    cycleStart = toDateStr(mondayOfWeek(state.schoolDate));
-    await storageSet(CYCLE_START_KEY, cycleStart);
-  }
-  state.cycleStartMonday = cycleStart;
-
-  state.todayOverride = await storageGet(dayKey(dstr));
-  state.checks = (await storageGet(checksKey(dstr))) || {};
-
-  // AUTO-SAVE: the first time a school day is viewed, snapshot the ENTIRE
-  // page for that day permanently (devotional, vocab, subjects, student
-  // profiles, and field labels as they were) so it can always be referenced
-  // exactly as shown, even if the plan or profiles change later.
-  if(SCHOOL_DAYS.includes(state.weekdayNum) && !state.todayOverride){
-    const wi = weekIndexForDate(state.schoolDate);
-    const resolved = JSON.parse(JSON.stringify((state.weeks[wi] && state.weeks[wi][state.weekdayNum]) || {}));
-    if(resolved && Object.keys(resolved).length){
-      resolved.students = JSON.parse(JSON.stringify(state.students));
-      resolved.fieldLabels = JSON.parse(JSON.stringify(state.fieldLabels));
-      state.todayOverride = resolved;
-      await storageSet(dayKey(dstr), resolved);
-    }
-  } else if(state.todayOverride && (!state.todayOverride.students || !state.todayOverride.fieldLabels)){
-    // Backfill snapshots for days saved before this feature existed.
-    state.todayOverride.students = state.todayOverride.students || JSON.parse(JSON.stringify(state.students));
-    state.todayOverride.fieldLabels = state.todayOverride.fieldLabels || JSON.parse(JSON.stringify(state.fieldLabels));
-    await storageSet(dayKey(dstr), state.todayOverride);
-  }
-
-  if(state.weekdayNum === 5){ state.weekWords = await computeWeekWordsFor(mondayOfWeek(state.schoolDate)); }
-}
-
-// Which of the 5 built weeks (1-5) applies to a given date, rotating forever.
-function weekIndexForDate(dateObj){
-  const mon = mondayOfWeek(dateObj);
-  const startMs = new Date(state.cycleStartMonday + 'T12:00:00').getTime();
-  const diffWeeks = Math.round((mon.getTime() - startMs) / (7*24*3600*1000));
-  return (((diffWeeks % 5) + 5) % 5) + 1;
-}
-
-async function computeWeekWordsFor(mon){
-  const grades = ['5th','8th','10th'];
-  const result = {'5th':[], '8th':[], '10th':[]};
-  const wi = weekIndexForDate(mon);
-  for(let i=0;i<4;i++){
-    const dt = new Date(mon); dt.setDate(mon.getDate()+i);
-    const ds = toDateStr(dt);
-    const override = await storageGet(dayKey(ds));
-    const wd = i+1;
-    const content = override || (state.weeks[wi] && state.weeks[wi][wd]);
-    if(content && content.vocab){
-      grades.forEach(g=>{ if(content.vocab[g]) result[g].push(content.vocab[g].word); });
-    }
-  }
-  return result;
-}
-
-function todayContent(){
-  if(state.todayOverride) return state.todayOverride;
-  const wi = weekIndexForDate(state.schoolDate);
-  return (state.weeks[wi] && state.weeks[wi][state.weekdayNum]) || null;
-}
-
-function allSubjects(c){
-  const subj = c.subjects || {};
-  const base = [
-    {id:'math', name:'Math', topic:subj.math},
-    {id:'sciHist', name: subj.scienceHistoryType || 'Science', topic:subj.scienceHistoryTopic},
-    {id:'reading', name:'Reading', topic:subj.reading},
-    {id:'spanish', name:'Spanish', topic:subj.spanish},
-  ];
-  const extra = (c.extraSubjects||[]).map(e=>({id:e.id, name:e.name, topic:e.topic}));
-  return base.concat(extra);
-}
-
-/* ========================= RENDER: HEADER ========================= */
-function renderHeader(){
-  const opts = {weekday:'long', month:'long', day:'numeric'};
-  document.getElementById('sbDate').textContent = state.schoolDate.toLocaleDateString('en-US', opts);
-  const wd = state.weekdayNum;
-  const isSchool = SCHOOL_DAYS.includes(wd);
-  document.getElementById('sbSub').textContent = isSchool
-    ? `School Day ${wd} of 5 this week` + (wd===5 ? ' · Test Day' : '')
-    : 'Weekend — no school day scheduled';
-  tickClock();
-  updateBuzzer();
-}
-function tickClock(){
-  const now = new Date();
-  document.getElementById('liveClock').textContent = now.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit',second:'2-digit'});
-}
-// Current wall-clock time in the chosen timezone, independent of the
-// viewing device's own timezone — so the buzzer countdown is the same
-// for every device.
-function centralNowParts(){
-  const tz = (state && state.timezone) || defaultTimezone();
-  const fmt = new Intl.DateTimeFormat('en-US', { timeZone: tz, hour12:false, hour:'2-digit', minute:'2-digit', second:'2-digit' });
-  const parts = fmt.formatToParts(new Date());
-  const get = t => +parts.find(p=>p.type===t).value;
-  return { h: get('hour')%24, m: get('minute'), s: get('second') };
-}
-function formatBuzzerTime(){
-  let {hour, minute} = state.buzzerTime;
-  const ampm = hour>=12 ? 'PM' : 'AM';
-  let h12 = hour % 12; if(h12===0) h12 = 12;
-  return `${h12}:${pad(minute)} ${ampm}`;
-}
-function updateBuzzer(){
-  const el = document.getElementById('buzzerTime');
-  if(!SCHOOL_DAYS.includes(state.weekdayNum)){ el.textContent = '—'; return; }
-  const {h,m,s} = centralNowParts();
-  const nowSec = h*3600 + m*60 + s;
-  const targetSec = state.buzzerTime.hour*3600 + state.buzzerTime.minute*60;
-  const diffSec = targetSec - nowSec;
-  if(diffSec <= 0){ el.textContent = 'Afternoon Activities'; return; }
-  const hh = Math.floor(diffSec/3600);
-  const mm = Math.floor((diffSec%3600)/60);
-  const ss = diffSec%60;
-  el.textContent = hh>0 ? `${hh}:${pad(mm)}:${pad(ss)}` : `${mm}:${pad(ss)}`;
-}
-
-/* ========================= RENDER: BOARD ========================= */
-function esc(s){ return (s||'').toString().replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
-function escAttr(s){ return esc(s).replace(/"/g,'&quot;'); }
-
-function renderBoard(){
-  const board = document.getElementById('board');
-  const wd = state.weekdayNum;
-
-  if(!SCHOOL_DAYS.includes(wd)){
-    const tzLabel = (TIMEZONE_OPTIONS.find(o=>o.value===state.timezone)||{}).label || state.timezone;
-    board.innerHTML = `<div class="weekend-card">
-      <h2>No School Day Scheduled</h2>
-      <p>The command center runs Monday–Friday and switches automatically at midnight ${esc(tzLabel)}. Enjoy the weekend! 🏀</p>
-    </div>`;
-    return;
-  }
-
-  const c = todayContent();
-  if(!c){ board.innerHTML = `<div class="weekend-card"><h2>Nothing planned yet</h2><p>Use the calendar icon above to build this weekday's plan.</p></div>`; return; }
-
-  const devo = c.devotional;
-  const isTestDay = wd===5;
-  const fl = state.fieldLabels;
-
-  const studentsHTML = state.students.map((s)=>{
-    const grade = s.grade;
-    let vocabHTML = '';
-    if(isTestDay){
-      const words = (state.weekWords[grade]||[]);
-      vocabHTML = `<div class="vocab-box">
-        <span class="test-badge">Test Day</span>
-        <ul class="test-list">${words.map(w=>`<li>${esc(w)}</li>`).join('') || '<li style="text-transform:none;font-family:Oswald;font-size:13px;color:var(--ink-soft)">No words logged this week yet</li>'}</ul>
-      </div>`;
-    } else {
-      const word = c.vocab && c.vocab[grade];
-      if(word){
-        vocabHTML = `<div class="vocab-box">
-          <div class="vocab-word">${esc(word.word)}</div>
-          <div class="vocab-row"><b>Define:</b> ${esc(word.def)}</div>
-          <div class="vocab-row"><b>Use it:</b> ${esc(word.sent)}</div>
-          <div class="syn-ant"><span><b>Syn</b> ${esc(word.syn)}</span><span class="ant"><b>Ant</b> ${esc(word.ant)}</span></div>
-        </div>`;
-      }
-    }
-
-    const infoCollapsed = collapseState[s.id+'-info'] ? 'collapsed' : '';
-    const phoneCollapsed = collapseState[s.id+'-phone'] ? 'collapsed' : '';
-
-    return `<div class="student-card">
-      <div class="student-head">
-        <div class="student-name">${esc(s.name)}</div>
-        <div class="grade-badge">${esc(s.grade)} GRADE</div>
-      </div>
-      <div class="student-body">
-        <div class="collapse-head" data-collapse="${s.id}-info">
-          <div class="mini-lbl">Personal Info</div><div class="chevron ${infoCollapsed}">▾</div>
-        </div>
-        <div class="collapse-body ${infoCollapsed}" data-collapsebody="${s.id}-info">
-          <div class="info-line"><span>Full name</span><span>${esc(s.name)}</span></div>
-          <div class="info-line"><span>${esc(fl.addr1)}</span><span>${esc(s.addr.a1)||'—'}</span></div>
-          <div class="info-line"><span>${esc(fl.addr2)}</span><span>${esc(s.addr.a2)||'—'}</span></div>
-          <div class="info-line"><span>${esc(fl.addr3)}</span><span>${esc(s.addr.a3)||'—'}</span></div>
-        </div>
-        <div class="collapse-head" data-collapse="${s.id}-phone">
-          <div class="mini-lbl">Phone Numbers</div><div class="chevron ${phoneCollapsed}">▾</div>
-        </div>
-        <div class="collapse-body ${phoneCollapsed}" data-collapsebody="${s.id}-phone">
-          <div class="info-line"><span>${esc(fl.phone1)}</span><span>${esc(s.phone.p1)||'—'}</span></div>
-          <div class="info-line"><span>${esc(fl.phone2)}</span><span>${esc(s.phone.p2)||'—'}</span></div>
-          <div class="info-line"><span>${esc(fl.phone3)}</span><span>${esc(s.phone.p3)||'—'}</span></div>
-          <div class="info-line"><span>${esc(fl.phone4)}</span><span>${esc(s.phone.p4)||'—'}</span></div>
-        </div>
-        <div class="mini-lbl" style="margin-top:12px;">Vocabulary ${isTestDay ? '— Test' : '('+grade+' grade)'}</div>
-        ${vocabHTML}
-      </div>
-    </div>`;
-  }).join('');
-
-  const subjList = applySubjectOrder(allSubjects(c));
-  const subjectsHTML = subjList.map((sub,i)=>{
-    const checked = !!state.checks[sub.id];
-    return `<div class="subj-card ${checked?'done':''}" data-subjname="${escAttr(sub.name||'')}">
-      <div class="subj-top">
-        <div class="subj-name">${esc(sub.name)||'Subject'}</div>
-        <div style="display:flex;align-items:center;gap:6px;">
-          <button type="button" class="move-btn" data-move="-1" data-subjname="${escAttr(sub.name||'')}" ${i===0?'disabled':''} title="Move earlier">◀</button>
-          <button type="button" class="move-btn" data-move="1" data-subjname="${escAttr(sub.name||'')}" ${i===subjList.length-1?'disabled':''} title="Move later">▶</button>
-          <div class="check ${checked?'checked':''}" data-subj="${sub.id}">${checked?'✓':''}</div>
-        </div>
-      </div>
-      <div class="subj-topic">${esc(sub.topic)||'No topic set'}</div>
-    </div>`;
-  }).join('');
-
-  board.innerHTML = `
-    <section class="qtr">
-      <div class="qtr-head"><div class="qtr-tag">Q1</div><div class="qtr-title">Warm-Up · Devotional</div><div class="qtr-hint">Sets today's intention</div></div>
-      <div class="devo-grid">
-        <div class="card">
-          <div class="word-badge">Word of the Day</div>
-          <div class="devo-word">${esc(devo.wordOfDay)}</div>
-          <p class="devo-scripture">${esc(devo.scripture)}</p>
-          <div class="devo-row"><div class="lbl">Reflection Question</div><div class="val">${esc(devo.reflection)}</div></div>
-          <div class="devo-row"><div class="lbl">Prayer</div><div class="val">${esc(devo.prayer)}</div></div>
-        </div>
-        <div class="intention-card">
-          <div class="intention-tag">Today's Intention</div>
-          <div class="intention-text">${esc(devo.intention)}</div>
-        </div>
-      </div>
-    </section>
-
-    <section class="qtr">
-      <div class="qtr-head"><div class="qtr-tag">Q2</div><div class="qtr-title">Skills Drill</div><div class="qtr-hint">Tap a header to collapse · double-click to collapse all</div></div>
-      <div class="students-grid">${studentsHTML}</div>
-    </section>
-
-    <section class="qtr">
-      <div class="qtr-head"><div class="qtr-tag">Q3–Q4</div><div class="qtr-title">Game Plan · Core Subjects</div><div class="qtr-hint">Tap to complete · ◀ ▶ to reorder</div></div>
-      <div class="subjects-grid" id="subjectsGrid">${subjectsHTML}</div>
-    </section>
-
-    <section class="qtr" id="seuSection" style="display:none;">
-      <div class="qtr-head"><div class="qtr-tag">Q5</div><div class="qtr-title">College Coursework</div><div class="qtr-hint">Due today · SEU dual enrollment</div></div>
-      <div class="subjects-grid" id="seuGrid"></div>
-    </section>
-
-    <footer class="buzzer-strip">
-      <div class="msg">Final buzzer <b>${formatBuzzerTime()}</b> — afternoon activities begin</div>
-      <button class="link-btn" id="openTodayFooter">Edit today's plan</button>
-    </footer>
-  `;
-
-  renderSeuSection();
-
-  board.querySelectorAll('.check').forEach(el=>{
-    el.addEventListener('click', async ()=>{
-      const key = el.dataset.subj;
-      state.checks[key] = !state.checks[key];
-      await storageSet(checksKey(state.dateStr), state.checks);
-      renderBoard();
-    });
-  });
-  board.querySelectorAll('[data-collapse]').forEach(el=>{
-    el.addEventListener('click', ()=>{
-      const key = el.dataset.collapse;
-      collapseState[key] = !collapseState[key];
-      const body = board.querySelector(`[data-collapsebody="${key}"]`);
-      const chev = el.querySelector('.chevron');
-      body.classList.toggle('collapsed', collapseState[key]);
-      chev.classList.toggle('collapsed', collapseState[key]);
-    });
-    el.addEventListener('dblclick', (e)=>{
-      e.preventDefault();
-      allSectionsCollapsed = !allSectionsCollapsed;
-      board.querySelectorAll('[data-collapse]').forEach(head=>{
-        const k = head.dataset.collapse;
-        collapseState[k] = allSectionsCollapsed;
-        const body = board.querySelector(`[data-collapsebody="${k}"]`);
-        const chev = head.querySelector('.chevron');
-        body.classList.toggle('collapsed', allSectionsCollapsed);
-        chev.classList.toggle('collapsed', allSectionsCollapsed);
-      });
-    });
-  });
-  board.querySelectorAll('.move-btn').forEach(btn=>{
-    btn.addEventListener('click', async ()=>{
-      await moveSubject(btn.dataset.subjname, +btn.dataset.move);
-    });
-  });
-  const footerBtn = document.getElementById('openTodayFooter');
-  if(footerBtn) footerBtn.addEventListener('click', ()=> requireEditAccess(openTodayModal));
-}
-let allSectionsCollapsed = false;
-
-/* ========================= SUBJECT REORDER (move buttons) =========================
-   Simple ◀ ▶ buttons rather than drag — reliable across mouse, touch, and
-   tablets without depending on pointer/drag quirks. Order is saved by
-   subject name so it applies consistently across every day and week. */
-function applySubjectOrder(list){
-  if(!state.subjectOrder || !state.subjectOrder.length) return list;
-  const idx = name => { const i = state.subjectOrder.indexOf(name); return i===-1 ? 9999 : i; };
-  return list.map((item,i)=>({item,i})).sort((a,b)=>{
-    const d = idx(a.item.name) - idx(b.item.name);
-    return d!==0 ? d : a.i-b.i;
-  }).map(x=>x.item);
-}
-
-async function moveSubject(name, direction){
-  const currentNames = applySubjectOrder(allSubjects(todayContent())).map(s=>s.name);
-  let order = (state.subjectOrder && state.subjectOrder.length) ? [...state.subjectOrder] : [...currentNames];
-  currentNames.forEach(n=>{ if(!order.includes(n)) order.push(n); });
-
-  const idx = order.indexOf(name);
-  const swapIdx = idx + direction;
-  if(idx===-1 || swapIdx<0 || swapIdx>=order.length) return;
-  [order[idx], order[swapIdx]] = [order[swapIdx], order[idx]];
-
-  state.subjectOrder = order;
-  await storageSet(SUBJECT_ORDER_KEY, order);
-  renderBoard();
-}
-
-/* ========================= SEU COLLEGE COURSEWORK (integrated) =========================
-   Reads from the same shared cloud table as the course planner app
-   (courses.html), keys prefixed "seu:", and shows anything due today
-   right inside the daily board. Tapping a task toggles it done in the
-   shared data, same as it would in the planner itself. */
-async function seuGet(key){ return storageGet('seu:'+key); }
-async function seuSet(key, val){ return storageSet('seu:'+key, val); }
-
-async function loadSeuToday(){
-  const courses = (await seuGet('courses')) || [];
-  if(!courses.length) return [];
-  const todayStr = state.dateStr;
-  const groups = [];
-  for(const course of courses){
-    const tasks = (await seuGet('tasks:'+course.id)) || [];
-    const dueToday = tasks.filter(t=>{
-      // Interpret the task's due date through the same timezone-aware
-      // "school date" logic the rest of the app uses, so it only ever
-      // shows on the one day it's actually due here.
-      try{ return toDateStr(getSchoolDate(new Date(t.dueDate))) === todayStr; }catch(e){ return false; }
-    });
-    if(dueToday.length) groups.push({ course, tasks: dueToday });
-  }
-  return groups;
-}
-
-async function renderSeuSection(){
-  const section = document.getElementById('seuSection');
-  const grid = document.getElementById('seuGrid');
-  if(!section || !grid) return;
-  if(!SCHOOL_DAYS.includes(state.weekdayNum)) return; // weekend board doesn't render this far anyway
-
-  const groups = await loadSeuToday();
-  if(!groups.length){ section.style.display = 'none'; return; }
-
-  const typeLabels = {discussion:'Discussion', assignment:'Assignment', quiz:'Quiz', exam:'Exam', reading:'Reading', other:'Task'};
-  grid.innerHTML = groups.map(g=>`
-    <div class="subj-card">
-      <div class="subj-top"><div class="subj-name">${esc(g.course.name)}</div></div>
-      ${g.tasks.map(t=>`
-        <div class="info-line" style="cursor:pointer;align-items:center;" data-seucourse="${escAttr(g.course.id)}" data-seutask="${escAttr(t.id)}">
-          <span style="${t.done?'text-decoration:line-through;color:var(--ink-soft);':''}">${esc(t.title)}</span>
-          <span class="check ${t.done?'checked':''}" style="width:20px;height:20px;font-size:12px;">${t.done?'✓':''}</span>
-        </div>
-      `).join('')}
-    </div>
-  `).join('');
-  section.style.display = 'block';
-
-  grid.querySelectorAll('[data-seutask]').forEach(row=>{
-    row.addEventListener('click', async ()=>{
-      const courseId = row.dataset.seucourse;
-      const taskId = row.dataset.seutask;
-      const tasks = (await seuGet('tasks:'+courseId)) || [];
-      const t = tasks.find(x=>x.id===taskId);
-      if(!t) return;
-      t.done = !t.done;
-      await seuSet('tasks:'+courseId, tasks);
-      renderSeuSection();
-    });
-  });
-}
-
-/* ========================= EXTRA SUBJECTS EDITOR ========================= */
-function makeExtraSubjectsEditor(container, arr){
-  function render(){
-    container.innerHTML = arr.map((item,i)=>`
-      <div class="extra-subj-row">
-        <input type="text" class="en" data-i="${i}" data-f="name" placeholder="Subject name" value="${escAttr(item.name)}">
-        <input type="text" class="et" data-i="${i}" data-f="topic" placeholder="Topic" value="${escAttr(item.topic)}">
-        <button type="button" class="extra-remove" data-i="${i}">✕</button>
-      </div>`).join('') + `<button type="button" class="btn btn-ghost add-extra-btn">+ Add Subject</button>`;
-    container.querySelectorAll('input').forEach(inp=>{
-      inp.addEventListener('input', ()=>{ arr[+inp.dataset.i][inp.dataset.f] = inp.value; });
-    });
-    container.querySelectorAll('.extra-remove').forEach(btn=>{
-      btn.addEventListener('click', ()=>{ arr.splice(+btn.dataset.i,1); render(); });
-    });
-    container.querySelector('.add-extra-btn').addEventListener('click', ()=>{
-      arr.push({id:'extra-'+Date.now()+'-'+Math.random().toString(36).slice(2,6), name:'', topic:''});
-      render();
-    });
+  courses = (await S.get('courses')) || [];
+  tasksByCourse = {};
+  for(const c of courses){
+    tasksByCourse[c.id] = (await S.get('tasks:'+c.id)) || [];
   }
   render();
 }
+async function saveCourses(){ await S.set('courses', courses); }
+async function saveTasks(courseId){ await S.set('tasks:'+courseId, tasksByCourse[courseId] || []); }
 
-/* ========================= SHARED: SINGLE-DAY EDIT FORM ========================= */
-let editorExtraSubjects = {}; // prefix -> array reference used by that form's extra-subjects editor
+/* =========================================================
+   SCHEDULE COMPRESSION
+   8-week SEU term -> modules 1-7 map 1:1 onto 7 calendar weeks;
+   module 8's work folds into week 7. Every task lands on a real
+   Monday-Friday day for that calendar week — never a weekend —
+   and exams always land on the last working day of their week,
+   after the regular work that leads up to them.
+========================================================= */
+function compressedWeekOf(week){ return Math.min(7, Math.ceil(week * 7/8)); }
 
-function dayEditFormHTML(prefix, c, isFriday){
-  const grades = ['5th','8th','10th'];
-  const vocabBlock = isFriday
-    ? `<p style="color:var(--ink-soft);font-size:13px;">Friday auto-pulls this week's words for testing — nothing to set here.</p>`
-    : grades.map(g=>{
-        const w = (c.vocab && c.vocab[g]) || {word:'',def:'',sent:'',syn:'',ant:''};
-        return `<div style="margin-bottom:12px;padding-bottom:10px;border-bottom:1.5px solid var(--line-light)">
-          <label>${g} Grade Word</label><input type="text" id="${prefix}-v-${g}-word" value="${escAttr(w.word)}">
-          <div class="field-grid">
-            <div><label>Definition</label><textarea id="${prefix}-v-${g}-def">${esc(w.def)}</textarea></div>
-            <div><label>Used in a sentence</label><textarea id="${prefix}-v-${g}-sent">${esc(w.sent)}</textarea></div>
-          </div>
-          <div class="field-grid">
-            <div><label>Synonym</label><input type="text" id="${prefix}-v-${g}-syn" value="${escAttr(w.syn)}"></div>
-            <div><label>Antonym</label><input type="text" id="${prefix}-v-${g}-ant" value="${escAttr(w.ant)}"></div>
-          </div>
-        </div>`;
-      }).join('');
-
-  return `
-    <div class="mini-lbl" style="margin-top:0">Devotional</div>
-    <label>Word of the Day</label><input type="text" id="${prefix}-word" value="${escAttr(c.devotional.wordOfDay)}">
-    <label>Scripture</label><textarea id="${prefix}-scripture">${esc(c.devotional.scripture)}</textarea>
-    <label>Reflection Question</label><textarea id="${prefix}-reflect">${esc(c.devotional.reflection)}</textarea>
-    <label>Prayer</label><textarea id="${prefix}-prayer">${esc(c.devotional.prayer)}</textarea>
-    <label>Intention</label><textarea id="${prefix}-intent">${esc(c.devotional.intention)}</textarea>
-    <hr class="divider">
-    <div class="mini-lbl" style="margin-top:0">Vocabulary</div>
-    ${vocabBlock}
-    <hr class="divider">
-    <div class="mini-lbl" style="margin-top:0">Core Subjects</div>
-    <label>Math Topic</label><input type="text" id="${prefix}-math" value="${escAttr(c.subjects.math)}">
-    <div class="field-grid">
-      <div><label>History or Science</label>
-        <select id="${prefix}-type"><option ${c.subjects.scienceHistoryType==='Science'?'selected':''}>Science</option><option ${c.subjects.scienceHistoryType==='History'?'selected':''}>History</option></select>
-      </div>
-      <div><label>Topic</label><input type="text" id="${prefix}-scihist" value="${escAttr(c.subjects.scienceHistoryTopic)}"></div>
-    </div>
-    <label>Reading Topic</label><input type="text" id="${prefix}-reading" value="${escAttr(c.subjects.reading)}">
-    <label>Spanish Topic</label><input type="text" id="${prefix}-spanish" value="${escAttr(c.subjects.spanish)}">
-    <div class="mini-lbl" style="margin:14px 0 8px;">Additional Subjects</div>
-    <div id="${prefix}-extra-subjects"></div>
-  `;
-}
-
-function initDayEditor(prefix, c){
-  editorExtraSubjects[prefix] = JSON.parse(JSON.stringify(c.extraSubjects||[]));
-  makeExtraSubjectsEditor(document.getElementById(`${prefix}-extra-subjects`), editorExtraSubjects[prefix]);
-}
-
-function collectDayForm(prefix, isFriday){
-  const vocab = {};
-  if(!isFriday){
-    ['5th','8th','10th'].forEach(g=>{
-      vocab[g] = { word:document.getElementById(`${prefix}-v-${g}-word`).value, def:document.getElementById(`${prefix}-v-${g}-def`).value,
-        sent:document.getElementById(`${prefix}-v-${g}-sent`).value, syn:document.getElementById(`${prefix}-v-${g}-syn`).value, ant:document.getElementById(`${prefix}-v-${g}-ant`).value };
-    });
+function getCourseWeekDates(course){
+  const weeks = [];
+  let cursor = startOfDay(new Date(course.startDate + 'T00:00:00'));
+  const dow0 = cursor.getDay();
+  if(dow0 === 0) cursor = addDays(cursor, 1);
+  else if(dow0 === 6) cursor = addDays(cursor, 2);
+  for(let w=0; w<7; w++){
+    const startDow = cursor.getDay();
+    const daysToFriday = 5 - startDow;
+    const weekdays = [];
+    for(let i=0; i<=daysToFriday; i++) weekdays.push(addDays(cursor, i));
+    weeks.push(weekdays);
+    let next = addDays(weekdays[weekdays.length-1], 1);
+    while(next.getDay() !== 1) next = addDays(next, 1);
+    cursor = next;
   }
-  return {
-    devotional:{ wordOfDay:document.getElementById(`${prefix}-word`).value, scripture:document.getElementById(`${prefix}-scripture`).value,
-      reflection:document.getElementById(`${prefix}-reflect`).value, prayer:document.getElementById(`${prefix}-prayer`).value, intention:document.getElementById(`${prefix}-intent`).value },
-    vocab,
-    subjects:{ math:document.getElementById(`${prefix}-math`).value, scienceHistoryType:document.getElementById(`${prefix}-type`).value,
-      scienceHistoryTopic:document.getElementById(`${prefix}-scihist`).value, reading:document.getElementById(`${prefix}-reading`).value, spanish:document.getElementById(`${prefix}-spanish`).value },
-    extraSubjects: (editorExtraSubjects[prefix]||[]).filter(e=>e.name.trim()!=='' || e.topic.trim()!=='')
-  };
-}
-
-/* ========================= TODAY MODAL ========================= */
-function openTodayModal(){
-  const c = JSON.parse(JSON.stringify(todayContent() || (state.weeks[1] && state.weeks[1][state.weekdayNum])));
-  document.getElementById('todaySub').textContent =
-    `Editing ${state.schoolDate.toLocaleDateString('en-US',{weekday:'long', month:'long', day:'numeric'})} only.`;
-
-  document.getElementById('t-devo').innerHTML = `
-    <label>Word of the Day</label><input type="text" id="f-word" value="${escAttr(c.devotional.wordOfDay)}">
-    <label>Scripture</label><textarea id="f-scripture">${esc(c.devotional.scripture)}</textarea>
-    <label>Reflection Question</label><textarea id="f-reflect">${esc(c.devotional.reflection)}</textarea>
-    <label>Prayer</label><textarea id="f-prayer">${esc(c.devotional.prayer)}</textarea>
-    <label>Today's Intention</label><textarea id="f-intent">${esc(c.devotional.intention)}</textarea>
-  `;
-
-  const grades = ['5th','8th','10th'];
-  document.getElementById('t-vocab').innerHTML = state.weekdayNum===5
-    ? `<p style="color:var(--ink-soft);font-size:14px;">Friday auto-pulls this week's words for testing — nothing to set here.</p>`
-    : grades.map(g=>{
-        const w = (c.vocab && c.vocab[g]) || {word:'',def:'',sent:'',syn:'',ant:''};
-        return `<div style="margin-bottom:14px;padding-bottom:10px;border-bottom:1.5px solid var(--line-light)">
-          <label>${g} Grade Word</label><input type="text" id="v-${g}-word" value="${escAttr(w.word)}">
-          <div class="field-grid">
-            <div><label>Definition</label><textarea id="v-${g}-def">${esc(w.def)}</textarea></div>
-            <div><label>Used in a sentence</label><textarea id="v-${g}-sent">${esc(w.sent)}</textarea></div>
-          </div>
-          <div class="field-grid">
-            <div><label>Synonym</label><input type="text" id="v-${g}-syn" value="${escAttr(w.syn)}"></div>
-            <div><label>Antonym</label><input type="text" id="v-${g}-ant" value="${escAttr(w.ant)}"></div>
-          </div>
-        </div>`;
-      }).join('');
-
-  document.getElementById('t-subj').innerHTML = `
-    <label>Math Topic</label><input type="text" id="s-math" value="${escAttr(c.subjects.math)}">
-    <div class="field-grid">
-      <div><label>History or Science</label>
-        <select id="s-type"><option ${c.subjects.scienceHistoryType==='Science'?'selected':''}>Science</option><option ${c.subjects.scienceHistoryType==='History'?'selected':''}>History</option></select>
-      </div>
-      <div><label>Topic</label><input type="text" id="s-scihist" value="${escAttr(c.subjects.scienceHistoryTopic)}"></div>
-    </div>
-    <label>Reading Topic</label><input type="text" id="s-reading" value="${escAttr(c.subjects.reading)}">
-    <label>Spanish Topic</label><input type="text" id="s-spanish" value="${escAttr(c.subjects.spanish)}">
-    <hr class="divider">
-    <div class="mini-lbl" style="margin-bottom:8px;">Additional Subjects</div>
-    <div id="today-extra-subjects"></div>
-  `;
-  editorExtraSubjects['today'] = JSON.parse(JSON.stringify(c.extraSubjects||[]));
-  makeExtraSubjectsEditor(document.getElementById('today-extra-subjects'), editorExtraSubjects['today']);
-
-  switchModalTab(document.getElementById('todayOverlay'), 't-devo');
-  document.getElementById('todayOverlay').classList.add('open');
-}
-function collectTodayForm(){
-  const g5w = document.getElementById('v-5th-word');
-  const vocab = {};
-  if(g5w){
-    ['5th','8th','10th'].forEach(g=>{
-      vocab[g] = { word:document.getElementById(`v-${g}-word`).value, def:document.getElementById(`v-${g}-def`).value,
-        sent:document.getElementById(`v-${g}-sent`).value, syn:document.getElementById(`v-${g}-syn`).value, ant:document.getElementById(`v-${g}-ant`).value };
-    });
-  }
-  return {
-    devotional:{ wordOfDay:document.getElementById('f-word').value, scripture:document.getElementById('f-scripture').value,
-      reflection:document.getElementById('f-reflect').value, prayer:document.getElementById('f-prayer').value, intention:document.getElementById('f-intent').value },
-    vocab,
-    subjects:{ math:document.getElementById('s-math').value, scienceHistoryType:document.getElementById('s-type').value,
-      scienceHistoryTopic:document.getElementById('s-scihist').value, reading:document.getElementById('s-reading').value, spanish:document.getElementById('s-spanish').value },
-    extraSubjects: (editorExtraSubjects['today']||[]).filter(e=>e.name.trim()!=='' || e.topic.trim()!=='')
-  };
-}
-
-/* ========================= WEEKS PLAN MODAL (5-week rotation) ========================= */
-const WEEKDAY_LABELS = {1:'Monday',2:'Tuesday',3:'Wednesday',4:'Thursday',5:'Friday (Test Day)'};
-function openTemplateModal(){
-  const weekTabsEl = document.getElementById('weekLevelTabs');
-  const weekGroupsEl = document.getElementById('weekLevelGroups');
-
-  weekTabsEl.innerHTML = [1,2,3,4,5].map((w,i)=>`<div class="modal-tab ${i===0?'active':''}" data-wk-level="wkgroup-${w}">Week ${w}</div>`).join('');
-
-  weekGroupsEl.innerHTML = [1,2,3,4,5].map((w,i)=>{
-    const dayTabs = Object.keys(WEEKDAY_LABELS).map((k,j)=>`<div class="modal-tab ${j===0?'active':''}" data-wtab="w-${w}-${k}">${WEEKDAY_LABELS[k]}</div>`).join('');
-    const dayPanels = Object.keys(WEEKDAY_LABELS).map((k,j)=>{
-      const c = state.weeks[w][k];
-      const prefix = `w-${w}-${k}`;
-      return `<div class="tab-panel ${j===0?'active':''}" id="${prefix}">${dayEditFormHTML(prefix, c, k==='5')}</div>`;
-    }).join('');
-    return `<div class="week-group" id="wkgroup-${w}" style="display:${i===0?'block':'none'};">
-      <div class="modal-tabs">${dayTabs}</div>
-      ${dayPanels}
-    </div>`;
-  }).join('');
-
-  // init extra-subject editors for all 25 days
-  [1,2,3,4,5].forEach(w=>{
-    Object.keys(WEEKDAY_LABELS).forEach(k=>{
-      initDayEditor(`w-${w}-${k}`, state.weeks[w][k]);
-    });
-  });
-
-  // week-level tab switching
-  weekTabsEl.querySelectorAll('.modal-tab').forEach(t=>{
-    t.addEventListener('click', ()=>{
-      weekTabsEl.querySelectorAll('.modal-tab').forEach(x=>x.classList.remove('active'));
-      t.classList.add('active');
-      weekGroupsEl.querySelectorAll('.week-group').forEach(g=> g.style.display = (g.id===t.dataset.wkLevel ? 'block':'none'));
-    });
-  });
-  // day-level tab switching within each week group
-  weekGroupsEl.querySelectorAll('.week-group').forEach(group=>{
-    group.querySelectorAll('.modal-tab').forEach(t=>{
-      t.addEventListener('click', ()=>{
-        group.querySelectorAll('.modal-tab').forEach(x=>x.classList.remove('active'));
-        group.querySelectorAll('.tab-panel').forEach(x=>x.classList.remove('active'));
-        t.classList.add('active');
-        document.getElementById(t.dataset.wtab).classList.add('active');
-      });
-    });
-  });
-
-  document.getElementById('templateOverlay').classList.add('open');
-}
-function collectTemplateForm(){
-  const weeks = {};
-  [1,2,3,4,5].forEach(w=>{
-    weeks[w] = {};
-    Object.keys(WEEKDAY_LABELS).forEach(k=>{
-      weeks[w][k] = collectDayForm(`w-${w}-${k}`, k==='5');
-    });
-  });
   return weeks;
 }
 
-
-/* ========================= STUDENTS MODAL ========================= */
-function openStudentsModal(){
-  const fl = state.fieldLabels;
-  document.getElementById('addrLabelFields').innerHTML = `
-    <div><label>Address 1 Label</label><input type="text" id="lbl-addr1" value="${escAttr(fl.addr1)}"></div>
-    <div><label>Address 2 Label</label><input type="text" id="lbl-addr2" value="${escAttr(fl.addr2)}"></div>
-    <div><label>Address 3 Label</label><input type="text" id="lbl-addr3" value="${escAttr(fl.addr3)}"></div>
-  `;
-  document.getElementById('phoneLabelFields').innerHTML = `
-    <div><label>Phone 1 Label</label><input type="text" id="lbl-phone1" value="${escAttr(fl.phone1)}"></div>
-    <div><label>Phone 2 Label</label><input type="text" id="lbl-phone2" value="${escAttr(fl.phone2)}"></div>
-    <div><label>Phone 3 Label</label><input type="text" id="lbl-phone3" value="${escAttr(fl.phone3)}"></div>
-    <div><label>Phone 4 Label</label><input type="text" id="lbl-phone4" value="${escAttr(fl.phone4)}"></div>
-  `;
-
-  const tabsEl = document.getElementById('studentTabs');
-  const panelsEl = document.getElementById('studentPanels');
-  tabsEl.innerHTML = state.students.map((s,i)=>`<div class="modal-tab ${i===0?'active':''}" data-stab="stu-${s.id}">${esc(s.name)||'Student '+(i+1)}</div>`).join('');
-
-  panelsEl.innerHTML = state.students.map((s,i)=>`
-    <div class="tab-panel ${i===0?'active':''}" id="stu-${s.id}">
-      <div class="field-grid">
-        <div><label>Full Name</label><input type="text" id="p-${s.id}-name" value="${escAttr(s.name)}"></div>
-        <div><label>Grade</label><input type="text" id="p-${s.id}-grade" value="${escAttr(s.grade)}"></div>
-      </div>
-      <div class="mini-lbl" style="margin-top:14px" id="p-${s.id}-addr1-lbl">${esc(fl.addr1)}</div>
-      <input type="text" id="p-${s.id}-addr-a1" value="${escAttr(s.addr.a1)}">
-      <div class="mini-lbl" style="margin-top:10px" id="p-${s.id}-addr2-lbl">${esc(fl.addr2)}</div>
-      <input type="text" id="p-${s.id}-addr-a2" value="${escAttr(s.addr.a2)}">
-      <div class="mini-lbl" style="margin-top:10px" id="p-${s.id}-addr3-lbl">${esc(fl.addr3)}</div>
-      <input type="text" id="p-${s.id}-addr-a3" value="${escAttr(s.addr.a3)}">
-      <div class="mini-lbl" style="margin-top:14px">Phone Numbers</div>
-      <div class="field-grid-4">
-        <div><label id="p-${s.id}-phone1-lbl">${esc(fl.phone1)}</label><input type="text" id="p-${s.id}-phone-p1" value="${escAttr(s.phone.p1)}"></div>
-        <div><label id="p-${s.id}-phone2-lbl">${esc(fl.phone2)}</label><input type="text" id="p-${s.id}-phone-p2" value="${escAttr(s.phone.p2)}"></div>
-        <div><label id="p-${s.id}-phone3-lbl">${esc(fl.phone3)}</label><input type="text" id="p-${s.id}-phone-p3" value="${escAttr(s.phone.p3)}"></div>
-        <div><label id="p-${s.id}-phone4-lbl">${esc(fl.phone4)}</label><input type="text" id="p-${s.id}-phone-p4" value="${escAttr(s.phone.p4)}"></div>
-      </div>
-    </div>
-  `).join('');
-
-  // Live-update the mini labels in each student panel as the shared labels are edited
-  ['addr1','addr2','addr3','phone1','phone2','phone3','phone4'].forEach(fkey=>{
-    const input = document.getElementById('lbl-'+fkey);
-    input.addEventListener('input', ()=>{
-      state.students.forEach(s=>{
-        const el = document.getElementById(`p-${s.id}-${fkey}-lbl`);
-        if(el) el.textContent = input.value || fkey;
-      });
-    });
-  });
-
-  tabsEl.querySelectorAll('.modal-tab').forEach(t=>{
-    t.addEventListener('click', ()=>{
-      tabsEl.querySelectorAll('.modal-tab').forEach(x=>x.classList.remove('active'));
-      panelsEl.querySelectorAll('.tab-panel').forEach(x=>x.classList.remove('active'));
-      t.classList.add('active');
-      document.getElementById(t.dataset.stab).classList.add('active');
-    });
-  });
-
-  document.getElementById('studentsOverlay').classList.add('open');
+function dateForNamedDay(weekdays, dayName, fallbackIndex){
+  const idx = dayIndex(dayName);
+  const jsDay = (idx + 1) % 7;
+  const match = weekdays.find(d => d.getDay() === jsDay);
+  return match || weekdays[fallbackIndex % weekdays.length];
 }
-function collectFieldLabels(){
-  return {
-    addr1: document.getElementById('lbl-addr1').value, addr2: document.getElementById('lbl-addr2').value, addr3: document.getElementById('lbl-addr3').value,
-    phone1: document.getElementById('lbl-phone1').value, phone2: document.getElementById('lbl-phone2').value,
-    phone3: document.getElementById('lbl-phone3').value, phone4: document.getElementById('lbl-phone4').value,
-  };
-}
-function collectStudentsForm(){
-  return state.students.map(s=>({
-    id:s.id, name:document.getElementById(`p-${s.id}-name`).value, grade:document.getElementById(`p-${s.id}-grade`).value,
-    addr:{ a1:document.getElementById(`p-${s.id}-addr-a1`).value, a2:document.getElementById(`p-${s.id}-addr-a2`).value, a3:document.getElementById(`p-${s.id}-addr-a3`).value },
-    phone:{ p1:document.getElementById(`p-${s.id}-phone-p1`).value, p2:document.getElementById(`p-${s.id}-phone-p2`).value,
-      p3:document.getElementById(`p-${s.id}-phone-p3`).value, p4:document.getElementById(`p-${s.id}-phone-p4`).value }
+
+// Builds the task list for a course from an extracted syllabus item
+// array. Regular items with no stated day are spread across the
+// week's working days in their ORIGINAL ORDER using a proportional
+// (non-wrapping) mapping, so item 6 of 6 never jumps back to Monday
+// ahead of item 5 — order is always preserved. Exams always land on
+// the last working day of the week.
+function buildTasksFromExtraction(course, extractedRaw){
+  const weekDates = getCourseWeekDates(course);
+  const extracted = extractedRaw.map((item, idx) => ({
+    ...item,
+    week: Math.min(8, Math.max(1, parseInt(item.week) || 1)),
+    _orderIndex: idx
   }));
-}
 
-/* ========================= ARCHIVE MODAL — full page snapshots ========================= */
-function buildFullDayHTML(dateObj, content, checks, weekWords){
-  const devo = content.devotional || {};
-  const wd = dateObj.getDay();
-  const isTestDay = wd===5;
-  const fl = content.fieldLabels || state.fieldLabels;
-  const students = content.students || state.students;
+  const byCW = {};
+  for(const item of extracted){
+    const cw = compressedWeekOf(item.week);
+    (byCW[cw] = byCW[cw] || []).push(item);
+  }
 
-  const studentsHTML = students.map(s=>{
-    const grade = s.grade;
-    let vocabHTML = '';
-    if(isTestDay){
-      const words = (weekWords && weekWords[grade]) || [];
-      vocabHTML = `<div class="vocab-box"><span class="test-badge">Test Day</span>
-        <ul class="test-list">${words.map(w=>`<li>${esc(w)}</li>`).join('') || '<li style="text-transform:none;font-family:Oswald;font-size:13px;color:var(--ink-soft)">No words logged this week</li>'}</ul></div>`;
+  for(const cw of Object.keys(byCW)){
+    const weekdays = weekDates[cw-1];
+    const itemsInWeek = byCW[cw];
+    const hasAutoExam = itemsInWeek.some(it => it.type==='exam' && !it.dueDayOfWeek);
+    const pool = (hasAutoExam && weekdays.length > 1) ? weekdays.slice(0,-1) : weekdays;
+    const regularAuto = itemsInWeek.filter(it =>
+      !it.dueDayOfWeek && it.type !== 'exam' &&
+      !(it.type === 'discussion' && (it.initialPostDay || it.replyDay))
+    );
+    const N = regularAuto.length, D = pool.length;
+    regularAuto.forEach((item, i) => {
+      const dayIdx = D > 0 ? Math.min(D-1, Math.floor(i * D / N)) : 0;
+      item._autoDate = pool[dayIdx];
+    });
+  }
+
+  const tasks = [];
+  let counter = 0;
+  for(const item of extracted){
+    const week = item.week;
+    const cw = compressedWeekOf(week);
+    const weekdays = weekDates[cw-1];
+    const baseId = course.id + '-' + (counter++) + '-' + Date.now();
+    if(item.type === 'discussion' && (item.initialPostDay || item.replyDay)){
+      const initDay = item.initialPostDay || 'Thursday';
+      const replyDay = item.replyDay || 'Friday';
+      tasks.push({
+        id: baseId+'-init', courseId: course.id, week, orderIndex: item._orderIndex,
+        title: item.title + ' — initial post', type: 'discussion',
+        dueDate: dateForNamedDay(weekdays, initDay, 0).toISOString(),
+        explicitDay: initDay, done: false, notes: item.notes || ''
+      });
+      tasks.push({
+        id: baseId+'-reply', courseId: course.id, week, orderIndex: item._orderIndex,
+        title: item.title + ' — replies', type: 'discussion',
+        dueDate: dateForNamedDay(weekdays, replyDay, 0).toISOString(),
+        explicitDay: replyDay, done: false, notes: item.notes || ''
+      });
     } else {
-      const word = content.vocab && content.vocab[grade];
-      if(word){
-        vocabHTML = `<div class="vocab-box">
-          <div class="vocab-word">${esc(word.word)}</div>
-          <div class="vocab-row"><b>Define:</b> ${esc(word.def)}</div>
-          <div class="vocab-row"><b>Use it:</b> ${esc(word.sent)}</div>
-          <div class="syn-ant"><span><b>Syn</b> ${esc(word.syn)}</span><span class="ant"><b>Ant</b> ${esc(word.ant)}</span></div>
-        </div>`;
-      }
+      const explicitDay = item.dueDayOfWeek || null;
+      let d;
+      if(explicitDay) d = dateForNamedDay(weekdays, explicitDay, 0);
+      else if(item.type === 'exam') d = weekdays[weekdays.length-1];
+      else d = item._autoDate || weekdays[0];
+      tasks.push({
+        id: baseId, courseId: course.id, week, orderIndex: item._orderIndex,
+        title: item.title, type: item.type || 'assignment',
+        dueDate: d.toISOString(), explicitDay, done: false, notes: item.notes || ''
+      });
     }
-    return `<div class="student-card">
-      <div class="student-head"><div class="student-name">${esc(s.name)}</div><div class="grade-badge">${esc(s.grade)} GRADE</div></div>
-      <div class="student-body">
-        <div class="mini-lbl">Personal Info</div>
-        <div class="info-line"><span>Full name</span><span>${esc(s.name)}</span></div>
-        <div class="info-line"><span>${esc(fl.addr1)}</span><span>${esc(s.addr.a1)||'—'}</span></div>
-        <div class="info-line"><span>${esc(fl.addr2)}</span><span>${esc(s.addr.a2)||'—'}</span></div>
-        <div class="info-line"><span>${esc(fl.addr3)}</span><span>${esc(s.addr.a3)||'—'}</span></div>
-        <div class="mini-lbl" style="margin-top:12px;">Phone Numbers</div>
-        <div class="info-line"><span>${esc(fl.phone1)}</span><span>${esc(s.phone.p1)||'—'}</span></div>
-        <div class="info-line"><span>${esc(fl.phone2)}</span><span>${esc(s.phone.p2)||'—'}</span></div>
-        <div class="info-line"><span>${esc(fl.phone3)}</span><span>${esc(s.phone.p3)||'—'}</span></div>
-        <div class="info-line"><span>${esc(fl.phone4)}</span><span>${esc(s.phone.p4)||'—'}</span></div>
-        <div class="mini-lbl" style="margin-top:12px;">Vocabulary ${isTestDay ? '— Test' : '('+grade+' grade)'}</div>
-        ${vocabHTML}
-      </div>
-    </div>`;
-  }).join('');
+  }
+  tasks.sort((a,b)=> new Date(a.dueDate) - new Date(b.dueDate));
+  return tasks;
+}
 
-  const subjList = allSubjects(content);
-  const subjectsHTML = subjList.map(sub=>{
-    const checked = !!(checks && checks[sub.id]);
-    return `<div class="subj-card ${checked?'done':''}">
-      <div class="subj-top"><div class="subj-name">${esc(sub.name)||'Subject'}</div><div class="check ${checked?'checked':''}">${checked?'✓':''}</div></div>
-      <div class="subj-topic">${esc(sub.topic)||'No topic set'}</div>
-    </div>`;
-  }).join('');
+function recomputeCourseDates(courseId){
+  const course = courses.find(c=>c.id===courseId);
+  const tasks = tasksByCourse[courseId] || [];
+  const weekDates = getCourseWeekDates(course);
+  const byCW = {};
+  for(const t of tasks){
+    const cw = compressedWeekOf(t.week);
+    (byCW[cw] = byCW[cw] || []).push(t);
+  }
+  for(const cw of Object.keys(byCW)){
+    const weekdays = weekDates[cw-1];
+    const itemsInWeek = byCW[cw].slice().sort((a,b)=> (a.orderIndex ?? 0) - (b.orderIndex ?? 0));
+    const hasAutoExam = itemsInWeek.some(t => t.type==='exam' && !t.explicitDay);
+    const pool = (hasAutoExam && weekdays.length > 1) ? weekdays.slice(0,-1) : weekdays;
+    const regularAuto = itemsInWeek.filter(t => !t.explicitDay && t.type !== 'exam');
+    const N = regularAuto.length, D = pool.length;
+    regularAuto.forEach((t, i) => {
+      const dayIdx = D > 0 ? Math.min(D-1, Math.floor(i * D / N)) : 0;
+      t.dueDate = pool[dayIdx].toISOString();
+    });
+    for(const t of itemsInWeek){
+      if(t.explicitDay) t.dueDate = dateForNamedDay(weekdays, t.explicitDay, 0).toISOString();
+      else if(t.type === 'exam') t.dueDate = weekdays[weekdays.length-1].toISOString();
+    }
+  }
+}
 
+/* =========================================================
+   PRELOADED FALL '26 SEU COURSES
+   Built directly from the College Composition (ENGL 1113) and
+   College Algebra (MATH 1213) syllabi + grade item exports. Both
+   are self-paced CBE courses (module = week), so no per-item
+   weekday is stated — items are auto-spread across Monday-Friday
+   in syllabus order within their module week, alternating between
+   subjects so both classes get worked on daily, with exams always
+   landing after that week's homework.
+========================================================= */
+const COMPOSITION_SEED = [
+  {week:1, title:"Double Introduction", type:"assignment"},
+  {week:1, title:"Rhetorical Analysis and Revision: University Communication", type:"assignment"},
+  {week:1, title:"Knowledge Check: Rhetorical Awareness", type:"quiz"},
+  {week:2, title:"Checkpoint 1: Rhetorical Personal Narrative", type:"assignment"},
+  {week:2, title:"Knowledge Check: Writing With Purpose", type:"quiz"},
+  {week:3, title:"Writing Exercise: Anchor Text 2", type:"assignment"},
+  {week:3, title:"Knowledge Check: Rhetorical Reading Check", type:"quiz"},
+  {week:4, title:"Checkpoint 2: Response Op-Ed Essay", type:"assignment"},
+  {week:4, title:"Knowledge Check: Responding to an Argument", type:"quiz"},
+  {week:5, title:"Practicing the Quote Sandwich", type:"assignment"},
+  {week:5, title:"Knowledge Check: Using Evidence", type:"quiz"},
+  {week:6, title:"Checkpoint 3: RAFT Advice Column", type:"assignment"},
+  {week:6, title:"Knowledge Check: Building an Argument", type:"quiz"},
+  {week:7, title:"Scholarly Article Skimming", type:"assignment"},
+  {week:7, title:"Knowledge Check: Scholarly Sources", type:"quiz"},
+  {week:8, title:"Research Integration Assignment", type:"assignment"},
+  {week:8, title:"Knowledge Check: Academic Conversations", type:"quiz"}
+];
+
+const ALGEBRA_SEED = [
+  {week:1, title:"Homework: Are You Ready for College Algebra?", type:"assignment"},
+  {week:2, title:"Homework 1.1: Graphs & Graphing Utilities", type:"assignment"},
+  {week:2, title:"Homework 1.2: Linear Equations & Rational Equations", type:"assignment"},
+  {week:2, title:"Homework 1.4: Complex Numbers", type:"assignment"},
+  {week:2, title:"Homework 1.5: Quadratic Equations", type:"assignment"},
+  {week:2, title:"Homework 1.6: Other Types of Equations", type:"assignment"},
+  {week:2, title:"Week 2 Test (Ch. 1)", type:"exam"},
+  {week:3, title:"Homework 2.1: Basics of Functions & Their Graphs", type:"assignment"},
+  {week:3, title:"Homework 2.2: More on Functions & Their Graphs", type:"assignment"},
+  {week:3, title:"Homework 2.3: Linear Functions & Slope", type:"assignment"},
+  {week:3, title:"Homework 2.4: More on Slope", type:"assignment"},
+  {week:3, title:"Week 3 Test (2.1–2.4)", type:"exam"},
+  {week:4, title:"Homework 2.5: Transformations of Functions", type:"assignment"},
+  {week:4, title:"Homework 2.6: Combinations & Composite Functions", type:"assignment"},
+  {week:4, title:"Homework 2.7: Inverse Functions", type:"assignment"},
+  {week:4, title:"Week 4 Test (2.5–2.7)", type:"exam"},
+  {week:5, title:"Homework 3.1: Quadratic Functions", type:"assignment"},
+  {week:5, title:"Homework 3.2: Polynomial Functions & Their Graphs", type:"assignment"},
+  {week:5, title:"Homework 3.3: Dividing Polynomials; Remainder & Factor Theorems", type:"assignment"},
+  {week:5, title:"Week 5 Test (3.1–3.3)", type:"exam"},
+  {week:6, title:"Homework 3.4: Zeros of Polynomial Functions", type:"assignment"},
+  {week:6, title:"Homework 3.5: Rational Functions & Their Graphs", type:"assignment"},
+  {week:6, title:"Week 6 Test (3.4–3.5)", type:"exam"},
+  {week:7, title:"Homework 4.1: Exponential Functions", type:"assignment"},
+  {week:7, title:"Homework 4.2: Logarithmic Functions", type:"assignment"},
+  {week:7, title:"Homework 4.3: Properties of Logarithms", type:"assignment"},
+  {week:7, title:"Homework 4.4: Exponential & Logarithmic Equations", type:"assignment"},
+  {week:7, title:"Week 7 Test (Ch. 4)", type:"exam"},
+  {week:8, title:"Final Exam (cumulative)", type:"exam"}
+];
+
+async function seedFall26(){
+  if(courses.some(c=>c.code==='ENGL 1113' || c.code==='MATH 1213')){
+    if(!confirm('Composition and/or Algebra already look loaded. Add another copy anyway?')) return;
+  }
+  const startDate = '2026-08-26';
+  const comp = {id:'comp'+Date.now(), name:'College Composition', code:'ENGL 1113', startDate};
+  const alg = {id:'alg'+(Date.now()+1), name:'College Algebra', code:'MATH 1213', startDate};
+  courses.push(comp, alg);
+  tasksByCourse[comp.id] = buildTasksFromExtraction(comp, COMPOSITION_SEED);
+  tasksByCourse[alg.id] = buildTasksFromExtraction(alg, ALGEBRA_SEED);
+  await saveCourses();
+  await saveTasks(comp.id);
+  await saveTasks(alg.id);
+  screen = 'schedule';
+  activeWeek = null;
+  render();
+}
+
+/* =========================================================
+   AI SYLLABUS PARSING
+========================================================= */
+async function parseSyllabusText(rawText){
+  const system = `You extract a structured task list from a college course syllabus for an accelerated 8-week SEU (Southeastern University) online term.
+Return ONLY valid JSON — no markdown fences, no preamble, no commentary. The JSON must be an array of objects with this exact shape:
+[{"week": 1, "title": "string", "type": "discussion"|"assignment"|"quiz"|"exam"|"reading"|"other", "dueDayOfWeek": "Monday".."Sunday" or null, "initialPostDay": "Monday".."Sunday" or null, "replyDay": "Monday".."Sunday" or null, "notes": "string, short"}]
+Rules:
+- Include every graded item: discussion boards, quizzes, exams, papers, assignments, projects.
+- For discussion board items, if the syllabus states separate initial-post and reply deadlines, fill initialPostDay and replyDay and leave dueDayOfWeek null. If only one deadline is given, use dueDayOfWeek and leave the other two null.
+- "week" is the module/week number (1-8) the item belongs to, inferred from the syllabus structure.
+- If a day of week isn't stated, use null — do not guess. (The app auto-spreads unstated days across Mon-Fri, and always schedules exams after that week's other work.)
+- Keep "notes" under 12 words (e.g. page count, submission format).
+- Do not invent items that aren't in the text.`;
+
+  const resp = await fetch("https://api.anthropic.com/v1/messages", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      model: "claude-sonnet-4-6",
+      max_tokens: 4000,
+      system,
+      messages: [{ role: "user", content: rawText.slice(0, 40000) }]
+    })
+  });
+  const data = await resp.json();
+  const textBlocks = (data.content || []).filter(b=>b.type==='text').map(b=>b.text).join('\n');
+  let clean = textBlocks.trim().replace(/^```json/i,'').replace(/^```/,'').replace(/```$/,'').trim();
+  const parsed = JSON.parse(clean);
+  if(!Array.isArray(parsed)) throw new Error('Unexpected response shape');
+  return parsed;
+}
+
+/* =========================================================
+   SHARED DISPLAY HELPERS
+========================================================= */
+function allTasksFlat(){
+  let all = [];
+  for(const c of courses){
+    for(const t of (tasksByCourse[c.id]||[])){
+      all.push({...t, courseName: c.name, courseCode: c.code});
+    }
+  }
+  return all;
+}
+
+function typeLabel(type){
+  const map = {discussion:'Discussion', assignment:'Assignment', quiz:'Quiz', exam:'Exam', reading:'Reading', other:'Task'};
+  return map[type] || 'Task';
+}
+
+function escapeHtml(str){ const d = document.createElement('div'); d.textContent = str||''; return d.innerHTML; }
+
+function taskRow(t, overdue){
+  const d = new Date(t.dueDate);
+  const statusBadge = overdue ? `<span class="badge overdue">Overdue</span>` :
+    sameDay(d, todayStart()) ? `<span class="badge today">Today</span>` : '';
   return `
-    <section class="qtr" style="margin-bottom:20px;">
-      <div class="qtr-head"><div class="qtr-tag">Q1</div><div class="qtr-title" style="font-size:18px;">Warm-Up · Devotional</div></div>
-      <div class="devo-grid">
-        <div class="card">
-          <div class="word-badge">Word of the Day</div>
-          <div class="devo-word">${esc(devo.wordOfDay)}</div>
-          <p class="devo-scripture">${esc(devo.scripture)}</p>
-          <div class="devo-row"><div class="lbl">Reflection Question</div><div class="val">${esc(devo.reflection)}</div></div>
-          <div class="devo-row"><div class="lbl">Prayer</div><div class="val">${esc(devo.prayer)}</div></div>
+    <div class="task">
+      <div class="check ${t.done?'done':''}" onclick="toggleDone('${t.courseId}','${t.id}')">${t.done?'✓':''}</div>
+      <div class="task-body">
+        <div class="task-title ${t.done?'done':''}">${escapeHtml(t.title)}</div>
+        <div class="task-meta">
+          <span class="badge ${t.type}">${typeLabel(t.type)}</span>
+          ${statusBadge}
+          <span class="course-chip">${escapeHtml(t.courseCode||t.courseName||'')}</span>
+          <span class="mono">· ${fmtDate(d)}</span>
         </div>
-        <div class="intention-card"><div class="intention-tag">Today's Intention</div><div class="intention-text">${esc(devo.intention)}</div></div>
+        ${t.notes?`<div class="helper">${escapeHtml(t.notes)}</div>`:''}
       </div>
-    </section>
-    <section class="qtr" style="margin-bottom:20px;">
-      <div class="qtr-head"><div class="qtr-tag">Q2</div><div class="qtr-title" style="font-size:18px;">Skills Drill</div></div>
-      <div class="students-grid">${studentsHTML}</div>
-    </section>
-    <section class="qtr" style="margin-bottom:4px;">
-      <div class="qtr-head"><div class="qtr-tag">Q3–Q4</div><div class="qtr-title" style="font-size:18px;">Game Plan · Core Subjects</div></div>
-      <div class="subjects-grid">${subjectsHTML}</div>
-    </section>
-  `;
+    </div>`;
 }
 
-async function openArchiveModal(){
-  document.getElementById('archiveOverlay').classList.add('open');
-  await loadArchiveTab();
-  await loadUpcomingTab();
+async function toggleDone(courseId, taskId){
+  const list = tasksByCourse[courseId];
+  const t = list.find(x=>x.id===taskId);
+  if(!t) return;
+  t.done = !t.done;
+  await saveTasks(courseId);
+  render();
 }
 
-function dayRowHTML(dateObj, wordOfDay, isTest, rowId){
-  const label = dateObj.toLocaleDateString('en-US',{weekday:'long', month:'long', day:'numeric'});
-  return `<div class="archive-day-card day-row-clickable" data-rowid="${rowId}" style="padding:14px 16px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;">
-    <div>
-      <div class="archive-day-title" style="margin:0 0 2px;">${label}${isTest?' · Test Day':''}</div>
-      <div style="font-family:'Oswald',sans-serif;font-size:15px;text-transform:uppercase;">${esc(wordOfDay)}</div>
+function groupTasksByCourse(list){
+  const groups = {};
+  for(const c of courses) groups[c.id] = [];
+  for(const t of list){ (groups[t.courseId] = groups[t.courseId] || []).push(t); }
+  return groups;
+}
+
+function renderSubjectGroups(list, overdue){
+  if(!list.length) return '';
+  const groups = groupTasksByCourse(list);
+  let html = '';
+  for(const c of courses){
+    const items = groups[c.id] || [];
+    if(!items.length) continue;
+    html += `<div class="subject-label">${escapeHtml(c.name)}</div>`;
+    html += `<div class="card">${items.map(t=>taskRow(t, overdue)).join('')}</div>`;
+  }
+  return html;
+}
+
+function renderDayByDayGroups(list){
+  const byDate = {};
+  for(const t of list){
+    const key = startOfDay(new Date(t.dueDate)).toISOString();
+    (byDate[key] = byDate[key] || []).push(t);
+  }
+  const keys = Object.keys(byDate).sort();
+  let html = '';
+  for(const key of keys){
+    const d = new Date(key);
+    html += `<div class="day-block">
+      <div class="day-heading">${d.toLocaleDateString(undefined,{weekday:'long'})} <span class="date-mono">${d.toLocaleDateString(undefined,{month:'short', day:'numeric'})}</span></div>
+      ${renderSubjectGroups(byDate[key])}
+    </div>`;
+  }
+  return html;
+}
+
+/* =========================================================
+   TOP-LEVEL RENDER
+========================================================= */
+function render(){
+  if(screen === 'courses') renderCoursesScreen();
+  else renderSchedulePage();
+}
+
+function toggleScreen(){
+  screen = (screen === 'schedule') ? 'courses' : 'schedule';
+  activeCourseId = null;
+  render();
+}
+
+/* =========================================================
+   SCHEDULE SCREEN — continuous Week 1-7 scroll
+========================================================= */
+function renderSchedulePage(){
+  document.getElementById('headerActionBtn').textContent = '⚙ Courses';
+
+  if(courses.length === 0){
+    document.getElementById('scoreboardTitle').textContent = 'Game Plan';
+    document.getElementById('scoreboardSub').textContent = 'No courses loaded yet';
+    document.getElementById('chipRow').innerHTML = '';
+    document.getElementById('mainContent').innerHTML = `
+      <div class="empty">
+        <span class="wordmark">No game plan yet</span>
+        <p>Add his first SEU course and load the syllabus to build the 7-week schedule.</p>
+        <button class="btn gold" onclick="openAddCourse()">+ Add a course</button>
+        <button class="btn ghost" style="margin-top:10px;" onclick="seedFall26()">Preload Fall '26: Composition &amp; Algebra</button>
+      </div>`;
+    return;
+  }
+
+  const course0 = courses[0];
+  const weekDatesAll = getCourseWeekDates(course0);
+  const now = todayStart();
+  let currentIdx = weekDatesAll.findIndex(wd => now >= wd[0] && now <= wd[wd.length-1]);
+  if(currentIdx === -1) currentIdx = (now < weekDatesAll[0][0]) ? 0 : 6;
+
+  const all = allTasksFlat();
+  const overdue = all.filter(t=>!t.done && startOfDay(new Date(t.dueDate)) < now);
+  const doneCount = all.filter(t=>t.done).length;
+
+  document.getElementById('scoreboardTitle').textContent = `Week ${currentIdx+1} of 7`;
+  document.getElementById('scoreboardSub').textContent = `${doneCount}/${all.length} complete · ${overdue.length} overdue`;
+
+  if(activeWeek === null) activeWeek = currentIdx+1;
+
+  let chipHtml = '';
+  for(let w=1; w<=7; w++){
+    const label = w===7 ? 'Wk 7' : `Wk ${w}`;
+    chipHtml += `<div class="wk-chip ${w===activeWeek?'current':''}" onclick="selectWeek(${w})">${label}</div>`;
+  }
+  document.getElementById('chipRow').innerHTML = chipHtml;
+
+  let html = '';
+  if(overdue.length){
+    html += `<div class="section-label">⏱ Overdue — catch up</div>`;
+    html += renderSubjectGroups(overdue, true);
+  }
+
+  const w = activeWeek;
+  const weekdays = weekDatesAll[w-1];
+  const rangeStart = weekdays[0], rangeEnd = weekdays[weekdays.length-1];
+  const weekTasks = all.filter(t=>{
+    const d = startOfDay(new Date(t.dueDate));
+    return d >= rangeStart && d <= rangeEnd;
+  });
+  const wDone = weekTasks.filter(t=>t.done).length;
+  html += `<section class="qtr" id="week-section-${w}">
+    <div class="qtr-head">
+      <div class="qtr-tag">WK ${w}</div>
+      <div class="qtr-title">${w===7 ? 'Modules 7–8' : 'Module '+w}</div>
+      <div class="qtr-hint">${fmtDate(rangeStart)} – ${fmtDate(rangeEnd)} · ${wDone}/${weekTasks.length} done</div>
     </div>
-    <div style="color:var(--orange);font-size:20px;">›</div>
-  </div>`;
+    ${weekTasks.length ? renderDayByDayGroups(weekTasks) : `<div class="card" style="padding:12px; color:var(--ink-soft); font-size:13.5px;">Nothing scheduled this week yet.</div>`}
+  </section>`;
+
+  document.getElementById('mainContent').innerHTML = html;
 }
 
-/* ---- Archive (past, saved) tab ---- */
-async function loadArchiveTab(){
-  const weeksEl = document.getElementById('archiveWeeks');
-  const daysEl = document.getElementById('archiveDays');
-  weeksEl.innerHTML = '';
-  daysEl.innerHTML = `<div class="archive-empty">Loading…</div>`;
+function selectWeek(w){
+  activeWeek = w;
+  renderSchedulePage();
+}
 
-  const keys = await storageList('day-override:');
-  if(!keys.length){ daysEl.innerHTML = `<div class="archive-empty">No archived days yet. Days save automatically as you view them.</div>`; return; }
+/* =========================================================
+   COURSES SCREEN — add / edit / preload / parse
+========================================================= */
+function renderCoursesScreen(){
+  document.getElementById('headerActionBtn').textContent = '📅 Schedule';
+  document.getElementById('chipRow').innerHTML = '';
 
-  const dates = keys.map(k=>k.replace('day-override:','')).filter(dd=>/^\d{4}-\d{2}-\d{2}$/.test(dd)).sort();
-  const weekMap = {};
-  dates.forEach(ds=>{
-    const [y,m,dn] = ds.split('-').map(Number);
-    const dateObj = new Date(y, m-1, dn, 12);
-    const monStr = toDateStr(mondayOfWeek(dateObj));
-    (weekMap[monStr] = weekMap[monStr]||[]).push(ds);
-  });
-  const weekKeys = Object.keys(weekMap).sort().reverse();
-
-  function fmtRange(monStr){
-    const [y,m,dn] = monStr.split('-').map(Number);
-    const mon = new Date(y,m-1,dn,12);
-    const fri = new Date(mon); fri.setDate(mon.getDate()+4);
-    const opt = {month:'short', day:'numeric'};
-    return mon.toLocaleDateString('en-US',opt) + ' – ' + fri.toLocaleDateString('en-US',opt);
+  if(activeCourseId){
+    renderCourseDetail(activeCourseId);
+    return;
   }
 
-  weeksEl.innerHTML = weekKeys.map((wk,i)=>`<button type="button" class="archive-week-btn ${i===0?'active':''}" data-wk="${wk}">${fmtRange(wk)}</button>`).join('');
+  document.getElementById('scoreboardTitle').textContent = 'Courses';
+  document.getElementById('scoreboardSub').textContent = `${courses.length} class${courses.length===1?'':'es'} this term`;
 
-  async function showWeek(monStr){
-    weeksEl.querySelectorAll('.archive-week-btn').forEach(b=>b.classList.toggle('active', b.dataset.wk===monStr));
-    const ds = weekMap[monStr].sort();
-    daysEl.innerHTML = `<div class="archive-empty">Loading…</div>`;
+  let html = '';
+  for(const c of courses){
+    const tasks = tasksByCourse[c.id] || [];
+    const done = tasks.filter(t=>t.done).length;
+    const pct = tasks.length ? Math.round(done/tasks.length*100) : 0;
+    html += `
+      <div class="card course-card" style="padding:14px 16px;" onclick="openCourseDetail('${c.id}')">
+        <div>
+          <div class="name">${escapeHtml(c.name)}</div>
+          <div class="code">${escapeHtml(c.code||'')} · starts ${fmtDate(new Date(c.startDate+'T00:00:00'))}</div>
+          <div class="progress-track"><div class="progress-fill" style="width:${pct}%"></div></div>
+          <div class="helper">${tasks.length ? `${done}/${tasks.length} tasks complete` : 'No syllabus loaded yet'}</div>
+        </div>
+        <div class="arrow">›</div>
+      </div>`;
+  }
+  html += `<button class="btn ghost" style="margin-top:8px;" onclick="openAddCourse()">+ Add another course</button>`;
+  html += `<button class="btn ghost" style="margin-top:8px;" onclick="seedFall26()">Preload Fall '26: Composition &amp; Algebra</button>`;
+  document.getElementById('mainContent').innerHTML = html;
+}
 
-    const rows = [];
-    const dayData = {};
-    for(let i=0;i<ds.length;i++){
-      const dstr = ds[i];
-      const content = await storageGet(dayKey(dstr));
-      if(!content) continue;
-      const [y,mo,da] = dstr.split('-').map(Number);
-      const dateObj = new Date(y,mo-1,da,12);
-      const checks = (await storageGet(checksKey(dstr))) || {};
-      const rowId = 'arch-'+dstr;
-      dayData[rowId] = {dateObj, content, checks};
-      rows.push(dayRowHTML(dateObj, content.devotional?.wordOfDay||'', dateObj.getDay()===5, rowId));
+function openCourseDetail(id){ activeCourseId = id; render(); }
+function backToCourseList(){ activeCourseId = null; render(); }
+
+function renderCourseDetail(id){
+  const c = courses.find(x=>x.id===id);
+  if(!c){ activeCourseId=null; render(); return; }
+  const tasks = tasksByCourse[id] || [];
+
+  let html = `<button class="link-btn" onclick="backToCourseList()">‹ All courses</button>`;
+  html += `<div class="section-label">${escapeHtml(c.name)}</div>`;
+  html += `<div class="card" style="padding:12px 14px;">
+      <div class="helper">${escapeHtml(c.code||'')} · 8-week SEU term starting ${fmtDate(new Date(c.startDate+'T00:00:00'))}, target finish by end of week 7</div>
+      <button class="link-btn" style="margin-top:8px;" onclick="openEditCourse('${c.id}')">Edit name / start date</button>
+    </div>`;
+
+  if(!tasks.length){
+    html += `
+      <div class="section-label">Load the syllabus</div>
+      <div class="card" style="padding:14px;">
+        <p class="helper" style="margin-top:0;">Upload the syllabus PDF, or paste its text below.</p>
+        <label class="field-label">Upload PDF</label>
+        <input type="file" id="syllabusPdfInput" accept="application/pdf" onchange="handlePdfUpload(event,'${c.id}')">
+        <div id="pdfStatus" class="helper"></div>
+        <label class="field-label" style="margin-top:16px;">Or paste syllabus text</label>
+        <textarea id="syllabusText" placeholder="Paste syllabus text here…"></textarea>
+        <div id="parseError" style="color:var(--danger); font-size:13px; margin-top:6px;"></div>
+        <button class="btn gold" style="margin-top:10px;" id="parseBtn" onclick="handleParse('${c.id}')">Parse syllabus</button>
+      </div>`;
+  } else {
+    html += `<div class="section-label">Full schedule (${tasks.length} items)</div>`;
+    html += `<div class="card">`;
+    let lastWeek = null;
+    for(const t of tasks.slice().sort((a,b)=>new Date(a.dueDate)-new Date(b.dueDate))){
+      if(t.week !== lastWeek){
+        html += `<div class="subject-label" style="margin-top:10px;">Module ${t.week}</div>`;
+        lastWeek = t.week;
+      }
+      html += taskRow({...t, courseCode:c.code, courseName:c.name});
     }
-    daysEl.innerHTML = rows.join('') || `<div class="archive-empty">No saved content for this week.</div>`;
-
-    daysEl.querySelectorAll('[data-rowid]').forEach(row=>{
-      row.addEventListener('click', async ()=>{
-        const {dateObj, content, checks} = dayData[row.dataset.rowid];
-        const wi = weekIndexForDate(dateObj);
-        const weekWords = dateObj.getDay()===5 ? await computeWeekWordsFor(mondayOfWeek(dateObj)) : null;
-        openDayLightbox(dateObj, content, checks, weekWords, false);
-      });
-    });
+    html += `</div>`;
+    html += `<button class="btn danger-ghost" style="margin-top:10px;" onclick="resetCourseTasks('${c.id}')">Re-parse syllabus (replaces current schedule)</button>`;
   }
 
-  weeksEl.querySelectorAll('.archive-week-btn').forEach(b=>{ b.addEventListener('click', ()=> showWeek(b.dataset.wk)); });
-  if(weekKeys.length) showWeek(weekKeys[0]);
+  html += `<button class="btn ghost" style="margin-top:20px;" onclick="deleteCourse('${c.id}')">Remove this course</button>`;
+  document.getElementById('mainContent').innerHTML = html;
 }
 
-/* ---- Upcoming (future, computed from the 5-week rotation) tab ---- */
-async function loadUpcomingTab(){
-  const weeksEl = document.getElementById('upcomingWeeks');
-  const daysEl = document.getElementById('upcomingDays');
+async function resetCourseTasks(courseId){
+  if(!confirm('This clears the current schedule for this course so you can paste a new syllabus. Continue?')) return;
+  tasksByCourse[courseId] = [];
+  await saveTasks(courseId);
+  render();
+}
 
-  const thisMonday = mondayOfWeek(state.schoolDate);
-  const upcomingMondays = [];
-  for(let i=0;i<6;i++){ // this week + next 5
-    const m = new Date(thisMonday); m.setDate(thisMonday.getDate() + i*7);
-    upcomingMondays.push(m);
+async function deleteCourse(courseId){
+  if(!confirm('Remove this course and its schedule? This cannot be undone.')) return;
+  courses = courses.filter(c=>c.id!==courseId);
+  delete tasksByCourse[courseId];
+  await saveCourses();
+  activeCourseId = null;
+  activeWeek = null;
+  render();
+}
+
+/* =========================================================
+   PDF UPLOAD -> TEXT EXTRACTION (pdf.js, runs client-side)
+========================================================= */
+if(window.pdfjsLib){
+  pdfjsLib.GlobalWorkerOptions.workerSrc = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+}
+
+async function handlePdfUpload(evt, courseId){
+  const file = evt.target.files[0];
+  const statusEl = document.getElementById('pdfStatus');
+  const ta = document.getElementById('syllabusText');
+  if(!file) return;
+  if(file.type !== 'application/pdf' && !file.name.toLowerCase().endsWith('.pdf')){
+    statusEl.textContent = 'That file isn\'t a PDF — try again.';
+    statusEl.style.color = 'var(--danger)';
+    return;
   }
-
-  function fmtRange(mon){
-    const fri = new Date(mon); fri.setDate(mon.getDate()+4);
-    const opt = {month:'short', day:'numeric'};
-    return mon.toLocaleDateString('en-US',opt) + ' – ' + fri.toLocaleDateString('en-US',opt);
-  }
-
-  weeksEl.innerHTML = upcomingMondays.map((mon,i)=>{
-    const label = i===0 ? 'This Week' : fmtRange(mon);
-    return `<button type="button" class="archive-week-btn ${i===0?'active':''}" data-idx="${i}">${label}</button>`;
-  }).join('');
-
-  async function showUpcomingWeek(idx){
-    weeksEl.querySelectorAll('.archive-week-btn').forEach(b=>b.classList.toggle('active', +b.dataset.idx===idx));
-    const mon = upcomingMondays[idx];
-    daysEl.innerHTML = `<div class="archive-empty">Loading…</div>`;
-    const wi = weekIndexForDate(mon);
-    const weekWords = await computeWeekWordsFor(mon);
-
-    const rows = [];
-    const dayData = {};
-    for(let i=0;i<5;i++){
-      const dateObj = new Date(mon); dateObj.setDate(mon.getDate()+i);
-      const wd = i+1;
-      const override = await storageGet(dayKey(toDateStr(dateObj)));
-      const content = override || state.weeks[wi][wd];
-      const rowId = 'up-'+toDateStr(dateObj);
-      dayData[rowId] = {dateObj, content};
-      rows.push(dayRowHTML(dateObj, content.devotional?.wordOfDay||'', wd===5, rowId));
+  statusEl.style.color = 'var(--ink-soft)';
+  statusEl.innerHTML = `<span class="spinner" style="border-top-color:var(--navy); border-color:rgba(16,22,29,0.25);"></span> Reading PDF…`;
+  try{
+    const buf = await file.arrayBuffer();
+    const pdf = await pdfjsLib.getDocument({data: buf}).promise;
+    let fullText = '';
+    for(let p = 1; p <= pdf.numPages; p++){
+      const page = await pdf.getPage(p);
+      const content = await page.getTextContent();
+      const pageText = content.items.map(it => it.str).join(' ');
+      fullText += pageText + '\n\n';
     }
-    daysEl.innerHTML = `<div class="archive-empty" style="padding:8px 4px 14px;text-align:left;">Week ${wi} of the rotation</div>` + rows.join('');
-
-    daysEl.querySelectorAll('[data-rowid]').forEach(row=>{
-      row.addEventListener('click', ()=>{
-        const {dateObj, content} = dayData[row.dataset.rowid];
-        openDayLightbox(dateObj, content, {}, dateObj.getDay()===5 ? weekWords : null, true);
-      });
-    });
-  }
-
-  weeksEl.querySelectorAll('.archive-week-btn').forEach(b=>{ b.addEventListener('click', ()=> showUpcomingWeek(+b.dataset.idx)); });
-  showUpcomingWeek(0);
-}
-
-/* ---- Day detail lightbox + image download ---- */
-function openDayLightbox(dateObj, content, checks, weekWords, isUpcoming){
-  const title = dateObj.toLocaleDateString('en-US',{weekday:'long', month:'long', day:'numeric'});
-  document.getElementById('lightboxTitle').textContent = title;
-  document.getElementById('lightboxSub').textContent = isUpcoming
-    ? 'Preview — this hasn\u2019t happened yet, so nothing is checked off.'
-    : 'Archived exactly as it appeared that day.';
-  const contentEl = document.getElementById('lightboxContent');
-  contentEl.innerHTML = buildFullDayHTML(dateObj, content, checks, weekWords);
-  document.getElementById('dayLightboxOverlay').classList.add('open');
-
-  const dlBtn = document.getElementById('downloadDayImg');
-  dlBtn.onclick = async ()=>{
-    dlBtn.disabled = true;
-    const origText = dlBtn.textContent;
-    dlBtn.textContent = 'Preparing…';
-    try{
-      const canvas = await html2canvas(contentEl, {backgroundColor: '#EEE7D6', scale: 2});
-      const link = document.createElement('a');
-      link.download = `legacy-lab-${toDateStr(dateObj)}.png`;
-      link.href = canvas.toDataURL('image/png');
-      link.click();
-    }catch(e){
-      console.error('image export failed', e);
-      showToast('Image download failed — please try again.');
+    fullText = fullText.trim();
+    if(fullText.length < 40){
+      statusEl.textContent = 'Couldn\'t find readable text in that PDF (it may be a scanned image) — try pasting the text instead.';
+      statusEl.style.color = 'var(--danger)';
+      return;
     }
-    dlBtn.disabled = false;
-    dlBtn.textContent = origText;
-  };
+    ta.value = fullText;
+    statusEl.textContent = `Loaded ${pdf.numPages} page${pdf.numPages===1?'':'s'} from "${file.name}". Review below, then parse.`;
+    statusEl.style.color = 'var(--green)';
+  }catch(e){
+    console.error(e);
+    statusEl.textContent = 'Couldn\'t read that PDF — try pasting the syllabus text instead.';
+    statusEl.style.color = 'var(--danger)';
+  }
 }
 
-/* ========================= MODAL SHARED ========================= */
-function switchModalTab(overlay, tabId){
-  overlay.querySelectorAll('.modal-tab').forEach(t=>t.classList.toggle('active', t.dataset.tab===tabId));
-  overlay.querySelectorAll('.tab-panel').forEach(p=>p.classList.toggle('active', p.id===tabId));
-}
-function closeAllModals(){ document.querySelectorAll('.modal-overlay').forEach(o=>o.classList.remove('open')); }
-function showToast(msg){
-  const t = document.getElementById('toast');
-  t.textContent = msg; t.classList.add('show');
-  setTimeout(()=>t.classList.remove('show'), 1800);
-}
-
-/* ========================= WIRE UP ========================= */
-document.querySelectorAll('[data-close]').forEach(b=>b.addEventListener('click', closeAllModals));
-document.querySelectorAll('.modal-overlay').forEach(o=>{ o.addEventListener('click', (e)=>{ if(e.target===o) closeAllModals(); }); });
-document.querySelectorAll('#todayOverlay .modal-tab').forEach(t=>{ t.addEventListener('click', ()=> switchModalTab(document.getElementById('todayOverlay'), t.dataset.tab)); });
-document.querySelectorAll('[data-cal-tab]').forEach(t=>{
-  t.addEventListener('click', ()=>{
-    document.querySelectorAll('[data-cal-tab]').forEach(x=>x.classList.remove('active'));
-    t.classList.add('active');
-    document.getElementById('archive-view').style.display = t.dataset.calTab==='archive-view' ? 'flex' : 'none';
-    document.getElementById('upcoming-view').style.display = t.dataset.calTab==='upcoming-view' ? 'flex' : 'none';
-  });
-});
-
-document.getElementById('openToday').addEventListener('click', ()=> requireEditAccess(openTodayModal));
-document.getElementById('openTemplate').addEventListener('click', ()=> requireEditAccess(openTemplateModal));
-document.getElementById('openStudents').addEventListener('click', ()=> requireEditAccess(openStudentsModal));
-document.getElementById('openArchive').addEventListener('click', openArchiveModal);
-document.getElementById('openBuzzerSettings').addEventListener('click', ()=> requireEditAccess(openBuzzerModal));
-
-function openBuzzerModal(){
-  const hh = pad(state.buzzerTime.hour);
-  const mm = pad(state.buzzerTime.minute);
-  document.getElementById('buzzerTimeInput').value = `${hh}:${mm}`;
-
-  const tzSelect = document.getElementById('timezoneInput');
-  tzSelect.innerHTML = TIMEZONE_OPTIONS.map(o=>`<option value="${o.value}" ${o.value===state.timezone?'selected':''}>${o.label}</option>`).join('');
-
-  document.getElementById('buzzerOverlay').classList.add('open');
-}
-document.getElementById('saveBuzzer').addEventListener('click', async ()=>{
-  const val = document.getElementById('buzzerTimeInput').value; // "HH:MM" 24h
-  if(!val){ return; }
-  const [hh, mm] = val.split(':').map(Number);
-  const bt = { hour: hh, minute: mm };
-  const tz = document.getElementById('timezoneInput').value;
-  state.buzzerTime = bt;
-  state.timezone = tz;
-  await storageSet(BUZZER_KEY, bt);
-  await storageSet(TIMEZONE_KEY, tz);
-  closeAllModals(); showToast('Day settings saved');
-  await loadAndRender();
-});
-
-document.getElementById('saveToday').addEventListener('click', async ()=>{
-  const data = collectTodayForm();
-  state.todayOverride = data;
-  await storageSet(dayKey(state.dateStr), data);
-  closeAllModals(); showToast("Today's plan saved");
-  await loadAndRender();
-});
-document.getElementById('resetToday').addEventListener('click', async ()=>{
-  await storageDelete(dayKey(state.dateStr));
-  state.todayOverride = null;
-  closeAllModals(); showToast('Reset to the 5-week plan');
-  await loadAndRender();
-});
-document.getElementById('saveTemplate').addEventListener('click', async ()=>{
-  const weeks = collectTemplateForm();
-  state.weeks = weeks;
-  await storageSet(WEEKS_KEY, weeks);
-  closeAllModals(); showToast('5-week plan saved');
-  await loadAndRender();
-});
-document.getElementById('saveStudents').addEventListener('click', async ()=>{
-  const labels = collectFieldLabels();
-  const students = collectStudentsForm();
-  state.fieldLabels = labels;
-  state.students = students;
-  await storageSet(LABELS_KEY, labels);
-  await storageSet(STUDENTS_KEY, students);
-  closeAllModals(); showToast('Profiles saved');
-  await loadAndRender();
-});
-
-/* ========================= INIT + LIVE REFRESH ========================= */
-async function loadAndRender(){
-  await loadAll();
-  renderHeader();
-  renderBoard();
+/* =========================================================
+   PARSE FLOW (with review-before-save modal)
+========================================================= */
+async function handleParse(courseId){
+  const c = courses.find(x=>x.id===courseId);
+  const ta = document.getElementById('syllabusText');
+  const btn = document.getElementById('parseBtn');
+  const errEl = document.getElementById('parseError');
+  const text = ta.value.trim();
+  errEl.textContent = '';
+  if(text.length < 40){
+    errEl.textContent = 'Paste more of the syllabus — need the module/week list with due dates.';
+    return;
+  }
+  btn.disabled = true;
+  btn.innerHTML = `<span class="spinner"></span> Reading syllabus…`;
+  try{
+    const extracted = await parseSyllabusText(text);
+    if(!extracted.length){
+      errEl.textContent = "Couldn't find any graded items in that text — try pasting the full module breakdown.";
+      btn.disabled = false; btn.textContent = 'Parse syllabus';
+      return;
+    }
+    showReviewModal(c, extracted);
+  }catch(e){
+    console.error(e);
+    errEl.textContent = 'Something went wrong reading that syllabus. Try again, or paste a shorter section.';
+    btn.disabled = false; btn.textContent = 'Parse syllabus';
+  }
 }
 
-if(!SUPABASE_CONFIGURED){
-  document.getElementById('setupBanner').style.display = 'block';
-} else {
-  document.getElementById('board').innerHTML = `<div class="weekend-card"><h2>Loading Plan…</h2><p>Connecting to the cloud plan.</p></div>`;
-  loadAndRender();
-
-  setInterval(()=>{ tickClock(); updateBuzzer(); }, 1000);
-
-  setInterval(async ()=>{
-    const freshSchoolDate = getSchoolDate(new Date());
-    if(toDateStr(freshSchoolDate) !== state.dateStr){ await loadAndRender(); }
-  }, 60000);
-
-  // Poll for changes made from other devices (e.g. you edit on your phone,
-  // the kids' display picks it up within a minute).
-  setInterval(async ()=>{ await loadAndRender(); }, 90000);
+function showReviewModal(course, extracted){
+  const root = document.getElementById('modalRoot');
+  const rows = extracted.map((it)=>`
+    <div class="review-item">
+      <div class="rtitle">${escapeHtml(it.title)}</div>
+      <div class="rmeta">Module ${it.week} · ${typeLabel(it.type)}${
+        it.initialPostDay ? ` · post ${it.initialPostDay}, reply ${it.replyDay||'—'}` :
+        it.dueDayOfWeek ? ` · due ${it.dueDayOfWeek}` : ' · no day stated (auto-spread Mon–Fri)'
+      }</div>
+    </div>`).join('');
+  root.innerHTML = `
+    <div class="modal-overlay">
+      <div class="modal">
+        <h2>Found ${extracted.length} items</h2>
+        <p class="helper">Review before building the schedule. Items spread across Monday–Friday of each module's week; exams always land after that week's other work.</p>
+        <div style="max-height:42vh; overflow-y:auto; margin-top:10px;">${rows}</div>
+        <div class="row-actions">
+          <button class="btn ghost" onclick="closeModal()">Cancel</button>
+          <button class="btn gold" onclick='confirmBuildSchedule(${JSON.stringify(course.id)})'>Build schedule</button>
+        </div>
+      </div>
+    </div>`;
+  window._pendingExtraction = extracted;
 }
+
+async function confirmBuildSchedule(courseId){
+  const c = courses.find(x=>x.id===courseId);
+  const extracted = window._pendingExtraction || [];
+  const tasks = buildTasksFromExtraction(c, extracted);
+  tasksByCourse[courseId] = tasks;
+  await saveTasks(courseId);
+  closeModal();
+  render();
+}
+
+function closeModal(){
+  document.getElementById('modalRoot').innerHTML = '';
+  window._pendingExtraction = null;
+}
+
+/* =========================================================
+   ADD / EDIT COURSE
+========================================================= */
+function openAddCourse(){
+  const root = document.getElementById('modalRoot');
+  root.innerHTML = `
+    <div class="modal-overlay">
+      <div class="modal" style="position:relative;">
+        <button class="close-x" onclick="closeModal()">×</button>
+        <h2>Add a course</h2>
+        <p class="helper">Set the term start date — the plan schedules everything to wrap by end of week 7.</p>
+        <label class="field-label">Course name</label>
+        <input type="text" id="newCourseName" placeholder="e.g. American Government">
+        <label class="field-label">Course code (optional)</label>
+        <input type="text" id="newCourseCode" placeholder="e.g. POS1041">
+        <label class="field-label">Term start date</label>
+        <input type="date" id="newCourseStart" value="2026-08-26">
+        <div class="row-actions">
+          <button class="btn ghost" onclick="closeModal()">Cancel</button>
+          <button class="btn gold" onclick="submitAddCourse()">Add course</button>
+        </div>
+      </div>
+    </div>`;
+}
+
+async function submitAddCourse(){
+  const name = document.getElementById('newCourseName').value.trim();
+  const code = document.getElementById('newCourseCode').value.trim();
+  const start = document.getElementById('newCourseStart').value;
+  if(!name || !start){ alert('Give it a name and a start date.'); return; }
+  const id = 'c' + Date.now();
+  courses.push({id, name, code, startDate: start});
+  tasksByCourse[id] = [];
+  await saveCourses();
+  await saveTasks(id);
+  closeModal();
+  activeCourseId = id;
+  render();
+}
+
+function openEditCourse(courseId){
+  const c = courses.find(x=>x.id===courseId);
+  if(!c) return;
+  const root = document.getElementById('modalRoot');
+  root.innerHTML = `
+    <div class="modal-overlay">
+      <div class="modal" style="position:relative;">
+        <button class="close-x" onclick="closeModal()">×</button>
+        <h2>Edit course</h2>
+        <p class="helper">Changing the start date reschedules every task in this course, keeping each item in its same module/week.</p>
+        <label class="field-label">Course name</label>
+        <input type="text" id="editCourseName" value="${escapeHtml(c.name)}">
+        <label class="field-label">Course code (optional)</label>
+        <input type="text" id="editCourseCode" value="${escapeHtml(c.code||'')}">
+        <label class="field-label">Term start date</label>
+        <input type="date" id="editCourseStart" value="${c.startDate}">
+        <div class="row-actions">
+          <button class="btn ghost" onclick="closeModal()">Cancel</button>
+          <button class="btn gold" onclick="submitEditCourse('${c.id}')">Save changes</button>
+        </div>
+      </div>
+    </div>`;
+}
+
+async function submitEditCourse(courseId){
+  const c = courses.find(x=>x.id===courseId);
+  if(!c) return;
+  const name = document.getElementById('editCourseName').value.trim();
+  const code = document.getElementById('editCourseCode').value.trim();
+  const start = document.getElementById('editCourseStart').value;
+  if(!name || !start){ alert('Give it a name and a start date.'); return; }
+  const dateChanged = start !== c.startDate;
+  c.name = name; c.code = code; c.startDate = start;
+  await saveCourses();
+  if(dateChanged){
+    recomputeCourseDates(courseId);
+    await saveTasks(courseId);
+    activeWeek = null;
+  }
+  closeModal();
+  render();
+}
+
+loadAll();
 </script>
 </body>
 </html>
