@@ -131,9 +131,14 @@
   @media (max-width:560px){.subjects-grid{grid-template-columns:1fr;}}
   .subj-card{background:var(--chalk);border:1.5px solid var(--line-light);border-radius:14px;padding:16px;display:flex;flex-direction:column;gap:8px;position:relative;}
   .subj-card.done{opacity:.55;}
-  .subj-card.dragging{opacity:.4;box-shadow:0 6px 18px rgba(0,0,0,.15);cursor:grabbing;z-index:5;}
-  .drag-handle{cursor:grab;color:var(--ink-soft);font-size:16px;line-height:1;padding:2px 4px;touch-action:none;user-select:none;}
-  .drag-handle:active{cursor:grabbing;}
+  .subj-card.move-flash{border-color:var(--orange);}
+  .move-btn{
+    width:24px;height:24px;border-radius:6px;border:1.5px solid var(--line-light);background:#fff;
+    color:var(--ink-soft);font-size:11px;display:flex;align-items:center;justify-content:center;cursor:pointer;padding:0;
+  }
+  .move-btn:hover{border-color:var(--orange);color:var(--orange);}
+  .move-btn:disabled{opacity:.3;cursor:default;}
+  .move-btn:disabled:hover{border-color:var(--line-light);color:var(--ink-soft);}
   .subj-top{display:flex;justify-content:space-between;align-items:flex-start;}
   .subj-name{font-family:'Oswald',sans-serif;font-size:15px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);}
   .subj-topic{font-size:16px;font-weight:600;line-height:1.35;}
@@ -244,6 +249,7 @@
       <div class="time" id="buzzerTime">2:30:00 PM</div>
     </div>
     <button class="icon-btn" id="openArchive" title="Archive & upcoming weeks">📅</button>
+    <a class="icon-btn" href="courses.html" title="College coursework (SEU dual enrollment)" style="text-decoration:none;">🎓</a>
     <button class="icon-btn" id="openBuzzerSettings" title="Day settings (buzzer time & timezone)">⏰</button>
     <button class="icon-btn" id="openStudents" title="Edit student profiles">👤</button>
     <button class="icon-btn" id="openToday" title="Edit today">✏️</button>
@@ -884,13 +890,14 @@ function renderBoard(){
   }).join('');
 
   const subjList = applySubjectOrder(allSubjects(c));
-  const subjectsHTML = subjList.map(sub=>{
+  const subjectsHTML = subjList.map((sub,i)=>{
     const checked = !!state.checks[sub.id];
     return `<div class="subj-card ${checked?'done':''}" data-subjname="${escAttr(sub.name||'')}">
       <div class="subj-top">
         <div class="subj-name">${esc(sub.name)||'Subject'}</div>
-        <div style="display:flex;align-items:center;gap:8px;">
-          <div class="drag-handle" data-draghandle title="Drag to reorder">⠿</div>
+        <div style="display:flex;align-items:center;gap:6px;">
+          <button type="button" class="move-btn" data-move="-1" data-subjname="${escAttr(sub.name||'')}" ${i===0?'disabled':''} title="Move earlier">◀</button>
+          <button type="button" class="move-btn" data-move="1" data-subjname="${escAttr(sub.name||'')}" ${i===subjList.length-1?'disabled':''} title="Move later">▶</button>
           <div class="check ${checked?'checked':''}" data-subj="${sub.id}">${checked?'✓':''}</div>
         </div>
       </div>
@@ -922,8 +929,13 @@ function renderBoard(){
     </section>
 
     <section class="qtr">
-      <div class="qtr-head"><div class="qtr-tag">Q3–Q4</div><div class="qtr-title">Game Plan · Core Subjects</div><div class="qtr-hint">Tap to complete · drag ⠿ to reorder</div></div>
+      <div class="qtr-head"><div class="qtr-tag">Q3–Q4</div><div class="qtr-title">Game Plan · Core Subjects</div><div class="qtr-hint">Tap to complete · ◀ ▶ to reorder</div></div>
       <div class="subjects-grid" id="subjectsGrid">${subjectsHTML}</div>
+    </section>
+
+    <section class="qtr" id="seuSection" style="display:none;">
+      <div class="qtr-head"><div class="qtr-tag">Q5</div><div class="qtr-title">College Coursework</div><div class="qtr-hint">Due today · SEU dual enrollment</div></div>
+      <div class="subjects-grid" id="seuGrid"></div>
     </section>
 
     <footer class="buzzer-strip">
@@ -931,6 +943,8 @@ function renderBoard(){
       <button class="link-btn" id="openTodayFooter">Edit today's plan</button>
     </footer>
   `;
+
+  renderSeuSection();
 
   board.querySelectorAll('.check').forEach(el=>{
     el.addEventListener('click', async ()=>{
@@ -962,15 +976,20 @@ function renderBoard(){
       });
     });
   });
-  wireSubjectDragReorder();
+  board.querySelectorAll('.move-btn').forEach(btn=>{
+    btn.addEventListener('click', async ()=>{
+      await moveSubject(btn.dataset.subjname, +btn.dataset.move);
+    });
+  });
   const footerBtn = document.getElementById('openTodayFooter');
   if(footerBtn) footerBtn.addEventListener('click', ()=> requireEditAccess(openTodayModal));
 }
 let allSectionsCollapsed = false;
 
-/* ========================= SUBJECT DRAG-TO-REORDER =========================
-   Works with mouse, touch, and pen via Pointer Events (native HTML5 drag
-   doesn't work reliably on touchscreens, and this is meant for a tablet). */
+/* ========================= SUBJECT REORDER (move buttons) =========================
+   Simple ◀ ▶ buttons rather than drag — reliable across mouse, touch, and
+   tablets without depending on pointer/drag quirks. Order is saved by
+   subject name so it applies consistently across every day and week. */
 function applySubjectOrder(list){
   if(!state.subjectOrder || !state.subjectOrder.length) return list;
   const idx = name => { const i = state.subjectOrder.indexOf(name); return i===-1 ? 9999 : i; };
@@ -980,54 +999,77 @@ function applySubjectOrder(list){
   }).map(x=>x.item);
 }
 
-function wireSubjectDragReorder(){
-  const grid = document.getElementById('subjectsGrid');
-  if(!grid) return;
-  let draggingCard = null;
+async function moveSubject(name, direction){
+  const currentNames = applySubjectOrder(allSubjects(todayContent())).map(s=>s.name);
+  let order = (state.subjectOrder && state.subjectOrder.length) ? [...state.subjectOrder] : [...currentNames];
+  currentNames.forEach(n=>{ if(!order.includes(n)) order.push(n); });
 
-  function getClosestCard(x, y){
-    const cards = [...grid.querySelectorAll('.subj-card')].filter(c=>c!==draggingCard);
-    let closest = null, closestDist = Infinity;
-    cards.forEach(card=>{
-      const box = card.getBoundingClientRect();
-      const cx = box.left + box.width/2, cy = box.top + box.height/2;
-      const dist = Math.hypot(x-cx, y-cy);
-      if(dist < closestDist){ closestDist = dist; closest = card; }
+  const idx = order.indexOf(name);
+  const swapIdx = idx + direction;
+  if(idx===-1 || swapIdx<0 || swapIdx>=order.length) return;
+  [order[idx], order[swapIdx]] = [order[swapIdx], order[idx]];
+
+  state.subjectOrder = order;
+  await storageSet(SUBJECT_ORDER_KEY, order);
+  renderBoard();
+}
+
+/* ========================= SEU COLLEGE COURSEWORK (integrated) =========================
+   Reads from the same shared cloud table as the course planner app
+   (courses.html), keys prefixed "seu:", and shows anything due today
+   right inside the daily board. Tapping a task toggles it done in the
+   shared data, same as it would in the planner itself. */
+async function seuGet(key){ return storageGet('seu:'+key); }
+async function seuSet(key, val){ return storageSet('seu:'+key, val); }
+
+async function loadSeuToday(){
+  const courses = (await seuGet('courses')) || [];
+  if(!courses.length) return [];
+  const todayStr = state.dateStr;
+  const groups = [];
+  for(const course of courses){
+    const tasks = (await seuGet('tasks:'+course.id)) || [];
+    const dueToday = tasks.filter(t=>{
+      try{ return toDateStr(new Date(t.dueDate)) === todayStr; }catch(e){ return false; }
     });
-    return closest;
+    if(dueToday.length) groups.push({ course, tasks: dueToday });
   }
+  return groups;
+}
 
-  grid.querySelectorAll('[data-draghandle]').forEach(handle=>{
-    handle.addEventListener('pointerdown', (e)=>{
-      const card = handle.closest('.subj-card');
-      if(!card) return;
-      draggingCard = card;
-      card.classList.add('dragging');
-      try{ card.setPointerCapture(e.pointerId); }catch(err){ /* not supported everywhere; drag still works */ }
-      e.preventDefault();
+async function renderSeuSection(){
+  const section = document.getElementById('seuSection');
+  const grid = document.getElementById('seuGrid');
+  if(!section || !grid) return;
+  if(!SCHOOL_DAYS.includes(state.weekdayNum)) return; // weekend board doesn't render this far anyway
 
-      function onMove(ev){
-        if(!draggingCard) return;
-        const target = getClosestCard(ev.clientX, ev.clientY);
-        if(target && target!==draggingCard){
-          const targetBox = target.getBoundingClientRect();
-          const before = ev.clientX < targetBox.left + targetBox.width/2;
-          grid.insertBefore(draggingCard, before ? target : target.nextSibling);
-        }
-      }
-      function onUp(){
-        card.classList.remove('dragging');
-        card.removeEventListener('pointermove', onMove);
-        card.removeEventListener('pointerup', onUp);
-        card.removeEventListener('pointercancel', onUp);
-        const order = [...grid.querySelectorAll('.subj-card')].map(c=>c.dataset.subjname);
-        state.subjectOrder = order;
-        storageSet(SUBJECT_ORDER_KEY, order);
-        draggingCard = null;
-      }
-      card.addEventListener('pointermove', onMove);
-      card.addEventListener('pointerup', onUp);
-      card.addEventListener('pointercancel', onUp);
+  const groups = await loadSeuToday();
+  if(!groups.length){ section.style.display = 'none'; return; }
+
+  const typeLabels = {discussion:'Discussion', assignment:'Assignment', quiz:'Quiz', exam:'Exam', reading:'Reading', other:'Task'};
+  grid.innerHTML = groups.map(g=>`
+    <div class="subj-card">
+      <div class="subj-top"><div class="subj-name">${esc(g.course.name)}</div></div>
+      ${g.tasks.map(t=>`
+        <div class="info-line" style="cursor:pointer;align-items:center;" data-seucourse="${escAttr(g.course.id)}" data-seutask="${escAttr(t.id)}">
+          <span style="${t.done?'text-decoration:line-through;color:var(--ink-soft);':''}">${esc(t.title)}</span>
+          <span class="check ${t.done?'checked':''}" style="width:20px;height:20px;font-size:12px;">${t.done?'✓':''}</span>
+        </div>
+      `).join('')}
+    </div>
+  `).join('');
+  section.style.display = 'block';
+
+  grid.querySelectorAll('[data-seutask]').forEach(row=>{
+    row.addEventListener('click', async ()=>{
+      const courseId = row.dataset.seucourse;
+      const taskId = row.dataset.seutask;
+      const tasks = (await seuGet('tasks:'+courseId)) || [];
+      const t = tasks.find(x=>x.id===taskId);
+      if(!t) return;
+      t.done = !t.done;
+      await seuSet('tasks:'+courseId, tasks);
+      renderSeuSection();
     });
   });
 }
