@@ -1449,9 +1449,15 @@ function buildFullDayHTML(dateObj, content, checks, weekWords){
           <div class="devo-word">${esc(devo.wordOfDay)}</div>
           <p class="devo-scripture">${esc(devo.scripture)}</p>
           <div class="devo-row"><div class="lbl">Reflection Question</div><div class="val">${esc(devo.reflection)}</div></div>
-          <div class="devo-row"><div class="lbl">Prayer</div><div class="val">${esc(devo.prayer)}</div></div>
+          <div class="devo-row"><div class="lbl">Prayer</div><div class="val">${esc(devo.prayer)}</div></        <div class="intention-card">
+          <div class="intention-tag">Today's Intention</div>
+          <div class="intention-text">${esc(devo.intention)}</div>
         </div>
-        <div class="intention-card"><div class="intention-tag">Today's Intention</div><div class="intention-text">${esc(devo.intention)}</div></div>
+      </div>
+      <div class="card" style="margin-top:16px;">
+        <div class="word-badge">Current Events</div>
+        <p style="font-size:13.5px;color:var(--ink-soft);margin:6px 0 12px;">Morning Brew Daily — a few minutes on today's news before school starts.</p>
+        <iframe style="border-radius:12px;" src="https://open.spotify.com/embed/show/7nc7OQdPTekErtFSRxOBKh?utm_source=generator" width="100%" height="152" frameborder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
       </div>
     </section>
     <section class="qtr" style="margin-bottom:20px;">
