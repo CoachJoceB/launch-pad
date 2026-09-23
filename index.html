@@ -227,6 +227,58 @@
   .archive-day-line b{color:var(--ink);}
   .archive-empty{color:var(--ink-soft);font-size:14px;text-align:center;padding:60px 20px;}
   @media (max-width:700px){.archive-layout{flex-direction:column;}.archive-weeks{width:100%;flex-direction:row;flex-wrap:wrap;max-height:none;}}
+
+  /* ===== COMPACT MODE — tablets/TVs/desktops (anything not phone-sized)
+     get tightened spacing so the whole day fits without scrolling in
+     typical cases. Phones keep the roomier default layout above since
+     there simply isn't space to fit everything on one small screen. */
+  @media (min-width:700px){
+    header.scoreboard{padding:10px 20px;}
+    .sb-date{font-size:clamp(16px,1.8vw,22px);}
+    .sb-sub{font-size:10.5px;}
+    .live-clock{font-size:clamp(18px,2.2vw,26px);}
+    .live-clock-label{font-size:8.5px;}
+    .buzzer .time{font-size:15px;}
+    .buzzer .label{font-size:9px;}
+    .icon-btn{width:30px;height:30px;font-size:13px;border-radius:7px;}
+    main.board{padding:12px 16px 20px;}
+    section.qtr{margin:0 auto 12px;}
+    .qtr-head{margin-bottom:6px;gap:6px;}
+    .qtr-tag{font-size:10.5px;padding:3px 8px;}
+    .qtr-title{font-size:clamp(14px,1.5vw,18px);}
+    .qtr-hint{font-size:10.5px;}
+    .devo-grid{gap:8px;}
+    .card{padding:10px 12px;border-radius:10px;}
+    .word-badge{font-size:9px;padding:2px 8px;margin-bottom:5px;}
+    .devo-word{font-size:17px;margin:0 0 5px;}
+    .devo-scripture{font-size:11.5px;padding-left:9px;margin:0 0 6px;}
+    .devo-row{margin-bottom:5px;}
+    .devo-row .lbl{font-size:9px;}
+    .devo-row .val{font-size:11.5px;margin-top:1px;}
+    .intention-card{padding:12px;border-radius:10px;}
+    .intention-tag{font-size:9.5px;margin-bottom:4px;}
+    .intention-text{font-size:clamp(14px,1.4vw,18px);line-height:1.2;}
+    .students-grid{gap:8px;}
+    .student-head{padding:7px 10px;}
+    .student-name{font-size:13px;}
+    .grade-badge{font-size:9px;padding:2px 6px;}
+    .student-body{padding:9px;}
+    .collapse-head{margin:6px 0 3px;}
+    .mini-lbl{font-size:8.5px;}
+    .collapse-body{max-height:400px;}
+    .info-line{font-size:11px;padding:2px 0;}
+    .vocab-box{margin-top:7px;padding:7px 9px;border-radius:8px;}
+    .vocab-word{font-size:14px;}
+    .vocab-row{font-size:10.5px;margin-top:3px;}
+    .syn-ant{margin-top:4px;font-size:10px;gap:8px;}
+    .subjects-grid{gap:6px;}
+    .subj-card{padding:7px 9px;border-radius:8px;gap:2px;}
+    .subj-name{font-size:10px;}
+    .subj-topic{font-size:11px;}
+    .check,.check-mini,.move-btn{width:16px;height:16px;}
+    footer.buzzer-strip{margin:6px auto 0;padding:10px 14px;border-radius:10px;}
+    .buzzer-strip .msg{font-size:12px;}
+  }
 </style>
 </head>
 <body>
@@ -257,6 +309,7 @@
     <a class="icon-btn" href="courses.html" title="College coursework (SEU dual enrollment)" style="text-decoration:none;">🎓</a>
     <button class="icon-btn" id="openBuzzerSettings" title="Day settings (buzzer time & timezone)">⏰</button>
     <button class="icon-btn" id="openCurriculum" title="Upload History/Science lesson PDFs">📚</button>
+    <button class="icon-btn" id="openGrading" title="Grade Friday tests">✅</button>
     <button class="icon-btn" id="openStudents" title="Edit student profiles">👤</button>
     <button class="icon-btn" id="openToday" title="Edit today">✏️</button>
     <button class="icon-btn" id="openTemplate" title="Edit 4-week content plan">🗓️</button>
@@ -393,6 +446,23 @@
   </div>
 </div>
 
+<!-- GRADE TESTS MODAL -->
+<div class="modal-overlay" id="gradingOverlay">
+  <div class="modal wide">
+    <h3>Grade Tests</h3>
+    <div class="sub">Financial Lit and States/Capitals auto-grade. Everything else, leave feedback.</div>
+    <div class="field-grid">
+      <div><label>Date</label><input type="text" id="gradeDateInput" placeholder="YYYY-MM-DD"></div>
+      <div><label>Student</label><select id="gradeStudentInput"></select></div>
+    </div>
+    <div id="gradingContent" style="margin-top:14px;"></div>
+    <div class="modal-actions">
+      <button class="btn btn-ghost" data-close>Close</button>
+      <button class="btn btn-primary" id="saveGrading">Save Feedback</button>
+    </div>
+  </div>
+</div>
+
 <div class="save-toast" id="toast">Saved</div>
 
 <!-- PIN DIALOG -->
@@ -418,7 +488,7 @@ function defaultBuzzerTime(){ return {hour:14, minute:30}; } // 2:30 PM
 
 const TIMEZONE_KEY = 'timezone-setting';
 function defaultTimezone(){ return 'America/Chicago'; } // Pensacola, FL
-const SUBJECT_ORDER_KEY = 'subject-order';
+function subjectOrderKey(studentId){ return 'subject-order:'+studentId; }
 const TIMEZONE_OPTIONS = [
   { value:'America/New_York',    label:'Eastern Time' },
   { value:'America/Chicago',     label:'Central Time' },
@@ -436,18 +506,24 @@ function defaultFieldLabels(){
 }
 function defaultStudents(){
   return [
-    { id:'s1', name:'Student One', grade:'5th', addr:{a1:'',a2:'',a3:''}, phone:{p1:'',p2:'',p3:'',p4:''} },
-    { id:'s2', name:'Student Two', grade:'8th', addr:{a1:'',a2:'',a3:''}, phone:{p1:'',p2:'',p3:'',p4:''} },
-    { id:'s3', name:'Student Three', grade:'10th', addr:{a1:'',a2:'',a3:''}, phone:{p1:'',p2:'',p3:'',p4:''} },
+    { id:'s1', name:'Student One', grade:'5th', addr:{a1:'',a2:'',a3:''}, phone:{p1:'',p2:'',p3:'',p4:''}, excludedSubjects:[], showSeu:false },
+    { id:'s2', name:'Student Two', grade:'8th', addr:{a1:'',a2:'',a3:''}, phone:{p1:'',p2:'',p3:'',p4:''}, excludedSubjects:[], showSeu:false },
+    { id:'s3', name:'Student Three', grade:'10th', addr:{a1:'',a2:'',a3:''}, phone:{p1:'',p2:'',p3:'',p4:''}, excludedSubjects:[], showSeu:false },
   ];
 }
 function normalizeStudent(s){
-  if(s.addr && s.phone) return s;
+  if(s.addr && s.phone){
+    if(!s.excludedSubjects) s.excludedSubjects = [];
+    if(s.showSeu === undefined) s.showSeu = false;
+    return s;
+  }
   // migrate from older shape if present
   return {
     id: s.id, name: s.name, grade: s.grade,
     addr:{ a1: s.addresses?.home||'', a2: s.addresses?.mom||'', a3: s.addresses?.dad||'' },
-    phone:{ p1: s.phones?.pooh||'', p2: s.phones?.mom||'', p3: s.phones?.dad||'', p4: s.phones?.own||'' }
+    phone:{ p1: s.phones?.pooh||'', p2: s.phones?.mom||'', p3: s.phones?.dad||'', p4: s.phones?.own||'' },
+    excludedSubjects: s.excludedSubjects || [],
+    showSeu: s.showSeu || false
   };
 }
 
@@ -754,6 +830,55 @@ function defaultScienceWeek1(){
   };
 }
 
+// Weeks 2-4 complete LIFEPAC Grade 5 Unit 1 for both subjects, researched to
+// match the real published section sequence (Alpha Omega Publications):
+// History & Geography 501 "A New World" (explorers \u2192 first colonies \u2192
+// conflict with Britain) and Science 501 "Cells" (composition \u2192 life &
+// growth of cells \u2192 plant vs. animal cells). No PDF attached yet for
+// these \u2014 topics are pre-filled; attach the actual scanned pages anytime
+// via the \ud83d\udcda uploader and they'll take over automatically.
+function defaultHistoryWeek2(){
+  return {
+    topic: 'The First Colonies — Jamestown, the Virginia colony, Plymouth, and the founding of the New England colonies.',
+    pdfDataUrl: null, pdfFilename: null,
+    blackHistoryMoment: 'Anthony Johnson arrived in the Virginia colony around 1621, originally as an indentured servant. After earning his freedom, he became one of the earliest documented free Black landowners in colonial America, building a farm in Northampton County. His life — and a 1655 court case over one of his own servants that helped shape colonial law on indentured servitude — is one of the earliest recorded examples of a Black colonist owning land and standing before colonial courts in the very colonies this week\u2019s lesson covers.'
+  };
+}
+function defaultHistoryWeek3(){
+  return {
+    topic: 'Conflict with Britain & the Birth of a New Nation — colonial grievances, rising tensions, and the road toward declaring independence.',
+    pdfDataUrl: null, pdfFilename: null,
+    blackHistoryMoment: 'Crispus Attucks, a man of African and Native American descent, is widely regarded as the first person killed in the Boston Massacre of 1770 — often called the first casualty of the American Revolution. His death became a rallying point in the colonial resistance against British rule that this week\u2019s lesson traces toward independence.'
+  };
+}
+function defaultHistoryWeek4(){
+  return {
+    topic: 'Unit 1 Review — Explorers, the First Colonies, and the Birth of a Nation. Review this month\u2019s material ahead of Friday\u2019s Unit Test.',
+    pdfDataUrl: null, pdfFilename: null,
+    blackHistoryMoment: 'This week, revisit Estevanico (Week 1), Anthony Johnson (Week 2), and Crispus Attucks (Week 3) — three men of African descent whose stories run alongside the exploration and founding of colonial America, from its earliest expeditions through the fight for independence.'
+  };
+}
+function defaultScienceWeek2(){
+  return {
+    topic: 'The Life and Growth of Cells — how cells grow, divide, and reproduce, including an introduction to chromosomes and cell division.',
+    pdfDataUrl: null, pdfFilename: null
+  };
+}
+function defaultScienceWeek3(){
+  return {
+    topic: 'Plant & Animal Cells — comparing structures unique to each, including the cell wall and chloroplasts found only in plant cells.',
+    pdfDataUrl: null, pdfFilename: null
+  };
+}
+function defaultScienceWeek4(){
+  return {
+    topic: 'Unit 1 Review — Cell composition, the life and growth of cells, and plant vs. animal cells. Review this month\u2019s material ahead of Friday\u2019s Unit Test.',
+    pdfDataUrl: null, pdfFilename: null
+  };
+}
+const DEFAULT_HISTORY_WEEKS = {1:defaultHistoryWeek1, 2:defaultHistoryWeek2, 3:defaultHistoryWeek3, 4:defaultHistoryWeek4};
+const DEFAULT_SCIENCE_WEEKS = {1:defaultScienceWeek1, 2:defaultScienceWeek2, 3:defaultScienceWeek3, 4:defaultScienceWeek4};
+
 /* ========================= DATE / SCHOOL DAY LOGIC ========================= */
 function pad(n){return n<10?'0'+n:''+n;}
 function toDateStr(d){ return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate()); }
@@ -781,7 +906,7 @@ function mondayOfWeek(schoolDate){
 
 /* ========================= APP STATE ========================= */
 let state = {
-  contentWeeks:null, students:null, fieldLabels:null, cycleStartMonday:null, buzzerTime:null, timezone:null, subjectOrder:null,
+  contentWeeks:null, students:null, fieldLabels:null, cycleStartMonday:null, buzzerTime:null, timezone:null, subjectOrders:null,
   schoolDate:null, weekdayNum:null, dateStr:null,
   todayOverride:null, weekWords:{}, checks:{}
 };
@@ -792,9 +917,20 @@ async function loadAll(){
   state.contentWeeks = (await storageGet(CONTENT_WEEKS_KEY)) || defaultContentWeeks();
   const rawStudents = (await storageGet(STUDENTS_KEY)) || defaultStudents();
   state.students = rawStudents.map(normalizeStudent);
+  // Personal Info / Phone Numbers sections default to collapsed to save
+  // screen space; only set the default once per session so a manual expand
+  // isn't stomped on by the next auto-refresh.
+  state.students.forEach(s=>{
+    if(!(s.id+'-info' in collapseState)) collapseState[s.id+'-info'] = true;
+    if(!(s.id+'-phone' in collapseState)) collapseState[s.id+'-phone'] = true;
+  });
   state.fieldLabels = (await storageGet(LABELS_KEY)) || defaultFieldLabels();
   state.buzzerTime = (await storageGet(BUZZER_KEY)) || defaultBuzzerTime();
-  state.subjectOrder = (await storageGet(SUBJECT_ORDER_KEY)) || [];
+  // Each student's subject order is independent, keyed by student id.
+  state.subjectOrders = {};
+  for(const s of state.students){
+    state.subjectOrders[s.id] = (await storageGet(subjectOrderKey(s.id))) || [];
+  }
 
   const now = new Date();
   state.schoolDate = getSchoolDate(now);
@@ -813,7 +949,10 @@ async function loadAll(){
   state.cycleStartMonday = cycleStart;
 
   state.todayOverride = await storageGet(dayKey(dstr));
+  // checks is keyed by studentId -> {subjectId: bool}, so each kid has
+  // independent completion tracking for their own academics.
   state.checks = (await storageGet(checksKey(dstr))) || {};
+  state.students.forEach(s=>{ if(!state.checks[s.id]) state.checks[s.id] = {}; });
 
   // AUTO-SAVE: the first time a school day is viewed, snapshot the ENTIRE
   // page for that day permanently (devotional, vocab, subjects, student
@@ -864,13 +1003,13 @@ function quarterNumber(actualWeek){ return Math.ceil(actualWeek / 8); }
 async function getHistoryWeek(actualWeek){
   const stored = await storageGet(historyWeekKey(actualWeek));
   if(stored) return stored;
-  if(actualWeek === 1) return defaultHistoryWeek1();
+  if(DEFAULT_HISTORY_WEEKS[actualWeek]) return DEFAULT_HISTORY_WEEKS[actualWeek]();
   return null; // not uploaded yet
 }
 async function getScienceWeek(actualWeek){
   const stored = await storageGet(scienceWeekKey(actualWeek));
   if(stored) return stored;
-  if(actualWeek === 1) return defaultScienceWeek1();
+  if(DEFAULT_SCIENCE_WEEKS[actualWeek]) return DEFAULT_SCIENCE_WEEKS[actualWeek]();
   return null; // not uploaded yet
 }
 
@@ -1041,6 +1180,35 @@ async function renderBoard(){
     <p style="font-size:12px;color:var(--ink-soft);margin-top:8px;">Bonus: share one fun fact about either state.</p>
   </div>` : '';
 
+  const testSectionHTML = isTestDay ? await renderTestSection() : '';
+
+  const baseSubjList = allSubjects(c);
+  const seuGroups = await loadSeuToday();
+  function seuCardsHTML(groups){
+    return groups.map(g=>{
+      if(g.tasks.length === 1){
+        const t = g.tasks[0];
+        const checked = !!t.done;
+        return `<div class="subj-card ${checked?'done':''}" data-seucourse="${escAttr(g.course.id)}">
+          <div class="subj-top">
+            <div class="subj-name">${esc(g.course.name)}</div>
+            <div class="check ${checked?'checked':''}" data-seucourse="${escAttr(g.course.id)}" data-seutask="${escAttr(t.id)}">${checked?'✓':''}</div>
+          </div>
+          <div class="subj-topic">${esc(t.title)}</div>
+        </div>`;
+      }
+      return `<div class="subj-card">
+        <div class="subj-top"><div class="subj-name">${esc(g.course.name)}</div></div>
+        ${g.tasks.map(t=>`
+          <div class="info-line" style="cursor:pointer;align-items:center;" data-seucourse="${escAttr(g.course.id)}" data-seutask="${escAttr(t.id)}">
+            <span style="${t.done?'text-decoration:line-through;color:var(--ink-soft);':''}">${esc(t.title)}</span>
+            <span class="check-mini ${t.done?'checked':''}">${t.done?'✓':''}</span>
+          </div>
+        `).join('')}
+      </div>`;
+    }).join('');
+  }
+
   const studentsHTML = state.students.map((s)=>{
     const grade = s.grade;
     let vocabHTML = '';
@@ -1064,6 +1232,31 @@ async function renderBoard(){
 
     const infoCollapsed = collapseState[s.id+'-info'] ? 'collapsed' : '';
     const phoneCollapsed = collapseState[s.id+'-phone'] ? 'collapsed' : '';
+
+    const excluded = s.excludedSubjects || [];
+    const orderedSubjList = applySubjectOrder(baseSubjList, s.id);
+    const studentSubjList = orderedSubjList.filter(sub => !excluded.includes(sub.name));
+    const studentChecks = state.checks[s.id] || {};
+    const studentSeuHTML = (s.showSeu && seuGroups.length) ? seuCardsHTML(seuGroups) : '';
+    const academicsHTML = isTestDay ? '' : `
+        <div class="mini-lbl" style="margin-top:12px;">Academics</div>
+        <div class="subjects-grid" style="grid-template-columns:1fr;margin-top:6px;">
+          ${studentSubjList.map((sub,i)=>{
+            const checked = !!studentChecks[sub.id];
+            return `<div class="subj-card ${checked?'done':''}" data-subjname="${escAttr(sub.name||'')}">
+              <div class="subj-top">
+                <div class="subj-name">${esc(sub.name)||'Subject'}</div>
+                <div style="display:flex;align-items:center;gap:6px;">
+                  <button type="button" class="move-btn" data-move="-1" data-subjname="${escAttr(sub.name||'')}" data-student="${s.id}" ${i===0?'disabled':''} title="Move earlier">◀</button>
+                  <button type="button" class="move-btn" data-move="1" data-subjname="${escAttr(sub.name||'')}" data-student="${s.id}" ${i===studentSubjList.length-1?'disabled':''} title="Move later">▶</button>
+                  <div class="check ${checked?'checked':''}" data-student="${s.id}" data-subj="${sub.id}">${checked?'✓':''}</div>
+                </div>
+              </div>
+              <div class="subj-topic">${esc(sub.topic)||'No topic set'}</div>
+            </div>`;
+          }).join('') || `<p style="color:var(--ink-soft);font-size:12px;margin-top:4px;">No subjects assigned — add some in \u{1f464} Profiles.</p>`}
+          ${studentSeuHTML}
+        </div>`;
 
     return `<div class="student-card">
       <div class="student-head">
@@ -1091,49 +1284,11 @@ async function renderBoard(){
         </div>
         <div class="mini-lbl" style="margin-top:12px;">Vocabulary ${isTestDay ? '— Test' : '('+grade+' grade)'}</div>
         ${vocabHTML}
+        ${academicsHTML}
       </div>
     </div>`;
   }).join('');
 
-  const subjList = applySubjectOrder(allSubjects(c));
-  const subjectsHTML = subjList.map((sub,i)=>{
-    const checked = !!state.checks[sub.id];
-    return `<div class="subj-card ${checked?'done':''}" data-subjname="${escAttr(sub.name||'')}">
-      <div class="subj-top">
-        <div class="subj-name">${esc(sub.name)||'Subject'}</div>
-        <div style="display:flex;align-items:center;gap:6px;">
-          <button type="button" class="move-btn" data-move="-1" data-subjname="${escAttr(sub.name||'')}" ${i===0?'disabled':''} title="Move earlier">◀</button>
-          <button type="button" class="move-btn" data-move="1" data-subjname="${escAttr(sub.name||'')}" ${i===subjList.length-1?'disabled':''} title="Move later">▶</button>
-          <div class="check ${checked?'checked':''}" data-subj="${sub.id}">${checked?'✓':''}</div>
-        </div>
-      </div>
-      <div class="subj-topic">${esc(sub.topic)||'No topic set'}</div>
-    </div>`;
-  }).join('');
-
-  const seuGroups = await loadSeuToday();
-  const seuHTML = seuGroups.map(g=>{
-    if(g.tasks.length === 1){
-      const t = g.tasks[0];
-      const checked = !!t.done;
-      return `<div class="subj-card ${checked?'done':''}" data-seucourse="${escAttr(g.course.id)}">
-        <div class="subj-top">
-          <div class="subj-name">${esc(g.course.name)}</div>
-          <div class="check ${checked?'checked':''}" data-seucourse="${escAttr(g.course.id)}" data-seutask="${escAttr(t.id)}">${checked?'✓':''}</div>
-        </div>
-        <div class="subj-topic">${esc(t.title)}</div>
-      </div>`;
-    }
-    return `<div class="subj-card">
-      <div class="subj-top"><div class="subj-name">${esc(g.course.name)}</div></div>
-      ${g.tasks.map(t=>`
-        <div class="info-line" style="cursor:pointer;align-items:center;" data-seucourse="${escAttr(g.course.id)}" data-seutask="${escAttr(t.id)}">
-          <span style="${t.done?'text-decoration:line-through;color:var(--ink-soft);':''}">${esc(t.title)}</span>
-          <span class="check-mini ${t.done?'checked':''}">${t.done?'✓':''}</span>
-        </div>
-      `).join('')}
-    </div>`;
-  }).join('');
 
   board.innerHTML = `
     <section class="qtr">
@@ -1154,24 +1309,25 @@ async function renderBoard(){
     </section>
 
     <section class="qtr">
-      <div class="qtr-head"><div class="qtr-tag">Q2</div><div class="qtr-title">Life Skills & Drills</div><div class="qtr-hint">Tap a header to collapse · double-click to collapse all</div></div>
+      <div class="qtr-head"><div class="qtr-tag">Q2</div><div class="qtr-title">${isTestDay ? 'Weekly Test' + (unitTest ? ' · Unit Test' : '') : 'Life Skills & Drills'}</div><div class="qtr-hint">${isTestDay ? 'Answers autosave as you go' : "Tap a header to collapse · double-click to collapse all"}</div></div>
+      ${isTestDay ? testSectionHTML : `
       <div class="devo-grid" style="margin-bottom:16px;">
         <div class="card">
           <div class="word-badge">Current Event</div>
-          <p style="font-size:13.5px;color:var(--ink-soft);margin:6px 0 12px;">Morning Brew Daily — a few minutes on today's news before school starts.</p>
-          <iframe style="border-radius:12px;" src="https://open.spotify.com/embed/show/7nc7OQdPTekErtFSRxOBKh?utm_source=generator" width="100%" height="152" frameborder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+          <p style="font-size:13.5px;color:var(--ink-soft);margin:6px 0 12px;">CNN 10 — a fact-only, no-opinion daily news show built for students, 10 minutes or less.</p>
+          <iframe style="border-radius:12px;" src="https://www.youtube.com/embed/videoseries?list=UUV5rRqUqVLWiadlehZNtGSg" width="100%" height="152" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>
           <p style="font-size:13px;font-weight:600;margin-top:10px;">Apply It: ${esc(CURRENT_EVENT_APPLY_IT)}</p>
         </div>
         ${financialLitHTML || '<div></div>'}
       </div>
       <div class="students-grid" style="margin-bottom:16px;">${studentsHTML}</div>
       ${statesHTML ? `<div class="devo-grid">${statesHTML}<div></div></div>` : ''}
+      `}
     </section>
 
     <section class="qtr">
-      <div class="qtr-head"><div class="qtr-tag">Q3–Q4</div><div class="qtr-title">Academics · Game Plan</div><div class="qtr-hint">Tap to complete · ◀ ▶ to reorder</div></div>
+      <div class="qtr-head"><div class="qtr-tag">Q3–Q4</div><div class="qtr-title">Academics · Today's Lesson</div><div class="qtr-hint">Each student checks off their own subjects above — College Coursework shows under whoever has it turned on</div></div>
       ${(lessonHTML || rwsHTML) ? `<div class="devo-grid" style="margin-bottom:16px;">${lessonHTML || '<div></div>'}${rwsHTML || '<div></div>'}</div>` : ''}
-      <div class="subjects-grid" id="subjectsGrid">${subjectsHTML}${seuHTML}</div>
     </section>
 
     <footer class="buzzer-strip">
@@ -1179,6 +1335,8 @@ async function renderBoard(){
       <button class="link-btn" id="openTodayFooter">Edit today's plan</button>
     </footer>
   `;
+
+  if(isTestDay) afterTestSectionRender();
 
   const flBtn = document.getElementById('revealFlAnswer');
   if(flBtn){
@@ -1216,9 +1374,11 @@ async function renderBoard(){
     el.addEventListener('click', async ()=>{
       if(el.dataset.seutask){
         await toggleSeuTask(el.dataset.seucourse, el.dataset.seutask);
-      } else {
+      } else if(el.dataset.student){
+        const studentId = el.dataset.student;
         const key = el.dataset.subj;
-        state.checks[key] = !state.checks[key];
+        if(!state.checks[studentId]) state.checks[studentId] = {};
+        state.checks[studentId][key] = !state.checks[studentId][key];
         await storageSet(checksKey(state.dateStr), state.checks);
       }
       await renderBoard();
@@ -1254,7 +1414,7 @@ async function renderBoard(){
   });
   board.querySelectorAll('.move-btn').forEach(btn=>{
     btn.addEventListener('click', async ()=>{
-      await moveSubject(btn.dataset.subjname, +btn.dataset.move);
+      await moveSubject(btn.dataset.subjname, +btn.dataset.move, btn.dataset.student);
     });
   });
   const footerBtn = document.getElementById('openTodayFooter');
@@ -1264,20 +1424,23 @@ let allSectionsCollapsed = false;
 
 /* ========================= SUBJECT REORDER (move buttons) =========================
    Simple ◀ ▶ buttons rather than drag — reliable across mouse, touch, and
-   tablets without depending on pointer/drag quirks. Order is saved by
-   subject name so it applies consistently across every day and week. */
-function applySubjectOrder(list){
-  if(!state.subjectOrder || !state.subjectOrder.length) return list;
-  const idx = name => { const i = state.subjectOrder.indexOf(name); return i===-1 ? 9999 : i; };
+   tablets without depending on pointer/drag quirks. Order is saved per
+   student, by subject name, so each kid can arrange their own list
+   independently and it still applies consistently across every day/week. */
+function applySubjectOrder(list, studentId){
+  const order = state.subjectOrders && state.subjectOrders[studentId];
+  if(!order || !order.length) return list;
+  const idx = name => { const i = order.indexOf(name); return i===-1 ? 9999 : i; };
   return list.map((item,i)=>({item,i})).sort((a,b)=>{
     const d = idx(a.item.name) - idx(b.item.name);
     return d!==0 ? d : a.i-b.i;
   }).map(x=>x.item);
 }
 
-async function moveSubject(name, direction){
-  const currentNames = applySubjectOrder(allSubjects(todayContent())).map(s=>s.name);
-  let order = (state.subjectOrder && state.subjectOrder.length) ? [...state.subjectOrder] : [...currentNames];
+async function moveSubject(name, direction, studentId){
+  const currentNames = applySubjectOrder(allSubjects(todayContent()), studentId).map(s=>s.name);
+  const existing = state.subjectOrders && state.subjectOrders[studentId];
+  let order = (existing && existing.length) ? [...existing] : [...currentNames];
   currentNames.forEach(n=>{ if(!order.includes(n)) order.push(n); });
 
   const idx = order.indexOf(name);
@@ -1285,8 +1448,9 @@ async function moveSubject(name, direction){
   if(idx===-1 || swapIdx<0 || swapIdx>=order.length) return;
   [order[idx], order[swapIdx]] = [order[swapIdx], order[idx]];
 
-  state.subjectOrder = order;
-  await storageSet(SUBJECT_ORDER_KEY, order);
+  if(!state.subjectOrders) state.subjectOrders = {};
+  state.subjectOrders[studentId] = order;
+  await storageSet(subjectOrderKey(studentId), order);
   await renderBoard();
 }
 
@@ -1322,6 +1486,192 @@ async function toggleSeuTask(courseId, taskId){
   if(!t) return;
   t.done = !t.done;
   await seuSet('tasks:'+courseId, tasks);
+}
+
+/* ========================= WEEKLY FILLABLE TEST =========================
+   Every Friday, auto-built per student from that week's actual content:
+   their grade's 4 vocab words, the week's financial lit fill-in-blanks,
+   states/capitals, history/science topics, current event, and the
+   real-world scenario. Answers autosave per student as they type.
+   Financial Lit and States/Capitals auto-grade right/wrong; everything
+   else is reviewed with written feedback in the Grade Tests screen. */
+function testAnswersKey(dateStr, studentId){ return 'test-answers:'+dateStr+':'+studentId; }
+function testGradesKey(dateStr, studentId){ return 'test-grades:'+dateStr+':'+studentId; }
+function normAnswer(s){ return (s||'').trim().toLowerCase().replace(/\s+/g,' '); }
+function autoGrade(given, expected){ return normAnswer(given) === normAnswer(expected) && normAnswer(given)!==''; }
+
+async function buildWeeklyTest(studentGrade, mon){
+  const cw = contentWeekForDate(mon);
+  const aw = actualWeekForDate(mon);
+  const week = state.contentWeeks[cw];
+  const vocab = [];
+  for(let d=1; d<=4; d++){
+    const w = week[d] && week[d].vocab && week[d].vocab[studentGrade];
+    if(w) vocab.push({word:w.word});
+  }
+  const financialLit = [];
+  for(let d=1; d<=4; d++){
+    const f = week[d] && week[d].financialLit;
+    if(f && f.concept) financialLit.push({concept:f.concept, blank:f.blank, answer:f.answer});
+  }
+  const statesCapitals = [];
+  for(let d=1; d<=4; d++){
+    (week[d] && week[d].statesCapitals || []).forEach(sc => statesCapitals.push({state:sc.state, answer:sc.capital}));
+  }
+  const historyLesson = await getHistoryWeek(aw);
+  const scienceLesson = await getScienceWeek(aw);
+  return {
+    vocab, financialLit, statesCapitals,
+    currentEventQuestion: CURRENT_EVENT_APPLY_IT,
+    historyTopic: historyLesson ? historyLesson.topic : '',
+    scienceTopic: scienceLesson ? scienceLesson.topic : '',
+    scenario: (week[1] && week[1].realWorldScenario) || ''
+  };
+}
+
+function defaultTestAnswers(){
+  return { vocab:[], financialLit:[], statesCapitals:[], funFact:'', currentEvent:'', history:'', science:'', scenario:'' };
+}
+
+let testCache = {}; // studentId -> {test, answers} while the Friday board is open
+
+async function loadTestForStudent(student){
+  const mon = mondayOfWeek(state.schoolDate);
+  const test = await buildWeeklyTest(student.grade, mon);
+  const saved = (await storageGet(testAnswersKey(state.dateStr, student.id))) || defaultTestAnswers();
+  while(saved.vocab.length < test.vocab.length) saved.vocab.push('');
+  while(saved.financialLit.length < test.financialLit.length) saved.financialLit.push('');
+  while(saved.statesCapitals.length < test.statesCapitals.length) saved.statesCapitals.push('');
+  testCache[student.id] = { test, answers: saved };
+  return testCache[student.id];
+}
+
+async function saveTestAnswers(studentId){
+  const entry = testCache[studentId];
+  if(!entry) return;
+  entry.answers.savedAt = new Date().toISOString();
+  await storageSet(testAnswersKey(state.dateStr, studentId), entry.answers);
+}
+
+function renderTestFormHTML(student, entry){
+  const { test, answers } = entry;
+  const p = `test-${student.id}`;
+  return `
+    <div class="card" style="margin-bottom:12px;">
+      <div class="mini-lbl" style="margin-top:0;">Vocabulary — define & use each word</div>
+      ${test.vocab.map((v,i)=>`
+        <div style="margin-bottom:10px;padding-bottom:8px;border-bottom:1px dashed var(--line-light);">
+          <div class="vocab-word" style="font-size:15px;">${esc(v.word)}</div>
+          <textarea data-testfield="${p}-vocab-${i}" placeholder="Define it and use it in a sentence" style="width:100%;margin-top:4px;min-height:44px;padding:8px;border:1.5px solid var(--line-light);border-radius:8px;font-family:'Oswald',sans-serif;font-size:13.5px;">${esc(answers.vocab[i]||'')}</textarea>
+        </div>`).join('') || '<p style="color:var(--ink-soft);font-size:13px;">No vocab words logged this week yet.</p>'}
+    </div>
+    <div class="card" style="margin-bottom:12px;">
+      <div class="mini-lbl" style="margin-top:0;">Current Event</div>
+      <p style="font-size:13.5px;margin:4px 0 8px;">${esc(test.currentEventQuestion)}</p>
+      <textarea data-testfield="${p}-currentEvent" style="width:100%;min-height:50px;padding:8px;border:1.5px solid var(--line-light);border-radius:8px;font-family:'Oswald',sans-serif;font-size:13.5px;">${esc(answers.currentEvent||'')}</textarea>
+    </div>
+    <div class="card" style="margin-bottom:12px;">
+      <div class="mini-lbl" style="margin-top:0;">Financial Lit — fill in the blank</div>
+      ${test.financialLit.map((f,i)=>{
+        const given = answers.financialLit[i]||'';
+        const graded = given ? (autoGrade(given,f.answer) ? '✓ correct' : '') : '';
+        return `<div style="margin-bottom:10px;padding-bottom:8px;border-bottom:1px dashed var(--line-light);">
+          <div style="font-size:13px;color:var(--ink-soft);font-weight:700;">${esc(f.concept)}</div>
+          <p style="font-size:13.5px;margin:4px 0 6px;">${esc(f.blank)}</p>
+          <input type="text" data-testfield="${p}-fl-${i}" value="${escAttr(given)}" placeholder="Your answer" style="width:100%;padding:8px;border:1.5px solid var(--line-light);border-radius:8px;font-family:'Oswald',sans-serif;">
+          ${graded ? `<div style="font-size:11.5px;color:var(--green);margin-top:4px;">${graded}</div>` : ''}
+        </div>`;
+      }).join('') || '<p style="color:var(--ink-soft);font-size:13px;">Nothing logged this week yet.</p>'}
+    </div>
+    <div class="card" style="margin-bottom:12px;">
+      <div class="mini-lbl" style="margin-top:0;">States & Capitals</div>
+      ${test.statesCapitals.map((s,i)=>`
+        <div class="info-line" style="align-items:center;">
+          <span>${esc(s.state)}</span>
+          <input type="text" data-testfield="${p}-sc-${i}" value="${escAttr(answers.statesCapitals[i]||'')}" placeholder="Capital" style="width:160px;padding:6px 8px;border:1.5px solid var(--line-light);border-radius:6px;font-family:'Oswald',sans-serif;">
+        </div>`).join('') || '<p style="color:var(--ink-soft);font-size:13px;">Nothing logged this week yet.</p>'}
+      <label style="margin-top:10px;">Bonus: one fun fact about any state above</label>
+      <textarea data-testfield="${p}-funFact" style="width:100%;min-height:44px;padding:8px;border:1.5px solid var(--line-light);border-radius:8px;font-family:'Oswald',sans-serif;font-size:13.5px;">${esc(answers.funFact||'')}</textarea>
+    </div>
+    <div class="devo-grid" style="margin-bottom:12px;">
+      <div class="card">
+        <div class="mini-lbl" style="margin-top:0;">History</div>
+        <p style="font-size:13px;color:var(--ink-soft);margin:4px 0 8px;">${esc(test.historyTopic)||'No lesson logged this week.'}</p>
+        <textarea data-testfield="${p}-history" placeholder="What's one important thing you learned?" style="width:100%;min-height:60px;padding:8px;border:1.5px solid var(--line-light);border-radius:8px;font-family:'Oswald',sans-serif;font-size:13.5px;">${esc(answers.history||'')}</textarea>
+      </div>
+      <div class="card">
+        <div class="mini-lbl" style="margin-top:0;">Science</div>
+        <p style="font-size:13px;color:var(--ink-soft);margin:4px 0 8px;">${esc(test.scienceTopic)||'No lesson logged this week.'}</p>
+        <textarea data-testfield="${p}-science" placeholder="What's one important thing you learned?" style="width:100%;min-height:60px;padding:8px;border:1.5px solid var(--line-light);border-radius:8px;font-family:'Oswald',sans-serif;font-size:13.5px;">${esc(answers.science||'')}</textarea>
+      </div>
+    </div>
+    <div class="card">
+      <div class="mini-lbl" style="margin-top:0;">Real World Scenario</div>
+      <p style="font-size:13.5px;margin:4px 0 8px;">${esc(test.scenario)||'No scenario logged this week.'}</p>
+      <textarea data-testfield="${p}-scenario" style="width:100%;min-height:60px;padding:8px;border:1.5px solid var(--line-light);border-radius:8px;font-family:'Oswald',sans-serif;font-size:13.5px;">${esc(answers.scenario||'')}</textarea>
+    </div>
+  `;
+}
+
+function wireTestFormInputs(container, studentId){
+  container.querySelectorAll('[data-testfield]').forEach(el=>{
+    el.addEventListener('change', async ()=>{
+      const key = el.dataset.testfield; // e.g. test-<id>-vocab-0 / test-<id>-currentEvent
+      const entry = testCache[studentId];
+      if(!entry) return;
+      const parts = key.split('-'); // ['test', studentId..., field, idx?]
+      // field name is second-to-last or last token depending on whether indexed
+      const idxMaybe = parts[parts.length-1];
+      const isIndexed = /^\d+$/.test(idxMaybe);
+      const field = isIndexed ? parts[parts.length-2] : parts[parts.length-1];
+      const idx = isIndexed ? +idxMaybe : null;
+      if(field==='vocab') entry.answers.vocab[idx] = el.value;
+      else if(field==='fl') entry.answers.financialLit[idx] = el.value;
+      else if(field==='sc') entry.answers.statesCapitals[idx] = el.value;
+      else if(field==='funFact') entry.answers.funFact = el.value;
+      else if(field==='currentEvent') entry.answers.currentEvent = el.value;
+      else if(field==='history') entry.answers.history = el.value;
+      else if(field==='science') entry.answers.science = el.value;
+      else if(field==='scenario') entry.answers.scenario = el.value;
+      await saveTestAnswers(studentId);
+      if(field==='fl'){
+        // live re-grade indicator without a full re-render
+        const f = entry.test.financialLit[idx];
+        const wrap = el.closest('div');
+        let badge = wrap.querySelector('.fl-live-grade');
+        const correct = autoGrade(el.value, f.answer);
+        if(!badge){ badge = document.createElement('div'); badge.className='fl-live-grade'; badge.style.cssText='font-size:11.5px;margin-top:4px;'; wrap.appendChild(badge); }
+        badge.style.color = correct ? 'var(--green)' : 'var(--ink-soft)';
+        badge.textContent = el.value ? (correct ? '✓ correct' : '') : '';
+      }
+    });
+  });
+}
+
+async function renderTestSection(){
+  const mon = mondayOfWeek(state.schoolDate);
+  let activeStudentId = state.students[0] && state.students[0].id;
+  for(const s of state.students){ await loadTestForStudent(s); }
+
+  const tabsHTML = state.students.map((s,i)=>`<div class="modal-tab ${i===0?'active':''}" data-testtab="${s.id}">${esc(s.name)}</div>`).join('');
+  return `<div class="modal-tabs" id="testStudentTabs">${tabsHTML}</div><div id="testFormArea"></div>`;
+}
+
+function afterTestSectionRender(){
+  const tabsWrap = document.getElementById('testStudentTabs');
+  const formArea = document.getElementById('testFormArea');
+  if(!tabsWrap || !formArea) return;
+  function showStudent(id){
+    tabsWrap.querySelectorAll('.modal-tab').forEach(t=>t.classList.toggle('active', t.dataset.testtab===id));
+    const student = state.students.find(s=>s.id===id);
+    const entry = testCache[id];
+    formArea.innerHTML = renderTestFormHTML(student, entry);
+    wireTestFormInputs(formArea, id);
+  }
+  tabsWrap.querySelectorAll('.modal-tab').forEach(t=>{
+    t.addEventListener('click', ()=> showStudent(t.dataset.testtab));
+  });
+  if(state.students[0]) showStudent(state.students[0].id);
 }
 
 /* ========================= EXTRA SUBJECTS EDITOR ========================= */
@@ -1541,7 +1891,15 @@ function openStudentsModal(){
   const panelsEl = document.getElementById('studentPanels');
   tabsEl.innerHTML = state.students.map((s,i)=>`<div class="modal-tab ${i===0?'active':''}" data-stab="stu-${s.id}">${esc(s.name)||'Student '+(i+1)}</div>`).join('');
 
-  panelsEl.innerHTML = state.students.map((s,i)=>`
+  panelsEl.innerHTML = state.students.map((s,i)=>{
+    const pool = allSubjects(todayContent() || {subjects:{}, extraSubjects:[]});
+    const excluded = s.excludedSubjects || [];
+    const subjectChecklist = pool.map(sub => `
+      <label style="display:flex;align-items:center;gap:8px;font-weight:400;text-transform:none;letter-spacing:0;font-size:13.5px;margin:6px 0;">
+        <input type="checkbox" data-subjtoggle="${s.id}" value="${escAttr(sub.name)}" ${excluded.includes(sub.name) ? '' : 'checked'} style="width:16px;height:16px;">
+        ${esc(sub.name)}
+      </label>`).join('') || `<p style="color:var(--ink-soft);font-size:13px;">No subjects defined yet — add them via the 5-week plan or today's edit.</p>`;
+    return `
     <div class="tab-panel ${i===0?'active':''}" id="stu-${s.id}">
       <div class="field-grid">
         <div><label>Full Name</label><input type="text" id="p-${s.id}-name" value="${escAttr(s.name)}"></div>
@@ -1560,8 +1918,15 @@ function openStudentsModal(){
         <div><label id="p-${s.id}-phone3-lbl">${esc(fl.phone3)}</label><input type="text" id="p-${s.id}-phone-p3" value="${escAttr(s.phone.p3)}"></div>
         <div><label id="p-${s.id}-phone4-lbl">${esc(fl.phone4)}</label><input type="text" id="p-${s.id}-phone-p4" value="${escAttr(s.phone.p4)}"></div>
       </div>
-    </div>
-  `).join('');
+      <div class="mini-lbl" style="margin-top:14px">Subjects for ${esc(s.name)}</div>
+      <div class="sub" style="margin:2px 0 6px;">Uncheck any this student doesn't do. New subjects can be added via the 🗓️ 4-week plan or ✏️ today editors — they'll show up here to turn on or off per student.</div>
+      <div id="p-${s.id}-subjects">${subjectChecklist}</div>
+      <label style="display:flex;align-items:center;gap:8px;font-weight:400;text-transform:none;letter-spacing:0;font-size:13.5px;margin-top:10px;">
+        <input type="checkbox" id="p-${s.id}-showseu" ${s.showSeu ? 'checked' : ''} style="width:16px;height:16px;">
+        Show College Coursework (SEU) under this student
+      </label>
+    </div>`;
+  }).join('');
 
   // Live-update the mini labels in each student panel as the shared labels are edited
   ['addr1','addr2','addr3','phone1','phone2','phone3','phone4'].forEach(fkey=>{
@@ -1593,12 +1958,18 @@ function collectFieldLabels(){
   };
 }
 function collectStudentsForm(){
-  return state.students.map(s=>({
-    id:s.id, name:document.getElementById(`p-${s.id}-name`).value, grade:document.getElementById(`p-${s.id}-grade`).value,
-    addr:{ a1:document.getElementById(`p-${s.id}-addr-a1`).value, a2:document.getElementById(`p-${s.id}-addr-a2`).value, a3:document.getElementById(`p-${s.id}-addr-a3`).value },
-    phone:{ p1:document.getElementById(`p-${s.id}-phone-p1`).value, p2:document.getElementById(`p-${s.id}-phone-p2`).value,
-      p3:document.getElementById(`p-${s.id}-phone-p3`).value, p4:document.getElementById(`p-${s.id}-phone-p4`).value }
-  }));
+  return state.students.map(s=>{
+    const allBoxes = document.querySelectorAll(`[data-subjtoggle="${s.id}"]`);
+    const excludedSubjects = [...allBoxes].filter(b=>!b.checked).map(b=>b.value);
+    const showSeu = document.getElementById(`p-${s.id}-showseu`)?.checked || false;
+    return {
+      id:s.id, name:document.getElementById(`p-${s.id}-name`).value, grade:document.getElementById(`p-${s.id}-grade`).value,
+      addr:{ a1:document.getElementById(`p-${s.id}-addr-a1`).value, a2:document.getElementById(`p-${s.id}-addr-a2`).value, a3:document.getElementById(`p-${s.id}-addr-a3`).value },
+      phone:{ p1:document.getElementById(`p-${s.id}-phone-p1`).value, p2:document.getElementById(`p-${s.id}-phone-p2`).value,
+        p3:document.getElementById(`p-${s.id}-phone-p3`).value, p4:document.getElementById(`p-${s.id}-phone-p4`).value },
+      excludedSubjects, showSeu
+    };
+  });
 }
 
 /* ========================= ARCHIVE MODAL — full page snapshots ========================= */
@@ -1609,6 +1980,7 @@ function buildFullDayHTML(dateObj, content, checks, weekWords){
   const fl = content.fieldLabels || state.fieldLabels;
   const students = content.students || state.students;
 
+  const baseSubjList = allSubjects(content);
   const studentsHTML = students.map(s=>{
     const grade = s.grade;
     let vocabHTML = '';
@@ -1627,6 +1999,18 @@ function buildFullDayHTML(dateObj, content, checks, weekWords){
         </div>`;
       }
     }
+    const excluded = s.excludedSubjects || [];
+    const studentSubjList = applySubjectOrder(baseSubjList, s.id).filter(sub => !excluded.includes(sub.name));
+    const studentChecks = (checks && checks[s.id]) || {};
+    const academicsHTML = isTestDay ? '' : `
+        <div class="mini-lbl" style="margin-top:12px;">Academics</div>
+        ${studentSubjList.map(sub=>{
+          const checked = !!studentChecks[sub.id];
+          return `<div class="subj-card ${checked?'done':''}" style="margin-top:6px;">
+            <div class="subj-top"><div class="subj-name">${esc(sub.name)||'Subject'}</div><div class="check ${checked?'checked':''}">${checked?'✓':''}</div></div>
+            <div class="subj-topic">${esc(sub.topic)||'No topic set'}</div>
+          </div>`;
+        }).join('') || '<p style="color:var(--ink-soft);font-size:12px;">No subjects assigned.</p>'}`;
     return `<div class="student-card">
       <div class="student-head"><div class="student-name">${esc(s.name)}</div><div class="grade-badge">${esc(s.grade)} GRADE</div></div>
       <div class="student-body">
@@ -1642,16 +2026,8 @@ function buildFullDayHTML(dateObj, content, checks, weekWords){
         <div class="info-line"><span>${esc(fl.phone4)}</span><span>${esc(s.phone.p4)||'—'}</span></div>
         <div class="mini-lbl" style="margin-top:12px;">Vocabulary ${isTestDay ? '— Test' : '('+grade+' grade)'}</div>
         ${vocabHTML}
+        ${academicsHTML}
       </div>
-    </div>`;
-  }).join('');
-
-  const subjList = allSubjects(content);
-  const subjectsHTML = subjList.map(sub=>{
-    const checked = !!(checks && checks[sub.id]);
-    return `<div class="subj-card ${checked?'done':''}">
-      <div class="subj-top"><div class="subj-name">${esc(sub.name)||'Subject'}</div><div class="check ${checked?'checked':''}">${checked?'✓':''}</div></div>
-      <div class="subj-topic">${esc(sub.topic)||'No topic set'}</div>
     </div>`;
   }).join('');
 
@@ -1700,9 +2076,8 @@ function buildFullDayHTML(dateObj, content, checks, weekWords){
       <div class="students-grid">${studentsHTML}</div>
     </section>`}
     <section class="qtr" style="margin-bottom:4px;">
-      <div class="qtr-head"><div class="qtr-tag">Q3–Q4</div><div class="qtr-title" style="font-size:18px;">Academics · Game Plan</div></div>
-      ${(lessonHTML || rwsHTML) ? `<div class="devo-grid" style="margin-bottom:16px;">${lessonHTML||'<div></div>'}${rwsHTML||'<div></div>'}</div>` : ''}
-      <div class="subjects-grid">${subjectsHTML}</div>
+      <div class="qtr-head"><div class="qtr-tag">Q3–Q4</div><div class="qtr-title" style="font-size:18px;">Academics · Today's Lesson</div></div>
+      ${(lessonHTML || rwsHTML) ? `<div class="devo-grid">${lessonHTML||'<div></div>'}${rwsHTML||'<div></div>'}</div>` : ''}
     </section>
   `;
 }
@@ -1994,6 +2369,103 @@ document.getElementById('saveCurriculum').addEventListener('click', async ()=>{
   await storageSet(subj==='history' ? historyWeekKey(w) : scienceWeekKey(w), obj);
   closeAllModals(); showToast(`Week ${w} ${subj==='history'?'History':'Science'} lesson saved`);
   await loadAndRender();
+});
+
+/* ========================= GRADE TESTS ========================= */
+document.getElementById('openGrading').addEventListener('click', ()=> requireEditAccess(openGradingModal));
+
+function openGradingModal(){
+  const fridayOfThisWeek = new Date(mondayOfWeek(state.schoolDate));
+  fridayOfThisWeek.setDate(fridayOfThisWeek.getDate()+4);
+  document.getElementById('gradeDateInput').value = toDateStr(fridayOfThisWeek);
+
+  const studentSel = document.getElementById('gradeStudentInput');
+  studentSel.innerHTML = state.students.map(s=>`<option value="${s.id}">${esc(s.name)}</option>`).join('');
+
+  loadGradingContent();
+  document.getElementById('gradingOverlay').classList.add('open');
+}
+document.getElementById('gradeDateInput').addEventListener('change', loadGradingContent);
+document.getElementById('gradeStudentInput').addEventListener('change', loadGradingContent);
+
+async function loadGradingContent(){
+  const dateStr = document.getElementById('gradeDateInput').value;
+  const studentId = document.getElementById('gradeStudentInput').value;
+  const content = document.getElementById('gradingContent');
+  if(!dateStr || !studentId){ content.innerHTML = ''; return; }
+  content.innerHTML = `<p style="color:var(--ink-soft);font-size:13px;">Loading…</p>`;
+
+  const student = state.students.find(s=>s.id===studentId);
+  const [y,m,d] = dateStr.split('-').map(Number);
+  const dateObj = new Date(y,m-1,d,12);
+  const mon = mondayOfWeek(dateObj);
+
+  const test = await buildWeeklyTest(student.grade, mon);
+  const answers = (await storageGet(testAnswersKey(dateStr, studentId))) || defaultTestAnswers();
+  const grades = (await storageGet(testGradesKey(dateStr, studentId))) || { vocabFeedback:[], currentEventFeedback:'', funFactFeedback:'', historyFeedback:'', scienceFeedback:'', scenarioFeedback:'' };
+  while(grades.vocabFeedback.length < test.vocab.length) grades.vocabFeedback.push('');
+
+  if(!answers.savedAt){
+    content.innerHTML = `<p style="color:var(--ink-soft);font-size:14px;">No test answers saved for ${esc(student.name)} on ${esc(dateStr)} yet.</p>`;
+    return;
+  }
+
+  function feedbackRow(label, promptText, answerText, key, value){
+    return `<div class="card" style="margin-bottom:10px;">
+      <div class="mini-lbl" style="margin-top:0;">${esc(label)}</div>
+      ${promptText ? `<p style="font-size:12.5px;color:var(--ink-soft);margin:4px 0;">${esc(promptText)}</p>` : ''}
+      <p style="font-size:14px;margin:6px 0;white-space:pre-wrap;">${esc(answerText)||'<em style="color:var(--ink-soft)">No answer given</em>'}</p>
+      <label>Feedback</label>
+      <textarea data-gradefield="${key}" style="width:100%;min-height:44px;padding:8px;border:1.5px solid var(--line-light);border-radius:8px;font-family:'Oswald',sans-serif;font-size:13px;">${esc(value||'')}</textarea>
+    </div>`;
+  }
+  function autoGradeRow(label, answerText, expected){
+    const correct = autoGrade(answerText, expected);
+    return `<div class="info-line" style="align-items:center;">
+      <span>${esc(label)}</span>
+      <span>${esc(answerText)||'—'} <b style="color:${correct?'var(--green)':'var(--orange)'};margin-left:6px;">${correct?'✓ Correct':'✗ Incorrect'}</b></span>
+    </div>`;
+  }
+
+  let html = '';
+  html += `<div class="card" style="margin-bottom:10px;">
+    <div class="mini-lbl" style="margin-top:0;">Vocabulary</div>
+    ${test.vocab.map((v,i)=>feedbackRow(v.word, '', answers.vocab[i], `vocab-${i}`, grades.vocabFeedback[i])).join('')}
+  </div>`;
+  html += feedbackRow('Current Event', test.currentEventQuestion, answers.currentEvent, 'currentEvent', grades.currentEventFeedback);
+  html += `<div class="card" style="margin-bottom:10px;">
+    <div class="mini-lbl" style="margin-top:0;">Financial Lit (auto-graded)</div>
+    ${test.financialLit.map((f,i)=>autoGradeRow(f.concept, answers.financialLit[i], f.answer)).join('')}
+  </div>`;
+  html += `<div class="card" style="margin-bottom:10px;">
+    <div class="mini-lbl" style="margin-top:0;">States & Capitals (auto-graded)</div>
+    ${test.statesCapitals.map((s,i)=>autoGradeRow(s.state, answers.statesCapitals[i], s.answer)).join('')}
+  </div>`;
+  html += feedbackRow('Fun Fact', '', answers.funFact, 'funFact', grades.funFactFeedback);
+  html += feedbackRow('History', test.historyTopic, answers.history, 'history', grades.historyFeedback);
+  html += feedbackRow('Science', test.scienceTopic, answers.science, 'science', grades.scienceFeedback);
+  html += feedbackRow('Real World Scenario', test.scenario, answers.scenario, 'scenario', grades.scenarioFeedback);
+
+  content.innerHTML = html;
+}
+
+document.getElementById('saveGrading').addEventListener('click', async ()=>{
+  const dateStr = document.getElementById('gradeDateInput').value;
+  const studentId = document.getElementById('gradeStudentInput').value;
+  if(!dateStr || !studentId) return;
+  const content = document.getElementById('gradingContent');
+  const vocabFeedback = [...content.querySelectorAll('[data-gradefield^="vocab-"]')].map(el=>el.value);
+  const grades = {
+    vocabFeedback,
+    currentEventFeedback: content.querySelector('[data-gradefield="currentEvent"]')?.value || '',
+    funFactFeedback: content.querySelector('[data-gradefield="funFact"]')?.value || '',
+    historyFeedback: content.querySelector('[data-gradefield="history"]')?.value || '',
+    scienceFeedback: content.querySelector('[data-gradefield="science"]')?.value || '',
+    scenarioFeedback: content.querySelector('[data-gradefield="scenario"]')?.value || '',
+    gradedAt: new Date().toISOString()
+  };
+  await storageSet(testGradesKey(dateStr, studentId), grades);
+  showToast('Feedback saved');
 });
 
 
