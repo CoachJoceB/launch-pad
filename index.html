@@ -446,6 +446,19 @@
   </div>
 </div>
 
+<!-- LESSON WORKSHEET MODAL -->
+<div class="modal-overlay" id="worksheetOverlay">
+  <div class="modal wide">
+    <h3 id="worksheetTitle">Worksheet</h3>
+    <div class="sub" id="worksheetSub">Answers autosave as you go.</div>
+    <div class="modal-tabs" id="worksheetStudentTabs"></div>
+    <div id="worksheetFormArea"></div>
+    <div class="modal-actions">
+      <button class="btn btn-ghost" data-close>Close</button>
+    </div>
+  </div>
+</div>
+
 <!-- GRADE TESTS MODAL -->
 <div class="modal-overlay" id="gradingOverlay">
   <div class="modal wide">
@@ -813,6 +826,13 @@ function checksKey(dateStr){ return 'day-checks:'+dateStr; }
 function historyWeekKey(w){ return 'history-week:'+w; }
 function scienceWeekKey(w){ return 'science-week:'+w; }
 
+// ---- Worksheet helpers: turn the actual PDF exercises into fillable data ----
+function wsFB(id, prompt, answer){ return {id, prompt, answer}; }
+function wsTF(id, statement, answer){ return {id, statement, answer}; }
+function wsMatch(id, term, answer){ return {id, term, answer}; }
+function wsSA(id, prompt){ return {id, prompt}; }
+function wsGroup(type, instructions, items, options){ return {type, instructions, items, options: options||null}; }
+
 // Black History moment drafted for Week 1, tied directly to the "A New World"
 // European-explorers unit: Estevanico is the first documented person of
 // African descent to explore what is now the continental United States.
@@ -820,13 +840,123 @@ function defaultHistoryWeek1(){
   return {
     topic: 'European Explorers & the Founding of a New World — Vikings, Columbus, and the Spanish, French, Dutch, and English claims on North America.',
     pdfDataUrl: null, pdfFilename: null,
-    blackHistoryMoment: 'Estevanico (also called Esteban) was an enslaved African man who became one of the first non-Native explorers of the American Southwest. Traveling with the Narváez expedition in the 1530s — the same era of Spanish exploration covered this week — he survived a shipwreck, learned Native languages, and later helped lead the search for the legendary "Seven Cities of Gold" through present-day Texas, New Mexico, and Arizona. He is the first documented person of African descent known to have explored what is now the continental United States.'
+    blackHistoryMoment: 'Estevanico (also called Esteban) was an enslaved African man who became one of the first non-Native explorers of the American Southwest. Traveling with the Narváez expedition in the 1530s — the same era of Spanish exploration covered this week — he survived a shipwreck, learned Native languages, and later helped lead the search for the legendary "Seven Cities of Gold" through present-day Texas, New Mexico, and Arizona. He is the first documented person of African descent known to have explored what is now the continental United States.',
+    worksheet: {
+      groups: [
+        wsGroup('matching', 'Choose the letter(s) that are true for each item or person. Use all of the lettered choices.', [
+          wsMatch('1.1','Native Americans','f'),
+          wsMatch('1.2','Eric the Red','b'),
+          wsMatch('1.3','Leif Ericson','o'),
+          wsMatch('1.4','Henry the Navigator','d,m'),
+          wsMatch('1.5','spices','e'),
+          wsMatch('1.6','Vikings (as a group)','q'),
+          wsMatch('1.7','BCE','a,k'),
+          wsMatch('1.8','CE','g'),
+          wsMatch('1.9','Bartholomeu Dias','h'),
+          wsMatch('1.10','Vasco da Gama','n'),
+          wsMatch('1.11','Portugal','l'),
+        ], [
+          {key:'a',text:'Before Common Era'},{key:'b',text:'led people to colonize Greenland'},{key:'c',text:'colonized Iceland'},
+          {key:'d',text:'Portuguese prince'},{key:'e',text:'what Europeans wanted from the Far East'},{key:'f',text:'first people to discover America'},
+          {key:'g',text:'Common Era'},{key:'h',text:'first European to sail around the bottom of Africa'},
+          {key:'i',text:'set up forts along the African coast to protect trade route'},{key:'j',text:'reached Europe by a difficult land and sea route in 1400'},
+          {key:'k',text:'Same time period as AD'},{key:'l',text:'nation that controlled the first all-water route to Asia'},
+          {key:'m',text:'founded a navigation school'},{key:'n',text:'first European to sail to Asia around Africa'},
+          {key:'o',text:'first European to reach America'},{key:'p',text:'crossed the Bering Sea'},
+          {key:'q',text:'pirates and expert sailors'},{key:'r',text:'recorded the discovery of America in sagas'}
+        ]),
+        wsGroup('fillblank', 'Complete these sentences.', [
+          wsFB('1.12','Ferdinand and Isabella, rulers of ___________ agreed to finance Columbus\u2019 voyage.','Spain'),
+          wsFB('1.13a','Columbus first landed on an island he named ___________','San Salvador'),
+          wsFB('1.13b','in October of ___________.','1492'),
+          wsFB('1.14a','The two mistakes Columbus made were thinking ___________ was closer to Europe','Asia'),
+          wsFB('1.14b','and not knowing ___________ was in the way.','America'),
+          wsFB('1.15','The archipelago where Columbus first landed was named the ___________.','West Indies'),
+          wsFB('1.16a','The first European colony in the Americas was ___________','Isabela'),
+          wsFB('1.16b','on the island of ___________.','Hispaniola'),
+          wsFB('1.17','Columbus believed he had sailed to ___________.','Asia'),
+          wsFB('1.18a','The ships on Columbus\u2019 first voyage were the ___________,','Ni\u00f1a'),
+          wsFB('1.18b','the ___________','Pinta'),
+          wsFB('1.18c','and the ___________.','Santa Maria'),
+          wsFB('1.19','Columbus sailed to America a total of ___________ times.','four'),
+        ]),
+        wsGroup('matching', 'Match these people with their description.', [
+          wsMatch('1.20','Hernando De Soto','b'),
+          wsMatch('1.21','Ponce de Le\u00f3n','c'),
+          wsMatch('1.22','Ferdinand Magellan','a'),
+          wsMatch('1.23','St. Augustine, Florida','e'),
+          wsMatch('1.24','conquistadors','d'),
+          wsMatch('1.25','Francisco Coronado','f'),
+        ], [
+          {key:'a',text:'Led the first voyage around the world'},{key:'b',text:'Explored between Florida and the Mississippi River'},
+          {key:'c',text:'Explored and named Florida, looking for the Fountain of Youth'},{key:'d',text:'Spanish noblemen who came to America to conquer and get rich'},
+          {key:'e',text:'First European settlement in the U.S.'},{key:'f',text:'Explored Arizona, New Mexico, and Texas'}
+        ]),
+        wsGroup('fillblank', 'Complete these sentences.', [
+          wsFB('1.26','The passage through or around America to Asia was called the ___________ Passage.','Northwest'),
+          wsFB('1.27','La Salle claimed all the land drained by the ___________ River.','Mississippi'),
+          wsFB('1.28a','Champlain became friends with the ___________ people','Algonquin'),
+          wsFB('1.28b','but enemies of the ___________.','Iroquois'),
+          wsFB('1.29','The first French colony in America was the city of ___________.','Quebec'),
+          wsFB('1.30','___________ was the "Father of New France."','Samuel de Champlain'),
+          wsFB('1.31','La Salle named the land he claimed for France ___________.','Louisiana'),
+          wsFB('1.32','New France became profitable by trading in ___________.','furs'),
+        ]),
+        wsGroup('shortanswer', 'Name the place or person.', [
+          wsSA('1.35','English sea dog who sailed around the world attacking Spanish cities and ships'),
+          wsSA('1.36','City built by the Dutch on Manhattan Island'),
+          wsSA('1.37','Explorer working for the Dutch and the English who found a river in New York and a bay in Canada'),
+          wsSA('1.38','Island where the Lost Colony was founded'),
+          wsSA('1.39','English explorer who found the Grand Banks in 1497'),
+          wsSA('1.40','Name for New Netherlands after it became English'),
+          wsSA('1.41','The Dutch paid about $24 for this important island'),
+          wsSA('1.42','Company that colonized New Netherlands'),
+        ]),
+      ]
+    }
   };
 }
 function defaultScienceWeek1(){
   return {
     topic: 'Cells — the Basic Unit of Life. Robert Hooke\u2019s 1665 discovery, the parts of a cell (membrane, cytoplasm, nucleus), and the difference between unicellular/multicellular and prokaryote/eukaryote cells.',
-    pdfDataUrl: null, pdfFilename: null
+    pdfDataUrl: null, pdfFilename: null,
+    worksheet: {
+      groups: [
+        wsGroup('fillblank', 'Write the answers on the lines.', [
+          wsFB('1.1','The unit of life for all living things is the ___________.','cell'),
+          wsFB('1.2','An Englishman named Robert Hooke examined ___________ under a crude microscope and called the small chambers "cells."','cork'),
+          wsFB('1.3','A cork cell was first observed by Robert Hooke in the year ___________.','1665'),
+          wsFB('1.4','A one-celled living thing is called ___________.','unicellular'),
+          wsFB('1.5','A many-celled living thing is called ___________.','multicellular'),
+        ]),
+        wsGroup('matching', 'Match these items.', [
+          wsMatch('1.6','protoplasm','b'),
+          wsMatch('1.7','prokaryote','f'),
+          wsMatch('1.8','eukaryote','a'),
+          wsMatch('1.9','nucleus','d'),
+          wsMatch('1.10','cytoplasm','g'),
+          wsMatch('1.11','cell wall','c'),
+        ], [
+          {key:'a',text:'contains three basic parts of the cell: cell membrane, cytoplasm, and nucleus'},
+          {key:'b',text:'inner fluid material within the cell membrane'},
+          {key:'c',text:'a fourth part of a cell found only in plants'},
+          {key:'d',text:'found within the protoplasm and looks a little like a dark ball or spot'},
+          {key:'e',text:'part of a microscope'},
+          {key:'f',text:'contains only two basic parts of the cell: cell membrane and protoplasm'},
+          {key:'g',text:'fluid material within cell membrane and outside the nucleus'}
+        ]),
+        wsGroup('truefalse', 'Answer true or false.', [
+          wsTF('1.13','Almost all cells are "microscopic."','true'),
+          wsTF('1.14','The smallest cell is the yolk of an ostrich egg.','false'),
+          wsTF('1.15','The human body has more than 10 trillion cells.','true'),
+          wsTF('1.16','Cells come in a great variety of shapes.','true'),
+          wsTF('1.17','All cells are the same size.','false'),
+        ]),
+        wsGroup('shortanswer', 'Answer this question.', [
+          wsSA('1.18','What things help us to view cells?'),
+        ]),
+      ]
+    }
   };
 }
 
@@ -1130,6 +1260,9 @@ async function renderBoard(){
       const pdfBtn = lesson.pdfDataUrl
         ? `<button type="button" class="btn btn-ghost" id="openLessonPdf" style="margin-top:10px;">📄 Open ${esc(lesson.pdfFilename||'Lesson PDF')}</button>`
         : `<p style="font-size:12.5px;color:var(--ink-soft);margin-top:10px;">No PDF attached yet for this week — use the 📚 icon to upload one.</p>`;
+      const worksheetBtn = lesson.worksheet
+        ? `<button type="button" class="btn btn-primary" id="openLessonWorksheet" style="margin-top:10px;margin-left:8px;">📝 Fill Out Worksheet</button>`
+        : '';
       const bhm = (lessonType==='History' && lesson.blackHistoryMoment)
         ? `<div class="vocab-box" style="margin-top:12px;">
              <div class="word-badge" style="margin-bottom:6px;">Black History Connection</div>
@@ -1138,11 +1271,14 @@ async function renderBoard(){
       lessonHTML = `<div class="card">
         <div class="word-badge">${esc(lessonType)} Lesson · Week ${aw}</div>
         <div style="font-size:15px;font-weight:600;line-height:1.4;margin:6px 0;">${esc(lesson.topic)}</div>
-        ${pdfBtn}
+        ${pdfBtn}${worksheetBtn}
         ${bhm}
       </div>`;
       if(lesson.pdfDataUrl){
         window.__pendingLessonPdf = lesson;
+      }
+      if(lesson.worksheet){
+        window.__pendingWorksheet = { subject: lessonType.toLowerCase(), lesson };
       }
     } else {
       lessonHTML = `<div class="card"><div class="word-badge">${esc(lessonType)} Lesson · Week ${aw}</div><p style="color:var(--ink-soft);font-size:13.5px;margin-top:8px;">Not uploaded yet — use the 📚 icon to add this week's ${esc(lessonType)} PDF.</p></div>`;
@@ -1367,6 +1503,13 @@ async function renderBoard(){
         const blob = new Blob([bytes], {type:'application/pdf'});
         window.open(URL.createObjectURL(blob), '_blank');
       }catch(e){ console.error('pdf open failed', e); showToast('Could not open the PDF.'); }
+    });
+  }
+  const lessonWorksheetBtn = document.getElementById('openLessonWorksheet');
+  if(lessonWorksheetBtn && window.__pendingWorksheet){
+    lessonWorksheetBtn.addEventListener('click', ()=>{
+      const { subject, lesson } = window.__pendingWorksheet;
+      openWorksheetModal(subject, lesson);
     });
   }
 
@@ -1672,6 +1815,114 @@ function afterTestSectionRender(){
     t.addEventListener('click', ()=> showStudent(t.dataset.testtab));
   });
   if(state.students[0]) showStudent(state.students[0].id);
+}
+
+/* ========================= LESSON WORKSHEET (fillable, per student) =========================
+   The History/Science lesson card gets a "Fill Out Worksheet" link when that
+   week's lesson has real transcribed exercises attached. Opens a modal with
+   student tabs (same pattern as the Friday test) — each kid fills their own
+   copy, autosaving per student per date per subject. Matching/fill-in-blank/
+   true-false auto-grade; short-answer questions get written feedback in the
+   Grade Tests screen. */
+function worksheetAnswersKey(dateStr, studentId, subject){ return 'worksheet-answers:'+dateStr+':'+subject+':'+studentId; }
+function worksheetGradesKey(dateStr, studentId, subject){ return 'worksheet-grades:'+dateStr+':'+subject+':'+studentId; }
+
+function defaultWorksheetAnswers(worksheet){
+  const answers = {};
+  (worksheet.groups||[]).forEach(g=>{ (g.items||[]).forEach(it=>{ answers[it.id] = ''; }); });
+  return answers;
+}
+
+let worksheetCache = {}; // studentId -> {worksheet, answers}
+let currentWorksheetCtx = null; // {subject, lesson, dateStr}
+
+async function openWorksheetModal(subject, lesson){
+  currentWorksheetCtx = { subject, lesson, dateStr: state.dateStr };
+  document.getElementById('worksheetTitle').textContent = (subject==='history'?'History':'Science') + ' Worksheet';
+  document.getElementById('worksheetSub').textContent = lesson.topic;
+
+  const tabsWrap = document.getElementById('worksheetStudentTabs');
+  tabsWrap.innerHTML = state.students.map((s,i)=>`<div class="modal-tab ${i===0?'active':''}" data-wstab="${s.id}">${esc(s.name)}</div>`).join('');
+
+  worksheetCache = {};
+  for(const s of state.students){
+    const saved = (await storageGet(worksheetAnswersKey(state.dateStr, s.id, subject))) || defaultWorksheetAnswers(lesson.worksheet);
+    worksheetCache[s.id] = { worksheet: lesson.worksheet, answers: saved };
+  }
+
+  function showStudent(id){
+    tabsWrap.querySelectorAll('.modal-tab').forEach(t=>t.classList.toggle('active', t.dataset.wstab===id));
+    const formArea = document.getElementById('worksheetFormArea');
+    formArea.innerHTML = renderWorksheetFormHTML(worksheetCache[id]);
+    wireWorksheetFormInputs(formArea, id);
+  }
+  tabsWrap.querySelectorAll('.modal-tab').forEach(t=>{ t.addEventListener('click', ()=> showStudent(t.dataset.wstab)); });
+  showStudent(state.students[0].id);
+
+  document.getElementById('worksheetOverlay').classList.add('open');
+}
+
+function renderWorksheetFormHTML(entry){
+  const { worksheet, answers } = entry;
+  return worksheet.groups.map((g,gi)=>{
+    if(g.type==='fillblank'){
+      return `<div class="card" style="margin-bottom:10px;">
+        <div class="mini-lbl" style="margin-top:0;">${esc(g.instructions)}</div>
+        ${g.items.map(it=>`
+          <div style="margin:8px 0;">
+            <p style="font-size:13.5px;margin:0 0 4px;">${esc(it.prompt)}</p>
+            <input type="text" data-wsfield="${it.id}" value="${escAttr(answers[it.id]||'')}" placeholder="Your answer" style="width:100%;padding:7px 9px;border:1.5px solid var(--line-light);border-radius:7px;font-family:'Oswald',sans-serif;">
+          </div>`).join('')}
+      </div>`;
+    }
+    if(g.type==='truefalse'){
+      return `<div class="card" style="margin-bottom:10px;">
+        <div class="mini-lbl" style="margin-top:0;">${esc(g.instructions)}</div>
+        ${g.items.map(it=>`
+          <div class="info-line" style="align-items:center;">
+            <span>${esc(it.statement)}</span>
+            <select data-wsfield="${it.id}" style="padding:5px 8px;border:1.5px solid var(--line-light);border-radius:6px;font-family:'Oswald',sans-serif;">
+              <option value="" ${!answers[it.id]?'selected':''}>—</option>
+              <option value="true" ${answers[it.id]==='true'?'selected':''}>True</option>
+              <option value="false" ${answers[it.id]==='false'?'selected':''}>False</option>
+            </select>
+          </div>`).join('')}
+      </div>`;
+    }
+    if(g.type==='matching'){
+      return `<div class="card" style="margin-bottom:10px;">
+        <div class="mini-lbl" style="margin-top:0;">${esc(g.instructions)}</div>
+        <div style="font-size:12px;color:var(--ink-soft);margin-bottom:8px;">
+          ${g.options.map(o=>`<b>${esc(o.key)}.</b> ${esc(o.text)}`).join(' &nbsp; ')}
+        </div>
+        ${g.items.map(it=>`
+          <div class="info-line" style="align-items:center;">
+            <span>${esc(it.term)}</span>
+            <input type="text" data-wsfield="${it.id}" value="${escAttr(answers[it.id]||'')}" placeholder="letter(s)" style="width:90px;padding:6px 8px;border:1.5px solid var(--line-light);border-radius:6px;font-family:'Oswald',sans-serif;text-align:center;">
+          </div>`).join('')}
+      </div>`;
+    }
+    // shortanswer
+    return `<div class="card" style="margin-bottom:10px;">
+      <div class="mini-lbl" style="margin-top:0;">${esc(g.instructions)}</div>
+      ${g.items.map(it=>`
+        <div style="margin:8px 0;">
+          <p style="font-size:13.5px;margin:0 0 4px;">${esc(it.prompt)}</p>
+          <textarea data-wsfield="${it.id}" style="width:100%;min-height:44px;padding:8px;border:1.5px solid var(--line-light);border-radius:8px;font-family:'Oswald',sans-serif;font-size:13.5px;">${esc(answers[it.id]||'')}</textarea>
+        </div>`).join('')}
+    </div>`;
+  }).join('');
+}
+
+function wireWorksheetFormInputs(container, studentId){
+  container.querySelectorAll('[data-wsfield]').forEach(el=>{
+    const evt = el.tagName==='SELECT' ? 'change' : 'change';
+    el.addEventListener(evt, async ()=>{
+      const entry = worksheetCache[studentId];
+      entry.answers[el.dataset.wsfield] = el.value;
+      await storageSet(worksheetAnswersKey(currentWorksheetCtx.dateStr, studentId, currentWorksheetCtx.subject), entry.answers);
+    });
+  });
 }
 
 /* ========================= EXTRA SUBJECTS EDITOR ========================= */
@@ -2388,6 +2639,9 @@ function openGradingModal(){
 document.getElementById('gradeDateInput').addEventListener('change', loadGradingContent);
 document.getElementById('gradeStudentInput').addEventListener('change', loadGradingContent);
 
+let gradingMode = 'test'; // 'test' | 'worksheet' | 'none' — set by loadGradingContent, read by the save handler
+let gradingSubject = null; // 'history' | 'science', only relevant when gradingMode === 'worksheet'
+
 async function loadGradingContent(){
   const dateStr = document.getElementById('gradeDateInput').value;
   const studentId = document.getElementById('gradeStudentInput').value;
@@ -2398,17 +2652,7 @@ async function loadGradingContent(){
   const student = state.students.find(s=>s.id===studentId);
   const [y,m,d] = dateStr.split('-').map(Number);
   const dateObj = new Date(y,m-1,d,12);
-  const mon = mondayOfWeek(dateObj);
-
-  const test = await buildWeeklyTest(student.grade, mon);
-  const answers = (await storageGet(testAnswersKey(dateStr, studentId))) || defaultTestAnswers();
-  const grades = (await storageGet(testGradesKey(dateStr, studentId))) || { vocabFeedback:[], currentEventFeedback:'', funFactFeedback:'', historyFeedback:'', scienceFeedback:'', scenarioFeedback:'' };
-  while(grades.vocabFeedback.length < test.vocab.length) grades.vocabFeedback.push('');
-
-  if(!answers.savedAt){
-    content.innerHTML = `<p style="color:var(--ink-soft);font-size:14px;">No test answers saved for ${esc(student.name)} on ${esc(dateStr)} yet.</p>`;
-    return;
-  }
+  const wd = dateObj.getDay();
 
   function feedbackRow(label, promptText, answerText, key, value){
     return `<div class="card" style="margin-bottom:10px;">
@@ -2427,25 +2671,73 @@ async function loadGradingContent(){
     </div>`;
   }
 
-  let html = '';
-  html += `<div class="card" style="margin-bottom:10px;">
-    <div class="mini-lbl" style="margin-top:0;">Vocabulary</div>
-    ${test.vocab.map((v,i)=>feedbackRow(v.word, '', answers.vocab[i], `vocab-${i}`, grades.vocabFeedback[i])).join('')}
-  </div>`;
-  html += feedbackRow('Current Event', test.currentEventQuestion, answers.currentEvent, 'currentEvent', grades.currentEventFeedback);
-  html += `<div class="card" style="margin-bottom:10px;">
-    <div class="mini-lbl" style="margin-top:0;">Financial Lit (auto-graded)</div>
-    ${test.financialLit.map((f,i)=>autoGradeRow(f.concept, answers.financialLit[i], f.answer)).join('')}
-  </div>`;
-  html += `<div class="card" style="margin-bottom:10px;">
-    <div class="mini-lbl" style="margin-top:0;">States & Capitals (auto-graded)</div>
-    ${test.statesCapitals.map((s,i)=>autoGradeRow(s.state, answers.statesCapitals[i], s.answer)).join('')}
-  </div>`;
-  html += feedbackRow('Fun Fact', '', answers.funFact, 'funFact', grades.funFactFeedback);
-  html += feedbackRow('History', test.historyTopic, answers.history, 'history', grades.historyFeedback);
-  html += feedbackRow('Science', test.scienceTopic, answers.science, 'science', grades.scienceFeedback);
-  html += feedbackRow('Real World Scenario', test.scenario, answers.scenario, 'scenario', grades.scenarioFeedback);
+  if(wd===5){
+    gradingMode = 'test'; gradingSubject = null;
+    const mon = mondayOfWeek(dateObj);
+    const test = await buildWeeklyTest(student.grade, mon);
+    const answers = (await storageGet(testAnswersKey(dateStr, studentId))) || defaultTestAnswers();
+    const grades = (await storageGet(testGradesKey(dateStr, studentId))) || { vocabFeedback:[], currentEventFeedback:'', funFactFeedback:'', historyFeedback:'', scienceFeedback:'', scenarioFeedback:'' };
+    while(grades.vocabFeedback.length < test.vocab.length) grades.vocabFeedback.push('');
 
+    if(!answers.savedAt){
+      content.innerHTML = `<p style="color:var(--ink-soft);font-size:14px;">No test answers saved for ${esc(student.name)} on ${esc(dateStr)} yet.</p>`;
+      return;
+    }
+
+    let html = '';
+    html += `<div class="card" style="margin-bottom:10px;">
+      <div class="mini-lbl" style="margin-top:0;">Vocabulary</div>
+      ${test.vocab.map((v,i)=>feedbackRow(v.word, '', answers.vocab[i], `vocab-${i}`, grades.vocabFeedback[i])).join('')}
+    </div>`;
+    html += feedbackRow('Current Event', test.currentEventQuestion, answers.currentEvent, 'currentEvent', grades.currentEventFeedback);
+    html += `<div class="card" style="margin-bottom:10px;">
+      <div class="mini-lbl" style="margin-top:0;">Financial Lit (auto-graded)</div>
+      ${test.financialLit.map((f,i)=>autoGradeRow(f.concept, answers.financialLit[i], f.answer)).join('')}
+    </div>`;
+    html += `<div class="card" style="margin-bottom:10px;">
+      <div class="mini-lbl" style="margin-top:0;">States & Capitals (auto-graded)</div>
+      ${test.statesCapitals.map((s,i)=>autoGradeRow(s.state, answers.statesCapitals[i], s.answer)).join('')}
+    </div>`;
+    html += feedbackRow('Fun Fact', '', answers.funFact, 'funFact', grades.funFactFeedback);
+    html += feedbackRow('History', test.historyTopic, answers.history, 'history', grades.historyFeedback);
+    html += feedbackRow('Science', test.scienceTopic, answers.science, 'science', grades.scienceFeedback);
+    html += feedbackRow('Real World Scenario', test.scenario, answers.scenario, 'scenario', grades.scenarioFeedback);
+    content.innerHTML = html;
+    return;
+  }
+
+  // Mon-Thu: worksheet grading (History Mon/Tue, Science Wed/Thu)
+  const subject = (wd===1||wd===2) ? 'history' : (wd===3||wd===4) ? 'science' : null;
+  if(!subject){ content.innerHTML = `<p style="color:var(--ink-soft);font-size:14px;">No lesson worksheet applies to this date.</p>`; return; }
+  gradingMode = 'worksheet'; gradingSubject = subject;
+
+  const aw = actualWeekForDate(dateObj);
+  const lesson = subject==='history' ? await getHistoryWeek(aw) : await getScienceWeek(aw);
+  if(!lesson || !lesson.worksheet){
+    content.innerHTML = `<p style="color:var(--ink-soft);font-size:14px;">No fillable worksheet attached to this week's ${subject==='history'?'History':'Science'} lesson.</p>`;
+    return;
+  }
+  const answers = (await storageGet(worksheetAnswersKey(dateStr, studentId, subject))) || {};
+  const grades = (await storageGet(worksheetGradesKey(dateStr, studentId, subject))) || {};
+
+  let html = '';
+  lesson.worksheet.groups.forEach((g, gi)=>{
+    if(g.type==='shortanswer'){
+      html += `<div class="card" style="margin-bottom:10px;">
+        <div class="mini-lbl" style="margin-top:0;">${esc(g.instructions)}</div>
+        ${g.items.map(it=>feedbackRow('', it.prompt, answers[it.id], it.id, grades[it.id])).join('')}
+      </div>`;
+    } else {
+      html += `<div class="card" style="margin-bottom:10px;">
+        <div class="mini-lbl" style="margin-top:0;">${esc(g.instructions)} (auto-graded)</div>
+        ${g.items.map(it=>{
+          const label = it.prompt || it.statement || it.term;
+          const expected = it.answer;
+          return autoGradeRow(label, answers[it.id], expected);
+        }).join('')}
+      </div>`;
+    }
+  });
   content.innerHTML = html;
 }
 
@@ -2454,6 +2746,16 @@ document.getElementById('saveGrading').addEventListener('click', async ()=>{
   const studentId = document.getElementById('gradeStudentInput').value;
   if(!dateStr || !studentId) return;
   const content = document.getElementById('gradingContent');
+
+  if(gradingMode === 'worksheet'){
+    const grades = {};
+    content.querySelectorAll('[data-gradefield]').forEach(el=>{ grades[el.dataset.gradefield] = el.value; });
+    grades.gradedAt = new Date().toISOString();
+    await storageSet(worksheetGradesKey(dateStr, studentId, gradingSubject), grades);
+    showToast('Feedback saved');
+    return;
+  }
+
   const vocabFeedback = [...content.querySelectorAll('[data-gradefield^="vocab-"]')].map(el=>el.value);
   const grades = {
     vocabFeedback,
