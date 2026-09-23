@@ -337,6 +337,16 @@
   <div class="modal wide">
     <h3>4-Week Content Plan</h3>
     <div class="sub">This rotates on repeat, forever — Week 5 is followed by Week 1 again. Days already auto-saved to the archive won't change unless you reset them individually.</div>
+    <div class="card" style="margin:12px 0;">
+      <div class="mini-lbl" style="margin-top:0;">Choose today's History or Science lesson</div>
+      <div class="sub">Choose any saved week, including lessons parsed from a PDF, then apply it to today's saved plan.</div>
+      <div class="field-grid">
+        <div><label>History lesson</label><select id="todayHistorySource"></select><button type="button" class="btn btn-ghost" id="applyTodayHistory" style="margin-top:6px;">Apply History to today</button></div>
+        <div><label>Science lesson</label><select id="todayScienceSource"></select><button type="button" class="btn btn-ghost" id="applyTodayScience" style="margin-top:6px;">Apply Science to today</button></div>
+      </div>
+      <div style="margin-top:8px;"><label>Other saved lesson</label><select id="todayOtherSource"></select><button type="button" class="btn btn-ghost" id="applyTodayOther" style="margin-top:6px;">Apply selected lesson to today</button></div>
+      <div id="todayLessonApplyStatus" class="sub" style="margin-bottom:0;"></div>
+    </div>
     <div class="modal-tabs" id="weekLevelTabs"></div>
     <div id="weekLevelGroups"></div>
     <div class="modal-actions">
@@ -406,7 +416,7 @@
 
 <!-- DAY SETTINGS MODAL -->
 <div class="modal-overlay" id="buzzerOverlay">
-  <div class="modal" style="max-width:400px;">
+  <div class="modal" style="max-width:560px;">
     <h3>Day Settings</h3>
     <div class="sub">Controls when the school day ends and which timezone the whole plan runs on.</div>
     <label>End-of-day (final buzzer) time</label>
@@ -414,9 +424,24 @@
     <label>Timezone</label>
     <select id="timezoneInput"></select>
     <div class="sub" style="margin-top:8px;margin-bottom:0;">Days switch over at midnight in this timezone, and the buzzer countdown runs on it too — the same for every device, no matter where it's opened.</div>
+    <hr class="divider">
+    <h3 style="font-size:20px;">AI Material Reader</h3>
+    <div class="sub">Upload a lesson PDF or a clear photo/scan of a worksheet. AI extracts a lesson summary and turns worksheet questions into interactive, student-specific answer forms.</div>
+    <label>AI access code</label><input type="password" id="aiAccessCode" autocomplete="off" placeholder="Set by your administrator">
+    <div class="field-grid">
+      <div><label>Subject</label><select id="aiSubject"><option value="history">History</option><option value="science">Science</option><option value="math">Math</option><option value="language arts">Language Arts</option><option value="bible">Bible</option><option value="other">Other</option></select></div>
+      <div><label>Week number</label><input type="number" id="aiWeek" min="1" value="1"></div>
+    </div>
+    <label>Material type</label><select id="aiMaterialType"><option value="lesson">Lesson material + worksheet</option><option value="worksheet">Worksheet only</option></select>
+    <label>Students who should receive the digital worksheet</label><div id="aiStudentChoices" class="sub"></div>
+    <label>PDF, text file, or worksheet image (PNG/JPEG/WebP)</label><input type="file" id="aiMaterialFile" accept="application/pdf,.txt,image/png,image/jpeg,image/webp">
+    <button type="button" class="btn btn-ghost" id="aiAnalyzeMaterial" style="margin-top:8px;">Read and parse material</button>
+    <div id="aiMaterialStatus" class="sub" aria-live="polite"></div>
+    <div id="aiMaterialPreview" class="card" style="display:none;max-height:220px;overflow:auto;"></div>
+    <button type="button" class="btn btn-primary" id="aiSaveMaterial" style="display:none;">Save parsed material</button>
     <div class="modal-actions">
       <button class="btn btn-ghost" data-close>Cancel</button>
-      <button class="btn btn-primary" id="saveBuzzer">Save</button>
+      <button class="btn btn-primary" id="saveBuzzer">Save settings</button>
     </div>
   </div>
 </div>
@@ -825,6 +850,15 @@ function dayKey(dateStr){ return 'day-override:'+dateStr; }
 function checksKey(dateStr){ return 'day-checks:'+dateStr; }
 function historyWeekKey(w){ return 'history-week:'+w; }
 function scienceWeekKey(w){ return 'science-week:'+w; }
+function customMaterialWeekKey(subject,w){ return `teaching-material:${subject}:${w}`; }
+async function getMaterialWeek(subject,w){
+  if(subject==='history') return await getHistoryWeek(w);
+  if(subject==='science') return await getScienceWeek(w);
+  return await storageGet(customMaterialWeekKey(subject,w));
+}
+function materialSubjectLabel(subject){
+  return ({history:'History',science:'Science',math:'Math','language arts':'Language Arts',bible:'Bible',other:'Other'})[subject] || subject;
+}
 
 // ---- Worksheet helpers: turn the actual PDF exercises into fillable data ----
 function wsFB(id, prompt, answer){ return {id, prompt, answer}; }
@@ -1006,8 +1040,11 @@ function defaultScienceWeek4(){
     pdfDataUrl: null, pdfFilename: null
   };
 }
-const DEFAULT_HISTORY_WEEKS = {1:defaultHistoryWeek1, 2:defaultHistoryWeek2, 3:defaultHistoryWeek3, 4:defaultHistoryWeek4};
-const DEFAULT_SCIENCE_WEEKS = {1:defaultScienceWeek1, 2:defaultScienceWeek2, 3:defaultScienceWeek3, 4:defaultScienceWeek4};
+// Week 6's new curriculum was initially authored in the Week 1 defaults.
+// Keep Week 1 available, and register those same defaults for the current
+// actual week so the Week 6 lesson lookup can populate the board and uploader.
+const DEFAULT_HISTORY_WEEKS = {1:defaultHistoryWeek1, 2:defaultHistoryWeek2, 3:defaultHistoryWeek3, 4:defaultHistoryWeek4, 6:defaultHistoryWeek1};
+const DEFAULT_SCIENCE_WEEKS = {1:defaultScienceWeek1, 2:defaultScienceWeek2, 3:defaultScienceWeek3, 4:defaultScienceWeek4, 6:defaultScienceWeek1};
 
 /* ========================= DATE / SCHOOL DAY LOGIC ========================= */
 function pad(n){return n<10?'0'+n:''+n;}
@@ -1230,6 +1267,8 @@ function escAttr(s){ return esc(s).replace(/"/g,'&quot;'); }
 async function renderBoard(){
   const board = document.getElementById('board');
   const wd = state.weekdayNum;
+  window.__pendingLessonPdf = null;
+  window.__pendingWorksheet = null;
 
   if(!SCHOOL_DAYS.includes(wd)){
     const tzLabel = (TIMEZONE_OPTIONS.find(o=>o.value===state.timezone)||{}).label || state.timezone;
@@ -1260,7 +1299,7 @@ async function renderBoard(){
       const pdfBtn = lesson.pdfDataUrl
         ? `<button type="button" class="btn btn-ghost" id="openLessonPdf" style="margin-top:10px;">📄 Open ${esc(lesson.pdfFilename||'Lesson PDF')}</button>`
         : `<p style="font-size:12.5px;color:var(--ink-soft);margin-top:10px;">No PDF attached yet for this week — use the 📚 icon to upload one.</p>`;
-      const worksheetBtn = lesson.worksheet
+      const worksheetBtn = lesson.worksheet?.groups?.some(g=>(g.items||[]).length)
         ? `<button type="button" class="btn btn-primary" id="openLessonWorksheet" style="margin-top:10px;margin-left:8px;">📝 Fill Out Worksheet</button>`
         : '';
       const bhm = (lessonType==='History' && lesson.blackHistoryMoment)
@@ -1271,13 +1310,14 @@ async function renderBoard(){
       lessonHTML = `<div class="card">
         <div class="word-badge">${esc(lessonType)} Lesson · Week ${aw}</div>
         <div style="font-size:15px;font-weight:600;line-height:1.4;margin:6px 0;">${esc(lesson.topic)}</div>
+        ${lesson.summary?`<p style="font-size:13.5px;line-height:1.5;color:var(--ink-soft);margin:6px 0;">${esc(lesson.summary)}</p>`:''}
         ${pdfBtn}${worksheetBtn}
         ${bhm}
       </div>`;
       if(lesson.pdfDataUrl){
         window.__pendingLessonPdf = lesson;
       }
-      if(lesson.worksheet){
+      if(lesson.worksheet?.groups?.some(g=>(g.items||[]).length)){
         window.__pendingWorksheet = { subject: lessonType.toLowerCase(), lesson };
       }
     } else {
@@ -1838,14 +1878,17 @@ let currentWorksheetCtx = null; // {subject, lesson, dateStr}
 
 async function openWorksheetModal(subject, lesson){
   currentWorksheetCtx = { subject, lesson, dateStr: state.dateStr };
-  document.getElementById('worksheetTitle').textContent = (subject==='history'?'History':'Science') + ' Worksheet';
+  document.getElementById('worksheetTitle').textContent = materialSubjectLabel(subject) + ' Worksheet';
   document.getElementById('worksheetSub').textContent = lesson.topic;
 
+  const assignedIds = Array.isArray(lesson.worksheetStudentIds) ? lesson.worksheetStudentIds : [];
+  const worksheetStudents = assignedIds.length ? state.students.filter(s=>assignedIds.includes(s.id)) : state.students;
+  if(!worksheetStudents.length){ showToast('This worksheet has no students assigned.'); return; }
   const tabsWrap = document.getElementById('worksheetStudentTabs');
-  tabsWrap.innerHTML = state.students.map((s,i)=>`<div class="modal-tab ${i===0?'active':''}" data-wstab="${s.id}">${esc(s.name)}</div>`).join('');
+  tabsWrap.innerHTML = worksheetStudents.map((s,i)=>`<div class="modal-tab ${i===0?'active':''}" data-wstab="${s.id}">${esc(s.name)}</div>`).join('');
 
   worksheetCache = {};
-  for(const s of state.students){
+  for(const s of worksheetStudents){
     const saved = (await storageGet(worksheetAnswersKey(state.dateStr, s.id, subject))) || defaultWorksheetAnswers(lesson.worksheet);
     worksheetCache[s.id] = { worksheet: lesson.worksheet, answers: saved };
   }
@@ -1857,7 +1900,7 @@ async function openWorksheetModal(subject, lesson){
     wireWorksheetFormInputs(formArea, id);
   }
   tabsWrap.querySelectorAll('.modal-tab').forEach(t=>{ t.addEventListener('click', ()=> showStudent(t.dataset.wstab)); });
-  showStudent(state.students[0].id);
+  showStudent(worksheetStudents[0].id);
 
   document.getElementById('worksheetOverlay').classList.add('open');
 }
@@ -2063,6 +2106,53 @@ function collectTodayForm(){
 
 /* ========================= WEEKS PLAN MODAL (5-week rotation) ========================= */
 const WEEKDAY_LABELS = {1:'Monday',2:'Tuesday',3:'Wednesday',4:'Thursday',5:'Friday (Test Day)'};
+async function populateTodayLessonSources(){
+  const actualWeek = actualWeekForDate(state.schoolDate);
+  const maxWeek = Math.max(actualWeek, 6);
+  for(const subject of ['history','science']){
+    const select = document.getElementById(`today${subject[0].toUpperCase()+subject.slice(1)}Source`);
+    const lessonFn = subject==='history' ? getHistoryWeek : getScienceWeek;
+    const options = [];
+    for(let week=1; week<=maxWeek; week++){
+      const lesson = await lessonFn(week);
+      if(lesson) options.push({week, lesson});
+    }
+    select.innerHTML = options.map(({week,lesson})=>`<option value="${week}" ${week===actualWeek?'selected':''}>Week ${week} · ${esc(lesson.topic||lesson.pdfFilename||'Untitled lesson')}${lesson.pdfFilename?' · PDF':''}</option>`).join('') || '<option value="">No saved lessons</option>';
+  }
+  const otherSelect = document.getElementById('todayOtherSource');
+  const otherOptions=[];
+  for(const subject of ['math','language arts','bible','other']){
+    for(let week=1;week<=maxWeek;week++){
+      const lesson=await getMaterialWeek(subject,week);
+      if(lesson) otherOptions.push({subject,week,lesson});
+    }
+  }
+  otherSelect.innerHTML=otherOptions.map(({subject,week,lesson})=>`<option value="${escAttr(subject)}|${week}">${esc(materialSubjectLabel(subject))} · Week ${week} · ${esc(lesson.topic||lesson.pdfFilename||'Untitled lesson')}${lesson.pdfFilename?' · PDF':''}</option>`).join('')||'<option value="">No other saved lessons</option>';
+  const current = todayContent();
+  document.getElementById('todayLessonApplyStatus').textContent = current?.lesson
+    ? `Today's plan currently uses ${current.lessonType||'a custom'} lesson: ${current.lesson.topic||'Untitled lesson'}.`
+    : 'Choose a lesson above to replace or add today’s History or Science lesson.';
+}
+
+async function applyLessonToToday(subject){
+  let week, lesson, label;
+  if(subject==='other'){
+    const [pickedSubject,pickedWeek]=document.getElementById('todayOtherSource').value.split('|');
+    subject=pickedSubject; week=Number(pickedWeek); label=materialSubjectLabel(subject);
+  } else { week=Number(document.getElementById(`today${subject[0].toUpperCase()+subject.slice(1)}Source`).value); label=materialSubjectLabel(subject); }
+  if(!week){ showToast('Choose a saved lesson first.'); return; }
+  lesson=await getMaterialWeek(subject,week);
+  if(!lesson){ showToast(`No ${label} lesson is saved for Week ${week}.`); return; }
+  const existing = todayContent() || {};
+  state.todayOverride = {...existing, lesson:JSON.parse(JSON.stringify(lesson)), lessonType:label};
+  state.todayOverride.students = state.todayOverride.students || JSON.parse(JSON.stringify(state.students));
+  state.todayOverride.fieldLabels = state.todayOverride.fieldLabels || JSON.parse(JSON.stringify(state.fieldLabels));
+  await storageSet(dayKey(state.dateStr), state.todayOverride);
+  document.getElementById('todayLessonApplyStatus').textContent = `Applied Week ${week} ${label} to today's plan: ${lesson.topic||lesson.pdfFilename||'Untitled lesson'}.`;
+  await loadAndRender();
+  showToast(`Week ${week} ${label} applied to today`);
+}
+
 function openTemplateModal(){
   const weekTabsEl = document.getElementById('weekLevelTabs');
   const weekGroupsEl = document.getElementById('weekLevelGroups');
@@ -2110,6 +2200,7 @@ function openTemplateModal(){
   });
 
   document.getElementById('templateOverlay').classList.add('open');
+  populateTodayLessonSources();
 }
 function collectTemplateForm(){
   const weeks = {};
@@ -2533,6 +2624,9 @@ document.querySelectorAll('[data-cal-tab]').forEach(t=>{
 
 document.getElementById('openToday').addEventListener('click', ()=> requireEditAccess(openTodayModal));
 document.getElementById('openTemplate').addEventListener('click', ()=> requireEditAccess(openTemplateModal));
+document.getElementById('applyTodayHistory').addEventListener('click', ()=> applyLessonToToday('history'));
+document.getElementById('applyTodayScience').addEventListener('click', ()=> applyLessonToToday('science'));
+document.getElementById('applyTodayOther').addEventListener('click', ()=> applyLessonToToday('other'));
 document.getElementById('openStudents').addEventListener('click', ()=> requireEditAccess(openStudentsModal));
 document.getElementById('openArchive').addEventListener('click', openArchiveModal);
 document.getElementById('openBuzzerSettings').addEventListener('click', ()=> requireEditAccess(openBuzzerModal));
@@ -2546,6 +2640,17 @@ function openBuzzerModal(){
   const tzSelect = document.getElementById('timezoneInput');
   tzSelect.innerHTML = TIMEZONE_OPTIONS.map(o=>`<option value="${o.value}" ${o.value===state.timezone?'selected':''}>${o.label}</option>`).join('');
 
+  document.getElementById('aiAccessCode').value = localStorage.getItem('ll_ai_access_code') || '';
+  document.getElementById('aiWeek').value = actualWeekForDate(state.schoolDate);
+  document.getElementById('aiMaterialFile').value = '';
+  document.getElementById('aiMaterialStatus').textContent = '';
+  document.getElementById('aiMaterialPreview').style.display = 'none';
+  document.getElementById('aiMaterialPreview').innerHTML = '';
+  document.getElementById('aiSaveMaterial').style.display = 'none';
+  document.getElementById('aiMaterialPreview').style.display = 'none';
+  document.getElementById('aiMaterialPreview').innerHTML = '';
+  document.getElementById('aiStudentChoices').innerHTML = state.students.map(s=>`<label style="display:inline-flex;align-items:center;gap:6px;margin:2px 12px 6px 0;"><input type="checkbox" data-ai-student="${escAttr(s.id)}" checked> ${esc(s.name)}</label>`).join('') || 'Add students before creating a student worksheet.';
+
   document.getElementById('buzzerOverlay').classList.add('open');
 }
 document.getElementById('saveBuzzer').addEventListener('click', async ()=>{
@@ -2556,6 +2661,7 @@ document.getElementById('saveBuzzer').addEventListener('click', async ()=>{
   const tz = document.getElementById('timezoneInput').value;
   state.buzzerTime = bt;
   state.timezone = tz;
+  localStorage.setItem('ll_ai_access_code', document.getElementById('aiAccessCode').value.trim());
   await storageSet(BUZZER_KEY, bt);
   await storageSet(TIMEZONE_KEY, tz);
   closeAllModals(); showToast('Day settings saved');
@@ -2565,6 +2671,82 @@ document.getElementById('saveBuzzer').addEventListener('click', async ()=>{
 /* ========================= CURRICULUM PDF UPLOAD ========================= */
 let curriculumPendingDataUrl = null;
 let curriculumPendingFilename = null;
+let pendingAiMaterial = null;
+
+function fileAsDataUrl(file){
+  return new Promise((resolve,reject)=>{
+    const reader = new FileReader();
+    reader.onload = ()=>resolve(reader.result);
+    reader.onerror = ()=>reject(new Error('Could not read the selected file.'));
+    reader.readAsDataURL(file);
+  });
+}
+
+document.getElementById('aiAnalyzeMaterial').addEventListener('click', async ()=>{
+  const file = document.getElementById('aiMaterialFile').files[0];
+  const code = document.getElementById('aiAccessCode').value.trim();
+  const status = document.getElementById('aiMaterialStatus');
+  document.getElementById('aiSaveMaterial').style.display = 'none';
+  pendingAiMaterial = null;
+  if(!file){ status.textContent = 'Choose a PDF, text file, or worksheet image first.'; return; }
+  if(file.size > 4 * 1024 * 1024){ status.textContent = 'Files must be 4 MB or smaller so the secure AI request can process them.'; return; }
+  if(!code){ status.textContent = 'Enter your AI access code. The code is saved only in this browser.'; return; }
+  if(!sb){ status.textContent = 'Cloud storage is not configured, so AI parsing is unavailable.'; return; }
+  const selectedIds = [...document.querySelectorAll('[data-ai-student]:checked')].map(el=>el.dataset.aiStudent);
+  if(!selectedIds.length){ status.textContent = 'Select at least one student for the worksheet.'; return; }
+  const selectedStudents = state.students.filter(s=>selectedIds.includes(s.id));
+  status.textContent = 'Reading material and building the lesson…';
+  try{
+    const fileDataUrl = await fileAsDataUrl(file);
+    const subject = document.getElementById('aiSubject').value;
+    const mode = document.getElementById('aiMaterialType').value;
+    const {data,error} = await sb.functions.invoke('parse-material', {
+      body:{fileName:file.name, mimeType:file.type, fileDataUrl, subject, mode, grades:[...new Set(selectedStudents.map(s=>s.grade))]},
+      headers:{'x-ai-access-code':code}
+    });
+    if(error) throw new Error(error.message || 'AI parsing failed.');
+    if(data?.error) throw new Error(data.error);
+    pendingAiMaterial = {data,fileDataUrl,fileName:file.name,subject,mode,week:Number(document.getElementById('aiWeek').value),studentIds:selectedIds};
+    const qCount = (data.worksheet?.groups||[]).reduce((n,g)=>n+(g.items||[]).length,0);
+    status.textContent = `Ready: ${data.topic||file.name}${qCount?` · ${qCount} digital questions for ${selectedStudents.map(s=>s.name).join(', ')}`:''}. Review, then save.`;
+    const previewItems=(data.worksheet?.groups||[]).flatMap(g=>(g.items||[]).map(item=>item.prompt||item.statement||item.term||''));
+    const preview=document.getElementById('aiMaterialPreview');
+    preview.innerHTML=`<strong>${esc(data.topic||file.name)}</strong>${data.summary?`<p>${esc(data.summary)}</p>`:''}${previewItems.length?`<ol>${previewItems.slice(0,8).map(q=>`<li>${esc(q)}</li>`).join('')}</ol>`:'<p>No worksheet questions were detected.</p>'}`;
+    preview.style.display='block';
+    document.getElementById('aiSaveMaterial').style.display = 'inline-block';
+  }catch(e){ console.error('AI material parsing failed',e); status.textContent = e.message || 'Could not parse this file.'; }
+});
+
+document.getElementById('aiSaveMaterial').addEventListener('click', async ()=>{
+  if(!pendingAiMaterial) return;
+  const {data,fileDataUrl,fileName,subject,mode,week,studentIds} = pendingAiMaterial;
+  if(!week || week<1){ document.getElementById('aiMaterialStatus').textContent='Enter a valid week number.'; return; }
+  const previous = await getMaterialWeek(subject,week);
+  const lesson = {
+    ...(previous||{}),
+    topic:data.topic || previous?.topic || fileName,
+    summary:data.summary || '',
+    pdfDataUrl:fileDataUrl,
+    pdfFilename:fileName,
+    worksheet:data.worksheet || previous?.worksheet || null,
+    worksheetStudentIds:studentIds
+  };
+  if(subject==='history' && data.blackHistoryMoment) lesson.blackHistoryMoment=data.blackHistoryMoment;
+  const lessonKey=subject==='history' ? historyWeekKey(week) : subject==='science' ? scienceWeekKey(week) : customMaterialWeekKey(subject,week);
+  await storageSet(lessonKey, lesson);
+  if(week===actualWeekForDate(state.schoolDate)){
+    const today = todayContent() || {};
+    state.todayOverride={...today,lesson:JSON.parse(JSON.stringify(lesson)),lessonType:materialSubjectLabel(subject)};
+    state.todayOverride.students=state.todayOverride.students||JSON.parse(JSON.stringify(state.students));
+    state.todayOverride.fieldLabels=state.todayOverride.fieldLabels||JSON.parse(JSON.stringify(state.fieldLabels));
+    await storageSet(dayKey(state.dateStr),state.todayOverride);
+    await loadAndRender();
+  }
+  document.getElementById('aiMaterialStatus').textContent=`Saved Week ${week} ${materialSubjectLabel(subject)} and ${week===actualWeekForDate(state.schoolDate)?'applied it to today.':'added it to the lesson picker.'}`;
+  document.getElementById('aiSaveMaterial').style.display='none';
+  pendingAiMaterial=null;
+  showToast('AI lesson and digital worksheet saved');
+});
 
 function openCurriculumModal(){
   const aw = actualWeekForDate(state.schoolDate);
@@ -2615,9 +2797,17 @@ document.getElementById('saveCurriculum').addEventListener('click', async ()=>{
   if(!w || w<1){ showToast('Enter a valid week number.'); return; }
   const subj = document.getElementById('currSubjectInput').value;
   const topic = document.getElementById('currTopicInput').value;
-  const obj = { topic, pdfDataUrl: curriculumPendingDataUrl, pdfFilename: curriculumPendingFilename };
+  const obj = {...(await (subj==='history' ? getHistoryWeek(w) : getScienceWeek(w)) || {}), topic, pdfDataUrl: curriculumPendingDataUrl, pdfFilename: curriculumPendingFilename };
   if(subj==='history') obj.blackHistoryMoment = document.getElementById('currBhmInput').value;
   await storageSet(subj==='history' ? historyWeekKey(w) : scienceWeekKey(w), obj);
+  const isLessonDay = subj==='history' ? [1,2].includes(state.weekdayNum) : [3,4].includes(state.weekdayNum);
+  if(w===actualWeekForDate(state.schoolDate) && isLessonDay){
+    const today=todayContent()||{};
+    state.todayOverride={...today,lesson:JSON.parse(JSON.stringify(obj)),lessonType:subj==='history'?'History':'Science'};
+    state.todayOverride.students=state.todayOverride.students||JSON.parse(JSON.stringify(state.students));
+    state.todayOverride.fieldLabels=state.todayOverride.fieldLabels||JSON.parse(JSON.stringify(state.fieldLabels));
+    await storageSet(dayKey(state.dateStr),state.todayOverride);
+  }
   closeAllModals(); showToast(`Week ${w} ${subj==='history'?'History':'Science'} lesson saved`);
   await loadAndRender();
 });

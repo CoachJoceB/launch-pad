@@ -510,33 +510,16 @@ async function seedFall26(){
    AI SYLLABUS PARSING
 ========================================================= */
 async function parseSyllabusText(rawText){
-  const system = `You extract a structured task list from a college course syllabus for an accelerated 8-week SEU (Southeastern University) online term.
-Return ONLY valid JSON — no markdown fences, no preamble, no commentary. The JSON must be an array of objects with this exact shape:
-[{"week": 1, "title": "string", "type": "discussion"|"assignment"|"quiz"|"exam"|"reading"|"other", "dueDayOfWeek": "Monday".."Sunday" or null, "initialPostDay": "Monday".."Sunday" or null, "replyDay": "Monday".."Sunday" or null, "notes": "string, short"}]
-Rules:
-- Include every graded item: discussion boards, quizzes, exams, papers, assignments, projects.
-- For discussion board items, if the syllabus states separate initial-post and reply deadlines, fill initialPostDay and replyDay and leave dueDayOfWeek null. If only one deadline is given, use dueDayOfWeek and leave the other two null.
-- "week" is the module/week number (1-8) the item belongs to, inferred from the syllabus structure.
-- If a day of week isn't stated, use null — do not guess. (The app auto-spreads unstated days across Mon-Fri, and always schedules exams after that week's other work.)
-- Keep "notes" under 12 words (e.g. page count, submission format).
-- Do not invent items that aren't in the text.`;
-
-  const resp = await fetch("https://api.anthropic.com/v1/messages", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      model: "claude-sonnet-4-6",
-      max_tokens: 4000,
-      system,
-      messages: [{ role: "user", content: rawText.slice(0, 40000) }]
-    })
+  const aiCode = localStorage.getItem('ll_ai_access_code') || '';
+  if(!aiCode) throw new Error('Open Day Settings on the main page and save your AI access code first.');
+  const {data,error} = await sb.functions.invoke('parse-material', {
+    body:{action:'syllabus',rawText:rawText.slice(0,40000)},
+    headers:{'x-ai-access-code':aiCode}
   });
-  const data = await resp.json();
-  const textBlocks = (data.content || []).filter(b=>b.type==='text').map(b=>b.text).join('\n');
-  let clean = textBlocks.trim().replace(/^```json/i,'').replace(/^```/,'').replace(/```$/,'').trim();
-  const parsed = JSON.parse(clean);
-  if(!Array.isArray(parsed)) throw new Error('Unexpected response shape');
-  return parsed;
+  if(error) throw new Error(error.message || 'Claude could not parse the syllabus.');
+  if(data?.error) throw new Error(data.error);
+  if(!Array.isArray(data?.items)) throw new Error('Claude returned an unexpected syllabus format.');
+  return data.items;
 }
 
 /* =========================================================
@@ -884,7 +867,7 @@ async function handleParse(courseId){
     showReviewModal(c, extracted);
   }catch(e){
     console.error(e);
-    errEl.textContent = 'Something went wrong reading that syllabus. Try again, or paste a shorter section.';
+    errEl.textContent = e.message || 'Something went wrong reading that syllabus. Try again, or paste a shorter section.';
     btn.disabled = false; btn.textContent = 'Parse syllabus';
   }
 }
