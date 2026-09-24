@@ -568,18 +568,19 @@ function normalizeStudent(s){
 function v(word,def,sent,syn,ant){ return {word,def,sent,syn,ant}; }
 function fl(concept,blank,answer){ return {concept,blank,answer}; }
 function sc(state,capital){ return {state,capital}; }
-function mkDay(devotional, vocab, financialLit, realWorldScenario, statesCapitals){
+function mkDay(devotional, vocab, currentEvent, financialLit, realWorldScenario, statesCapitals){
   return {
-    devotional, vocab, financialLit, realWorldScenario, statesCapitals,
+    devotional, vocab, currentEvent, financialLit, realWorldScenario, statesCapitals,
     subjects:{ math:'Independent work - 1 lesson', reading:'30 mins', spanish:'Duolingo' }
   };
 }
 function mkFriday(devotional){
   return {
-    devotional, vocab:{}, financialLit:null, realWorldScenario:'', statesCapitals:[],
+    devotional, vocab:{}, currentEvent:null, financialLit:null, realWorldScenario:'', statesCapitals:[],
     subjects:{ math:'Independent work - 1 lesson', reading:'30 mins', spanish:'Duolingo' }
   };
 }
+function ce(headline, summary, applyIt){ return {headline, summary, applyIt}; }
 function devo(wordOfDay, scripture, reflection, prayer, intention){ return {wordOfDay, scripture, reflection, prayer, intention}; }
 
 // Content weeks 1-4: devotional, vocab, financial lit, real-world scenario, and
@@ -592,184 +593,108 @@ function defaultContentWeeks(){
           {'5th':v('Resilient','Able to recover quickly from difficulty.','She was resilient after losing the first game and came back stronger.','tough','fragile'),
            '8th':v('Tenacity','Firmness in holding to a course of action.','His tenacity on defense wore the other team down.','persistence','weakness'),
            '10th':v('Fortitude','Courage and strength in facing pain or adversity.','It took fortitude to keep training after the injury.','resolve','cowardice')},
-          fl('Budgeting','A budget helps you plan how to spend your ______ so you don\u2019t run out before payday.','money'), 'A teammate takes credit for your idea in front of the coach. What do you do?', [sc('Florida','Tallahassee'), sc('Georgia','Atlanta')]),
+          ce('Amazon Raises Pay for a Million Workers', 'Amazon is a company that sells almost everything online. This week, Amazon said it will pay its warehouse and delivery workers more money — over $1 billion more, split between workers across the country. The company wants to keep its workers and make their jobs better.', 'If you ran a company, would you rather pay your workers more or spend that money on other things? Why?'), fl('Budgeting','A budget helps you plan how to spend your ______ so you don\u2019t run out before payday.','money'), 'A teammate takes credit for your idea in front of the coach. What do you do?', [sc('Florida','Tallahassee'), sc('Georgia','Atlanta')]),
       2: mkDay(devo('Discipline','"No discipline seems pleasant at the time, but painful. Later it produces a harvest of righteousness." — Hebrews 12:11','What is one small habit you can stick to today, even when no one is watching?','God, help me do the right thing consistently, not just when it\u2019s easy. Amen.','Today I follow through on my routine, even the boring parts.'),
           {'5th':v('Discipline','Training to act in a controlled, correct way.','Discipline helped him finish his homework before practice.','self-control','carelessness'),
            '8th':v('Composure','Calmness and control, especially in a difficult situation.','She kept her composure at the free-throw line.','calm','panic'),
            '10th':v('Discernment','The ability to judge well.','Discernment helped her choose the smarter play, not just the fastest one.','judgment','confusion')},
-          fl('Paying Yourself First','Setting aside part of your money regularly, before you spend the rest, is called paying yourself ______.','first'), 'You get your first paycheck: $200. Saving is a habit you want to build early. How much would you set aside before spending any of it, and why?', [sc('Alabama','Montgomery'), sc('Texas','Austin')]),
+          ce('New iPhones Are Selling Really Well', 'Apple makes iPhones, one of the most popular phones in the world. This week, news came out that a lot of people are buying Apple\'s newest iPhone. When a company sells more of something, it usually means the company makes more money — and its stock (a tiny piece of ownership in the company) often goes up in value too.', 'Why do you think so many people want the newest version of a phone, even if their old one still works?'), fl('Paying Yourself First','Setting aside part of your money regularly, before you spend the rest, is called paying yourself ______.','first'), 'You get your first paycheck: $200. Saving is a habit you want to build early. How much would you set aside before spending any of it, and why?', [sc('Alabama','Montgomery'), sc('Texas','Austin')]),
       3: mkDay(devo('Integrity','"The integrity of the upright guides them." — Proverbs 11:3','Would you make the same choice if no one were watching?','Lord, let my actions match my words today, in the classroom and on the court. Amen.','Today I do the right thing even when it\u2019s inconvenient.'),
           {'5th':v('Integrity','Doing the right thing even when no one is watching.','He called his own foul because of his integrity.','honesty','dishonesty'),
            '8th':v('Adversity','Difficulties or misfortune.','The team faced adversity but stayed focused on the plan.','hardship','ease'),
            '10th':v('Resolute','Admirably purposeful, determined, unwavering.','She stayed resolute in her training schedule all season.','determined','wavering')},
-          fl('Needs vs. Wants','Rent and groceries are ______, while video games are wants.','needs'), 'A friend asks to borrow $20 and still hasn\u2019t paid back the $10 they borrowed last month. What do you say?', [sc('California','Sacramento'), sc('New York','Albany')]),
+          ce('GameStop Pays Off Its Debt', 'GameStop is a store that sells video games. The company used to owe over a billion dollars to people it had borrowed money from. This week, GameStop paid that debt back — but instead of using cash, it gave those people small pieces of ownership in the company, called stock, instead.', 'Why might a company want to pay off debt as fast as it can, even if it means giving up something valuable?'), fl('Needs vs. Wants','Rent and groceries are ______, while video games are wants.','needs'), 'A friend asks to borrow $20 and still hasn\u2019t paid back the $10 they borrowed last month. What do you say?', [sc('California','Sacramento'), sc('New York','Albany')]),
       4: mkDay(devo('Perseverance','"Let us not become weary in doing good, for at the proper time we will reap a harvest." — Galatians 6:9','What\u2019s something you almost gave up on that you\u2019re glad you kept doing?','God, help me keep going one more rep, one more page, one more try. Amen.','Today I finish what I start, even when it gets hard partway through.'),
           {'5th':v('Perseverance','Continuing on a task despite difficulty.','Her perseverance paid off when she finally made the shot.','persistence','quitting'),
            '8th':v('Accountability','Being responsible for your actions and choices.','Accountability meant admitting the mistake and fixing it.','responsibility','irresponsibility'),
            '10th':v('Meticulous','Showing great attention to detail.','His meticulous film study helped the whole team improve.','careful','sloppy')},
-          fl('Income','Money you earn from working a job is called ______.','income'), 'You disagree with a coach\u2019s call in front of the team. How do you handle it in the moment, and afterward?', [sc('Virginia','Richmond'), sc('Ohio','Columbus')]),
+          ce('Gold Prices Hit an All-Time High', 'Gold is a shiny metal that people have valued for thousands of years. This week, the price of gold reached its highest point ever — over $4,300 for just one ounce! When people worry about the economy, they often buy gold because they trust it will hold its value.', 'Can you think of something else (not money) that people trust will always be valuable? Why do they trust it?'), fl('Income','Money you earn from working a job is called ______.','income'), 'You disagree with a coach\u2019s call in front of the team. How do you handle it in the moment, and afterward?', [sc('Virginia','Richmond'), sc('Ohio','Columbus')]),
       5: mkFriday(devo('Resilience','"I can do all things through Christ who strengthens me." — Philippians 4:13','When something feels hard today, what will you tell yourself instead of quitting?','Lord, give me strength to keep going when today gets tough. Help me trust You with my effort. Amen.','Today I bounce back quickly when something doesn\u2019t go my way.'),
           {'5th':v('Resilient','Able to recover quickly from difficulty.','She was resilient after losing the first game and came back stronger.','tough','fragile'),
            '8th':v('Tenacity','Firmness in holding to a course of action.','His tenacity on defense wore the other team down.','persistence','weakness'),
            '10th':v('Fortitude','Courage and strength in facing pain or adversity.','It took fortitude to keep training after the injury.','resolve','cowardice')},
           'Science','Intro to forces & motion'),
-      2: mkDay(devo('Discipline','"No discipline seems pleasant at the time, but painful. Later it produces a harvest of righteousness." — Hebrews 12:11','What is one small habit you can stick to today, even when no one is watching?','God, help me do the right thing consistently, not just when it\u2019s easy. Amen.','Today I follow through on my routine, even the boring parts.'),
-          {'5th':v('Discipline','Training to act in a controlled, correct way.','Discipline helped him finish his homework before practice.','self-control','carelessness'),
-           '8th':v('Composure','Calmness and control, especially in a difficult situation.','She kept her composure at the free-throw line.','calm','panic'),
-           '10th':v('Discernment','The ability to judge well.','Discernment helped her choose the smarter play, not just the fastest one.','judgment','confusion')},
-          'History','Colonial America overview'),
-      3: mkDay(devo('Integrity','"The integrity of the upright guides them." — Proverbs 11:3','Would you make the same choice if no one were watching?','Lord, let my actions match my words today, in the classroom and on the court. Amen.','Today I do the right thing even when it\u2019s inconvenient.'),
-          {'5th':v('Integrity','Doing the right thing even when no one is watching.','He called his own foul because of his integrity.','honesty','dishonesty'),
-           '8th':v('Adversity','Difficulties or misfortune.','The team faced adversity but stayed focused on the plan.','hardship','ease'),
-           '10th':v('Resolute','Admirably purposeful, determined, unwavering.','She stayed resolute in her training schedule all season.','determined','wavering')},
-          'Science','States of matter'),
-      4: mkDay(devo('Perseverance','"Let us not become weary in doing good, for at the proper time we will reap a harvest." — Galatians 6:9','What\u2019s something you almost gave up on that you\u2019re glad you kept doing?','God, help me keep going one more rep, one more page, one more try. Amen.','Today I finish what I start, even when it gets hard partway through.'),
-          {'5th':v('Perseverance','Continuing on a task despite difficulty.','Her perseverance paid off when she finally made the shot.','persistence','quitting'),
-           '8th':v('Accountability','Being responsible for your actions and choices.','Accountability meant admitting the mistake and fixing it.','responsibility','irresponsibility'),
-           '10th':v('Meticulous','Showing great attention to detail.','His meticulous film study helped the whole team improve.','careful','sloppy')},
-          'History','Causes of the American Revolution'),
-      5: mkDay(devo('Test Day','"She is clothed with strength and dignity; she can laugh at the days to come." — Proverbs 31:25','Which of this week\u2019s words describes how you want to show up today?','Lord, help me show what I\u2019ve learned this week with confidence, not fear. Amen.','Today I show what I\u2019ve built all week — in the classroom and on the court.')),
-    },
-    2:{
-      1: mkDay(devo('Test Day','"She is clothed with strength and dignity; she can laugh at the days to come." — Proverbs 31:25','Which of this week\u2019s words describes how you want to show up today?','Lord, help me show what I\u2019ve learned this week with confidence, not fear. Amen.','Today I show what I\u2019ve built all week — in the classroom and on the court.'),
-          {}, 'Science','Week review / lab'),
     },
     2:{
       1: mkDay(devo('Focus','"Fix your eyes straight ahead; look only where you\u2019re headed." — Proverbs 4:25','What is distracting you from doing your best today, and how can you set it aside?','Lord, help me keep my eyes on what matters and not get pulled off course today. Amen.','Today I lock in on one task at a time instead of rushing between things.'),
           {'5th':v('Focus','Paying close attention to one thing.','She kept her focus on the ball the whole game.','concentration','distraction'),
            '8th':v('Concentration','Deep, careful attention to a task.','His concentration during the test never wavered.','attention','carelessness'),
            '10th':v('Diligence','Careful and persistent effort.','Her diligence in film study set her apart from teammates.','attentiveness','negligence')},
-          fl('Interest','When a bank pays you extra money for keeping your savings with them, that\u2019s called ______.','interest'), 'You\u2019re invited to a friend\u2019s birthday and a team practice at the same time. How do you decide?', [sc('Illinois','Springfield'), sc('Michigan','Lansing')]),
+          ce('Stock Market Hits a New Record High', 'The Nasdaq is a place where people buy and sell stock in companies, especially tech companies. This week, the Nasdaq reached its highest point ever, mostly because of excitement about artificial intelligence (AI) companies. When people believe a group of companies will do well in the future, they buy more of their stock, which pushes prices up.', 'What\'s something you\'re excited about that you think will be a big deal in the future?'), fl('Interest','When a bank pays you extra money for keeping your savings with them, that\u2019s called ______.','interest'), 'You\u2019re invited to a friend\u2019s birthday and a team practice at the same time. How do you decide?', [sc('Illinois','Springfield'), sc('Michigan','Lansing')]),
       2: mkDay(devo('Confidence','"The Lord is my strength and my shield; my heart trusts in him." — Psalm 28:7','What is one thing you\u2019re good at that you can remind yourself of today?','God, help me trust the work I\u2019ve put in and play free today. Amen.','Today I trust my preparation and don\u2019t let mistakes shake me.'),
           {'5th':v('Confident','Sure of yourself and your abilities.','He walked up to the free-throw line feeling confident.','self-assured','unsure'),
            '8th':v('Assurance','A feeling of certainty about something.','Her assurance on defense came from hours of practice.','certainty','doubt'),
            '10th':v('Poise','Graceful and confident behavior under pressure.','She played the final minute with total poise.','composure','anxiety')},
-          fl('Credit','Borrowing money now and promising to pay it back later, often with extra cost, is called using ______.','credit'), 'You get a B- on a test you studied hard for. What\u2019s your next move?', [sc('Pennsylvania','Harrisburg'), sc('North Carolina','Raleigh')]),
+          ce('Interest Rates on Government Loans Went Up', 'The U.S. government borrows money by selling something called a bond — basically an IOU that pays you back with extra money, called interest, later on. This week, the interest rate on a 10-year bond reached its highest point since 2007. Higher interest rates can make it more expensive for people and businesses to borrow money too.', 'If a bank offered you more interest for saving your money longer, would you wait? Why or why not?'), fl('Credit','Borrowing money now and promising to pay it back later, often with extra cost, is called using ______.','credit'), 'You get a B- on a test you studied hard for. What\u2019s your next move?', [sc('Pennsylvania','Harrisburg'), sc('North Carolina','Raleigh')]),
       3: mkDay(devo('Patience','"Be patient, bearing with one another in love." — Ephesians 4:2','When is it hardest for you to wait, and how can you handle that better?','Lord, slow me down and help me trust Your timing today. Amen.','Today I stay calm even when things don\u2019t happen as fast as I want.'),
           {'5th':v('Patient','Able to wait calmly without getting upset.','She was patient while waiting her turn to shoot.','calm','impatient'),
            '8th':v('Endurance','The ability to keep going through a long or hard process.','His endurance during conditioning drills impressed the coach.','stamina','fatigue'),
            '10th':v('Steadfast','Firm and unwavering, especially in loyalty or belief.','She remained steadfast in her training plan despite setbacks.','unwavering','fickle')},
-          fl('Debt','Money you owe to someone else is called ______.','debt'), 'A younger teammate is being left out by the others. What do you do?', [sc('South Carolina','Columbia'), sc('Tennessee','Nashville')]),
+          ce('PayPal\'s Stock Price Jumped', 'PayPal is a company that lets people send and receive money online. This week, PayPal\'s stock price went up more than 2% in a single day after some good news about the company. A 2% jump might sound small, but for a company worth billions of dollars, that\'s a lot of value gained in just one day.', 'Why do you think good news about a company can make its stock price change so fast?'), fl('Debt','Money you owe to someone else is called ______.','debt'), 'A younger teammate is being left out by the others. What do you do?', [sc('South Carolina','Columbia'), sc('Tennessee','Nashville')]),
       4: mkDay(devo('Effort','"Whatever you do, work at it with all your heart." — Colossians 3:23','Did you give your full effort today, or were you holding something back?','God, let my effort today honor the gifts You\u2019ve given me. Amen.','Today I give full effort in every drill, not just the ones I like.'),
           {'5th':v('Effort','Hard work put toward a goal.','Her effort in practice earned her more playing time.','exertion','laziness'),
            '8th':v('Initiative','The ability to start something on your own.','He showed initiative by staying late to work on free throws.','drive','passivity'),
            '10th':v('Exertion','Physical or mental effort.','The exertion of a full practice left the team exhausted but proud.','effort','idleness')},
-          fl('Taxes','Money the government collects from your paycheck to pay for roads, schools, and services is called ______.','taxes'), 'Your phone bill is due and you only have enough for that or the new shoes you want. What do you choose?', [sc('Louisiana','Baton Rouge'), sc('Mississippi','Jackson')]),
+          ce('One Computer Chip Company Leads the Pack', 'NVIDIA makes computer chips that power artificial intelligence. This week, NVIDIA stood out from other chip companies because of how strong its AI hardware and software business is. Chips are like the “brains” inside computers, phones, and even AI programs — and NVIDIA is one of the biggest chip-makers in the world.', 'What\'s one everyday device you use that probably has a computer chip inside it?'), fl('Taxes','Money the government collects from your paycheck to pay for roads, schools, and services is called ______.','taxes'), 'Your phone bill is due and you only have enough for that or the new shoes you want. What do you choose?', [sc('Louisiana','Baton Rouge'), sc('Mississippi','Jackson')]),
       5: mkFriday(devo('Focus','"Fix your eyes straight ahead; look only where you\u2019re headed." — Proverbs 4:25','What is distracting you from doing your best today, and how can you set it aside?','Lord, help me keep my eyes on what matters and not get pulled off course today. Amen.','Today I lock in on one task at a time instead of rushing between things.'),
           {'5th':v('Focus','Paying close attention to one thing.','She kept her focus on the ball the whole game.','concentration','distraction'),
            '8th':v('Concentration','Deep, careful attention to a task.','His concentration during the test never wavered.','attention','carelessness'),
            '10th':v('Diligence','Careful and persistent effort.','Her diligence in film study set her apart from teammates.','attentiveness','negligence')},
           'History','Revolutionary War: key battles'),
-      2: mkDay(devo('Confidence','"The Lord is my strength and my shield; my heart trusts in him." — Psalm 28:7','What is one thing you\u2019re good at that you can remind yourself of today?','God, help me trust the work I\u2019ve put in and play free today. Amen.','Today I trust my preparation and don\u2019t let mistakes shake me.'),
-          {'5th':v('Confident','Sure of yourself and your abilities.','He walked up to the free-throw line feeling confident.','self-assured','unsure'),
-           '8th':v('Assurance','A feeling of certainty about something.','Her assurance on defense came from hours of practice.','certainty','doubt'),
-           '10th':v('Poise','Graceful and confident behavior under pressure.','She played the final minute with total poise.','composure','anxiety')},
-          'Science','Simple machines'),
-      3: mkDay(devo('Patience','"Be patient, bearing with one another in love." — Ephesians 4:2','When is it hardest for you to wait, and how can you handle that better?','Lord, slow me down and help me trust Your timing today. Amen.','Today I stay calm even when things don\u2019t happen as fast as I want.'),
-          {'5th':v('Patient','Able to wait calmly without getting upset.','She was patient while waiting her turn to shoot.','calm','impatient'),
-           '8th':v('Endurance','The ability to keep going through a long or hard process.','His endurance during conditioning drills impressed the coach.','stamina','fatigue'),
-           '10th':v('Steadfast','Firm and unwavering, especially in loyalty or belief.','She remained steadfast in her training plan despite setbacks.','unwavering','fickle')},
-          'History','The Declaration of Independence'),
-      4: mkDay(devo('Effort','"Whatever you do, work at it with all your heart." — Colossians 3:23','Did you give your full effort today, or were you holding something back?','God, let my effort today honor the gifts You\u2019ve given me. Amen.','Today I give full effort in every drill, not just the ones I like.'),
-          {'5th':v('Effort','Hard work put toward a goal.','Her effort in practice earned her more playing time.','exertion','laziness'),
-           '8th':v('Initiative','The ability to start something on your own.','He showed initiative by staying late to work on free throws.','drive','passivity'),
-           '10th':v('Exertion','Physical or mental effort.','The exertion of a full practice left the team exhausted but proud.','effort','idleness')},
-          'Science','Energy: potential & kinetic'),
-      5: mkDay(devo('Test Day','"Whatever you have learned or received... put it into practice." — Philippians 4:9','Which of this week\u2019s words — focus, confidence, patience, or effort — do you need most today?','Lord, help me show what I\u2019ve built this week with a clear head. Amen.','Today I put this week\u2019s words into action, not just my memory.')),
-    },
-    3:{
-      1: mkDay(devo('Test Day','"Whatever you have learned or received... put it into practice." — Philippians 4:9','Which of this week\u2019s words — focus, confidence, patience, or effort — do you need most today?','Lord, help me show what I\u2019ve built this week with a clear head. Amen.','Today I put this week\u2019s words into action, not just my memory.'),
-          {}, 'History','Week review / quiz'),
     },
     3:{
       1: mkDay(devo('Teamwork','"Two are better than one... if either falls down, one can help the other up." — Ecclesiastes 4:9-10','How can you make a teammate or sibling better today?','God, help me care about the team\u2019s success as much as my own today. Amen.','Today I look for ways to help someone else succeed.'),
           {'5th':v('Teamwork','Working together toward a shared goal.','Good teamwork helped them win the close game.','cooperation','rivalry'),
            '8th':v('Collaboration','Working jointly with others on a task.','Their collaboration on the group project made it stronger.','partnership','competition'),
            '10th':v('Synergy','The extra energy created when people work well together.','The team\u2019s synergy was obvious in the fourth quarter.','cooperation','discord')},
-          fl('Emergency Fund','Money set aside just for unexpected problems, like a car repair, is called an ______ fund.','emergency'), 'You made a mistake that cost your team a game. How do you talk to your teammates about it afterward?', [sc('Arizona','Phoenix'), sc('Colorado','Denver')]),
+          ce('Amazon Spends Big on AI and Cloud Computing', 'Besides selling products, Amazon also runs a huge cloud computing business called AWS, which stores data and runs programs for other companies. This week, news showed Amazon is spending a huge amount of money building more AI technology and cloud computing power to stay ahead of competitors.', 'Would you rather spend money now to build something big for the future, or save it? Why?'), fl('Emergency Fund','Money set aside just for unexpected problems, like a car repair, is called an ______ fund.','emergency'), 'You made a mistake that cost your team a game. How do you talk to your teammates about it afterward?', [sc('Arizona','Phoenix'), sc('Colorado','Denver')]),
       2: mkDay(devo('Leadership','"Whoever wants to become great among you must be your servant." — Matthew 20:26','What\u2019s one way you can lead by example today, even without a title?','Lord, let me lead by serving others today, not by demanding attention. Amen.','Today I lead with my actions before I lead with my words.'),
           {'5th':v('Leader','Someone who guides or directs others.','The point guard was a natural leader on the court.','guide','follower'),
            '8th':v('Influence','The power to affect someone\u2019s actions or thinking.','Her positive attitude had a big influence on the team.','impact','insignificance'),
            '10th':v('Decisiveness','The ability to make decisions quickly and confidently.','Her decisiveness in the final seconds won the game.','resolve','hesitation')},
-          fl('Opportunity Cost','If you spend your allowance on a video game instead of saving it, what you give up is called the ______ ______.','opportunity cost'), 'You\u2019re offered $15/hour to babysit or $12/hour to help at a family friend\u2019s store, but the store job teaches new skills. Which do you pick, and why?', [sc('Washington','Olympia'), sc('Oregon','Salem')]),
+          ce('Bitcoin\'s Price Keeps Moving', 'Bitcoin is a kind of digital money that isn\'t controlled by any government or bank. This week, Bitcoin\'s price moved up and down, like it often does. Unlike regular money, Bitcoin\'s value can change a lot in a single day because people are still deciding how much they trust and want it.', 'What do you think makes something valuable — is it what people agree it\'s worth, or something else?'), fl('Opportunity Cost','If you spend your allowance on a video game instead of saving it, what you give up is called the ______ ______.','opportunity cost'), 'You\u2019re offered $15/hour to babysit or $12/hour to help at a family friend\u2019s store, but the store job teaches new skills. Which do you pick, and why?', [sc('Washington','Olympia'), sc('Oregon','Salem')]),
       3: mkDay(devo('Respect','"Show proper respect to everyone." — 1 Peter 2:17','Who is someone you can show extra respect to today, even if it\u2019s hard?','God, help me treat referees, coaches, and teammates with respect today, win or lose. Amen.','Today I speak to others the way I want to be spoken to.'),
           {'5th':v('Respect','Treating someone with consideration and honor.','He showed respect by shaking hands after the game.','courtesy','disrespect'),
            '8th':v('Courtesy','Polite behavior and consideration for others.','Her courtesy toward the new player made him feel welcome.','politeness','rudeness'),
            '10th':v('Deference','Respectful yielding to another\u2019s opinion or authority.','He showed deference to his coach\u2019s game plan.','respect','disregard')},
-          fl('Investing','Putting your money into something like stocks, hoping it grows over time, is called ______.','investing'), 'A friend is spreading a rumor about you. Do you confront them, ignore it, or something else?', [sc('Nevada','Carson City'), sc('Utah','Salt Lake City')]),
+          ce('Netflix Focuses on Growing Steadily', 'Netflix is a streaming service where people watch shows and movies. Instead of spending money to buy other companies, Netflix decided to focus on things it already does well — like adding more ads to lower-cost plans and creating new shows. This let Netflix keep more money and grow in a safer way.', 'Is it better to grow slowly and safely, or take a big risk to grow fast? Why?'), fl('Investing','Putting your money into something like stocks, hoping it grows over time, is called ______.','investing'), 'A friend is spreading a rumor about you. Do you confront them, ignore it, or something else?', [sc('Nevada','Carson City'), sc('Utah','Salt Lake City')]),
       4: mkDay(devo('Humility','"Humble yourselves before the Lord, and he will lift you up." — James 4:10','How can you celebrate a win today without putting anyone else down?','Lord, keep me humble in success and steady in failure today. Amen.','Today I let my play speak instead of my words.'),
           {'5th':v('Humble','Not thinking too highly of yourself.','She stayed humble even after scoring the winning basket.','modest','arrogant'),
            '8th':v('Modesty','A lack of excessive pride or self-importance.','His modesty after the win impressed the coaches.','humility','conceit'),
            '10th':v('Unassuming','Not pretentious or arrogant; modest.','Despite being the star player, she stayed unassuming.','humble','boastful')},
-          fl('Compound Interest','Earning interest not just on your original money, but also on the interest you already earned, is called ______ interest.','compound'), 'You have $50 and three things you want: new shoes, saving for a car, and a gift for a friend\u2019s birthday. How do you split it?', [sc('Missouri','Jefferson City'), sc('Indiana','Indianapolis')]),
+          ce('The Stock Market Had a Great Day', 'This week, the S&P 500 — a list of 500 big American companies — had its best day in weeks. This happened after leaders from the United States and China met and talked about working together. When people feel hopeful about countries getting along, they often feel more confident about the economy too.', 'Why do you think news about world leaders meeting can affect how people feel about money and business?'), fl('Compound Interest','Earning interest not just on your original money, but also on the interest you already earned, is called ______ interest.','compound'), 'You have $50 and three things you want: new shoes, saving for a car, and a gift for a friend\u2019s birthday. How do you split it?', [sc('Missouri','Jefferson City'), sc('Indiana','Indianapolis')]),
       5: mkFriday(devo('Teamwork','"Two are better than one... if either falls down, one can help the other up." — Ecclesiastes 4:9-10','How can you make a teammate or sibling better today?','God, help me care about the team\u2019s success as much as my own today. Amen.','Today I look for ways to help someone else succeed.'),
           {'5th':v('Teamwork','Working together toward a shared goal.','Good teamwork helped them win the close game.','cooperation','rivalry'),
            '8th':v('Collaboration','Working jointly with others on a task.','Their collaboration on the group project made it stronger.','partnership','competition'),
            '10th':v('Synergy','The extra energy created when people work well together.','The team\u2019s synergy was obvious in the fourth quarter.','cooperation','discord')},
           'Science','Ecosystems & food chains'),
-      2: mkDay(devo('Leadership','"Whoever wants to become great among you must be your servant." — Matthew 20:26','What\u2019s one way you can lead by example today, even without a title?','Lord, let me lead by serving others today, not by demanding attention. Amen.','Today I lead with my actions before I lead with my words.'),
-          {'5th':v('Leader','Someone who guides or directs others.','The point guard was a natural leader on the court.','guide','follower'),
-           '8th':v('Influence','The power to affect someone\u2019s actions or thinking.','Her positive attitude had a big influence on the team.','impact','insignificance'),
-           '10th':v('Decisiveness','The ability to make decisions quickly and confidently.','Her decisiveness in the final seconds won the game.','resolve','hesitation')},
-          'History','The U.S. Constitution'),
-      3: mkDay(devo('Respect','"Show proper respect to everyone." — 1 Peter 2:17','Who is someone you can show extra respect to today, even if it\u2019s hard?','God, help me treat referees, coaches, and teammates with respect today, win or lose. Amen.','Today I speak to others the way I want to be spoken to.'),
-          {'5th':v('Respect','Treating someone with consideration and honor.','He showed respect by shaking hands after the game.','courtesy','disrespect'),
-           '8th':v('Courtesy','Polite behavior and consideration for others.','Her courtesy toward the new player made him feel welcome.','politeness','rudeness'),
-           '10th':v('Deference','Respectful yielding to another\u2019s opinion or authority.','He showed deference to his coach\u2019s game plan.','respect','disregard')},
-          'Science','Weather & climate patterns'),
-      4: mkDay(devo('Humility','"Humble yourselves before the Lord, and he will lift you up." — James 4:10','How can you celebrate a win today without putting anyone else down?','Lord, keep me humble in success and steady in failure today. Amen.','Today I let my play speak instead of my words.'),
-          {'5th':v('Humble','Not thinking too highly of yourself.','She stayed humble even after scoring the winning basket.','modest','arrogant'),
-           '8th':v('Modesty','A lack of excessive pride or self-importance.','His modesty after the win impressed the coaches.','humility','conceit'),
-           '10th':v('Unassuming','Not pretentious or arrogant; modest.','Despite being the star player, she stayed unassuming.','humble','boastful')},
-          'History','The Bill of Rights'),
-      5: mkDay(devo('Test Day','"Iron sharpens iron, and one person sharpens another." — Proverbs 27:17','How did teamwork, leadership, respect, or humility show up in your week?','God, thank You for the people who sharpen me. Help me show what I\u2019ve learned today. Amen.','Today I show this week\u2019s words weren\u2019t just talk.')),
-    },
-    4:{
-      1: mkDay(devo('Test Day','"Iron sharpens iron, and one person sharpens another." — Proverbs 27:17','How did teamwork, leadership, respect, or humility show up in your week?','God, thank You for the people who sharpen me. Help me show what I\u2019ve learned today. Amen.','Today I show this week\u2019s words weren\u2019t just talk.'),
-          {}, 'Science','Week review / lab'),
     },
     4:{
       1: mkDay(devo('Growth','"I press on toward the goal." — Philippians 3:14','What\u2019s one skill you\u2019ve gotten better at this month?','Lord, help me see mistakes today as steps toward growth, not reasons to quit. Amen.','Today I focus on getting 1% better, not being perfect.'),
           {'5th':v('Growth','The process of developing or improving.','His growth as a shooter showed in every game.','improvement','decline'),
            '8th':v('Progress','Forward movement toward a goal.','Her progress in reading comprehension was clear this month.','advancement','regression'),
            '10th':v('Development','The process of growing or improving over time.','Coaches tracked each athlete\u2019s development across the season.','advancement','stagnation')},
-          fl('Checking Account','A bank account you use for everyday spending, often with a debit card, is called a ______ account.','checking'), 'Your coach asks you to help a struggling teammate instead of only focusing on your own game. How does that change how you show up at practice?', [sc('Wisconsin','Madison'), sc('Minnesota','St. Paul')]),
+          ce('How Disney Makes Money Without Making Movies', 'Disney doesn\'t just make movies — it also makes money by letting other companies use its characters, like Mickey Mouse, on toys, clothes, and books. This is called licensing. Companies pay Disney for the right to use its characters, and Disney earns money without having to make or sell the product itself.', 'If you could license one of your own ideas or drawings to a company, what would it be?'), fl('Checking Account','A bank account you use for everyday spending, often with a debit card, is called a ______ account.','checking'), 'Your coach asks you to help a struggling teammate instead of only focusing on your own game. How does that change how you show up at practice?', [sc('Wisconsin','Madison'), sc('Minnesota','St. Paul')]),
       2: mkDay(devo('Courage','"Be strong and courageous... the Lord your God will be with you." — Joshua 1:9','What\u2019s something a little scary you can try today anyway?','God, give me courage to take the hard shot and ask the hard question today. Amen.','Today I do the brave thing, not just the easy thing.'),
           {'5th':v('Courage','The ability to do something that frightens you.','It took courage to take the last shot.','bravery','cowardice'),
            '8th':v('Boldness','Confidence and willingness to take risks.','Her boldness on defense created three turnovers.','daring','timidity'),
            '10th':v('Valor','Great courage in the face of danger or difficulty.','His valor during the toughest drill inspired the team.','bravery','cowardice')},
-          fl('Credit Score','A number that shows how reliably you pay back money you borrow is called your credit ______.','score'), 'You signed up for something and now don\u2019t feel like going. Do you go anyway? What matters more \u2014 the commitment or how you feel?', [sc('Kentucky','Frankfort'), sc('West Virginia','Charleston')]),
+          ce('Amazon Blocks a Rival\'s AI Shopping Helper', 'Meta, the company that owns Instagram and Facebook, built an AI assistant called Muse to help people shop online. This week, Amazon decided not to let Muse work on Amazon\'s website. Amazon wants to keep control over how people shop and checkout on its own site, instead of letting another company\'s AI take over that job.', 'Why might a company not want a competitor\'s tool working inside its own store?'), fl('Credit Score','A number that shows how reliably you pay back money you borrow is called your credit ______.','score'), 'You signed up for something and now don\u2019t feel like going. Do you go anyway? What matters more \u2014 the commitment or how you feel?', [sc('Kentucky','Frankfort'), sc('West Virginia','Charleston')]),
       3: mkDay(devo('Gratitude','"Give thanks in all circumstances." — 1 Thessalonians 5:18','What\u2019s one thing about today you can be thankful for, even if it\u2019s a hard day?','Lord, thank You for the chance to learn and play today. Keep my heart grateful. Amen.','Today I notice and say thank you for at least one thing.'),
           {'5th':v('Grateful','Feeling or showing thanks.','She was grateful for her coach\u2019s extra help.','thankful','ungrateful'),
            '8th':v('Appreciation','Recognition of the value of something.','His appreciation for his teammates grew after the injury.','gratitude','disregard'),
            '10th':v('Gratitude','The quality of being thankful.','Her gratitude for the opportunity showed in her work ethic.','thankfulness','ingratitude')},
-          fl('Net Worth','What you own minus what you owe is called your net ______.','worth'), 'You see a teammate being disrespectful to a referee. What\u2019s your role in that moment?', [sc('Maryland','Annapolis'), sc('Massachusetts','Boston')]),
+          ce('Apple\'s Smart Home Tools Get an Upgrade', 'Apple makes iPhones, but it also makes apps that control smart home devices, like lights and thermostats. This week, Apple announced new features for its Home app that work with utility companies, helping people\'s smart homes save energy more automatically.', 'What\'s one chore or task at home you wish technology could do automatically?'), fl('Net Worth','What you own minus what you owe is called your net ______.','worth'), 'You see a teammate being disrespectful to a referee. What\u2019s your role in that moment?', [sc('Maryland','Annapolis'), sc('Massachusetts','Boston')]),
       4: mkDay(devo('Consistency','"Whoever can be trusted with very little can also be trusted with much." — Luke 16:10','What\u2019s one habit you can do the same way every single day?','God, help me show up the same way today as I did yesterday. Amen.','Today I do the small things right, even when no one is watching.'),
           {'5th':v('Consistent','Acting or performing in the same way over time.','Her consistent free-throw form paid off in games.','steady','erratic'),
            '8th':v('Reliability','The quality of being trustworthy and consistent.','His reliability made him a coach\u2019s favorite.','dependability','unpredictability'),
            '10th':v('Constancy','Steadiness and firmness over time.','Her constancy in training never wavered, win or lose.','steadiness','inconsistency')},
-          fl('Charitable Giving','Giving part of your money to help others or a cause you care about is called ______.','giving'), 'You have one week to prepare for a big test and also have practice every day. How do you build a schedule that covers both?', [sc('New Jersey','Trenton'), sc('Connecticut','Hartford')]),
+          ce('Should You Trust an AI With Your Money Info?', 'Meta\'s new AI tool, Muse, can help people shop and make purchases. This raises a big question: should people feel comfortable sharing money and shopping information with an AI chatbot? Experts are still debating how safe and private these new AI shopping tools really are.', 'What\'s one question you\'d want answered before trusting an AI with your personal information?'), fl('Charitable Giving','Giving part of your money to help others or a cause you care about is called ______.','giving'), 'You have one week to prepare for a big test and also have practice every day. How do you build a schedule that covers both?', [sc('New Jersey','Trenton'), sc('Connecticut','Hartford')]),
       5: mkFriday(devo('Growth','"I press on toward the goal." — Philippians 3:14','What\u2019s one skill you\u2019ve gotten better at this month?','Lord, help me see mistakes today as steps toward growth, not reasons to quit. Amen.','Today I focus on getting 1% better, not being perfect.'),
           {'5th':v('Growth','The process of developing or improving.','His growth as a shooter showed in every game.','improvement','decline'),
            '8th':v('Progress','Forward movement toward a goal.','Her progress in reading comprehension was clear this month.','advancement','regression'),
            '10th':v('Development','The process of growing or improving over time.','Coaches tracked each athlete\u2019s development across the season.','advancement','stagnation')},
           'History','Early U.S. presidents'),
-      2: mkDay(devo('Courage','"Be strong and courageous... the Lord your God will be with you." — Joshua 1:9','What\u2019s something a little scary you can try today anyway?','God, give me courage to take the hard shot and ask the hard question today. Amen.','Today I do the brave thing, not just the easy thing.'),
-          {'5th':v('Courage','The ability to do something that frightens you.','It took courage to take the last shot.','bravery','cowardice'),
-           '8th':v('Boldness','Confidence and willingness to take risks.','Her boldness on defense created three turnovers.','daring','timidity'),
-           '10th':v('Valor','Great courage in the face of danger or difficulty.','His valor during the toughest drill inspired the team.','bravery','cowardice')},
-          'Science','Plant & animal cells'),
-      3: mkDay(devo('Gratitude','"Give thanks in all circumstances." — 1 Thessalonians 5:18','What\u2019s one thing about today you can be thankful for, even if it\u2019s a hard day?','Lord, thank You for the chance to learn and play today. Keep my heart grateful. Amen.','Today I notice and say thank you for at least one thing.'),
-          {'5th':v('Grateful','Feeling or showing thanks.','She was grateful for her coach\u2019s extra help.','thankful','ungrateful'),
-           '8th':v('Appreciation','Recognition of the value of something.','His appreciation for his teammates grew after the injury.','gratitude','disregard'),
-           '10th':v('Gratitude','The quality of being thankful.','Her gratitude for the opportunity showed in her work ethic.','thankfulness','ingratitude')},
-          'History','The Louisiana Purchase'),
-      4: mkDay(devo('Consistency','"Whoever can be trusted with very little can also be trusted with much." — Luke 16:10','What\u2019s one habit you can do the same way every single day?','God, help me show up the same way today as I did yesterday. Amen.','Today I do the small things right, even when no one is watching.'),
-          {'5th':v('Consistent','Acting or performing in the same way over time.','Her consistent free-throw form paid off in games.','steady','erratic'),
-           '8th':v('Reliability','The quality of being trustworthy and consistent.','His reliability made him a coach\u2019s favorite.','dependability','unpredictability'),
-           '10th':v('Constancy','Steadiness and firmness over time.','Her constancy in training never wavered, win or lose.','steadiness','inconsistency')},
-          'Science','Circuits & electricity basics'),
-      5: mkDay(devo('Test Day','"Well done, good and faithful servant." — Matthew 25:21','Which of this week\u2019s words — growth, courage, gratitude, consistency — did you live out best?','Lord, help me finish this week strong and show what I\u2019ve built. Amen.','Today I show my consistency by finishing the week as strong as I started it.')),
     },
   };
 }
@@ -1043,8 +968,8 @@ function defaultScienceWeek4(){
 // Week 6's new curriculum was initially authored in the Week 1 defaults.
 // Keep Week 1 available, and register those same defaults for the current
 // actual week so the Week 6 lesson lookup can populate the board and uploader.
-const DEFAULT_HISTORY_WEEKS = {1:defaultHistoryWeek1, 2:defaultHistoryWeek2, 3:defaultHistoryWeek3, 4:defaultHistoryWeek4, 6:defaultHistoryWeek1};
-const DEFAULT_SCIENCE_WEEKS = {1:defaultScienceWeek1, 2:defaultScienceWeek2, 3:defaultScienceWeek3, 4:defaultScienceWeek4, 6:defaultScienceWeek1};
+const DEFAULT_HISTORY_WEEKS = {6:defaultHistoryWeek1, 7:defaultHistoryWeek2, 8:defaultHistoryWeek3, 9:defaultHistoryWeek4};
+const DEFAULT_SCIENCE_WEEKS = {6:defaultScienceWeek1, 7:defaultScienceWeek2, 8:defaultScienceWeek3, 9:defaultScienceWeek4};
 
 /* ========================= DATE / SCHOOL DAY LOGIC ========================= */
 function pad(n){return n<10?'0'+n:''+n;}
@@ -1112,6 +1037,17 @@ async function loadAll(){
   if(!cycleStart){
     cycleStart = toDateStr(mondayOfWeek(state.schoolDate));
     await storageSet(CYCLE_START_KEY, cycleStart);
+  }
+  // One-time correction: align "today" to actual week 6, since that is
+  // where the family actually is right now. Runs once, then never again.
+  const week6Fixed = await storageGet('week6-alignment-applied');
+  if(!week6Fixed){
+    const thisMonday = mondayOfWeek(state.schoolDate);
+    const correctedStart = new Date(thisMonday);
+    correctedStart.setDate(correctedStart.getDate() - 5*7);
+    cycleStart = toDateStr(correctedStart);
+    await storageSet(CYCLE_START_KEY, cycleStart);
+    await storageSet('week6-alignment-applied', true);
   }
   state.cycleStartMonday = cycleStart;
 
@@ -1291,39 +1227,49 @@ async function renderBoard(){
   const unitTest = isUnitTestWeek(aw);
 
   // ---- History / Science lesson (per real week, Mon/Tue = History, Wed/Thu = Science) ----
-  let lessonHTML = '';
+  // Rendered once per student (inside their own card) so each student has
+  // their own "Fill Out Worksheet" entry point tied directly to them.
+  let sharedLesson = null, sharedLessonType = '';
   if(!isTestDay){
-    const lesson = c.lesson || (isHistoryDay ? await getHistoryWeek(aw) : isScienceDay ? await getScienceWeek(aw) : null);
-    const lessonType = c.lessonType || (isHistoryDay ? 'History' : isScienceDay ? 'Science' : '');
-    if(lesson){
-      const pdfBtn = lesson.pdfDataUrl
-        ? `<button type="button" class="btn btn-ghost" id="openLessonPdf" style="margin-top:10px;">📄 Open ${esc(lesson.pdfFilename||'Lesson PDF')}</button>`
-        : `<p style="font-size:12.5px;color:var(--ink-soft);margin-top:10px;">No PDF attached yet for this week — use the 📚 icon to upload one.</p>`;
-      const worksheetBtn = lesson.worksheet?.groups?.some(g=>(g.items||[]).length)
-        ? `<button type="button" class="btn btn-primary" id="openLessonWorksheet" style="margin-top:10px;margin-left:8px;">📝 Fill Out Worksheet</button>`
-        : '';
-      const bhm = (lessonType==='History' && lesson.blackHistoryMoment)
-        ? `<div class="vocab-box" style="margin-top:12px;">
-             <div class="word-badge" style="margin-bottom:6px;">Black History Connection</div>
-             <div style="font-size:13.5px;line-height:1.5;">${esc(lesson.blackHistoryMoment)}</div>
-           </div>` : '';
-      lessonHTML = `<div class="card">
-        <div class="word-badge">${esc(lessonType)} Lesson · Week ${aw}</div>
-        <div style="font-size:15px;font-weight:600;line-height:1.4;margin:6px 0;">${esc(lesson.topic)}</div>
-        ${lesson.summary?`<p style="font-size:13.5px;line-height:1.5;color:var(--ink-soft);margin:6px 0;">${esc(lesson.summary)}</p>`:''}
-        ${pdfBtn}${worksheetBtn}
-        ${bhm}
-      </div>`;
-      if(lesson.pdfDataUrl){
-        window.__pendingLessonPdf = lesson;
-      }
-      if(lesson.worksheet?.groups?.some(g=>(g.items||[]).length)){
-        window.__pendingWorksheet = { subject: lessonType.toLowerCase(), lesson };
-      }
-    } else {
-      lessonHTML = `<div class="card"><div class="word-badge">${esc(lessonType)} Lesson · Week ${aw}</div><p style="color:var(--ink-soft);font-size:13.5px;margin-top:8px;">Not uploaded yet — use the 📚 icon to add this week's ${esc(lessonType)} PDF.</p></div>`;
-    }
+    sharedLesson = c.lesson || (isHistoryDay ? await getHistoryWeek(aw) : isScienceDay ? await getScienceWeek(aw) : null);
+    sharedLessonType = c.lessonType || (isHistoryDay ? 'History' : isScienceDay ? 'Science' : '');
   }
+  function buildLessonCardHTML(studentId){
+    if(isTestDay) return '';
+    const lesson = sharedLesson, lessonType = sharedLessonType;
+    if(!lesson){
+      return `<div class="card"><div class="word-badge">${esc(lessonType)} Lesson · Week ${aw}</div><p style="color:var(--ink-soft);font-size:13.5px;margin-top:8px;">Not uploaded yet — use the 📚 icon to add this week's ${esc(lessonType)} PDF.</p></div>`;
+    }
+    const pdfBtn = lesson.pdfDataUrl
+      ? `<button type="button" class="btn btn-ghost" data-openlessonpdf style="margin-top:10px;">📄 Open ${esc(lesson.pdfFilename||'Lesson PDF')}</button>`
+      : `<p style="font-size:12.5px;color:var(--ink-soft);margin-top:10px;">No PDF attached yet for this week — use the 📚 icon to upload one.</p>`;
+    const worksheetBtn = lesson.worksheet?.groups?.some(g=>(g.items||[]).length)
+      ? `<button type="button" class="btn btn-primary" data-openworksheet data-student="${studentId}" style="margin-top:10px;margin-left:8px;">📝 Fill Out Worksheet</button>`
+      : '';
+    const bhm = (lessonType==='History' && lesson.blackHistoryMoment)
+      ? `<div class="vocab-box" style="margin-top:12px;">
+           <div class="word-badge" style="margin-bottom:6px;">Black History Connection</div>
+           <div style="font-size:13.5px;line-height:1.5;">${esc(lesson.blackHistoryMoment)}</div>
+         </div>` : '';
+    return `<div class="card">
+      <div class="word-badge">${esc(lessonType)} Lesson · Week ${aw}</div>
+      <div style="font-size:15px;font-weight:600;line-height:1.4;margin:6px 0;">${esc(lesson.topic)}</div>
+      ${lesson.summary?`<p style="font-size:13.5px;line-height:1.5;color:var(--ink-soft);margin:6px 0;">${esc(lesson.summary)}</p>`:''}
+      ${pdfBtn}${worksheetBtn}
+      ${bhm}
+    </div>`;
+  }
+  if(sharedLesson && sharedLesson.pdfDataUrl) window.__pendingLessonPdf = sharedLesson;
+  if(sharedLesson && sharedLesson.worksheet?.groups?.some(g=>(g.items||[]).length)) window.__pendingWorksheet = { subject: sharedLessonType.toLowerCase(), lesson: sharedLesson };
+
+  // ---- Current Event (real news article, simplified) ----
+  const ceData = c.currentEvent;
+  const currentEventHTML = (!isTestDay && ceData && ceData.headline) ? `<div class="card">
+    <div class="word-badge">Current Event</div>
+    <div style="font-size:15px;font-weight:600;margin:6px 0 8px;line-height:1.3;">${esc(ceData.headline)}</div>
+    <p style="font-size:13.5px;line-height:1.55;">${esc(ceData.summary)}</p>
+    <p style="font-size:13px;font-weight:600;margin-top:10px;">Apply It: ${esc(ceData.applyIt)}</p>
+  </div>` : '';
 
   // ---- Financial Lit ----
   const flData = c.financialLit;
@@ -1414,7 +1360,9 @@ async function renderBoard(){
     const studentSubjList = orderedSubjList.filter(sub => !excluded.includes(sub.name));
     const studentChecks = state.checks[s.id] || {};
     const studentSeuHTML = (s.showSeu && seuGroups.length) ? seuCardsHTML(seuGroups) : '';
+    const studentLessonHTML = buildLessonCardHTML(s.id);
     const academicsHTML = isTestDay ? '' : `
+        ${studentLessonHTML ? `<div style="margin-top:12px;">${studentLessonHTML}</div>` : ''}
         <div class="mini-lbl" style="margin-top:12px;">Academics</div>
         <div class="subjects-grid" style="grid-template-columns:1fr;margin-top:6px;">
           ${studentSubjList.map((sub,i)=>{
@@ -1485,25 +1433,14 @@ async function renderBoard(){
     </section>
 
     <section class="qtr">
-      <div class="qtr-head"><div class="qtr-tag">Q2</div><div class="qtr-title">${isTestDay ? 'Weekly Test' + (unitTest ? ' · Unit Test' : '') : 'Life Skills & Drills'}</div><div class="qtr-hint">${isTestDay ? 'Answers autosave as you go' : "Tap a header to collapse · double-click to collapse all"}</div></div>
+      <div class="qtr-head"><div class="qtr-tag">Q2</div><div class="qtr-title">${isTestDay ? 'Weekly Test' + (unitTest ? ' · Unit Test' : '') : 'Life Skills & Drills'}</div><div class="qtr-hint">${isTestDay ? 'Answers autosave as you go' : "History/Science & subjects live below · double-click a header to collapse all"}</div></div>
       ${isTestDay ? testSectionHTML : `
-      <div class="devo-grid" style="margin-bottom:16px;">
-        <div class="card">
-          <div class="word-badge">Current Event</div>
-          <p style="font-size:13.5px;color:var(--ink-soft);margin:6px 0 12px;">CNN 10 — a fact-only, no-opinion daily news show built for students, 10 minutes or less.</p>
-          <iframe style="border-radius:12px;" src="https://www.youtube.com/embed/videoseries?list=UUV5rRqUqVLWiadlehZNtGSg" width="100%" height="152" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>
-          <p style="font-size:13px;font-weight:600;margin-top:10px;">Apply It: ${esc(CURRENT_EVENT_APPLY_IT)}</p>
-        </div>
-        ${financialLitHTML || '<div></div>'}
-      </div>
+      ${(currentEventHTML && financialLitHTML) ? `<div class="devo-grid" style="margin-bottom:16px;">${currentEventHTML}${financialLitHTML}</div>`
+        : (currentEventHTML || financialLitHTML) ? `<div style="margin-bottom:16px;">${currentEventHTML || financialLitHTML}</div>` : ''}
+      ${rwsHTML ? `<div style="margin-bottom:16px;">${rwsHTML}</div>` : ''}
       <div class="students-grid" style="margin-bottom:16px;">${studentsHTML}</div>
-      ${statesHTML ? `<div class="devo-grid">${statesHTML}<div></div></div>` : ''}
+      ${statesHTML ? `<div style="margin-bottom:16px;">${statesHTML}</div>` : ''}
       `}
-    </section>
-
-    <section class="qtr">
-      <div class="qtr-head"><div class="qtr-tag">Q3–Q4</div><div class="qtr-title">Academics · Today's Lesson</div><div class="qtr-hint">Each student checks off their own subjects above — College Coursework shows under whoever has it turned on</div></div>
-      ${(lessonHTML || rwsHTML) ? `<div class="devo-grid" style="margin-bottom:16px;">${lessonHTML || '<div></div>'}${rwsHTML || '<div></div>'}</div>` : ''}
     </section>
 
     <footer class="buzzer-strip">
@@ -1532,10 +1469,10 @@ async function renderBoard(){
       target.style.color = 'var(--green)';
     });
   });
-  const lessonPdfBtn = document.getElementById('openLessonPdf');
-  if(lessonPdfBtn && window.__pendingLessonPdf){
-    lessonPdfBtn.addEventListener('click', ()=>{
+  board.querySelectorAll('[data-openlessonpdf]').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
       const lesson = window.__pendingLessonPdf;
+      if(!lesson) return;
       try{
         const byteStr = atob(lesson.pdfDataUrl.split(',')[1]);
         const bytes = new Uint8Array(byteStr.length);
@@ -1544,14 +1481,14 @@ async function renderBoard(){
         window.open(URL.createObjectURL(blob), '_blank');
       }catch(e){ console.error('pdf open failed', e); showToast('Could not open the PDF.'); }
     });
-  }
-  const lessonWorksheetBtn = document.getElementById('openLessonWorksheet');
-  if(lessonWorksheetBtn && window.__pendingWorksheet){
-    lessonWorksheetBtn.addEventListener('click', ()=>{
-      const { subject, lesson } = window.__pendingWorksheet;
-      openWorksheetModal(subject, lesson);
+  });
+  board.querySelectorAll('[data-openworksheet]').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      const wsData = window.__pendingWorksheet;
+      if(!wsData) return;
+      openWorksheetModal(wsData.subject, wsData.lesson, btn.dataset.student);
     });
-  }
+  });
 
   board.querySelectorAll('.check').forEach(el=>{
     el.addEventListener('click', async ()=>{
@@ -1703,9 +1640,10 @@ async function buildWeeklyTest(studentGrade, mon){
   }
   const historyLesson = await getHistoryWeek(aw);
   const scienceLesson = await getScienceWeek(aw);
+  const weekCurrentEvent = (week[1] && week[1].currentEvent) || null;
   return {
     vocab, financialLit, statesCapitals,
-    currentEventQuestion: CURRENT_EVENT_APPLY_IT,
+    currentEventQuestion: weekCurrentEvent ? `${weekCurrentEvent.headline} — ${weekCurrentEvent.applyIt}` : 'What\u2019s one current event from this week that stood out to you?',
     historyTopic: historyLesson ? historyLesson.topic : '',
     scienceTopic: scienceLesson ? scienceLesson.topic : '',
     scenario: (week[1] && week[1].realWorldScenario) || ''
@@ -1876,7 +1814,7 @@ function defaultWorksheetAnswers(worksheet){
 let worksheetCache = {}; // studentId -> {worksheet, answers}
 let currentWorksheetCtx = null; // {subject, lesson, dateStr}
 
-async function openWorksheetModal(subject, lesson){
+async function openWorksheetModal(subject, lesson, preferredStudentId){
   currentWorksheetCtx = { subject, lesson, dateStr: state.dateStr };
   document.getElementById('worksheetTitle').textContent = materialSubjectLabel(subject) + ' Worksheet';
   document.getElementById('worksheetSub').textContent = lesson.topic;
@@ -1885,7 +1823,8 @@ async function openWorksheetModal(subject, lesson){
   const worksheetStudents = assignedIds.length ? state.students.filter(s=>assignedIds.includes(s.id)) : state.students;
   if(!worksheetStudents.length){ showToast('This worksheet has no students assigned.'); return; }
   const tabsWrap = document.getElementById('worksheetStudentTabs');
-  tabsWrap.innerHTML = worksheetStudents.map((s,i)=>`<div class="modal-tab ${i===0?'active':''}" data-wstab="${s.id}">${esc(s.name)}</div>`).join('');
+  const defaultId = (preferredStudentId && worksheetStudents.some(s=>s.id===preferredStudentId)) ? preferredStudentId : worksheetStudents[0].id;
+  tabsWrap.innerHTML = worksheetStudents.map((s)=>`<div class="modal-tab ${s.id===defaultId?'active':''}" data-wstab="${s.id}">${esc(s.name)}</div>`).join('');
 
   worksheetCache = {};
   for(const s of worksheetStudents){
@@ -1900,7 +1839,7 @@ async function openWorksheetModal(subject, lesson){
     wireWorksheetFormInputs(formArea, id);
   }
   tabsWrap.querySelectorAll('.modal-tab').forEach(t=>{ t.addEventListener('click', ()=> showStudent(t.dataset.wstab)); });
-  showStudent(worksheetStudents[0].id);
+  showStudent(defaultId);
 
   document.getElementById('worksheetOverlay').classList.add('open');
 }
@@ -2014,10 +1953,15 @@ function dayEditFormHTML(prefix, c, isFriday){
       }).join('');
 
   const fl = c.financialLit || {concept:'',blank:'',answer:''};
+  const ceD = c.currentEvent || {headline:'',summary:'',applyIt:''};
   const sc = c.statesCapitals || [];
   const lifeSkillsBlock = isFriday
     ? `<p style="color:var(--ink-soft);font-size:13px;">Friday is test day — no new Financial Lit / States / Scenario content needed.</p>`
     : `
+    <label>Current Event Headline</label><input type="text" id="${prefix}-ce-headline" value="${escAttr(ceD.headline)}">
+    <label>Summary (5th grade reading level)</label><textarea id="${prefix}-ce-summary">${esc(ceD.summary)}</textarea>
+    <label>Apply It Question</label><textarea id="${prefix}-ce-applyit">${esc(ceD.applyIt)}</textarea>
+    <hr class="divider">
     <label>Financial Lit Concept</label><input type="text" id="${prefix}-fl-concept" value="${escAttr(fl.concept)}">
     <label>Fill-in-the-blank sentence (use ______ for the blank)</label><textarea id="${prefix}-fl-blank">${esc(fl.blank)}</textarea>
     <label>Answer</label><input type="text" id="${prefix}-fl-answer" value="${escAttr(fl.answer)}">
@@ -2070,8 +2014,10 @@ function collectDayForm(prefix, isFriday){
         sent:document.getElementById(`${prefix}-v-${g}-sent`).value, syn:document.getElementById(`${prefix}-v-${g}-syn`).value, ant:document.getElementById(`${prefix}-v-${g}-ant`).value };
     });
   }
-  let financialLit = null, realWorldScenario = '', statesCapitals = [];
+  let currentEvent = null, financialLit = null, realWorldScenario = '', statesCapitals = [];
   if(!isFriday){
+    const ceHeadline = document.getElementById(`${prefix}-ce-headline`).value;
+    if(ceHeadline) currentEvent = { headline: ceHeadline, summary: document.getElementById(`${prefix}-ce-summary`).value, applyIt: document.getElementById(`${prefix}-ce-applyit`).value };
     financialLit = { concept:document.getElementById(`${prefix}-fl-concept`).value, blank:document.getElementById(`${prefix}-fl-blank`).value, answer:document.getElementById(`${prefix}-fl-answer`).value };
     realWorldScenario = document.getElementById(`${prefix}-rws`).value;
     const s1 = document.getElementById(`${prefix}-sc1-state`).value, c1 = document.getElementById(`${prefix}-sc1-capital`).value;
@@ -2082,7 +2028,7 @@ function collectDayForm(prefix, isFriday){
   return {
     devotional:{ wordOfDay:document.getElementById(`${prefix}-word`).value, scripture:document.getElementById(`${prefix}-scripture`).value,
       reflection:document.getElementById(`${prefix}-reflect`).value, prayer:document.getElementById(`${prefix}-prayer`).value, intention:document.getElementById(`${prefix}-intent`).value },
-    vocab, financialLit, realWorldScenario, statesCapitals,
+    vocab, currentEvent, financialLit, realWorldScenario, statesCapitals,
     subjects:{ math:document.getElementById(`${prefix}-math`).value, reading:document.getElementById(`${prefix}-reading`).value, spanish:document.getElementById(`${prefix}-spanish`).value },
     extraSubjects: (editorExtraSubjects[prefix]||[]).filter(e=>e.name.trim()!=='' || e.topic.trim()!=='')
   };
@@ -2344,7 +2290,14 @@ function buildFullDayHTML(dateObj, content, checks, weekWords){
     const excluded = s.excludedSubjects || [];
     const studentSubjList = applySubjectOrder(baseSubjList, s.id).filter(sub => !excluded.includes(sub.name));
     const studentChecks = (checks && checks[s.id]) || {};
+    const lesson = content.lesson;
+    const studentLessonHTML = (!isTestDay && lesson) ? `<div class="card" style="margin-top:12px;">
+      <div class="word-badge">${esc(content.lessonType||'Lesson')}</div>
+      <div style="font-size:14px;font-weight:600;margin-top:6px;">${esc(lesson.topic)}</div>
+      ${lesson.blackHistoryMoment ? `<div class="vocab-box" style="margin-top:10px;"><div class="word-badge" style="margin-bottom:4px;">Black History Connection</div><div style="font-size:13px;">${esc(lesson.blackHistoryMoment)}</div></div>` : ''}
+    </div>` : '';
     const academicsHTML = isTestDay ? '' : `
+        ${studentLessonHTML}
         <div class="mini-lbl" style="margin-top:12px;">Academics</div>
         ${studentSubjList.map(sub=>{
           const checked = !!studentChecks[sub.id];
@@ -2373,6 +2326,13 @@ function buildFullDayHTML(dateObj, content, checks, weekWords){
     </div>`;
   }).join('');
 
+  const ceData = content.currentEvent;
+  const currentEventHTML = (ceData && ceData.headline) ? `<div class="card">
+    <div class="word-badge">Current Event</div>
+    <div style="font-size:15px;font-weight:600;margin:6px 0 8px;line-height:1.3;">${esc(ceData.headline)}</div>
+    <p style="font-size:13.5px;line-height:1.55;">${esc(ceData.summary)}</p>
+    <p style="font-size:13px;font-weight:600;margin-top:10px;">Apply It: ${esc(ceData.applyIt)}</p>
+  </div>` : '';
   const flData = content.financialLit;
   const financialLitHTML = (flData && flData.concept) ? `<div class="card">
     <div class="word-badge">Financial Lit</div>
@@ -2387,12 +2347,6 @@ function buildFullDayHTML(dateObj, content, checks, weekWords){
   const statesHTML = (content.statesCapitals && content.statesCapitals.length) ? `<div class="card">
     <div class="word-badge">States & Capitals</div>
     ${content.statesCapitals.map(sc=>`<div class="info-line"><span>${esc(sc.state)}</span><span>${esc(sc.capital)}</span></div>`).join('')}
-  </div>` : '';
-  const lesson = content.lesson;
-  const lessonHTML = lesson ? `<div class="card">
-    <div class="word-badge">${esc(content.lessonType||'Lesson')}</div>
-    <div style="font-size:14px;font-weight:600;margin-top:6px;">${esc(lesson.topic)}</div>
-    ${lesson.blackHistoryMoment ? `<div class="vocab-box" style="margin-top:10px;"><div class="word-badge" style="margin-bottom:4px;">Black History Connection</div><div style="font-size:13px;">${esc(lesson.blackHistoryMoment)}</div></div>` : ''}
   </div>` : '';
 
   return `
@@ -2409,18 +2363,15 @@ function buildFullDayHTML(dateObj, content, checks, weekWords){
         <div class="intention-card"><div class="intention-tag">Today's Intention</div><div class="intention-text">${esc(devo.intention)}</div></div>
       </div>
     </section>
-    ${(financialLitHTML || statesHTML) ? `<section class="qtr" style="margin-bottom:20px;">
+    <section class="qtr" style="margin-bottom:20px;">
       <div class="qtr-head"><div class="qtr-tag">Q2</div><div class="qtr-title" style="font-size:18px;">Life Skills & Drills</div></div>
-      <div class="devo-grid" style="margin-bottom:16px;">${financialLitHTML||'<div></div>'}${statesHTML||'<div></div>'}</div>
+      ${(currentEventHTML && financialLitHTML) ? `<div class="devo-grid" style="margin-bottom:16px;">${currentEventHTML}${financialLitHTML}</div>`
+        : (currentEventHTML || financialLitHTML) ? `<div style="margin-bottom:16px;">${currentEventHTML || financialLitHTML}</div>` : ''}
+      ${rwsHTML ? `<div style="margin-bottom:16px;">${rwsHTML}</div>` : ''}
       <div class="students-grid">${studentsHTML}</div>
-    </section>` : `<section class="qtr" style="margin-bottom:20px;">
-      <div class="qtr-head"><div class="qtr-tag">Q2</div><div class="qtr-title" style="font-size:18px;">Life Skills & Drills</div></div>
-      <div class="students-grid">${studentsHTML}</div>
-    </section>`}
-    <section class="qtr" style="margin-bottom:4px;">
-      <div class="qtr-head"><div class="qtr-tag">Q3–Q4</div><div class="qtr-title" style="font-size:18px;">Academics · Today's Lesson</div></div>
-      ${(lessonHTML || rwsHTML) ? `<div class="devo-grid">${lessonHTML||'<div></div>'}${rwsHTML||'<div></div>'}</div>` : ''}
+      ${statesHTML ? `<div style="margin-top:16px;">${statesHTML}</div>` : ''}
     </section>
+
   `;
 }
 
@@ -2640,7 +2591,7 @@ function openBuzzerModal(){
   const tzSelect = document.getElementById('timezoneInput');
   tzSelect.innerHTML = TIMEZONE_OPTIONS.map(o=>`<option value="${o.value}" ${o.value===state.timezone?'selected':''}>${o.label}</option>`).join('');
 
-  document.getElementById('aiAccessCode').value = localStorage.getItem('ll_ai_access_code') || '';
+  try{ document.getElementById('aiAccessCode').value = localStorage.getItem('ll_ai_access_code') || ''; }catch(e){ document.getElementById('aiAccessCode').value = ''; }
   document.getElementById('aiWeek').value = actualWeekForDate(state.schoolDate);
   document.getElementById('aiMaterialFile').value = '';
   document.getElementById('aiMaterialStatus').textContent = '';
@@ -2661,7 +2612,7 @@ document.getElementById('saveBuzzer').addEventListener('click', async ()=>{
   const tz = document.getElementById('timezoneInput').value;
   state.buzzerTime = bt;
   state.timezone = tz;
-  localStorage.setItem('ll_ai_access_code', document.getElementById('aiAccessCode').value.trim());
+  try{ localStorage.setItem('ll_ai_access_code', document.getElementById('aiAccessCode').value.trim()); }catch(e){ /* storage unavailable here — access code just won't persist */ }
   await storageSet(BUZZER_KEY, bt);
   await storageSet(TIMEZONE_KEY, tz);
   closeAllModals(); showToast('Day settings saved');
