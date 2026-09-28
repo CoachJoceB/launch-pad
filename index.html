@@ -182,6 +182,7 @@
   @media (max-width:640px){.field-grid,.field-grid-3,.field-grid-4{grid-template-columns:1fr;}}
   .modal-tabs{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap;}
   .settings-panel{padding-top:4px;}
+  textarea.autogrow{display:block;width:100%;box-sizing:border-box;padding:8px 10px;border:1.5px solid var(--line-light);border-radius:8px;font-family:'Oswald',sans-serif;font-size:14px;line-height:1.4;resize:none;overflow:hidden;min-height:38px;white-space:pre-wrap;overflow-wrap:anywhere;}
   .modal-tab{
     font-family:'Oswald',sans-serif;font-size:13px;text-transform:uppercase;letter-spacing:.04em;padding:7px 14px;
     border-radius:999px;border:1.5px solid var(--line-light);cursor:pointer;background:#fff;
@@ -1394,9 +1395,9 @@ async function renderBoard(){
         <div class="mini-lbl" style="margin-top:12px;">My Current Event (NewsForKids.net)</div>
         <div class="card" style="margin-top:6px;">
           <label style="margin-top:0;">Headline I read</label>
-          <input type="text" data-cefield="headline" data-student="${s.id}" value="${escAttr(ceResp.headline)}" placeholder="Title of the story">
+          <textarea class="autogrow" rows="1" data-cefield="headline" data-student="${s.id}" placeholder="Title of the story">${esc(ceResp.headline)}</textarea>
           <label>My summary</label>
-          <textarea data-cefield="summary" data-student="${s.id}" placeholder="What was it about, in your own words?">${esc(ceResp.summary)}</textarea>
+          <textarea class="autogrow" rows="2" data-cefield="summary" data-student="${s.id}" placeholder="What was it about, in your own words?">${esc(ceResp.summary)}</textarea>
         </div>`;
     const academicsHTML = isTestDay ? '' : `
         ${studentLessonHTML ? `<div style="margin-top:12px;">${studentLessonHTML}</div>` : ''}
@@ -1490,15 +1491,24 @@ async function renderBoard(){
   if(isTestDay) afterTestSectionRender();
 
   board.querySelectorAll('[data-cefield]').forEach(el=>{
-    el.addEventListener('change', async ()=>{
+    const dateAtRender = state.dateStr;
+    const saveNow = async ()=>{
       const studentId = el.dataset.student;
       const field = el.dataset.cefield;
       const current = currentEventResponses[studentId] || {headline:'', summary:''};
       current[field] = el.value;
       currentEventResponses[studentId] = current;
-      await storageSet(currentEventResponseKey(state.dateStr, studentId), current);
-    });
+      await storageSet(currentEventResponseKey(dateAtRender, studentId), current);
+    };
+    let t = null;
+    el.addEventListener('input', ()=>{ clearTimeout(t); t = setTimeout(saveNow, 500); });
+    el.addEventListener('change', ()=>{ clearTimeout(t); saveNow(); });
+    if(el.dataset.cefield === 'headline'){
+      el.addEventListener('keydown', e=>{ if(e.key==='Enter'){ e.preventDefault(); el.blur(); } });
+    }
   });
+  wireAutoGrow(board);
+  requestAnimationFrame(()=> wireAutoGrow(board));
 
   const flBtn = document.getElementById('revealFlAnswer');
   if(flBtn){
@@ -1756,7 +1766,7 @@ function renderTestFormHTML(student, entry){
           `).join('')}
         </div>` : `<p style="font-size:12.5px;color:var(--ink-soft);margin:4px 0 8px;">No NewsForKids.net entries logged yet this week.</p>`}
       <p style="font-size:13.5px;margin:8px 0 8px;font-weight:600;">${esc(test.currentEventQuestion)}</p>
-      <textarea data-testfield="${p}-currentEvent" style="width:100%;min-height:50px;padding:8px;border:1.5px solid var(--line-light);border-radius:8px;font-family:'Oswald',sans-serif;font-size:13.5px;">${esc(answers.currentEvent||'')}</textarea>
+      <textarea class="autogrow" data-testfield="${p}-currentEvent" style="min-height:50px;padding:8px;border:1.5px solid var(--line-light);border-radius:8px;font-family:'Oswald',sans-serif;font-size:13.5px;">${esc(answers.currentEvent||'')}</textarea>
     </div>
     <div class="card" style="margin-bottom:12px;">
       <div class="mini-lbl" style="margin-top:0;">Financial Lit — fill in the blank</div>
@@ -1855,6 +1865,8 @@ function afterTestSectionRender(){
     const entry = testCache[id];
     formArea.innerHTML = renderTestFormHTML(student, entry);
     wireTestFormInputs(formArea, id);
+    wireAutoGrow(formArea);
+    requestAnimationFrame(()=> wireAutoGrow(formArea));
   }
   tabsWrap.querySelectorAll('.modal-tab').forEach(t=>{
     t.addEventListener('click', ()=> showStudent(t.dataset.testtab));
@@ -2670,6 +2682,21 @@ document.getElementById('openArchive').addEventListener('click', openArchiveModa
 // Day Settings, Students, Curriculum, Grading, and the 4-Week Plan without
 // re-prompting. Each tab reuses that section's existing load function, so
 // switching tabs always shows fresh data.
+// Auto-growing text boxes: height always follows the wrapped content, so
+// typed text is never hidden behind a scrollbar or clipped.
+function autoGrow(el){
+  el.style.height = 'auto';
+  el.style.height = (el.scrollHeight + (el.offsetHeight - el.clientHeight)) + 'px';
+}
+function wireAutoGrow(root){
+  root.querySelectorAll('textarea.autogrow').forEach(el=>{
+    if(!el.dataset.agWired){ el.dataset.agWired = '1'; el.addEventListener('input', ()=> autoGrow(el)); }
+    autoGrow(el);
+  });
+}
+window.addEventListener('resize', ()=> wireAutoGrow(document));
+if(document.fonts && document.fonts.ready) document.fonts.ready.then(()=> wireAutoGrow(document));
+
 let lastSettingsTab = 'day';
 function showSettingsPanel(tab){
   lastSettingsTab = tab;
@@ -3083,7 +3110,11 @@ if(!SUPABASE_CONFIGURED){
 
   // Poll for changes made from other devices (e.g. you edit on your phone,
   // the kids' display picks it up within a minute).
-  setInterval(async ()=>{ await loadAndRender(); }, 90000);
+  setInterval(async ()=>{
+    const ae = document.activeElement;
+    if(ae && /^(TEXTAREA|INPUT)$/.test(ae.tagName) && document.getElementById('board').contains(ae)) return; // don't rebuild the board mid-typing
+    await loadAndRender();
+  }, 90000);
 }
 </script>
 </body>
