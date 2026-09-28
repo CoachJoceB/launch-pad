@@ -181,6 +181,7 @@
   .field-grid-4{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:0 14px;}
   @media (max-width:640px){.field-grid,.field-grid-3,.field-grid-4{grid-template-columns:1fr;}}
   .modal-tabs{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap;}
+  .settings-panel{padding-top:4px;}
   .modal-tab{
     font-family:'Oswald',sans-serif;font-size:13px;text-transform:uppercase;letter-spacing:.04em;padding:7px 14px;
     border-radius:999px;border:1.5px solid var(--line-light);cursor:pointer;background:#fff;
@@ -307,12 +308,8 @@
     </div>
     <button class="icon-btn" id="openArchive" title="Archive & upcoming weeks">📅</button>
     <a class="icon-btn" href="courses.html" title="College coursework (SEU dual enrollment)" style="text-decoration:none;">🎓</a>
-    <button class="icon-btn" id="openBuzzerSettings" title="Day settings (buzzer time & timezone)">⏰</button>
-    <button class="icon-btn" id="openCurriculum" title="Upload History/Science lesson PDFs">📚</button>
-    <button class="icon-btn" id="openGrading" title="Grade Friday tests">✅</button>
-    <button class="icon-btn" id="openStudents" title="Edit student profiles">👤</button>
     <button class="icon-btn" id="openToday" title="Edit today">✏️</button>
-    <button class="icon-btn" id="openTemplate" title="Edit 4-week content plan">🗓️</button>
+    <button class="icon-btn" id="openSettings" title="Settings — day settings, students, curriculum, grading, 4-week plan">⚙️</button>
   </div>
 </header>
 
@@ -332,44 +329,112 @@
   </div>
 </div>
 
-<!-- 5-WEEK PLAN MODAL -->
-<div class="modal-overlay" id="templateOverlay">
+<!-- SETTINGS MODAL (consolidated: Day Settings, Students, Curriculum, Grading, 4-Week Plan) -->
+<div class="modal-overlay" id="settingsOverlay">
   <div class="modal wide">
-    <h3>4-Week Content Plan</h3>
-    <div class="sub">This rotates on repeat, forever — Week 5 is followed by Week 1 again. Days already auto-saved to the archive won't change unless you reset them individually.</div>
-    <div class="card" style="margin:12px 0;">
-      <div class="mini-lbl" style="margin-top:0;">Choose today's History or Science lesson</div>
-      <div class="sub">Choose any saved week, including lessons parsed from a PDF, then apply it to today's saved plan.</div>
-      <div class="field-grid">
-        <div><label>History lesson</label><select id="todayHistorySource"></select><button type="button" class="btn btn-ghost" id="applyTodayHistory" style="margin-top:6px;">Apply History to today</button></div>
-        <div><label>Science lesson</label><select id="todayScienceSource"></select><button type="button" class="btn btn-ghost" id="applyTodayScience" style="margin-top:6px;">Apply Science to today</button></div>
-      </div>
-      <div style="margin-top:8px;"><label>Other saved lesson</label><select id="todayOtherSource"></select><button type="button" class="btn btn-ghost" id="applyTodayOther" style="margin-top:6px;">Apply selected lesson to today</button></div>
-      <div id="todayLessonApplyStatus" class="sub" style="margin-bottom:0;"></div>
+    <h3>Settings</h3>
+    <div class="modal-tabs" id="settingsTabs">
+      <div class="modal-tab active" data-settingstab="day">Day Settings</div>
+      <div class="modal-tab" data-settingstab="students">Students</div>
+      <div class="modal-tab" data-settingstab="curriculum">Curriculum</div>
+      <div class="modal-tab" data-settingstab="grading">Grading</div>
+      <div class="modal-tab" data-settingstab="plan">4-Week Plan</div>
     </div>
-    <div class="modal-tabs" id="weekLevelTabs"></div>
-    <div id="weekLevelGroups"></div>
-    <div class="modal-actions">
-      <button class="btn btn-ghost" data-close>Cancel</button>
-      <button class="btn btn-primary" id="saveTemplate">Save 5-week plan</button>
-    </div>
-  </div>
-</div>
 
-<!-- STUDENTS MODAL -->
-<div class="modal-overlay" id="studentsOverlay">
-  <div class="modal">
-    <h3>Student Profiles</h3>
-    <div class="sub">Personal info practice pulls from here. Stored only on this device/account.</div>
-    <div class="mini-lbl" style="margin-bottom:8px;">Field Labels (shared across all students)</div>
-    <div class="field-grid-3" id="addrLabelFields"></div>
-    <div class="field-grid-4" style="margin-top:6px;" id="phoneLabelFields"></div>
-    <hr class="divider">
-    <div class="modal-tabs" id="studentTabs"></div>
-    <div id="studentPanels"></div>
-    <div class="modal-actions">
-      <button class="btn btn-ghost" data-close>Cancel</button>
-      <button class="btn btn-primary" id="saveStudents">Save profiles</button>
+    <div class="settings-panel" data-settingspanel="day">
+      <div class="sub">Controls when the school day ends and which timezone the whole plan runs on.</div>
+      <label>End-of-day (final buzzer) time</label>
+      <input type="time" id="buzzerTimeInput" style="font-family:'Oswald',sans-serif;font-size:18px;padding:10px;">
+      <label>Timezone</label>
+      <select id="timezoneInput"></select>
+      <div class="sub" style="margin-top:8px;margin-bottom:0;">Days switch over at midnight in this timezone, and the buzzer countdown runs on it too — the same for every device, no matter where it's opened.</div>
+      <hr class="divider">
+      <h3 style="font-size:20px;">AI Material Reader</h3>
+      <div class="sub">Upload a lesson PDF or a clear photo/scan of a worksheet. AI extracts a lesson summary and turns worksheet questions into interactive, student-specific answer forms.</div>
+      <label>AI access code</label><input type="password" id="aiAccessCode" autocomplete="off" placeholder="Set by your administrator">
+      <div class="field-grid">
+        <div><label>Subject</label><select id="aiSubject"><option value="history">History</option><option value="science">Science</option><option value="math">Math</option><option value="language arts">Language Arts</option><option value="bible">Bible</option><option value="other">Other</option></select></div>
+        <div><label>Week number</label><input type="number" id="aiWeek" min="1" value="1"></div>
+      </div>
+      <label>Material type</label><select id="aiMaterialType"><option value="lesson">Lesson material + worksheet</option><option value="worksheet">Worksheet only</option></select>
+      <label>Students who should receive the digital worksheet</label><div id="aiStudentChoices" class="sub"></div>
+      <label>PDF, text file, or worksheet image (PNG/JPEG/WebP)</label><input type="file" id="aiMaterialFile" accept="application/pdf,.txt,image/png,image/jpeg,image/webp">
+      <button type="button" class="btn btn-ghost" id="aiAnalyzeMaterial" style="margin-top:8px;">Read and parse material</button>
+      <div id="aiMaterialStatus" class="sub" aria-live="polite"></div>
+      <div id="aiMaterialPreview" class="card" style="display:none;max-height:220px;overflow:auto;"></div>
+      <button type="button" class="btn btn-primary" id="aiSaveMaterial" style="display:none;">Save parsed material</button>
+      <div class="modal-actions">
+        <button class="btn btn-ghost" data-close>Close</button>
+        <button class="btn btn-primary" id="saveBuzzer">Save settings</button>
+      </div>
+    </div>
+
+    <div class="settings-panel" data-settingspanel="students" style="display:none;">
+      <div class="sub">Personal info practice pulls from here. Stored only on this device/account.</div>
+      <div class="mini-lbl" style="margin-bottom:8px;">Field Labels (shared across all students)</div>
+      <div class="field-grid-3" id="addrLabelFields"></div>
+      <div class="field-grid-4" style="margin-top:6px;" id="phoneLabelFields"></div>
+      <hr class="divider">
+      <div class="modal-tabs" id="studentTabs"></div>
+      <div id="studentPanels"></div>
+      <div class="modal-actions">
+        <button class="btn btn-ghost" data-close>Close</button>
+        <button class="btn btn-primary" id="saveStudents">Save profiles</button>
+      </div>
+    </div>
+
+    <div class="settings-panel" data-settingspanel="curriculum" style="display:none;">
+      <div class="sub">History = Mon/Tue, Science = Wed/Thu. Each real week keeps going — never repeats.</div>
+      <div class="field-grid">
+        <div><label>Week number</label><input type="text" inputmode="numeric" id="currWeekInput" placeholder="e.g. 1"></div>
+        <div><label>Subject</label><select id="currSubjectInput"><option value="history">History</option><option value="science">Science</option></select></div>
+      </div>
+      <label>Topic / summary</label>
+      <textarea id="currTopicInput" placeholder="What this week's lesson covers"></textarea>
+      <div id="currBhmField">
+        <label>Black History Connection</label>
+        <textarea id="currBhmInput" placeholder="A moment tied to this week's material"></textarea>
+      </div>
+      <label>Lesson PDF</label>
+      <input type="file" id="currPdfInput" accept="application/pdf">
+      <div id="currExistingFile" class="sub" style="margin-top:6px;"></div>
+      <div class="modal-actions">
+        <button class="btn btn-ghost" data-close>Close</button>
+        <button class="btn btn-primary" id="saveCurriculum">Save Lesson</button>
+      </div>
+    </div>
+
+    <div class="settings-panel" data-settingspanel="grading" style="display:none;">
+      <div class="sub">Financial Lit and States/Capitals auto-grade. Everything else, leave feedback.</div>
+      <div class="field-grid">
+        <div><label>Date</label><input type="text" id="gradeDateInput" placeholder="YYYY-MM-DD"></div>
+        <div><label>Student</label><select id="gradeStudentInput"></select></div>
+      </div>
+      <div id="gradingContent" style="margin-top:14px;"></div>
+      <div class="modal-actions">
+        <button class="btn btn-ghost" data-close>Close</button>
+        <button class="btn btn-primary" id="saveGrading">Save Feedback</button>
+      </div>
+    </div>
+
+    <div class="settings-panel" data-settingspanel="plan" style="display:none;">
+      <div class="sub">This rotates on repeat, forever — Week 5 is followed by Week 1 again. Days already auto-saved to the archive won't change unless you reset them individually.</div>
+      <div class="card" style="margin:12px 0;">
+        <div class="mini-lbl" style="margin-top:0;">Choose today's History or Science lesson</div>
+        <div class="sub">Choose any saved week, including lessons parsed from a PDF, then apply it to today's saved plan.</div>
+        <div class="field-grid">
+          <div><label>History lesson</label><select id="todayHistorySource"></select><button type="button" class="btn btn-ghost" id="applyTodayHistory" style="margin-top:6px;">Apply History to today</button></div>
+          <div><label>Science lesson</label><select id="todayScienceSource"></select><button type="button" class="btn btn-ghost" id="applyTodayScience" style="margin-top:6px;">Apply Science to today</button></div>
+        </div>
+        <div style="margin-top:8px;"><label>Other saved lesson</label><select id="todayOtherSource"></select><button type="button" class="btn btn-ghost" id="applyTodayOther" style="margin-top:6px;">Apply selected lesson to today</button></div>
+        <div id="todayLessonApplyStatus" class="sub" style="margin-bottom:0;"></div>
+      </div>
+      <div class="modal-tabs" id="weekLevelTabs"></div>
+      <div id="weekLevelGroups"></div>
+      <div class="modal-actions">
+        <button class="btn btn-ghost" data-close>Close</button>
+        <button class="btn btn-primary" id="saveTemplate">Save 5-week plan</button>
+      </div>
     </div>
   </div>
 </div>
@@ -414,68 +479,12 @@
   </div>
 </div>
 
-<!-- DAY SETTINGS MODAL -->
-<div class="modal-overlay" id="buzzerOverlay">
-  <div class="modal" style="max-width:560px;">
-    <h3>Day Settings</h3>
-    <div class="sub">Controls when the school day ends and which timezone the whole plan runs on.</div>
-    <label>End-of-day (final buzzer) time</label>
-    <input type="time" id="buzzerTimeInput" style="font-family:'Oswald',sans-serif;font-size:18px;padding:10px;">
-    <label>Timezone</label>
-    <select id="timezoneInput"></select>
-    <div class="sub" style="margin-top:8px;margin-bottom:0;">Days switch over at midnight in this timezone, and the buzzer countdown runs on it too — the same for every device, no matter where it's opened.</div>
-    <hr class="divider">
-    <h3 style="font-size:20px;">AI Material Reader</h3>
-    <div class="sub">Upload a lesson PDF or a clear photo/scan of a worksheet. AI extracts a lesson summary and turns worksheet questions into interactive, student-specific answer forms.</div>
-    <label>AI access code</label><input type="password" id="aiAccessCode" autocomplete="off" placeholder="Set by your administrator">
-    <div class="field-grid">
-      <div><label>Subject</label><select id="aiSubject"><option value="history">History</option><option value="science">Science</option><option value="math">Math</option><option value="language arts">Language Arts</option><option value="bible">Bible</option><option value="other">Other</option></select></div>
-      <div><label>Week number</label><input type="number" id="aiWeek" min="1" value="1"></div>
-    </div>
-    <label>Material type</label><select id="aiMaterialType"><option value="lesson">Lesson material + worksheet</option><option value="worksheet">Worksheet only</option></select>
-    <label>Students who should receive the digital worksheet</label><div id="aiStudentChoices" class="sub"></div>
-    <label>PDF, text file, or worksheet image (PNG/JPEG/WebP)</label><input type="file" id="aiMaterialFile" accept="application/pdf,.txt,image/png,image/jpeg,image/webp">
-    <button type="button" class="btn btn-ghost" id="aiAnalyzeMaterial" style="margin-top:8px;">Read and parse material</button>
-    <div id="aiMaterialStatus" class="sub" aria-live="polite"></div>
-    <div id="aiMaterialPreview" class="card" style="display:none;max-height:220px;overflow:auto;"></div>
-    <button type="button" class="btn btn-primary" id="aiSaveMaterial" style="display:none;">Save parsed material</button>
-    <div class="modal-actions">
-      <button class="btn btn-ghost" data-close>Cancel</button>
-      <button class="btn btn-primary" id="saveBuzzer">Save settings</button>
-    </div>
-  </div>
-</div>
-
-<!-- CURRICULUM PDF UPLOAD MODAL -->
-<div class="modal-overlay" id="curriculumOverlay">
-  <div class="modal" style="max-width:460px;">
-    <h3>Weekly Lesson Upload</h3>
-    <div class="sub">History = Mon/Tue, Science = Wed/Thu. Each real week keeps going — never repeats.</div>
-    <div class="field-grid">
-      <div><label>Week number</label><input type="text" inputmode="numeric" id="currWeekInput" placeholder="e.g. 1"></div>
-      <div><label>Subject</label><select id="currSubjectInput"><option value="history">History</option><option value="science">Science</option></select></div>
-    </div>
-    <label>Topic / summary</label>
-    <textarea id="currTopicInput" placeholder="What this week's lesson covers"></textarea>
-    <div id="currBhmField">
-      <label>Black History Connection</label>
-      <textarea id="currBhmInput" placeholder="A moment tied to this week's material"></textarea>
-    </div>
-    <label>Lesson PDF</label>
-    <input type="file" id="currPdfInput" accept="application/pdf">
-    <div id="currExistingFile" class="sub" style="margin-top:6px;"></div>
-    <div class="modal-actions">
-      <button class="btn btn-ghost" data-close>Cancel</button>
-      <button class="btn btn-primary" id="saveCurriculum">Save Lesson</button>
-    </div>
-  </div>
-</div>
-
 <!-- LESSON WORKSHEET MODAL -->
 <div class="modal-overlay" id="worksheetOverlay">
   <div class="modal wide">
     <h3 id="worksheetTitle">Worksheet</h3>
     <div class="sub" id="worksheetSub">Answers autosave as you go.</div>
+    <div id="worksheetReading" class="card" style="display:none;margin-bottom:12px;"></div>
     <div class="modal-tabs" id="worksheetStudentTabs"></div>
     <div id="worksheetFormArea"></div>
     <div class="modal-actions">
@@ -484,24 +493,8 @@
   </div>
 </div>
 
-<!-- GRADE TESTS MODAL -->
-<div class="modal-overlay" id="gradingOverlay">
-  <div class="modal wide">
-    <h3>Grade Tests</h3>
-    <div class="sub">Financial Lit and States/Capitals auto-grade. Everything else, leave feedback.</div>
-    <div class="field-grid">
-      <div><label>Date</label><input type="text" id="gradeDateInput" placeholder="YYYY-MM-DD"></div>
-      <div><label>Student</label><select id="gradeStudentInput"></select></div>
-    </div>
-    <div id="gradingContent" style="margin-top:14px;"></div>
-    <div class="modal-actions">
-      <button class="btn btn-ghost" data-close>Close</button>
-      <button class="btn btn-primary" id="saveGrading">Save Feedback</button>
-    </div>
-  </div>
-</div>
-
 <div class="save-toast" id="toast">Saved</div>
+
 
 <!-- PIN DIALOG -->
 <div class="modal-overlay" id="pinOverlay">
@@ -800,78 +793,88 @@ function defaultHistoryWeek1(){
     topic: 'European Explorers & the Founding of a New World — Vikings, Columbus, and the Spanish, French, Dutch, and English claims on North America.',
     pdfDataUrl: null, pdfFilename: null,
     blackHistoryMoment: 'Estevanico (also called Esteban) was an enslaved African man who became one of the first non-Native explorers of the American Southwest. Traveling with the Narváez expedition in the 1530s — the same era of Spanish exploration covered this week — he survived a shipwreck, learned Native languages, and later helped lead the search for the legendary "Seven Cities of Gold" through present-day Texas, New Mexico, and Arizona. He is the first documented person of African descent known to have explored what is now the continental United States.',
-    worksheet: {
-      groups: [
-        wsGroup('matching', 'Choose the letter(s) that are true for each item or person. Use all of the lettered choices.', [
-          wsMatch('1.1','Native Americans','f'),
-          wsMatch('1.2','Eric the Red','b'),
-          wsMatch('1.3','Leif Ericson','o'),
-          wsMatch('1.4','Henry the Navigator','d,m'),
-          wsMatch('1.5','spices','e'),
-          wsMatch('1.6','Vikings (as a group)','q'),
-          wsMatch('1.7','BCE','a,k'),
-          wsMatch('1.8','CE','g'),
-          wsMatch('1.9','Bartholomeu Dias','h'),
-          wsMatch('1.10','Vasco da Gama','n'),
-          wsMatch('1.11','Portugal','l'),
-        ], [
-          {key:'a',text:'Before Common Era'},{key:'b',text:'led people to colonize Greenland'},{key:'c',text:'colonized Iceland'},
-          {key:'d',text:'Portuguese prince'},{key:'e',text:'what Europeans wanted from the Far East'},{key:'f',text:'first people to discover America'},
-          {key:'g',text:'Common Era'},{key:'h',text:'first European to sail around the bottom of Africa'},
-          {key:'i',text:'set up forts along the African coast to protect trade route'},{key:'j',text:'reached Europe by a difficult land and sea route in 1400'},
-          {key:'k',text:'Same time period as AD'},{key:'l',text:'nation that controlled the first all-water route to Asia'},
-          {key:'m',text:'founded a navigation school'},{key:'n',text:'first European to sail to Asia around Africa'},
-          {key:'o',text:'first European to reach America'},{key:'p',text:'crossed the Bering Sea'},
-          {key:'q',text:'pirates and expert sailors'},{key:'r',text:'recorded the discovery of America in sagas'}
-        ]),
-        wsGroup('fillblank', 'Complete these sentences.', [
-          wsFB('1.12','Ferdinand and Isabella, rulers of ___________ agreed to finance Columbus\u2019 voyage.','Spain'),
-          wsFB('1.13a','Columbus first landed on an island he named ___________','San Salvador'),
-          wsFB('1.13b','in October of ___________.','1492'),
-          wsFB('1.14a','The two mistakes Columbus made were thinking ___________ was closer to Europe','Asia'),
-          wsFB('1.14b','and not knowing ___________ was in the way.','America'),
-          wsFB('1.15','The archipelago where Columbus first landed was named the ___________.','West Indies'),
-          wsFB('1.16a','The first European colony in the Americas was ___________','Isabela'),
-          wsFB('1.16b','on the island of ___________.','Hispaniola'),
-          wsFB('1.17','Columbus believed he had sailed to ___________.','Asia'),
-          wsFB('1.18a','The ships on Columbus\u2019 first voyage were the ___________,','Ni\u00f1a'),
-          wsFB('1.18b','the ___________','Pinta'),
-          wsFB('1.18c','and the ___________.','Santa Maria'),
-          wsFB('1.19','Columbus sailed to America a total of ___________ times.','four'),
-        ]),
-        wsGroup('matching', 'Match these people with their description.', [
-          wsMatch('1.20','Hernando De Soto','b'),
-          wsMatch('1.21','Ponce de Le\u00f3n','c'),
-          wsMatch('1.22','Ferdinand Magellan','a'),
-          wsMatch('1.23','St. Augustine, Florida','e'),
-          wsMatch('1.24','conquistadors','d'),
-          wsMatch('1.25','Francisco Coronado','f'),
-        ], [
-          {key:'a',text:'Led the first voyage around the world'},{key:'b',text:'Explored between Florida and the Mississippi River'},
-          {key:'c',text:'Explored and named Florida, looking for the Fountain of Youth'},{key:'d',text:'Spanish noblemen who came to America to conquer and get rich'},
-          {key:'e',text:'First European settlement in the U.S.'},{key:'f',text:'Explored Arizona, New Mexico, and Texas'}
-        ]),
-        wsGroup('fillblank', 'Complete these sentences.', [
-          wsFB('1.26','The passage through or around America to Asia was called the ___________ Passage.','Northwest'),
-          wsFB('1.27','La Salle claimed all the land drained by the ___________ River.','Mississippi'),
-          wsFB('1.28a','Champlain became friends with the ___________ people','Algonquin'),
-          wsFB('1.28b','but enemies of the ___________.','Iroquois'),
-          wsFB('1.29','The first French colony in America was the city of ___________.','Quebec'),
-          wsFB('1.30','___________ was the "Father of New France."','Samuel de Champlain'),
-          wsFB('1.31','La Salle named the land he claimed for France ___________.','Louisiana'),
-          wsFB('1.32','New France became profitable by trading in ___________.','furs'),
-        ]),
-        wsGroup('shortanswer', 'Name the place or person.', [
-          wsSA('1.35','English sea dog who sailed around the world attacking Spanish cities and ships'),
-          wsSA('1.36','City built by the Dutch on Manhattan Island'),
-          wsSA('1.37','Explorer working for the Dutch and the English who found a river in New York and a bay in Canada'),
-          wsSA('1.38','Island where the Lost Colony was founded'),
-          wsSA('1.39','English explorer who found the Grand Banks in 1497'),
-          wsSA('1.40','Name for New Netherlands after it became English'),
-          wsSA('1.41','The Dutch paid about $24 for this important island'),
-          wsSA('1.42','Company that colonized New Netherlands'),
-        ]),
-      ]
+    day1: {
+      reading: 'For centuries before European explorers arrived, Native American peoples already lived across North and South America \u2014 their ancestors had crossed from Asia thousands of years earlier. The first Europeans to reach America were actually the Vikings, skilled sailors from Scandinavia. Around 985 BCE, a Viking named Eric the Red led settlers to Greenland, and his son Leif Ericson sailed even farther, reaching what is now Canada around 1000 BCE. The settlements there didn\u2019t last, and word of the discovery faded from most of Europe, remembered only in old Icelandic stories.\n\nBy the 1400s, Europeans wanted a direct ocean route to Asia to trade for valuable spices without the cost and danger of overland routes. Portugal led the way: Prince Henry the Navigator funded voyages down the African coast and founded a school for sailors. In 1488, Bartholomeu Dias rounded the southern tip of Africa, and ten years later Vasco da Gama sailed all the way to India and back \u2014 Portugal had found a working sea route to Asia.\n\nSpain wanted its own route, and gambled on a different idea: sailing west. Christopher Columbus convinced King Ferdinand and Queen Isabella of Spain to fund his voyage in 1492, though he badly underestimated the distance to Asia and didn\u2019t know America stood in the way. His three ships \u2014 the Ni\u00f1a, the Pinta, and the Santa Mar\u00eda \u2014 reached land in October 1492, and Columbus named the island San Salvador, believing he\u2019d reached islands near Asia. He made four voyages total, established Spain\u2019s first colony in the Americas at Isabela on the island of Hispaniola, and died in 1506 still believing he\u2019d reached Asia.\n\nSpain moved quickly to claim more land. Conquistadors \u2014 Spanish noblemen looking to conquer and get rich \u2014 spread through the Americas. Ponce de Le\u00f3n explored Florida searching for a legendary "Fountain of Youth." Ferdinand Magellan set out in 1519 to sail all the way around the world; his crew survived the journey, though Magellan himself was killed along the way \u2014 proving once and for all that the Americas were a separate landmass from Asia. Hernando De Soto explored between Florida and the Mississippi River, while Francisco Coronado searched what is now Arizona, New Mexico, and Texas for cities of gold he never found. Spain\u2019s lasting mark on North America included St. Augustine, Florida, founded in 1565 \u2014 the first permanent European settlement in what is now the United States.',
+      worksheet: {
+        groups: [
+          wsGroup('matching', 'Choose the letter(s) that are true for each item or person. Use all of the lettered choices.', [
+            wsMatch('1.1','Native Americans','f'),
+            wsMatch('1.2','Eric the Red','b'),
+            wsMatch('1.3','Leif Ericson','o'),
+            wsMatch('1.4','Henry the Navigator','d,m'),
+            wsMatch('1.5','spices','e'),
+            wsMatch('1.6','Vikings (as a group)','q'),
+            wsMatch('1.7','BCE','a,k'),
+            wsMatch('1.8','CE','g'),
+            wsMatch('1.9','Bartholomeu Dias','h'),
+            wsMatch('1.10','Vasco da Gama','n'),
+            wsMatch('1.11','Portugal','l'),
+          ], [
+            {key:'a',text:'Before Common Era'},{key:'b',text:'led people to colonize Greenland'},{key:'c',text:'colonized Iceland'},
+            {key:'d',text:'Portuguese prince'},{key:'e',text:'what Europeans wanted from the Far East'},{key:'f',text:'first people to discover America'},
+            {key:'g',text:'Common Era'},{key:'h',text:'first European to sail around the bottom of Africa'},
+            {key:'i',text:'set up forts along the African coast to protect trade route'},{key:'j',text:'reached Europe by a difficult land and sea route in 1400'},
+            {key:'k',text:'Same time period as AD'},{key:'l',text:'nation that controlled the first all-water route to Asia'},
+            {key:'m',text:'founded a navigation school'},{key:'n',text:'first European to sail to Asia around Africa'},
+            {key:'o',text:'first European to reach America'},{key:'p',text:'crossed the Bering Sea'},
+            {key:'q',text:'pirates and expert sailors'},{key:'r',text:'recorded the discovery of America in sagas'}
+          ]),
+          wsGroup('fillblank', 'Complete these sentences.', [
+            wsFB('1.12','Ferdinand and Isabella, rulers of ___________ agreed to finance Columbus\u2019 voyage.','Spain'),
+            wsFB('1.13a','Columbus first landed on an island he named ___________','San Salvador'),
+            wsFB('1.13b','in October of ___________.','1492'),
+            wsFB('1.14a','The two mistakes Columbus made were thinking ___________ was closer to Europe','Asia'),
+            wsFB('1.14b','and not knowing ___________ was in the way.','America'),
+            wsFB('1.15','The archipelago where Columbus first landed was named the ___________.','West Indies'),
+            wsFB('1.16a','The first European colony in the Americas was ___________','Isabela'),
+            wsFB('1.16b','on the island of ___________.','Hispaniola'),
+            wsFB('1.17','Columbus believed he had sailed to ___________.','Asia'),
+            wsFB('1.18a','The ships on Columbus\u2019 first voyage were the ___________,','Ni\u00f1a'),
+            wsFB('1.18b','the ___________','Pinta'),
+            wsFB('1.18c','and the ___________.','Santa Maria'),
+            wsFB('1.19','Columbus sailed to America a total of ___________ times.','four'),
+          ]),
+          wsGroup('matching', 'Match these people with their description.', [
+            wsMatch('1.20','Hernando De Soto','b'),
+            wsMatch('1.21','Ponce de Le\u00f3n','c'),
+            wsMatch('1.22','Ferdinand Magellan','a'),
+            wsMatch('1.23','St. Augustine, Florida','e'),
+            wsMatch('1.24','conquistadors','d'),
+            wsMatch('1.25','Francisco Coronado','f'),
+          ], [
+            {key:'a',text:'Led the first voyage around the world'},{key:'b',text:'Explored between Florida and the Mississippi River'},
+            {key:'c',text:'Explored and named Florida, looking for the Fountain of Youth'},{key:'d',text:'Spanish noblemen who came to America to conquer and get rich'},
+            {key:'e',text:'First European settlement in the U.S.'},{key:'f',text:'Explored Arizona, New Mexico, and Texas'}
+          ]),
+        ]
+      }
+    },
+    day2: {
+      reading: 'While Spain built its empire in the south, other European nations claimed different parts of North America. France focused on the north. Jacques Cartier explored the St. Lawrence River starting in 1534, and decades later Samuel de Champlain \u2014 later called the "Father of New France" \u2014 founded the city of Quebec in 1608. Champlain allied with the Algonquin people, which put New France at odds with the Algonquin\u2019s rivals, the Iroquois. French settlers spread out to trade furs, a hugely profitable business, and explorers like Louis Jolliet, Jacques Marquette, and later Sieur de La Salle followed the Mississippi River south. La Salle claimed the entire river basin for France in 1682, naming it Louisiana after the French king.\n\nThe Netherlands staked its own claim. In 1609, the Dutch East India Company hired English sailor Henry Hudson to search for a trade route to Asia. He explored the river later named for him \u2014 the Hudson River \u2014 giving the Dutch a claim to what\u2019s now New York. The Dutch West India Company settled the land, founded the city of Albany, and purchased Manhattan Island from local Native Americans for about $24 worth of goods, founding New Amsterdam at its southern tip. Years later, the English took over the colony and renamed it New York.\n\nEngland was slower to explore, but eventually sent its own sailors and adventurers. John Cabot reached the rich fishing waters of the Grand Banks near Canada just five years after Columbus\u2019s first voyage. Sir Francis Drake, one of England\u2019s "sea dogs," raided Spanish ships and treasure around the world between 1577 and 1580, becoming the first Englishman to sail all the way around the globe. Henry Hudson, after his work for the Dutch, later sailed for England too, exploring the enormous bay in Canada that now bears his name. England\u2019s early attempt at a permanent colony didn\u2019t go smoothly: in 1587, Sir Walter Raleigh sponsored a settlement on Roanoke Island, but when a supply ship finally returned in 1590, every colonist had vanished without a trace \u2014 a mystery historians still call "the Lost Colony." Despite that setback, England\u2019s claims up and down the Atlantic coast would eventually grow into the thirteen colonies.',
+      worksheet: {
+        groups: [
+          wsGroup('fillblank', 'Complete these sentences.', [
+            wsFB('1.26','The passage through or around America to Asia was called the ___________ Passage.','Northwest'),
+            wsFB('1.27','La Salle claimed all the land drained by the ___________ River.','Mississippi'),
+            wsFB('1.28a','Champlain became friends with the ___________ people','Algonquin'),
+            wsFB('1.28b','but enemies of the ___________.','Iroquois'),
+            wsFB('1.29','The first French colony in America was the city of ___________.','Quebec'),
+            wsFB('1.30','___________ was the "Father of New France."','Samuel de Champlain'),
+            wsFB('1.31','La Salle named the land he claimed for France ___________.','Louisiana'),
+            wsFB('1.32','New France became profitable by trading in ___________.','furs'),
+          ]),
+          wsGroup('shortanswer', 'Name the place or person.', [
+            wsSA('1.35','English sea dog who sailed around the world attacking Spanish cities and ships'),
+            wsSA('1.36','City built by the Dutch on Manhattan Island'),
+            wsSA('1.37','Explorer working for the Dutch and the English who found a river in New York and a bay in Canada'),
+            wsSA('1.38','Island where the Lost Colony was founded'),
+            wsSA('1.39','English explorer who found the Grand Banks in 1497'),
+            wsSA('1.40','Name for New Netherlands after it became English'),
+            wsSA('1.41','The Dutch paid about $24 for this important island'),
+            wsSA('1.42','Company that colonized New Netherlands'),
+          ]),
+        ]
+      }
     }
   };
 }
@@ -879,42 +882,53 @@ function defaultScienceWeek1(){
   return {
     topic: 'Cells — the Basic Unit of Life. Robert Hooke\u2019s 1665 discovery, the parts of a cell (membrane, cytoplasm, nucleus), and the difference between unicellular/multicellular and prokaryote/eukaryote cells.',
     pdfDataUrl: null, pdfFilename: null,
-    worksheet: {
-      groups: [
-        wsGroup('fillblank', 'Write the answers on the lines.', [
-          wsFB('1.1','The unit of life for all living things is the ___________.','cell'),
-          wsFB('1.2','An Englishman named Robert Hooke examined ___________ under a crude microscope and called the small chambers "cells."','cork'),
-          wsFB('1.3','A cork cell was first observed by Robert Hooke in the year ___________.','1665'),
-          wsFB('1.4','A one-celled living thing is called ___________.','unicellular'),
-          wsFB('1.5','A many-celled living thing is called ___________.','multicellular'),
-        ]),
-        wsGroup('matching', 'Match these items.', [
-          wsMatch('1.6','protoplasm','b'),
-          wsMatch('1.7','prokaryote','f'),
-          wsMatch('1.8','eukaryote','a'),
-          wsMatch('1.9','nucleus','d'),
-          wsMatch('1.10','cytoplasm','g'),
-          wsMatch('1.11','cell wall','c'),
-        ], [
-          {key:'a',text:'contains three basic parts of the cell: cell membrane, cytoplasm, and nucleus'},
-          {key:'b',text:'inner fluid material within the cell membrane'},
-          {key:'c',text:'a fourth part of a cell found only in plants'},
-          {key:'d',text:'found within the protoplasm and looks a little like a dark ball or spot'},
-          {key:'e',text:'part of a microscope'},
-          {key:'f',text:'contains only two basic parts of the cell: cell membrane and protoplasm'},
-          {key:'g',text:'fluid material within cell membrane and outside the nucleus'}
-        ]),
-        wsGroup('truefalse', 'Answer true or false.', [
-          wsTF('1.13','Almost all cells are "microscopic."','true'),
-          wsTF('1.14','The smallest cell is the yolk of an ostrich egg.','false'),
-          wsTF('1.15','The human body has more than 10 trillion cells.','true'),
-          wsTF('1.16','Cells come in a great variety of shapes.','true'),
-          wsTF('1.17','All cells are the same size.','false'),
-        ]),
-        wsGroup('shortanswer', 'Answer this question.', [
-          wsSA('1.18','What things help us to view cells?'),
-        ]),
-      ]
+    day1: {
+      reading: 'Every living thing, from the smallest bacteria to the largest whale, is built from cells \u2014 the basic unit of life. Scientists only began to understand this a few hundred years ago: in 1665, an Englishman named Robert Hooke looked at a thin slice of cork under a simple microscope and noticed it was made of tiny box-like chambers, which he named "cells" after the small rooms monks lived in. That discovery opened up an entire field of science that\u2019s still growing today.\n\nLiving things made of just one cell are called unicellular, while those made of many cells \u2014 like every plant and animal, including you \u2014 are called multicellular. Your body alone is built from billions of individual cells, each with its own job, constantly growing and working, and eventually being replaced by identical new cells so your body keeps functioning even as old cells wear out.\n\nEvery cell has at least two basic parts: a cell membrane, the thin outer layer that holds everything together, and protoplasm, the fluid material inside it. Cells with only these two parts are called prokaryote cells \u2014 bacteria are a well-known example. Many other cells also have a third part, a nucleus, which acts like the cell\u2019s command center and usually looks like a small dark spot inside the cell. When a cell has a nucleus, the fluid around it (outside the nucleus but still inside the membrane) is called cytoplasm. Cells with all three parts \u2014 membrane, cytoplasm, and nucleus \u2014 are called eukaryote cells; every cell in your body is a eukaryote cell. Plant and fungus cells have one more part besides these three: a tough outer layer called the cell wall, which surrounds the cell membrane and gives the cell extra support and structure.',
+      worksheet: {
+        groups: [
+          wsGroup('fillblank', 'Write the answers on the lines.', [
+            wsFB('1.1','The unit of life for all living things is the ___________.','cell'),
+            wsFB('1.2','An Englishman named Robert Hooke examined ___________ under a crude microscope and called the small chambers "cells."','cork'),
+            wsFB('1.3','A cork cell was first observed by Robert Hooke in the year ___________.','1665'),
+            wsFB('1.4','A one-celled living thing is called ___________.','unicellular'),
+            wsFB('1.5','A many-celled living thing is called ___________.','multicellular'),
+          ]),
+          wsGroup('matching', 'Match these items.', [
+            wsMatch('1.6','protoplasm','b'),
+            wsMatch('1.7','prokaryote','f'),
+            wsMatch('1.8','eukaryote','a'),
+            wsMatch('1.9','nucleus','d'),
+            wsMatch('1.10','cytoplasm','g'),
+            wsMatch('1.11','cell wall','c'),
+          ], [
+            {key:'a',text:'contains three basic parts of the cell: cell membrane, cytoplasm, and nucleus'},
+            {key:'b',text:'inner fluid material within the cell membrane'},
+            {key:'c',text:'a fourth part of a cell found only in plants'},
+            {key:'d',text:'found within the protoplasm and looks a little like a dark ball or spot'},
+            {key:'e',text:'part of a microscope'},
+            {key:'f',text:'contains only two basic parts of the cell: cell membrane and protoplasm'},
+            {key:'g',text:'fluid material within cell membrane and outside the nucleus'}
+          ]),
+        ]
+      }
+    },
+    day2: {
+      reading: 'Cells come in an enormous range of sizes and shapes. Almost every cell is microscopic \u2014 so small that the period at the end of a sentence could fit about 500 average-sized cells inside it! In fact, the human body contains more than 10 trillion cells in total. There are exceptions, though: the largest single cell in nature is the yolk of an ostrich egg, which can be about 3 inches across despite being just one cell. Cells also come in every shape imaginable \u2014 round, oval, cube-shaped, column-shaped, stretched-out, even shaped like doughnuts, hearts, or corkscrews. There\u2019s no single "typical" cell shape.\n\nBecause most cells are too small to see with the naked eye, scientists rely on microscopes to study them. An optical microscope \u2014 the kind you\u2019re most likely to use yourself \u2014 can magnify a cell up to about 2,000 times, which is enough to see a cell\u2019s basic parts clearly. For even smaller structures, scientists use an electron microscope, which can magnify up to one million times. Scientists also often use dyes, like iodine, to stain different parts of a cell so they stand out more clearly under the microscope \u2014 a technique you may get to try yourself in the hands-on skin-cell lab that goes with this section, using a microscope and a drop of diluted iodine to view real cells gently scraped from your own skin.',
+      worksheet: {
+        groups: [
+          wsGroup('truefalse', 'Answer true or false.', [
+            wsTF('1.13','Almost all cells are "microscopic."','true'),
+            wsTF('1.14','The smallest cell is the yolk of an ostrich egg.','false'),
+            wsTF('1.15','The human body has more than 10 trillion cells.','true'),
+            wsTF('1.16','Cells come in a great variety of shapes.','true'),
+            wsTF('1.17','All cells are the same size.','false'),
+          ]),
+          wsGroup('shortanswer', 'Answer this question.', [
+            wsSA('1.18','What things help us to view cells?'),
+            wsSA('1.20','Bonus: if you get to try the hands-on skin-cell lab with a microscope, what did you find interesting or surprising?'),
+          ]),
+        ]
+      }
     }
   };
 }
@@ -1228,22 +1242,27 @@ async function renderBoard(){
 
   // ---- History / Science lesson (per real week, Mon/Tue = History, Wed/Thu = Science) ----
   // Rendered once per student (inside their own card) so each student has
-  // their own "Fill Out Worksheet" entry point tied directly to them.
+  // their own "Fill Out Worksheet" entry point tied directly to them. Each
+  // lesson can carry day1/day2 content (Mon vs Tue, or Wed vs Thu) so a
+  // multi-activity lesson is chunked across its two allotted days instead
+  // of repeating the same full worksheet both days; lessons without a
+  // day split fall back to one shared reading/worksheet for both days.
   let sharedLesson = null, sharedLessonType = '';
   if(!isTestDay){
     sharedLesson = c.lesson || (isHistoryDay ? await getHistoryWeek(aw) : isScienceDay ? await getScienceWeek(aw) : null);
     sharedLessonType = c.lessonType || (isHistoryDay ? 'History' : isScienceDay ? 'Science' : '');
   }
+  const sharedDayPart = getLessonDayPart(sharedLesson, state.weekdayNum);
   function buildLessonCardHTML(studentId){
     if(isTestDay) return '';
-    const lesson = sharedLesson, lessonType = sharedLessonType;
+    const lesson = sharedLesson, lessonType = sharedLessonType, dayPart = sharedDayPart;
     if(!lesson){
       return `<div class="card"><div class="word-badge">${esc(lessonType)} Lesson · Week ${aw}</div><p style="color:var(--ink-soft);font-size:13.5px;margin-top:8px;">Not uploaded yet — use the 📚 icon to add this week's ${esc(lessonType)} PDF.</p></div>`;
     }
     const pdfBtn = lesson.pdfDataUrl
       ? `<button type="button" class="btn btn-ghost" data-openlessonpdf style="margin-top:10px;">📄 Open ${esc(lesson.pdfFilename||'Lesson PDF')}</button>`
       : `<p style="font-size:12.5px;color:var(--ink-soft);margin-top:10px;">No PDF attached yet for this week — use the 📚 icon to upload one.</p>`;
-    const worksheetBtn = lesson.worksheet?.groups?.some(g=>(g.items||[]).length)
+    const worksheetBtn = dayPart?.worksheet?.groups?.some(g=>(g.items||[]).length)
       ? `<button type="button" class="btn btn-primary" data-openworksheet data-student="${studentId}" style="margin-top:10px;margin-left:8px;">📝 Fill Out Worksheet</button>`
       : '';
     const bhm = (lessonType==='History' && lesson.blackHistoryMoment)
@@ -1251,24 +1270,26 @@ async function renderBoard(){
            <div class="word-badge" style="margin-bottom:6px;">Black History Connection</div>
            <div style="font-size:13.5px;line-height:1.5;">${esc(lesson.blackHistoryMoment)}</div>
          </div>` : '';
+    const readingHTML = dayPart?.reading
+      ? `<div style="font-size:13.5px;line-height:1.6;color:var(--ink);margin:8px 0;white-space:pre-wrap;">${esc(dayPart.reading)}</div>`
+      : (lesson.summary ? `<p style="font-size:13.5px;line-height:1.5;color:var(--ink-soft);margin:6px 0;">${esc(lesson.summary)}</p>` : '');
     return `<div class="card">
       <div class="word-badge">${esc(lessonType)} Lesson · Week ${aw}</div>
       <div style="font-size:15px;font-weight:600;line-height:1.4;margin:6px 0;">${esc(lesson.topic)}</div>
-      ${lesson.summary?`<p style="font-size:13.5px;line-height:1.5;color:var(--ink-soft);margin:6px 0;">${esc(lesson.summary)}</p>`:''}
+      ${readingHTML}
       ${pdfBtn}${worksheetBtn}
       ${bhm}
     </div>`;
   }
   if(sharedLesson && sharedLesson.pdfDataUrl) window.__pendingLessonPdf = sharedLesson;
-  if(sharedLesson && sharedLesson.worksheet?.groups?.some(g=>(g.items||[]).length)) window.__pendingWorksheet = { subject: sharedLessonType.toLowerCase(), lesson: sharedLesson };
+  if(sharedLesson && sharedDayPart?.worksheet?.groups?.some(g=>(g.items||[]).length)) window.__pendingWorksheet = { subject: sharedLessonType.toLowerCase(), lesson: sharedLesson, weekdayNum: state.weekdayNum };
 
-  // ---- Current Event (real news article, simplified) ----
-  const ceData = c.currentEvent;
-  const currentEventHTML = (!isTestDay && ceData && ceData.headline) ? `<div class="card">
+  // ---- Current Event (NewsForKids.net — student reads a real article and
+  // logs their own headline + summary; response is per-student, per-day) ----
+  const currentEventHTML = (!isTestDay) ? `<div class="card">
     <div class="word-badge">Current Event</div>
-    <div style="font-size:15px;font-weight:600;margin:6px 0 8px;line-height:1.3;">${esc(ceData.headline)}</div>
-    <p style="font-size:13.5px;line-height:1.55;">${esc(ceData.summary)}</p>
-    <p style="font-size:13px;font-weight:600;margin-top:10px;">Apply It: ${esc(ceData.applyIt)}</p>
+    <p style="font-size:13.5px;line-height:1.55;margin:6px 0 10px;">Read one story on NewsForKids.net today, then log the headline and a brief summary in your own words in your card below.</p>
+    <a href="https://newsforkids.net/" target="_blank" rel="noopener" class="btn btn-primary" style="text-decoration:none;display:inline-block;">📰 Open NewsForKids.net</a>
   </div>` : '';
 
   // ---- Financial Lit ----
@@ -1331,6 +1352,13 @@ async function renderBoard(){
     }).join('');
   }
 
+  const currentEventResponses = {};
+  if(!isTestDay){
+    for(const s of state.students){
+      currentEventResponses[s.id] = (await storageGet(currentEventResponseKey(state.dateStr, s.id))) || {headline:'', summary:''};
+    }
+  }
+
   const studentsHTML = state.students.map((s)=>{
     const grade = s.grade;
     let vocabHTML = '';
@@ -1361,6 +1389,15 @@ async function renderBoard(){
     const studentChecks = state.checks[s.id] || {};
     const studentSeuHTML = (s.showSeu && seuGroups.length) ? seuCardsHTML(seuGroups) : '';
     const studentLessonHTML = buildLessonCardHTML(s.id);
+    const ceResp = currentEventResponses[s.id] || {headline:'', summary:''};
+    const currentEventFieldsHTML = isTestDay ? '' : `
+        <div class="mini-lbl" style="margin-top:12px;">My Current Event (NewsForKids.net)</div>
+        <div class="card" style="margin-top:6px;">
+          <label style="margin-top:0;">Headline I read</label>
+          <input type="text" data-cefield="headline" data-student="${s.id}" value="${escAttr(ceResp.headline)}" placeholder="Title of the story">
+          <label>My summary</label>
+          <textarea data-cefield="summary" data-student="${s.id}" placeholder="What was it about, in your own words?">${esc(ceResp.summary)}</textarea>
+        </div>`;
     const academicsHTML = isTestDay ? '' : `
         ${studentLessonHTML ? `<div style="margin-top:12px;">${studentLessonHTML}</div>` : ''}
         <div class="mini-lbl" style="margin-top:12px;">Academics</div>
@@ -1408,6 +1445,7 @@ async function renderBoard(){
         </div>
         <div class="mini-lbl" style="margin-top:12px;">Vocabulary ${isTestDay ? '— Test' : '('+grade+' grade)'}</div>
         ${vocabHTML}
+        ${currentEventFieldsHTML}
         ${academicsHTML}
       </div>
     </div>`;
@@ -1451,6 +1489,17 @@ async function renderBoard(){
 
   if(isTestDay) afterTestSectionRender();
 
+  board.querySelectorAll('[data-cefield]').forEach(el=>{
+    el.addEventListener('change', async ()=>{
+      const studentId = el.dataset.student;
+      const field = el.dataset.cefield;
+      const current = currentEventResponses[studentId] || {headline:'', summary:''};
+      current[field] = el.value;
+      currentEventResponses[studentId] = current;
+      await storageSet(currentEventResponseKey(state.dateStr, studentId), current);
+    });
+  });
+
   const flBtn = document.getElementById('revealFlAnswer');
   if(flBtn){
     flBtn.addEventListener('click', ()=>{
@@ -1486,7 +1535,7 @@ async function renderBoard(){
     btn.addEventListener('click', ()=>{
       const wsData = window.__pendingWorksheet;
       if(!wsData) return;
-      openWorksheetModal(wsData.subject, wsData.lesson, btn.dataset.student);
+      openWorksheetModal(wsData.subject, wsData.lesson, btn.dataset.student, wsData.weekdayNum);
     });
   });
 
@@ -1620,7 +1669,7 @@ function testGradesKey(dateStr, studentId){ return 'test-grades:'+dateStr+':'+st
 function normAnswer(s){ return (s||'').trim().toLowerCase().replace(/\s+/g,' '); }
 function autoGrade(given, expected){ return normAnswer(given) === normAnswer(expected) && normAnswer(given)!==''; }
 
-async function buildWeeklyTest(studentGrade, mon){
+async function buildWeeklyTest(studentGrade, mon, studentId){
   const cw = contentWeekForDate(mon);
   const aw = actualWeekForDate(mon);
   const week = state.contentWeeks[cw];
@@ -1640,10 +1689,19 @@ async function buildWeeklyTest(studentGrade, mon){
   }
   const historyLesson = await getHistoryWeek(aw);
   const scienceLesson = await getScienceWeek(aw);
-  const weekCurrentEvent = (week[1] && week[1].currentEvent) || null;
+  // Pull the student's own NewsForKids.net logs from Mon-Thu of this same
+  // week so the Friday test reflects what they actually read that week.
+  const currentEventLogs = [];
+  if(studentId){
+    for(let d=0; d<4; d++){
+      const dt = new Date(mon); dt.setDate(dt.getDate()+d);
+      const resp = await storageGet(currentEventResponseKey(toDateStr(dt), studentId));
+      if(resp && resp.headline) currentEventLogs.push({ day: ['Mon','Tue','Wed','Thu'][d], headline: resp.headline, summary: resp.summary });
+    }
+  }
   return {
-    vocab, financialLit, statesCapitals,
-    currentEventQuestion: weekCurrentEvent ? `${weekCurrentEvent.headline} — ${weekCurrentEvent.applyIt}` : 'What\u2019s one current event from this week that stood out to you?',
+    vocab, financialLit, statesCapitals, currentEventLogs,
+    currentEventQuestion: 'Which NewsForKids.net story from this week stuck with you most? Give the headline and tell me what it was about.',
     historyTopic: historyLesson ? historyLesson.topic : '',
     scienceTopic: scienceLesson ? scienceLesson.topic : '',
     scenario: (week[1] && week[1].realWorldScenario) || ''
@@ -1658,7 +1716,7 @@ let testCache = {}; // studentId -> {test, answers} while the Friday board is op
 
 async function loadTestForStudent(student){
   const mon = mondayOfWeek(state.schoolDate);
-  const test = await buildWeeklyTest(student.grade, mon);
+  const test = await buildWeeklyTest(student.grade, mon, student.id);
   const saved = (await storageGet(testAnswersKey(state.dateStr, student.id))) || defaultTestAnswers();
   while(saved.vocab.length < test.vocab.length) saved.vocab.push('');
   while(saved.financialLit.length < test.financialLit.length) saved.financialLit.push('');
@@ -1688,7 +1746,16 @@ function renderTestFormHTML(student, entry){
     </div>
     <div class="card" style="margin-bottom:12px;">
       <div class="mini-lbl" style="margin-top:0;">Current Event</div>
-      <p style="font-size:13.5px;margin:4px 0 8px;">${esc(test.currentEventQuestion)}</p>
+      ${test.currentEventLogs && test.currentEventLogs.length ? `
+        <div style="margin:4px 0 10px;">
+          ${test.currentEventLogs.map(log=>`
+            <div class="info-line" style="align-items:flex-start;flex-direction:column;gap:2px;padding:6px 0;">
+              <span style="font-weight:700;font-size:12px;color:var(--ink-soft);">${esc(log.day)}: ${esc(log.headline)}</span>
+              <span style="font-size:12.5px;color:var(--ink-soft);">${esc(log.summary)}</span>
+            </div>
+          `).join('')}
+        </div>` : `<p style="font-size:12.5px;color:var(--ink-soft);margin:4px 0 8px;">No NewsForKids.net entries logged yet this week.</p>`}
+      <p style="font-size:13.5px;margin:8px 0 8px;font-weight:600;">${esc(test.currentEventQuestion)}</p>
       <textarea data-testfield="${p}-currentEvent" style="width:100%;min-height:50px;padding:8px;border:1.5px solid var(--line-light);border-radius:8px;font-family:'Oswald',sans-serif;font-size:13.5px;">${esc(answers.currentEvent||'')}</textarea>
     </div>
     <div class="card" style="margin-bottom:12px;">
@@ -1802,6 +1869,22 @@ function afterTestSectionRender(){
    copy, autosaving per student per date per subject. Matching/fill-in-blank/
    true-false auto-grade; short-answer questions get written feedback in the
    Grade Tests screen. */
+// A lesson can carry day1/day2 content (Mon vs Tue for History, Wed vs Thu
+// for Science) so a multi-activity lesson is chunked across its two
+// allotted days. Monday/Wednesday = day1, Tuesday/Thursday = day2. Lessons
+// with no day split (older format, or a topic-only week) fall back to one
+// shared reading/worksheet used on both days.
+function getLessonDayPart(lesson, weekdayNum){
+  if(!lesson) return null;
+  const isFirstDay = (weekdayNum===1 || weekdayNum===3);
+  const part = isFirstDay ? lesson.day1 : lesson.day2;
+  if(part) return part;
+  return { reading: lesson.reading || '', worksheet: lesson.worksheet || null };
+}
+
+// Per-student, per-day NewsForKids.net response (headline + summary they write themselves)
+function currentEventResponseKey(dateStr, studentId){ return 'current-event-response:'+dateStr+':'+studentId; }
+
 function worksheetAnswersKey(dateStr, studentId, subject){ return 'worksheet-answers:'+dateStr+':'+subject+':'+studentId; }
 function worksheetGradesKey(dateStr, studentId, subject){ return 'worksheet-grades:'+dateStr+':'+subject+':'+studentId; }
 
@@ -1814,10 +1897,22 @@ function defaultWorksheetAnswers(worksheet){
 let worksheetCache = {}; // studentId -> {worksheet, answers}
 let currentWorksheetCtx = null; // {subject, lesson, dateStr}
 
-async function openWorksheetModal(subject, lesson, preferredStudentId){
+async function openWorksheetModal(subject, lesson, preferredStudentId, weekdayNum){
+  const dayPart = getLessonDayPart(lesson, weekdayNum !== undefined ? weekdayNum : state.weekdayNum);
+  const worksheet = dayPart && dayPart.worksheet;
+  if(!worksheet){ showToast('No worksheet questions for this day yet.'); return; }
   currentWorksheetCtx = { subject, lesson, dateStr: state.dateStr };
   document.getElementById('worksheetTitle').textContent = materialSubjectLabel(subject) + ' Worksheet';
   document.getElementById('worksheetSub').textContent = lesson.topic;
+
+  const readingEl = document.getElementById('worksheetReading');
+  if(dayPart.reading){
+    readingEl.style.display = 'block';
+    readingEl.innerHTML = `<div class="word-badge">Today's Reading</div><div style="font-size:13.5px;line-height:1.6;margin-top:8px;white-space:pre-wrap;">${esc(dayPart.reading)}</div>`;
+  } else {
+    readingEl.style.display = 'none';
+    readingEl.innerHTML = '';
+  }
 
   const assignedIds = Array.isArray(lesson.worksheetStudentIds) ? lesson.worksheetStudentIds : [];
   const worksheetStudents = assignedIds.length ? state.students.filter(s=>assignedIds.includes(s.id)) : state.students;
@@ -1828,8 +1923,8 @@ async function openWorksheetModal(subject, lesson, preferredStudentId){
 
   worksheetCache = {};
   for(const s of worksheetStudents){
-    const saved = (await storageGet(worksheetAnswersKey(state.dateStr, s.id, subject))) || defaultWorksheetAnswers(lesson.worksheet);
-    worksheetCache[s.id] = { worksheet: lesson.worksheet, answers: saved };
+    const saved = (await storageGet(worksheetAnswersKey(state.dateStr, s.id, subject))) || defaultWorksheetAnswers(worksheet);
+    worksheetCache[s.id] = { worksheet: worksheet, answers: saved };
   }
 
   function showStudent(id){
@@ -1953,15 +2048,10 @@ function dayEditFormHTML(prefix, c, isFriday){
       }).join('');
 
   const fl = c.financialLit || {concept:'',blank:'',answer:''};
-  const ceD = c.currentEvent || {headline:'',summary:'',applyIt:''};
   const sc = c.statesCapitals || [];
   const lifeSkillsBlock = isFriday
     ? `<p style="color:var(--ink-soft);font-size:13px;">Friday is test day — no new Financial Lit / States / Scenario content needed.</p>`
     : `
-    <label>Current Event Headline</label><input type="text" id="${prefix}-ce-headline" value="${escAttr(ceD.headline)}">
-    <label>Summary (5th grade reading level)</label><textarea id="${prefix}-ce-summary">${esc(ceD.summary)}</textarea>
-    <label>Apply It Question</label><textarea id="${prefix}-ce-applyit">${esc(ceD.applyIt)}</textarea>
-    <hr class="divider">
     <label>Financial Lit Concept</label><input type="text" id="${prefix}-fl-concept" value="${escAttr(fl.concept)}">
     <label>Fill-in-the-blank sentence (use ______ for the blank)</label><textarea id="${prefix}-fl-blank">${esc(fl.blank)}</textarea>
     <label>Answer</label><input type="text" id="${prefix}-fl-answer" value="${escAttr(fl.answer)}">
@@ -2014,10 +2104,8 @@ function collectDayForm(prefix, isFriday){
         sent:document.getElementById(`${prefix}-v-${g}-sent`).value, syn:document.getElementById(`${prefix}-v-${g}-syn`).value, ant:document.getElementById(`${prefix}-v-${g}-ant`).value };
     });
   }
-  let currentEvent = null, financialLit = null, realWorldScenario = '', statesCapitals = [];
+  let financialLit = null, realWorldScenario = '', statesCapitals = [];
   if(!isFriday){
-    const ceHeadline = document.getElementById(`${prefix}-ce-headline`).value;
-    if(ceHeadline) currentEvent = { headline: ceHeadline, summary: document.getElementById(`${prefix}-ce-summary`).value, applyIt: document.getElementById(`${prefix}-ce-applyit`).value };
     financialLit = { concept:document.getElementById(`${prefix}-fl-concept`).value, blank:document.getElementById(`${prefix}-fl-blank`).value, answer:document.getElementById(`${prefix}-fl-answer`).value };
     realWorldScenario = document.getElementById(`${prefix}-rws`).value;
     const s1 = document.getElementById(`${prefix}-sc1-state`).value, c1 = document.getElementById(`${prefix}-sc1-capital`).value;
@@ -2028,7 +2116,7 @@ function collectDayForm(prefix, isFriday){
   return {
     devotional:{ wordOfDay:document.getElementById(`${prefix}-word`).value, scripture:document.getElementById(`${prefix}-scripture`).value,
       reflection:document.getElementById(`${prefix}-reflect`).value, prayer:document.getElementById(`${prefix}-prayer`).value, intention:document.getElementById(`${prefix}-intent`).value },
-    vocab, currentEvent, financialLit, realWorldScenario, statesCapitals,
+    vocab, financialLit, realWorldScenario, statesCapitals,
     subjects:{ math:document.getElementById(`${prefix}-math`).value, reading:document.getElementById(`${prefix}-reading`).value, spanish:document.getElementById(`${prefix}-spanish`).value },
     extraSubjects: (editorExtraSubjects[prefix]||[]).filter(e=>e.name.trim()!=='' || e.topic.trim()!=='')
   };
@@ -2145,7 +2233,7 @@ function openTemplateModal(){
     });
   });
 
-  document.getElementById('templateOverlay').classList.add('open');
+  showSettingsPanel('plan');
   populateTodayLessonSources();
 }
 function collectTemplateForm(){
@@ -2236,7 +2324,7 @@ function openStudentsModal(){
     });
   });
 
-  document.getElementById('studentsOverlay').classList.add('open');
+  showSettingsPanel('students');
 }
 function collectFieldLabels(){
   return {
@@ -2291,9 +2379,11 @@ function buildFullDayHTML(dateObj, content, checks, weekWords){
     const studentSubjList = applySubjectOrder(baseSubjList, s.id).filter(sub => !excluded.includes(sub.name));
     const studentChecks = (checks && checks[s.id]) || {};
     const lesson = content.lesson;
+    const dayPart = getLessonDayPart(lesson, dateObj.getDay());
     const studentLessonHTML = (!isTestDay && lesson) ? `<div class="card" style="margin-top:12px;">
       <div class="word-badge">${esc(content.lessonType||'Lesson')}</div>
       <div style="font-size:14px;font-weight:600;margin-top:6px;">${esc(lesson.topic)}</div>
+      ${dayPart && dayPart.reading ? `<div style="font-size:13px;line-height:1.5;margin-top:8px;white-space:pre-wrap;">${esc(dayPart.reading)}</div>` : ''}
       ${lesson.blackHistoryMoment ? `<div class="vocab-box" style="margin-top:10px;"><div class="word-badge" style="margin-bottom:4px;">Black History Connection</div><div style="font-size:13px;">${esc(lesson.blackHistoryMoment)}</div></div>` : ''}
     </div>` : '';
     const academicsHTML = isTestDay ? '' : `
@@ -2326,13 +2416,10 @@ function buildFullDayHTML(dateObj, content, checks, weekWords){
     </div>`;
   }).join('');
 
-  const ceData = content.currentEvent;
-  const currentEventHTML = (ceData && ceData.headline) ? `<div class="card">
+  const currentEventHTML = isTestDay ? '' : `<div class="card">
     <div class="word-badge">Current Event</div>
-    <div style="font-size:15px;font-weight:600;margin:6px 0 8px;line-height:1.3;">${esc(ceData.headline)}</div>
-    <p style="font-size:13.5px;line-height:1.55;">${esc(ceData.summary)}</p>
-    <p style="font-size:13px;font-weight:600;margin-top:10px;">Apply It: ${esc(ceData.applyIt)}</p>
-  </div>` : '';
+    <p style="font-size:13px;color:var(--ink-soft);margin-top:6px;">Each student's NewsForKids.net headline & summary is saved on their own card that day — open that date on the live board to see their answers.</p>
+  </div>`;
   const flData = content.financialLit;
   const financialLitHTML = (flData && flData.concept) ? `<div class="card">
     <div class="word-badge">Financial Lit</div>
@@ -2574,14 +2661,33 @@ document.querySelectorAll('[data-cal-tab]').forEach(t=>{
 });
 
 document.getElementById('openToday').addEventListener('click', ()=> requireEditAccess(openTodayModal));
-document.getElementById('openTemplate').addEventListener('click', ()=> requireEditAccess(openTemplateModal));
 document.getElementById('applyTodayHistory').addEventListener('click', ()=> applyLessonToToday('history'));
 document.getElementById('applyTodayScience').addEventListener('click', ()=> applyLessonToToday('science'));
 document.getElementById('applyTodayOther').addEventListener('click', ()=> applyLessonToToday('other'));
-document.getElementById('openStudents').addEventListener('click', ()=> requireEditAccess(openStudentsModal));
 document.getElementById('openArchive').addEventListener('click', openArchiveModal);
-document.getElementById('openBuzzerSettings').addEventListener('click', ()=> requireEditAccess(openBuzzerModal));
-document.getElementById('openCurriculum').addEventListener('click', ()=> requireEditAccess(openCurriculumModal));
+
+// Single Settings entry point — one PIN check, then tabs switch between
+// Day Settings, Students, Curriculum, Grading, and the 4-Week Plan without
+// re-prompting. Each tab reuses that section's existing load function, so
+// switching tabs always shows fresh data.
+let lastSettingsTab = 'day';
+function showSettingsPanel(tab){
+  lastSettingsTab = tab;
+  document.querySelectorAll('#settingsTabs .modal-tab').forEach(t=>t.classList.toggle('active', t.dataset.settingstab===tab));
+  document.querySelectorAll('.settings-panel').forEach(p=>{ p.style.display = (p.dataset.settingspanel===tab) ? 'block' : 'none'; });
+  document.getElementById('settingsOverlay').classList.add('open');
+}
+function openSettingsTab(tab){
+  if(tab==='day') openBuzzerModal();
+  else if(tab==='students') openStudentsModal();
+  else if(tab==='curriculum') openCurriculumModal();
+  else if(tab==='grading') openGradingModal();
+  else if(tab==='plan') openTemplateModal();
+}
+document.querySelectorAll('#settingsTabs .modal-tab').forEach(t=>{
+  t.addEventListener('click', ()=> openSettingsTab(t.dataset.settingstab));
+});
+document.getElementById('openSettings').addEventListener('click', ()=> requireEditAccess(()=> openSettingsTab(lastSettingsTab)));
 
 function openBuzzerModal(){
   const hh = pad(state.buzzerTime.hour);
@@ -2602,7 +2708,7 @@ function openBuzzerModal(){
   document.getElementById('aiMaterialPreview').innerHTML = '';
   document.getElementById('aiStudentChoices').innerHTML = state.students.map(s=>`<label style="display:inline-flex;align-items:center;gap:6px;margin:2px 12px 6px 0;"><input type="checkbox" data-ai-student="${escAttr(s.id)}" checked> ${esc(s.name)}</label>`).join('') || 'Add students before creating a student worksheet.';
 
-  document.getElementById('buzzerOverlay').classList.add('open');
+  showSettingsPanel('day');
 }
 document.getElementById('saveBuzzer').addEventListener('click', async ()=>{
   const val = document.getElementById('buzzerTimeInput').value; // "HH:MM" 24h
@@ -2711,7 +2817,7 @@ function openCurriculumModal(){
   curriculumPendingFilename = null;
   toggleBhmField();
   loadExistingCurriculum();
-  document.getElementById('curriculumOverlay').classList.add('open');
+  showSettingsPanel('curriculum');
 }
 function toggleBhmField(){
   const isHistory = document.getElementById('currSubjectInput').value === 'history';
@@ -2764,7 +2870,6 @@ document.getElementById('saveCurriculum').addEventListener('click', async ()=>{
 });
 
 /* ========================= GRADE TESTS ========================= */
-document.getElementById('openGrading').addEventListener('click', ()=> requireEditAccess(openGradingModal));
 
 function openGradingModal(){
   const fridayOfThisWeek = new Date(mondayOfWeek(state.schoolDate));
@@ -2775,7 +2880,7 @@ function openGradingModal(){
   studentSel.innerHTML = state.students.map(s=>`<option value="${s.id}">${esc(s.name)}</option>`).join('');
 
   loadGradingContent();
-  document.getElementById('gradingOverlay').classList.add('open');
+  showSettingsPanel('grading');
 }
 document.getElementById('gradeDateInput').addEventListener('change', loadGradingContent);
 document.getElementById('gradeStudentInput').addEventListener('change', loadGradingContent);
@@ -2815,7 +2920,7 @@ async function loadGradingContent(){
   if(wd===5){
     gradingMode = 'test'; gradingSubject = null;
     const mon = mondayOfWeek(dateObj);
-    const test = await buildWeeklyTest(student.grade, mon);
+    const test = await buildWeeklyTest(student.grade, mon, studentId);
     const answers = (await storageGet(testAnswersKey(dateStr, studentId))) || defaultTestAnswers();
     const grades = (await storageGet(testGradesKey(dateStr, studentId))) || { vocabFeedback:[], currentEventFeedback:'', funFactFeedback:'', historyFeedback:'', scienceFeedback:'', scenarioFeedback:'' };
     while(grades.vocabFeedback.length < test.vocab.length) grades.vocabFeedback.push('');
@@ -2831,6 +2936,17 @@ async function loadGradingContent(){
       ${test.vocab.map((v,i)=>feedbackRow(v.word, '', answers.vocab[i], `vocab-${i}`, grades.vocabFeedback[i])).join('')}
     </div>`;
     html += feedbackRow('Current Event', test.currentEventQuestion, answers.currentEvent, 'currentEvent', grades.currentEventFeedback);
+    if(test.currentEventLogs && test.currentEventLogs.length){
+      html += `<div class="card" style="margin-bottom:10px;margin-top:-4px;">
+        <div class="mini-lbl" style="margin-top:0;">This Week's NewsForKids.net Logs</div>
+        ${test.currentEventLogs.map(log=>`
+          <div class="info-line" style="align-items:flex-start;flex-direction:column;gap:2px;padding:6px 0;">
+            <span style="font-weight:700;font-size:12px;color:var(--ink-soft);">${esc(log.day)}: ${esc(log.headline)}</span>
+            <span style="font-size:12.5px;color:var(--ink-soft);">${esc(log.summary)}</span>
+          </div>
+        `).join('')}
+      </div>`;
+    }
     html += `<div class="card" style="margin-bottom:10px;">
       <div class="mini-lbl" style="margin-top:0;">Financial Lit (auto-graded)</div>
       ${test.financialLit.map((f,i)=>autoGradeRow(f.concept, answers.financialLit[i], f.answer)).join('')}
@@ -2854,15 +2970,17 @@ async function loadGradingContent(){
 
   const aw = actualWeekForDate(dateObj);
   const lesson = subject==='history' ? await getHistoryWeek(aw) : await getScienceWeek(aw);
-  if(!lesson || !lesson.worksheet){
-    content.innerHTML = `<p style="color:var(--ink-soft);font-size:14px;">No fillable worksheet attached to this week's ${subject==='history'?'History':'Science'} lesson.</p>`;
+  const dayPart = getLessonDayPart(lesson, wd);
+  const worksheet = dayPart && dayPart.worksheet;
+  if(!lesson || !worksheet){
+    content.innerHTML = `<p style="color:var(--ink-soft);font-size:14px;">No fillable worksheet attached to this week's ${subject==='history'?'History':'Science'} lesson for this day.</p>`;
     return;
   }
   const answers = (await storageGet(worksheetAnswersKey(dateStr, studentId, subject))) || {};
   const grades = (await storageGet(worksheetGradesKey(dateStr, studentId, subject))) || {};
 
   let html = '';
-  lesson.worksheet.groups.forEach((g, gi)=>{
+  worksheet.groups.forEach((g, gi)=>{
     if(g.type==='shortanswer'){
       html += `<div class="card" style="margin-bottom:10px;">
         <div class="mini-lbl" style="margin-top:0;">${esc(g.instructions)}</div>
