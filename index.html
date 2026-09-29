@@ -3171,7 +3171,7 @@ function buildFullDayHTML(dateObj, content, checks, weekWords){
     const studentSubjList = applySubjectOrder(baseSubjList, s.id).filter(sub => !excluded.includes(sub.name));
     const studentChecks = (checks && checks[s.id]) || {};
     const lesson = content.lesson;
-    const dayPart = getLessonDayPart(lesson, dateObj.getDay());
+    const dayPart = getLessonDayPart(lesson, dateObj.getDay(), toDateStr(dateObj));
     const studentLessonHTML = (!isTestDay && lesson) ? `<div class="card" style="margin-top:12px;">
       <div class="word-badge">${esc(content.lessonType||'Lesson')}</div>
       <div style="font-size:14px;font-weight:600;margin-top:6px;">${esc(lesson.topic)}</div>
@@ -3375,8 +3375,13 @@ async function loadUpcomingTab(){
       const override = await storageGet(dayKey(toDateStr(dateObj)));
       const content = override || JSON.parse(JSON.stringify(state.contentWeeks[cw][wd]));
       if(!override){
-        if(wd===1||wd===2){ content.lesson = histWk; content.lessonType='History'; }
-        else if(wd===3||wd===4){ content.lesson = sciWk; content.lessonType='Science'; }
+        // Same whole-subject-week rotation as the live dashboard: odd actual
+        // weeks = History Mon-Thu, even actual weeks = Science Mon-Thu.
+        const weekSubject = (aw % 2 === 1) ? 'history' : 'science';
+        if(wd>=1 && wd<=4){
+          content.lesson = weekSubject==='history' ? histWk : sciWk;
+          content.lessonType = weekSubject==='history' ? 'History' : 'Science';
+        }
       }
       const rowId = 'up-'+toDateStr(dateObj);
       dayData[rowId] = {dateObj, content};
