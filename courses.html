@@ -275,7 +275,16 @@ const S = {
    not a determined visitor. Real lockdown = Supabase Auth + RLS.
 ========================================================= */
 const LOCK_KEY = 'lp_unlocked';
-const EDIT_PIN = '2633';
+const PIN_FAMILY_KEY = 'pin:family'; // shared with the main dashboard (no seu: prefix)
+let FAMILY_PIN = '2633';
+async function loadFamilyPin(){
+  try{
+    const { data, error } = await sb.from('command_center').select('value').eq('key', PIN_FAMILY_KEY).maybeSingle();
+    if(error) throw error;
+    const v = data ? data.value : null;
+    if(v && /^\d{4,}$/.test(String(v).trim())) FAMILY_PIN = String(v).trim();
+  }catch(e){ console.error('pin load failed', e); }
+}
 function isUnlocked(){
   try{ return sessionStorage.getItem(LOCK_KEY)==='1'; }catch(e){ return false; }
 }
@@ -293,7 +302,7 @@ function showCourseLock(){
   const input = document.getElementById('coursePin');
   const err = document.getElementById('coursePinErr');
   const go = ()=>{
-    if(input.value === EDIT_PIN){
+    if(input.value === FAMILY_PIN){
       try{ sessionStorage.setItem(LOCK_KEY,'1'); }catch(e){}
       loadAll();
     } else { err.style.display='block'; input.value=''; input.focus(); }
@@ -1073,7 +1082,7 @@ document.addEventListener('keydown', (e)=>{
 });
 enhanceClickableDivs(document);
 
-if(sb){ if(isUnlocked()){ loadAll(); } else { showCourseLock(); } }
+if(sb){ (async ()=>{ await loadFamilyPin(); if(isUnlocked()){ loadAll(); } else { showCourseLock(); } })(); }
 </script>
 </body>
 </html>
