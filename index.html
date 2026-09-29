@@ -375,6 +375,7 @@
       <div class="modal-tab" data-settingstab="curriculum">Curriculum</div>
       <div class="modal-tab" data-settingstab="grading">Grading</div>
       <div class="modal-tab" data-settingstab="plan">4-Week Plan</div>
+      <div class="modal-tab" data-settingstab="pins">PINs</div>
     </div>
 
     <div class="settings-panel" data-settingspanel="day">
@@ -470,6 +471,19 @@
       <div class="modal-actions">
         <button class="btn btn-ghost" data-close>Close</button>
         <button class="btn btn-primary" id="saveTemplate">Save 4-week plan</button>
+      </div>
+    </div>
+
+    <div class="settings-panel" data-settingspanel="pins" style="display:none;">
+      <div class="sub">Two PINs. The <b>family PIN</b> opens the dashboard and courses page — the kids know this one. The <b>parent PIN</b> guards Settings, Edit Day, and the 4-week plan editors — just you. Both are stored in the cloud, so changing them here updates every device right away. Each needs at least 4 digits.</div>
+      <label>Family PIN (kids use this to open the site)</label>
+      <input type="password" inputmode="numeric" id="familyPinInput" autocomplete="off" style="font-family:'Oswald',sans-serif;font-size:18px;padding:10px;text-align:center;letter-spacing:6px;">
+      <label>Parent PIN (Settings and editing — just you)</label>
+      <input type="password" inputmode="numeric" id="parentPinInput" autocomplete="off" style="font-family:'Oswald',sans-serif;font-size:18px;padding:10px;text-align:center;letter-spacing:6px;">
+      <div class="sub" id="pinSaveMsg" style="display:none;margin-top:8px;" aria-live="polite"></div>
+      <div class="modal-actions">
+        <button class="btn btn-ghost" data-close>Close</button>
+        <button class="btn btn-primary" id="savePins">Save PINs</button>
       </div>
     </div>
   </div>
@@ -767,16 +781,29 @@ async function storageList(prefix){
   }catch(e){ console.error('storage list failed', e); return []; }
 }
 
-/* ========================= EDIT PIN GATE =========================
-   Soft gate only — kids can freely check off subjects, but opening the
-   Today / 4-Week Plan / Profiles editors asks for this PIN first. Since
-   this is plain client-side code, anyone who views page source can see
-   it — it stops accidental edits, it isn't real security. Change it
-   below before you deploy. Uses a custom in-page dialog (not the
-   browser's native prompt) so it also works inside sandboxed preview
+/* ========================= PIN GATES =========================
+   Two PINs, both changeable in Settings → PINs and stored in the cloud
+   so every device (and the courses page) uses the same ones:
+     Family PIN — unlocks the dashboard and courses page (the kids know this one).
+     Parent PIN — guards Settings, Edit Day, and the 4-week plan editors (parent only).
+   Soft gates only: this is plain client-side code, so anyone who views
+   page source can see them — they stop casual snooping and accidental
+   edits, they aren't real security. Uses a custom in-page dialog (not
+   the browser's native prompt) so it also works inside sandboxed preview
    frames that block native dialogs. */
-const EDIT_PIN = '2633';
-function requireEditAccess(action){
+const PIN_FAMILY_KEY = 'pin:family';
+const PIN_PARENT_KEY = 'pin:parent';
+let FAMILY_PIN = '2633';
+let PARENT_PIN = '2633';
+async function loadPins(){
+  try{
+    const f = await storageGet(PIN_FAMILY_KEY);
+    const p = await storageGet(PIN_PARENT_KEY);
+    if(f && /^\d{4,}$/.test(String(f).trim())) FAMILY_PIN = String(f).trim();
+    if(p && /^\d{4,}$/.test(String(p).trim())) PARENT_PIN = String(p).trim();
+  }catch(e){ console.error('pin load failed', e); }
+}
+function requirePinAccess(pin, action){
   const overlay = document.getElementById('pinOverlay');
   const input = document.getElementById('pinInput');
   const err = document.getElementById('pinError');
@@ -789,13 +816,17 @@ function requireEditAccess(action){
 
   function cleanup(){ overlay.classList.remove('open'); }
   function onSubmit(){
-    if(input.value === EDIT_PIN){ cleanup(); action(); }
+    if(input.value === pin){ cleanup(); action(); }
     else { err.style.display = 'block'; input.value=''; input.focus(); }
   }
   submitBtn.onclick = onSubmit;
   cancelBtn.onclick = cleanup;
   input.onkeydown = (e)=>{ if(e.key==='Enter') onSubmit(); if(e.key==='Escape') cleanup(); };
 }
+/* Parent-only areas: Settings, Edit Day, 4-week plan editors. */
+function requireEditAccess(action){ requirePinAccess(PARENT_PIN, action); }
+/* Lock screens: dashboard and courses page. */
+function requireFamilyAccess(action){ requirePinAccess(FAMILY_PIN, action); }
 
 /* ========================= SESSION LOCK =========================
    The whole board sits behind the family PIN: no student names,
@@ -823,7 +854,7 @@ function showLockScreen(){
       <button type="button" class="btn-warmup" id="unlockBtn">Enter PIN</button>
     </div>`;
   document.getElementById('unlockBtn').addEventListener('click', ()=>{
-    requireEditAccess(()=>{
+    requireFamilyAccess(()=>{
       try{ sessionStorage.setItem(LOCK_KEY,'1'); }catch(e){}
       document.body.classList.remove('locked');
       bootApp();
@@ -2361,6 +2392,35 @@ async function applyLessonToToday(subject){
   showToast(`Week ${week} ${label} applied to today`);
 }
 
+/* PINs tab: view/change the family + parent PINs. */
+function openPinsModal(){
+  document.getElementById('familyPinInput').value = FAMILY_PIN;
+  document.getElementById('parentPinInput').value = PARENT_PIN;
+  document.getElementById('pinSaveMsg').style.display = 'none';
+  showSettingsPanel('pins');
+}
+document.getElementById('savePins').addEventListener('click', async ()=>{
+  const f = document.getElementById('familyPinInput').value.trim();
+  const p = document.getElementById('parentPinInput').value.trim();
+  const msg = document.getElementById('pinSaveMsg');
+  if(!/^\d{4,}$/.test(f) || !/^\d{4,}$/.test(p)){
+    msg.textContent = 'Both PINs need at least 4 digits.';
+    msg.style.display = 'block';
+    return;
+  }
+  const okF = await storageSet(PIN_FAMILY_KEY, f);
+  const okP = await storageSet(PIN_PARENT_KEY, p);
+  if(okF && okP){
+    FAMILY_PIN = f; PARENT_PIN = p;
+    msg.textContent = 'PINs updated — they apply on every device right away.';
+    msg.style.display = 'block';
+    showToast('PINs updated');
+  } else {
+    msg.textContent = "Couldn't save — check your connection and try again.";
+    msg.style.display = 'block';
+  }
+});
+
 function openTemplateModal(){
   const weekTabsEl = document.getElementById('weekLevelTabs');
   const weekGroupsEl = document.getElementById('weekLevelGroups');
@@ -2872,6 +2932,7 @@ function openSettingsTab(tab){
   else if(tab==='curriculum') openCurriculumModal();
   else if(tab==='grading') openGradingModal();
   else if(tab==='plan') openTemplateModal();
+  else if(tab==='pins') openPinsModal();
 }
 document.querySelectorAll('#settingsTabs .modal-tab').forEach(t=>{
   t.addEventListener('click', ()=> openSettingsTab(t.dataset.settingstab));
@@ -3298,8 +3359,16 @@ function bootApp(){
   }, 90000);
 }
 
-/* Locked visitors get the PIN screen; unlocked sessions boot straight in. */
-if(isUnlocked()){ bootApp(); } else { showLockScreen(); }
+/* Normal boot path — the setup-banner and cloud-error branches above are
+   exclusive with this condition. Locked visitors get the PIN screen;
+   unlocked sessions boot straight in. PINs load first so a changed
+   family PIN applies on the very first try. */
+if(SUPABASE_CONFIGURED && typeof supabase !== 'undefined' && sb){
+  (async function(){
+    await loadPins();
+    if(isUnlocked()){ bootApp(); } else { showLockScreen(); }
+  })();
+}
 </script>
 </body>
 </html>
