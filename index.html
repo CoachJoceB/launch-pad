@@ -1225,13 +1225,16 @@ function quarterNumber(actualWeek){ return Math.ceil(actualWeek / 8); }
 async function getHistoryWeek(actualWeek){
   const stored = await storageGet(historyWeekKey(actualWeek));
   if(stored) return stored;
-  if(DEFAULT_HISTORY_WEEKS[actualWeek]) return DEFAULT_HISTORY_WEEKS[actualWeek]();
+  // Built-in defaults only cover the old both-subjects era (weeks <= 6).
+  // Week 7+ uses the rotating single-subject model, so a week with no stored
+  // unit honestly reports "not uploaded yet" instead of stale content.
+  if(actualWeek <= 6 && DEFAULT_HISTORY_WEEKS[actualWeek]) return DEFAULT_HISTORY_WEEKS[actualWeek]();
   return null; // not uploaded yet
 }
 async function getScienceWeek(actualWeek){
   const stored = await storageGet(scienceWeekKey(actualWeek));
   if(stored) return stored;
-  if(DEFAULT_SCIENCE_WEEKS[actualWeek]) return DEFAULT_SCIENCE_WEEKS[actualWeek]();
+  if(actualWeek <= 6 && DEFAULT_SCIENCE_WEEKS[actualWeek]) return DEFAULT_SCIENCE_WEEKS[actualWeek]();
   return null; // not uploaded yet
 }
 
@@ -1317,6 +1320,21 @@ function updateBuzzer(){
 
 /* ========================= RENDER: BOARD ========================= */
 function esc(s){ return (s||'').toString().replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+// Black History Connection box. Accepts a plain string (legacy) or
+// {text, link, label}. The link is rendered as a real clickable source link.
+function bhmHTML(bhm){
+  if(!bhm) return '';
+  const text = typeof bhm === 'string' ? bhm : (bhm.text || '');
+  const link = typeof bhm === 'object' ? bhm.link : null;
+  const label = typeof bhm === 'object' ? (bhm.label || 'Learn more') : null;
+  const linkHTML = link
+    ? `<div style="margin-top:8px;"><a href="${escAttr(link)}" target="_blank" rel="noopener" style="color:var(--accent);font-weight:600;font-size:13px;">🔗 ${esc(label)}</a></div>`
+    : '';
+  return `<div class="vocab-box" style="margin-top:12px;">
+     <div class="word-badge" style="margin-bottom:6px;">Black History Connection</div>
+     <div style="font-size:13.5px;line-height:1.5;">${esc(text)}</div>${linkHTML}
+   </div>`;
+}
 function escAttr(s){ return esc(s).replace(/"/g,'&quot;'); }
 // Privacy: only ever display a student's first name on the public board.
 function firstName(n){ return String(n||'').trim().split(/\s+/)[0] || ''; }
@@ -1343,23 +1361,26 @@ async function renderBoard(){
   const isTestDay = wd===5;
   const fl = state.fieldLabels;
   const aw = actualWeekForDate(state.schoolDate);
-  const isHistoryDay = wd===1 || wd===2;
-  const isScienceDay = wd===3 || wd===4;
+  // Rotating weeks: odd actual weeks = History (Mon-Thu), even = Science (Mon-Thu).
+  // One subject owns the whole week so each unit gets 4 sequential days.
+  const isLessonDay = wd>=1 && wd<=4;
+  const weekSubject = (aw % 2 === 1) ? 'history' : 'science';
+  const isHistoryDay = isLessonDay && weekSubject==='history';
+  const isScienceDay = isLessonDay && weekSubject==='science';
   const unitTest = isUnitTestWeek(aw);
 
-  // ---- History / Science lesson (per real week, Mon/Tue = History, Wed/Thu = Science) ----
+  // ---- History / Science lesson (one subject per week, Mon-Thu) ----
   // Rendered once per student (inside their own card) so each student has
   // their own "Fill Out Worksheet" entry point tied directly to them. Each
-  // lesson can carry day1/day2 content (Mon vs Tue, or Wed vs Thu) so a
-  // multi-activity lesson is chunked across its two allotted days instead
-  // of repeating the same full worksheet both days; lessons without a
-  // day split fall back to one shared reading/worksheet for both days.
+  // lesson carries day1..day4 content so a unit is chunked across its four
+  // days (day4 = the self test); lessons without a day split fall back to
+  // one shared reading/worksheet used every day.
   let sharedLesson = null, sharedLessonType = '';
   if(!isTestDay){
     sharedLesson = c.lesson || (isHistoryDay ? await getHistoryWeek(aw) : isScienceDay ? await getScienceWeek(aw) : null);
     sharedLessonType = c.lessonType || (isHistoryDay ? 'History' : isScienceDay ? 'Science' : '');
   }
-  const sharedDayPart = getLessonDayPart(sharedLesson, state.weekdayNum);
+  const sharedDayPart = getLessonDayPart(sharedLesson, state.weekdayNum, state.dateStr);
   function buildLessonCardHTML(studentId){
     if(isTestDay) return '';
     const lesson = sharedLesson, lessonType = sharedLessonType, dayPart = sharedDayPart;
@@ -1368,32 +1389,26 @@ async function renderBoard(){
     }
     const pdfBtn = lesson.pdfDataUrl
       ? `<button type="button" class="btn btn-ghost" data-openlessonpdf style="margin-top:10px;">📄 Open ${esc(lesson.pdfFilename||'Lesson PDF')}</button>`
-      : `<p style="font-size:12.5px;color:var(--ink-soft);margin-top:10px;">No PDF attached yet for this week — use the 📚 icon to upload one.</p>`;
+      : '';
     const worksheetBtn = dayPart?.worksheet?.groups?.some(g=>(g.items||[]).length)
       ? `<button type="button" class="btn btn-primary" data-openworksheet data-student="${studentId}" style="margin-top:10px;margin-left:8px;">📝 Fill Out Worksheet</button>`
       : '';
-    const bhm = (lessonType==='History' && lesson.blackHistoryMoment)
-      ? `<div class="vocab-box" style="margin-top:12px;">
-           <div class="word-badge" style="margin-bottom:6px;">Black History Connection</div>
-           <div style="font-size:13.5px;line-height:1.5;">${esc(lesson.blackHistoryMoment)}</div>
-         </div>` : '';
-    const readingBody = dayPart?.reading
-      ? `<div style="font-size:13.5px;line-height:1.6;color:var(--ink);margin:8px 0;white-space:pre-wrap;">${esc(dayPart.reading)}</div>`
-      : (lesson.summary ? `<p style="font-size:13.5px;line-height:1.5;color:var(--ink-soft);margin:6px 0;">${esc(lesson.summary)}</p>` : '');
-    // Collapsible reading area: expanded by default, toggles like the other
-    // collapse sections (keyboard + Collapse all / Expand all included).
-    const readingHTML = readingBody
-      ? `<div class="collapse-head" data-collapse="lesson-${studentId}" style="margin-top:10px;">
-           <div class="mini-lbl">Lesson Reading</div><div class="chevron">▾</div>
-         </div>
-         <div class="collapse-body lesson-reading" data-collapsebody="lesson-${studentId}">${readingBody}</div>`
+    // NOTE: the lesson reading AND the Black History Connection live only inside
+    // the worksheet modal now — the dashboard card stays compact (topic + buttons).
+    // The BHM title shows under the lesson topic; its link label (e.g.
+    // "BlackPast: Juan Garrido") carries the title.
+    const bhmData = dayPart?.bhm || lesson.blackHistoryMoment;
+    const bhmTitle = (bhmData && typeof bhmData === 'object' && bhmData.label)
+      ? String(bhmData.label).replace(/^[^:]+:\s*/, '')
+      : '';
+    const bhmTitleHTML = bhmTitle
+      ? `<div style="font-size:13px;color:var(--ink-soft);margin:-2px 0 6px;">✊🏾 Black History: <strong style="color:var(--ink);">${esc(bhmTitle)}</strong></div>`
       : '';
     return `<div class="card">
       <div class="word-badge">${esc(lessonType)} Lesson · Week ${aw}</div>
       <div style="font-size:15px;font-weight:600;line-height:1.4;margin:6px 0;">${esc(lesson.topic)}</div>
-      ${readingHTML}
+      ${bhmTitleHTML}
       ${pdfBtn}${worksheetBtn}
-      ${bhm}
     </div>`;
   }
   if(sharedLesson && sharedLesson.pdfDataUrl) window.__pendingLessonPdf = sharedLesson;
@@ -1453,6 +1468,28 @@ async function renderBoard(){
 
   const testSectionHTML = isTestDay ? await renderTestSection() : '';
 
+  // Friday self-test card: when the week's unit started mid-week (fewer than
+  // 4 lesson days before Friday), its day4 self test hasn't had a day yet —
+  // offer it here so the unit still closes out properly.
+  let selfTestCardHTML = '';
+  if(isTestDay){
+    const wSubj = (aw % 2 === 1) ? 'history' : 'science';
+    const wkLesson = wSubj==='history' ? await getHistoryWeek(aw) : await getScienceWeek(aw);
+    if(wkLesson && wkLesson.day4 && lessonDaysInWeek(wkLesson, state.dateStr) < 4){
+      const st = esc(wkLesson.day4.title || 'Unit Self Test');
+      const subjLabel = wSubj==='history' ? 'History' : 'Science';
+      selfTestCardHTML = `
+      <div class="card" style="margin-bottom:16px;">
+        <div class="mini-lbl" style="margin-top:0;">${subjLabel} Unit Self Test</div>
+        <p style="font-size:13.5px;margin:4px 0 8px;">${st} — this week's unit started mid-week, so the self test moves to today. Check each section as you go and see your score right away.</p>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;">
+          ${state.students.map(s=>`<button type="button" class="btn btn-primary" data-selftest="${wSubj}" data-student="${s.id}">📝 ${esc(s.name)}: Take the Self Test</button>`).join('')}
+        </div>
+      </div>`;
+      window.__pendingSelfTest = { subject: wSubj, lesson: wkLesson };
+    }
+  }
+
   const baseSubjList = allSubjects(c);
   const seuGroups = await loadSeuToday();
   function seuCardsHTML(groups){
@@ -1460,9 +1497,10 @@ async function renderBoard(){
       if(g.tasks.length === 1){
         const t = g.tasks[0];
         const checked = !!t.done;
+        const od = t._overdue && !t.done ? `<span style="display:inline-block;background:var(--red);color:#fff;font-size:10.5px;font-weight:700;border-radius:8px;padding:1px 8px;margin-left:6px;vertical-align:middle;">OVERDUE</span>` : '';
         return `<div class="subj-card ${checked?'done':''}" data-seucourse="${escAttr(g.course.id)}">
           <div class="subj-top">
-            <div class="subj-name">${esc(g.course.name)}</div>
+            <div class="subj-name">${esc(g.course.name)}${od}</div>
             <div class="check ${checked?'checked':''}" data-seucourse="${escAttr(g.course.id)}" data-seutask="${escAttr(t.id)}">${checked?'✓':''}</div>
           </div>
           <div class="subj-topic">${esc(t.title)}</div>
@@ -1472,7 +1510,7 @@ async function renderBoard(){
         <div class="subj-top"><div class="subj-name">${esc(g.course.name)}</div></div>
         ${g.tasks.map(t=>`
           <div class="info-line" style="cursor:pointer;align-items:center;" data-seucourse="${escAttr(g.course.id)}" data-seutask="${escAttr(t.id)}">
-            <span style="${t.done?'text-decoration:line-through;color:var(--ink-soft);':''}">${esc(t.title)}</span>
+            <span style="${t.done?'text-decoration:line-through;color:var(--ink-soft);':''}">${esc(t.title)}${t._overdue && !t.done ? ' <strong style="color:var(--red);font-size:11px;">OVERDUE</strong>' : ''}</span>
             <span class="check-mini ${t.done?'checked':''}">${t.done?'✓':''}</span>
           </div>
         `).join('')}
@@ -1614,12 +1652,12 @@ async function renderBoard(){
 
     <section class="qtr">
       <div class="qtr-head"><div class="qtr-tag">Q2</div><h2 class="qtr-title">${isTestDay ? 'Weekly Test' + (unitTest ? ' · Unit Test' : '') : 'Life Skills & Drills'}</h2><div class="qtr-hint">${isTestDay ? 'Answers autosave as you go' : `Subjects & lessons below<button type="button" class="collapse-all-btn" id="collapseAllBtn" aria-expanded="false">Collapse all</button>`}</div></div>
-      ${isTestDay ? testSectionHTML : `
+      ${isTestDay ? (selfTestCardHTML + testSectionHTML) : `
       ${(currentEventHTML && financialLitHTML) ? `<div class="devo-grid" style="margin-bottom:16px;">${currentEventHTML}${financialLitHTML}</div>`
         : (currentEventHTML || financialLitHTML) ? `<div style="margin-bottom:16px;">${currentEventHTML || financialLitHTML}</div>` : ''}
       ${rwsHTML ? `<div style="margin-bottom:16px;">${rwsHTML}</div>` : ''}
-      <div class="students-grid" style="margin-bottom:16px;">${studentsHTML}</div>
       ${statesHTML ? `<div style="margin-bottom:16px;">${statesHTML}</div>` : ''}
+      <div class="students-grid" style="margin-bottom:16px;">${studentsHTML}</div>
       `}
     </section>
 
@@ -1717,6 +1755,13 @@ async function renderBoard(){
       const wsData = window.__pendingWorksheet;
       if(!wsData) return;
       openWorksheetModal(wsData.subject, wsData.lesson, btn.dataset.student, wsData.weekdayNum);
+    });
+  });
+  board.querySelectorAll('[data-selftest]').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      const stData = window.__pendingSelfTest;
+      if(!stData) return;
+      openWorksheetModal(stData.subject, stData.lesson, btn.dataset.student, 5, 4);
     });
   });
 
@@ -1847,13 +1892,19 @@ async function loadSeuToday(){
   const groups = [];
   for(const course of courses){
     const tasks = (await seuGet('tasks:'+course.id)) || [];
-    const dueToday = tasks.filter(t=>{
+    const relevant = tasks.filter(t=>{
       // Interpret the task's due date through the same timezone-aware
       // "school date" logic the rest of the app uses, so it only ever
-      // shows on the one day it's actually due here.
-      try{ return toDateStr(getSchoolDate(new Date(t.dueDate))) === todayStr; }catch(e){ return false; }
+      // shows on the one day it's actually due here — plus any overdue
+      // (past-due and not done) items, which roll forward to today.
+      try{
+        const dueStr = toDateStr(getSchoolDate(new Date(t.dueDate)));
+        if(dueStr === todayStr) return true;
+        if(!t.done && dueStr < todayStr){ t._overdue = true; return true; }
+        return false;
+      }catch(e){ return false; }
     });
-    if(dueToday.length) groups.push({ course, tasks: dueToday });
+    if(relevant.length) groups.push({ course, tasks: relevant });
   }
   return groups;
 }
@@ -1881,6 +1932,8 @@ function autoGrade(given, expected){ return normAnswer(given) === normAnswer(exp
 async function buildWeeklyTest(studentGrade, mon, studentId){
   const cw = contentWeekForDate(mon);
   const aw = actualWeekForDate(mon);
+  // Rotating weeks: only the week's own subject has a lesson to test.
+  const weekSubj = (aw % 2 === 1) ? 'history' : 'science';
   const week = state.contentWeeks[cw];
   const vocab = [];
   for(let d=1; d<=4; d++){
@@ -1896,8 +1949,8 @@ async function buildWeeklyTest(studentGrade, mon, studentId){
   for(let d=1; d<=4; d++){
     (week[d] && week[d].statesCapitals || []).forEach(sc => statesCapitals.push({state:sc.state, answer:sc.capital}));
   }
-  const historyLesson = await getHistoryWeek(aw);
-  const scienceLesson = await getScienceWeek(aw);
+  const historyLesson = weekSubj==='history' ? await getHistoryWeek(aw) : null;
+  const scienceLesson = weekSubj==='science' ? await getScienceWeek(aw) : null;
   // Pull the student's own NewsForKids.net logs from Mon-Thu of this same
   // week so the Friday test reflects what they actually read that week.
   const currentEventLogs = [];
@@ -2075,22 +2128,58 @@ function afterTestSectionRender(){
 
 /* ========================= LESSON WORKSHEET (fillable, per student) =========================
    The History/Science lesson card gets a "Fill Out Worksheet" link when that
-   week's lesson has real transcribed exercises attached. Opens a modal with
-   student tabs (same pattern as the Friday test) — each kid fills their own
-   copy, autosaving per student per date per subject. Matching/fill-in-blank/
-   true-false auto-grade; short-answer questions get written feedback in the
-   Grade Tests screen. */
-// A lesson can carry day1/day2 content (Mon vs Tue for History, Wed vs Thu
-// for Science) so a multi-activity lesson is chunked across its two
-// allotted days. Monday/Wednesday = day1, Tuesday/Thursday = day2. Lessons
-// with no day split (older format, or a topic-only week) fall back to one
-// shared reading/worksheet used on both days.
-function getLessonDayPart(lesson, weekdayNum){
+   week's lesson has exercises attached. Opens a modal with student tabs (same
+   pattern as the Friday test) — each kid fills their own copy, autosaving per
+   student per date per subject. The self-checking engine (below) gives instant
+   per-section feedback: fill-blank/matching/true-false/choice/order auto-grade,
+   short answers reveal the model answer for self-marking, checklists track
+   completion live, and reveal cards mark read. Written feedback still lives in
+   the Grade Tests screen. */
+// A lesson can carry day1..day4 content so a unit is chunked across its four
+// days (day4 = the self test). The day index counts Mon-Thu lesson days from
+// the unit's firstDay (so a unit that starts mid-week still runs day1, day2,
+// day3 in order); lessons without firstDay start on their week's Monday.
+// Older 2-day lessons (day1/day2 only) keep the legacy Mon-vs-Tue mapping.
+function parseYMD(s){ const [y,m,d] = s.split('-').map(Number); return new Date(y, m-1, d, 12); }
+function getLessonDayPart(lesson, weekdayNum, dateStr){
   if(!lesson) return null;
-  const isFirstDay = (weekdayNum===1 || weekdayNum===3);
-  const part = isFirstDay ? lesson.day1 : lesson.day2;
-  if(part) return part;
-  return { reading: lesson.reading || '', worksheet: lesson.worksheet || null };
+  if(!(lesson.day3 || lesson.day4)){
+    const isFirstDay = (weekdayNum===1 || weekdayNum===3);
+    const part = isFirstDay ? lesson.day1 : lesson.day2;
+    if(part) return part;
+    return { reading: lesson.reading || '', worksheet: lesson.worksheet || null, bhm: lesson.blackHistoryMoment || '' };
+  }
+  let idx = 0;
+  try{
+    const cur = parseYMD(dateStr);
+    let start;
+    if(lesson.firstDay){ start = parseYMD(lesson.firstDay); }
+    else { start = mondayOfWeek(cur); }
+    let n = 0;
+    for(let d = new Date(start); d <= cur; d.setDate(d.getDate()+1)){
+      const w = d.getDay();
+      if(w>=1 && w<=4) n++;
+    }
+    idx = Math.max(0, Math.min(3, n-1));
+  }catch(e){ idx = 0; }
+  return lesson['day'+(idx+1)] || null;
+}
+// Count Mon-Thu lesson days of dateStr's week that fall on/after the unit's
+// firstDay (used to decide whether a partial first week still owes its
+// self test on Friday).
+function lessonDaysInWeek(lesson, dateStr){
+  try{
+    const cur = parseYMD(dateStr);
+    const mon = mondayOfWeek(cur);
+    const start = lesson.firstDay ? parseYMD(lesson.firstDay) : mon;
+    const fri = new Date(mon); fri.setDate(fri.getDate()+4);
+    let n = 0;
+    for(let d = new Date(Math.max(start, mon)); d < fri; d.setDate(d.getDate()+1)){
+      const w = d.getDay();
+      if(w>=1 && w<=4) n++;
+    }
+    return n;
+  }catch(e){ return 4; }
 }
 
 // Per-student, per-day NewsForKids.net response (headline + summary they write themselves)
@@ -2101,29 +2190,551 @@ function worksheetGradesKey(dateStr, studentId, subject){ return 'worksheet-grad
 
 function defaultWorksheetAnswers(worksheet){
   const answers = {};
-  (worksheet.groups||[]).forEach(g=>{ (g.items||[]).forEach(it=>{ answers[it.id] = ''; }); });
+  (worksheet.groups||[]).forEach((g,gi)=>{ (g.items||[]).forEach(it=>{ answers['ws-g'+gi+'-'+it.id] = ''; }); });
   return answers;
 }
 
 let worksheetCache = {}; // studentId -> {worksheet, answers}
 let currentWorksheetCtx = null; // {subject, lesson, dateStr}
 
-async function openWorksheetModal(subject, lesson, preferredStudentId, weekdayNum){
-  const dayPart = getLessonDayPart(lesson, weekdayNum !== undefined ? weekdayNum : state.weekdayNum);
+/* ========================= WORKSHEET SELF-CHECKING ENGINE =========================
+   Every worksheet group gets a "Check answers" button so kids get instant
+   feedback one chunk at a time (ADHD-friendly: small wins, no waiting for a
+   parent). Fill-blank, matching, true/false, choice, and ordering grade
+   instantly with the right answer shown for misses; short answers reveal the
+   model answer for honest self-marking; checklists track completion live;
+   reveal cards mark themselves read. Check state persists per student per day
+   per subject alongside the answers, and editing an answer clears its mark so
+   a re-check is always honest. */
+function wsCheckKey(dateStr, studentId, subject){ return 'worksheet-checks:'+dateStr+':'+subject+':'+studentId; }
+let wsChecksCache = {};   // studentId -> {itemId: 'ok'|'bad'|'viewed'}
+let wsActiveStudent = null;
+// Sequence guard against a real race: typing then immediately hitting
+// "Check answers" fires blur-change (async save) BEFORE the click, but the
+// change handler's continuation lands AFTER the check's sync feedback.
+// Each edit/check bumps wsSeq; a change only clears marks from a check that
+// ran before that edit, never feedback created after it.
+let wsSeq = 0;
+const wsCheckSeq = {};    // itemId -> seq of its most recent check
+
+// Loose normalization for kid-typed answers: ignore case, punctuation,
+// extra spaces, and diacritics so "Santa Maria" matches "santa maria".
+function normLoose(s){
+  return (s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]/g,'');
+}
+function normLetters(s){ return normLoose(s).replace(/[^a-z]/g,'').split('').sort().join(''); }
+
+// Grade one auto-checkable item. Returns 'ok' | 'bad' | 'skip' (blank).
+function gradeWsItem(group, item, value){
+  const v = (value||'').trim();
+  if(!v) return 'skip';
+  switch(group.type){
+    case 'fillblank': {
+      const cands = [item.answer].concat(item.accept||[]).map(normLoose);
+      return cands.indexOf(normLoose(v)) !== -1 ? 'ok' : 'bad';
+    }
+    case 'matching': return normLetters(v) === normLetters(item.answer) ? 'ok' : 'bad';
+    case 'truefalse': return v === item.answer ? 'ok' : 'bad';
+    case 'choice': return normLoose(v) === normLoose(item.answer) ? 'ok' : 'bad';
+    case 'order': return parseInt(v,10) === item.answer ? 'ok' : 'bad';
+    default: return 'skip';
+  }
+}
+
+// Human-readable correct answer for feedback after a miss.
+function wsCorrectText(group, item){
+  switch(group.type){
+    case 'fillblank': return item.answer;
+    case 'matching': return 'the letter(s): ' + item.answer.toUpperCase();
+    case 'truefalse': return item.answer === 'true' ? 'True' : 'False';
+    case 'choice': return item.answer;
+    case 'order': return '#' + item.answer;
+    default: return '';
+  }
+}
+
+const WS_AUTO_TYPES = ['fillblank','matching','truefalse','choice','order'];
+
+function wsItemValue(group, item, container, entry){
+  const field = group._fieldPrefix + item.id;
+  if(group.type==='checklist'){
+    const el = container.querySelector('[data-wsitem="'+item.id+'"]');
+    return el && el.checked ? 'x' : '';
+  }
+  if(group.type==='choice' || group.type==='truefalse'){
+    return entry.answers[field] || '';
+  }
+  const el = container.querySelector('[data-wsitem="'+item.id+'"]');
+  return el ? el.value : '';
+}
+
+function wsMarkHTML(itemId, status){
+  const el = document.querySelector('[data-wsmark="'+itemId+'"]');
+  if(!el) return;
+  if(status==='ok'){ el.textContent = ' ✓'; el.style.color = 'var(--green)'; }
+  else if(status==='bad'){ el.textContent = ' ✗'; el.style.color = 'var(--red)'; }
+  else { el.textContent = ''; }
+}
+function wsNoteHTML(itemId, html){
+  const el = document.querySelector('[data-wsnote="'+itemId+'"]');
+  if(el) el.innerHTML = html || '';
+}
+
+function wsGroupDone(g, entry, checks){
+  const items = g.items||[];
+  if(!items.length) return true;
+  if(g.type==='checklist') return items.every(it=>entry.answers[g._fieldPrefix + it.id]);
+  if(g.type==='reveal') return items.every(it=>checks[it.id]==='viewed');
+  if(g.type==='shortanswer') return items.every(it=>checks[it.id]==='ok'||checks[it.id]==='bad');
+  return items.every(it=>checks[it.id]==='ok'||checks[it.id]==='bad');
+}
+
+function wsUpdateProgress(container, worksheet, entry, checks){
+  const groups = worksheet.groups||[];
+  const done = groups.filter(g=>wsGroupDone(g, entry, checks)).length;
+  const total = groups.length;
+  const pct = total ? Math.round(done/total*100) : 0;
+  const pEl = container.querySelector('[data-wsprogress]');
+  const bEl = container.querySelector('[data-wsbar]');
+  if(pEl) pEl.textContent = done + ' of ' + total + ' parts done' + (done===total && total ? ' 🎉' : '');
+  if(bEl) bEl.style.width = pct + '%';
+}
+
+function renderWorksheetFormHTML(entry, checks){
+  const { worksheet, answers, bhm } = entry;
+  worksheet.groups.forEach((g,gi)=>{ g._fieldPrefix = 'ws-g'+gi+'-'; });
+  const progressHTML = `
+    <div class="card" style="margin-bottom:10px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <div class="mini-lbl" style="margin:0;">Your progress</div>
+        <div data-wsprogress style="font-weight:700;font-size:13px;"></div>
+      </div>
+      <div style="height:8px;background:var(--line-light);border-radius:4px;margin-top:8px;overflow:hidden;">
+        <div data-wsbar style="height:100%;background:var(--green);border-radius:4px;width:0%;transition:width .3s;"></div>
+      </div>
+      <p style="font-size:11.5px;color:var(--ink-soft);margin:6px 0 0;">Check each part as you finish it — you get <strong>2 tries</strong> per part, so think before you check.</p>
+    </div>`;
+  // Alternate section backgrounds so it's obvious when one part ends and the
+  // next begins.
+  const WS_ALT_BG = ['#ffffff', '#faf6ee'];
+  return progressHTML + worksheet.groups.map((g,gi)=>{
+    const p = g._fieldPrefix;
+    const altBg = WS_ALT_BG[gi % WS_ALT_BG.length];
+    // 2-try lock state (persisted in checks): a section whose two tries are
+    // used renders with its inputs disabled.
+    const attemptsKey = '__attempts_'+gi;
+    const attemptsUsed = (checks && checks[attemptsKey]) || 0;
+    const autoGraded = WS_AUTO_TYPES.indexOf(g.type)!==-1;
+    const locked = autoGraded && attemptsUsed >= 2;
+    const dis = locked ? ' disabled' : '';
+    const head = `<div class="mini-lbl" style="margin-top:0;">${esc(g.instructions||('Part '+(gi+1)))}</div>`
+      + (g.subtitle ? `<p style="font-size:12.5px;color:var(--ink-soft);margin:4px 0 8px;">${esc(g.subtitle)}</p>` : '')
+      + (g.wordBank ? `<div style="margin:8px 0 12px;padding:10px 12px;background:#fff;border:2px solid var(--orange);border-radius:10px;"><div style="font-size:11px;font-weight:700;letter-spacing:.5px;color:var(--ink-soft);margin-bottom:6px;">📚 WORD BANK — use these words below</div><div style="display:flex;flex-wrap:wrap;gap:6px;">${g.wordBank.map(w=>`<span style="font-size:12.5px;font-weight:600;background:var(--bg-soft,#f4f1ea);border:1px solid var(--line-light);border-radius:12px;padding:3px 12px;">${esc(w)}</span>`).join('')}</div></div>` : '');
+    let body = '';
+    if(g.type==='checklist'){
+      body = (g.items||[]).map(it=>{
+        const field = p + it.id;
+        const checked = answers[field] ? 'checked' : '';
+        return `<label style="display:flex;gap:8px;align-items:flex-start;font-size:13.5px;margin-bottom:8px;cursor:pointer;">
+          <input type="checkbox" data-wsfield="${field}" data-wsitem="${it.id}" ${checked}${dis} style="margin-top:3px;transform:scale(1.2);">
+          <span>${esc(it.text)}</span>
+        </label>`;
+      }).join('') + `<div data-wsdone="${gi}" style="font-size:12.5px;font-weight:700;margin-top:4px;"></div>`;
+    } else if(g.type==='reveal'){
+      body = (g.items||[]).map(it=>{
+        const viewed = checks[it.id]==='viewed';
+        return `<div style="margin-bottom:10px;">
+          <button type="button" class="btn btn-ghost" data-wsreveal="${it.id}" style="font-size:13px;">${viewed ? '✓ ' : ''}${esc(it.label||'Tap to reveal')}</button>
+          <div data-wsrevealbody="${it.id}" style="display:${viewed?'block':'none'};font-size:13.5px;line-height:1.55;margin-top:6px;white-space:pre-wrap;">${esc(it.content||'')}</div>
+        </div>`;
+      }).join('');
+    } else if(g.type==='shortanswer'){
+      body = (g.items||[]).map(it=>{
+        const field = p + it.id;
+        const st = checks[it.id];
+        const model = it.answer ? `<div data-wsmodel="${it.id}" style="display:${st?'block':'none'};margin-top:6px;padding:8px;border:1.5px dashed var(--line-light);border-radius:8px;background:var(--bg-soft,#fbf9f4);">
+            <div style="font-size:11.5px;font-weight:700;color:var(--ink-soft);">MODEL ANSWER — compare yours honestly:</div>
+            <div style="font-size:13px;margin:4px 0 8px;white-space:pre-wrap;">${esc(it.answer)}</div>
+            <div style="display:flex;gap:8px;">
+              <button type="button" class="btn ${st==='ok'?'btn-primary':'btn-ghost'}" data-selfmark="${it.id}" data-val="ok" style="font-size:12px;padding:6px 12px;">✓ Mine matches</button>
+              <button type="button" class="btn ${st==='bad'?'btn-primary':'btn-ghost'}" data-selfmark="${it.id}" data-val="bad" style="font-size:12px;padding:6px 12px;">✗ Not yet</button>
+            </div>
+          </div>` : `<div data-wsmodel="${it.id}" style="display:${st?'block':'none'};margin-top:6px;">
+            <button type="button" class="btn ${st?'btn-primary':'btn-ghost'}" data-selfmark="${it.id}" data-val="ok" style="font-size:12px;padding:6px 12px;">✓ Done</button>
+          </div>`;
+        return `<div style="margin-bottom:12px;">
+          <p style="font-size:13.5px;margin:0 0 6px;"><strong>${esc(it.prompt)}</strong><span data-wsmark="${it.id}"></span></p>
+          <textarea data-wsfield="${field}" data-wsitem="${it.id}"${dis} placeholder="Write your answer here" style="width:100%;min-height:52px;padding:8px;border:1.5px solid var(--line-light);border-radius:8px;font-family:'Oswald',sans-serif;font-size:13.5px;">${esc(answers[field]||'')}</textarea>
+          <div data-wsnote="${it.id}" style="font-size:12px;margin-top:4px;"></div>
+          ${model}
+        </div>`;
+      }).join('');
+    } else if(g.type==='truefalse'){
+      body = (g.items||[]).map(it=>{
+        const field = p + it.id;
+        const val = answers[field]||'';
+        return `<div style="margin-bottom:12px;padding-bottom:10px;border-bottom:1px dashed var(--line-light);">
+          <p style="font-size:13.5px;margin:0 0 6px;">${esc(it.text)}<span data-wsmark="${it.id}"></span></p>
+          <div style="display:flex;gap:8px;">
+            <button type="button" class="btn ${val==='true'?'btn-primary':'btn-ghost'}"${dis} data-wstf="${field}" data-wsitem="${it.id}" data-val="true" style="font-size:13px;padding:6px 16px;">True</button>
+            <button type="button" class="btn ${val==='false'?'btn-primary':'btn-ghost'}"${dis} data-wstf="${field}" data-wsitem="${it.id}" data-val="false" style="font-size:13px;padding:6px 16px;">False</button>
+          </div>
+          <div data-wsnote="${it.id}" style="font-size:12px;margin-top:6px;"></div>
+        </div>`;
+      }).join('');
+    } else if(g.type==='choice'){
+      body = (g.items||[]).map(it=>{
+        const field = p + it.id;
+        const val = answers[field]||'';
+        return `<div style="margin-bottom:12px;padding-bottom:10px;border-bottom:1px dashed var(--line-light);">
+          <p style="font-size:13.5px;margin:0 0 6px;"><strong>${esc(it.prompt)}</strong><span data-wsmark="${it.id}"></span></p>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;">
+            ${(it.options||[]).map(o=>`<button type="button" class="btn ${val===o?'btn-primary':'btn-ghost'}"${dis} data-wschoice="${field}" data-wsitem="${it.id}" data-val="${escAttr(o)}" style="font-size:13px;padding:6px 14px;">${esc(o)}</button>`).join('')}
+          </div>
+          <div data-wsnote="${it.id}" style="font-size:12px;margin-top:6px;"></div>
+        </div>`;
+      }).join('');
+    } else if(g.type==='order'){
+      body = `<p style="font-size:12.5px;color:var(--ink-soft);margin:0 0 8px;">Number each event 1–${(g.items||[]).length} in the order it happened.</p>` + (g.items||[]).map(it=>{
+        const field = p + it.id;
+        return `<div style="display:flex;gap:8px;align-items:center;margin-bottom:8px;">
+          <input type="number" min="1" max="${(g.items||[]).length}"${dis} data-wsfield="${field}" data-wsitem="${it.id}" value="${escAttr(answers[field]||'')}" placeholder="#" style="width:56px;padding:6px;border:1.5px solid var(--line-light);border-radius:6px;font-family:'Oswald',sans-serif;text-align:center;">
+          <span style="font-size:13.5px;">${esc(it.event||it.text||'')}</span><span data-wsmark="${it.id}"></span>
+        </div><div data-wsnote="${it.id}" style="font-size:12px;margin:-4px 0 8px 64px;"></div>`;
+      }).join('');
+    } else if(g.type==='matching'){
+      // The lettered choices being matched FROM — shown in their own box so
+      // kids can see what they're picking from. Terms are dark, choices are
+      // accent-colored so the two sides are visually distinct.
+      const optsBox = (g.options && g.options.length)
+        ? `<div style="margin:8px 0 12px;padding:10px 12px;background:#fff;border:2px solid var(--accent);border-radius:10px;">
+             <div style="font-size:11px;font-weight:700;letter-spacing:.5px;color:var(--ink-soft);margin-bottom:6px;">&#128302; CHOICES — match each item to a letter</div>
+             <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:4px 12px;">
+               ${g.options.map(o=>`<div style="font-size:12.5px;line-height:1.45;"><strong style="color:var(--accent);font-size:13px;">${esc(String(o.key).toUpperCase())}.</strong> <span style="color:var(--ink);">${esc(o.text)}</span></div>`).join('')}
+             </div>
+           </div>` : '';
+      body = optsBox + (g.items||[]).map(it=>{
+        const field = p + it.id;
+        return `<div style="margin-bottom:8px;">
+          <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+            <span style="font-size:13.5px;color:var(--ink);"><strong>${esc(it.term)}</strong></span>
+            <span style="font-size:13px;color:var(--ink-soft);">&#8594;</span>
+            <input type="text" data-wsfield="${field}" data-wsitem="${it.id}"${dis} value="${escAttr(answers[field]||'')}" placeholder="letter" style="width:90px;padding:6px 8px;border:1.5px solid var(--line-light);border-radius:6px;font-family:'Oswald',sans-serif;">
+            <span data-wsmark="${it.id}"></span>
+          </div>
+          <div data-wsnote="${it.id}" style="font-size:12px;margin-top:2px;"></div>
+        </div>`;
+      }).join('');
+    } else { // fillblank (default): either an inline ___ blank or a prompt + answer box
+      body = (g.items||[]).map(it=>{
+        const field = p + it.id;
+        const inputHTML = `<input type="text"${dis} data-wsfield="${field}" data-wsitem="${it.id}" value="${escAttr(answers[field]||'')}" placeholder="your answer" style="width:170px;padding:6px 8px;border:1.5px solid var(--line-light);border-radius:6px;font-family:'Oswald',sans-serif;">`;
+        let qHTML;
+        if((it.text||'').indexOf('___') !== -1){
+          const parts = it.text.split('___');
+          qHTML = esc(parts[0]||'');
+          for(let k=1;k<parts.length;k++){ qHTML += inputHTML + esc(parts[k]); }
+        } else {
+          qHTML = `<div style="margin-bottom:4px;">${esc(it.prompt||it.text||'')}</div>` + inputHTML;
+        }
+        return `<div style="margin-bottom:10px;font-size:13.5px;">${qHTML}<span data-wsmark="${it.id}"></span>
+          <div data-wsnote="${it.id}" style="font-size:12px;margin-top:4px;"></div>
+        </div>`;
+      }).join('');
+    }
+    const needsCheck = autoGraded || g.type==='shortanswer';
+    const triesLeft = autoGraded ? Math.max(0, 2-attemptsUsed) : null;
+    const checkBtn = needsCheck
+      ? (locked
+        ? `<div data-wsresult="${gi}" style="font-size:12.5px;margin-top:8px;"><span style="color:var(--ink-soft);font-weight:700;">Both tries used — answers are locked in.</span></div>`
+        : `<button type="button" class="btn btn-primary" data-wscheck="${gi}" style="margin-top:6px;font-size:13px;padding:7px 16px;">Check answers${triesLeft!==null?` <span style="font-size:11px;opacity:.85;">(${triesLeft} ${triesLeft===1?'try':'tries'} left)</span>`:''}</button>
+           <div data-wsresult="${gi}" style="font-size:12.5px;margin-top:8px;"></div>`) : '';
+    return `<div class="card" data-wsgroup="${gi}" style="margin-bottom:10px;background:${altBg};">${head}${body}${checkBtn}</div>`;
+  }).join('') + bhmWorksheetSection();
+
+  // Black History Connection + reflection: the last section of the worksheet,
+  // per student (the reflection autosaves with the rest of the worksheet answers).
+  function bhmWorksheetSection(){
+    if(!bhm) return '';
+    const altBg = WS_ALT_BG[(worksheet.groups||[]).length % WS_ALT_BG.length];
+    const field = 'wsbhm-reflection';
+    return `<div class="card" style="margin-bottom:10px;background:${altBg};">
+      <div class="mini-lbl" style="margin-top:0;">Black History Connection — read & reflect</div>
+      ${bhmHTML(bhm)}
+      <label style="display:block;font-size:12.5px;font-weight:600;color:var(--ink-soft);margin:10px 0 4px;">My reflection</label>
+      <textarea data-wsfield="${field}" rows="2" placeholder="What did this make you think about? Write a sentence or two." style="width:100%;min-height:52px;padding:8px;border:1.5px solid var(--line-light);border-radius:8px;font-family:'Oswald',sans-serif;font-size:13.5px;">${esc(answers[field]||'')}</textarea>
+    </div>`;
+  }
+}
+
+async function wsSaveChecks(studentId){
+  const checks = wsChecksCache[studentId] || {};
+  await storageSet(wsCheckKey(currentWorksheetCtx.dateStr, studentId, currentWorksheetCtx.subject), checks);
+}
+
+function wsClearMark(container, itemId, entry, checks, studentId){
+  if(checks[itemId]){ delete checks[itemId]; wsSaveChecks(studentId); }
+  wsMarkHTML(itemId, '');
+  wsNoteHTML(itemId, '');
+  const model = container.querySelector('[data-wsmodel="'+itemId+'"]');
+  if(model) model.style.display = 'none';
+  const worksheet = worksheetCache[studentId].worksheet;
+  wsUpdateProgress(container, worksheet, entry, checks);
+}
+
+function wsRunGroupCheck(container, studentId, gi){
+  const entry = worksheetCache[studentId];
+  const checks = wsChecksCache[studentId] || (wsChecksCache[studentId] = {});
+  const worksheet = entry.worksheet;
+  const g = worksheet.groups[gi];
+  const groupEl = container.querySelector('[data-wsgroup="'+gi+'"]');
+  const attemptsKey = '__attempts_'+gi;
+  const isShort = g.type==='shortanswer';
+  // 2-try limit on auto-graded parts (short answer is self-marked, no limit).
+  let attemptsUsed = checks[attemptsKey] || 0;
+  if(!isShort){
+    if(attemptsUsed >= 2) return; // already locked
+    attemptsUsed += 1;
+    checks[attemptsKey] = attemptsUsed;
+  }
+  const finalTry = !isShort && attemptsUsed >= 2;
+  let okCount = 0, badCount = 0, skipCount = 0;
+  (g.items||[]).forEach(it=>{
+    wsCheckSeq[it.id] = ++wsSeq;
+    if(g.type==='shortanswer'){
+      const model = container.querySelector('[data-wsmodel="'+it.id+'"]');
+      if(model) model.style.display = 'block';
+      const v = wsItemValue(g, it, container, entry);
+      if(v && v.trim()){ wsNoteHTML(it.id, '<span style="color:var(--ink-soft);">Compare with the model answer, then mark yourself honestly.</span>'); }
+      else { wsNoteHTML(it.id, '<span style="color:var(--ink-soft);">Write your answer first, then compare.</span>'); }
+      return;
+    }
+    const val = wsItemValue(g, it, container, entry);
+    const res = gradeWsItem(g, it, val);
+    if(res==='skip'){ skipCount++; wsMarkHTML(it.id,''); wsNoteHTML(it.id,'<span style="color:var(--ink-soft);">— answer this one to check it.</span>'); delete checks[it.id]; }
+    else if(res==='ok'){ okCount++; checks[it.id]='ok'; wsMarkHTML(it.id,'ok'); wsNoteHTML(it.id,'<span style="color:var(--green);">✓ Nice.</span>'); }
+    else {
+      badCount++; checks[it.id]='bad'; wsMarkHTML(it.id,'bad');
+      let fb = '<span style="color:var(--red);">✗ The answer is: <strong>'+esc(wsCorrectText(g,it))+'</strong></span>';
+      if(g.type==='truefalse' && it.correction) fb += '<div style="color:var(--ink-soft);margin-top:2px;">'+esc(it.correction)+'</div>';
+      else if(g.type==='truefalse' && it.note) fb += '<div style="color:var(--ink-soft);margin-top:2px;">'+esc(it.note)+'</div>';
+      else if(it.note && g.type!=='truefalse') fb += '<div style="color:var(--ink-soft);margin-top:2px;">'+esc(it.note)+'</div>';
+      wsNoteHTML(it.id, fb);
+    }
+  });
+  wsSaveChecks(studentId);
+  const total = (g.items||[]).length;
+  const resEl = groupEl ? groupEl.querySelector('[data-wsresult="'+gi+'"]') : null;
+  if(resEl){
+    if(g.type==='shortanswer'){
+      resEl.innerHTML = '<span style="color:var(--ink-soft);">Model answers are showing — mark each one honestly.</span>';
+    } else if(skipCount===total){
+      // A fully-blank check still counts as a try, but let the kid answer
+      // first before locking anything.
+      resEl.innerHTML = '<span style="color:var(--ink-soft);">Answer the questions above, then check again.'+(finalTry?' That was your last try — study the answers shown and move on.':'')+'</span>';
+    } else if(badCount===0 && skipCount===0){
+      resEl.innerHTML = '<span style="color:var(--green);font-weight:700;">✓ All '+total+' correct — great work!</span>';
+    } else {
+      let msg = 'You got <strong>'+okCount+' of '+total+'</strong> right.';
+      if(skipCount) msg += ' ' + skipCount + ' still blank.';
+      if(finalTry) msg += ' <strong>That was your 2nd try</strong> — the answers above are locked in. Study them and move on.';
+      else if(badCount) msg += ' Fix the ✗ ones and check again — 1 try left.';
+      resEl.innerHTML = msg;
+    }
+  }
+  if(finalTry && groupEl){
+    // Lock the section: disable inputs and swap the check button for a
+    // "tries used up" note so answers can't be changed after try #2.
+    groupEl.querySelectorAll('[data-wsfield],[data-wstf],[data-wschoice]').forEach(el=>{ el.disabled = true; });
+    const btn = groupEl.querySelector('[data-wscheck]');
+    if(btn) btn.outerHTML = '<div style="font-size:12.5px;margin-top:8px;color:var(--ink-soft);font-weight:700;">Both tries used — answers are locked in.</div>';
+  }
+  wsUpdateProgress(container, worksheet, entry, checks);
+}
+
+function wireWorksheetFormInputs(container, studentId){
+  const entry = worksheetCache[studentId];
+  const worksheet = entry.worksheet;
+  const checks = wsChecksCache[studentId] || (wsChecksCache[studentId] = {});
+
+  // Re-render marks from saved check state
+  (worksheet.groups||[]).forEach(g=>{
+    (g.items||[]).forEach(it=>{
+      const st = checks[it.id];
+      if(st==='ok'||st==='bad') wsMarkHTML(it.id, st);
+    });
+  });
+  wsUpdateProgress(container, worksheet, entry, checks);
+
+  // Checklist groups: live completion tracking
+  worksheet.groups.forEach((g,gi)=>{
+    if(g.type!=='checklist') return;
+    const doneEl = container.querySelector('[data-wsdone="'+gi+'"]');
+    const refresh = ()=>{
+      const all = (g.items||[]).every(it=>entry.answers[g._fieldPrefix + it.id]);
+      if(doneEl) doneEl.innerHTML = all ? '<span style="color:var(--green);">✓ All checked — part done!</span>' : '';
+      wsUpdateProgress(container, worksheet, entry, checks);
+    };
+    refresh();
+    container.querySelectorAll('[data-wsgroup="'+gi+'"] [data-wsfield]').forEach(el=>{
+      el.addEventListener('change', async ()=>{
+        entry.answers[el.dataset.wsfield] = el.checked ? 'x' : '';
+        await storageSet(worksheetAnswersKey(currentWorksheetCtx.dateStr, studentId, currentWorksheetCtx.subject), entry.answers);
+        refresh();
+      });
+    });
+  });
+
+  // Text / number / textarea inputs: autosave + clear the item's mark on edit
+  // (sequence-guarded: an edit that predates the latest check never wipes it)
+  container.querySelectorAll('[data-wsfield]').forEach(el=>{
+    if(el.type==='checkbox') return; // handled above
+    el.addEventListener('change', async ()=>{
+      const editSeq = ++wsSeq;
+      const itemId = el.dataset.wsitem;
+      entry.answers[el.dataset.wsfield] = el.value;
+      await storageSet(worksheetAnswersKey(currentWorksheetCtx.dateStr, studentId, currentWorksheetCtx.subject), entry.answers);
+      if(itemId && (wsCheckSeq[itemId]||0) <= editSeq) wsClearMark(container, itemId, entry, checks, studentId);
+    });
+  });
+
+  // True/False + choice pill buttons
+  container.querySelectorAll('[data-wstf],[data-wschoice]').forEach(btn=>{
+    btn.addEventListener('click', async ()=>{
+      const editSeq = ++wsSeq;
+      const itemId = btn.dataset.wsitem;
+      const field = btn.getAttribute('data-wstf') || btn.getAttribute('data-wschoice');
+      entry.answers[field] = btn.dataset.val;
+      await storageSet(worksheetAnswersKey(currentWorksheetCtx.dateStr, studentId, currentWorksheetCtx.subject), entry.answers);
+      const sibAttr = btn.hasAttribute('data-wstf') ? 'data-wstf' : 'data-wschoice';
+      container.querySelectorAll('['+sibAttr+'="'+field+'"]').forEach(b=>{
+        b.classList.toggle('btn-primary', b===btn);
+        b.classList.toggle('btn-ghost', b!==btn);
+      });
+      if(itemId && (wsCheckSeq[itemId]||0) <= editSeq) wsClearMark(container, itemId, entry, checks, studentId);
+    });
+  });
+
+  // Reveal cards
+  container.querySelectorAll('[data-wsreveal]').forEach(btn=>{
+    btn.addEventListener('click', async ()=>{
+      const id = btn.dataset.wsreveal;
+      const body = container.querySelector('[data-wsrevealbody="'+id+'"]');
+      const open = body.style.display !== 'block';
+      body.style.display = open ? 'block' : 'none';
+      if(open && checks[id]!=='viewed'){
+        checks[id] = 'viewed';
+        btn.innerHTML = '✓ ' + btn.textContent.replace(/^✓\s*/, '');
+        await wsSaveChecks(studentId);
+        wsUpdateProgress(container, worksheet, entry, checks);
+      }
+    });
+  });
+
+  // Self-mark buttons (short answer)
+  container.querySelectorAll('[data-selfmark]').forEach(btn=>{
+    btn.addEventListener('click', async ()=>{
+      const id = btn.dataset.selfmark;
+      checks[id] = btn.dataset.val;
+      await wsSaveChecks(studentId);
+      wsMarkHTML(id, btn.dataset.val);
+      wsNoteHTML(id, btn.dataset.val==='ok'
+        ? '<span style="color:var(--green);">✓ Marked correct.</span>'
+        : '<span style="color:var(--ink-soft);">Marked for review — reread that part of the lesson and try again.</span>');
+      container.querySelectorAll('[data-selfmark="'+id+'"]').forEach(b=>{
+        b.classList.toggle('btn-primary', b===btn);
+        b.classList.toggle('btn-ghost', b!==btn);
+      });
+      wsUpdateProgress(container, worksheet, entry, checks);
+    });
+  });
+
+  // Check-answer buttons
+  container.querySelectorAll('[data-wscheck]').forEach(btn=>{
+    btn.addEventListener('click', ()=> wsRunGroupCheck(container, studentId, +btn.dataset.wscheck));
+  });
+}
+
+/* Split a lesson reading into { text, vocab[] }: the source readings end with
+   "NEW WORDS: term — definition. | term — definition." — the vocab gets its
+   own box under the reading instead of sitting inline. */
+function parseReadingVocab(reading){
+  const m = String(reading||'').match(/NEW WORDS:\s*([\s\S]*?)\s*$/);
+  if(!m) return { text: String(reading||'').trim(), vocab: [] };
+  const text = String(reading||'').slice(0, m.index).trim();
+  const vocab = m[1].split('|').map(s=>s.trim()).filter(Boolean).map(entry=>{
+    const parts = entry.split(/—|–|-/);
+    const term = (parts.shift()||'').trim().replace(/\.$/,'');
+    return { term, def: parts.join('-').trim() };
+  }).filter(v=>v.term);
+  return { text, vocab };
+}
+
+/* Highlight key (vocab) terms inside already-escaped HTML. Longest terms
+   first so "BCE / CE" wins over a bare "CE". */
+function highlightKeyTerms(escapedHTML, terms){
+  const sorted = terms.filter(Boolean).sort((a,b)=>b.length-a.length);
+  if(!sorted.length) return escapedHTML;
+  const rx = new RegExp('(' + sorted.map(t=>t.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')).join('|') + ')', 'gi');
+  return escapedHTML.replace(rx, '<mark style="background:#fff3c4;border-radius:3px;padding:0 2px;font-weight:700;">$1</mark>');
+}
+
+/* Read-to-me for the lesson reading (Web Speech API). Toggles speak/stop. */
+let wsSpeechUtter = null;
+function wsToggleReadAloud(btn, plainText){
+  try{
+    const synth = window.speechSynthesis;
+    if(!synth){ showToast('Read-aloud is not supported in this browser.'); return; }
+    if(synth.speaking || wsSpeechUtter){
+      synth.cancel(); wsSpeechUtter = null;
+      btn.innerHTML = '&#128266; Read to me';
+      return;
+    }
+    const u = new SpeechSynthesisUtterance(plainText);
+    u.rate = 0.95;
+    u.onend = u.onerror = ()=>{ wsSpeechUtter = null; btn.innerHTML = '&#128266; Read to me'; };
+    wsSpeechUtter = u;
+    btn.innerHTML = '&#9209; Stop reading';
+    synth.speak(u);
+  }catch(e){ showToast('Read-aloud is not available right now.'); }
+}
+window.wsToggleReadAloud = wsToggleReadAloud;
+
+async function openWorksheetModal(subject, lesson, preferredStudentId, weekdayNum, forceDayNum){
+  const wd = weekdayNum !== undefined ? weekdayNum : state.weekdayNum;
+  const dayPart = forceDayNum ? lesson['day'+forceDayNum] : getLessonDayPart(lesson, wd, state.dateStr);
   const worksheet = dayPart && dayPart.worksheet;
   if(!worksheet){ showToast('No worksheet questions for this day yet.'); return; }
   currentWorksheetCtx = { subject, lesson, dateStr: state.dateStr };
-  document.getElementById('worksheetTitle').textContent = materialSubjectLabel(subject) + ' Worksheet';
-  document.getElementById('worksheetSub').textContent = lesson.topic;
+  document.getElementById('worksheetTitle').textContent = materialSubjectLabel(subject) + (forceDayNum ? ' Self Test' : ' Worksheet');
+  document.getElementById('worksheetSub').textContent = (forceDayNum && dayPart.title ? dayPart.title + ' · ' : '') + lesson.topic;
 
   const readingEl = document.getElementById('worksheetReading');
+  let readingHTML = '';
   if(dayPart.reading){
-    readingEl.style.display = 'block';
-    readingEl.innerHTML = `<div class="word-badge">Today's Reading</div><div style="font-size:13.5px;line-height:1.6;margin-top:8px;white-space:pre-wrap;">${esc(dayPart.reading)}</div>`;
-  } else {
-    readingEl.style.display = 'none';
-    readingEl.innerHTML = '';
+    const parsed = parseReadingVocab(dayPart.reading);
+    const terms = parsed.vocab.map(v=>v.term);
+    const highlighted = highlightKeyTerms(esc(parsed.text), terms);
+    const readBtnId = 'wsReadAloud';
+    readingHTML += `<div class="word-badge">${forceDayNum ? 'Before you start' : "Today's Reading"}</div>
+      <div style="margin-top:8px;"><button type="button" class="btn btn-ghost" id="${readBtnId}" style="font-size:12.5px;padding:6px 14px;">&#128266; Read to me</button></div>
+      <div style="font-size:13.5px;line-height:1.6;margin-top:8px;white-space:pre-wrap;">${highlighted}</div>`;
+    if(parsed.vocab.length){
+      readingHTML += `<div style="margin-top:12px;padding:10px 12px;background:#fff;border:2px solid var(--green);border-radius:10px;">
+        <div style="font-size:11px;font-weight:700;letter-spacing:.5px;color:var(--ink-soft);margin-bottom:8px;">&#128214; NEW WORDS — learn these</div>
+        ${parsed.vocab.map(v=>`<div style="font-size:13px;line-height:1.5;margin-bottom:6px;"><strong style="color:var(--green);">${esc(v.term)}</strong> — ${esc(v.def)}</div>`).join('')}
+      </div>`;
+    }
+    // Wire the read-aloud button after insert (plain text, vocab included).
+    setTimeout(()=>{
+      const btn = document.getElementById(readBtnId);
+      if(btn) btn.addEventListener('click', ()=> wsToggleReadAloud(btn, parsed.text + (parsed.vocab.length ? '\n\nNew words. ' + parsed.vocab.map(v=>v.term+': '+v.def).join(' ') : '')));
+    }, 0);
   }
+  // The Black History Connection + reflection now live inside the per-student
+  // worksheet form (below), not in the shared reading area.
+  if(readingHTML){ readingEl.style.display = 'block'; readingEl.innerHTML = readingHTML; }
+  else { readingEl.style.display = 'none'; readingEl.innerHTML = ''; }
 
   const assignedIds = Array.isArray(lesson.worksheetStudentIds) ? lesson.worksheetStudentIds : [];
   const worksheetStudents = assignedIds.length ? state.students.filter(s=>assignedIds.includes(s.id)) : state.students;
@@ -2133,84 +2744,25 @@ async function openWorksheetModal(subject, lesson, preferredStudentId, weekdayNu
   tabsWrap.innerHTML = worksheetStudents.map((s)=>`<div class="modal-tab ${s.id===defaultId?'active':''}" data-wstab="${s.id}">${esc(s.name)}</div>`).join('');
 
   worksheetCache = {};
+  wsChecksCache = {};
+  const wsBhm = dayPart.bhm || lesson.blackHistoryMoment || null;
   for(const s of worksheetStudents){
     const saved = (await storageGet(worksheetAnswersKey(state.dateStr, s.id, subject))) || defaultWorksheetAnswers(worksheet);
-    worksheetCache[s.id] = { worksheet: worksheet, answers: saved };
+    worksheetCache[s.id] = { worksheet: worksheet, answers: saved, bhm: wsBhm };
+    wsChecksCache[s.id] = (await storageGet(wsCheckKey(state.dateStr, s.id, subject))) || {};
   }
 
   function showStudent(id){
+    wsActiveStudent = id;
     tabsWrap.querySelectorAll('.modal-tab').forEach(t=>t.classList.toggle('active', t.dataset.wstab===id));
     const formArea = document.getElementById('worksheetFormArea');
-    formArea.innerHTML = renderWorksheetFormHTML(worksheetCache[id]);
+    formArea.innerHTML = renderWorksheetFormHTML(worksheetCache[id], wsChecksCache[id]);
     wireWorksheetFormInputs(formArea, id);
   }
   tabsWrap.querySelectorAll('.modal-tab').forEach(t=>{ t.addEventListener('click', ()=> showStudent(t.dataset.wstab)); });
   showStudent(defaultId);
 
   document.getElementById('worksheetOverlay').classList.add('open');
-}
-
-function renderWorksheetFormHTML(entry){
-  const { worksheet, answers } = entry;
-  return worksheet.groups.map((g,gi)=>{
-    if(g.type==='fillblank'){
-      return `<div class="card" style="margin-bottom:10px;">
-        <div class="mini-lbl" style="margin-top:0;">${esc(g.instructions)}</div>
-        ${g.items.map(it=>`
-          <div style="margin:8px 0;">
-            <p style="font-size:13.5px;margin:0 0 4px;">${esc(it.prompt)}</p>
-            <input type="text" data-wsfield="${it.id}" value="${escAttr(answers[it.id]||'')}" placeholder="Your answer" style="width:100%;padding:7px 9px;border:1.5px solid var(--line-light);border-radius:7px;font-family:'Oswald',sans-serif;">
-          </div>`).join('')}
-      </div>`;
-    }
-    if(g.type==='truefalse'){
-      return `<div class="card" style="margin-bottom:10px;">
-        <div class="mini-lbl" style="margin-top:0;">${esc(g.instructions)}</div>
-        ${g.items.map(it=>`
-          <div class="info-line" style="align-items:center;">
-            <span>${esc(it.statement)}</span>
-            <select data-wsfield="${it.id}" style="padding:5px 8px;border:1.5px solid var(--line-light);border-radius:6px;font-family:'Oswald',sans-serif;">
-              <option value="" ${!answers[it.id]?'selected':''}>—</option>
-              <option value="true" ${answers[it.id]==='true'?'selected':''}>True</option>
-              <option value="false" ${answers[it.id]==='false'?'selected':''}>False</option>
-            </select>
-          </div>`).join('')}
-      </div>`;
-    }
-    if(g.type==='matching'){
-      return `<div class="card" style="margin-bottom:10px;">
-        <div class="mini-lbl" style="margin-top:0;">${esc(g.instructions)}</div>
-        <div style="font-size:12px;color:var(--ink-soft);margin-bottom:8px;">
-          ${g.options.map(o=>`<b>${esc(o.key)}.</b> ${esc(o.text)}`).join(' &nbsp; ')}
-        </div>
-        ${g.items.map(it=>`
-          <div class="info-line" style="align-items:center;">
-            <span>${esc(it.term)}</span>
-            <input type="text" data-wsfield="${it.id}" value="${escAttr(answers[it.id]||'')}" placeholder="letter(s)" style="width:90px;padding:6px 8px;border:1.5px solid var(--line-light);border-radius:6px;font-family:'Oswald',sans-serif;text-align:center;">
-          </div>`).join('')}
-      </div>`;
-    }
-    // shortanswer
-    return `<div class="card" style="margin-bottom:10px;">
-      <div class="mini-lbl" style="margin-top:0;">${esc(g.instructions)}</div>
-      ${g.items.map(it=>`
-        <div style="margin:8px 0;">
-          <p style="font-size:13.5px;margin:0 0 4px;">${esc(it.prompt)}</p>
-          <textarea data-wsfield="${it.id}" style="width:100%;min-height:44px;padding:8px;border:1.5px solid var(--line-light);border-radius:8px;font-family:'Oswald',sans-serif;font-size:13.5px;">${esc(answers[it.id]||'')}</textarea>
-        </div>`).join('')}
-    </div>`;
-  }).join('');
-}
-
-function wireWorksheetFormInputs(container, studentId){
-  container.querySelectorAll('[data-wsfield]').forEach(el=>{
-    const evt = el.tagName==='SELECT' ? 'change' : 'change';
-    el.addEventListener(evt, async ()=>{
-      const entry = worksheetCache[studentId];
-      entry.answers[el.dataset.wsfield] = el.value;
-      await storageSet(worksheetAnswersKey(currentWorksheetCtx.dateStr, studentId, currentWorksheetCtx.subject), entry.answers);
-    });
-  });
 }
 
 /* ========================= EXTRA SUBJECTS EDITOR ========================= */
@@ -2695,8 +3247,8 @@ function buildFullDayHTML(dateObj, content, checks, weekWords){
       ${(currentEventHTML && financialLitHTML) ? `<div class="devo-grid" style="margin-bottom:16px;">${currentEventHTML}${financialLitHTML}</div>`
         : (currentEventHTML || financialLitHTML) ? `<div style="margin-bottom:16px;">${currentEventHTML || financialLitHTML}</div>` : ''}
       ${rwsHTML ? `<div style="margin-bottom:16px;">${rwsHTML}</div>` : ''}
+      ${statesHTML ? `<div style="margin-bottom:16px;">${statesHTML}</div>` : ''}
       <div class="students-grid">${studentsHTML}</div>
-      ${statesHTML ? `<div style="margin-top:16px;">${statesHTML}</div>` : ''}
     </section>
 
   `;
@@ -3219,14 +3771,15 @@ async function loadGradingContent(){
     return;
   }
 
-  // Mon-Thu: worksheet grading (History Mon/Tue, Science Wed/Thu)
-  const subject = (wd===1||wd===2) ? 'history' : (wd===3||wd===4) ? 'science' : null;
+  // Mon-Thu: worksheet grading (rotating weeks: odd = history, even = science)
+  const awG = actualWeekForDate(dateObj);
+  const subject = (wd>=1&&wd<=4) ? ((awG % 2 === 1) ? 'history' : 'science') : null;
   if(!subject){ content.innerHTML = `<p style="color:var(--ink-soft);font-size:14px;">No lesson worksheet applies to this date.</p>`; return; }
   gradingMode = 'worksheet'; gradingSubject = subject;
 
   const aw = actualWeekForDate(dateObj);
   const lesson = subject==='history' ? await getHistoryWeek(aw) : await getScienceWeek(aw);
-  const dayPart = getLessonDayPart(lesson, wd);
+  const dayPart = getLessonDayPart(lesson, wd, dateStr);
   const worksheet = dayPart && dayPart.worksheet;
   if(!lesson || !worksheet){
     content.innerHTML = `<p style="color:var(--ink-soft);font-size:14px;">No fillable worksheet attached to this week's ${subject==='history'?'History':'Science'} lesson for this day.</p>`;
@@ -3235,21 +3788,41 @@ async function loadGradingContent(){
   const answers = (await storageGet(worksheetAnswersKey(dateStr, studentId, subject))) || {};
   const grades = (await storageGet(worksheetGradesKey(dateStr, studentId, subject))) || {};
 
+  const wsChecks = (await storageGet(wsCheckKey(dateStr, studentId, subject))) || {};
+  function wsGradeRow(g, fp, it){
+    const given = answers[fp + it.id] || '';
+    const label = (it.prompt || it.text || it.term || it.event || '').replace(/___/g, '_____');
+    const res = gradeWsItem(g, it, given);
+    const mark = !given ? '<b style="color:var(--ink-soft);margin-left:6px;">— blank</b>'
+      : res==='ok' ? '<b style="color:var(--green);margin-left:6px;">✓ Correct</b>'
+      : '<b style="color:var(--orange);margin-left:6px;">✗ Incorrect</b>';
+    const exp = res==='bad' ? ` <span style="color:var(--ink-soft);font-size:12px;">(answer: ${esc(wsCorrectText(g,it))})</span>` : '';
+    const self = wsChecks[it.id]==='ok' ? ' <span style="color:var(--green);font-size:12px;">✓ self-checked</span>' : (wsChecks[it.id]==='bad' ? ' <span style="color:var(--orange);font-size:12px;">✗ self-marked wrong</span>' : '');
+    return `<div class="info-line" style="align-items:center;"><span>${esc(label)}</span><span>${esc(given)||'—'}${mark}${exp}${self}</span></div>`;
+  }
+
   let html = '';
   worksheet.groups.forEach((g, gi)=>{
+    const fp = 'ws-g'+gi+'-';
     if(g.type==='shortanswer'){
       html += `<div class="card" style="margin-bottom:10px;">
         <div class="mini-lbl" style="margin-top:0;">${esc(g.instructions)}</div>
-        ${g.items.map(it=>feedbackRow('', it.prompt, answers[it.id], it.id, grades[it.id])).join('')}
+        ${g.items.map(it=>feedbackRow('', it.prompt, answers[fp+it.id], it.id, grades[it.id])).join('')}
+      </div>`;
+    } else if(g.type==='checklist'){
+      html += `<div class="card" style="margin-bottom:10px;">
+        <div class="mini-lbl" style="margin-top:0;">${esc(g.instructions)} (checklist)</div>
+        ${g.items.map(it=>`<div class="info-line" style="align-items:center;"><span>${esc(it.text)}</span><span style="font-weight:700;color:${answers[fp+it.id]?'var(--green)':'var(--ink-soft)'};">${answers[fp+it.id]?'✓ done':'— not yet'}</span></div>`).join('')}
+      </div>`;
+    } else if(g.type==='reveal'){
+      html += `<div class="card" style="margin-bottom:10px;">
+        <div class="mini-lbl" style="margin-top:0;">${esc(g.instructions)} (read-and-check)</div>
+        ${g.items.map(it=>`<div class="info-line" style="align-items:center;"><span>${esc(it.label||'Reveal card')}</span><span style="font-weight:700;color:${wsChecks[it.id]==='viewed'?'var(--green)':'var(--ink-soft)'};">${wsChecks[it.id]==='viewed'?'✓ read':'— not opened'}</span></div>`).join('')}
       </div>`;
     } else {
       html += `<div class="card" style="margin-bottom:10px;">
         <div class="mini-lbl" style="margin-top:0;">${esc(g.instructions)} (auto-graded)</div>
-        ${g.items.map(it=>{
-          const label = it.prompt || it.statement || it.term;
-          const expected = it.answer;
-          return autoGradeRow(label, answers[it.id], expected);
-        }).join('')}
+        ${g.items.map(it=>wsGradeRow(g, fp, it)).join('')}
       </div>`;
     }
   });
