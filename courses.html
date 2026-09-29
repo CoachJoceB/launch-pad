@@ -3,7 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Legacy Lab · Game Plan</title>
+<meta name="robots" content="noindex,nofollow">
+<meta name="description" content="Legacy Lab Academy dual-enrollment coursework tracker — SEU college courses, weekly tasks, and progress. Private family page.">
+<meta property="og:title" content="Legacy Lab · Game Plan">
+<meta property="og:description" content="Dual-enrollment coursework: weekly tasks and progress.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#10161D">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2310161D'/%3E%3Ctext x='32' y='42' font-family='Arial Black,sans-serif' font-size='28' font-weight='900' fill='%23E8622A' text-anchor='middle'%3ELL%3C/text%3E%3C/svg%3E">
+<title>Legacy Lab · Courses — SEU Dual Enrollment</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
@@ -204,6 +211,8 @@
   .review-item .rtitle{font-weight:700; font-size:14px;}
   .review-item .rmeta{font-size:12px; color:var(--ink-soft); margin-top:2px;}
   .link-btn{background:none; border:none; color:var(--navy-2); font-family:'Oswald',sans-serif; font-weight:600; font-size:13px; text-transform:uppercase; letter-spacing:.04em; text-decoration:underline; cursor:pointer; padding:0;}
+  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
+  button:focus-visible,a:focus-visible,[tabindex]:focus-visible{outline:3px solid var(--amber);outline-offset:2px;}
 </style>
 </head>
 <body>
@@ -220,6 +229,7 @@
   </div>
   <div class="chip-row" id="chipRow"></div>
 </header>
+<h1 class="sr-only">Legacy Lab Academy — dual-enrollment coursework</h1>
 
 <main id="mainContent"></main>
 
@@ -232,7 +242,10 @@
 ========================================================= */
 const SUPABASE_URL = 'https://gwahlqvngjfhslqqprzl.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imd3YWhscXZuZ2pmaHNscXFwcnpsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODcxNDU5NzIsImV4cCI6MjEwMjcyMTk3Mn0.bx2skjuZUNVXVplQNg-OaleXVYQ8D6R2Ej6xr1rBZYk';
-const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+const sb = (typeof supabase !== 'undefined') ? supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
+if(!sb){
+  document.getElementById('mainContent').innerHTML = '<div class="card" style="margin-top:16px;"><h2>Couldn\'t load the cloud library</h2><p style="font-size:14px;">The page couldn\'t reach its cloud connection. Check your internet connection, then <a href="" onclick="location.reload();return false;">try again</a>.</p></div>';
+}
 
 // Same shared cloud table the command center uses, so this is part of the
 // same system and reachable from any device — keys prefixed "seu:" so they
@@ -246,12 +259,49 @@ const S = {
     }catch(e){ console.error('storage get failed', e); return null; }
   },
   async set(key, val){
+    if(!isUnlocked()){ console.warn('storage write blocked: courses page locked'); return; }
     try{
       const { error } = await sb.from('command_center').upsert({ key:'seu:'+key, value: val, updated_at: new Date().toISOString() });
       if(error) throw error;
     }catch(e){ console.error('storage set failed', e); }
   }
 };
+
+/* =========================================================
+   SESSION LOCK — same family PIN gate as the main dashboard.
+   Unlocking the dashboard in this tab unlocks this page too
+   (shared tab-session flag). Casual client-side gate only:
+   the PIN lives in this file, so it stops casual snooping,
+   not a determined visitor. Real lockdown = Supabase Auth + RLS.
+========================================================= */
+const LOCK_KEY = 'lp_unlocked';
+const EDIT_PIN = '2633';
+function isUnlocked(){
+  try{ return sessionStorage.getItem(LOCK_KEY)==='1'; }catch(e){ return false; }
+}
+function showCourseLock(){
+  document.getElementById('mainContent').innerHTML = `
+    <div class="card" style="margin:24px auto;max-width:440px;text-align:center;">
+      <div style="font-size:40px;line-height:1;" aria-hidden="true">🔒</div>
+      <h2>Coursework is locked</h2>
+      <p style="font-size:14px;">Enter the family PIN to view courses.</p>
+      <input type="password" inputmode="numeric" id="coursePin" placeholder="••••" aria-label="Family PIN"
+        style="text-align:center;font-size:22px;letter-spacing:6px;padding:10px;border:1.5px solid #c9c9c9;border-radius:8px;width:200px;">
+      <div id="coursePinErr" style="display:none;color:var(--danger,#b3261e);font-size:13px;margin:8px 0 0;">Incorrect PIN — try again.</div>
+      <div><button class="btn gold" id="courseUnlockBtn" style="margin-top:12px;">Unlock</button></div>
+    </div>`;
+  const input = document.getElementById('coursePin');
+  const err = document.getElementById('coursePinErr');
+  const go = ()=>{
+    if(input.value === EDIT_PIN){
+      try{ sessionStorage.setItem(LOCK_KEY,'1'); }catch(e){}
+      loadAll();
+    } else { err.style.display='block'; input.value=''; input.focus(); }
+  };
+  document.getElementById('courseUnlockBtn').addEventListener('click', go);
+  input.addEventListener('keydown', (e)=>{ if(e.key==='Enter') go(); });
+  input.focus();
+}
 
 /* =========================================================
    STATE
@@ -995,7 +1045,35 @@ async function submitEditCourse(courseId){
   render();
 }
 
-loadAll();
+/* Keyboard access for clickable divs (week chips, course cards, task checks):
+   divs with inline onclick get checkbox/button roles and Enter/Space support. */
+function enhanceClickableDivs(root){
+  if(!root.querySelectorAll) return;
+  root.querySelectorAll('div[onclick]').forEach(el=>{
+    if(el.dataset.kbEnhanced) return;
+    el.dataset.kbEnhanced = '1';
+    const isCheck = el.classList.contains('check');
+    el.setAttribute('role', isCheck ? 'checkbox' : 'button');
+    el.setAttribute('tabindex','0');
+    if(isCheck) el.setAttribute('aria-checked', el.classList.contains('done') ? 'true' : 'false');
+    else if(el.classList.contains('course-card')) el.setAttribute('aria-label','Open course details');
+  });
+}
+const kbObserver = new MutationObserver((muts)=>{
+  muts.forEach(m=>{ m.addedNodes.forEach(n=>{ if(n.nodeType===1) enhanceClickableDivs(n); }); });
+});
+['mainContent','chipRow'].forEach(id=>{
+  const node = document.getElementById(id);
+  if(node) kbObserver.observe(node, {childList:true, subtree:true});
+});
+document.addEventListener('keydown', (e)=>{
+  if(e.key!==' ' && e.key!=='Enter') return;
+  const t = e.target;
+  if(t && t.dataset && t.dataset.kbEnhanced){ e.preventDefault(); t.click(); }
+});
+enhanceClickableDivs(document);
+
+if(sb){ if(isUnlocked()){ loadAll(); } else { showCourseLock(); } }
 </script>
 </body>
 </html>
