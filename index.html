@@ -1399,11 +1399,17 @@ async function renderBoard(){
   if(sharedLesson && sharedLesson.pdfDataUrl) window.__pendingLessonPdf = sharedLesson;
   if(sharedLesson && sharedDayPart?.worksheet?.groups?.some(g=>(g.items||[]).length)) window.__pendingWorksheet = { subject: sharedLessonType.toLowerCase(), lesson: sharedLesson, weekdayNum: state.weekdayNum };
 
-  // ---- Current Event (NewsForKids.net — student reads a real article and
-  // logs their own headline + summary; response is per-student, per-day) ----
+  // ---- Current Event: show the prepared headline/summary/discussion question
+  // for the day when present; the NewsForKids link + per-student response
+  // logging below stay as the student's own reading activity. ----
+  const ceData = c.currentEvent;
   const currentEventHTML = (!isTestDay) ? `<div class="card">
     <div class="word-badge">Current Event</div>
-    <p style="font-size:13.5px;line-height:1.55;margin:6px 0 10px;">Read one story on NewsForKids.net today, then log the headline and a brief summary in your own words in your card below.</p>
+    ${(ceData && ceData.headline) ? `
+    <p style="font-weight:700;font-size:14.5px;line-height:1.4;margin:8px 0 6px;">${esc(ceData.headline)}</p>
+    ${ceData.summary ? `<p style="font-size:13.5px;line-height:1.55;margin:0 0 8px;">${esc(ceData.summary)}</p>` : ''}
+    ${ceData.applyIt ? `<p style="font-size:13px;line-height:1.5;margin:0 0 10px;color:var(--ink-soft);"><em>Think about it:</em> ${esc(ceData.applyIt)}</p>` : ''}` : ''}
+    <p style="font-size:13.5px;line-height:1.55;margin:6px 0 10px;">${(ceData && ceData.headline) ? 'Want to explore more? Read' : 'Read'} one story on NewsForKids.net today, then log the headline and a brief summary in your own words in your card below.</p>
     <a href="https://newsforkids.net/" target="_blank" rel="noopener" class="btn btn-primary" style="text-decoration:none;display:inline-block;">📰 Open NewsForKids.net</a>
   </div>` : '';
 
