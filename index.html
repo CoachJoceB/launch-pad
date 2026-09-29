@@ -2424,10 +2424,10 @@ function renderWorksheetFormHTML(entry, checks){
       // kids can see what they're picking from. Terms are dark, choices are
       // accent-colored so the two sides are visually distinct.
       const optsBox = (g.options && g.options.length)
-        ? `<div style="margin:8px 0 12px;padding:10px 12px;background:#fff;border:2px solid var(--accent);border-radius:10px;">
+        ? `<div data-wsmatchbank style="margin:8px 0 12px;padding:10px 12px;background:#fff;border:2px solid var(--accent);border-radius:10px;">
              <div style="font-size:11px;font-weight:700;letter-spacing:.5px;color:var(--ink-soft);margin-bottom:6px;">&#128302; CHOICES — match each item to a letter</div>
              <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:4px 12px;">
-               ${g.options.map(o=>`<div style="font-size:12.5px;line-height:1.45;"><strong style="color:var(--accent);font-size:13px;">${esc(String(o.key).toUpperCase())}.</strong> <span style="color:var(--ink);">${esc(o.text)}</span></div>`).join('')}
+               ${g.options.map(o=>`<div data-wsopt="${escAttr(String(o.key).toUpperCase())}" style="font-size:12.5px;line-height:1.45;"><strong style="color:var(--accent);font-size:13px;">${esc(String(o.key).toUpperCase())}.</strong> <span style="color:var(--ink);">${esc(o.text)}</span></div>`).join('')}
              </div>
            </div>` : '';
       body = optsBox + (g.items||[]).map(it=>{
@@ -2436,7 +2436,7 @@ function renderWorksheetFormHTML(entry, checks){
           <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
             <span style="font-size:13.5px;color:var(--ink);"><strong>${esc(it.term)}</strong></span>
             <span style="font-size:13px;color:var(--ink-soft);">&#8594;</span>
-            <input type="text" data-wsfield="${field}" data-wsitem="${it.id}"${dis} value="${escAttr(answers[field]||'')}" placeholder="letter" style="width:90px;padding:6px 8px;border:1.5px solid var(--line-light);border-radius:6px;font-family:'Oswald',sans-serif;">
+            <input type="text" data-wsfield="${field}" data-wsitem="${it.id}" data-wsmatchletter${dis} value="${escAttr(answers[field]||'')}" placeholder="letter" style="width:90px;padding:6px 8px;border:1.5px solid var(--line-light);border-radius:6px;font-family:'Oswald',sans-serif;">
             <span data-wsmark="${it.id}"></span>
           </div>
           <div data-wsnote="${it.id}" style="font-size:12px;margin-top:2px;"></div>
@@ -2499,6 +2499,23 @@ function wsClearMark(container, itemId, entry, checks, studentId){
   wsUpdateProgress(container, worksheet, entry, checks);
 }
 
+// Matching: cross used letters off the word bank as kids type them. Scoped
+// per section (data-wsgroup) so two matching sections never share cross-offs.
+function wsRefreshMatchBanks(container){
+  container.querySelectorAll('[data-wsmatchbank]').forEach(bank=>{
+    const groupEl = bank.closest('[data-wsgroup]') || container;
+    const used = {};
+    groupEl.querySelectorAll('[data-wsmatchletter]').forEach(inp=>{
+      const L = (inp.value||'').trim().toUpperCase().charAt(0);
+      if(/^[A-Z]$/.test(L)) used[L] = true;
+    });
+    bank.querySelectorAll('[data-wsopt]').forEach(opt=>{
+      const on = !!used[(opt.getAttribute('data-wsopt')||'').toUpperCase()];
+      opt.style.textDecoration = on ? 'line-through' : '';
+      opt.style.opacity = on ? '0.45' : '';
+    });
+  });
+}
 function wsRunGroupCheck(container, studentId, gi){
   const entry = worksheetCache[studentId];
   const checks = wsChecksCache[studentId] || (wsChecksCache[studentId] = {});
@@ -2607,6 +2624,7 @@ function wireWorksheetFormInputs(container, studentId){
   // (sequence-guarded: an edit that predates the latest check never wipes it)
   container.querySelectorAll('[data-wsfield]').forEach(el=>{
     if(el.type==='checkbox') return; // handled above
+    el.addEventListener('input', ()=>{ if(el.hasAttribute('data-wsmatchletter')) wsRefreshMatchBanks(container); });
     el.addEventListener('change', async ()=>{
       const editSeq = ++wsSeq;
       const itemId = el.dataset.wsitem;
@@ -2671,6 +2689,9 @@ function wireWorksheetFormInputs(container, studentId){
   container.querySelectorAll('[data-wscheck]').forEach(btn=>{
     btn.addEventListener('click', ()=> wsRunGroupCheck(container, studentId, +btn.dataset.wscheck));
   });
+
+  // Restore matching word-bank cross-offs from saved answers on open.
+  wsRefreshMatchBanks(container);
 }
 
 /* Split a lesson reading into { text, vocab[] }: the source readings end with
@@ -2723,6 +2744,18 @@ async function openWorksheetModal(subject, lesson, preferredStudentId, weekdayNu
   const dayPart = forceDayNum ? lesson['day'+forceDayNum] : getLessonDayPart(lesson, wd, state.dateStr);
   const worksheet = dayPart && dayPart.worksheet;
   if(!worksheet){ showToast('No worksheet questions for this day yet.'); return; }
+  // "Today's plan" checklists get a vocab copy-down item so kids mark it
+  // complete. Injected at open (not in the stored unit) so it applies to
+  // every unit, past and future; the id guard keeps cached lessons from
+  // collecting duplicates.
+  (worksheet.groups||[]).forEach(g=>{
+    if(g.type==='checklist' && /today's plan/i.test(g.instructions||'')){
+      g.items = g.items || [];
+      if(!g.items.some(it=>it.id==='__vocabcopy')){
+        g.items.push({id:'__vocabcopy', text:'Copy the NEW WORDS — each vocabulary word with its definition — into your notebook.'});
+      }
+    }
+  });
   currentWorksheetCtx = { subject, lesson, dateStr: state.dateStr };
   document.getElementById('worksheetTitle').textContent = materialSubjectLabel(subject) + (forceDayNum ? ' Self Test' : ' Worksheet');
   document.getElementById('worksheetSub').textContent = (forceDayNum && dayPart.title ? dayPart.title + ' · ' : '') + lesson.topic;
