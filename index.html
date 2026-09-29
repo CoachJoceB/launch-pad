@@ -386,6 +386,11 @@
       <select id="timezoneInput"></select>
       <div class="sub" style="margin-top:8px;margin-bottom:0;">Days switch over at midnight in this timezone, and the buzzer countdown runs on it too — the same for every device, no matter where it's opened.</div>
       <hr class="divider">
+      <h3 style="font-size:20px;">Worksheet Self-Check</h3>
+      <div class="sub">How many tries each student gets on a worksheet section before their answers lock in.</div>
+      <label>Number of tries per section</label>
+      <input type="number" id="maxTriesInput" min="1" max="5" step="1" style="font-family:'Oswald',sans-serif;font-size:18px;padding:10px;width:110px;">
+      <hr class="divider">
       <h3 style="font-size:20px;">AI Material Reader</h3>
       <div class="sub">Upload a lesson PDF or a clear photo/scan of a worksheet. AI extracts a lesson summary and turns worksheet questions into interactive, student-specific answer forms.</div>
       <label>AI access code</label><input type="password" id="aiAccessCode" autocomplete="off" placeholder="Set by your administrator">
@@ -569,6 +574,17 @@ function defaultBuzzerTime(){ return {hour:14, minute:30}; } // 2:30 PM
 
 const TIMEZONE_KEY = 'timezone-setting';
 function defaultTimezone(){ return 'America/Chicago'; } // Pensacola, FL
+// Worksheet self-check: how many tries each section allows before locking.
+const MAX_TRIES_KEY = 'worksheet-max-tries';
+function defaultMaxTries(){ return 2; }
+function wsMaxTries(){
+  const n = parseInt(state.maxTries, 10);
+  return (n >= 1 && n <= 5) ? n : defaultMaxTries();
+}
+function wsTriesUsedText(){
+  const m = wsMaxTries();
+  return (m === 2 ? 'Both' : 'All ' + m) + (m === 1 ? ' try' : ' tries') + ' used — answers are locked in.';
+}
 function subjectOrderKey(studentId){ return 'subject-order:'+studentId; }
 const TIMEZONE_OPTIONS = [
   { value:'America/New_York',    label:'Eastern Time' },
@@ -1137,6 +1153,7 @@ async function loadAll(){
   });
   state.fieldLabels = (await storageGet(LABELS_KEY)) || defaultFieldLabels();
   state.buzzerTime = (await storageGet(BUZZER_KEY)) || defaultBuzzerTime();
+  state.maxTries = (await storageGet(MAX_TRIES_KEY)) || defaultMaxTries();
   // Each student's subject order is independent, keyed by student id.
   state.subjectOrders = {};
   for(const s of state.students){
@@ -2312,7 +2329,7 @@ function renderWorksheetFormHTML(entry, checks){
       <div style="height:8px;background:var(--line-light);border-radius:4px;margin-top:8px;overflow:hidden;">
         <div data-wsbar style="height:100%;background:var(--green);border-radius:4px;width:0%;transition:width .3s;"></div>
       </div>
-      <p style="font-size:11.5px;color:var(--ink-soft);margin:6px 0 0;">Check each part as you finish it — you get <strong>2 tries</strong> per part, so think before you check.</p>
+      <p style="font-size:11.5px;color:var(--ink-soft);margin:6px 0 0;">Check each part as you finish it — you get <strong>${wsMaxTries()} ${wsMaxTries()===1?'try':'tries'}</strong> per part, so think before you check.</p>
     </div>`;
   // Alternate section backgrounds so it's obvious when one part ends and the
   // next begins.
@@ -2320,12 +2337,12 @@ function renderWorksheetFormHTML(entry, checks){
   return progressHTML + worksheet.groups.map((g,gi)=>{
     const p = g._fieldPrefix;
     const altBg = WS_ALT_BG[gi % WS_ALT_BG.length];
-    // 2-try lock state (persisted in checks): a section whose two tries are
-    // used renders with its inputs disabled.
+    // Try-limit lock state (persisted in checks): a section whose tries are
+    // used up renders with its inputs disabled.
     const attemptsKey = '__attempts_'+gi;
     const attemptsUsed = (checks && checks[attemptsKey]) || 0;
     const autoGraded = WS_AUTO_TYPES.indexOf(g.type)!==-1;
-    const locked = autoGraded && attemptsUsed >= 2;
+    const locked = autoGraded && attemptsUsed >= wsMaxTries();
     const dis = locked ? ' disabled' : '';
     const head = `<div class="mini-lbl" style="margin-top:0;">${esc(g.instructions||('Part '+(gi+1)))}</div>`
       + (g.subtitle ? `<p style="font-size:12.5px;color:var(--ink-soft);margin:4px 0 8px;">${esc(g.subtitle)}</p>` : '')
@@ -2443,10 +2460,10 @@ function renderWorksheetFormHTML(entry, checks){
       }).join('');
     }
     const needsCheck = autoGraded || g.type==='shortanswer';
-    const triesLeft = autoGraded ? Math.max(0, 2-attemptsUsed) : null;
+    const triesLeft = autoGraded ? Math.max(0, wsMaxTries()-attemptsUsed) : null;
     const checkBtn = needsCheck
       ? (locked
-        ? `<div data-wsresult="${gi}" style="font-size:12.5px;margin-top:8px;"><span style="color:var(--ink-soft);font-weight:700;">Both tries used — answers are locked in.</span></div>`
+        ? `<div data-wsresult="${gi}" style="font-size:12.5px;margin-top:8px;"><span style="color:var(--ink-soft);font-weight:700;">${wsTriesUsedText()}</span></div>`
         : `<button type="button" class="btn btn-primary" data-wscheck="${gi}" style="margin-top:6px;font-size:13px;padding:7px 16px;">Check answers${triesLeft!==null?` <span style="font-size:11px;opacity:.85;">(${triesLeft} ${triesLeft===1?'try':'tries'} left)</span>`:''}</button>
            <div data-wsresult="${gi}" style="font-size:12.5px;margin-top:8px;"></div>`) : '';
     return `<div class="card" data-wsgroup="${gi}" style="margin-bottom:10px;background:${altBg};">${head}${body}${checkBtn}</div>`;
@@ -2490,14 +2507,15 @@ function wsRunGroupCheck(container, studentId, gi){
   const groupEl = container.querySelector('[data-wsgroup="'+gi+'"]');
   const attemptsKey = '__attempts_'+gi;
   const isShort = g.type==='shortanswer';
-  // 2-try limit on auto-graded parts (short answer is self-marked, no limit).
+  // Try limit on auto-graded parts (short answer is self-marked, no limit).
+  const maxTries = wsMaxTries();
   let attemptsUsed = checks[attemptsKey] || 0;
   if(!isShort){
-    if(attemptsUsed >= 2) return; // already locked
+    if(attemptsUsed >= maxTries) return; // already locked
     attemptsUsed += 1;
     checks[attemptsKey] = attemptsUsed;
   }
-  const finalTry = !isShort && attemptsUsed >= 2;
+  const finalTry = !isShort && attemptsUsed >= maxTries;
   let okCount = 0, badCount = 0, skipCount = 0;
   (g.items||[]).forEach(it=>{
     wsCheckSeq[it.id] = ++wsSeq;
@@ -2544,10 +2562,10 @@ function wsRunGroupCheck(container, studentId, gi){
   }
   if(finalTry && groupEl){
     // Lock the section: disable inputs and swap the check button for a
-    // "tries used up" note so answers can't be changed after try #2.
+    // "tries used up" note so answers can't be changed after the last try.
     groupEl.querySelectorAll('[data-wsfield],[data-wstf],[data-wschoice]').forEach(el=>{ el.disabled = true; });
     const btn = groupEl.querySelector('[data-wscheck]');
-    if(btn) btn.outerHTML = '<div style="font-size:12.5px;margin-top:8px;color:var(--ink-soft);font-weight:700;">Both tries used — answers are locked in.</div>';
+    if(btn) btn.outerHTML = '<div style="font-size:12.5px;margin-top:8px;color:var(--ink-soft);font-weight:700;">' + wsTriesUsedText() + '</div>';
   }
   wsUpdateProgress(container, worksheet, entry, checks);
 }
@@ -3510,6 +3528,8 @@ function openBuzzerModal(){
   const tzSelect = document.getElementById('timezoneInput');
   tzSelect.innerHTML = TIMEZONE_OPTIONS.map(o=>`<option value="${o.value}" ${o.value===state.timezone?'selected':''}>${o.label}</option>`).join('');
 
+  document.getElementById('maxTriesInput').value = wsMaxTries();
+
   try{ document.getElementById('aiAccessCode').value = localStorage.getItem('ll_ai_access_code') || ''; }catch(e){ document.getElementById('aiAccessCode').value = ''; }
   document.getElementById('aiWeek').value = actualWeekForDate(state.schoolDate);
   document.getElementById('aiMaterialFile').value = '';
@@ -3529,11 +3549,14 @@ document.getElementById('saveBuzzer').addEventListener('click', async ()=>{
   const [hh, mm] = val.split(':').map(Number);
   const bt = { hour: hh, minute: mm };
   const tz = document.getElementById('timezoneInput').value;
+  const mt = Math.max(1, Math.min(5, parseInt(document.getElementById('maxTriesInput').value, 10) || defaultMaxTries()));
   state.buzzerTime = bt;
   state.timezone = tz;
+  state.maxTries = mt;
   try{ localStorage.setItem('ll_ai_access_code', document.getElementById('aiAccessCode').value.trim()); }catch(e){ /* storage unavailable here — access code just won't persist */ }
   await storageSet(BUZZER_KEY, bt);
   await storageSet(TIMEZONE_KEY, tz);
+  await storageSet(MAX_TRIES_KEY, mt);
   closeAllModals(); showToast('Day settings saved');
   await loadAndRender();
 });
