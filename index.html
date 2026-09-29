@@ -3,6 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex,nofollow">
+<meta name="description" content="Legacy Lab Academy daily game plan — a private family homeschool dashboard with today's devotional, drills, lessons, and checklists.">
+<meta property="og:title" content="Legacy Lab — Game Plan">
+<meta property="og:description" content="Today's homeschool game plan: warm-up, drills, lessons, and checklists.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#0A0A0A">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230A0A0A'/%3E%3Ctext x='32' y='42' font-family='Arial Black,sans-serif' font-size='28' font-weight='900' fill='%23E8622A' text-anchor='middle'%3ELL%3C/text%3E%3C/svg%3E">
 <title>Legacy Lab — Game Plan</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -16,6 +23,7 @@
     --ink:#111111;
     --ink-soft:#5B5955;
     --orange:#E8622A;
+    --orange-deep:#B34A1E;
     --amber:#F2A93C;
     --green:#3F8F5F;
     --chalk:#F7F5EF;
@@ -40,6 +48,8 @@
   .live-clock{font-family:'Oswald',sans-serif;font-size:clamp(26px,3.4vw,40px);font-weight:700;color:var(--chalk);letter-spacing:.02em;}
   .live-clock-label{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:rgba(247,245,239,.5);}
   .sb-right{display:flex;align-items:center;gap:12px;flex-wrap:wrap;}
+  /* Session lock: hide all header actions until the family PIN unlocks the board. */
+  body.locked .sb-right{display:none;}
   .buzzer{font-family:'Oswald',sans-serif;text-align:right;}
   .buzzer .label{font-size:10px;color:rgba(247,245,239,.55);letter-spacing:.08em;text-transform:uppercase;}
   .buzzer .time{font-size:19px;color:var(--amber);font-weight:700;}
@@ -66,7 +76,7 @@
     font-family:'Oswald',sans-serif;background:var(--ink);color:var(--chalk);font-size:13px;
     letter-spacing:.1em;text-transform:uppercase;padding:5px 11px;border-radius:5px;
   }
-  .qtr-title{font-family:'Oswald',sans-serif;font-size:clamp(20px,2.4vw,28px);text-transform:uppercase;letter-spacing:.02em;font-weight:600;}
+  .qtr-title{font-family:'Oswald',sans-serif;font-size:clamp(20px,2.4vw,28px);text-transform:uppercase;letter-spacing:.02em;font-weight:600;margin:0;}
   .qtr-hint{font-size:13px;color:var(--ink-soft);margin-left:auto;}
 
   .devo-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:16px;}
@@ -96,8 +106,8 @@
   @media (max-width:1100px){.students-grid{grid-template-columns:1fr;}}
   .student-card{background:var(--chalk);border:1.5px solid var(--line-light);border-radius:14px;overflow:hidden;}
   .student-head{background:var(--navy-2);color:var(--chalk);padding:12px 16px;display:flex;align-items:center;justify-content:space-between;}
-  .student-name{font-family:'Oswald',sans-serif;font-size:18px;text-transform:uppercase;letter-spacing:.02em;}
-  .grade-badge{font-family:'Oswald',sans-serif;font-size:11px;background:var(--orange);padding:3px 8px;border-radius:5px;}
+  .student-name{font-family:'Oswald',sans-serif;font-size:18px;text-transform:uppercase;letter-spacing:.02em;margin:0;font-weight:600;}
+  .grade-badge{font-family:'Oswald',sans-serif;font-size:11px;background:var(--orange-deep);color:var(--chalk);padding:3px 8px;border-radius:5px;}
   .student-body{padding:16px;}
   .collapse-head{
     display:flex;align-items:center;justify-content:space-between;cursor:pointer;
@@ -107,6 +117,7 @@
   .mini-lbl{font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-soft);font-weight:700;}
   .chevron{font-size:11px;color:var(--ink-soft);transition:transform .15s;}
   .chevron.collapsed{transform:rotate(-90deg);}
+  .collapse-body.lesson-reading{max-height:5000px;}
   .collapse-body{overflow:hidden;max-height:600px;transition:max-height .2s ease;}
   .collapse-body.collapsed{max-height:0;}
   .info-line{display:flex;justify-content:space-between;font-size:13.5px;padding:4px 0;border-bottom:1px dashed var(--line-light);}
@@ -281,6 +292,30 @@
     footer.buzzer-strip{margin:6px auto 0;padding:10px 14px;border-radius:10px;}
     .buzzer-strip .msg{font-size:12px;}
   }
+  /* ===== Fix pack: accessibility, labels, progress ===== */
+  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
+  .icon-btn.labeled{width:auto;min-height:38px;padding:0 13px;gap:7px;font-family:'Oswald',sans-serif;font-size:12px;letter-spacing:.08em;text-transform:uppercase;}
+  .icon-btn.labeled .lbl{font-size:12px;}
+  @media (max-width:640px){.icon-btn.labeled .lbl{display:none;}.icon-btn.labeled{padding:0;width:38px;}}
+  button:focus-visible,a:focus-visible,[tabindex]:focus-visible{outline:3px solid var(--amber);outline-offset:2px;}
+  .check{width:24px;height:24px;}
+  .check-mini{width:24px;height:24px;}
+  .move-btn{width:24px;height:24px;font-size:11px;}
+  .progress-strip{max-width:1400px;margin:0 auto 20px;background:var(--navy-2);color:var(--chalk);border-radius:14px;padding:14px 20px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;border:1.5px solid var(--line-dark);}
+  .progress-count{font-family:'Oswald',sans-serif;font-size:15px;text-transform:uppercase;letter-spacing:.06em;}
+  .progress-count b{color:var(--amber);font-size:22px;}
+  .progress-bar{flex:1;min-width:140px;height:10px;background:rgba(247,245,239,.15);border-radius:999px;overflow:hidden;}
+  .progress-fill{height:100%;background:linear-gradient(90deg,var(--orange),var(--amber));border-radius:999px;transition:width .3s;}
+  .btn-warmup{background:var(--orange);color:#fff;border:none;border-radius:9px;padding:11px 20px;font-family:'Oswald',sans-serif;font-size:14px;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;}
+  .btn-warmup:hover{background:var(--orange-deep);}
+  .warmup-row{max-width:1400px;margin:0 auto 20px;display:flex;justify-content:center;}
+  .student-progress{padding:10px 14px 2px;}
+  .sp-count{font-size:12.5px;color:var(--ink-soft);font-weight:600;}
+  .sp-count b{color:var(--orange-deep);font-size:16px;}
+  .sp-bar{height:6px;background:var(--line-light);border-radius:999px;margin-top:6px;overflow:hidden;}
+  .sp-fill{height:100%;background:linear-gradient(90deg,var(--orange),var(--amber));border-radius:999px;transition:width .3s;width:0%;}
+  .collapse-all-btn{background:transparent;border:1.5px solid var(--line-light);border-radius:7px;padding:5px 11px;font-family:'Oswald',sans-serif;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);cursor:pointer;margin-left:10px;white-space:nowrap;}
+  .collapse-all-btn:hover{border-color:var(--orange);color:var(--orange);}
 </style>
 </head>
 <body>
@@ -307,10 +342,10 @@
       <div class="label">Final Buzzer</div>
       <div class="time" id="buzzerTime">2:30:00 PM</div>
     </div>
-    <button class="icon-btn" id="openArchive" title="Archive & upcoming weeks">📅</button>
-    <a class="icon-btn" href="courses.html" title="College coursework (SEU dual enrollment)" style="text-decoration:none;">🎓</a>
-    <button class="icon-btn" id="openToday" title="Edit today">✏️</button>
-    <button class="icon-btn" id="openSettings" title="Settings — day settings, students, curriculum, grading, 4-week plan">⚙️</button>
+    <button class="icon-btn labeled" id="openArchive" title="Archive & upcoming weeks" aria-label="Archive and upcoming weeks">📅 <span class="lbl">Archive</span></button>
+    <a class="icon-btn labeled" href="courses.html" title="College coursework (SEU dual enrollment)" aria-label="College coursework, SEU dual enrollment" style="text-decoration:none;">🎓 <span class="lbl">Courses</span></a>
+    <button class="icon-btn labeled" id="openToday" title="Edit today" aria-label="Edit today">✏️ <span class="lbl">Edit Day</span></button>
+    <button class="icon-btn labeled" id="openSettings" title="Settings — day settings, students, curriculum, grading, 4-week plan" aria-label="Settings">⚙️ <span class="lbl">Settings</span></button>
   </div>
 </header>
 
@@ -419,7 +454,7 @@
     </div>
 
     <div class="settings-panel" data-settingspanel="plan" style="display:none;">
-      <div class="sub">This rotates on repeat, forever — Week 5 is followed by Week 1 again. Days already auto-saved to the archive won't change unless you reset them individually.</div>
+      <div class="sub">This rotates on repeat, forever — after Week 4 the rotation starts over at Week 1 again. Days already auto-saved to the archive won't change unless you reset them individually.</div>
       <div class="card" style="margin:12px 0;">
         <div class="mini-lbl" style="margin-top:0;">Choose today's History or Science lesson</div>
         <div class="sub">Choose any saved week, including lessons parsed from a PDF, then apply it to today's saved plan.</div>
@@ -434,7 +469,7 @@
       <div id="weekLevelGroups"></div>
       <div class="modal-actions">
         <button class="btn btn-ghost" data-close>Close</button>
-        <button class="btn btn-primary" id="saveTemplate">Save 5-week plan</button>
+        <button class="btn btn-primary" id="saveTemplate">Save 4-week plan</button>
       </div>
     </div>
   </div>
@@ -444,7 +479,7 @@
 <div class="modal-overlay" id="archiveOverlay">
   <div class="modal wide">
     <h3>Plan Calendar</h3>
-    <div class="sub">Past days auto-save exactly as shown. Upcoming days preview the 5-week rotation. Click any day to open it.</div>
+    <div class="sub">Past days auto-save exactly as shown. Upcoming days preview the 4-week rotation. Click any day to open it.</div>
     <div class="modal-tabs">
       <div class="modal-tab active" data-cal-tab="archive-view">Archive</div>
       <div class="modal-tab" data-cal-tab="upcoming-view">Upcoming</div>
@@ -699,7 +734,7 @@ function defaultContentWeeks(){
 const SUPABASE_URL = 'https://gwahlqvngjfhslqqprzl.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imd3YWhscXZuZ2pmaHNscXFwcnpsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODcxNDU5NzIsImV4cCI6MjEwMjcyMTk3Mn0.bx2skjuZUNVXVplQNg-OaleXVYQ8D6R2Ej6xr1rBZYk';
 const SUPABASE_CONFIGURED = !SUPABASE_URL.includes('YOUR_SUPABASE_URL') && !SUPABASE_ANON_KEY.includes('YOUR_SUPABASE_ANON_KEY');
-const sb = SUPABASE_CONFIGURED ? supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
+const sb = (SUPABASE_CONFIGURED && typeof supabase !== 'undefined') ? supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
 
 async function storageGet(key){
   if(!sb) return null;
@@ -710,6 +745,7 @@ async function storageGet(key){
   }catch(e){ console.error('storage get failed', e); return null; }
 }
 async function storageSet(key,value){
+  if(!isUnlocked()){ console.warn('storage write blocked: board is locked'); return false; }
   if(!sb) return false;
   try{
     const {error} = await sb.from('command_center').upsert({ key, value, updated_at: new Date().toISOString() });
@@ -718,6 +754,7 @@ async function storageSet(key,value){
   }catch(e){ console.error('storage set failed', e); return false; }
 }
 async function storageDelete(key){
+  if(!isUnlocked()){ console.warn('storage delete blocked: board is locked'); return; }
   if(!sb) return;
   try{ await sb.from('command_center').delete().eq('key',key); }catch(e){ console.error('storage delete failed', e); }
 }
@@ -758,6 +795,42 @@ function requireEditAccess(action){
   submitBtn.onclick = onSubmit;
   cancelBtn.onclick = cleanup;
   input.onkeydown = (e)=>{ if(e.key==='Enter') onSubmit(); if(e.key==='Escape') cleanup(); };
+}
+
+/* ========================= SESSION LOCK =========================
+   The whole board sits behind the family PIN: no student names,
+   grades, schedules, lessons, or written work render until it's
+   entered, and storageSet/storageDelete refuse writes while locked.
+   Unlock lasts for the tab session only (sessionStorage) — closing
+   the tab locks the board again.
+
+   Honest limit, same as the edit PIN above: this is a casual
+   client-side gate. The PIN and the Supabase anon key live in this
+   file, so anyone who views page source or calls the API directly
+   can get past it. It stops casual snooping, not a determined
+   visitor. Real lockdown = Supabase Auth + row-level security. */
+const LOCK_KEY = 'lp_unlocked';
+function isUnlocked(){
+  try{ return sessionStorage.getItem(LOCK_KEY)==='1'; }catch(e){ return false; }
+}
+function showLockScreen(){
+  document.body.classList.add('locked');
+  document.getElementById('board').innerHTML = `
+    <div class="weekend-card" style="text-align:center;max-width:440px;margin:10vh auto;">
+      <div style="font-size:44px;line-height:1;" aria-hidden="true">🔒</div>
+      <h2>Today's plan is locked</h2>
+      <p style="margin:0 0 18px;">Enter the family PIN to open the dashboard.</p>
+      <button type="button" class="btn-warmup" id="unlockBtn">Enter PIN</button>
+    </div>`;
+  document.getElementById('unlockBtn').addEventListener('click', ()=>{
+    requireEditAccess(()=>{
+      try{ sessionStorage.setItem(LOCK_KEY,'1'); }catch(e){}
+      document.body.classList.remove('locked');
+      bootApp();
+    });
+  });
+  // Let keyboards/assistive tech reach the button immediately.
+  document.getElementById('unlockBtn').focus();
 }
 
 const CURRENT_EVENT_APPLY_IT = 'What\u2019s one thing from today\u2019s episode that could actually affect a decision you make this week?';
@@ -1046,7 +1119,7 @@ async function loadAll(){
   const dstr = toDateStr(state.schoolDate);
   state.dateStr = dstr;
 
-  // Cycle anchor: the Monday the 5-week rotation started. Created once,
+  // Cycle anchor: the Monday the 4-week rotation started. Created once,
   // then reused forever so the rotation stays stable across devices.
   let cycleStart = await storageGet(CYCLE_START_KEY);
   if(!cycleStart){
@@ -1214,6 +1287,8 @@ function updateBuzzer(){
 /* ========================= RENDER: BOARD ========================= */
 function esc(s){ return (s||'').toString().replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
 function escAttr(s){ return esc(s).replace(/"/g,'&quot;'); }
+// Privacy: only ever display a student's first name on the public board.
+function firstName(n){ return String(n||'').trim().split(/\s+/)[0] || ''; }
 
 async function renderBoard(){
   const board = document.getElementById('board');
@@ -1271,9 +1346,17 @@ async function renderBoard(){
            <div class="word-badge" style="margin-bottom:6px;">Black History Connection</div>
            <div style="font-size:13.5px;line-height:1.5;">${esc(lesson.blackHistoryMoment)}</div>
          </div>` : '';
-    const readingHTML = dayPart?.reading
+    const readingBody = dayPart?.reading
       ? `<div style="font-size:13.5px;line-height:1.6;color:var(--ink);margin:8px 0;white-space:pre-wrap;">${esc(dayPart.reading)}</div>`
       : (lesson.summary ? `<p style="font-size:13.5px;line-height:1.5;color:var(--ink-soft);margin:6px 0;">${esc(lesson.summary)}</p>` : '');
+    // Collapsible reading area: expanded by default, toggles like the other
+    // collapse sections (keyboard + Collapse all / Expand all included).
+    const readingHTML = readingBody
+      ? `<div class="collapse-head" data-collapse="lesson-${studentId}" style="margin-top:10px;">
+           <div class="mini-lbl">Lesson Reading</div><div class="chevron">▾</div>
+         </div>
+         <div class="collapse-body lesson-reading" data-collapsebody="lesson-${studentId}">${readingBody}</div>`
+      : '';
     return `<div class="card">
       <div class="word-badge">${esc(lessonType)} Lesson · Week ${aw}</div>
       <div style="font-size:15px;font-weight:600;line-height:1.4;margin:6px 0;">${esc(lesson.topic)}</div>
@@ -1293,6 +1376,13 @@ async function renderBoard(){
     <a href="https://newsforkids.net/" target="_blank" rel="noopener" class="btn btn-primary" style="text-decoration:none;display:inline-block;">📰 Open NewsForKids.net</a>
   </div>` : '';
 
+  // Placeholder shown when a day's life-skills content is missing, so gaps are
+  // visible at a glance instead of silently hiding the section.
+  const missingCard = (title)=>`<div class="card" style="border:1.5px dashed var(--orange);">
+    <div class="word-badge">${title}</div>
+    <p style="font-size:13px;color:var(--ink-soft);margin-top:8px;line-height:1.5;">Not filled in for today yet — add it in ⚙️ Settings → 4-Week Plan.</p>
+  </div>`;
+
   // ---- Financial Lit ----
   const flData = c.financialLit;
   const financialLitHTML = (!isTestDay && flData && flData.concept) ? `<div class="card">
@@ -1301,14 +1391,14 @@ async function renderBoard(){
     <p style="font-size:14px;line-height:1.5;">${esc(flData.blank)}</p>
     <button type="button" class="btn btn-ghost" data-flanswer="${escAttr(flData.answer)}" id="revealFlAnswer" style="margin-top:8px;">Reveal Answer</button>
     <div id="flAnswerText" style="display:none;margin-top:8px;font-weight:700;color:var(--green);"></div>
-  </div>` : '';
+  </div>` : (!isTestDay ? missingCard('Financial Lit') : '');
 
   // ---- Real World Scenario ----
   const rwsHTML = (!isTestDay && c.realWorldScenario) ? `<div class="card">
     <div class="word-badge">Real World Scenario</div>
     <p style="font-size:14px;line-height:1.5;margin-top:8px;">${esc(c.realWorldScenario)}</p>
     <p style="font-size:12px;color:var(--ink-soft);margin-top:8px;">Talk it through or write your answer — nothing to submit yet.</p>
-  </div>` : '';
+  </div>` : (!isTestDay ? missingCard('Real World Scenario') : '');
 
   // ---- States & Capitals ----
   const statesHTML = (!isTestDay && c.statesCapitals && c.statesCapitals.length) ? `<div class="card">
@@ -1322,7 +1412,7 @@ async function renderBoard(){
       `).join('')}
     </div>
     <p style="font-size:12px;color:var(--ink-soft);margin-top:8px;">Bonus: share one fun fact about either state.</p>
-  </div>` : '';
+  </div>` : (!isTestDay ? missingCard('States & Capitals') : '');
 
   const testSectionHTML = isTestDay ? await renderTestSection() : '';
 
@@ -1383,6 +1473,10 @@ async function renderBoard(){
 
     const infoCollapsed = collapseState[s.id+'-info'] ? 'collapsed' : '';
     const phoneCollapsed = collapseState[s.id+'-phone'] ? 'collapsed' : '';
+    // Hide the Personal Info / Phone sections entirely when nothing is filled in,
+    // so the card never renders rows of empty "—" placeholders.
+    const hasInfo = !!((s.addr && (s.addr.a1 || s.addr.a2 || s.addr.a3)));
+    const hasPhone = !!((s.phone && (s.phone.p1 || s.phone.p2 || s.phone.p3 || s.phone.p4)));
 
     const excluded = s.excludedSubjects || [];
     const orderedSubjList = applySubjectOrder(baseSubjList, s.id);
@@ -1422,10 +1516,15 @@ async function renderBoard(){
 
     return `<div class="student-card">
       <div class="student-head">
-        <div class="student-name">${esc(s.name)}</div>
+        <h3 class="student-name">${esc(firstName(s.name))}</h3>
         <div class="grade-badge">${esc(s.grade)} GRADE</div>
       </div>
+      ${isTestDay ? '' : `<div class="student-progress">
+        <div class="sp-count"><b data-sp-done>0</b> of <span data-sp-total>0</span> checked off</div>
+        <div class="sp-bar" data-sp-bar role="progressbar" aria-label="${escAttr(firstName(s.name))}’s check-offs today" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="sp-fill" data-sp-fill></div></div>
+      </div>`}
       <div class="student-body">
+        ${hasInfo ? `
         <div class="collapse-head" data-collapse="${s.id}-info">
           <div class="mini-lbl">Personal Info</div><div class="chevron ${infoCollapsed}">▾</div>
         </div>
@@ -1434,7 +1533,8 @@ async function renderBoard(){
           <div class="info-line"><span>${esc(fl.addr1)}</span><span>${esc(s.addr.a1)||'—'}</span></div>
           <div class="info-line"><span>${esc(fl.addr2)}</span><span>${esc(s.addr.a2)||'—'}</span></div>
           <div class="info-line"><span>${esc(fl.addr3)}</span><span>${esc(s.addr.a3)||'—'}</span></div>
-        </div>
+        </div>` : ''}
+        ${hasPhone ? `
         <div class="collapse-head" data-collapse="${s.id}-phone">
           <div class="mini-lbl">Phone Numbers</div><div class="chevron ${phoneCollapsed}">▾</div>
         </div>
@@ -1443,7 +1543,7 @@ async function renderBoard(){
           <div class="info-line"><span>${esc(fl.phone2)}</span><span>${esc(s.phone.p2)||'—'}</span></div>
           <div class="info-line"><span>${esc(fl.phone3)}</span><span>${esc(s.phone.p3)||'—'}</span></div>
           <div class="info-line"><span>${esc(fl.phone4)}</span><span>${esc(s.phone.p4)||'—'}</span></div>
-        </div>
+        </div>` : ''}
         <div class="mini-lbl" style="margin-top:12px;">Vocabulary ${isTestDay ? '— Test' : '('+grade+' grade)'}</div>
         ${vocabHTML}
         ${currentEventFieldsHTML}
@@ -1454,8 +1554,12 @@ async function renderBoard(){
 
 
   board.innerHTML = `
-    <section class="qtr">
-      <div class="qtr-head"><div class="qtr-tag">Q1</div><div class="qtr-title">Warm-Up · Devotional</div><div class="qtr-hint">Sets today's intention</div></div>
+    <h1 class="sr-only">Legacy Lab Academy — today's game plan</h1>
+    <div class="warmup-row">
+      <button type="button" class="btn-warmup" id="startWarmup">Start today's warm-up</button>
+    </div>
+    <section class="qtr" id="q1">
+      <div class="qtr-head"><div class="qtr-tag">Q1</div><h2 class="qtr-title">Warm-Up · Devotional</h2><div class="qtr-hint">Sets today's intention</div></div>
       <div class="devo-grid">
         <div class="card">
           <div class="word-badge">Word of the Day</div>
@@ -1472,7 +1576,7 @@ async function renderBoard(){
     </section>
 
     <section class="qtr">
-      <div class="qtr-head"><div class="qtr-tag">Q2</div><div class="qtr-title">${isTestDay ? 'Weekly Test' + (unitTest ? ' · Unit Test' : '') : 'Life Skills & Drills'}</div><div class="qtr-hint">${isTestDay ? 'Answers autosave as you go' : "History/Science & subjects live below · double-click a header to collapse all"}</div></div>
+      <div class="qtr-head"><div class="qtr-tag">Q2</div><h2 class="qtr-title">${isTestDay ? 'Weekly Test' + (unitTest ? ' · Unit Test' : '') : 'Life Skills & Drills'}</h2><div class="qtr-hint">${isTestDay ? 'Answers autosave as you go' : `Subjects & lessons below<button type="button" class="collapse-all-btn" id="collapseAllBtn" aria-expanded="false">Collapse all</button>`}</div></div>
       ${isTestDay ? testSectionHTML : `
       ${(currentEventHTML && financialLitHTML) ? `<div class="devo-grid" style="margin-bottom:16px;">${currentEventHTML}${financialLitHTML}</div>`
         : (currentEventHTML || financialLitHTML) ? `<div style="margin-bottom:16px;">${currentEventHTML || financialLitHTML}</div>` : ''}
@@ -1489,6 +1593,29 @@ async function renderBoard(){
   `;
 
   if(isTestDay) afterTestSectionRender();
+
+  // ---- Progress strip: "X of Y checked off" + warm-up CTA ----
+  // Per-student progress: each card counts its own subject + SEU task check-offs.
+  (function updateProgress(){
+    document.querySelectorAll('.student-card').forEach(card=>{
+      const total = card.querySelectorAll('.check[data-subj], .check[data-seutask], .check-mini').length;
+      const done = card.querySelectorAll('.check[data-subj].checked, .check[data-seutask].checked, .check-mini.checked').length;
+      const pct = total ? Math.round(done/total*100) : 0;
+      const doneEl = card.querySelector('[data-sp-done]');
+      const totalEl = card.querySelector('[data-sp-total]');
+      const fill = card.querySelector('[data-sp-fill]');
+      const bar = card.querySelector('[data-sp-bar]');
+      if(doneEl) doneEl.textContent = done;
+      if(totalEl) totalEl.textContent = total;
+      if(fill) fill.style.width = pct + '%';
+      if(bar) bar.setAttribute('aria-valuenow', pct);
+    });
+  })();
+  const warmupBtn = document.getElementById('startWarmup');
+  if(warmupBtn) warmupBtn.addEventListener('click', ()=>{
+    const q1 = document.getElementById('q1');
+    if(q1) q1.scrollIntoView({behavior:'smooth', block:'start'});
+  });
 
   board.querySelectorAll('[data-cefield]').forEach(el=>{
     const dateAtRender = state.dateStr;
@@ -1520,12 +1647,19 @@ async function renderBoard(){
     });
   }
   board.querySelectorAll('[data-staterev]').forEach(row=>{
-    row.addEventListener('click', ()=>{
+    row.setAttribute('role','button');
+    row.setAttribute('tabindex','0');
+    row.setAttribute('aria-label','Tap to reveal the capital');
+    const reveal = ()=>{
       const i = row.dataset.staterev;
       const target = row.querySelector(`[data-staterev-answer="${i}"]`);
       const sc = c.statesCapitals[+i];
       target.textContent = sc.capital;
       target.style.color = 'var(--green)';
+    };
+    row.addEventListener('click', reveal);
+    row.addEventListener('keydown', (e)=>{
+      if(e.key===' '||e.key==='Enter'){ e.preventDefault(); reveal(); }
     });
   });
   board.querySelectorAll('[data-openlessonpdf]').forEach(btn=>{
@@ -1550,6 +1684,13 @@ async function renderBoard(){
   });
 
   board.querySelectorAll('.check').forEach(el=>{
+    el.setAttribute('role','checkbox');
+    el.setAttribute('tabindex','0');
+    el.setAttribute('aria-checked', el.classList.contains('checked') ? 'true' : 'false');
+    el.setAttribute('aria-label','Mark subject complete');
+    el.addEventListener('keydown', (e)=>{
+      if(e.key===' '||e.key==='Enter'){ e.preventDefault(); el.click(); }
+    });
     el.addEventListener('click', async ()=>{
       if(el.dataset.seutask){
         await toggleSeuTask(el.dataset.seucourse, el.dataset.seutask);
@@ -1564,33 +1705,54 @@ async function renderBoard(){
     });
   });
   board.querySelectorAll('.info-line[data-seutask]').forEach(el=>{
+    el.setAttribute('role','checkbox');
+    el.setAttribute('tabindex','0');
+    el.addEventListener('keydown', (e)=>{
+      if(e.key===' '||e.key==='Enter'){ e.preventDefault(); el.click(); }
+    });
     el.addEventListener('click', async ()=>{
       await toggleSeuTask(el.dataset.seucourse, el.dataset.seutask);
       await renderBoard();
     });
   });
+  // Collapse-all helper shared by double-click and the visible button.
+  function setAllCollapsed(v){
+    allSectionsCollapsed = v;
+    board.querySelectorAll('[data-collapse]').forEach(head=>{
+      const k = head.dataset.collapse;
+      collapseState[k] = v;
+      const body = board.querySelector(`[data-collapsebody="${k}"]`);
+      const chev = head.querySelector('.chevron');
+      body.classList.toggle('collapsed', v);
+      chev.classList.toggle('collapsed', v);
+      head.setAttribute('aria-expanded', String(!v));
+    });
+    const btn = document.getElementById('collapseAllBtn');
+    if(btn){ btn.textContent = v ? 'Expand all' : 'Collapse all'; btn.setAttribute('aria-expanded', String(!v)); }
+  }
   board.querySelectorAll('[data-collapse]').forEach(el=>{
+    el.setAttribute('role','button');
+    el.setAttribute('tabindex','0');
+    const key = el.dataset.collapse;
+    el.setAttribute('aria-expanded', String(!collapseState[key]));
+    el.addEventListener('keydown', (e)=>{
+      if(e.key===' '||e.key==='Enter'){ e.preventDefault(); el.click(); }
+    });
     el.addEventListener('click', ()=>{
-      const key = el.dataset.collapse;
       collapseState[key] = !collapseState[key];
       const body = board.querySelector(`[data-collapsebody="${key}"]`);
       const chev = el.querySelector('.chevron');
       body.classList.toggle('collapsed', collapseState[key]);
       chev.classList.toggle('collapsed', collapseState[key]);
+      el.setAttribute('aria-expanded', String(!collapseState[key]));
     });
     el.addEventListener('dblclick', (e)=>{
       e.preventDefault();
-      allSectionsCollapsed = !allSectionsCollapsed;
-      board.querySelectorAll('[data-collapse]').forEach(head=>{
-        const k = head.dataset.collapse;
-        collapseState[k] = allSectionsCollapsed;
-        const body = board.querySelector(`[data-collapsebody="${k}"]`);
-        const chev = head.querySelector('.chevron');
-        body.classList.toggle('collapsed', allSectionsCollapsed);
-        chev.classList.toggle('collapsed', allSectionsCollapsed);
-      });
+      setAllCollapsed(!allSectionsCollapsed);
     });
   });
+  const collapseAllBtn = document.getElementById('collapseAllBtn');
+  if(collapseAllBtn) collapseAllBtn.addEventListener('click', ()=> setAllCollapsed(!allSectionsCollapsed));
   board.querySelectorAll('.move-btn').forEach(btn=>{
     btn.addEventListener('click', async ()=>{
       await moveSubject(btn.dataset.subjname, +btn.dataset.move, btn.dataset.student);
@@ -2150,7 +2312,7 @@ function collectTodayForm(){
   return collectDayForm('today', state.weekdayNum===5);
 }
 
-/* ========================= WEEKS PLAN MODAL (5-week rotation) ========================= */
+/* ========================= WEEKS PLAN MODAL (4-week rotation) ========================= */
 const WEEKDAY_LABELS = {1:'Monday',2:'Tuesday',3:'Wednesday',4:'Thursday',5:'Friday (Test Day)'};
 async function populateTodayLessonSources(){
   const actualWeek = actualWeekForDate(state.schoolDate);
@@ -2286,7 +2448,7 @@ function openStudentsModal(){
       <label style="display:flex;align-items:center;gap:8px;font-weight:400;text-transform:none;letter-spacing:0;font-size:13.5px;margin:6px 0;">
         <input type="checkbox" data-subjtoggle="${s.id}" value="${escAttr(sub.name)}" ${excluded.includes(sub.name) ? '' : 'checked'} style="width:16px;height:16px;">
         ${esc(sub.name)}
-      </label>`).join('') || `<p style="color:var(--ink-soft);font-size:13px;">No subjects defined yet — add them via the 5-week plan or today's edit.</p>`;
+      </label>`).join('') || `<p style="color:var(--ink-soft);font-size:13px;">No subjects defined yet — add them via the 4-week plan or today's edit.</p>`;
     return `
     <div class="tab-panel ${i===0?'active':''}" id="stu-${s.id}">
       <div class="field-grid">
@@ -2409,7 +2571,7 @@ function buildFullDayHTML(dateObj, content, checks, weekWords){
           </div>`;
         }).join('') || '<p style="color:var(--ink-soft);font-size:12px;">No subjects assigned.</p>'}`;
     return `<div class="student-card">
-      <div class="student-head"><div class="student-name">${esc(s.name)}</div><div class="grade-badge">${esc(s.grade)} GRADE</div></div>
+      <div class="student-head"><h3 class="student-name">${esc(firstName(s.name))}</h3><div class="grade-badge">${esc(s.grade)} GRADE</div></div>
       <div class="student-body">
         <div class="mini-lbl">Personal Info</div>
         <div class="info-line"><span>Full name</span><span>${esc(s.name)}</span></div>
@@ -3067,7 +3229,7 @@ document.getElementById('saveToday').addEventListener('click', async ()=>{
 document.getElementById('resetToday').addEventListener('click', async ()=>{
   await storageDelete(dayKey(state.dateStr));
   state.todayOverride = null;
-  closeAllModals(); showToast('Reset to the 5-week plan');
+  closeAllModals(); showToast('Reset to the 4-week plan');
   await loadAndRender();
 });
 document.getElementById('saveTemplate').addEventListener('click', async ()=>{
@@ -3097,9 +3259,28 @@ async function loadAndRender(){
 
 if(!SUPABASE_CONFIGURED){
   document.getElementById('setupBanner').style.display = 'block';
-} else {
+} else if(typeof supabase === 'undefined' || !sb){
+  // The Supabase CDN script failed to load (e.g. offline) — show an error
+  // instead of dying silently on an undefined global.
+  document.getElementById('board').innerHTML = `<div class="weekend-card"><h2>Couldn't load the cloud library</h2><p style="margin-bottom:16px;">The page couldn't reach its cloud connection. Check your internet connection, then try again.</p><button type="button" class="btn-warmup" onclick="location.reload()">Try again</button></div>`;
+}
+
+/* App boot — only runs after the session PIN unlock, so no student
+   names, grades, schedules, lessons, or written work ever render
+   (or save) for a locked visitor. */
+function bootApp(){
   document.getElementById('board').innerHTML = `<div class="weekend-card"><h2>Loading Plan…</h2><p>Connecting to the cloud plan.</p></div>`;
-  loadAndRender();
+  // Never strand on the loader: if the cloud fetch hangs or fails, show an
+  // error card with a retry instead of "Loading Plan…" forever.
+  (async function initialLoad(){
+    const timeout = new Promise((_, reject)=> setTimeout(()=>reject(new Error('load timeout')), 25000));
+    try{
+      await Promise.race([loadAndRender(), timeout]);
+    }catch(e){
+      console.error('initial load failed', e);
+      document.getElementById('board').innerHTML = `<div class="weekend-card"><h2>Couldn't reach the cloud plan</h2><p style="margin-bottom:16px;">Today's plan didn't load. Check your internet connection, then try again.</p><button type="button" class="btn-warmup" onclick="location.reload()">Try again</button></div>`;
+    }
+  })();
 
   setInterval(()=>{ tickClock(); updateBuzzer(); }, 1000);
 
@@ -3116,6 +3297,9 @@ if(!SUPABASE_CONFIGURED){
     await loadAndRender();
   }, 90000);
 }
+
+/* Locked visitors get the PIN screen; unlocked sessions boot straight in. */
+if(isUnlocked()){ bootApp(); } else { showLockScreen(); }
 </script>
 </body>
 </html>
