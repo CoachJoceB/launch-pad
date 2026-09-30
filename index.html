@@ -1204,9 +1204,13 @@ async function loadAll(){
       resolved.students = JSON.parse(JSON.stringify(state.students));
       resolved.fieldLabels = JSON.parse(JSON.stringify(state.fieldLabels));
       // Freeze that day's History/Science lesson into the permanent snapshot too.
+      // Whole-subject weeks: odd actual weeks = History, even = Science (Mon-Thu).
       const aw = actualWeekForDate(state.schoolDate);
-      if(state.weekdayNum===1 || state.weekdayNum===2){ resolved.lesson = await getHistoryWeek(aw); resolved.lessonType='History'; }
-      else if(state.weekdayNum===3 || state.weekdayNum===4){ resolved.lesson = await getScienceWeek(aw); resolved.lessonType='Science'; }
+      const snapSubj = (aw % 2 === 1) ? 'history' : 'science';
+      if(state.weekdayNum>=1 && state.weekdayNum<=4){
+        resolved.lesson = snapSubj==='history' ? await getHistoryWeek(aw) : await getScienceWeek(aw);
+        resolved.lessonType = snapSubj==='history' ? 'History' : 'Science';
+      }
       state.todayOverride = resolved;
       await storageSet(dayKey(dstr), resolved);
     }
@@ -1278,12 +1282,23 @@ function todayContent(){
   return (state.contentWeeks[cw] && state.contentWeeks[cw][state.weekdayNum]) || null;
 }
 
-function allSubjects(c){
+function allSubjects(c, opts){
+  opts = opts || {};
   const subj = c.subjects || {};
+  const scNames = (c.statesCapitals||[]).map(x=>x.state).filter(Boolean).join(' & ');
+  const rws = c.realWorldScenario || '';
   const base = [
     {id:'math', name:'Math', topic:subj.math},
     {id:'reading', name:'Reading', topic:subj.reading},
     {id:'spanish', name:'Spanish', topic:subj.spanish},
+    {id:'warmup', name:'Warm Up', topic:(c.devotional && c.devotional.wordOfDay) ? ('Word of the Day: '+c.devotional.wordOfDay) : 'Morning devotional'},
+    {id:'currentevent', name:'Current Event', topic:(c.currentEvent && c.currentEvent.headline) || 'NewsForKids reading'},
+    {id:'financiallit', name:'Financial Lit', topic:(c.financialLit && c.financialLit.concept) || 'Money lesson'},
+    {id:'rws', name:'Real World Scenario', topic: rws ? (rws.length>70 ? rws.slice(0,70).trim()+'…' : rws) : 'Today’s scenario'},
+    {id:'states', name:'State & Capital', topic: scNames || 'States & capitals'},
+    {id:'vocabulary', name:'Vocabulary', topic: opts.vocabWord || 'Word study'},
+    {id:'memory', name:'Memory Work', topic:subj.memory},
+    {id:'weeklesson', name:opts.weekSubjectName || 'History/Science', topic:opts.lessonTopic},
   ];
   const extra = (c.extraSubjects||[]).map(e=>({id:e.id, name:e.name, topic:e.topic}));
   return base.concat(extra);
@@ -1394,8 +1409,12 @@ async function renderBoard(){
   // one shared reading/worksheet used every day.
   let sharedLesson = null, sharedLessonType = '';
   if(!isTestDay){
-    sharedLesson = c.lesson || (isHistoryDay ? await getHistoryWeek(aw) : isScienceDay ? await getScienceWeek(aw) : null);
-    sharedLessonType = c.lessonType || (isHistoryDay ? 'History' : isScienceDay ? 'Science' : '');
+    // A frozen lesson that's actually empty ({} from a bad snapshot) must not
+    // shadow the live week lookup — fall through to the rotation instead.
+    // And a stale frozen label must never disagree with the lesson shown.
+    const frozenLesson = (c.lesson && Object.keys(c.lesson).length) ? c.lesson : null;
+    sharedLesson = frozenLesson || (isHistoryDay ? await getHistoryWeek(aw) : isScienceDay ? await getScienceWeek(aw) : null);
+    sharedLessonType = (frozenLesson && c.lessonType) || (isHistoryDay ? 'History' : isScienceDay ? 'Science' : '');
   }
   const sharedDayPart = getLessonDayPart(sharedLesson, state.weekdayNum, state.dateStr);
   function buildLessonCardHTML(studentId){
@@ -1507,7 +1526,10 @@ async function renderBoard(){
     }
   }
 
-  const baseSubjList = allSubjects(c);
+  const baseSubjList = allSubjects(c, {
+    weekSubjectName: weekSubject==='history' ? 'History' : (weekSubject==='science' ? 'Science' : ''),
+    lessonTopic: sharedLesson && sharedLesson.topic,
+  });
   const seuGroups = await loadSeuToday();
   function seuCardsHTML(groups){
     return groups.map(g=>{
@@ -1572,7 +1594,11 @@ async function renderBoard(){
 
     const excluded = s.excludedSubjects || [];
     const orderedSubjList = applySubjectOrder(baseSubjList, s.id);
-    const studentSubjList = orderedSubjList.filter(sub => !excluded.includes(sub.name));
+    // Vocabulary topic is per-grade: stamp this student's word onto their copy.
+    const gradeWord = c.vocab && c.vocab[grade] && c.vocab[grade].word;
+    const studentSubjList = orderedSubjList
+      .filter(sub => !excluded.includes(sub.name))
+      .map(sub => (sub.id==='vocabulary' && gradeWord) ? Object.assign({}, sub, {topic:gradeWord}) : sub);
     const studentChecks = state.checks[s.id] || {};
     const studentSeuHTML = (s.showSeu && seuGroups.length) ? seuCardsHTML(seuGroups) : '';
     const studentLessonHTML = buildLessonCardHTML(s.id);
@@ -2900,6 +2926,7 @@ function dayEditFormHTML(prefix, c, isFriday){
     <label>Math Topic</label><input type="text" id="${prefix}-math" value="${escAttr(c.subjects.math)}">
     <label>Reading Topic</label><input type="text" id="${prefix}-reading" value="${escAttr(c.subjects.reading)}">
     <label>Spanish Topic</label><input type="text" id="${prefix}-spanish" value="${escAttr(c.subjects.spanish)}">
+    <label>Memory Work Topic</label><input type="text" id="${prefix}-memory" value="${escAttr(c.subjects.memory)}" placeholder="e.g. the verse or passage they're memorizing this week">
     <div class="mini-lbl" style="margin:14px 0 8px;">Additional Subjects</div>
     <div id="${prefix}-extra-subjects"></div>
   `;
@@ -2931,7 +2958,7 @@ function collectDayForm(prefix, isFriday){
     devotional:{ wordOfDay:document.getElementById(`${prefix}-word`).value, scripture:document.getElementById(`${prefix}-scripture`).value,
       reflection:document.getElementById(`${prefix}-reflect`).value, prayer:document.getElementById(`${prefix}-prayer`).value, intention:document.getElementById(`${prefix}-intent`).value },
     vocab, financialLit, realWorldScenario, statesCapitals,
-    subjects:{ math:document.getElementById(`${prefix}-math`).value, reading:document.getElementById(`${prefix}-reading`).value, spanish:document.getElementById(`${prefix}-spanish`).value },
+    subjects:{ math:document.getElementById(`${prefix}-math`).value, reading:document.getElementById(`${prefix}-reading`).value, spanish:document.getElementById(`${prefix}-spanish`).value, memory:document.getElementById(`${prefix}-memory`).value },
     extraSubjects: (editorExtraSubjects[prefix]||[]).filter(e=>e.name.trim()!=='' || e.topic.trim()!=='')
   };
 }
