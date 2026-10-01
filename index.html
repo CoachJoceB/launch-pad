@@ -2829,9 +2829,12 @@ function wsToggleReadAloud(btn, plainText){
 window.wsToggleReadAloud = wsToggleReadAloud;
 
 /* Key-information highlighting for ADHD-friendly reading: ==text== in the
-   source becomes a soft green highlight. Works in both Full and Light mode. */
+   source becomes a soft green highlight. Works in both Full and Light mode.
+   The span content may already contain the yellow vocab <mark> HTML (which
+   includes "=" in style="..."), so the body class must allow "=" — pairs
+   are sequential and non-interleaved by authorship. */
 function highlightKeyInfo(escapedHTML){
-  return String(escapedHTML).replace(/==([^=]+?)==/g,
+  return String(escapedHTML).replace(/==([\s\S]+?)==/g,
     '<mark style="background:#d9f0e0;border-radius:3px;padding:0 2px;font-weight:700;">$1</mark>');
 }
 /* Strip == key markers for plain-text uses (read-aloud, archive fallback). */
