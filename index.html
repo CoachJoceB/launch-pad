@@ -885,6 +885,21 @@ const CONTENT_WEEKS_KEY = 'content-weeks-4block';
 const CYCLE_START_KEY = 'cycle-start-monday';
 const STUDENTS_KEY = 'student-profiles';
 const LABELS_KEY = 'field-labels';
+// Snapshot schema version. Bumped whenever the snapshot format or the code
+// that builds it changes incompatibly. A day snapshot stamped with an older
+// (or missing) version is treated as stale: for the current school day it is
+// rebuilt from live data instead of trusted. This stops a stale cached copy
+// of the app (old code on a kid's device) from permanently clobbering today
+// with a bad frozen snapshot.
+const SNAP_V = 2;
+function stampSnap(o){ if(o && typeof o==='object') o._snapV = SNAP_V; return o; }
+// localStorage keys for sticky fallbacks when a backend read fails
+// transiently (storageGet swallows errors and returns null, which the old
+// code mistook for "missing" and overwrote good values).
+const LS_CYCLE_START = 'lp-cycle-start';
+const LS_WEEK6_FIXED = 'lp-week6-fixed';
+function lsGet(k){ try{ return localStorage.getItem(k); }catch(e){ return null; } }
+function lsSet(k,v){ try{ localStorage.setItem(k,v); }catch(e){} }
 function dayKey(dateStr){ return 'day-override:'+dateStr; }
 function checksKey(dateStr){ return 'day-checks:'+dateStr; }
 function historyWeekKey(w){ return 'history-week:'+w; }
@@ -1169,14 +1184,25 @@ async function loadAll(){
 
   // Cycle anchor: the Monday the 4-week rotation started. Created once,
   // then reused forever so the rotation stays stable across devices.
+  // If the backend read fails transiently, fall back to the last known good
+  // value from the sticky local cache instead of inventing a new anchor
+  // (inventing one would silently shift every week/content lookup).
   let cycleStart = await storageGet(CYCLE_START_KEY);
+  if(cycleStart) lsSet(LS_CYCLE_START, cycleStart);
   if(!cycleStart){
-    cycleStart = toDateStr(mondayOfWeek(state.schoolDate));
-    await storageSet(CYCLE_START_KEY, cycleStart);
+    cycleStart = lsGet(LS_CYCLE_START);
+    if(!cycleStart){
+      cycleStart = toDateStr(mondayOfWeek(state.schoolDate));
+      await storageSet(CYCLE_START_KEY, cycleStart);
+      lsSet(LS_CYCLE_START, cycleStart);
+    }
   }
   // One-time correction: align "today" to actual week 6, since that is
   // where the family actually is right now. Runs once, then never again.
-  const week6Fixed = await storageGet('week6-alignment-applied');
+  // The flag is also cached locally: if the backend read fails, a missing
+  // read must NOT re-trigger the correction and rewrite the anchor.
+  let week6Fixed = await storageGet('week6-alignment-applied');
+  if(!week6Fixed) week6Fixed = lsGet(LS_WEEK6_FIXED);
   if(!week6Fixed){
     const thisMonday = mondayOfWeek(state.schoolDate);
     const correctedStart = new Date(thisMonday);
@@ -1184,6 +1210,8 @@ async function loadAll(){
     cycleStart = toDateStr(correctedStart);
     await storageSet(CYCLE_START_KEY, cycleStart);
     await storageSet('week6-alignment-applied', true);
+    lsSet(LS_CYCLE_START, cycleStart);
+    lsSet(LS_WEEK6_FIXED, '1');
   }
   state.cycleStartMonday = cycleStart;
 
@@ -1197,7 +1225,12 @@ async function loadAll(){
   // page for that day permanently (devotional, vocab, subjects, student
   // profiles, and field labels as they were) so it can always be referenced
   // exactly as shown, even if the plan or profiles change later.
-  if(SCHOOL_DAYS.includes(state.weekdayNum) && !state.todayOverride){
+  // A snapshot stamped with an older SNAP_V (e.g. frozen by a stale cached
+  // copy of the app) is rebuilt from live data when the day being viewed is
+  // today; past days are left alone as historical record.
+  const isTodayView = dstr === toDateStr(getSchoolDate(new Date()));
+  const snapStale = !!(state.todayOverride && state.todayOverride._snapV !== SNAP_V);
+  if(SCHOOL_DAYS.includes(state.weekdayNum) && (!state.todayOverride || (isTodayView && snapStale))){
     const cw = contentWeekForDate(state.schoolDate);
     const resolved = JSON.parse(JSON.stringify((state.contentWeeks[cw] && state.contentWeeks[cw][state.weekdayNum]) || {}));
     if(resolved && Object.keys(resolved).length){
@@ -1211,13 +1244,15 @@ async function loadAll(){
         resolved.lesson = snapSubj==='history' ? await getHistoryWeek(aw) : await getScienceWeek(aw);
         resolved.lessonType = snapSubj==='history' ? 'History' : 'Science';
       }
+      stampSnap(resolved);
       state.todayOverride = resolved;
       await storageSet(dayKey(dstr), resolved);
     }
-  } else if(state.todayOverride && (!state.todayOverride.students || !state.todayOverride.fieldLabels)){
+  } else if(state.todayOverride && (!state.todayOverride.students || !state.todayOverride.fieldLabels || state.todayOverride._snapV !== SNAP_V)){
     // Backfill snapshots for days saved before this feature existed.
     state.todayOverride.students = state.todayOverride.students || JSON.parse(JSON.stringify(state.students));
     state.todayOverride.fieldLabels = state.todayOverride.fieldLabels || JSON.parse(JSON.stringify(state.fieldLabels));
+    stampSnap(state.todayOverride);
     await storageSet(dayKey(dstr), state.todayOverride);
   }
 
@@ -3019,7 +3054,7 @@ async function applyLessonToToday(subject){
   lesson=await getMaterialWeek(subject,week);
   if(!lesson){ showToast(`No ${label} lesson is saved for Week ${week}.`); return; }
   const existing = todayContent() || {};
-  state.todayOverride = {...existing, lesson:JSON.parse(JSON.stringify(lesson)), lessonType:label};
+  state.todayOverride = stampSnap({...existing, lesson:JSON.parse(JSON.stringify(lesson)), lessonType:label});
   state.todayOverride.students = state.todayOverride.students || JSON.parse(JSON.stringify(state.students));
   state.todayOverride.fieldLabels = state.todayOverride.fieldLabels || JSON.parse(JSON.stringify(state.fieldLabels));
   await storageSet(dayKey(state.dateStr), state.todayOverride);
@@ -3689,7 +3724,7 @@ document.getElementById('aiSaveMaterial').addEventListener('click', async ()=>{
   await storageSet(lessonKey, lesson);
   if(week===actualWeekForDate(state.schoolDate)){
     const today = todayContent() || {};
-    state.todayOverride={...today,lesson:JSON.parse(JSON.stringify(lesson)),lessonType:materialSubjectLabel(subject)};
+    state.todayOverride=stampSnap({...today,lesson:JSON.parse(JSON.stringify(lesson)),lessonType:materialSubjectLabel(subject)});
     state.todayOverride.students=state.todayOverride.students||JSON.parse(JSON.stringify(state.students));
     state.todayOverride.fieldLabels=state.todayOverride.fieldLabels||JSON.parse(JSON.stringify(state.fieldLabels));
     await storageSet(dayKey(state.dateStr),state.todayOverride);
@@ -3756,7 +3791,7 @@ document.getElementById('saveCurriculum').addEventListener('click', async ()=>{
   const isLessonDay = subj==='history' ? [1,2].includes(state.weekdayNum) : [3,4].includes(state.weekdayNum);
   if(w===actualWeekForDate(state.schoolDate) && isLessonDay){
     const today=todayContent()||{};
-    state.todayOverride={...today,lesson:JSON.parse(JSON.stringify(obj)),lessonType:subj==='history'?'History':'Science'};
+    state.todayOverride=stampSnap({...today,lesson:JSON.parse(JSON.stringify(obj)),lessonType:subj==='history'?'History':'Science'});
     state.todayOverride.students=state.todayOverride.students||JSON.parse(JSON.stringify(state.students));
     state.todayOverride.fieldLabels=state.todayOverride.fieldLabels||JSON.parse(JSON.stringify(state.fieldLabels));
     await storageSet(dayKey(state.dateStr),state.todayOverride);
@@ -3949,7 +3984,7 @@ document.getElementById('saveGrading').addEventListener('click', async ()=>{
 
 document.getElementById('saveToday').addEventListener('click', async ()=>{
   const data = collectTodayForm();
-  state.todayOverride = data;
+  state.todayOverride = stampSnap(data);
   await storageSet(dayKey(state.dateStr), data);
   closeAllModals(); showToast("Today's plan saved");
   await loadAndRender();
