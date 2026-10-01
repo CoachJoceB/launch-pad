@@ -612,6 +612,7 @@ function normalizeStudent(s){
   if(s.addr && s.phone){
     if(!s.excludedSubjects) s.excludedSubjects = [];
     if(s.showSeu === undefined) s.showSeu = false;
+    if(s.lessonSize !== 'light') s.lessonSize = 'full';
     return s;
   }
   // migrate from older shape if present
@@ -620,7 +621,8 @@ function normalizeStudent(s){
     addr:{ a1: s.addresses?.home||'', a2: s.addresses?.mom||'', a3: s.addresses?.dad||'' },
     phone:{ p1: s.phones?.pooh||'', p2: s.phones?.mom||'', p3: s.phones?.dad||'', p4: s.phones?.own||'' },
     excludedSubjects: s.excludedSubjects || [],
-    showSeu: s.showSeu || false
+    showSeu: s.showSeu || false,
+    lessonSize: s.lessonSize === 'light' ? 'light' : 'full'
   };
 }
 
@@ -2359,7 +2361,7 @@ function wsNoteHTML(itemId, html){
 }
 
 function wsGroupDone(g, entry, checks){
-  const items = g.items||[];
+  const items = (entry._isLight && g.itemsLight) ? g.itemsLight : (g.items||[]);
   if(!items.length) return true;
   if(g.type==='checklist') return items.every(it=>entry.answers[g._fieldPrefix + it.id]);
   if(g.type==='reveal') return items.every(it=>checks[it.id]==='viewed');
@@ -2368,7 +2370,8 @@ function wsGroupDone(g, entry, checks){
 }
 
 function wsUpdateProgress(container, worksheet, entry, checks){
-  const groups = worksheet.groups||[];
+  // In Light mode only the required (non-bonus) groups count toward progress.
+  const groups = entry._requiredGroups || worksheet.groups || [];
   const done = groups.filter(g=>wsGroupDone(g, entry, checks)).length;
   const total = groups.length;
   const pct = total ? Math.round(done/total*100) : 0;
@@ -2381,6 +2384,16 @@ function wsUpdateProgress(container, worksheet, entry, checks){
 function renderWorksheetFormHTML(entry, checks){
   const { worksheet, answers, bhm } = entry;
   worksheet.groups.forEach((g,gi)=>{ g._fieldPrefix = 'ws-g'+gi+'-'; });
+  // Per-student lesson size: a "light" student sees groups flagged bonus:true
+  // inside a collapsed optional section; everyone else sees the full worksheet.
+  // Original group indices are preserved so saved answers and check state keep
+  // working across the Full/Light switch.
+  const student = state.students.find(s=>s.id===entry.studentId);
+  const isLight = !!student && student.lessonSize==='light';
+  const coreIdx = [], bonusIdx = [];
+  (worksheet.groups||[]).forEach((g,gi)=>{ (isLight && g.bonus ? bonusIdx : coreIdx).push(gi); });
+  entry._requiredGroups = coreIdx.map(gi=>worksheet.groups[gi]);
+  entry._isLight = isLight;
   const progressHTML = `
     <div class="card" style="margin-bottom:10px;">
       <div style="display:flex;justify-content:space-between;align-items:center;">
@@ -2395,7 +2408,8 @@ function renderWorksheetFormHTML(entry, checks){
   // Alternate section backgrounds so it's obvious when one part ends and the
   // next begins.
   const WS_ALT_BG = ['#ffffff', '#faf6ee'];
-  return progressHTML + worksheet.groups.map((g,gi)=>{
+  const renderGroupCard = (gi)=>{
+    const g = worksheet.groups[gi];
     const p = g._fieldPrefix;
     const altBg = WS_ALT_BG[gi % WS_ALT_BG.length];
     // Try-limit lock state (persisted in checks): a section whose tries are
@@ -2410,7 +2424,9 @@ function renderWorksheetFormHTML(entry, checks){
       + (g.wordBank ? `<div style="margin:8px 0 12px;padding:10px 12px;background:#fff;border:2px solid var(--orange);border-radius:10px;"><div style="font-size:11px;font-weight:700;letter-spacing:.5px;color:var(--ink-soft);margin-bottom:6px;">📚 WORD BANK — use these words below</div><div style="display:flex;flex-wrap:wrap;gap:6px;">${g.wordBank.map(w=>`<span style="font-size:12.5px;font-weight:600;background:var(--bg-soft,#f4f1ea);border:1px solid var(--line-light);border-radius:12px;padding:3px 12px;">${esc(w)}</span>`).join('')}</div></div>` : '');
     let body = '';
     if(g.type==='checklist'){
-      body = (g.items||[]).map(it=>{
+      // Light students may get reworded plan items (data: g.itemsLight).
+      const listItems = (isLight && g.itemsLight) ? g.itemsLight : (g.items||[]);
+      body = listItems.map(it=>{
         const field = p + it.id;
         const checked = answers[field] ? 'checked' : '';
         return `<label style="display:flex;gap:8px;align-items:flex-start;font-size:13.5px;margin-bottom:8px;cursor:pointer;">
@@ -2528,12 +2544,22 @@ function renderWorksheetFormHTML(entry, checks){
         : `<button type="button" class="btn btn-primary" data-wscheck="${gi}" style="margin-top:6px;font-size:13px;padding:7px 16px;">Check answers${triesLeft!==null?` <span style="font-size:11px;opacity:.85;">(${triesLeft} ${triesLeft===1?'try':'tries'} left)</span>`:''}</button>
            <div data-wsresult="${gi}" style="font-size:12.5px;margin-top:8px;"></div>`) : '';
     return `<div class="card" data-wsgroup="${gi}" style="margin-bottom:10px;background:${altBg};">${head}${body}${checkBtn}</div>`;
-  }).join('') + bhmWorksheetSection();
+  };
+  let groupsHTML = coreIdx.map(renderGroupCard).join('');
+  if(bonusIdx.length){
+    groupsHTML += `<details class="card" style="margin-bottom:10px;background:#fff8ec;border:2px dashed var(--orange);">`
+      + `<summary style="cursor:pointer;font-weight:700;font-size:14px;list-style:none;">⭐ Bonus — optional extra practice <span style="font-weight:400;color:var(--ink-soft);font-size:12px;">(tap to open; not required)</span></summary>`
+      + `<div style="margin-top:10px;">${bonusIdx.map(renderGroupCard).join('')}</div></details>`;
+  }
+  return progressHTML + groupsHTML + bhmWorksheetSection();
 
   // Black History Connection + reflection: the last section of the worksheet,
   // per student (the reflection autosaves with the rest of the worksheet answers).
+  // Units whose Black history is woven into the reading carry no bhm text, so no
+  // separate section renders for them.
   function bhmWorksheetSection(){
-    if(!bhm) return '';
+    const bhmText = typeof bhm==='string' ? bhm : ((bhm && bhm.text) || '');
+    if(!bhmText) return '';
     const altBg = WS_ALT_BG[(worksheet.groups||[]).length % WS_ALT_BG.length];
     const field = 'wsbhm-reflection';
     return `<div class="card" style="margin-bottom:10px;background:${altBg};">
@@ -2860,7 +2886,7 @@ async function openWorksheetModal(subject, lesson, preferredStudentId, weekdayNu
   const wsBhm = dayPart.bhm || lesson.blackHistoryMoment || null;
   for(const s of worksheetStudents){
     const saved = (await storageGet(worksheetAnswersKey(state.dateStr, s.id, subject))) || defaultWorksheetAnswers(worksheet);
-    worksheetCache[s.id] = { worksheet: worksheet, answers: saved, bhm: wsBhm };
+    worksheetCache[s.id] = { worksheet: worksheet, answers: saved, bhm: wsBhm, studentId: s.id };
     wsChecksCache[s.id] = (await storageGet(wsCheckKey(state.dateStr, s.id, subject))) || {};
   }
 
@@ -3206,6 +3232,16 @@ function openStudentsModal(){
         <input type="checkbox" id="p-${s.id}-showseu" ${s.showSeu ? 'checked' : ''} style="width:16px;height:16px;">
         Show College Coursework (SEU) under this student
       </label>
+      <div class="mini-lbl" style="margin-top:14px">Lesson size</div>
+      <div class="sub" style="margin:2px 0 6px;">Light keeps the reading and the core work; extra practice moves into an optional bonus area. Each student keeps their own setting.</div>
+      <label style="display:flex;align-items:center;gap:8px;font-weight:400;text-transform:none;letter-spacing:0;font-size:13.5px;margin:6px 0;">
+        <input type="radio" name="p-${s.id}-lessonsize" value="full" ${s.lessonSize!=='light'?'checked':''} style="width:16px;height:16px;">
+        Full — everything
+      </label>
+      <label style="display:flex;align-items:center;gap:8px;font-weight:400;text-transform:none;letter-spacing:0;font-size:13.5px;margin:6px 0;">
+        <input type="radio" name="p-${s.id}-lessonsize" value="light" ${s.lessonSize==='light'?'checked':''} style="width:16px;height:16px;">
+        Light — core only, bonus optional
+      </label>
     </div>`;
   }).join('');
 
@@ -3243,12 +3279,14 @@ function collectStudentsForm(){
     const allBoxes = document.querySelectorAll(`[data-subjtoggle="${s.id}"]`);
     const excludedSubjects = [...allBoxes].filter(b=>!b.checked).map(b=>b.value);
     const showSeu = document.getElementById(`p-${s.id}-showseu`)?.checked || false;
+    const lessonSizeEl = document.querySelector(`input[name="p-${s.id}-lessonsize"]:checked`);
+    const lessonSize = lessonSizeEl ? lessonSizeEl.value : 'full';
     return {
       id:s.id, name:document.getElementById(`p-${s.id}-name`).value, grade:document.getElementById(`p-${s.id}-grade`).value,
       addr:{ a1:document.getElementById(`p-${s.id}-addr-a1`).value, a2:document.getElementById(`p-${s.id}-addr-a2`).value, a3:document.getElementById(`p-${s.id}-addr-a3`).value },
       phone:{ p1:document.getElementById(`p-${s.id}-phone-p1`).value, p2:document.getElementById(`p-${s.id}-phone-p2`).value,
         p3:document.getElementById(`p-${s.id}-phone-p3`).value, p4:document.getElementById(`p-${s.id}-phone-p4`).value },
-      excludedSubjects, showSeu
+      excludedSubjects, showSeu, lessonSize
     };
   });
 }
