@@ -2419,7 +2419,9 @@ function renderWorksheetFormHTML(entry, checks){
     const autoGraded = WS_AUTO_TYPES.indexOf(g.type)!==-1;
     const locked = autoGraded && attemptsUsed >= wsMaxTries();
     const dis = locked ? ' disabled' : '';
-    const head = `<div class="mini-lbl" style="margin-top:0;">${esc(g.instructions||('Part '+(gi+1)))}</div>`
+    // Light students may get simplified instructions (data: g.instructionsLight).
+    const instr = (isLight && g.instructionsLight) ? g.instructionsLight : (g.instructions||('Part '+(gi+1)));
+    const head = `<div class="mini-lbl" style="margin-top:0;">${highlightKeyInfo(esc(instr))}</div>`
       + (g.subtitle ? `<p style="font-size:12.5px;color:var(--ink-soft);margin:4px 0 8px;">${esc(g.subtitle)}</p>` : '')
       + (g.wordBank ? `<div style="margin:8px 0 12px;padding:10px 12px;background:#fff;border:2px solid var(--orange);border-radius:10px;"><div style="font-size:11px;font-weight:700;letter-spacing:.5px;color:var(--ink-soft);margin-bottom:6px;">📚 WORD BANK — use these words below</div><div style="display:flex;flex-wrap:wrap;gap:6px;">${g.wordBank.map(w=>`<span style="font-size:12.5px;font-weight:600;background:var(--bg-soft,#f4f1ea);border:1px solid var(--line-light);border-radius:12px;padding:3px 12px;">${esc(w)}</span>`).join('')}</div></div>` : '');
     let body = '';
@@ -2801,7 +2803,7 @@ function parseReadingVocab(reading){
 function highlightKeyTerms(escapedHTML, terms){
   const sorted = terms.filter(Boolean).sort((a,b)=>b.length-a.length);
   if(!sorted.length) return escapedHTML;
-  const rx = new RegExp('(' + sorted.map(t=>t.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')).join('|') + ')', 'gi');
+  const rx = new RegExp('\\b(' + sorted.map(t=>t.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')).join('|') + ')\\b', 'gi');
   return escapedHTML.replace(rx, '<mark style="background:#fff3c4;border-radius:3px;padding:0 2px;font-weight:700;">$1</mark>');
 }
 
@@ -2826,6 +2828,40 @@ function wsToggleReadAloud(btn, plainText){
 }
 window.wsToggleReadAloud = wsToggleReadAloud;
 
+/* Key-information highlighting for ADHD-friendly reading: ==text== in the
+   source becomes a soft green highlight. Works in both Full and Light mode. */
+function highlightKeyInfo(escapedHTML){
+  return String(escapedHTML).replace(/==([^=]+?)==/g,
+    '<mark style="background:#d9f0e0;border-radius:3px;padding:0 2px;font-weight:700;">$1</mark>');
+}
+/* Strip == key markers for plain-text uses (read-aloud, archive fallback). */
+function stripKeyInfo(text){ return String(text||'').replace(/==/g,''); }
+
+/* Build the reading card HTML. useLight picks dayPart.readingLight when present. */
+function worksheetReadingHTML(dayPart, useLight, forceDayNum){
+  if(!dayPart || !dayPart.reading) return '';
+  const src = (useLight && dayPart.readingLight) ? dayPart.readingLight : dayPart.reading;
+  const parsed = parseReadingVocab(src);
+  const terms = parsed.vocab.map(v=>v.term);
+  const highlighted = highlightKeyInfo(highlightKeyTerms(esc(parsed.text), terms));
+  const readBtnId = 'wsReadAloud';
+  let html = `<div class="word-badge">${forceDayNum ? 'Before you start' : "Today's Reading"}</div>
+      <div style="margin-top:8px;"><button type="button" class="btn btn-ghost" id="${readBtnId}" style="font-size:12.5px;padding:6px 14px;">&#128266; Read to me</button></div>
+      <div style="font-size:13.5px;line-height:1.6;margin-top:8px;white-space:pre-wrap;">${highlighted}</div>`;
+  if(parsed.vocab.length){
+    html += `<div style="margin-top:12px;padding:10px 12px;background:#fff;border:2px solid var(--green);border-radius:10px;">
+        <div style="font-size:11px;font-weight:700;letter-spacing:.5px;color:var(--ink-soft);margin-bottom:8px;">&#128214; NEW WORDS — learn these</div>
+        ${parsed.vocab.map(v=>`<div style="font-size:13px;line-height:1.5;margin-bottom:6px;"><strong style="color:var(--green);">${esc(v.term)}</strong> — ${esc(v.def)}</div>`).join('')}
+      </div>`;
+  }
+  // Wire the read-aloud button after insert (plain text, vocab included).
+  setTimeout(()=>{
+    const btn = document.getElementById(readBtnId);
+    if(btn) btn.addEventListener('click', ()=> wsToggleReadAloud(btn, stripKeyInfo(parsed.text) + (parsed.vocab.length ? '\n\nNew words. ' + parsed.vocab.map(v=>v.term+': '+v.def).join(' ') : '')));
+  }, 0);
+  return html;
+}
+
 async function openWorksheetModal(subject, lesson, preferredStudentId, weekdayNum, forceDayNum){
   const wd = weekdayNum !== undefined ? weekdayNum : state.weekdayNum;
   const dayPart = forceDayNum ? lesson['day'+forceDayNum] : getLessonDayPart(lesson, wd, state.dateStr);
@@ -2848,31 +2884,16 @@ async function openWorksheetModal(subject, lesson, preferredStudentId, weekdayNu
   document.getElementById('worksheetSub').textContent = (forceDayNum && dayPart.title ? dayPart.title + ' · ' : '') + lesson.topic;
 
   const readingEl = document.getElementById('worksheetReading');
-  let readingHTML = '';
-  if(dayPart.reading){
-    const parsed = parseReadingVocab(dayPart.reading);
-    const terms = parsed.vocab.map(v=>v.term);
-    const highlighted = highlightKeyTerms(esc(parsed.text), terms);
-    const readBtnId = 'wsReadAloud';
-    readingHTML += `<div class="word-badge">${forceDayNum ? 'Before you start' : "Today's Reading"}</div>
-      <div style="margin-top:8px;"><button type="button" class="btn btn-ghost" id="${readBtnId}" style="font-size:12.5px;padding:6px 14px;">&#128266; Read to me</button></div>
-      <div style="font-size:13.5px;line-height:1.6;margin-top:8px;white-space:pre-wrap;">${highlighted}</div>`;
-    if(parsed.vocab.length){
-      readingHTML += `<div style="margin-top:12px;padding:10px 12px;background:#fff;border:2px solid var(--green);border-radius:10px;">
-        <div style="font-size:11px;font-weight:700;letter-spacing:.5px;color:var(--ink-soft);margin-bottom:8px;">&#128214; NEW WORDS — learn these</div>
-        ${parsed.vocab.map(v=>`<div style="font-size:13px;line-height:1.5;margin-bottom:6px;"><strong style="color:var(--green);">${esc(v.term)}</strong> — ${esc(v.def)}</div>`).join('')}
-      </div>`;
-    }
-    // Wire the read-aloud button after insert (plain text, vocab included).
-    setTimeout(()=>{
-      const btn = document.getElementById(readBtnId);
-      if(btn) btn.addEventListener('click', ()=> wsToggleReadAloud(btn, parsed.text + (parsed.vocab.length ? '\n\nNew words. ' + parsed.vocab.map(v=>v.term+': '+v.def).join(' ') : '')));
-    }, 0);
-  }
+  // The reading card is per-student: Light students get readingLight when the
+  // day-part provides one. (Key-info == markers render in both modes.)
+  const paintReading = (studentId)=>{
+    const st = state.students.find(s=>s.id===studentId);
+    const html = worksheetReadingHTML(dayPart, !!st && st.lessonSize==='light', forceDayNum);
+    if(html){ readingEl.style.display = 'block'; readingEl.innerHTML = html; }
+    else { readingEl.style.display = 'none'; readingEl.innerHTML = ''; }
+  };
   // The Black History Connection + reflection now live inside the per-student
   // worksheet form (below), not in the shared reading area.
-  if(readingHTML){ readingEl.style.display = 'block'; readingEl.innerHTML = readingHTML; }
-  else { readingEl.style.display = 'none'; readingEl.innerHTML = ''; }
 
   const assignedIds = Array.isArray(lesson.worksheetStudentIds) ? lesson.worksheetStudentIds : [];
   const worksheetStudents = assignedIds.length ? state.students.filter(s=>assignedIds.includes(s.id)) : state.students;
@@ -2892,6 +2913,7 @@ async function openWorksheetModal(subject, lesson, preferredStudentId, weekdayNu
 
   function showStudent(id){
     wsActiveStudent = id;
+    paintReading(id);
     tabsWrap.querySelectorAll('.modal-tab').forEach(t=>t.classList.toggle('active', t.dataset.wstab===id));
     const formArea = document.getElementById('worksheetFormArea');
     formArea.innerHTML = renderWorksheetFormHTML(worksheetCache[id], wsChecksCache[id]);
@@ -3326,7 +3348,7 @@ function buildFullDayHTML(dateObj, content, checks, weekWords){
     const studentLessonHTML = (!isTestDay && lesson) ? `<div class="card" style="margin-top:12px;">
       <div class="word-badge">${esc(content.lessonType||'Lesson')}</div>
       <div style="font-size:14px;font-weight:600;margin-top:6px;">${esc(lesson.topic)}</div>
-      ${dayPart && dayPart.reading ? `<div style="font-size:13px;line-height:1.5;margin-top:8px;white-space:pre-wrap;">${esc(dayPart.reading)}</div>` : ''}
+      ${dayPart && dayPart.reading ? `<div style="font-size:13px;line-height:1.5;margin-top:8px;white-space:pre-wrap;">${esc(stripKeyInfo(dayPart.reading))}</div>` : ''}
       ${lesson.blackHistoryMoment ? `<div class="vocab-box" style="margin-top:10px;"><div class="word-badge" style="margin-bottom:4px;">Black History Connection</div><div style="font-size:13px;">${esc(lesson.blackHistoryMoment)}</div></div>` : ''}
     </div>` : '';
     const academicsHTML = isTestDay ? '' : `
