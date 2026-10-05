@@ -882,6 +882,81 @@ function showLockScreen(){
   document.getElementById('unlockBtn').focus();
 }
 
+/* ========================= FAMILY SIGN-IN =========================
+   Supabase Auth gate (added Oct 5, 2026). The board only boots for a
+   signed-in family member: once row-level security is enabled on the
+   table, the anon key alone can no longer read anything. Sessions
+   persist in localStorage, so the kids stay signed in on their devices.
+   The family PIN screen still follows as the second, casual layer. */
+function showLoginScreen(msg){
+  document.body.classList.add('locked');
+  document.getElementById('board').innerHTML = `
+    <div class="weekend-card" style="text-align:center;max-width:440px;margin:10vh auto;">
+      <div style="font-size:44px;line-height:1;" aria-hidden="true">🏠</div>
+      <h2>Family sign-in</h2>
+      <p style="margin:0 0 18px;">Sign in to open the homeschool board.</p>
+      <div style="text-align:left;max-width:300px;margin:0 auto 12px;">
+        <label style="display:block;font-size:12px;letter-spacing:.08em;text-transform:uppercase;margin-bottom:6px;">Email</label>
+        <input id="authEmail" type="email" autocomplete="username" style="width:100%;padding:11px 12px;border:1.5px solid #E2E8F0;border-radius:8px;font-size:15px;box-sizing:border-box;" />
+      </div>
+      <div style="text-align:left;max-width:300px;margin:0 auto 16px;">
+        <label style="display:block;font-size:12px;letter-spacing:.08em;text-transform:uppercase;margin-bottom:6px;">Password</label>
+        <input id="authPass" type="password" autocomplete="current-password" style="width:100%;padding:11px 12px;border:1.5px solid #E2E8F0;border-radius:8px;font-size:15px;box-sizing:border-box;" />
+      </div>
+      <p id="authErr" style="display:none;color:#B45309;font-size:13px;margin:0 0 12px;"></p>
+      <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
+        <button type="button" class="btn-warmup" id="signInBtn">Sign in</button>
+        <button type="button" class="btn-warmup" id="signUpBtn" style="background:#fff;color:#1B2A4E;border:1.5px solid #1B2A4E;">Create account</button>
+      </div>
+      <p style="font-size:12px;color:#5A6B84;margin:14px 0 0;">New here? Create an account, then ask Jocelyn to activate it.</p>
+    </div>`;
+  const emailEl = document.getElementById('authEmail');
+  const passEl = document.getElementById('authPass');
+  const errEl = document.getElementById('authErr');
+  function showErr(m){ errEl.textContent = m; errEl.style.display = 'block'; }
+  async function afterAuth(){
+    document.body.classList.remove('locked');
+    await loadPins();
+    if(isUnlocked()){ bootApp(); } else { showLockScreen(); }
+  }
+  document.getElementById('signInBtn').addEventListener('click', async ()=>{
+    errEl.style.display = 'none';
+    const {error} = await sb.auth.signInWithPassword({email: emailEl.value.trim(), password: passEl.value});
+    if(error){ showErr(friendlyAuthError(error)); return; }
+    await afterAuth();
+  });
+  document.getElementById('signUpBtn').addEventListener('click', async ()=>{
+    errEl.style.display = 'none';
+    const {data, error} = await sb.auth.signUp({email: emailEl.value.trim(), password: passEl.value});
+    if(error){ showErr(friendlyAuthError(error)); return; }
+    if(data.session){ await afterAuth(); }
+    else { showErr('Account created! Check your email for the confirmation link, then ask Jocelyn to activate it before signing in.'); }
+  });
+  passEl.addEventListener('keydown', (e)=>{ if(e.key==='Enter') document.getElementById('signInBtn').click(); });
+  emailEl.focus();
+  if(msg) showErr(msg);
+}
+function friendlyAuthError(error){
+  const m = (error && error.message) || 'Sign-in failed. Try again.';
+  if(/invalid login credentials/i.test(m)) return 'Wrong email or password. Try again.';
+  if(/email not confirmed/i.test(m)) return 'Check your email for the confirmation link first, then sign in.';
+  if(/user already registered/i.test(m)) return 'That email already has an account — just sign in.';
+  if(/password/i.test(m) && /short|weak|length/i.test(m)) return 'Use a longer password (at least 6 characters).';
+  return m;
+}
+function addSignOutButton(){
+  if(document.getElementById('signOutBtn')) return;
+  const b = document.createElement('button');
+  b.id = 'signOutBtn'; b.type = 'button'; b.textContent = 'Sign out';
+  b.style.cssText = 'position:fixed;right:12px;bottom:12px;z-index:60;font-size:12px;padding:8px 12px;border-radius:8px;border:1px solid #CBD5E1;background:#fff;color:#5A6B84;cursor:pointer;';
+  b.addEventListener('click', async ()=>{
+    try{ sessionStorage.removeItem(LOCK_KEY); }catch(e){}
+    try{ await sb.auth.signOut(); }catch(e){}
+    showLoginScreen();
+  });
+  document.body.appendChild(b);
+}
+
 const CURRENT_EVENT_APPLY_IT = 'What\u2019s one thing from today\u2019s episode that could actually affect a decision you make this week?';
 const CONTENT_WEEKS_KEY = 'content-weeks-4block';
 const CYCLE_START_KEY = 'cycle-start-monday';
@@ -4141,7 +4216,17 @@ function bootApp(){
    unlocked sessions boot straight in. PINs load first so a changed
    family PIN applies on the very first try. */
 if(SUPABASE_CONFIGURED && typeof supabase !== 'undefined' && sb){
+  addSignOutButton();
+  sb.auth.onAuthStateChange((event)=>{
+    if(event === 'SIGNED_OUT'){
+      try{ sessionStorage.removeItem(LOCK_KEY); }catch(e){}
+      showLoginScreen();
+    }
+  });
   (async function(){
+    let session = null;
+    try{ session = (await sb.auth.getSession()).data.session; }catch(e){ console.error('auth session check failed', e); }
+    if(!session){ showLoginScreen(); return; }
     await loadPins();
     if(isUnlocked()){ bootApp(); } else { showLockScreen(); }
   })();
