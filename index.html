@@ -4046,8 +4046,12 @@ document.getElementById('saveGrading').addEventListener('click', async ()=>{
 
 
 document.getElementById('saveToday').addEventListener('click', async ()=>{
-  const data = collectTodayForm();
-  state.todayOverride = stampSnap(data);
+  // Merge over the existing day content: the edit form has no inputs for
+  // currentEvent/lesson/lessonType, so a plain replace would silently wipe
+  // the prepared Current Event headline (and the frozen lesson) every save.
+  const existing = todayContent() || {};
+  const data = stampSnap({...existing, ...collectTodayForm()});
+  state.todayOverride = data;
   await storageSet(dayKey(state.dateStr), data);
   closeAllModals(); showToast("Today's plan saved");
   await loadAndRender();
@@ -4060,6 +4064,14 @@ document.getElementById('resetToday').addEventListener('click', async ()=>{
 });
 document.getElementById('saveTemplate').addEventListener('click', async ()=>{
   const weeks = collectTemplateForm();
+  // Merge each day over its existing plan entry: the template form has no
+  // Current Event inputs, so a plain replace would wipe all 16 prepared
+  // headlines the next time the 4-week plan is saved.
+  [1,2,3,4].forEach(w=>{
+    Object.keys(WEEKDAY_LABELS).forEach(k=>{
+      weeks[w][k] = {...(((state.contentWeeks||{})[w]||{})[k]||{}), ...weeks[w][k]};
+    });
+  });
   state.contentWeeks = weeks;
   await storageSet(CONTENT_WEEKS_KEY, weeks);
   closeAllModals(); showToast('4-week content plan saved');
