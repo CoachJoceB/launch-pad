@@ -561,7 +561,7 @@
     <div id="wsUtilBar" style="display:none;">
       <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:8px;">
         <div class="mini-lbl" style="margin:0;">&#128218; New words &middot; Progress &middot; Today&rsquo;s plan</div>
-        <button type="button" id="wsUtilToggle" class="btn btn-ghost" style="font-size:12px;padding:5px 14px;">Hide</button>
+        <button type="button" id="wsUtilToggle" class="btn btn-primary" aria-expanded="true" style="font-size:13px;font-weight:700;padding:8px 18px;border-radius:999px;box-shadow:0 2px 6px rgba(0,0,0,.12);">&#9650; Hide</button>
       </div>
       <div id="wsUtilBody">
         <div id="wsUtilVocab" style="margin-bottom:10px;"></div>
@@ -3166,7 +3166,8 @@ function wsSetUtilCollapsed(collapsed){
   const btn = document.getElementById('wsUtilToggle');
   if(!body || !btn) return;
   body.classList.toggle('collapsed', !!collapsed);
-  btn.textContent = collapsed ? 'Show tools' : 'Hide tools';
+  btn.innerHTML = collapsed ? '&#9660; Show' : '&#9650; Hide';
+  btn.setAttribute('aria-expanded', collapsed ? 'false' : 'true');
   wsSyncStickyOffsets();
 }
 function wsSyncStickyOffsets(){
