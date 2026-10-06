@@ -102,7 +102,7 @@
   .intention-tag{font-family:'Oswald',sans-serif;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--amber);margin-bottom:8px;}
   .intention-text{font-family:'Oswald',sans-serif;font-size:clamp(20px,2.2vw,26px);line-height:1.3;font-weight:500;}
 
-  .students-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+  .students-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(340px,100%),1fr));gap:16px;align-items:start;}
   @media (max-width:1100px){.students-grid{grid-template-columns:1fr;}}
   .student-card{background:var(--chalk);border:1.5px solid var(--line-light);border-radius:14px;overflow:hidden;}
   .student-head{background:var(--navy-2);color:var(--chalk);padding:12px 16px;display:flex;align-items:center;justify-content:space-between;}
@@ -178,7 +178,24 @@
   }
   .modal-overlay.open{display:flex;}
   .modal{background:var(--chalk);border-radius:16px;max-width:780px;width:100%;padding:26px 26px 22px;margin:auto;}
-  .modal.wide{max-width:980px;}
+  .modal.wide{max-width:1120px;}
+  /* Worksheet modal: side-by-side reading + questions on wide screens,
+     stacked on narrow. */
+  .ws-cols{display:block;}
+  #worksheetReading{margin-bottom:12px;}
+  @media (min-width:900px){
+    .ws-cols{display:grid;grid-template-columns:minmax(280px,5fr) minmax(0,7fr);gap:14px;align-items:start;}
+    #worksheetReading{position:sticky;top:0;max-height:72vh;overflow-y:auto;margin-bottom:0;}
+  }
+  /* Worksheet utility bar: new words + progress + today's plan, moved to the
+     top of the modal and sticky while scrolling. In-flow (never a fixed
+     overlay) so it can never cover readable text. */
+  #wsUtilBar{position:sticky;top:0;z-index:20;background:var(--chalk);padding:10px 2px 12px;margin-bottom:12px;border-bottom:2px solid var(--line-light);}
+  #wsUtilBody.collapsed{display:none;}
+  /* Fill-in-the-blank word bank: struck-through terms are used up. */
+  .wb-used{text-decoration:line-through;opacity:.45;}
+  .warmup-flash{animation:warmupFlash 1.6s ease-out;}
+  @keyframes warmupFlash{0%{box-shadow:0 0 0 0 rgba(232,98,42,.0);}25%{box-shadow:0 0 0 5px rgba(232,98,42,.55);}100%{box-shadow:0 0 0 0 rgba(232,98,42,0);}}
   .modal h3{font-family:'Oswald',sans-serif;text-transform:uppercase;margin:0 0 4px;font-size:22px;}
   .modal .sub{color:var(--ink-soft);font-size:13px;margin-bottom:18px;}
   .modal label{display:block;font-size:11.5px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--ink-soft);margin:12px 0 4px;}
@@ -369,13 +386,13 @@
 <div class="modal-overlay" id="settingsOverlay">
   <div class="modal wide">
     <h3>Settings</h3>
-    <div class="modal-tabs" id="settingsTabs">
-      <div class="modal-tab active" data-settingstab="day">Day Settings</div>
-      <div class="modal-tab" data-settingstab="students">Students</div>
-      <div class="modal-tab" data-settingstab="curriculum">Curriculum</div>
-      <div class="modal-tab" data-settingstab="grading">Grading</div>
-      <div class="modal-tab" data-settingstab="plan">4-Week Plan</div>
-      <div class="modal-tab" data-settingstab="pins">PINs</div>
+    <div class="modal-tabs" id="settingsTabs" role="tablist" aria-label="Settings sections">
+      <div class="modal-tab active" role="tab" tabindex="0" aria-selected="true" data-settingstab="day">Day Settings</div>
+      <div class="modal-tab" role="tab" tabindex="0" aria-selected="false" data-settingstab="students">Students</div>
+      <div class="modal-tab" role="tab" tabindex="0" aria-selected="false" data-settingstab="curriculum">Curriculum</div>
+      <div class="modal-tab" role="tab" tabindex="0" aria-selected="false" data-settingstab="grading">Grading</div>
+      <div class="modal-tab" role="tab" tabindex="0" aria-selected="false" data-settingstab="plan">4-Week Plan</div>
+      <div class="modal-tab" role="tab" tabindex="0" aria-selected="false" data-settingstab="pins">PINs</div>
     </div>
 
     <div class="settings-panel" data-settingspanel="day">
@@ -387,7 +404,7 @@
       <div class="sub" style="margin-top:8px;margin-bottom:0;">Days switch over at midnight in this timezone, and the buzzer countdown runs on it too — the same for every device, no matter where it's opened.</div>
       <hr class="divider">
       <h3 style="font-size:20px;">Worksheet Self-Check</h3>
-      <div class="sub">How many tries each student gets on a worksheet section before their answers lock in.</div>
+      <div class="sub">How many tries each student gets on a worksheet section before the answers are revealed and lock in.</div>
       <label>Number of tries per section</label>
       <input type="number" id="maxTriesInput" min="1" max="5" step="1" style="font-family:'Oswald',sans-serif;font-size:18px;padding:10px;width:110px;">
       <hr class="divider">
@@ -419,6 +436,7 @@
       <hr class="divider">
       <div class="modal-tabs" id="studentTabs"></div>
       <div id="studentPanels"></div>
+      <button type="button" class="btn btn-ghost" id="addStudentBtn" style="margin:4px 0 8px;">+ Add student</button>
       <div class="modal-actions">
         <button class="btn btn-ghost" data-close>Close</button>
         <button class="btn btn-primary" id="saveStudents">Save profiles</button>
@@ -539,16 +557,29 @@
   <div class="modal wide">
     <h3 id="worksheetTitle">Worksheet</h3>
     <div class="sub" id="worksheetSub">Answers autosave as you go.</div>
-    <div id="worksheetReading" class="card" style="display:none;margin-bottom:12px;"></div>
     <div class="modal-tabs" id="worksheetStudentTabs"></div>
-    <div id="worksheetFormArea"></div>
+    <div id="wsUtilBar" style="display:none;">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:8px;">
+        <div class="mini-lbl" style="margin:0;">&#128218; New words &middot; Progress &middot; Today&rsquo;s plan</div>
+        <button type="button" id="wsUtilToggle" class="btn btn-ghost" style="font-size:12px;padding:5px 14px;">Hide</button>
+      </div>
+      <div id="wsUtilBody">
+        <div id="wsUtilVocab" style="margin-bottom:10px;"></div>
+        <div id="wsUtilProgress" style="margin-bottom:10px;"></div>
+        <div id="wsUtilPlan"></div>
+      </div>
+    </div>
+    <div class="ws-cols">
+      <div id="worksheetReading" class="card" style="display:none;"></div>
+      <div id="worksheetFormArea"></div>
+    </div>
     <div class="modal-actions">
       <button class="btn btn-ghost" data-close>Close</button>
     </div>
   </div>
 </div>
 
-<div class="save-toast" id="toast">Saved</div>
+<div class="save-toast" id="toast">All changes saved</div>
 
 
 <!-- PIN DIALOG -->
@@ -576,7 +607,12 @@ const TIMEZONE_KEY = 'timezone-setting';
 function defaultTimezone(){ return 'America/Chicago'; } // Pensacola, FL
 // Worksheet self-check: how many tries each section allows before locking.
 const MAX_TRIES_KEY = 'worksheet-max-tries';
-function defaultMaxTries(){ return 2; }
+function defaultMaxTries(){ return 3; }
+function wsOrdinal(n){
+  n = parseInt(n, 10) || 0;
+  const s = ['th','st','nd','rd'], v = n % 100;
+  return n + (s[(v-20)%10] || s[v] || s[0]);
+}
 function wsMaxTries(){
   const n = parseInt(state.maxTries, 10);
   return (n >= 1 && n <= 5) ? n : defaultMaxTries();
@@ -1455,7 +1491,7 @@ function updateBuzzer(){
   const nowSec = h*3600 + m*60 + s;
   const targetSec = state.buzzerTime.hour*3600 + state.buzzerTime.minute*60;
   const diffSec = targetSec - nowSec;
-  if(diffSec <= 0){ el.textContent = 'Afternoon Activities'; return; }
+  if(diffSec <= 0){ el.textContent = (h >= 18) ? "School's Out" : 'Afternoon Activities'; return; }
   const hh = Math.floor(diffSec/3600);
   const mm = Math.floor((diffSec%3600)/60);
   const ss = diffSec%60;
@@ -1844,7 +1880,13 @@ async function renderBoard(){
   const warmupBtn = document.getElementById('startWarmup');
   if(warmupBtn) warmupBtn.addEventListener('click', ()=>{
     const q1 = document.getElementById('q1');
-    if(q1) q1.scrollIntoView({behavior:'smooth', block:'start'});
+    if(!q1) return;
+    q1.scrollIntoView({behavior:'smooth', block:'start'});
+    // Brief highlight pulse so the jump lands visibly.
+    q1.classList.remove('warmup-flash');
+    void q1.offsetWidth;
+    q1.classList.add('warmup-flash');
+    setTimeout(()=>q1.classList.remove('warmup-flash'), 1600);
   });
 
   board.querySelectorAll('[data-cefield]').forEach(el=>{
@@ -2392,6 +2434,17 @@ function gradeWsItem(group, item, value){
     case 'truefalse': return v === item.answer ? 'ok' : 'bad';
     case 'choice': return normLoose(v) === normLoose(item.answer) ? 'ok' : 'bad';
     case 'order': return parseInt(v,10) === item.answer ? 'ok' : 'bad';
+    case 'interactive': {
+      let st = {};
+      try { st = JSON.parse(v || '{}'); } catch(e){ return 'skip'; }
+      const spec = WS_ACTIVITIES[item.activity];
+      if(!spec) return 'skip';
+      const hasAny = spec.kind==='label'
+        ? Object.keys(st.labels||{}).length > 0
+        : Object.keys(st.cities||{}).length > 0 || Object.keys(st.routes||{}).some(k=>(st.routes[k]||[]).length>0);
+      if(!hasAny) return 'skip';
+      return wsGradeActivity(spec, st).ok ? 'ok' : 'bad';
+    }
     default: return 'skip';
   }
 }
@@ -2404,11 +2457,12 @@ function wsCorrectText(group, item){
     case 'truefalse': return item.answer === 'true' ? 'True' : 'False';
     case 'choice': return item.answer;
     case 'order': return '#' + item.answer;
+    case 'interactive': return wsActivityAnswerText(item.activity);
     default: return '';
   }
 }
 
-const WS_AUTO_TYPES = ['fillblank','matching','truefalse','choice','order'];
+const WS_AUTO_TYPES = ['fillblank','matching','truefalse','choice','order','interactive'];
 
 function wsItemValue(group, item, container, entry){
   const field = group._fieldPrefix + item.id;
@@ -2498,7 +2552,7 @@ function renderWorksheetFormHTML(entry, checks){
     const instr = (isLight && g.instructionsLight) ? g.instructionsLight : (g.instructions||('Part '+(gi+1)));
     const head = `<div class="mini-lbl" style="margin-top:0;">${highlightKeyInfo(esc(instr))}</div>`
       + (g.subtitle ? `<p style="font-size:12.5px;color:var(--ink-soft);margin:4px 0 8px;">${esc(g.subtitle)}</p>` : '')
-      + (g.wordBank ? `<div style="margin:8px 0 12px;padding:10px 12px;background:#fff;border:2px solid var(--orange);border-radius:10px;"><div style="font-size:11px;font-weight:700;letter-spacing:.5px;color:var(--ink-soft);margin-bottom:6px;">📚 WORD BANK — use these words below</div><div style="display:flex;flex-wrap:wrap;gap:6px;">${g.wordBank.map(w=>`<span style="font-size:12.5px;font-weight:600;background:var(--bg-soft,#f4f1ea);border:1px solid var(--line-light);border-radius:12px;padding:3px 12px;">${esc(w)}</span>`).join('')}</div></div>` : '');
+      + (g.wordBank ? `<div data-wswordbank style="margin:8px 0 12px;padding:10px 12px;background:#fff;border:2px solid var(--orange);border-radius:10px;"><div style="font-size:11px;font-weight:700;letter-spacing:.5px;color:var(--ink-soft);margin-bottom:6px;">📚 WORD BANK — use these words below</div><div style="display:flex;flex-wrap:wrap;gap:6px;">${g.wordBank.map(w=>`<span data-wbterm="${escAttr(String(w).trim().toLowerCase())}" style="font-size:12.5px;font-weight:600;background:var(--bg-soft,#f4f1ea);border:1px solid var(--line-light);border-radius:12px;padding:3px 12px;">${esc(w)}</span>`).join('')}</div></div>` : '');
     let body = '';
     if(g.type==='checklist'){
       // Light students may get reworded plan items (data: g.itemsLight).
@@ -2545,7 +2599,7 @@ function renderWorksheetFormHTML(entry, checks){
         const field = p + it.id;
         const val = answers[field]||'';
         return `<div style="margin-bottom:12px;padding-bottom:10px;border-bottom:1px dashed var(--line-light);">
-          <p style="font-size:13.5px;margin:0 0 6px;">${esc(it.text)}<span data-wsmark="${it.id}"></span></p>
+          <p style="font-size:13.5px;margin:0 0 6px;">${esc(it.text || it.statement || '')}<span data-wsmark="${it.id}"></span></p>
           <div style="display:flex;gap:8px;">
             <button type="button" class="btn ${val==='true'?'btn-primary':'btn-ghost'}"${dis} data-wstf="${field}" data-wsitem="${it.id}" data-val="true" style="font-size:13px;padding:6px 16px;">True</button>
             <button type="button" class="btn ${val==='false'?'btn-primary':'btn-ghost'}"${dis} data-wstf="${field}" data-wsitem="${it.id}" data-val="false" style="font-size:13px;padding:6px 16px;">False</button>
@@ -2572,6 +2626,17 @@ function renderWorksheetFormHTML(entry, checks){
           <input type="number" min="1" max="${(g.items||[]).length}"${dis} data-wsfield="${field}" data-wsitem="${it.id}" value="${escAttr(answers[field]||'')}" placeholder="#" style="width:56px;padding:6px;border:1.5px solid var(--line-light);border-radius:6px;font-family:'Oswald',sans-serif;text-align:center;">
           <span style="font-size:13.5px;">${esc(it.event||it.text||'')}</span><span data-wsmark="${it.id}"></span>
         </div><div data-wsnote="${it.id}" style="font-size:12px;margin:-4px 0 8px 64px;"></div>`;
+      }).join('');
+    } else if(g.type==='interactive'){
+      // Tap-to-place diagram labeling or map tracing. One hidden input per
+      // item carries the JSON placement state for autosave + grading.
+      body = (g.items||[]).map(it=>{
+        const field = p + it.id;
+        return `<div style="margin-bottom:10px;">
+          <div style="font-size:13.5px;margin-bottom:8px;"><strong>${esc(it.prompt||'')}</strong><span data-wsmark="${it.id}"></span></div>
+          ${wsActivityHTML(g, it, field, answers[field]||'', locked)}
+          <div data-wsnote="${it.id}" style="font-size:12px;margin-top:6px;"></div>
+        </div>`;
       }).join('');
     } else if(g.type==='matching'){
       // The lettered choices being matched FROM — shown in their own box so
@@ -2622,13 +2687,22 @@ function renderWorksheetFormHTML(entry, checks){
            <div data-wsresult="${gi}" style="font-size:12.5px;margin-top:8px;"></div>`) : '';
     return `<div class="card" data-wsgroup="${gi}" style="margin-bottom:10px;background:${altBg};">${head}${body}${checkBtn}</div>`;
   };
-  let groupsHTML = coreIdx.map(renderGroupCard).join('');
-  if(bonusIdx.length){
-    groupsHTML += `<details class="card" style="margin-bottom:10px;background:#fff8ec;border:2px dashed var(--orange);">`
+  // The "today's plan" checklist moves to the floating utility bar at the top
+  // of the modal. Pull it out of the question flow here (original group
+  // indices are preserved so saved answers keep working).
+  const isPlanGroup = (g)=> g.type==='checklist' && /today's plan/i.test(g.instructions||'');
+  const planIdx = [];
+  const keepCore = coreIdx.filter(gi=>{ if(isPlanGroup(worksheet.groups[gi])){ planIdx.push(gi); return false; } return true; });
+  const keepBonus = bonusIdx.filter(gi=>{ if(isPlanGroup(worksheet.groups[gi])){ planIdx.push(gi); return false; } return true; });
+  const planHTML = planIdx.map(renderGroupCard).join('');
+  let restHTML = keepCore.map(renderGroupCard).join('');
+  if(keepBonus.length){
+    restHTML += `<details class="card" style="margin-bottom:10px;background:#fff8ec;border:2px dashed var(--orange);">`
       + `<summary style="cursor:pointer;font-weight:700;font-size:14px;list-style:none;">⭐ Bonus — optional extra practice <span style="font-weight:400;color:var(--ink-soft);font-size:12px;">(tap to open; not required)</span></summary>`
-      + `<div style="margin-top:10px;">${bonusIdx.map(renderGroupCard).join('')}</div></details>`;
+      + `<div style="margin-top:10px;">${keepBonus.map(renderGroupCard).join('')}</div></details>`;
   }
-  return progressHTML + groupsHTML + bhmWorksheetSection();
+  restHTML += bhmWorksheetSection();
+  return { progressHTML, planHTML, groupsHTML: restHTML };
 
   // Black History Connection + reflection: the last section of the worksheet,
   // per student (the reflection autosaves with the rest of the worksheet answers).
@@ -2662,6 +2736,454 @@ function wsClearMark(container, itemId, entry, checks, studentId){
   const worksheet = worksheetCache[studentId].worksheet;
   wsUpdateProgress(container, worksheet, entry, checks);
 }
+/* ============ INTERACTIVE ACTIVITIES (tap-to-place) ============
+   Replaces "draw on paper" for diagram-label and map-trace items.
+   Tap a label chip, then tap its target on the SVG. Tap a placed tag to
+   send it back. State persists as JSON in a hidden data-wsfield input so
+   autosave, tries, and the check system work unchanged. */
+
+function wsSvgCell(){
+  return `<svg viewBox="0 0 220 220" style="width:100%;max-width:300px;display:block;margin:0 auto;user-select:none;-webkit-user-select:none;" data-wsdiagram>
+    <circle cx="110" cy="110" r="78" fill="#eaf5ea"/>
+    <circle cx="110" cy="110" r="92" fill="none" stroke="#2e7d4f" stroke-width="8"/>
+    <circle cx="110" cy="110" r="24" fill="#3d7a5c"/>
+    <circle cx="110" cy="110" r="92" fill="none" stroke="rgba(0,0,0,0)" stroke-width="26" data-wszone="z-membrane" style="cursor:pointer"/>
+    <circle cx="110" cy="110" r="78" fill="rgba(0,0,0,0)" data-wszone="z-cytoplasm" style="cursor:pointer"/>
+    <circle cx="110" cy="110" r="24" fill="rgba(0,0,0,0)" data-wszone="z-nucleus" style="cursor:pointer"/>
+    <g data-wstags></g>
+  </svg>`;
+}
+
+function wsSvgMicroscope(){
+  return `<svg viewBox="0 0 260 210" style="width:100%;max-width:340px;display:block;margin:0 auto;user-select:none;-webkit-user-select:none;" data-wsdiagram>
+    <circle cx="130" cy="105" r="98" fill="#ffffff" stroke="#1c2330" stroke-width="3"/>
+    <rect x="55" y="55" width="70" height="42" fill="#f5f0e1" stroke="#8a7a5a" stroke-width="3"/>
+    <rect x="130" y="55" width="70" height="42" fill="#f5f0e1" stroke="#8a7a5a" stroke-width="3"/>
+    <rect x="92" y="102" width="70" height="42" fill="#f5f0e1" stroke="#8a7a5a" stroke-width="3"/>
+    <ellipse cx="90" cy="76" rx="10" ry="7" fill="#5a4a3a"/>
+    <ellipse cx="165" cy="76" rx="10" ry="7" fill="#5a4a3a"/>
+    <ellipse cx="127" cy="123" rx="10" ry="7" fill="#5a4a3a"/>
+    <circle cx="208" cy="158" r="20" fill="#ffffff" stroke="#1c2330" stroke-width="4"/>
+    <rect x="55" y="55" width="70" height="42" fill="rgba(0,0,0,0)" data-wszone="z-cell" style="cursor:pointer"/>
+    <rect x="130" y="55" width="70" height="42" fill="none" stroke="rgba(0,0,0,0)" stroke-width="12" data-wszone="z-cellwall" style="cursor:pointer"/>
+    <ellipse cx="90" cy="76" rx="12" ry="9" fill="rgba(0,0,0,0)" data-wszone="z-nucleus" style="cursor:pointer"/>
+    <circle cx="208" cy="158" r="20" fill="rgba(0,0,0,0)" data-wszone="z-airbubble" style="cursor:pointer"/>
+    <g data-wstags></g>
+  </svg>`;
+}
+
+function wsSvgPlantCell(){
+  return `<svg viewBox="0 0 250 210" style="width:100%;max-width:330px;display:block;margin:0 auto;user-select:none;-webkit-user-select:none;" data-wsdiagram>
+    <rect x="35" y="35" width="180" height="140" rx="12" fill="#eaf5ea"/>
+    <rect x="25" y="25" width="200" height="160" rx="16" fill="none" stroke="#2e7d4f" stroke-width="9"/>
+    <rect x="35" y="35" width="180" height="140" rx="12" fill="none" stroke="#4a8c6a" stroke-width="3"/>
+    <ellipse cx="70" cy="70" rx="12" ry="7" fill="#6aa84f"/>
+    <ellipse cx="180" cy="140" rx="12" ry="7" fill="#6aa84f"/>
+    <ellipse cx="172" cy="68" rx="12" ry="7" fill="#6aa84f"/>
+    <circle cx="125" cy="105" r="20" fill="#3d7a5c"/>
+    <rect x="25" y="25" width="200" height="160" rx="16" fill="none" stroke="rgba(0,0,0,0)" stroke-width="24" data-wszone="z-wall" style="cursor:pointer"/>
+    <rect x="35" y="35" width="180" height="140" rx="12" fill="none" stroke="rgba(0,0,0,0)" stroke-width="14" data-wszone="z-membrane" style="cursor:pointer"/>
+    <rect x="48" y="48" width="154" height="114" fill="rgba(0,0,0,0)" data-wszone="z-cytoplasm" style="cursor:pointer"/>
+    <circle cx="125" cy="105" r="20" fill="rgba(0,0,0,0)" data-wszone="z-nucleus" style="cursor:pointer"/>
+    <g data-wstags></g>
+  </svg>`;
+}
+
+function wsSvgExplorerMap(){
+  const wps = [
+    ['W1',352,140],['W2',325,122],['W3',290,112],['W4',252,102],['W5',228,72],
+    ['W6',200,130],['W7',245,148],['W8',168,152],['W9',192,190],['W10',200,248],
+    ['W11',210,292],['W12',222,272]
+  ];
+  const dots = wps.map(([id,x,y])=>
+    `<g data-wszone="wp:${id}" style="cursor:pointer"><circle cx="${x}" cy="${y}" r="9" fill="#ffffff" stroke="#1c2330" stroke-width="2"/><circle cx="${x}" cy="${y}" r="3" fill="#1c2330"/></g>`
+  ).join('');
+  return `<svg viewBox="0 0 400 340" style="width:100%;max-width:440px;display:block;margin:0 auto;user-select:none;-webkit-user-select:none;" data-wsdiagram>
+    <rect x="0" y="0" width="400" height="340" fill="#f5f0e1"/>
+    <path d="M340,0 Q330,100 345,180 Q350,260 335,340 L400,340 L400,0 Z" fill="#d6e9f5"/>
+    <ellipse cx="210" cy="318" rx="95" ry="26" fill="#d6e9f5"/>
+    <ellipse cx="175" cy="135" rx="16" ry="10" fill="#d6e9f5" stroke="#3a6ea5" stroke-width="1.5"/>
+    <ellipse cx="200" cy="130" rx="13" ry="9" fill="#d6e9f5" stroke="#3a6ea5" stroke-width="1.5"/>
+    <ellipse cx="185" cy="152" rx="14" ry="8" fill="#d6e9f5" stroke="#3a6ea5" stroke-width="1.5"/>
+    <ellipse cx="162" cy="150" rx="11" ry="8" fill="#d6e9f5" stroke="#3a6ea5" stroke-width="1.5"/>
+    <path d="M215,112 Q260,105 295,112 Q320,118 340,128" fill="none" stroke="#3a6ea5" stroke-width="4"/>
+    <path d="M250,100 Q240,85 228,72" fill="none" stroke="#3a6ea5" stroke-width="3"/>
+    <path d="M192,165 Q188,210 196,250 Q202,275 210,295" fill="none" stroke="#3a6ea5" stroke-width="4"/>
+    <text x="352" y="205" font-size="11" font-style="italic" fill="#3a6ea5" text-anchor="middle">Atlantic</text>
+    <text x="150" y="118" font-size="9" font-style="italic" fill="#3a6ea5" text-anchor="middle">Great Lakes</text>
+    <text x="120" y="235" font-size="10" font-style="italic" fill="#3a6ea5" text-anchor="middle">Mississippi R.</text>
+    <text x="285" y="96" font-size="9" font-style="italic" fill="#3a6ea5" text-anchor="middle">St. Lawrence R.</text>
+    <g data-wsroutes></g>
+    ${dots}
+    <g data-wstags></g>
+  </svg>`;
+}
+
+const WS_ACTIVITIES = {
+  'label-cell': {
+    kind: 'label',
+    svg: wsSvgCell,
+    labels: [
+      {id:'membrane', text:'cell membrane', zone:'z-membrane', ax:110, ay:10},
+      {id:'cytoplasm', text:'cytoplasm', zone:'z-cytoplasm', ax:110, ay:178},
+      {id:'nucleus', text:'nucleus', zone:'z-nucleus', ax:110, ay:110},
+    ],
+  },
+  'label-microscope': {
+    kind: 'label',
+    svg: wsSvgMicroscope,
+    labels: [
+      {id:'cell', text:'cell', zone:'z-cell', ax:62, ay:62},
+      {id:'cellwall', text:'cell wall', zone:'z-cellwall', ax:200, ay:50},
+      {id:'nucleus', text:'nucleus', zone:'z-nucleus', ax:90, ay:76},
+      {id:'airbubble', text:'air bubble', zone:'z-airbubble', ax:208, ay:158},
+    ],
+  },
+  'label-plantcell': {
+    kind: 'label',
+    svg: wsSvgPlantCell,
+    labels: [
+      {id:'wall', text:'cell wall', zone:'z-wall', ax:125, ay:12},
+      {id:'membrane', text:'cell membrane', zone:'z-membrane', ax:232, ay:105},
+      {id:'cytoplasm', text:'cytoplasm', zone:'z-cytoplasm', ax:80, ay:152},
+      {id:'nucleus', text:'nucleus', zone:'z-nucleus', ax:125, ay:105},
+    ],
+  },
+  'map-explorers': {
+    kind: 'map',
+    svg: wsSvgExplorerMap,
+    cities: [
+      {id:'quebec', text:'Quebec', zone:'W3', ax:290, ay:92},
+      {id:'montreal', text:'Montreal', zone:'W4', ax:252, ay:82},
+      {id:'neworleans', text:'New Orleans', zone:'W12', ax:272, ay:272},
+    ],
+    explorers: [
+      {id:'cartier', text:'Cartier', color:'#e07b39', route:['W1','W2','W4']},
+      {id:'champlain', text:'Champlain', color:'#2e7d4f', route:['W2','W3','W5','W6','W7']},
+      {id:'marquette', text:'Marquette & Jolliet', color:'#3a6ea5', route:['W8','W9','W10']},
+      {id:'lasalle', text:'La Salle', color:'#8e44ad', route:['W9','W10','W11']},
+    ],
+    wpPos: {W1:[352,140],W2:[325,122],W3:[290,112],W4:[252,102],W5:[228,72],W6:[200,130],W7:[245,148],W8:[168,152],W9:[192,190],W10:[200,248],W11:[210,292],W12:[222,272]},
+  },
+};
+
+/* Render one interactive activity: label bank + SVG + hidden state input. */
+function wsActivityHTML(g, it, field, savedJson, locked){
+  const spec = WS_ACTIVITIES[it.activity];
+  if(!spec) return `<p style="color:var(--ink-soft);">This activity is not available.</p>`;
+  const disBtn = locked ? ' disabled' : '';
+  let bank = '';
+  if(spec.kind === 'label'){
+    bank = `<div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px;" data-wsactbank>`
+      + spec.labels.map(l=>`<button type="button" data-wsactlabel="${l.id}" class="btn btn-ghost"${disBtn} style="font-size:13px;padding:6px 14px;">${esc(l.text)}</button>`).join('')
+      + `</div><p style="font-size:12.5px;color:var(--ink-soft);margin:0 0 8px;">Tap a label, then tap the part of the diagram it names. Tap a placed label to take it back.</p>`;
+  } else if(spec.kind === 'map'){
+    bank = `<div style="margin-bottom:8px;"><div style="font-size:11px;font-weight:700;letter-spacing:.5px;color:var(--ink-soft);margin-bottom:6px;">1 &middot; PLACE THE CITIES — tap a city, then tap its dot</div>`
+      + `<div style="display:flex;flex-wrap:wrap;gap:8px;" data-wsactbank>`
+      + spec.cities.map(c=>`<button type="button" data-wsactcity="${c.id}" class="btn btn-ghost"${disBtn} style="font-size:13px;padding:6px 14px;">${esc(c.text)}</button>`).join('')
+      + `</div></div>`
+      + `<div style="margin-bottom:10px;"><div style="font-size:11px;font-weight:700;letter-spacing:.5px;color:var(--ink-soft);margin-bottom:6px;">2 &middot; TRACE EACH ROUTE — tap an explorer, then tap the dots in travel order</div>`
+      + `<div style="display:flex;flex-wrap:wrap;gap:8px;" data-wsactexplorers>`
+      + spec.explorers.map(e=>`<button type="button" data-wsactexplorer="${e.id}" class="btn btn-ghost"${disBtn} style="font-size:13px;padding:6px 14px;border-left:5px solid ${e.color};">${esc(e.text)}</button>`).join('')
+      + `</div>`
+      + `<div style="display:flex;gap:8px;margin-top:8px;"><button type="button" data-wsactundo class="btn btn-ghost"${disBtn} style="font-size:12px;padding:5px 12px;">Undo last dot</button><button type="button" data-wsactclear class="btn btn-ghost"${disBtn} style="font-size:12px;padding:5px 12px;">Clear route</button></div></div>`;
+  }
+  return `<div data-wsact="${esc(it.activity)}"${locked?' data-wslocked="1"':''} style="margin-bottom:6px;${locked?'opacity:0.75;':''}">${bank}${spec.svg()}`
+    + `<input type="hidden" data-wsfield="${field}" data-wsitem="${it.id}" value="${escAttr(savedJson||'')}">`
+    + `</div>`;
+}
+
+/* Read/write activity state (JSON) through the hidden input. */
+function wsActState(actEl){
+  const inp = actEl.querySelector('input[data-wsfield]');
+  try { return JSON.parse(inp.value || '{}'); } catch(e){ return {}; }
+}
+function wsActSave(actEl, st){
+  const inp = actEl.querySelector('input[data-wsfield]');
+  inp.value = JSON.stringify(st);
+  inp.dispatchEvent(new Event('change', {bubbles:true}));
+}
+
+/* Draw placed-label tags onto the SVG. */
+function wsActDrawTags(actEl, spec, st){
+  const svg = actEl.querySelector('[data-wsdiagram]');
+  if(!svg) return;
+  const NS = 'http://www.w3.org/2000/svg';
+  let tagLayer = svg.querySelector('[data-wstags]');
+  tagLayer.innerHTML = '';
+  const placeTag = (text, ax, ay, key, color)=>{
+    const g = document.createElementNS(NS, 'g');
+    g.setAttribute('data-wsacttag', key);
+    g.style.cursor = 'pointer';
+    const rect = document.createElementNS(NS, 'rect');
+    const w = Math.max(34, text.length * 7.2 + 16);
+    rect.setAttribute('x', ax - w/2); rect.setAttribute('y', ay - 12);
+    rect.setAttribute('width', w); rect.setAttribute('height', 24); rect.setAttribute('rx', 12);
+    rect.setAttribute('fill', '#ffffff'); rect.setAttribute('stroke', color || '#1c2330'); rect.setAttribute('stroke-width', '1.5');
+    const t = document.createElementNS(NS, 'text');
+    t.setAttribute('x', ax); t.setAttribute('y', ay + 5); t.setAttribute('text-anchor', 'middle');
+    t.setAttribute('font-size', '12'); t.setAttribute('font-weight', '700'); t.setAttribute('fill', '#1c2330');
+    t.textContent = text;
+    g.appendChild(rect); g.appendChild(t);
+    tagLayer.appendChild(g);
+  };
+  if(spec.kind === 'label'){
+    const placed = st.labels || {};
+    spec.labels.forEach(l=>{
+      if(placed[l.id]) placeTag(l.text, l.ax, l.ay, 'label:'+l.id, '#2e7d4f');
+    });
+  } else if(spec.kind === 'map'){
+    const placed = (st.cities) || {};
+    spec.cities.forEach(c=>{
+      if(placed[c.id]) placeTag(c.text, c.ax, c.ay, 'city:'+c.id, '#2e7d4f');
+    });
+    // Route polylines for the selected explorer (all routes, each in its color)
+    let routeLayer = svg.querySelector('[data-wsroutes]');
+    routeLayer.innerHTML = '';
+    const routes = st.routes || {};
+    spec.explorers.forEach(e=>{
+      const wps = routes[e.id] || [];
+      if(wps.length < 2) return;
+      const pts = wps.map(w=>spec.wpPos[w]).filter(Boolean).map(p=>p.join(',')).join(' ');
+      const pl = document.createElementNS(NS, 'polyline');
+      pl.setAttribute('points', pts);
+      pl.setAttribute('fill', 'none'); pl.setAttribute('stroke', e.color);
+      pl.setAttribute('stroke-width', '3.5'); pl.setAttribute('stroke-linecap', 'round'); pl.setAttribute('stroke-linejoin', 'round');
+      pl.setAttribute('opacity', '0.9');
+      routeLayer.appendChild(pl);
+      // arrowhead on last segment
+      const a = spec.wpPos[wps[wps.length-2]], b = spec.wpPos[wps[wps.length-1]];
+      const ang = Math.atan2(b[1]-a[1], b[0]-a[0]);
+      const s = 9;
+      const tri = document.createElementNS(NS, 'polygon');
+      tri.setAttribute('points', `${b[0]},${b[1]} ${b[0]-s*Math.cos(ang-0.45)},${b[1]-s*Math.sin(ang-0.45)} ${b[0]-s*Math.cos(ang+0.45)},${b[1]-s*Math.sin(ang+0.45)}`);
+      tri.setAttribute('fill', e.color);
+      routeLayer.appendChild(tri);
+    });
+  }
+}
+
+/* Wire tap-to-place for one activity element. */
+function wsWireActivity(actEl){
+  const activityId = actEl.getAttribute('data-wsact');
+  const spec = WS_ACTIVITIES[activityId];
+  if(!spec) return;
+  const st = wsActState(actEl);
+  if(spec.kind === 'label' && !st.labels) st.labels = {};
+  if(spec.kind === 'map'){
+    if(!st.cities) st.cities = {};
+    if(!st.routes) st.routes = {};
+  }
+  let selLabel = null, selCity = null, selExplorer = null;
+
+  const refreshChips = ()=>{
+    actEl.querySelectorAll('[data-wsactlabel]').forEach(b=>{
+      const id = b.getAttribute('data-wsactlabel');
+      const used = st.labels && st.labels[id];
+      b.classList.toggle('btn-primary', selLabel===id);
+      b.classList.toggle('btn-ghost', selLabel!==id);
+      b.style.opacity = used ? '0.35' : '1';
+    });
+    actEl.querySelectorAll('[data-wsactcity]').forEach(b=>{
+      const id = b.getAttribute('data-wsactcity');
+      const used = st.cities && st.cities[id];
+      b.classList.toggle('btn-primary', selCity===id);
+      b.classList.toggle('btn-ghost', selCity!==id);
+      b.style.opacity = used ? '0.35' : '1';
+    });
+    actEl.querySelectorAll('[data-wsactexplorer]').forEach(b=>{
+      const id = b.getAttribute('data-wsactexplorer');
+      b.classList.toggle('btn-primary', selExplorer===id);
+      b.classList.toggle('btn-ghost', selExplorer!==id);
+    });
+  };
+
+  const draw = ()=>{ wsActDrawTags(actEl, spec, st); refreshChips(); };
+
+  // Label chips (diagram labeling)
+  actEl.querySelectorAll('[data-wsactlabel]').forEach(b=>{
+    b.addEventListener('click', ()=>{
+      const id = b.getAttribute('data-wsactlabel');
+      if(st.labels[id]) return; // already placed; tap its tag to remove
+      selLabel = (selLabel===id) ? null : id;
+      draw();
+    });
+  });
+  // City chips (map)
+  actEl.querySelectorAll('[data-wsactcity]').forEach(b=>{
+    b.addEventListener('click', ()=>{
+      const id = b.getAttribute('data-wsactcity');
+      if(st.cities[id]) return;
+      selCity = (selCity===id) ? null : id;
+      selExplorer = null;
+      draw();
+    });
+  });
+  // Explorer buttons (map routes)
+  actEl.querySelectorAll('[data-wsactexplorer]').forEach(b=>{
+    b.addEventListener('click', ()=>{
+      const id = b.getAttribute('data-wsactexplorer');
+      selExplorer = (selExplorer===id) ? null : id;
+      selCity = null; selLabel = null;
+      draw();
+    });
+  });
+  const undoBtn = actEl.querySelector('[data-wsactundo]');
+  if(undoBtn) undoBtn.addEventListener('click', ()=>{
+    if(!selExplorer) return;
+    (st.routes[selExplorer] || []).pop();
+    wsActSave(actEl, st); draw();
+  });
+  const clearBtn = actEl.querySelector('[data-wsactclear]');
+  if(clearBtn) clearBtn.addEventListener('click', ()=>{
+    if(!selExplorer) return;
+    st.routes[selExplorer] = [];
+    wsActSave(actEl, st); draw();
+  });
+
+  // Tap targets on the SVG
+  actEl.querySelectorAll('[data-wszone]').forEach(z=>{
+    z.addEventListener('click', ()=>{
+      const zone = z.getAttribute('data-wszone');
+      if(spec.kind === 'label' && selLabel){
+        // If another label is on this zone, send it back first.
+        Object.keys(st.labels).forEach(lid=>{ if(st.labels[lid]===zone) delete st.labels[lid]; });
+        st.labels[selLabel] = zone;
+        selLabel = null;
+        wsActSave(actEl, st); draw();
+      } else if(spec.kind === 'map' && selCity){
+        const wp = zone.indexOf('wp:')===0 ? zone.slice(3) : null;
+        if(!wp) return;
+        Object.keys(st.cities).forEach(cid=>{ if(st.cities[cid]===wp) delete st.cities[cid]; });
+        st.cities[selCity] = wp;
+        selCity = null;
+        wsActSave(actEl, st); draw();
+      } else if(spec.kind === 'map' && selExplorer){
+        const wp = zone.indexOf('wp:')===0 ? zone.slice(3) : null;
+        if(!wp) return;
+        const r = st.routes[selExplorer] || (st.routes[selExplorer] = []);
+        if(r[r.length-1] !== wp) r.push(wp);
+        wsActSave(actEl, st); draw();
+      }
+    });
+  });
+  // Locked (tries used up): freeze all interaction via capture, but keep
+  // saved tags visible.
+  actEl.addEventListener('click', (e)=>{
+    if(actEl.hasAttribute('data-wslocked')){ e.stopPropagation(); e.preventDefault(); }
+  }, true);
+  // Tap a placed tag to send it back to the bank.
+  actEl.addEventListener('click', (e)=>{
+    const tag = e.target.closest('[data-wsacttag]');
+    if(!tag) return;
+    const key = tag.getAttribute('data-wsacttag');
+    const [kind, id] = key.split(':');
+    if(kind==='label' && st.labels) delete st.labels[id];
+    if(kind==='city' && st.cities) delete st.cities[id];
+    wsActSave(actEl, st); draw();
+  });
+
+  draw();
+}
+
+/* Grade an activity state. Returns {ok, wrong:[display texts]}. */
+function wsGradeActivity(spec, st){
+  const wrong = [];
+  if(spec.kind === 'label'){
+    const placed = (st && st.labels) || {};
+    spec.labels.forEach(l=>{
+      if(placed[l.id] !== l.zone) wrong.push(l.text);
+    });
+  } else if(spec.kind === 'map'){
+    const cities = (st && st.cities) || {};
+    spec.cities.forEach(c=>{
+      if(cities[c.id] !== c.zone) wrong.push(c.text);
+    });
+    const routes = (st && st.routes) || {};
+    spec.explorers.forEach(e=>{
+      const got = routes[e.id] || [];
+      const want = e.route;
+      const same = got.length === want.length && got.every((w,i)=>w===want[i]);
+      if(!same) wrong.push(e.text + "'s route");
+    });
+  }
+  return { ok: wrong.length === 0, wrong };
+}
+
+/* Human-readable answer key for final-try feedback. */
+function wsActivityAnswerText(activityId){
+  const spec = WS_ACTIVITIES[activityId];
+  if(!spec) return '';
+  if(spec.kind === 'label'){
+    return spec.labels.map(l=>l.text + ' \u2192 ' + l.zone.replace(/^z-/,'')).join('; ');
+  }
+  const parts = spec.cities.map(c=>c.text + ' \u2192 ' + c.zone);
+  spec.explorers.forEach(e=>parts.push(e.text + ': ' + e.route.join(' \u2192 ')));
+  return parts.join('; ');
+}
+
+/* Auto-scroll the reading pane to the paragraph most relevant to the group
+   just checked, so the student does not have to scroll back up to find the
+   answer. Scroll only — no highlight or flash on the target paragraph. */
+function wsScrollReadingToGroup(container, g){
+  const readingEl = document.getElementById('worksheetReading');
+  if(!readingEl || readingEl.style.display === 'none') return;
+  const STOP = new Set(['which','what','where','when','these','those','their','about','would','could','should','there','them','then','than','that','with','from']);
+  const keywords = [];
+  (g.items||[]).forEach(it=>{
+    String(it.text||'').toLowerCase().replace(/[^a-z0-9\s]/g,' ').split(/\s+/)
+      .forEach(w=>{ if(w.length>=5 && !STOP.has(w) && !keywords.includes(w)) keywords.push(w); });
+  });
+  const paras = readingEl.querySelectorAll('p[data-wspar]');
+  // Best-match: the paragraph containing the most keywords wins (ties go
+  // to the earliest), so generic words like "world" don't pull the pane
+  // to an unrelated early paragraph.
+  let target = null, bestHits = 0;
+  for(const p of paras){
+    const t = p.textContent.toLowerCase();
+    const hits = keywords.reduce((n,k)=> n + (t.includes(k) ? 1 : 0), 0);
+    if(hits > bestHits){ bestHits = hits; target = p; }
+  }
+  const wide = window.matchMedia && window.matchMedia('(min-width:900px)').matches;
+  if(target){
+    if(wide){
+      // Sticky pane: scroll inside it so the questions stay put.
+      const top = target.offsetTop - readingEl.clientHeight/2 + target.clientHeight/2;
+      readingEl.scrollTo({top: Math.max(0, top), behavior:'smooth'});
+    } else {
+      target.scrollIntoView({behavior:'smooth', block:'center'});
+    }
+  } else if(wide){
+    readingEl.scrollTo({top: 0, behavior:'smooth'});
+  }
+}
+
+// Floating utility bar: collapse/expand, and keep the sticky reading pane
+// from sliding under the bar on wide screens. The bar is in-flow (sticky,
+// never fixed) so it can never cover readable text.
+function wsSetUtilCollapsed(collapsed){
+  const body = document.getElementById('wsUtilBody');
+  const btn = document.getElementById('wsUtilToggle');
+  if(!body || !btn) return;
+  body.classList.toggle('collapsed', !!collapsed);
+  btn.textContent = collapsed ? 'Show tools' : 'Hide tools';
+  wsSyncStickyOffsets();
+}
+function wsSyncStickyOffsets(){
+  const bar = document.getElementById('wsUtilBar');
+  const reading = document.getElementById('worksheetReading');
+  if(!bar || !reading) return;
+  const wide = window.matchMedia && window.matchMedia('(min-width:900px)').matches;
+  if(wide && bar.style.display !== 'none' && reading.style.display !== 'none'){
+    reading.style.top = bar.offsetHeight + 'px';
+  } else {
+    reading.style.top = '';
+  }
+}
+document.getElementById('wsUtilToggle').addEventListener('click', ()=>{
+  wsSetUtilCollapsed(!document.getElementById('wsUtilBody').classList.contains('collapsed'));
+});
+window.addEventListener('resize', wsSyncStickyOffsets);
 
 // Matching: cross used letters off the word bank as kids type them. Scoped
 // per section (data-wsgroup) so two matching sections never share cross-offs.
@@ -2680,6 +3202,25 @@ function wsRefreshMatchBanks(container){
     });
   });
 }
+
+// Fill-in-the-blank: strike through word-bank terms as kids type them into
+// blanks, so used-up terms are visible at a glance. Scoped per section
+// (data-wsgroup) so two word banks never share cross-offs. Case-insensitive,
+// trimmed; empty blanks never count as used.
+function wsRefreshWordBank(groupEl){
+  if(!groupEl) return;
+  const bank = groupEl.querySelector('[data-wswordbank]');
+  if(!bank) return;
+  const used = {};
+  groupEl.querySelectorAll('input[type="text"][data-wsfield]').forEach(inp=>{
+    const v = (inp.value||'').trim().toLowerCase();
+    if(v) used[v] = true;
+  });
+  bank.querySelectorAll('[data-wbterm]').forEach(chip=>{
+    chip.classList.toggle('wb-used', !!used[chip.getAttribute('data-wbterm')||'']);
+  });
+}
+
 function wsRunGroupCheck(container, studentId, gi){
   const entry = worksheetCache[studentId];
   const checks = wsChecksCache[studentId] || (wsChecksCache[studentId] = {});
@@ -2714,10 +3255,32 @@ function wsRunGroupCheck(container, studentId, gi){
     else if(res==='ok'){ okCount++; checks[it.id]='ok'; wsMarkHTML(it.id,'ok'); wsNoteHTML(it.id,'<span style="color:var(--green);">✓ Nice.</span>'); }
     else {
       badCount++; checks[it.id]='bad'; wsMarkHTML(it.id,'bad');
-      let fb = '<span style="color:var(--red);">✗ The answer is: <strong>'+esc(wsCorrectText(g,it))+'</strong></span>';
-      if(g.type==='truefalse' && it.correction) fb += '<div style="color:var(--ink-soft);margin-top:2px;">'+esc(it.correction)+'</div>';
-      else if(g.type==='truefalse' && it.note) fb += '<div style="color:var(--ink-soft);margin-top:2px;">'+esc(it.note)+'</div>';
-      else if(it.note && g.type!=='truefalse') fb += '<div style="color:var(--ink-soft);margin-top:2px;">'+esc(it.note)+'</div>';
+      let fb;
+      if(finalTry){
+        // Last try: reveal the correct answer, then lock the section below.
+        fb = '<span style="color:var(--red);">✗ The answer is: <strong>'+esc(wsCorrectText(g,it))+'</strong></span>';
+        if(g.type==='truefalse' && it.correction) fb += '<div style="color:var(--ink-soft);margin-top:2px;">'+esc(it.correction)+'</div>';
+        else if(g.type==='truefalse' && it.note) fb += '<div style="color:var(--ink-soft);margin-top:2px;">'+esc(it.note)+'</div>';
+        else if(it.note && g.type!=='truefalse') fb += '<div style="color:var(--ink-soft);margin-top:2px;">'+esc(it.note)+'</div>';
+      } else {
+        // Tries remain: mark it wrong but keep the answer hidden so the
+        // student can try again. Inputs stay enabled (locked on finalTry only).
+        fb = '<span style="color:var(--red);">✗ Not quite. Try again.</span>';
+        // Interactive activities: name which labels/routes are wrong (without
+        // revealing the answer) so the student knows what to fix.
+        if(g.type==='interactive'){
+          const spec = WS_ACTIVITIES[it.activity];
+          if(spec){
+            let st = {};
+            try { st = JSON.parse(val || '{}'); } catch(e){}
+            const det = wsGradeActivity(spec, st);
+            if(det.wrong.length){
+              fb += ' <span style="color:var(--ink-soft);">Look again at: <strong>'
+                + det.wrong.map(esc).join(', ') + '</strong>.</span>';
+            }
+          }
+        }
+      }
       wsNoteHTML(it.id, fb);
     }
   });
@@ -2736,8 +3299,11 @@ function wsRunGroupCheck(container, studentId, gi){
     } else {
       let msg = 'You got <strong>'+okCount+' of '+total+'</strong> right.';
       if(skipCount) msg += ' ' + skipCount + ' still blank.';
-      if(finalTry) msg += ' <strong>That was your 2nd try</strong> — the answers above are locked in. Study them and move on.';
-      else if(badCount) msg += ' Fix the ✗ ones and check again — 1 try left.';
+      if(finalTry) msg += ' <strong>That was your '+wsOrdinal(attemptsUsed)+' try</strong> — the answers above are locked in. Study them and move on.';
+      else if(badCount){
+        const triesLeft = maxTries - attemptsUsed;
+        msg += ' Fix the ✗ ones and check again — ' + triesLeft + (triesLeft === 1 ? ' try' : ' tries') + ' left.';
+      }
       resEl.innerHTML = msg;
     }
   }
@@ -2749,6 +3315,7 @@ function wsRunGroupCheck(container, studentId, gi){
     if(btn) btn.outerHTML = '<div style="font-size:12.5px;margin-top:8px;color:var(--ink-soft);font-weight:700;">' + wsTriesUsedText() + '</div>';
   }
   wsUpdateProgress(container, worksheet, entry, checks);
+  wsScrollReadingToGroup(container, g);
 }
 
 function wireWorksheetFormInputs(container, studentId){
@@ -2788,7 +3355,11 @@ function wireWorksheetFormInputs(container, studentId){
   // (sequence-guarded: an edit that predates the latest check never wipes it)
   container.querySelectorAll('[data-wsfield]').forEach(el=>{
     if(el.type==='checkbox') return; // handled above
-    el.addEventListener('input', ()=>{ if(el.hasAttribute('data-wsmatchletter')) wsRefreshMatchBanks(container); });
+    el.addEventListener('input', ()=>{
+      if(el.hasAttribute('data-wsmatchletter')) wsRefreshMatchBanks(container);
+      const ge = el.closest('[data-wsgroup]');
+      if(ge) wsRefreshWordBank(ge);
+    });
     el.addEventListener('change', async ()=>{
       const editSeq = ++wsSeq;
       const itemId = el.dataset.wsitem;
@@ -2856,6 +3427,10 @@ function wireWorksheetFormInputs(container, studentId){
 
   // Restore matching word-bank cross-offs from saved answers on open.
   wsRefreshMatchBanks(container);
+  // Restore fill-in-the-blank word-bank strike-throughs from saved answers.
+  container.querySelectorAll('[data-wsgroup]').forEach(wsRefreshWordBank);
+  // Interactive activities: wire tap-to-place (restores saved placements).
+  container.querySelectorAll('[data-wsact]').forEach(actEl=>wsWireActivity(actEl));
 }
 
 /* Split a lesson reading into { text, vocab[] }: the source readings end with
@@ -2916,22 +3491,31 @@ function highlightKeyInfo(escapedHTML){
 function stripKeyInfo(text){ return String(text||'').replace(/==/g,''); }
 
 /* Build the reading card HTML. useLight picks dayPart.readingLight when present. */
+function worksheetVocabBoxHTML(dayPart, useLight){
+  if(!dayPart || !dayPart.reading) return '';
+  const src = (useLight && dayPart.readingLight) ? dayPart.readingLight : dayPart.reading;
+  const parsed = parseReadingVocab(src);
+  if(!parsed.vocab.length) return '';
+  return `<div style="padding:10px 12px;background:#fff;border:2px solid var(--green);border-radius:10px;">
+      <div style="font-size:11px;font-weight:700;letter-spacing:.5px;color:var(--ink-soft);margin-bottom:8px;">&#128214; NEW WORDS — learn these</div>
+      ${parsed.vocab.map(v=>`<div style="font-size:13px;line-height:1.5;margin-bottom:6px;"><strong style="color:var(--green);">${esc(v.term)}</strong> — ${esc(v.def)}</div>`).join('')}
+    </div>`;
+}
+
 function worksheetReadingHTML(dayPart, useLight, forceDayNum){
   if(!dayPart || !dayPart.reading) return '';
   const src = (useLight && dayPart.readingLight) ? dayPart.readingLight : dayPart.reading;
   const parsed = parseReadingVocab(src);
   const terms = parsed.vocab.map(v=>v.term);
-  const highlighted = highlightKeyInfo(highlightKeyTerms(esc(parsed.text), terms));
+  const paras = String(parsed.text).split(/\n\s*\n/).map(p=>p.trim()).filter(Boolean);
+  const paraHTML = paras.map((p,i)=>{
+    const highlighted = highlightKeyInfo(highlightKeyTerms(esc(p), terms));
+    return `<p data-wspar="${i}" style="margin:0 0 10px;white-space:pre-wrap;">${highlighted}</p>`;
+  }).join('');
   const readBtnId = 'wsReadAloud';
   let html = `<div class="word-badge">${forceDayNum ? 'Before you start' : "Today's Reading"}</div>
       <div style="margin-top:8px;"><button type="button" class="btn btn-ghost" id="${readBtnId}" style="font-size:12.5px;padding:6px 14px;">&#128266; Read to me</button></div>
-      <div style="font-size:13.5px;line-height:1.6;margin-top:8px;white-space:pre-wrap;">${highlighted}</div>`;
-  if(parsed.vocab.length){
-    html += `<div style="margin-top:12px;padding:10px 12px;background:#fff;border:2px solid var(--green);border-radius:10px;">
-        <div style="font-size:11px;font-weight:700;letter-spacing:.5px;color:var(--ink-soft);margin-bottom:8px;">&#128214; NEW WORDS — learn these</div>
-        ${parsed.vocab.map(v=>`<div style="font-size:13px;line-height:1.5;margin-bottom:6px;"><strong style="color:var(--green);">${esc(v.term)}</strong> — ${esc(v.def)}</div>`).join('')}
-      </div>`;
-  }
+      <div style="font-size:13.5px;line-height:1.6;margin-top:8px;">${paraHTML}</div>`;
   // Wire the read-aloud button after insert (plain text, vocab included).
   setTimeout(()=>{
     const btn = document.getElementById(readBtnId);
@@ -2966,9 +3550,12 @@ async function openWorksheetModal(subject, lesson, preferredStudentId, weekdayNu
   // day-part provides one. (Key-info == markers render in both modes.)
   const paintReading = (studentId)=>{
     const st = state.students.find(s=>s.id===studentId);
-    const html = worksheetReadingHTML(dayPart, !!st && st.lessonSize==='light', forceDayNum);
+    const useLight = !!st && st.lessonSize==='light';
+    const html = worksheetReadingHTML(dayPart, useLight, forceDayNum);
     if(html){ readingEl.style.display = 'block'; readingEl.innerHTML = html; }
     else { readingEl.style.display = 'none'; readingEl.innerHTML = ''; }
+    // New words live in the floating utility bar now (per-student vocab).
+    document.getElementById('wsUtilVocab').innerHTML = worksheetVocabBoxHTML(dayPart, useLight);
   };
   // The Black History Connection + reflection now live inside the per-student
   // worksheet form (below), not in the shared reading area.
@@ -2994,8 +3581,18 @@ async function openWorksheetModal(subject, lesson, preferredStudentId, weekdayNu
     paintReading(id);
     tabsWrap.querySelectorAll('.modal-tab').forEach(t=>t.classList.toggle('active', t.dataset.wstab===id));
     const formArea = document.getElementById('worksheetFormArea');
-    formArea.innerHTML = renderWorksheetFormHTML(worksheetCache[id], wsChecksCache[id]);
-    wireWorksheetFormInputs(formArea, id);
+    const parts = renderWorksheetFormHTML(worksheetCache[id], wsChecksCache[id]);
+    // Utility bar: progress + today's plan float at the top while scrolling.
+    document.getElementById('wsUtilProgress').innerHTML = parts.progressHTML;
+    document.getElementById('wsUtilPlan').innerHTML = parts.planHTML;
+    document.getElementById('wsUtilBar').style.display = 'block';
+    // Collapsed by default on narrow screens where space is tight.
+    wsSetUtilCollapsed(window.innerWidth < 900);
+    formArea.innerHTML = parts.groupsHTML;
+    // Wire against the whole modal so the utility-bar checklist and progress
+    // stay connected to the same handlers.
+    wireWorksheetFormInputs(document.querySelector('#worksheetOverlay .modal'), id);
+    wsSyncStickyOffsets();
   }
   tabsWrap.querySelectorAll('.modal-tab').forEach(t=>{ t.addEventListener('click', ()=> showStudent(t.dataset.wstab)); });
   showStudent(defaultId);
@@ -3296,7 +3893,7 @@ function openStudentsModal(){
 
   const tabsEl = document.getElementById('studentTabs');
   const panelsEl = document.getElementById('studentPanels');
-  tabsEl.innerHTML = state.students.map((s,i)=>`<div class="modal-tab ${i===0?'active':''}" data-stab="stu-${s.id}">${esc(s.name)||'Student '+(i+1)}</div>`).join('');
+  tabsEl.innerHTML = state.students.map((s,i)=>`<div class="modal-tab ${i===0?'active':''}" data-stab="stu-${s.id}">${esc(s.name)||'Student '+(i+1)}${state.students.length>1?` <span class="tab-rm" data-rmstudent="${escAttr(s.id)}" title="Remove student" aria-label="Remove ${escAttr(s.name||'student')}" style="opacity:.55;margin-left:6px;">×</span>`:''}</div>`).join('');
 
   panelsEl.innerHTML = state.students.map((s,i)=>{
     const pool = allSubjects(todayContent() || {subjects:{}, extraSubjects:[]});
@@ -3357,15 +3954,34 @@ function openStudentsModal(){
   });
 
   tabsEl.querySelectorAll('.modal-tab').forEach(t=>{
-    t.addEventListener('click', ()=>{
+    t.addEventListener('click', (e)=>{
+      const rm = e.target.closest('.tab-rm');
+      if(rm){ e.stopPropagation(); removeSettingsStudent(rm.dataset.rmstudent); return; }
       tabsEl.querySelectorAll('.modal-tab').forEach(x=>x.classList.remove('active'));
       panelsEl.querySelectorAll('.tab-panel').forEach(x=>x.classList.remove('active'));
       t.classList.add('active');
       document.getElementById(t.dataset.stab).classList.add('active');
     });
   });
+  document.getElementById('addStudentBtn').onclick = ()=>{
+    if(state.students.length >= 8){ showToast('Up to 8 students per family space.'); return; }
+    state.fieldLabels = collectFieldLabels();
+    state.students = collectStudentsForm();
+    const nums = state.students.map(s=>{ const m = /^s(\d+)$/.exec(s.id||''); return m ? +m[1] : 0; });
+    state.students.push(normalizeStudent({ id:'s'+(Math.max(0,...nums)+1), name:'', grade:'5th' }));
+    openStudentsModal();
+    showToast('Student added — fill in the name, then Save profiles.');
+  };
 
   showSettingsPanel('students');
+}
+function removeSettingsStudent(id){
+  if(state.students.length <= 1) return;
+  const s = state.students.find(x=>x.id===id);
+  if(!confirm(`Remove ${s && s.name ? s.name : 'this student'} from this family space? Their saved answers stay in the cloud.`)) return;
+  state.fieldLabels = collectFieldLabels();
+  state.students = collectStudentsForm().filter(x=>x.id!==id);
+  openStudentsModal();
 }
 function collectFieldLabels(){
   return {
@@ -3736,7 +4352,11 @@ if(document.fonts && document.fonts.ready) document.fonts.ready.then(()=> wireAu
 let lastSettingsTab = 'day';
 function showSettingsPanel(tab){
   lastSettingsTab = tab;
-  document.querySelectorAll('#settingsTabs .modal-tab').forEach(t=>t.classList.toggle('active', t.dataset.settingstab===tab));
+  document.querySelectorAll('#settingsTabs .modal-tab').forEach(t=>{
+    const on = t.dataset.settingstab===tab;
+    t.classList.toggle('active', on);
+    t.setAttribute('aria-selected', on ? 'true' : 'false');
+  });
   document.querySelectorAll('.settings-panel').forEach(p=>{ p.style.display = (p.dataset.settingspanel===tab) ? 'block' : 'none'; });
   document.getElementById('settingsOverlay').classList.add('open');
 }
@@ -3750,6 +4370,9 @@ function openSettingsTab(tab){
 }
 document.querySelectorAll('#settingsTabs .modal-tab').forEach(t=>{
   t.addEventListener('click', ()=> openSettingsTab(t.dataset.settingstab));
+  t.addEventListener('keydown', (e)=>{
+    if(e.key===' ' || e.key==='Enter'){ e.preventDefault(); openSettingsTab(t.dataset.settingstab); }
+  });
 });
 document.getElementById('openSettings').addEventListener('click', ()=> requireEditAccess(()=> openSettingsTab(lastSettingsTab)));
 
