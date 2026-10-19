@@ -337,6 +337,9 @@
 <script src="mm_weeks_35.js"></script>
 <script src="mm_weeks_68.js"></script>
 <script src="mm_weeks_912.js"></script>
+<script src="mm_devotional_52.js"></script>
+<script src="mm_financial_52.js"></script>
+<script src="mm_states_52.js"></script>
 </head>
 <body>
 
@@ -1446,7 +1449,19 @@ function todayContent(){
 function allSubjects(c, opts){
   opts = opts || {};
   const subj = c.subjects || {};
-  const scNames = (c.statesCapitals||[]).map(x=>x.state).filter(Boolean).join(' & ');
+  // 52-week: states & capitals from MM_STATES_52
+  let scNames = (c.statesCapitals||[]).map(x=>x.state).filter(Boolean).join(' & ');
+  let finConcept = (c.financialLit && c.financialLit.concept) || 'Money lesson';
+  if(mm52IsActive()){
+    try {
+      const weekNum = contentWeekForDate(new Date(state.schoolDate + 'T12:00:00'));
+      const st52 = mm52States(weekNum);
+      if(st52 && !st52.review) scNames = st52.state;
+      else if(st52 && st52.review) scNames = 'Review: ' + (st52.states||[]).join(', ');
+      const fin52 = mm52Financial(weekNum, state.weekdayNum);
+      if(fin52 && fin52.concept) finConcept = fin52.concept;
+    } catch(e) {}
+  }
   const rws = c.realWorldScenario || '';
   const base = [
     {id:'math', name:'Math', topic:subj.math},
@@ -1454,7 +1469,7 @@ function allSubjects(c, opts){
     {id:'spanish', name:'Spanish', topic:subj.spanish},
     {id:'warmup', name:'Warm Up', topic:(c.devotional && c.devotional.wordOfDay) ? ('Word of the Day: '+c.devotional.wordOfDay) : 'Morning devotional'},
     {id:'currentevent', name:'Current Event', topic:(c.currentEvent && c.currentEvent.headline) || 'NewsForKids reading'},
-    {id:'financiallit', name:'Financial Lit', topic:(c.financialLit && c.financialLit.concept) || 'Money lesson'},
+    {id:'financiallit', name:'Financial Lit', topic:finConcept},
     {id:'rws', name:'Real World Scenario', topic: rws ? (rws.length>70 ? rws.slice(0,70).trim()+'…' : rws) : 'Today’s scenario'},
     {id:'states', name:'State & Capital', topic: scNames || 'States & capitals'},
     {id:'vocabulary', name:'Vocabulary', topic: opts.vocabWord || 'Word study'},
@@ -1676,6 +1691,32 @@ function mm52IsActive(){
 }
 const MM52_BAND_LABELS = {'35':'Grades 3-5', '68':'Grades 6-8', '912':'Grades 9-12'};
 
+/* 52-week devotional: get day's content (Mon-Thu = days[0-3], Fri = review) */
+function mm52Devotional(weekNum, weekdayNum){
+  if(typeof MM_DEVOTIONAL_52 === 'undefined') return null;
+  const week = MM_DEVOTIONAL_52.find(w => w.w === weekNum);
+  if(!week || !week.days) return null;
+  if(weekdayNum >= 1 && weekdayNum <= 4){
+    return week.days[weekdayNum - 1];
+  }
+  return null; // Friday is review day
+}
+/* 52-week financial literacy: get week's concept + day's activity */
+function mm52Financial(weekNum, weekdayNum){
+  if(typeof MM_FINANCIAL_52 === 'undefined') return null;
+  const week = MM_FINANCIAL_52.find(w => w.w === weekNum);
+  if(!week) return null;
+  const dayNames = {1:'Monday',2:'Tuesday',3:'Wednesday',4:'Thursday'};
+  const dayName = dayNames[weekdayNum];
+  const dayActivity = (week.days||[]).find(d => d.day === dayName);
+  return { concept: week.concept, explanation: week.explanation, activity: dayActivity };
+}
+/* 52-week states & capitals */
+function mm52States(weekNum){
+  if(typeof MM_STATES_52 === 'undefined') return null;
+  return MM_STATES_52.find(w => w.w === weekNum) || null;
+}
+
 async function renderBoard(){
   const board = document.getElementById('board');
   const wd = state.weekdayNum;
@@ -1734,6 +1775,7 @@ async function renderBoard(){
   const isTestDay = wd===5;
   // 52-week curriculum: Word of the Day comes from the week's vocabulary
   // Mon-Thu: one word per day (words 1-4). Friday: review all 4 words.
+  // Devotional (scripture, reflection, prayer, intention) from 52-week devotional.
   if(mm52IsActive() && devo){
     try {
       const weekNum = contentWeekForDate(new Date(state.schoolDate + 'T12:00:00'));
@@ -1750,7 +1792,15 @@ async function renderBoard(){
           devo.wordOfDay = 'Review: ' + words;
         }
       }
-    } catch(e) { console.warn('52-week word of day:', e); }
+      // 52-week devotional content (Mon-Thu)
+      const devDay = mm52Devotional(weekNum, wd);
+      if(devDay){
+        devo.scripture = devDay.scripture + (devDay.scriptureText ? ' — "' + devDay.scriptureText + '"' : '');
+        devo.reflection = devDay.reflection;
+        devo.prayer = devDay.prayer;
+        devo.intention = devDay.intention;
+      }
+    } catch(e) { console.warn('52-week devo:', e); }
   }
   const fl = state.fieldLabels;
   const aw = actualWeekForDate(state.schoolDate);
@@ -1844,14 +1894,27 @@ async function renderBoard(){
     <p style="font-size:13px;color:var(--ink-soft);margin-top:8px;line-height:1.5;">Not filled in for today yet — add it in ⚙️ Settings → 4-Week Plan.</p>
   </div>`;
 
-  // ---- Financial Lit ----
-  const flData = c.financialLit;
+  // ---- Financial Lit (52-week when active) ----
+  let flData = c.financialLit;
+  if(mm52IsActive()){
+    try {
+      const weekNum = contentWeekForDate(new Date(state.schoolDate + 'T12:00:00'));
+      const fin52 = mm52Financial(weekNum, wd);
+      if(fin52 && fin52.concept){
+        flData = {
+          concept: fin52.concept,
+          blank: fin52.explanation + (fin52.activity ? '\n\nToday: ' + fin52.activity.title + ' — ' + fin52.activity.activity : ''),
+          answer: fin52.activity ? fin52.activity.title : ''
+        };
+      }
+    } catch(e) { console.warn('52-week financial:', e); }
+  }
   const financialLitHTML = (!isTestDay && flData && flData.concept) ? `<div class="card">
-    <div class="word-badge">Financial Lit</div>
+    <div class="word-badge">Financial Lit · Week ${mm52IsActive() ? contentWeekForDate(new Date(state.schoolDate + 'T12:00:00')) : ''}</div>
     <div style="font-size:15px;font-weight:600;margin:6px 0 8px;">${esc(flData.concept)}</div>
-    <p style="font-size:14px;line-height:1.5;">${esc(flData.blank)}</p>
-    <button type="button" class="btn btn-ghost" data-flanswer="${escAttr(flData.answer)}" id="revealFlAnswer" style="margin-top:8px;">Reveal Answer</button>
-    <div id="flAnswerText" style="display:none;margin-top:8px;font-weight:700;color:var(--green);"></div>
+    <p style="font-size:14px;line-height:1.5;white-space:pre-line;">${esc(flData.blank)}</p>
+    ${flData.answer ? `<button type="button" class="btn btn-ghost" data-flanswer="${escAttr(flData.answer)}" id="revealFlAnswer" style="margin-top:8px;">Reveal Answer</button>
+    <div id="flAnswerText" style="display:none;margin-top:8px;font-weight:700;color:var(--green);"></div>` : ''}
   </div>` : (!isTestDay ? missingCard('Financial Lit') : '');
 
   // ---- Real World Scenario ----
@@ -1861,17 +1924,35 @@ async function renderBoard(){
     <p style="font-size:12px;color:var(--ink-soft);margin-top:8px;">Talk it through or write your answer — nothing to submit yet.</p>
   </div>` : (!isTestDay ? missingCard('Real World Scenario') : '');
 
-  // ---- States & Capitals ----
-  const statesHTML = (!isTestDay && c.statesCapitals && c.statesCapitals.length) ? `<div class="card">
-    <div class="word-badge">States & Capitals</div>
+  // ---- States & Capitals (52-week when active) ----
+  let statesCapitalsData = c.statesCapitals;
+  let statesFunFact = '';
+  let statesNickname = '';
+  if(mm52IsActive()){
+    try {
+      const weekNum = contentWeekForDate(new Date(state.schoolDate + 'T12:00:00'));
+      const st52 = mm52States(weekNum);
+      if(st52 && !st52.review){
+        statesCapitalsData = [{state: st52.state, capital: st52.capital}];
+        statesFunFact = st52.funFact || '';
+        statesNickname = st52.nickname || '';
+      } else if(st52 && st52.review){
+        statesCapitalsData = (st52.states||[]).map((s,i)=>({state: s, capital: (st52.capitals||[])[i] || ''}));
+      }
+    } catch(e) { console.warn('52-week states:', e); }
+  }
+  const statesHTML = (!isTestDay && statesCapitalsData && statesCapitalsData.length) ? `<div class="card">
+    <div class="word-badge">States & Capitals · Week ${mm52IsActive() ? contentWeekForDate(new Date(state.schoolDate + 'T12:00:00')) : ''}</div>
     <div style="display:flex;flex-direction:column;gap:8px;margin-top:8px;">
-      ${c.statesCapitals.map((sc,i)=>`
+      ${statesCapitalsData.map((sc,i)=>`
         <div class="info-line" style="cursor:pointer;" data-staterev="${i}">
-          <span>${esc(sc.state)}</span>
-          <span data-staterev-answer="${i}" style="font-weight:700;">Tap to reveal</span>
+          <span>${esc(sc.state)}${sc.capital ? '' : ''}</span>
+          <span data-staterev-answer="${i}" data-capital="${escAttr(sc.capital||'')}" style="font-weight:700;">Tap to reveal</span>
         </div>
       `).join('')}
     </div>
+    ${statesFunFact ? `<p style="font-size:13.5px;line-height:1.5;margin-top:10px;"><strong>Fun fact:</strong> ${esc(statesFunFact)}</p>` : ''}
+    ${statesNickname ? `<p style="font-size:12.5px;color:var(--ink-soft);margin-top:4px;"><em>${esc(statesNickname)}</em></p>` : ''}
     <p style="font-size:12px;color:var(--ink-soft);margin-top:8px;">Bonus: share one fun fact about either state.</p>
   </div>` : (!isTestDay ? missingCard('States & Capitals') : '');
 
@@ -2182,8 +2263,9 @@ async function renderBoard(){
     const reveal = ()=>{
       const i = row.dataset.staterev;
       const target = row.querySelector(`[data-staterev-answer="${i}"]`);
-      const sc = c.statesCapitals[+i];
-      target.textContent = sc.capital;
+      // 52-week: capital is in data attribute; fallback to old c.statesCapitals
+      const capital = target.dataset.capital || (c.statesCapitals && c.statesCapitals[+i] && c.statesCapitals[+i].capital) || '';
+      target.textContent = capital || '—';
       target.style.color = 'var(--green)';
     };
     row.addEventListener('click', reveal);
