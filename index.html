@@ -383,7 +383,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
     <button class="icon-btn labeled" id="openArchive" title="Archive & upcoming weeks" aria-label="Archive and upcoming weeks">📅 <span class="lbl">Archive</span></button>
     <a class="icon-btn labeled" href="courses.html" title="College coursework (SEU dual enrollment)" aria-label="College coursework, SEU dual enrollment" style="text-decoration:none;">🎓 <span class="lbl">Courses</span></a>
     <button class="icon-btn labeled" id="openToday" title="Edit today" aria-label="Edit today">✏️ <span class="lbl">Edit Day</span></button>
-    <button class="icon-btn labeled" id="openSettings" title="Settings — day settings, students, curriculum, grading, 52-week plan" aria-label="Settings">⚙️ <span class="lbl">Settings</span></button>
+    <button class="icon-btn labeled" id="openSettings" title="Settings — day settings, students, grading, weekly plan" aria-label="Settings">⚙️ <span class="lbl">Settings</span></button>
   </div>
 </header>
 
@@ -410,7 +410,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
     <div class="modal-tabs" id="settingsTabs" role="tablist" aria-label="Settings sections">
       <div class="modal-tab active" role="tab" tabindex="0" aria-selected="true" data-settingstab="day">Day Settings</div>
       <div class="modal-tab" role="tab" tabindex="0" aria-selected="false" data-settingstab="students">Students</div>
-      <div class="modal-tab" role="tab" tabindex="0" aria-selected="false" data-settingstab="mm52">52-Week Plan</div>
+      <div class="modal-tab" role="tab" tabindex="0" aria-selected="false" data-settingstab="mm52">Weekly Plan</div>
       <div class="modal-tab" role="tab" tabindex="0" aria-selected="false" data-settingstab="grading">Grading</div>
       <div class="modal-tab" role="tab" tabindex="0" aria-selected="false" data-settingstab="pins">PINs</div>
     </div>
@@ -536,7 +536,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
 <div class="modal-overlay" id="archiveOverlay">
   <div class="modal wide">
     <h3>Plan Calendar</h3>
-    <div class="sub">Past days auto-save exactly as shown. Upcoming days preview the 52-week curriculum. Click any day to open it.</div>
+    <div class="sub">Past days auto-save exactly as shown. Upcoming days preview future lessons. Click any day to open it.</div>
     <div class="modal-tabs">
       <div class="modal-tab active" data-cal-tab="archive-view">Archive</div>
       <div class="modal-tab" data-cal-tab="upcoming-view">Upcoming</div>
@@ -577,7 +577,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
     <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px;flex-wrap:wrap;">
       <div>
         <h3>🔮 Preview Upcoming Days</h3>
-        <div class="sub">Select a date to preview that day's full dashboard. 52-week content is live.</div>
+        <div class="sub">Select a date to preview that day's full dashboard.</div>
       </div>
       <button class="btn btn-ghost" data-close>Close</button>
     </div>
@@ -5030,8 +5030,8 @@ function openMM52Modal(){
     newPanel.className = 'settings-panel';
     newPanel.dataset.settingspanel = 'mm52';
     newPanel.innerHTML = `
-      <h3>52-Week Plan</h3>
-      <div class="sub">Browse the 52-week curriculum by week and grade band. Week 1 starts Oct 19, 2026. Each student's grade band (set in Students tab) determines which content they see on the dashboard.</div>
+      <h3>Weekly Plan</h3>
+      <div class="sub">Browse the curriculum by week and grade band. Week 1 starts Oct 19, 2026. Each student's grade band (set in Students tab) determines which content they see on the dashboard.</div>
       <div style="display:flex;gap:10px;align-items:center;margin:12px 0;flex-wrap:wrap;">
         <select id="mm52SettingsWeek" style="font-size:14px;font-weight:700;padding:8px 12px;border:2px solid var(--orange);border-radius:8px;">
           ${Array.from({length:52},(_,i)=>`<option value="${i+1}" ${i+1===mm52CurrentWeek()?'selected':''}>Week ${i+1} (${mm52WeekDateRange(i+1)})</option>`).join('')}
