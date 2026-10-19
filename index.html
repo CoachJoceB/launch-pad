@@ -1684,12 +1684,22 @@ async function renderBoard(){
 
   if(!SCHOOL_DAYS.includes(wd)){
     // Weekend: show next Monday's 52-week lesson preview instead of "No School Day"
-    const today = new Date(state.schoolDate + 'T12:00:00');
+    let today;
+    try {
+      today = new Date(state.schoolDate + 'T12:00:00');
+      if(isNaN(today.getTime())) today = new Date();
+    } catch(e) { today = new Date(); }
+    today.setHours(12,0,0,0);
     const daysUntilMonday = (8 - today.getDay()) % 7 || 7;
     const nextMonday = new Date(today);
     nextMonday.setDate(today.getDate() + daysUntilMonday);
-    const mondayWeek = contentWeekForDate(nextMonday);
-    const mondayStr = nextMonday.toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric'});
+    let mondayWeek = 1;
+    let mondayStr = 'Monday';
+    try {
+      mondayWeek = contentWeekForDate(nextMonday);
+      if(isNaN(mondayWeek)) mondayWeek = 1;
+      mondayStr = nextMonday.toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric'});
+    } catch(e) {}
 
     let mondayPreview = '';
     if(mm52IsActive()){
@@ -1722,6 +1732,26 @@ async function renderBoard(){
 
   const devo = c.devotional;
   const isTestDay = wd===5;
+  // 52-week curriculum: Word of the Day comes from the week's vocabulary
+  // Mon-Thu: one word per day (words 1-4). Friday: review all 4 words.
+  if(mm52IsActive() && devo){
+    try {
+      const weekNum = contentWeekForDate(new Date(state.schoolDate + 'T12:00:00'));
+      // Use the 3-5 band vocab as the shared Word of the Day (or first available band)
+      let weekData = mm52GetWeek(weekNum, '35') || mm52GetWeek(weekNum, '68') || mm52GetWeek(weekNum, '912');
+      if(weekData && weekData.vocab && weekData.vocab.length >= 4){
+        if(wd >= 1 && wd <= 4){
+          const wordIdx = wd - 1; // Mon=0, Tue=1, Wed=2, Thu=3
+          devo.wordOfDay = weekData.vocab[wordIdx].word;
+          devo.wordDef = weekData.vocab[wordIdx].def;
+        } else if(wd === 5){
+          // Friday: show all 4 words for review
+          const words = weekData.vocab.slice(0,4).map(v=>v.word).join(', ');
+          devo.wordOfDay = 'Review: ' + words;
+        }
+      }
+    } catch(e) { console.warn('52-week word of day:', e); }
+  }
   const fl = state.fieldLabels;
   const aw = actualWeekForDate(state.schoolDate);
   // Rotating weeks: odd actual weeks = History (Mon-Thu), even = Science (Mon-Thu).
