@@ -89,6 +89,58 @@ const MM_WEEKS_68 = [
                 "answer": "Model answer: First, flakes were struck from both sides of the stone, which shows repeated, aimed strikes rather than one random break. Second, the edge is still sharp, which means it was shaped into a cutting edge on purpose."
               }
             ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "h1-0-c1",
+                "question": "Where were the oldest known Oldowan tools found, and how old are they?",
+                "answer": "Model answer: They were found in Olduvai Gorge, a valley in what is now Tanzania, and they are more than two and a half million years old."
+              },
+              {
+                "id": "h1-0-c2",
+                "question": "Why did better food lead to bigger brains, and how did that change toolmaking?",
+                "answer": "Model answer: Sharp flakes let early humans cut meat from animals they could never catch with bare hands. Better food fed bigger brains, and bigger brains made better tools, creating a slow cycle that built the human mind."
+              },
+              {
+                "id": "h1-0-c3",
+                "question": "An archaeologist's field note reads: 'This stone did not break by chance. Someone shaped it on purpose.' What does this passage reveal about how archaeologists judge a stone tool?",
+                "answer": "Model answer: It reveals that archaeologists look for signs of deliberate work, like flakes struck from both sides and an edge that is still sharp. When the maker chose the right stone and struck it at the right angle, they conclude the tool was shaped on purpose, not broken by accident."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "h1-0-e1",
+                "prompt": "How did toolmaking set early humans apart from every other animal?",
+                "thesis": "Toolmaking set early humans apart because it required planning, teaching, and a growing brain, launching a cycle of better food, bigger brains, and better tools.",
+                "points": [
+                  "The maker chose the right stone and struck it at the right angle, which proves the tools were planned, not accidents.",
+                  "The skill had to be taught from parent to child, so knowledge passed along long before schools existed.",
+                  "Sharper tools brought better food, which fed bigger brains, which made better tools, building the human mind."
+                ],
+                "conclusion": "Restate the thesis and close with the reading's big idea: every computer and spaceship traces back to that first struck stone in Africa."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "h1-0-vw1",
+                "words": [
+                  "hominin",
+                  "artifact"
+                ],
+                "prompt": "Use each word in an original sentence about the first toolmakers."
+              }
+            ]
           }
         ]
       },
@@ -155,6 +207,58 @@ const MM_WEEKS_68 = [
                   "To prove that ancient tools were accidents"
                 ],
                 "answer": "To learn how long each step takes and compare the marks"
+              }
+            ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "h1-1-c1",
+                "question": "What do cut marks on animal bones tell archaeologists?",
+                "answer": "Model answer: They tell archaeologists that early humans used sharp flakes to slice meat."
+              },
+              {
+                "id": "h1-1-c2",
+                "question": "Why does the reading say a whole dig site is a story while a single stone tool is only a clue?",
+                "answer": "Model answer: A single tool gives one clue, but a dig site shows where each artifact was found, what lies beside it, and what marks cover its surface, so archaeologists can read the layers of earth like pages in a book."
+              },
+              {
+                "id": "h1-1-c3",
+                "question": "Modern archaeologists shape stone tools the ancient way and compare their flakes to the ancient ones under microscopes. What does this experiment reveal when the marks match?",
+                "answer": "Model answer: It reveals that they have rebuilt a lost skill: the match proves they now know how long each step took and how the tools were really made."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "h1-1-e1",
+                "prompt": "Analyze what a stone tool and an archaeologist's field note together reveal about early humans.",
+                "thesis": "Stone tools and field notes reveal that early humans were not only toolmakers but planners, teachers, and teammates.",
+                "points": [
+                  "Making a handaxe took planning, practice, and a steady hand, which the tools themselves prove.",
+                  "Someone had to teach the skill, so knowledge passed from parent to child long before schools existed.",
+                  "Groups that shared tools and food could survive cold nights and hungry seasons, so toolmaking was about teamwork too."
+                ],
+                "conclusion": "Restate the thesis and close with the reading's line: the past cannot speak, but its tools still can, if we learn how to read them."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "h1-1-vw1",
+                "words": [
+                  "artifact",
+                  "excavate"
+                ],
+                "prompt": "Use each word in an original sentence about reading clues at a dig site."
               }
             ]
           }
@@ -229,6 +333,58 @@ const MM_WEEKS_68 = [
                 "answer": "Model answer: The cell is called the building block of life because every living thing is made of cells, and nothing smaller than a cell is alive on its own. Just as bricks build a house, cells build every plant, animal, and bacterium."
               }
             ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "s1-0-c1",
+                "question": "What are the three statements of cell theory?",
+                "answer": "Model answer: All living things are made of cells, cells are the basic unit of life, and all cells come from other cells."
+              },
+              {
+                "id": "s1-0-c2",
+                "question": "Why does the reading compare the cell's parts to the rooms of a house?",
+                "answer": "Model answer: Like rooms serve one family, the parts work together: the membrane controls what enters and leaves, the cytoplasm is where much of the cell's work gets done, and the nucleus stores the instructions."
+              },
+              {
+                "id": "s1-0-c3",
+                "question": "The reading says, 'When you understand the cell, you hold the key to every living thing.' What does this passage reveal about why cells matter?",
+                "answer": "Model answer: It reveals that one shared plan explains everything from the bacteria in yogurt to the cells in your brain, so learning the cell unlocks all of biology."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "s1-0-e1",
+                "prompt": "How did cell theory change the way we understand living things?",
+                "thesis": "Cell theory changed biology by proving that all living things share one building block, which explained growth, healing, and disease.",
+                "points": [
+                  "The theory proved that a tree, a mushroom, a bacterium, and a person are all built from cells.",
+                  "Because all cells come from other cells, we can explain how skin replaces itself and scraped knees heal.",
+                  "Once doctors knew diseases could attack cells, they could study exactly where the damage happened."
+                ],
+                "conclusion": "Restate the thesis and close with the reading's idea: the invisible world turned out to run the visible one."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "s1-0-vw1",
+                "words": [
+                  "fossil",
+                  "artifact"
+                ],
+                "prompt": "Use each word in an original sentence connecting it to evidence of the earliest life on Earth."
+              }
+            ]
           }
         ]
       },
@@ -293,6 +449,58 @@ const MM_WEEKS_68 = [
                 "text": "People knew about cells for thousands of years before microscopes existed.",
                 "answer": "false",
                 "note": "No one knew cells existed until Hooke saw them through a microscope in the 1660s."
+              }
+            ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "s1-1-c1",
+                "question": "What did Robert Hooke see through his microscope in the 1660s, and why did he call what he saw 'cells'?",
+                "answer": "Model answer: He saw tiny boxlike rooms in thin cork. They reminded him of the small rooms where monks lived, which were called cells, so the name stuck."
+              },
+              {
+                "id": "s1-1-c2",
+                "question": "How did seeing cells change medicine?",
+                "answer": "Model answer: Once doctors knew that diseases could attack cells, they could study exactly where the damage happened. Learning that the body constantly makes new cells explained how cuts heal and bones mend."
+              },
+              {
+                "id": "s1-1-c3",
+                "question": "The reading says, 'The invisible world turned out to run the visible one.' What does this passage reveal?",
+                "answer": "Model answer: It reveals that things too small to see control life itself, which is why the microscope became one of the most important tools in science."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "s1-1-e1",
+                "prompt": "How do new tools change what scientists can know? Use the microscope as your example.",
+                "thesis": "The microscope changed science because each stronger lens opened a new world, from Hooke's cork cells to watching living cells divide in real time.",
+                "points": [
+                  "Hooke's homemade microscope revealed the tiny boxlike rooms in cork, giving cells their name.",
+                  "Better microscopes showed single-celled creatures in pond water and proved cells are busy workshops, not empty boxes.",
+                  "Seeing cells transformed medicine, letting doctors find where disease strikes and how the body heals."
+                ],
+                "conclusion": "Restate the thesis and close with the parallel to archaeology: new tools make the invisible visible, just as careful reading makes silent stones speak."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "s1-1-vw1",
+                "words": [
+                  "excavate",
+                  "fossil"
+                ],
+                "prompt": "Use each word in an original sentence about how scientists uncover hidden evidence, like Hooke did."
               }
             ]
           }
@@ -544,6 +752,58 @@ const MM_WEEKS_68 = [
                 "note": "Extra grain could feed potters, priests, builders, and rulers."
               }
             ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "h2-0-c1",
+                "question": "Where did people begin planting seeds and taming sheep and goats about ten thousand years ago, and what crops did African farmers domesticate?",
+                "answer": "Model answer: In the hills of the Middle East, people began planting seeds and taming wild sheep and goats. In Africa, farmers domesticated sorghum, millet, and yams."
+              },
+              {
+                "id": "h2-0-c2",
+                "question": "What does the hunter's reply to the farmer suggest about the cost of farming?",
+                "answer": "Model answer: The hunter says the farmer labors from sunrise to sunset in the hot field with a bent back, while the hunter walks free and eats meat, nuts, and berries. It suggests farming brought harder work and less freedom."
+              },
+              {
+                "id": "h2-0-c3",
+                "question": "The farmer says, 'I no longer wander. My children eat even in winter.' What does this passage reveal about why people accepted farming?",
+                "answer": "Model answer: It reveals farming's promise: a settled, reliable food supply. People accepted longer hours and crowded villages in exchange for grain every year and children who ate through winter."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "h2-0-e1",
+                "prompt": "Was the Agricultural Revolution a step forward or backward for most people? Use the farmer and the hunter as your two accounts.",
+                "thesis": "The Agricultural Revolution moved humanity forward in power but backward in daily health, a tradeoff whose gains outweighed its costs only over centuries.",
+                "points": [
+                  "Farming fed far more people than hunting and produced a surplus that could be stored and traded.",
+                  "Farmers worked longer hours, faced new diseases, and were often less healthy than the hunters before them.",
+                  "The surplus made potters, priests, builders, rulers, towns, cities, and writing possible."
+                ],
+                "conclusion": "Restate the thesis and close by comparing the two accounts: both the farmer and the hunter had a point, and the revolution changed how humans lived, worked, and governed one another."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "h2-0-vw1",
+                "words": [
+                  "domesticate",
+                  "surplus"
+                ],
+                "prompt": "Use each word in an original sentence about the Agricultural Revolution."
+              }
+            ]
           }
         ]
       },
@@ -622,6 +882,58 @@ const MM_WEEKS_68 = [
                 "answer": "c"
               }
             ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "h2-1-c1",
+                "question": "According to bones and teeth from ancient graves, how did early farmers' health compare to the hunters who came before them?",
+                "answer": "Model answer: Early farmers were often less healthy than the hunters who came before them."
+              },
+              {
+                "id": "h2-1-c2",
+                "question": "Why did controlling the storehouse mean controlling the village?",
+                "answer": "Model answer: Whoever controlled the stored surplus grain controlled the food supply, so some people grew rich while others worked their fields, and deep inequality split human society for the first time."
+              },
+              {
+                "id": "h2-1-c3",
+                "question": "The reading says, 'Still, there was no going back.' What does this passage reveal about why farming spread?",
+                "answer": "Model answer: It reveals farming's advantage was numbers: farming villages held ten or a hundred times more people than hunting camps, which meant more ideas, more workers, and stronger armies, so the system spread to every continent."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "h2-1-e1",
+                "prompt": "Analyze two views of the Agricultural Revolution: the farmers' hardships versus the rulers' gains.",
+                "thesis": "The Agricultural Revolution's gains went mostly to rulers and specialists, while farmers paid the price in health and freedom.",
+                "points": [
+                  "Surplus grain let rulers, priests, and soldiers rise above farmers in rank for the first time.",
+                  "Women, who had gathered much of the wild food, often lost status as heavy plow farming depended on men's labor.",
+                  "Yet the surplus made cities, kings, and writing possible, so the tradeoffs were real but irreversible."
+                ],
+                "conclusion": "Restate the thesis and ask the reader to judge: weigh who paid and who gained, and decide whether the price was worth it."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "h2-1-vw1",
+                "words": [
+                  "surplus",
+                  "sedentary"
+                ],
+                "prompt": "Use each word in an original sentence about the price of plenty."
+              }
+            ]
           }
         ]
       }
@@ -692,6 +1004,58 @@ const MM_WEEKS_68 = [
                 "id": "s1-s1",
                 "prompt": "Explain why a salad is like a plate of tiny solar panels. Use two facts from the lesson.",
                 "answer": "Model answer: Salad leaves are made of plant cells packed with chloroplasts, which trap sunlight and turn it into sugar. That is exactly what a solar panel does with light, except the leaf turns it into food. When I eat the salad, I am eating captured sunlight."
+              }
+            ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "s2-0-c1",
+                "question": "What three parts do plant cells have that animal cells lack, and what does each do?",
+                "answer": "Model answer: A stiff cell wall holds the plant upright like the frame of a house, a large central vacuole stores water and keeps the cell firm, and chloroplasts trap sunlight for photosynthesis."
+              },
+              {
+                "id": "s2-0-c2",
+                "question": "Why does a wilted plant perk up after watering?",
+                "answer": "Model answer: Because its vacuoles refill with water, making the cells firm again."
+              },
+              {
+                "id": "s2-0-c3",
+                "question": "The reading calls a salad 'millions of tiny solar panels, each one turning light into lunch.' What does this passage reveal?",
+                "answer": "Model answer: It reveals that chloroplasts convert sunlight into food energy, and that we eat that stored light energy in every bite."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "s2-0-e1",
+                "prompt": "Outline a 5-paragraph essay on how a plant cell works like a quiet factory.",
+                "thesis": "A plant cell is a quiet factory where each special part does one job, and sunlight is the raw material.",
+                "points": [
+                  "The stiff cell wall is the factory's frame, holding everything upright.",
+                  "The central vacuole is the water tank, keeping the whole structure firm.",
+                  "The chloroplasts are the solar panels, turning light into sugar that feeds nearly every living thing."
+                ],
+                "conclusion": "Restate the thesis and close with the reading's image: a houseplant leaning toward a window is the factory at work."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "s2-0-vw1",
+                "words": [
+                  "harvest",
+                  "cultivate"
+                ],
+                "prompt": "Use each word in an original sentence about how plant cells make farming possible."
               }
             ]
           }
@@ -767,6 +1131,58 @@ const MM_WEEKS_68 = [
                 "text": "Plant and animal cells both have a nucleus, cytoplasm, and membrane.",
                 "answer": "true",
                 "note": "They share the same basic plan but differ in their special parts."
+              }
+            ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "s2-1-c1",
+                "question": "What are mitochondria, and why do muscle cells hold thousands of them?",
+                "answer": "Model answer: Mitochondria are tiny parts that break down food to release energy the cell can use. Hardworking muscle cells hold thousands of them to keep up with demand."
+              },
+              {
+                "id": "s2-1-c2",
+                "question": "How do the differences between plant and animal cells reflect their lifestyles?",
+                "answer": "Model answer: Plants stay in one place and harvest light, so they need walls and chloroplasts. Animals move and hunt for food, so they need flexible shapes and extra power."
+              },
+              {
+                "id": "s2-1-c3",
+                "question": "The reading says, 'Animal cells trade the safety of walls for the freedom to move.' What does this passage reveal?",
+                "answer": "Model answer: It reveals that lacking a cell wall is a deliberate tradeoff: flexibility lets a white blood cell squeeze through tiny gaps to chase germs, and animal survival depends on that freedom."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "s2-1-e1",
+                "prompt": "Compare a plant cell and an animal cell as two answers to the problem of staying alive.",
+                "thesis": "Plant and animal cells share the same basic plan but follow different blueprints: one harvests light in place, and the other moves to find food.",
+                "points": [
+                  "Plant cells have walls, vacuoles, and chloroplasts built for a tough, sunlit, stationary life.",
+                  "Animal cells have no wall, so they can bend, stretch, and crawl to their food.",
+                  "Both share a membrane, cytoplasm, and nucleus: same building blocks, different blueprints for different lives."
+                ],
+                "conclusion": "Restate the thesis and close with the reading's point: your own body shows these ideas in action every time you run."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "s2-1-vw1",
+                "words": [
+                  "domesticate",
+                  "surplus"
+                ],
+                "prompt": "Use each word in an original sentence about animals humans tamed and how their cells work hard."
               }
             ]
           }
@@ -1012,6 +1428,58 @@ const MM_WEEKS_68 = [
                 "note": "Nubian traders carried gold and ivory along routes that linked Africa to Mesopotamia."
               }
             ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "h3-0-c1",
+                "question": "What problem did irrigation solve in Mesopotamia, and what was the result?",
+                "answer": "Model answer: The plain between the Tigris and Euphrates had rich soil but little rain. Canals carried river water to fields of barley and wheat, harvests were huge, and Uruk swelled into the world's first city."
+              },
+              {
+                "id": "h3-0-c2",
+                "question": "Why does the reading say the first cities 'did not grow alone'?",
+                "answer": "Model answer: They grew through trade: Uruk's traders sailed south to the Persian Gulf and west toward distant lands, while Nubian traders carried gold and ivory north along routes linking Africa to Mesopotamia."
+              },
+              {
+                "id": "h3-0-c3",
+                "question": "Hammurabi's law code says, 'The law stands above every citizen.' What does this excerpt reveal?",
+                "answer": "Model answer: It reveals a new idea: even the powerful must answer to written law, and the code was carved on stone for all to see."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "h3-0-e1",
+                "prompt": "Outline a 5-paragraph essay arguing that irrigation, not conquest, built the first cities. Analyze Hammurabi's law code excerpt as evidence.",
+                "thesis": "Mesopotamia's cities arose because irrigation created a food surplus, and that surplus needed rules, which is why law codes appeared alongside cities.",
+                "points": [
+                  "Irrigation turned a dry plain into huge harvests that could feed thousands.",
+                  "The surplus let specialists, traders, priests, and kings gather in Uruk, a city-state ruling its farmland.",
+                  "Hammurabi's code shows cities needed written law to manage fields, judges, and trade: the law stood above every citizen."
+                ],
+                "conclusion": "Restate the thesis and close with the reading's point: cities rose because farmers grew a surplus, but they lasted because scribes wrote it down."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "h3-0-vw1",
+                "words": [
+                  "city-state",
+                  "irrigate"
+                ],
+                "prompt": "Use each word in an original sentence about Mesopotamia."
+              }
+            ]
           }
         ]
       },
@@ -1090,6 +1558,58 @@ const MM_WEEKS_68 = [
                 "answer": "c"
               }
             ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "h3-1-c1",
+                "question": "How did cuneiform writing begin in Uruk around 3200 BCE?",
+                "answer": "Model answer: Scribes began pressing picture signs into soft clay tablets to track grain when small clay tokens were not enough. Over centuries the pictures shrank into wedge-shaped marks called cuneiform."
+              },
+              {
+                "id": "h3-1-c2",
+                "question": "Why did learning cuneiform take years, and what did that mean for scribes?",
+                "answer": "Model answer: The script was complex, so scribes attended special schools and earned high status, becoming the memory of the city."
+              },
+              {
+                "id": "h3-1-c3",
+                "question": "The reading says a tablet recording a worker's two bowls of barley is 'a receipt four thousand years old.' What does this passage reveal?",
+                "answer": "Model answer: It reveals that writing preserved ordinary details of daily life, letting us read the economy and work of people who lived four thousand years ago."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "h3-1-e1",
+                "prompt": "Outline a 5-paragraph essay on how writing changed power in Mesopotamia.",
+                "thesis": "Writing changed power because whoever controlled the records could tax, command, and be remembered.",
+                "points": [
+                  "Kings used writing to tax and command their people.",
+                  "Merchants used it to track debts across long journeys, and priests recorded offerings to the gods.",
+                  "Stories like the Epic of Gilgamesh outlived their authors by thousands of years because they were pressed into clay."
+                ],
+                "conclusion": "Restate the thesis and close with the reading's image: your note and the scribes' tablet do the same job, holding memory outside the mind."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "h3-1-vw1",
+                "words": [
+                  "cuneiform",
+                  "record"
+                ],
+                "prompt": "Use each word in an original sentence about the scribes of Uruk."
+              }
+            ]
           }
         ]
       }
@@ -1160,6 +1680,58 @@ const MM_WEEKS_68 = [
                 "id": "s1-s1",
                 "prompt": "Explain why a cell is like a workshop. Name two organelles and their jobs.",
                 "answer": "Model answer: A cell is like a workshop because each part has a special job that keeps the whole place running. The mitochondria release energy from food, like engines powering machines. The ribosomes build proteins, like workers assembling parts on a line."
+              }
+            ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "s3-0-c1",
+                "question": "Name four organelles and the job of each.",
+                "answer": "Model answer: The nucleus is the control center storing instructions, mitochondria release energy from food, ribosomes build proteins, and the cell membrane guards what enters and leaves."
+              },
+              {
+                "id": "s3-0-c2",
+                "question": "Why are mitochondria's inner walls folded?",
+                "answer": "Model answer: The folds give them extra surface for releasing energy. Each organelle's shape fits its work: form follows function, even at a scale a thousand times thinner than a hair."
+              },
+              {
+                "id": "s3-0-c3",
+                "question": "The reading suggests learning organelles in pairs: 'the nucleus gives orders, the ribosomes build.' What does this pairing reveal about the cell?",
+                "answer": "Model answer: It reveals the cell is an organized system where parts cooperate like departments in a city, not a random mix of parts."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "s3-0-e1",
+                "prompt": "Outline a 5-paragraph essay arguing that a cell thrives the way a city-state thrives: only when its parts cooperate.",
+                "thesis": "Like the first city-states, a cell thrives only when its parts cooperate, with each organelle doing its job.",
+                "points": [
+                  "The nucleus is the control center, giving orders like a city's rulers.",
+                  "Mitochondria supply power and ribosomes build, like workers and workshops feeding the city.",
+                  "When organelles fail, the cell suffers, just as a city-state suffers when its harvest or defenses fail."
+                ],
+                "conclusion": "Restate the thesis and close with the reading's pairing trick: master the four in pairs, and the rest of the crew will make sense."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "s3-0-vw1",
+                "words": [
+                  "invent",
+                  "record"
+                ],
+                "prompt": "Use each word in an original sentence about how biologists learned the jobs of organelles."
               }
             ]
           }
@@ -1235,6 +1807,58 @@ const MM_WEEKS_68 = [
                 "text": "The cell membrane is like an open door with no guards.",
                 "answer": "false",
                 "note": "It is like a guarded border, deciding what enters and leaves."
+              }
+            ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "s3-1-c1",
+                "question": "In the cell-as-a-city analogy, which organelle is the post office, and what does it do?",
+                "answer": "Model answer: The Golgi apparatus is the post office. It packages and addresses shipments of new proteins."
+              },
+              {
+                "id": "s3-1-c2",
+                "question": "Why does the whole cell fail if only one part breaks down?",
+                "answer": "Model answer: Because all the parts cooperate: if the power plants fail, the factories go dark, and if the gates jam, supplies pile up or run out."
+              },
+              {
+                "id": "s3-1-c3",
+                "question": "The reading says the real cell is 'stranger and more wonderful than any city humans ever built.' What does this reveal about the analogy?",
+                "answer": "Model answer: It reveals the analogy has limits: the city picture helps us remember organelle jobs, but the living cell is more complex than any human city."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "s3-1-e1",
+                "prompt": "Outline a 5-paragraph essay evaluating the cell-as-a-city analogy: where does it work and where does it break down?",
+                "thesis": "The cell-as-a-city analogy works because it matches jobs to places, but it breaks down because the real cell is stranger than any city.",
+                "points": [
+                  "The nucleus as city hall and mitochondria as power plants make organelle jobs easy to remember.",
+                  "The endoplasmic reticulum as highways and lysosomes as cleanup crews extend the match even deeper.",
+                  "Yet the cell runs one of nature's most complex factories at a scale a thousand times thinner than a hair, beyond anything humans built."
+                ],
+                "conclusion": "Restate the thesis and close with the reading's challenge: draw your own cell city from memory to prove you truly know the cell."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "s3-1-vw1",
+                "words": [
+                  "city-state",
+                  "invent"
+                ],
+                "prompt": "Use 'city-state' in a sentence comparing a cell to a city-state, and 'invent' in a sentence about a new organelle name you would invent."
               }
             ]
           }
@@ -1469,6 +2093,58 @@ const MM_WEEKS_68 = [
                 "note": "They were Nubian kings from Africa who ruled Egypt for nearly a hundred years."
               }
             ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "h4-0-c1",
+                "question": "Around 750 BCE, who took Egypt's throne, and what were they called?",
+                "answer": "Model answer: Nubian kings marched north and took the Egyptian throne. They were called the 25th Dynasty: Black pharaohs from Nubia who ruled all of Egypt for nearly a hundred years."
+              },
+              {
+                "id": "h4-0-c2",
+                "question": "Why did the pharaoh's power depend on the Nile's flood?",
+                "answer": "Model answer: The flood left rich black soil, and the pharaoh's officials measured the fields and collected taxes in grain, so controlling the harvest meant controlling wealth."
+              },
+              {
+                "id": "h4-0-c3",
+                "question": "Piye's inscription says, 'I did not burn a single city that opened its gates to me.' What does this passage reveal about how he wanted to be seen?",
+                "answer": "Model answer: It reveals that Piye wanted to be seen as a rightful, just Egyptian king who honored the temples, not a foreign invader."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "h4-0-e1",
+                "prompt": "Outline a 5-paragraph essay on how Piye's tomb inscription shows that monuments were tools of power. Analyze the inscription excerpt.",
+                "thesis": "Piye's inscription shows that Egyptian rulers used stone messages to claim legitimacy: power had to be carved to be believed.",
+                "points": [
+                  "Piye claims the gods of Egypt gave him the land, making his rule holy.",
+                  "He boasts that he did not burn a single city that opened its gates, posing as merciful.",
+                  "He promises to rule with justice and honor the temples, presenting himself as a true Egyptian king."
+                ],
+                "conclusion": "Restate the thesis and close with the reading's point: Egypt's story was never one people alone; it was African from its first stone to its last."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "h4-0-vw1",
+                "words": [
+                  "pharaoh",
+                  "worship"
+                ],
+                "prompt": "Use each word in an original sentence about the rulers of ancient Egypt."
+              }
+            ]
           }
         ]
       },
@@ -1537,6 +2213,58 @@ const MM_WEEKS_68 = [
                 "accept": [
                   "the ramps"
                 ]
+              }
+            ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "h4-1-c1",
+                "question": "Who built the largest pyramid at Giza, around when, and how big was it?",
+                "answer": "Model answer: Pharaoh Khufu built it around 2560 BCE. It held more than two million stone blocks and stood as the tallest building on Earth for nearly four thousand years."
+              },
+              {
+                "id": "h4-1-c2",
+                "question": "What did archaeologists find that corrected the old story that slaves built the pyramids?",
+                "answer": "Model answer: They found the workers' villages, bakeries, and graves near Giza, proving the pyramids were built by an organized army of workers, not slaves."
+              },
+              {
+                "id": "h4-1-c3",
+                "question": "The reading calls the pyramid 'a machine for showing power.' What does this passage reveal?",
+                "answer": "Model answer: It reveals the pyramid's message: its size, perfect star alignment, and tightly cut blocks proved the pharaoh could command tens of thousands of workers, making power visible in stone."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "h4-1-e1",
+                "prompt": "Outline a 5-paragraph essay arguing that the Great Pyramid was a political statement, not just a tomb.",
+                "thesis": "The Great Pyramid was a political statement: its size, precision, and organization proved the pharaoh's power to everyone who saw it.",
+                "points": [
+                  "Its perfect alignment with the stars displayed Egyptian knowledge of math and astronomy.",
+                  "Feeding and organizing tens of thousands of workers proved the government was strong.",
+                  "The pyramid told every viewer the same message: here ruled a king who believed death was only the beginning."
+                ],
+                "conclusion": "Restate the thesis and close with the reading's line: the pyramids remain the loudest statement any king ever made in stone."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "h4-1-vw1",
+                "words": [
+                  "pharaoh",
+                  "obey"
+                ],
+                "prompt": "Use each word in an original sentence about building the pyramids."
               }
             ]
           }
@@ -1611,6 +2339,58 @@ const MM_WEEKS_68 = [
                 "answer": "Model answer: The ingredients are carbon dioxide from the air and water from the soil, plus light energy. Powered by light, six molecules of each become one molecule of sugar and six molecules of oxygen. The plant keeps the sugar as food and releases the oxygen into the air."
               }
             ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "s4-0-c1",
+                "question": "What are the two ingredients of photosynthesis, and what two products come out?",
+                "answer": "Model answer: Carbon dioxide from the air and water from the soil go in, powered by light. The plant keeps sugar as food and releases oxygen as a leftover."
+              },
+              {
+                "id": "s4-0-c2",
+                "question": "Why do leaves look green?",
+                "answer": "Model answer: Chlorophyll traps red and blue light but cannot use green, so leaves reflect the green light they cannot use back to our eyes."
+              },
+              {
+                "id": "s4-0-c3",
+                "question": "The reading says, 'Almost every bite you take is sunlight, caught by chlorophyll and cooked into food.' What does this passage reveal?",
+                "answer": "Model answer: It reveals that photosynthesis starts nearly every food chain: bread, apples, and even chicken trace back to sunlight captured by leaves."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "s4-0-e1",
+                "prompt": "Outline a 5-paragraph essay explaining the photosynthesis recipe, analyzing each ingredient's role.",
+                "thesis": "Photosynthesis is the most important chemical reaction on Earth because it turns air, water, and light into food and fresh air.",
+                "points": [
+                  "Carbon dioxide from the air provides the carbon for building sugar.",
+                  "Water from the soil provides the rest of the raw material.",
+                  "Light, trapped by chlorophyll, powers the whole reaction, and oxygen is released for us to breathe."
+                ],
+                "conclusion": "Restate the thesis and close with the reading's challenge: trace your lunch back to sunlight and you will find a leaf."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "s4-0-vw1",
+                "words": [
+                  "oasis",
+                  "obey"
+                ],
+                "prompt": "Use 'oasis' in a sentence about where desert plants photosynthesize, and 'obey' in a sentence about a houseplant leaning toward light."
+              }
+            ]
           }
         ]
       },
@@ -1660,6 +2440,58 @@ const MM_WEEKS_68 = [
                 "id": "s2-s1",
                 "prompt": "Explain why a forest turns gold and crimson in autumn. Use two facts from the lesson.",
                 "answer": "Model answer: In autumn, trees pull the valuable chlorophyll back into their branches before the leaves fall. With the green gone, the yellow, orange, and red pigments that were hidden underneath shine through."
+              }
+            ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "s4-1-c1",
+                "question": "Why do forests turn gold and crimson in autumn?",
+                "answer": "Model answer: Trees pull the valuable chlorophyll back into their branches before the leaves fall. With the green gone, the hidden yellow, orange, and red pigments shine through."
+              },
+              {
+                "id": "s4-1-c2",
+                "question": "Why do evergreens keep their needles through winter?",
+                "answer": "Model answer: Their waxy coats protect the chlorophyll through winter."
+              },
+              {
+                "id": "s4-1-c3",
+                "question": "The reading says, 'Plants are honest chemists. Give them light, water, and air, and they will show you green.' What does this passage reveal?",
+                "answer": "Model answer: It reveals that leaves are a health readout: yellow leaves on a houseplant often mean too little light, so you can read a plant's health the way a doctor reads a patient's face."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "s4-1-e1",
+                "prompt": "Outline a 5-paragraph essay on how fall color reveals the hidden work of pigments, using the foil-on-leaf test as evidence.",
+                "thesis": "Autumn color is not paint added to leaves but a curtain lifting, revealing pigments that were there all along.",
+                "points": [
+                  "In spring and summer, chlorophyll floods every leaf and hides the yellows, oranges, and reds.",
+                  "In autumn, trees reclaim the valuable chlorophyll before the leaves fall, and the hidden pigments shine through.",
+                  "The foil test proves the point: a leaf covered for a week turns pale, starved of light for its chlorophyll."
+                ],
+                "conclusion": "Restate the thesis and close with the reading's line: fall color is not paint added to leaves; it is a curtain lifting."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "s4-1-vw1",
+                "words": [
+                  "oasis",
+                  "worship"
+                ],
+                "prompt": "Use 'oasis' in a sentence about a green desert valley, and 'worship' in a sentence about why ancient people honored the sun."
               }
             ]
           }
@@ -1894,6 +2726,58 @@ const MM_WEEKS_68 = [
                 "note": "Most Egyptians were farmers whose lives followed the river's rhythm."
               }
             ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "h5-0-c1",
+                "question": "What were the jobs of scribes and artisans in ancient Egypt?",
+                "answer": "Model answer: Scribes trained for years to master hieroglyphs, then recorded taxes, harvests, and royal orders. Artisans shaped gold, carved stone, and painted tomb walls with scenes of feasts and hunts."
+              },
+              {
+                "id": "h5-0-c2",
+                "question": "Why does the reading mention Imhotep in a section about daily life?",
+                "answer": "Model answer: Imhotep was an African architect and physician who designed the first pyramid, the Step Pyramid, and wrote early medical texts, showing that Egyptian daily life included great minds, not just farmers."
+              },
+              {
+                "id": "h5-0-c3",
+                "question": "The worker's letter says, 'The overseer gave me extra grain for the tomb work.' What does this passage reveal?",
+                "answer": "Model answer: It reveals that tomb work was paid, organized labor in a skilled society, and that ordinary Egyptians lived hard but deeply human lives tied to the river's rhythm."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "h5-0-e1",
+                "prompt": "Outline a 5-paragraph essay on what an Egyptian worker's letter reveals about daily life along the Nile.",
+                "thesis": "A worker's letter shows that ordinary Egyptians lived organized, skilled, deeply human lives, not the misery of slaves.",
+                "points": [
+                  "The harvest was good and the overseer gave extra grain for tomb work, showing paid, organized labor.",
+                  "Family news, the baby walking, and the tax collector show a normal household life.",
+                  "The rhythm of flood, planting, and harvest organized everything, and scribes and artisans show a skilled society."
+                ],
+                "conclusion": "Restate the thesis and close with the reading's line: three thousand years later, the rhythm remains, though the tools changed."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "h5-0-vw1",
+                "words": [
+                  "scribe",
+                  "artisan"
+                ],
+                "prompt": "Use each word in an original sentence about work in ancient Egypt."
+              }
+            ]
           }
         ]
       },
@@ -1972,6 +2856,58 @@ const MM_WEEKS_68 = [
                 "answer": "c"
               }
             ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "h5-1-c1",
+                "question": "How did Champollion crack the hieroglyph code?",
+                "answer": "Model answer: He used the Rosetta Stone, a slab carved with the same message in three scripts, and used the known Greek text to decode the hieroglyphs."
+              },
+              {
+                "id": "h5-1-c2",
+                "question": "Compare the shabti figurine and the scribe's palette: what two Egypts do they show?",
+                "answer": "Model answer: The shabti was meant to do farm work for the dead in the afterlife, while the palette belonged to a living official who measured grain and wrote orders. One served the next world, the other ran this one."
+              },
+              {
+                "id": "h5-1-c3",
+                "question": "Champollion was 'driven by one question: what did the Egyptians say?' What does this passage reveal about what his answer unlocked?",
+                "answer": "Model answer: It reveals that cracking the code unlocked three thousand years of voices: love poems, tax lists, medical guides, and temple hymns, and we are still listening."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "h5-1-e1",
+                "prompt": "Outline a 5-paragraph essay comparing the shabti figurine and the scribe's palette as two stories of ancient Egypt.",
+                "thesis": "Two artifacts tell two Egypts: one that planned for eternity and one that managed every harvest.",
+                "points": [
+                  "The shabti figurine served the next world, doing farm work for the dead in the afterlife.",
+                  "The scribe's palette served this world, measuring grain and writing orders for a living official.",
+                  "Together they show an Egypt that thought about both eternity and every harvest."
+                ],
+                "conclusion": "Restate the thesis and close with Champollion's gift: because he cracked the code, three thousand years of voices began to speak again."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "h5-1-vw1",
+                "words": [
+                  "scribe",
+                  "labor"
+                ],
+                "prompt": "Use each word in an original sentence about the work of writing in ancient Egypt."
+              }
+            ]
           }
         ]
       }
@@ -2044,6 +2980,58 @@ const MM_WEEKS_68 = [
                 "answer": "Model answer: Photosynthesis builds sugar up from carbon dioxide and water using light energy. Cellular respiration breaks sugar down with oxygen to release energy. One stores energy in sugar, and the other frees it for the cell to use."
               }
             ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "s5-0-c1",
+                "question": "What is cellular respiration, and where does it happen?",
+                "answer": "Model answer: Respiration burns sugar with oxygen inside the mitochondria, releasing energy the cell can use. It is the mirror image of photosynthesis."
+              },
+              {
+                "id": "s5-0-c2",
+                "question": "Why do you pant after a race?",
+                "answer": "Model answer: Your mitochondria need more oxygen to make more ATP for your hardworking muscles, so your breathing quickens to deliver air."
+              },
+              {
+                "id": "s5-0-c3",
+                "question": "The reading calls ATP 'a rechargeable battery the cell carries everywhere.' What does this passage reveal?",
+                "answer": "Model answer: It reveals that energy is released in small, controlled steps and stored, so muscles draw on it to contract and nerves draw on it to fire, exactly when needed."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "s5-0-e1",
+                "prompt": "Outline a 5-paragraph essay comparing photosynthesis and cellular respiration as mirror images.",
+                "thesis": "Photosynthesis builds sugar up and respiration breaks it down, and together they keep every cell alive to enjoy the meal.",
+                "points": [
+                  "Photosynthesis captures light to build sugar from carbon dioxide and water.",
+                  "Respiration burns that sugar with oxygen in the mitochondria, storing the energy as ATP.",
+                  "The two reactions trade gases in an endless cycle, feeding the world and powering every cell."
+                ],
+                "conclusion": "Restate the thesis and close with the reading's image: feel your pulse after running in place, and you feel respiration working."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "s5-0-vw1",
+                "words": [
+                  "energy",
+                  "labor"
+                ],
+                "prompt": "Use each word in an original sentence about how your cells work."
+              }
+            ]
           }
         ]
       },
@@ -2093,6 +3081,58 @@ const MM_WEEKS_68 = [
                 "id": "s2-s1",
                 "prompt": "Describe the journey of one breath of oxygen from your lungs to a muscle cell. Use two facts from the lesson.",
                 "answer": "Model answer: Oxygen enters the lungs, where tiny air sacs pass it into the blood. The blood carries it to a muscle cell, where mitochondria use it to burn sugar and make ATP. The leftover carbon dioxide rides the blood back to the lungs and leaves when I exhale."
+              }
+            ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "s5-1-c1",
+                "question": "Describe the partnership between your lungs and your cells.",
+                "answer": "Model answer: Breathing brings oxygen deep into the lungs, where tiny air sacs pass it into the blood. The blood carries oxygen to every cell, the mitochondria use it to burn sugar for energy, and carbon dioxide rides the blood back to the lungs and leaves with each exhale."
+              },
+              {
+                "id": "s5-1-c2",
+                "question": "Why does holding your breath for thirty seconds make your chest demand air?",
+                "answer": "Model answer: Because your cells never stop burning fuel, so they keep calling for oxygen."
+              },
+              {
+                "id": "s5-1-c3",
+                "question": "The reading says, 'Every breath you take is a trade with a leaf somewhere.' What does this passage reveal?",
+                "answer": "Model answer: It reveals that plants and animals are locked in an endless exchange: plants release the oxygen animals need, and animals release the carbon dioxide plants need."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "s5-1-e1",
+                "prompt": "Outline a 5-paragraph essay on how breathing connects you to a leaf.",
+                "thesis": "Breathing is not just moving air; it is a trade with plants that has balanced Earth's air for hundreds of millions of years.",
+                "points": [
+                  "Your diaphragm pulls air in, and your blood carries oxygen out to the cells.",
+                  "Your mitochondria spend that oxygen burning sugar for ATP.",
+                  "Plants return the favor, turning your exhaled carbon dioxide back into oxygen."
+                ],
+                "conclusion": "Restate the thesis and close with the reading's line: you never breathe alone."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "s5-1-vw1",
+                "words": [
+                  "labor",
+                  "merchant"
+                ],
+                "prompt": "Use 'labor' in a sentence about your diaphragm's work, and 'merchant' in a sentence comparing plants and animals to trading partners."
               }
             ]
           }
@@ -2327,6 +3367,58 @@ const MM_WEEKS_68 = [
                 "note": "He traveled with thousands of attendants, and his gifts of gold made prices fall in Egypt."
               }
             ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "h6-0-c1",
+                "question": "How did the Mali Empire get its wealth?",
+                "answer": "Model answer: Camel caravans carried salt south from the desert and gold north to the Mediterranean, and the king taxed every load that crossed his land."
+              },
+              {
+                "id": "h6-0-c2",
+                "question": "Why did Mansa Musa's pilgrimage to Mecca lower prices in Egypt for years?",
+                "answer": "Model answer: He traveled with thousands of attendants and camels loaded with gold, and he gave away so much gold along the way that prices in Egypt fell for years."
+              },
+              {
+                "id": "h6-0-c3",
+                "question": "Ibn Battuta wrote, 'In the markets, I saw salt traded for its weight in gold.' What does this passage reveal about his view of Mali?",
+                "answer": "Model answer: It reveals that he saw an empire known not only for riches but for welcome: the people were generous and honored their guests, and the king gave gifts of gold to poets and scholars."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "h6-0-e1",
+                "prompt": "Outline a 5-paragraph essay on how Mansa Musa's pilgrimage put Africa on the world's map. Analyze Ibn Battuta's account as evidence.",
+                "thesis": "Mansa Musa's pilgrimage changed the world's image of Africa from unknown land to a place of wealth, faith, and learning.",
+                "points": [
+                  "The gold he gave away crashed prices in Egypt for years, proving his riches were real.",
+                  "Maps in Europe began marking Mali with a golden king on a golden throne.",
+                  "Ibn Battuta's account showed generosity and welcome, not just gold, shaping how the world saw Mali."
+                ],
+                "conclusion": "Restate the thesis and close with the reading's line: the world had learned that Africa held empires to rival any on Earth."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "h6-0-vw1",
+                "words": [
+                  "griot",
+                  "pilgrimage"
+                ],
+                "prompt": "Use each word in an original sentence about Mansa Musa."
+              }
+            ]
           }
         ]
       },
@@ -2405,6 +3497,58 @@ const MM_WEEKS_68 = [
                 "answer": "c"
               }
             ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "h6-1-c1",
+                "question": "What did Mansa Musa build in Timbuktu, and what did students study there?",
+                "answer": "Model answer: He built mosques and schools that drew scholars from across Africa and the Middle East. Students studied law, math, astronomy, and medicine."
+              },
+              {
+                "id": "h6-1-c2",
+                "question": "How did griots and books carry Mali's memory together?",
+                "answer": "Model answer: Griots memorized the deeds of kings in songs and could recite a family's history back seven generations, while Timbuktu held hundreds of thousands of handwritten books copied and recopied by scholars."
+              },
+              {
+                "id": "h6-1-c3",
+                "question": "The reading says, 'Mansa Musa's gold is long spent, but his books are still paying interest.' What does this passage reveal?",
+                "answer": "Model answer: It reveals that learning outlasts wealth: the gold was spent, but the manuscripts survive and are still studied, proving Mali's golden age was about ideas as well as gold."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "h6-1-e1",
+                "prompt": "Outline a 5-paragraph essay arguing that Mansa Musa's greatest investment was learning, not gold.",
+                "thesis": "Mansa Musa spent his gold on something more lasting than palaces: a kingdom of learning whose books still pay interest.",
+                "points": [
+                  "Timbuktu's mosques and schools drew scholars from Cairo to Spain.",
+                  "Griots kept the older oral history alive in song, so written books and sung stories carried Mali's memory together.",
+                  "The manuscripts still survive today in wooden chests, while the gold is long gone."
+                ],
+                "conclusion": "Restate the thesis and close with the reading's belief: a kingdom's greatest treasure is a learned mind."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "h6-1-vw1",
+                "words": [
+                  "scholar",
+                  "griot"
+                ],
+                "prompt": "Use each word in an original sentence about learning in the Mali Empire."
+              }
+            ]
           }
         ]
       }
@@ -2477,6 +3621,58 @@ const MM_WEEKS_68 = [
                 "answer": "Model answer: The new cells must be identical because each one needs a full, correct set of DNA instructions to do its job. If the copies differed, a healed cut might grow the wrong kind of tissue. Identical copies keep the body working as designed."
               }
             ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "s6-0-c1",
+                "question": "What are the steps of mitosis, in order?",
+                "answer": "Model answer: First, the cell copies its DNA. Then the copies line up in the middle of the cell. Next, they are pulled apart to opposite sides. Finally, the cell pinches in two, and each half becomes a complete new cell."
+              },
+              {
+                "id": "s6-0-c2",
+                "question": "Why must each daughter cell get the exact same DNA?",
+                "answer": "Model answer: So that a healed cut grows normal skin instead of something strange: each new cell needs the full, correct set of instructions."
+              },
+              {
+                "id": "s6-0-c3",
+                "question": "The reading says, 'Mitosis is life's copy machine, running quietly in your body millions of times a day.' What does this passage reveal?",
+                "answer": "Model answer: It reveals that cell division is constant and silent: your body makes about two million new cells every second, healing scrapes and replacing skin without you noticing."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "s6-0-e1",
+                "prompt": "Outline a 5-paragraph essay on how mitosis built you from a single cell.",
+                "thesis": "Mitosis is the careful copy machine that grew you from one cell into a person and heals you every day.",
+                "points": [
+                  "The cell copies its full set of DNA so each new cell gets complete instructions.",
+                  "The copies line up and are pulled apart exactly, so nothing is lost.",
+                  "Identical daughter cells become skin, blood, and bone, and the same process heals a scraped knee."
+                ],
+                "conclusion": "Restate the thesis and close with the reading's invitation: look at an onion root tip under a microscope and watch millions of years of evolution in a slice of onion."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "s6-0-vw1",
+                "words": [
+                  "divide",
+                  "identical"
+                ],
+                "prompt": "Use each word in an original sentence about mitosis."
+              }
+            ]
           }
         ]
       },
@@ -2541,6 +3737,58 @@ const MM_WEEKS_68 = [
                 "text": "Every mutation harms the cell.",
                 "answer": "false",
                 "note": "Most mutations do nothing, and a rare few can help."
+              }
+            ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "s6-1-c1",
+                "question": "What is a mutation, and what do the cell's proofreaders do about mistakes?",
+                "answer": "Model answer: A mutation is a change in DNA. Before mitosis, special proteins check the copied strands letter by letter, like editors proofreading a book, and fix errors before the cell divides."
+              },
+              {
+                "id": "s6-1-c2",
+                "question": "How can one cell's divisions build a whole forest?",
+                "answer": "Model answer: A tiny seed holds cells that divide again and again, following DNA instructions, until they become roots, stems, and leaves."
+              },
+              {
+                "id": "s6-1-c3",
+                "question": "The reading says, 'You owe your health to molecular proofreaders you will never see.' What does this passage reveal?",
+                "answer": "Model answer: It reveals that without constant error-checking, every division would scatter typos and complex life could never last. The editors fix thousands of mistakes a day, silently."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "s6-1-e1",
+                "prompt": "Outline a 5-paragraph essay on why careful copying matters: the cell's proofreaders.",
+                "thesis": "The proofreading before mitosis matters more than it seems, because without it complex life could never last.",
+                "points": [
+                  "Every DNA strand is duplicated letter by letter before the cell divides.",
+                  "Protein editors check the copy like proofreaders and fix mistakes before division.",
+                  "Slips become mutations, which can harm the cell, cause cancer, or rarely help, driving new traits."
+                ],
+                "conclusion": "Restate the thesis and close with the reading's image: the proofreaders work while you sleep, eat, and play, asking nothing in return."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "s6-1-vw1",
+                "words": [
+                  "identical",
+                  "scholar"
+                ],
+                "prompt": "Use 'identical' in a sentence about daughter cells, and 'scholar' in a sentence about the scientists who study mutations."
               }
             ]
           }
@@ -2775,6 +4023,58 @@ const MM_WEEKS_68 = [
                 "note": "Athens prized debate and art, while Sparta prized discipline and war."
               }
             ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "h7-0-c1",
+                "question": "Why did Greece have many city-states instead of one country?",
+                "answer": "Model answer: Rocky mountains and deep seas split the land into valleys, and each valley built its own polis with its own government, army, coins, and gods."
+              },
+              {
+                "id": "h7-0-c2",
+                "question": "How did Athens and Sparta raise boys differently, and what did each city value?",
+                "answer": "Model answer: An Athenian boy learned reading and music, reflecting Athens's love of debate, art, and ideas. A Spartan boy was taken from home at age seven to train as a soldier, reflecting Sparta's love of discipline and obedience."
+              },
+              {
+                "id": "h7-0-c3",
+                "question": "Pericles boasted, 'Our government favors the many, not the few.' What does this passage reveal about his view of Athens?",
+                "answer": "Model answer: It reveals that Pericles saw the assembly as rule by the people, where every citizen was equal before the law, even though women, enslaved people, and foreigners could not vote."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "h7-0-e1",
+                "prompt": "Outline a 5-paragraph essay on the limits of Athenian democracy. Analyze Pericles' excerpt.",
+                "thesis": "Athens planted the idea that government could belong to the people, but its democracy was narrow, leaving most people outside the circle.",
+                "points": [
+                  "Cleisthenes gave ordinary citizens a share of power through the assembly and juries.",
+                  "Women, enslaved people, and foreigners could not vote, so the circle was small.",
+                  "Pericles' boast that every citizen is equal before the law applied only to the few inside it."
+                ],
+                "conclusion": "Restate the thesis and close with the reading's point: the idea was planted, and it would take two thousand years before rule by the people grew to include everyone."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "h7-0-vw1",
+                "words": [
+                  "polis",
+                  "citizen"
+                ],
+                "prompt": "Use each word in an original sentence about ancient Greece."
+              }
+            ]
           }
         ]
       },
@@ -2853,6 +4153,58 @@ const MM_WEEKS_68 = [
                 "answer": "c"
               }
             ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "h7-1-c1",
+                "question": "What price did each city pay for its choice?",
+                "answer": "Model answer: Athens's love of debate sometimes led to mob rule, and its assembly once voted to execute its own best generals in anger. Sparta's discipline made it strong in war but poor in art, science, and new ideas."
+              },
+              {
+                "id": "h7-1-c2",
+                "question": "Why did the rivalry between Athens and Sparta end badly for both?",
+                "answer": "Model answer: Sparta beat Athens in a long war, then Thebes beat Sparta, then Macedonia conquered them all. The poleis proved brilliant at competing and terrible at uniting."
+              },
+              {
+                "id": "h7-1-c3",
+                "question": "The reading says, 'Their ideas outlived their armies, which may be the real victory.' What does this passage reveal?",
+                "answer": "Model answer: It reveals that although the cities fell, ideas like citizen power and debate survived, and in the end those ideas mattered more than military victory."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "h7-1-e1",
+                "prompt": "Outline a 5-paragraph essay comparing Athens and Sparta as two answers to the question of what makes a city strong.",
+                "thesis": "Athens and Sparta each chose a strength, debate and discipline, and each choice carried a price that eventually destroyed both.",
+                "points": [
+                  "Athens chose ideas and citizen power, but its assembly could turn into mob rule.",
+                  "Sparta chose military discipline, but it grew poor in art, science, and new ideas.",
+                  "Their two-hundred-year rivalry tore the Greek world apart until Macedonia conquered them all."
+                ],
+                "conclusion": "Restate the thesis and close with the reading's line: their ideas outlived their armies, which may be the real victory."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "h7-1-vw1",
+                "words": [
+                  "debate",
+                  "polis"
+                ],
+                "prompt": "Use each word in an original sentence comparing Athens and Sparta."
+              }
+            ]
           }
         ]
       }
@@ -2925,6 +4277,58 @@ const MM_WEEKS_68 = [
                 "answer": "Model answer: When Mendel crossed the children of a tall and short plant, about three quarters of the grandchildren were tall and one quarter were short. The short trait was recessive, so it hid in the first generation and reappeared when a plant got two recessive copies."
               }
             ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "s7-0-c1",
+                "question": "Why did Mendel choose pea plants for his experiments?",
+                "answer": "Model answer: They grow fast and show clear traits: tall or short stems, green or yellow seeds, smooth or wrinkled skins. He could cross them and count thousands of offspring."
+              },
+              {
+                "id": "s7-0-c2",
+                "question": "What did the 3 to 1 ratio in the grandchildren tell Mendel?",
+                "answer": "Model answer: When the tall children were crossed, about three quarters of the grandchildren were tall and one quarter were short. The short trait had been hiding, waiting for its chance to appear."
+              },
+              {
+                "id": "s7-0-c3",
+                "question": "The reading says, 'When the numbers form a pattern, nature is telling you something.' What does this reveal about Mendel's method?",
+                "answer": "Model answer: It reveals that Mendel's power was careful counting: the 3 to 1 pattern exposed the hidden rules of inheritance that no one had seen before."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "s7-0-e1",
+                "prompt": "Outline a 5-paragraph essay on how a monk counting peas changed science.",
+                "thesis": "Mendel changed science forever by proving that inheritance follows hidden rules, discovered through patient counting in a monastery garden.",
+                "points": [
+                  "Peas showed clear, countable traits that made patterns visible.",
+                  "The 3 to 1 ratio revealed dominant traits that show and recessive traits that hide.",
+                  "His paper sat unread for thirty-five years, then scientists realized he had found the laws of genetics."
+                ],
+                "conclusion": "Restate the thesis and close with the reading's line: the monk who counted peas taught science its most powerful habit."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "s7-0-vw1",
+                "words": [
+                  "inherit",
+                  "offspring"
+                ],
+                "prompt": "Use each word in an original sentence about Mendel's pea plants."
+              }
+            ]
           }
         ]
       },
@@ -2974,6 +4378,58 @@ const MM_WEEKS_68 = [
                 "id": "s2-s1",
                 "prompt": "How could two tall pea plants have a short child? Explain using Mendel's rules.",
                 "answer": "Model answer: Both tall parents could carry one hidden recessive copy for shortness along with their dominant tall copy. If their child gets the recessive copy from each parent, the recessive trait appears and the child is short."
+              }
+            ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "s7-1-c1",
+                "question": "How can two tall plants have a short child?",
+                "answer": "Model answer: Each parent gives one copy of its instructions to each child. If both parents carry a hidden recessive copy, the child can get two recessive copies, one from each parent, and the recessive trait appears."
+              },
+              {
+                "id": "s7-1-c2",
+                "question": "Why did Mendel's guess about two copies prove so powerful even though he never knew about DNA?",
+                "answer": "Model answer: A century later, scientists found the physical instructions he had predicted, coiled inside every cell. His counting had revealed the pattern before anyone saw the mechanism."
+              },
+              {
+                "id": "s7-1-c3",
+                "question": "The reading says traits 'pass down in whole copies, shuffled and dealt like cards.' What does this passage reveal?",
+                "answer": "Model answer: It reveals that traits do not blend like paint. Each generation reshuffles whole copies of instructions, which is why a hidden trait can reappear."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "s7-1-e1",
+                "prompt": "Outline a 5-paragraph essay explaining why two brown-eyed parents can have a blue-eyed child.",
+                "thesis": "Two brown-eyed parents can have a blue-eyed child because recessive traits hide in carriers and reappear when a child gets two hidden copies.",
+                "points": [
+                  "Each parent gives one copy of its instructions to each child.",
+                  "One dominant copy is enough for the dominant trait to show.",
+                  "The recessive trait appears only when a child gets two recessive copies, one from each parent."
+                ],
+                "conclusion": "Restate the thesis and close with the reading's challenge: test your own traits at the dinner table and do Mendel's experiment yourself."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "s7-1-vw1",
+                "words": [
+                  "inherit",
+                  "debate"
+                ],
+                "prompt": "Use 'inherit' in a sentence about earlobes, and 'debate' in a sentence about whether traits blend like paint or pass in whole copies."
               }
             ]
           }
@@ -3208,6 +4664,58 @@ const MM_WEEKS_68 = [
                 "note": "Douglass used Greek ideals of liberty to argue against slavery."
               }
             ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "h8-0-c1",
+                "question": "What did Cleisthenes do around 508 BCE to break the nobles' power?",
+                "answer": "Model answer: He divided Athens into new voting tribes that mixed rich and poor neighborhoods, so no noble family could control the vote, then he opened the assembly to all citizens."
+              },
+              {
+                "id": "h8-0-c2",
+                "question": "Why was ostracism called a 'strange safety valve,' and how did it sometimes work too well?",
+                "answer": "Model answer: Citizens could vote to banish any person for ten years by scratching a name on broken pottery, meant to stop any one man from becoming a tyrant. But the great general Themistocles, who had saved Greece from Persia, was ostracized by the city he rescued."
+              },
+              {
+                "id": "h8-0-c3",
+                "question": "Douglass argued, 'If liberty is right for Athens, it is right for every person.' What does this passage reveal?",
+                "answer": "Model answer: It reveals that Douglass turned Greece's own ideals into a weapon against slavery, arguing that America praised liberty while holding millions in chains."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "h8-0-e1",
+                "prompt": "Outline a 5-paragraph essay comparing who counted as a citizen in Athens and in early America, using Douglass's argument.",
+                "thesis": "Athens and early America both praised liberty while drawing a narrow circle of citizens, and Douglass used Athens's own words to demand a wider one.",
+                "points": [
+                  "In Athens, only free adult males born in the polis could vote in the assembly.",
+                  "Early America praised Greek ideals while holding millions in chains.",
+                  "Douglass argued that if liberty is right for Athens, it is right for every person."
+                ],
+                "conclusion": "Restate the thesis and close with the reading's question: every expansion of voting rights has been an answer to the question Athens first asked, who counts?"
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "h8-0-vw1",
+                "words": [
+                  "assembly",
+                  "ostracism"
+                ],
+                "prompt": "Use each word in an original sentence about Athenian democracy."
+              }
+            ]
           }
         ]
       },
@@ -3286,6 +4794,58 @@ const MM_WEEKS_68 = [
                 "answer": "c"
               }
             ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "h8-1-c1",
+                "question": "Out of about 300,000 people in Athens, how many could vote, and who was shut out?",
+                "answer": "Model answer: Only about 30,000 could vote. Women, enslaved people, and foreigners could not enter the assembly."
+              },
+              {
+                "id": "h8-1-c2",
+                "question": "Why was Athens's direct democracy sometimes 'reckless'?",
+                "answer": "Model answer: The assembly could be swayed by a great speaker one day and reverse itself the next. Juries of 500 held one-day trials with no lawyers, so justice was passionate but unpredictable."
+              },
+              {
+                "id": "h8-1-c3",
+                "question": "The reading says every generation 'has faced the same question Athens faced: who counts?' What does this passage reveal about Athens's legacy?",
+                "answer": "Model answer: It reveals that Athens's lasting legacy is not its narrow democracy but its question: every expansion of voting rights since has been an answer to it."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "h8-1-e1",
+                "prompt": "Outline a 5-paragraph essay arguing that Athens's greatest gift was its question, not its answer.",
+                "thesis": "Athens invented something precious, the idea that ordinary people should govern themselves, while showing how easily a democracy leaves most people outside the circle.",
+                "points": [
+                  "The assembly gave ordinary citizens real power over war, peace, and law.",
+                  "The circle excluded women, enslaved people, and foreigners, leaving most people out.",
+                  "Every generation since, from workers to women to young adults, has widened the circle."
+                ],
+                "conclusion": "Restate the thesis and close with the reading's line: Athens lost its democracy to kings and conquerors, but the question survived."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "h8-1-vw1",
+                "words": [
+                  "assembly",
+                  "exile"
+                ],
+                "prompt": "Use each word in an original sentence about the limits of Athenian citizenship."
+              }
+            ]
           }
         ]
       }
@@ -3358,6 +4918,58 @@ const MM_WEEKS_68 = [
                 "answer": "Model answer: Both parents could be Bb, meaning each carries one dominant brown copy and one recessive blue copy. If their child gets the lowercase b from each parent, the child is bb and has blue eyes. The recessive trait hides for a generation, then appears."
               }
             ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "s8-0-c1",
+                "question": "What do the letters BB, Bb, and bb mean for eye color in the simple model?",
+                "answer": "Model answer: Capital B stands for dominant brown eyes and lowercase b for recessive blue. BB or Bb gives brown eyes because one capital letter is enough, while only bb gives blue eyes."
+              },
+              {
+                "id": "s8-0-c2",
+                "question": "Why can two brown-eyed parents have a blue-eyed child?",
+                "answer": "Model answer: Both parents can carry a hidden recessive copy. If the child gets the recessive copy from each parent, the hidden trait appears."
+              },
+              {
+                "id": "s8-0-c3",
+                "question": "The reading says real traits are often more complex, yet 'Mendel's letters still work as a first map of inheritance.' What does this reveal?",
+                "answer": "Model answer: It reveals the simple model is a starting map, not the full truth: eye color actually involves many genes, but the dominant and recessive pattern holds for thousands of traits."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "s8-0-e1",
+                "prompt": "Outline a 5-paragraph essay on how scientists write inheritance in letters, using eye color as your example.",
+                "thesis": "Mendel's alphabet of capital and lowercase letters turns hidden inheritance into a readable code.",
+                "points": [
+                  "Each person carries two copies of the instructions, one from each parent.",
+                  "One dominant copy is enough for the dominant trait to show.",
+                  "Genetic counselors use these letters to map who carries a condition and what the chances are."
+                ],
+                "conclusion": "Restate the thesis and close with the reading's point: Mendel's alphabet became a tool for medicine."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "s8-0-vw1",
+                "words": [
+                  "dominant",
+                  "recessive"
+                ],
+                "prompt": "Use each word in an original sentence about eye color."
+              }
+            ]
           }
         ]
       },
@@ -3407,6 +5019,58 @@ const MM_WEEKS_68 = [
                 "id": "s2-s1",
                 "prompt": "Explain how a Punnett square turns Mendel's 3 to 1 ratio into percents. Use the Bb example.",
                 "answer": "Model answer: The square for two Bb parents gives four boxes: BB, Bb, Bb, and bb. Three of the four boxes show the dominant trait, which is 75 percent, and one shows the recessive trait, which is 25 percent. That is the 3 to 1 ratio written as percents."
+              }
+            ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "s8-1-c1",
+                "question": "How do you build a Punnett square, and what does it show for two Bb parents?",
+                "answer": "Model answer: Draw a box with two rows and two columns. Write one parent's two copies across the top and the other parent's down the side, and each box shows one possible child. For two Bb parents the boxes are BB, Bb, Bb, and bb: a 75 percent chance of brown eyes and a 25 percent chance of blue."
+              },
+              {
+                "id": "s8-1-c2",
+                "question": "Why is probability 'not a promise'?",
+                "answer": "Model answer: Any single child could be the one in four. The percents hold true only over many children."
+              },
+              {
+                "id": "s8-1-c3",
+                "question": "The reading says, 'When you can answer from your own square, you own the method.' What does this passage reveal?",
+                "answer": "Model answer: It reveals that building the square yourself, not just reading about it, is how you truly learn the method, the same habit Mendel used."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "s8-1-e1",
+                "prompt": "Outline a 5-paragraph essay on how the Punnett square turns Mendel's 3 to 1 ratio into a prediction.",
+                "thesis": "The Punnett square turns counting into predicting, letting breeders, doctors, and students see the odds of inheritance.",
+                "points": [
+                  "The grid maps every possible child in four boxes.",
+                  "Counting the boxes turns the 3 to 1 ratio into percents: 75 and 25.",
+                  "Breeders predict prized traits in calves, and doctors tell parents the chance a child will inherit a condition."
+                ],
+                "conclusion": "Restate the thesis and close with the reading's caution and challenge: probability is not a promise, but build your own square and you own the method."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "s8-1-vw1",
+                "words": [
+                  "dominant",
+                  "recessive"
+                ],
+                "prompt": "Use each word in an original sentence about a Punnett square."
               }
             ]
           }
@@ -3641,6 +5305,58 @@ const MM_WEEKS_68 = [
                 "note": "Citizens elected two consuls to lead for one year."
               }
             ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "h9-0-c1",
+                "question": "How was Rome's republic organized after the kings were thrown out?",
+                "answer": "Model answer: Citizens elected two consuls to lead for one year, a Senate of elders advised them, and laws were written down in the Twelve Tables so every citizen could read them."
+              },
+              {
+                "id": "h9-0-c2",
+                "question": "Why did Rome's army make the republic strong?",
+                "answer": "Model answer: Roman legions, units of about 5,000 soldiers, trained harder than any army on Earth. They marched twenty miles a day, built a fortified camp every night, and never broke formation."
+              },
+              {
+                "id": "h9-0-c3",
+                "question": "The Twelve Tables read, 'The law is the same for rich and poor.' What does this excerpt reveal?",
+                "answer": "Model answer: It reveals the republic's promise: written law applied equally to everyone, so every citizen could read and claim it."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "h9-0-e1",
+                "prompt": "Outline a 5-paragraph essay on how Rome's republic balanced power, and why that balance broke. Analyze the Twelve Tables excerpt.",
+                "thesis": "Rome's republic balanced a king's power with elected consuls, a Senate, and written law, but its conquering army outgrew the rules meant to control it.",
+                "points": [
+                  "Two consuls, a Senate, and the Twelve Tables shared and limited power, with the law the same for rich and poor.",
+                  "The legions made generals rich and famous, and soldiers grew loyal to their generals instead of the law.",
+                  "Septimius Severus, a boy from Africa, climbed to the top of the empire, showing how far Rome's reach extended."
+                ],
+                "conclusion": "Restate the thesis and close with the reading's line: the Senate's marble is dust, but its idea marches on."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "h9-0-vw1",
+                "words": [
+                  "republic",
+                  "legion"
+                ],
+                "prompt": "Use each word in an original sentence about ancient Rome."
+              }
+            ]
           }
         ]
       },
@@ -3708,6 +5424,58 @@ const MM_WEEKS_68 = [
                 "id": "h2-o4",
                 "event": "Augustus becomes the first emperor",
                 "answer": 4
+              }
+            ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "h9-1-c1",
+                "question": "How did Caesar's assassination fail to save the republic?",
+                "answer": "Model answer: Killing Caesar on March 15, 44 BCE did not save the republic. It started thirteen more years of civil war, which ended with Caesar's heir Octavian taking the title Augustus, the first emperor."
+              },
+              {
+                "id": "h9-1-c2",
+                "question": "Why did Augustus keep the Senate, consuls, and assemblies if he held all real power?",
+                "answer": "Model answer: He kept the republic's forms so Romans would accept his rule. They called it a restored republic, but it was an empire with good manners."
+              },
+              {
+                "id": "h9-1-c3",
+                "question": "The reading says, 'When soldiers answer to a person instead of the law, the law is in danger.' What does this passage reveal?",
+                "answer": "Model answer: It reveals the republic's fatal flaw: rich generals bought their legions' loyalty, and no law could compete with a legion's loyalty to its commander."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "h9-1-e1",
+                "prompt": "Outline a 5-paragraph essay arguing that the republic's success destroyed it.",
+                "thesis": "The republic's success destroyed it: victory gave generals money, fame, and loyal armies that no law could control.",
+                "points": [
+                  "Marius, Sulla, Pompey, and Caesar each used armies to seize power in Rome.",
+                  "Killing Caesar led to civil war, not freedom, because the armies answered to generals, not laws.",
+                  "Augustus kept the Senate and consuls but held the armies and the treasury: a republic wearing an empire's clothes."
+                ],
+                "conclusion": "Restate the thesis and close with the reading's lesson: when soldiers answer to a person instead of the law, the law is in danger."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "h9-1-vw1",
+                "words": [
+                  "republic",
+                  "rebel"
+                ],
+                "prompt": "Use each word in an original sentence about the fall of Rome's republic."
               }
             ]
           }
@@ -3782,6 +5550,58 @@ const MM_WEEKS_68 = [
                 "answer": "Model answer: DNA is called the blueprint of life because it holds the instructions that build a whole living thing, from height to eye color. It is copied before every cell division so each new cell gets the full set of instructions."
               }
             ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "s9-0-c1",
+                "question": "How is DNA packed, and how much of it is in one cell?",
+                "answer": "Model answer: DNA is packed into chromosomes: humans have 46 in each cell, 23 from each parent. Stretched out, one cell's DNA would be about six feet long, yet it fits inside a nucleus smaller than a dust speck."
+              },
+              {
+                "id": "s9-0-c2",
+                "question": "Why is DNA called the densest instruction manual in nature?",
+                "answer": "Model answer: The order of base pairs on its twisted ladder spells out the instructions for a whole living thing, from height to eye color, in a molecule too small to see."
+              },
+              {
+                "id": "s9-0-c3",
+                "question": "The reading says, 'Read carefully: you are the story it tells.' What does this passage reveal?",
+                "answer": "Model answer: It reveals that DNA is not just chemistry but identity: the DNA in your body, laid end to end, would stretch to the sun and back many times, and it writes each person's story."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "s9-0-e1",
+                "prompt": "Outline a 5-paragraph essay on DNA as the blueprint of life.",
+                "thesis": "DNA is the blueprint for a whole living thing: a twisted ladder whose rungs spell out instructions in the densest manual in nature.",
+                "points": [
+                  "The rungs of the ladder are base pairs, and their order spells out instructions.",
+                  "Genes, sections of DNA, carry the instructions for single traits, like Mendel's pea colors.",
+                  "When a cell divides, it copies its entire DNA so each new cell gets the full blueprint."
+                ],
+                "conclusion": "Restate the thesis and close with the reading's wonder: nature writes its longest books in its tiniest print."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "s9-0-vw1",
+                "words": [
+                  "mutate",
+                  "conquer"
+                ],
+                "prompt": "Use 'mutate' in a sentence about a DNA typo, and 'conquer' in a sentence about how DNA's tiny code stores six feet of instructions."
+              }
+            ]
           }
         ]
       },
@@ -3831,6 +5651,58 @@ const MM_WEEKS_68 = [
                 "id": "s2-s1",
                 "prompt": "Explain the base-pair rule and why it matters. Use two facts from the lesson.",
                 "answer": "Model answer: The rule is that A always pairs with T, and C always pairs with G. It matters because reading one side of the DNA ladder lets you predict the other side. It also explains copying: each strand can serve as a template for a new matching strand."
+              }
+            ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "s9-1-c1",
+                "question": "How do DNA's four letters pair, and what does a three-letter group do?",
+                "answer": "Model answer: A always pairs with T, and C always pairs with G. Groups of three letters form a word that tells the cell which building block to add to a protein."
+              },
+              {
+                "id": "s9-1-c2",
+                "question": "How does the reading show that reading a genome got faster?",
+                "answer": "Model answer: The first human genome took thirteen years and billions of dollars to read. Today it takes a day."
+              },
+              {
+                "id": "s9-1-c3",
+                "question": "The reading says, 'The ladder turned out to be a map.' What does this passage reveal?",
+                "answer": "Model answer: It reveals that DNA does more than build bodies: police use it to identify suspects, doctors use it to match organ donors, and ancestry tests trace where great-grandparents walked."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "s9-1-e1",
+                "prompt": "Outline a 5-paragraph essay on how reading DNA changed medicine and identity.",
+                "thesis": "Learning to read DNA's four letters turned the blueprint into a map for medicine, justice, and family history.",
+                "points": [
+                  "The four letters always pair the same way, so reading one strand predicts the other.",
+                  "A single-letter typo can change a protein, which is how a mutation works.",
+                  "Reading DNA lets doctors find the typos behind diseases and lets anyone trace how all life is related."
+                ],
+                "conclusion": "Restate the thesis and close with the reading's line: Mendel counted peas, and today we read whole genomes in a day."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "s9-1-vw1",
+                "words": [
+                  "mutate",
+                  "rebel"
+                ],
+                "prompt": "Use 'mutate' in a sentence about a typo in the genetic code, and 'rebel' in a sentence about a cell that stops following its instructions."
               }
             ]
           }
@@ -4080,6 +5952,58 @@ const MM_WEEKS_68 = [
                 "note": "As a civil rights lawyer and Supreme Court justice, he argued the law must protect every citizen equally."
               }
             ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "h10-0-c1",
+                "question": "How much road did Rome build, and how did its aqueducts move water?",
+                "answer": "Model answer: Rome built more than 50,000 miles of paved highways. Aqueducts carried fresh water across valleys on towering arches, dropping only a few feet per mile so the flow never stopped, delivering enough water for a million people."
+              },
+              {
+                "id": "h10-0-c2",
+                "question": "Why does the reading connect Thurgood Marshall to Roman roads?",
+                "answer": "Model answer: Marshall used law the way Romans used roads, as a path to reach people. Rome built roads of stone, and Marshall helped build roads of justice."
+              },
+              {
+                "id": "h10-0-c3",
+                "question": "The reading says, 'The empire fell, but its roads refused to retire.' What does this passage reveal?",
+                "answer": "Model answer: It reveals that Roman engineering outlasted the empire: many Roman roads are still in use today, paved over by modern highways."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "h10-0-e1",
+                "prompt": "Outline a 5-paragraph essay arguing that Rome's roads were its most practical gift.",
+                "thesis": "Rome's roads were its most practical lasting gift because they moved armies, mail, and grain, and they still carry travelers today.",
+                "points": [
+                  "More than 50,000 miles of straight, drained, guarded highways let a traveler walk from Britain to Syria on Roman road.",
+                  "Aqueducts moved water as surely as roads moved people, feeding fountains, baths, and homes.",
+                  "Modern drivers in England and France travel Roman routes every day without knowing it."
+                ],
+                "conclusion": "Restate the thesis and close with the reading's line: the empire fell, but its roads refused to retire."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "h10-0-vw1",
+                "words": [
+                  "aqueduct",
+                  "justice"
+                ],
+                "prompt": "Use each word in an original sentence about Rome's lasting gifts."
+              }
+            ]
           }
         ]
       },
@@ -4146,6 +6070,58 @@ const MM_WEEKS_68 = [
                 "id": "h2-m3",
                 "term": "Organized centuries of law",
                 "answer": "c"
+              }
+            ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "h10-1-c1",
+                "question": "What problem did Justinian's code solve?",
+                "answer": "Model answer: A thousand years of Roman rulings were scattered across hundreds of scrolls and hard to use. His scholars sorted centuries of Roman law into one clear code."
+              },
+              {
+                "id": "h10-1-c2",
+                "question": "How does the reading show that Roman law lives on today?",
+                "answer": "Model answer: When a contract is enforced, when a person is presumed innocent until proven guilty, and when laws are written down for all to see, Roman ideas are at work."
+              },
+              {
+                "id": "h10-1-c3",
+                "question": "The code opens, 'The law must protect the weak as well as the strong. No one stands above the law.' What does this excerpt reveal?",
+                "answer": "Model answer: It reveals Rome's legal ideal: justice as the constant and lasting wish to give each person what is due, with the law binding even the powerful."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "h10-1-e1",
+                "prompt": "Outline a 5-paragraph essay on why the Justinian Code outlived the empire. Analyze its opening words.",
+                "thesis": "Rome's greatest monument is not stone but a sentence: its code outlived its makers because written law protects everyone.",
+                "points": [
+                  "Justinian's scholars organized a mountain of scattered rulings into one clear code.",
+                  "Its opening words demand justice for the weak as well as the strong, with no one above the law.",
+                  "Its ideas still bind contracts and courts today across Europe and the Americas."
+                ],
+                "conclusion": "Restate the thesis and close with the reading's line: empires fall, but a good code outlives its makers."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "h10-1-vw1",
+                "words": [
+                  "code",
+                  "justice"
+                ],
+                "prompt": "Use each word in an original sentence about Roman law."
               }
             ]
           }
@@ -4220,6 +6196,58 @@ const MM_WEEKS_68 = [
                 "answer": "Model answer: Before factories, light gray moths hid against pale bark. When soot darkened the trees, birds ate the light moths and dark moths survived to have more babies. When clean air returned, light moths came back. Hungry birds did the selecting."
               }
             ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "s10-0-c1",
+                "question": "What happened to England's peppered moths when factories darkened the trees?",
+                "answer": "Model answer: Dark moths hid better against the soot and light moths were eaten by birds, so within decades dark moths ruled the cities. When clean air returned, light moths came back."
+              },
+              {
+                "id": "s10-0-c2",
+                "question": "What three ingredients does natural selection need?",
+                "answer": "Model answer: Differences among individuals, a struggle to survive, and inherited traits passed to offspring."
+              },
+              {
+                "id": "s10-0-c3",
+                "question": "The reading says, 'The moths did not choose to change. Hungry birds did the choosing.' What does this passage reveal?",
+                "answer": "Model answer: It reveals that selection has no plan or will: the environment does the choosing, and the individuals best suited to their surroundings live longer and have more babies."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "s10-0-e1",
+                "prompt": "Outline a 5-paragraph essay on how the peppered moth proved Darwin right.",
+                "thesis": "The peppered moths of England proved natural selection because their colors shifted with the soot and shifted back with clean air.",
+                "points": [
+                  "Before factories, light gray moths hid against pale bark.",
+                  "When soot darkened the trees, dark moths hid better and birds ate the light ones.",
+                  "When clean air returned, light moths came back, showing selection can reverse."
+                ],
+                "conclusion": "Restate the thesis and close with the reading's point: evolution is not distant history; it is happening on your countertop."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "s10-0-vw1",
+                "words": [
+                  "adapt",
+                  "extinct"
+                ],
+                "prompt": "Use each word in an original sentence about the peppered moths."
+              }
+            ]
           }
         ]
       },
@@ -4269,6 +6297,58 @@ const MM_WEEKS_68 = [
                 "id": "s2-s1",
                 "prompt": "Name one adaptation from the lesson and explain how it helps its owner survive.",
                 "answer": "Model answer: I choose the arctic fox's white winter coat. It hides the fox in the snow, so prey cannot see it coming and predators cannot spot it. Foxes with better camouflage survived and passed the trait to their pups."
+              }
+            ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "s10-1-c1",
+                "question": "How did Darwin use the Galapagos finches as evidence?",
+                "answer": "Model answer: Finches on different islands had different beaks: thick beaks for cracking hard seeds, thin beaks for catching insects. Each beak fit its island's food, showing selection had shaped each group from a shared ancestor."
+              },
+              {
+                "id": "s10-1-c2",
+                "question": "How is natural selection still happening today, according to the reading?",
+                "answer": "Model answer: Bacteria evolve resistance to medicines and insects evolve resistance to pesticides, so farmers and doctors fight evolution every day."
+              },
+              {
+                "id": "s10-1-c3",
+                "question": "The reading says, 'You are selection's latest draft, still being edited.' What does this passage reveal?",
+                "answer": "Model answer: It reveals that humans are also selection's product: large brains, gripping hands, and a love of sweet foods all won ancient contests, and the story continues in every generation."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "s10-1-e1",
+                "prompt": "Outline a 5-paragraph essay on adaptations as evidence of natural selection, using the finch, the fox, and the camel.",
+                "thesis": "Adaptations are everywhere once you look, and each one won its place because it helped someone survive and reproduce.",
+                "points": [
+                  "Finch beaks on different islands fit different foods, from hard seeds to insects.",
+                  "Arctic foxes grow white winter coats and camels close their nostrils against sandstorms.",
+                  "Resistance in bacteria and insects shows selection never stops, even today."
+                ],
+                "conclusion": "Restate the thesis and close with the reading's line: every trait you carry won an ancient contest."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "s10-1-vw1",
+                "words": [
+                  "adapt",
+                  "extinct"
+                ],
+                "prompt": "Use 'adapt' in a sentence about a finch beak, and 'extinct' in a sentence about a trait that disappears when it stops helping."
               }
             ]
           }
@@ -4511,6 +6591,58 @@ const MM_WEEKS_68 = [
                 "answer": "Model answer: Aksum shows that Rome's fall was not the fall of all civilization. While Rome cracked, the African kingdom of Aksum minted coins, raised obelisks, and traded across the seas. History kept moving, just in different places."
               }
             ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "h11-0-c1",
+                "question": "What happened in 410 CE that had been unthinkable?",
+                "answer": "Model answer: The Visigoths sacked Rome itself."
+              },
+              {
+                "id": "h11-0-c2",
+                "question": "How did hiring barbarians as soldiers weaken Rome?",
+                "answer": "Model answer: Rome hired many Germanic peoples as soldiers, and soon the legions were half barbarian, straining the army that had built the empire."
+              },
+              {
+                "id": "h11-0-c3",
+                "question": "The reading says, 'Decline is quiet. That is what makes it dangerous.' What does this passage reveal?",
+                "answer": "Model answer: It reveals that Rome's fall was so slow that Romans kept paying taxes, cheering races, and calling themselves Roman long after the emperors were gone: empires rarely hear themselves fall."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "h11-0-e1",
+                "prompt": "Outline a 5-paragraph essay on the cracks that weakened Rome before it fell.",
+                "thesis": "Rome did not fall in a day; it cracked first through size, weak emperors, and a strained army.",
+                "points": [
+                  "The empire stretched from Britain to Egypt, and messages took months to cross it.",
+                  "In one fifty-year span, more than twenty men claimed the throne, while taxes climbed and coins lost value.",
+                  "The legions grew half barbarian, and the army that built the empire strained to defend it."
+                ],
+                "conclusion": "Restate the thesis and close with the reading's warning: decline is quiet, and that is what makes it dangerous."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "h11-0-vw1",
+                "words": [
+                  "decline",
+                  "invade"
+                ],
+                "prompt": "Use each word in an original sentence about Rome's troubles."
+              }
+            ]
           }
         ]
       },
@@ -4563,6 +6695,58 @@ const MM_WEEKS_68 = [
                   "A volcanic eruption"
                 ],
                 "answer": "Many causes struck at once"
+              }
+            ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "h11-1-c1",
+                "question": "What did Edward Gibbon blame for Rome's fall, and why do modern historians find his answer too simple?",
+                "answer": "Model answer: Gibbon blamed the loss of Roman virtue, saying Christianity made Romans soft and the army weak. Modern historians say he wanted one big moral reason instead of a web of causes."
+              },
+              {
+                "id": "h11-1-c2",
+                "question": "List the modern historians' causes of Rome's fall.",
+                "answer": "Model answer: The empire grew too large to defend, its economy depended on conquest and the money ran out when conquest stopped, plagues killed millions, civil wars drained the legions, and climate shifts hurt harvests."
+              },
+              {
+                "id": "h11-1-c3",
+                "question": "The reading says, 'Rome did not fall in a day. It declined, slowly and then suddenly, like an old building giving way.' What does this passage reveal?",
+                "answer": "Model answer: It reveals that the truth is a web of causes: a thousand small cuts weakened Rome over time until it collapsed suddenly."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "h11-1-e1",
+                "prompt": "Outline a 5-paragraph essay comparing Gibbon's and modern historians' explanations of Rome's fall.",
+                "thesis": "Gibbon wanted one big moral reason for Rome's fall, while modern scholars see a web of economic, military, and natural causes, and the web is closer to the truth.",
+                "points": [
+                  "Gibbon blamed lost Roman virtue, saying Christianity softened the army.",
+                  "Modern historians point to overreach, an economy built on conquest, plague, civil war, and bad harvests.",
+                  "Comparing the two teaches that history is a mirror: each age asks what holds any civilization together."
+                ],
+                "conclusion": "Restate the thesis and close with the reading's point: both answers are worth hearing, because every age must answer for itself."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "h11-1-vw1",
+                "words": [
+                  "decline",
+                  "collapse"
+                ],
+                "prompt": "Use each word in an original sentence about the fall of Rome."
               }
             ]
           }
@@ -4635,6 +6819,58 @@ const MM_WEEKS_68 = [
                 "id": "s1-s1",
                 "prompt": "Explain why Archaeopteryx is strong evidence for evolution. Use two facts.",
                 "answer": "Model answer: Archaeopteryx had feathers and wings like a bird but teeth and a bony tail like a dinosaur. It is a transition fossil, a snapshot of change in progress between two kinds of animals."
+              }
+            ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "s11-0-c1",
+                "question": "What are transitional fossils? Name two examples from the reading.",
+                "answer": "Model answer: They are fossils that show change in progress. Archaeopteryx had feathers and wings like a bird but teeth and a bony tail like a dinosaur, and Tiktaalik had fins and a neck, a fish learning to walk."
+              },
+              {
+                "id": "s11-0-c2",
+                "question": "Why is the whale's tiny hip bone evidence of evolution?",
+                "answer": "Model answer: Whales carry tiny hip bones, leftovers from ancestors that walked on land, showing they descended from land animals."
+              },
+              {
+                "id": "s11-0-c3",
+                "question": "The reading calls the fossil record 'a book with missing pages.' What does this passage reveal?",
+                "answer": "Model answer: It reveals that the record is incomplete, yet the pages we have tell a clear story: simple sea life first, then fish, land animals, and mammals, in the order evolution predicts."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "s11-0-e1",
+                "prompt": "Outline a 5-paragraph essay on how fossils tell the story of evolution like a book.",
+                "thesis": "Fossils are the book of stone: even with missing pages, they tell a clear story of change over time.",
+                "points": [
+                  "Fossils appear in layers, with the oldest at the bottom, so the layers order the history of life.",
+                  "Transitional fossils like Archaeopteryx and Tiktaalik are snapshots of change in progress.",
+                  "New fossils keep filling the gaps, and every one fits the pattern evolution predicts."
+                ],
+                "conclusion": "Restate the thesis and close with the reading's line: the book of stone keeps gaining pages, and with each page the story grows clearer."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "s11-0-vw1",
+                "words": [
+                  "resist",
+                  "collapse"
+                ],
+                "prompt": "Use 'resist' in a sentence about how bones resist rotting to become fossils, and 'collapse' in a sentence about a weak theory facing new fossils."
               }
             ]
           }
@@ -4710,6 +6946,58 @@ const MM_WEEKS_68 = [
                 "text": "The fossil record is complete with no missing pages.",
                 "answer": "false",
                 "note": "It is like a book with missing pages, but the pages we have tell a clear story."
+              }
+            ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "s11-1-c1",
+                "question": "What are homologous structures, and what example does the reading give?",
+                "answer": "Model answer: They are body parts with different jobs that share the same bone pattern, pointing to a shared ancestor. The human arm, bat's wing, whale's flipper, and cat's paw all share one bone, two bones, many small bones, digits."
+              },
+              {
+                "id": "s11-1-c2",
+                "question": "How does DNA confirm evolution?",
+                "answer": "Model answer: Humans and chimpanzees share about 98 percent of their DNA. The more closely two species are related, the more DNA they share, and broken genes sit in our DNA like dusty books on a shelf."
+              },
+              {
+                "id": "s11-1-c3",
+                "question": "The reading says goosebumps are 'a leftover instruction from a furrier past.' What does this passage reveal?",
+                "answer": "Model answer: It reveals that evolution left useless reflexes in us: tiny muscles still pull our hairs upright for warmth or warning, doing nothing useful on our nearly hairless skin."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "s11-1-e1",
+                "prompt": "Outline a 5-paragraph essay on how rocks, bodies, and DNA tell one story three ways.",
+                "thesis": "Fossils, homologous structures, and DNA are three separate lines of evidence for one conclusion: life on Earth evolved.",
+                "points": [
+                  "Fossils show change over time in the layers of rock.",
+                  "Homologous structures show shared blueprints in different bodies.",
+                  "DNA shows shared code, with close relatives sharing more of it."
+                ],
+                "conclusion": "Restate the thesis and close with the reading's point: three separate lines of evidence, one conclusion."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "s11-1-vw1",
+                "words": [
+                  "decline",
+                  "resist"
+                ],
+                "prompt": "Use 'decline' in a sentence about a useless reflex fading over generations, and 'resist' in a sentence about DNA evidence standing up to doubt."
               }
             ]
           }
@@ -4944,6 +7232,58 @@ const MM_WEEKS_68 = [
                 "note": "They were carved straight down into solid rock."
               }
             ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "h12-0-c1",
+                "question": "Why did Constantinople survive when Rome fell in the west?",
+                "answer": "Model answer: It held the richest markets in the world, guarded by massive walls and a golden chain across its harbor, and while western Europe forgot how to read, Byzantium kept its libraries full."
+              },
+              {
+                "id": "h12-0-c2",
+                "question": "How were Ethiopia's Lalibela churches built?",
+                "answer": "Model answer: King Lalibela ordered eleven churches cut straight down into solid stone, complete with doors, windows, and roofs, all carved from one piece of rock, with workers digging from the top down."
+              },
+              {
+                "id": "h12-0-c3",
+                "question": "The San Vitale mosaic shows Justinian 'robed in purple, holding a golden bowl, flanked by soldiers and priests.' What message does this reveal?",
+                "answer": "Model answer: It reveals the mosaic was a sermon in stone: the emperor rules by God's will, the church and state stand as one, and this empire will not fall."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "h12-0-e1",
+                "prompt": "Outline a 5-paragraph essay on how the San Vitale mosaic sent a political message. Analyze the mosaic.",
+                "thesis": "The San Vitale mosaic was a sermon in stone, telling viewers that Justinian ruled by God's will and that church and state stood as one.",
+                "points": [
+                  "Purple robes and a golden bowl signal imperial and holy power at once.",
+                  "Soldiers and priests flanking him unite force and faith behind the emperor.",
+                  "Every tile was placed to send one message: this empire will not fall."
+                ],
+                "conclusion": "Restate the thesis and close with the reading's respect: when we call it Byzantine, we should hear the word with respect, for it was Rome refusing to die."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "h12-0-vw1",
+                "words": [
+                  "mosaic",
+                  "preserve"
+                ],
+                "prompt": "Use each word in an original sentence about Byzantine art."
+              }
+            ]
           }
         ]
       },
@@ -5022,6 +7362,58 @@ const MM_WEEKS_68 = [
                 "answer": "c"
               }
             ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "h12-1-c1",
+                "question": "How did Byzantine scholars act as a bridge for ancient learning?",
+                "answer": "Model answer: They copied the works of Plato, Aristotle, and Galen by hand, keeping them safe for centuries. When Islamic scholars translated these works into Arabic, the bridge carried Greek wisdom east."
+              },
+              {
+                "id": "h12-1-c2",
+                "question": "Why did the fall of Constantinople in 1453 help spark the Renaissance?",
+                "answer": "Model answer: Byzantine scholars fled west carrying their books and the Greek language itself, and their teaching helped spark the Renaissance."
+              },
+              {
+                "id": "h12-1-c3",
+                "question": "The reading says, 'Ideas travel farther than armies, and they outlast every wall.' What does this passage reveal about Byzantium's legacy?",
+                "answer": "Model answer: It reveals that Byzantium's true legacy was not its walls but its ideas: the learning it preserved outlived the empire itself."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "h12-1-e1",
+                "prompt": "Outline a 5-paragraph essay on Byzantium as a bridge between worlds.",
+                "thesis": "Byzantium was a bridge: it carried Greek wisdom east to the Islamic world and west to the Renaissance, outliving its own fall.",
+                "points": [
+                  "Scholars copied and preserved ancient works through centuries when the west had lost them.",
+                  "Trade through Constantinople made the empire rich enough to fund walls, churches, and scholars.",
+                  "After 1453, fleeing scholars carried Greek books and language west, sparking the Renaissance."
+                ],
+                "conclusion": "Restate the thesis and close with the reading's line: empires end, but the ideas they carry live on."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "h12-1-vw1",
+                "words": [
+                  "preserve",
+                  "expand"
+                ],
+                "prompt": "Use each word in an original sentence about how Byzantium handled ancient learning."
+              }
+            ]
           }
         ]
       }
@@ -5092,6 +7484,58 @@ const MM_WEEKS_68 = [
                 "id": "s1-s1",
                 "prompt": "Explain why one worldwide name for each species matters. Use the puma example.",
                 "answer": "Model answer: One animal can have many common names, like puma, cougar, and mountain lion, which confuses scientists. A single worldwide scientific name means every researcher knows exactly which species is meant. Shared names let science speak one language."
+              }
+            ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "s12-0-c1",
+                "question": "What are the nested groups of classification, and who started the system?",
+                "answer": "Model answer: Each species belongs to a genus, each genus to a family, and so on up to kingdom and domain. Carl Linnaeus began the system in the 1700s with two-part Latin names like Homo sapiens."
+              },
+              {
+                "id": "s12-0-c2",
+                "question": "Why did Linnaeus give every species one worldwide name?",
+                "answer": "Model answer: So scientists everywhere use one name and never confuse a puma, a cougar, and a mountain lion again."
+              },
+              {
+                "id": "s12-0-c3",
+                "question": "The reading says the boxes 'draw the tree of life.' What does this passage reveal?",
+                "answer": "Model answer: It reveals that classification shows relationships, not just order: lions and tigers share the genus Panthera, so they are close cousins."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "s12-0-e1",
+                "prompt": "Outline a 5-paragraph essay on how classification is a detective game.",
+                "thesis": "Classification sorts life's millions into nested boxes that reveal who is related to whom.",
+                "points": [
+                  "Linnaeus's two-part Latin names ended confusion with one worldwide name per species.",
+                  "Nested boxes from species to domain organize all life, one careful box at a time.",
+                  "The boxes draw the tree of life: shared boxes mean shared ancestors, like lions and tigers."
+                ],
+                "conclusion": "Restate the thesis and close with the reading's challenge: sort five animals you know by shared traits, and you have built a tiny classification."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "s12-0-vw1",
+                "words": [
+                  "preserve",
+                  "expand"
+                ],
+                "prompt": "Use 'preserve' in a sentence about museums preserving species, and 'expand' in a sentence about the tree of life growing."
               }
             ]
           }
@@ -5167,6 +7611,58 @@ const MM_WEEKS_68 = [
                 "text": "Classification is finished and will never change.",
                 "answer": "false",
                 "note": "Every new species and genome sharpens the picture."
+              }
+            ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "s12-1-c1",
+                "question": "What are the three domains, and where do humans fit?",
+                "answer": "Model answer: The three domains are Bacteria, Archaea, and Eukarya. Humans are eukaryotes, along with every mushroom and oak tree."
+              },
+              {
+                "id": "s12-1-c2",
+                "question": "How does a dichotomous key work?",
+                "answer": "Model answer: It asks yes-or-no questions, like whether an organism has a backbone or feathers. Each answer leads to the next question until only one species remains."
+              },
+              {
+                "id": "s12-1-c3",
+                "question": "DNA showed that fungi are closer to animals than to plants. What does this reveal about the tree of life?",
+                "answer": "Model answer: It reveals the tree is not finished: new tools keep redrawing it, and every genome read sharpens the picture."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "s12-1-e1",
+                "prompt": "Outline a 5-paragraph essay on how the tree of life is an open invitation, not a finished list.",
+                "thesis": "The tree of life keeps growing: new species and new DNA keep redrawing its branches.",
+                "points": [
+                  "The three domains organize all life, from single-celled microbes to oak trees.",
+                  "DNA surprises, like fungi landing closer to animals than plants, redraw the branches.",
+                  "Scientists describe thousands of new species every year, each one a new branch."
+                ],
+                "conclusion": "Restate the thesis and close with the reading's invitation: pick up a field guide and start naming, because every name is a branch you planted."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "s12-1-vw1",
+                "words": [
+                  "mosaic",
+                  "expand"
+                ],
+                "prompt": "Use 'mosaic' in a sentence comparing the tree of life to a mosaic, and 'expand' in a sentence about new species expanding the tree."
               }
             ]
           }
@@ -5401,6 +7897,58 @@ const MM_WEEKS_68 = [
                 "note": "Timbuktu's scholars copied and studied the works of Baghdad."
               }
             ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "h13-0-c1",
+                "question": "What did scholars at the House of Wisdom do beyond translating?",
+                "answer": "Model answer: They translated Greek, Persian, and Indian works into Arabic, then went beyond them: al-Khwarizmi invented algebra, Ibn Sina wrote a medical encyclopedia used in Europe for six hundred years, and scholars mapped the stars and built the first hospitals."
+              },
+              {
+                "id": "h13-0-c2",
+                "question": "How did Baghdad's learning reach Africa?",
+                "answer": "Model answer: In Timbuktu, Muslim scholars copied and studied the works of Baghdad, building libraries of their own, and African and Arab learning flowed together along the desert trade routes."
+              },
+              {
+                "id": "h13-0-c3",
+                "question": "The scholar wrote, 'Knowledge must be tested, not only believed.' What does this quote reveal about the golden age's method?",
+                "answer": "Model answer: It reveals that Baghdad's scholars learned the states of the body by watching and by reason. Testing ideas, not only believing them, was their method."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "h13-0-e1",
+                "prompt": "Outline a 5-paragraph essay on how the House of Wisdom built the modern world. Analyze the scholar's quote.",
+                "thesis": "Baghdad's House of Wisdom built the modern world with a three-word recipe: translate, test, and share.",
+                "points": [
+                  "Scholars translated the world's knowledge, Greek, Persian, and Indian, into Arabic.",
+                  "They tested ideas, inventing algebra and a medicine based on watching and reason.",
+                  "They shared through books that reached Timbuktu and Europe, outliving Baghdad's fall."
+                ],
+                "conclusion": "Restate the thesis and close with the reading's line: Baghdad's library is gone, but its method still runs every laboratory on Earth."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "h13-0-vw1",
+                "words": [
+                  "algebra",
+                  "astrolabe"
+                ],
+                "prompt": "Use each word in an original sentence about Baghdad's scholars."
+              }
+            ]
           }
         ]
       },
@@ -5479,6 +8027,58 @@ const MM_WEEKS_68 = [
                 "answer": "c"
               }
             ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "h13-1-c1",
+                "question": "What made Islamic hospitals different from earlier healing places?",
+                "answer": "Model answer: They had separate wards, trained doctors, and pharmacies. They kept patient records and required doctors to pass exams, so medicine became a science of testing, not just tradition."
+              },
+              {
+                "id": "h13-1-c2",
+                "question": "Why did the new numerals change the world more than they seem to?",
+                "answer": "Model answer: The numerals 0 through 9, learned from India, made business, science, and engineering possible. Doing long division with Roman numerals shows the difference."
+              },
+              {
+                "id": "h13-1-c3",
+                "question": "The reading says, 'Good tools spread, and the best tools spread fastest.' What does this passage reveal?",
+                "answer": "Model answer: It reveals why Baghdad's gifts conquered the world: better numerals, hospitals, and the idea of the research library were simply better tools."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "h13-1-e1",
+                "prompt": "Outline a 5-paragraph essay arguing that the House of Wisdom itself was Baghdad's greatest gift.",
+                "thesis": "The House of Wisdom's greatest gift was the idea that a city should gather the world's knowledge in one place and pay scholars to extend it.",
+                "points": [
+                  "Its hospitals made medicine a science of testing, with wards, exams, and patient records.",
+                  "Its numerals, 0 through 9, made modern math, business, and engineering possible.",
+                  "Libraries, universities, and laboratories all descend from that one idea."
+                ],
+                "conclusion": "Restate the thesis and close with the reading's method: test, translate, and share still drives science today."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "h13-1-vw1",
+                "words": [
+                  "algebra",
+                  "observe"
+                ],
+                "prompt": "Use 'algebra' in a sentence about al-Khwarizmi's gift, and 'observe' in a sentence about how scholars studied the stars."
+              }
+            ]
           }
         ]
       }
@@ -5551,6 +8151,58 @@ const MM_WEEKS_68 = [
                 "answer": "Model answer: Bacteria can double every twenty minutes, which is helpful when culturing yogurt overnight. But the same speed lets a small infection become serious fast. Their superpower cuts both ways."
               }
             ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "s13-0-c1",
+                "question": "How do helpful bacteria help us, and which diseases come from harmful ones?",
+                "answer": "Model answer: Yogurt bacteria turn milk thick and tangy, and the trillions in your gut help digest food and train your immune system. Cholera, tuberculosis, and strep throat come from harmful bacteria."
+              },
+              {
+                "id": "s13-0-c2",
+                "question": "Why is a bacterium's speed its superpower?",
+                "answer": "Model answer: Some bacteria double every twenty minutes, so a small infection can become serious fast, and helpful bacteria can culture a whole jar of yogurt overnight."
+              },
+              {
+                "id": "s13-0-c3",
+                "question": "The reading says, 'Knowing your enemy matters.' What does this passage reveal?",
+                "answer": "Model answer: It reveals that not all germs are bacteria and viruses work differently, so antibiotics cannot touch them. The right weapon depends on the right identification."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "s13-0-e1",
+                "prompt": "Outline a 5-paragraph essay on how bacteria are both friend and foe.",
+                "thesis": "Bacteria are not evil or good; they are single cells living the only way they know, and that makes them both our helpers and our enemies.",
+                "points": [
+                  "Most are harmless, and many are helpful: yogurt bacteria, gut bacteria, and soil bacteria.",
+                  "A few cause disease, simply feeding and multiplying the only way they know.",
+                  "Their speed is their superpower, for good and ill, doubling every twenty minutes."
+                ],
+                "conclusion": "Restate the thesis and close with the reading's advice: good doctors always ask what is making you sick before they prescribe anything."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "s13-0-vw1",
+                "words": [
+                  "infect",
+                  "sanitation"
+                ],
+                "prompt": "Use each word in an original sentence about bacteria."
+              }
+            ]
           }
         ]
       },
@@ -5600,6 +8252,58 @@ const MM_WEEKS_68 = [
                 "id": "s2-s1",
                 "prompt": "Explain how penicillin was discovered and why doctors guard antibiotics today.",
                 "answer": "Model answer: Alexander Fleming noticed in 1928 that a mold killed the bacteria in his dish, which led to penicillin. Doctors guard antibiotics today because overuse breeds resistant bacteria that the medicines can no longer kill."
+              }
+            ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "s13-1-c1",
+                "question": "What did Joseph Lister and Alexander Fleming each contribute to fighting germs?",
+                "answer": "Model answer: Lister sprayed carbolic acid on wounds and instruments in the 1860s, and deaths from infection fell sharply. Fleming noticed in 1928 that a mold killed the bacteria in his dish, and penicillin was born."
+              },
+              {
+                "id": "s13-1-c2",
+                "question": "Why do doctors now guard antibiotics carefully?",
+                "answer": "Model answer: Because bacteria evolve: the overuse of antibiotics breeds resistant germs."
+              },
+              {
+                "id": "s13-1-c3",
+                "question": "The reading says, 'Twenty seconds of soap stands between you and an invisible world.' What does this passage reveal?",
+                "answer": "Model answer: It reveals that small daily habits beat invisible enemies: washing your hands for twenty seconds removes most harmful bacteria, doing what Lister taught and what Fleming's discovery made possible."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "s13-1-e1",
+                "prompt": "Outline a 5-paragraph essay on how cleanliness became medicine.",
+                "thesis": "Lister changed surgery with a simple idea, kill the germs first, and cleanliness became medicine.",
+                "points": [
+                  "Carbolic acid on wounds and instruments cut infection deaths sharply.",
+                  "Hand washing, sterilized tools, and clean gowns followed, making cleanliness part of medicine.",
+                  "Antibiotics saved hundreds of millions of lives, but resistance means doctors must guard them."
+                ],
+                "conclusion": "Restate the thesis and close with the reading's line: knowledge is our best weapon in a war that is never fully won."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "s13-1-vw1",
+                "words": [
+                  "sanitation",
+                  "observe"
+                ],
+                "prompt": "Use 'sanitation' in a sentence about Lister's hospitals, and 'observe' in a sentence about Fleming's moldy dish."
               }
             ]
           }
@@ -5869,6 +8573,58 @@ const MM_WEEKS_68 = [
                 "answer": "Thesis: Feudalism was a two-way bargain of duties. Point 1: The vassal owed military service, court advice, and payments. Point 2: The lord owed protection, justice, and land. Point 3: The oath of homage sealed the deal, but the system favored the powerful."
               }
             ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "h14-0-c1",
+                "question": "In feudalism, what did the king grant to a powerful nobleman, and what did the nobleman promise in return?",
+                "answer": "Model answer: The king granted land called a fief, and the nobleman promised loyalty and military help in return, becoming the king's vassal."
+              },
+              {
+                "id": "h14-0-c2",
+                "question": "Why did feudalism grow up in western Europe after the Roman Empire fell?",
+                "answer": "Model answer: Kings were too weak to protect every village, so granting land in exchange for loyalty and military service gave local lords a way to provide protection and keep order."
+              },
+              {
+                "id": "h14-0-c3",
+                "question": "The reading quotes a feudal oath: 'I promise by my faith that I will be faithful to my lord. I will never harm him, and I will defend him with all my power. So help me God.' What does this oath reveal about how feudalism held together?",
+                "answer": "Model answer: It reveals that feudalism depended on personal, spoken promises. The oath was a spoken contract, and a person's word carried the weight of law, holding the whole chain of promises together."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "h14-0-e1",
+                "prompt": "Did feudalism's chain of promises create order, or did it freeze society in place? Outline an essay on feudal obligations, and analyze the feudal oath quoted in the reading.",
+                "thesis": "Feudalism bought order at the price of freedom, because every promise in the chain protected the powerful while binding the powerless.",
+                "points": [
+                  "A vassal owed forty days of military service each year, advice at the lord's court, and money payments, while the lord owed protection, justice, and the land itself.",
+                  "The homage ceremony turned these duties into a sacred personal bond, sealed by a spoken oath that carried the weight of law.",
+                  "Peasants were left out of the promises yet did almost all the work, so a peasant's children were almost always peasants and a lord's children were almost always lords."
+                ],
+                "conclusion": "End by judging whether security was worth the cost, and connect the chain of promises to a system that kept Europe together for centuries."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "h14-0-vw1",
+                "words": [
+                  "vassal",
+                  "liege"
+                ],
+                "prompt": "Use each word in an original sentence."
+              }
+            ]
           }
         ]
       },
@@ -5947,6 +8703,58 @@ const MM_WEEKS_68 = [
                 "answer": "c"
               }
             ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "h14-1-c1",
+                "question": "What were serfs required to do for the lord, and what did they receive in return?",
+                "answer": "Model answer: Serfs farmed the lord's fields several days each week before working their own small strips, and paid rent in crops, animals, and labor. In return, the lord gave them protection when raiders came and a court where disputes were settled."
+              },
+              {
+                "id": "h14-1-c2",
+                "question": "Why does the reading say the manor gave peasants 'a secure place in an uncertain world'?",
+                "answer": "Model answer: The manor was self-sufficient, so almost everything people needed was made or grown there. Peasants had food, shelter, protection, and justice without depending on faraway markets or a weak king's armies."
+              },
+              {
+                "id": "h14-1-c3",
+                "question": "The reading compares Mali's griots to medieval European bards. What does this comparison reveal about how both societies preserved their history?",
+                "answer": "Model answer: It reveals that both societies relied on spoken words to carry laws, family lines, and the deeds of great rulers from one generation to the next. Whether spoken in a French castle or sung by a Malian griot, memory, not writing, was the record."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "h14-1-e1",
+                "prompt": "Was life on the manor a fair trade for the serf? Outline an essay on feudal obligations, analyzing the feudal oath as a contract.",
+                "thesis": "The manor traded the serf's freedom for security, and the oath shows why the lord always held the better end of the bargain.",
+                "points": [
+                  "Serfs could not leave without the lord's permission, worked his fields before their own, and paid rent in crops, animals, and labor.",
+                  "In return they received real benefits in a dangerous age: protection from raiders and a court to settle disputes.",
+                  "Yet the oath binds only the vassal's loyalty to his lord, while the peasant who did the work made no promises and held no rights."
+                ],
+                "conclusion": "End by deciding whether security without freedom is a fair trade, and note how the spoken oath carried the weight of law."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "h14-1-vw1",
+                "words": [
+                  "manor",
+                  "serf"
+                ],
+                "prompt": "Use each word in an original sentence."
+              }
+            ]
           }
         ]
       }
@@ -6008,6 +8816,57 @@ const MM_WEEKS_68 = [
                 "id": "s1-s1",
                 "prompt": "In your own words, explain the steps a virus takes to reproduce inside the body.",
                 "answer": "First the virus attaches to a cell and slips inside. Then it hijacks the cell's machinery to make thousands of copies. The copies burst out, often destroying the cell, and infect more cells."
+              }
+            ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "s14-0-c1",
+                "question": "Why is a virus not considered truly alive?",
+                "answer": "Model answer: A virus cannot eat, grow, or reproduce on its own. It is a tiny package of genetic instructions in a protein coat that must hijack a cell's machinery to make copies of itself."
+              },
+              {
+                "id": "s14-0-c2",
+                "question": "According to the reading, how do coughs and sneezes spread illnesses like the flu?",
+                "answer": "Model answer: Coughs and sneezes launch virus-packed droplets into the air, and touching a contaminated surface and then your face can also carry viruses inside you."
+              },
+              {
+                "id": "s14-0-c3",
+                "question": "The reading says that when Europeans reached the Americas, smallpox spread among Native peoples 'because no one had immunity.' What does this reveal about the role of immunity in history?",
+                "answer": "Model answer: It reveals that immunity can decide the fate of whole communities. Without prior exposure, people had no defenses, so disease alone devastated societies that had never met these germs before."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "s14-0-e1",
+                "prompt": "How does reading evidence, like the account of smallpox in the Americas, turn science into protection? Outline an essay on viruses, analyzing that historical account.",
+                "thesis": "Careful observation of how viruses spread lets people fight back, because every outbreak leaves clues that science can read.",
+                "points": [
+                  "A virus hijacks a cell's machinery to copy itself, so understanding the mechanism reveals the germ's weak points.",
+                  "The smallpox account shows the cost when a population has no immunity: whole communities suffered terribly.",
+                  "Simple defenses like washing hands, covering coughs, and staying home when sick all come from reading such evidence."
+                ],
+                "conclusion": "End by explaining that tracking a virus is the same careful observation that builds all scientific knowledge."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "s14-0-vw1",
+                "words": [
+                  "pathogen"
+                ],
+                "prompt": "Use the word in an original sentence that shows its meaning in the context of the reading."
               }
             ]
           }
@@ -6098,6 +8957,57 @@ const MM_WEEKS_68 = [
                 "id": "s2-o5",
                 "event": "The next attack is fast and you may not feel sick",
                 "answer": 5
+              }
+            ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "s14-1-c1",
+                "question": "What are antibodies, and what do they do?",
+                "answer": "Model answer: Antibodies are Y-shaped proteins that latch onto germs and mark them for destruction by the immune system."
+              },
+              {
+                "id": "s14-1-c2",
+                "question": "How does a vaccine train the immune system without causing the real disease?",
+                "answer": "Model answer: A vaccine shows the body a weakened or partial piece of a germ, so memory cells learn to recognize it without the person having to suffer the real disease."
+              },
+              {
+                "id": "s14-1-c3",
+                "question": "The reading calls the immune system 'a silent army defending you every day of your life.' What does this metaphor reveal about how immunity works?",
+                "answer": "Model answer: It reveals that defense is constant and organized, with different cells playing roles like soldiers. Most of the work happens without us noticing, and memory cells stand ready to launch a fast attack if the same germ returns."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "s14-1-e1",
+                "prompt": "Why is immunity a community achievement, not just a personal one? Outline an essay analyzing the reading's description of herd immunity.",
+                "thesis": "Each person's trained immune system is one soldier, but herd immunity is the whole army standing together.",
+                "points": [
+                  "Special memory cells remember each defeated germ and launch a fast, powerful attack if it returns.",
+                  "Vaccines train those cells safely, showing the body a weakened piece of a germ without the real disease.",
+                  "When enough people are immune, germs cannot find new hosts and the disease fades, which scientists call herd immunity."
+                ],
+                "conclusion": "End by arguing that choosing vaccination protects neighbors as well as yourself."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "s14-1-vw1",
+                "words": [
+                  "pathogen"
+                ],
+                "prompt": "Use the word in an original sentence that shows its meaning in the context of the reading."
               }
             ]
           }
@@ -6367,6 +9277,58 @@ const MM_WEEKS_68 = [
                 "answer": "Thesis: A castle was engineered technology, not just a big building. Point 1: Defensive features like moats, drawbridges, and arrow slits each solved a military problem. Point 2: Concentric walls layered the defense. Point 3: Moorish fortresses show the engineering was shared across cultures."
               }
             ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "h15-0-c1",
+                "question": "Name three features of a stone castle and explain each one's defensive purpose.",
+                "answer": "Model answer: A moat slowed attackers before they reached the walls. A drawbridge could be raised to seal the gate. Arrow slits let defenders shoot while staying hidden."
+              },
+              {
+                "id": "h15-0-c2",
+                "question": "Why did builders switch from wooden towers to stone castles?",
+                "answer": "Model answer: Attackers learned to burn wooden towers down, so builders needed a material that could not be burned. Stone walls, towers, and keeps resisted fire and lasted far longer."
+              },
+              {
+                "id": "h15-0-c3",
+                "question": "The reading says the Moors' Alhambra in Spain blended 'strong defenses with beautiful design.' What does this reveal about what castles meant to the people who built them?",
+                "answer": "Model answer: It reveals that castles were not only for fighting. They were statements of power and culture, built to impress visitors as much as to stop attackers."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "h15-0-e1",
+                "prompt": "Were castles more about defense or about power and image? Outline an essay on castles as technology, and analyze the two castle descriptions given in the knights section.",
+                "thesis": "A great castle was both shield and billboard: engineered to stop attackers and to warn everyone not to try.",
+                "points": [
+                  "Stone walls, moats, drawbridges, arrow slits, and concentric rings solved the real military problem of siege warfare.",
+                  "Grand halls, fine carvings, and towering keeps advertised wealth and power that discouraged challenges before they began.",
+                  "The Moors' Alhambra proves the point: strong defenses and beautiful design were deliberately built together."
+                ],
+                "conclusion": "End by judging which purpose mattered more, and explain why only the richest lords could afford the finest castles."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "h15-0-vw1",
+                "words": [
+                  "keep",
+                  "moat"
+                ],
+                "prompt": "Use each word in an original sentence."
+              }
+            ]
           }
         ]
       },
@@ -6443,6 +9405,58 @@ const MM_WEEKS_68 = [
                 "id": "h2-m3",
                 "term": "moat",
                 "answer": "c"
+              }
+            ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "h15-1-c1",
+                "question": "Describe the three stages of becoming a knight and the age at which each began.",
+                "answer": "Model answer: At about seven a boy became a page, serving in a lord's household and learning manners. Around fourteen he became a squire, caring for a knight's armor and horses and practicing with real weapons. Then he was dubbed a knight in a ceremony with a sword tapped on each shoulder."
+              },
+              {
+                "id": "h15-1-c2",
+                "question": "Why does the reading say the code of chivalry 'shaped how nobles were supposed to behave' even though some knights did not follow it?",
+                "answer": "Model answer: Because an ideal can set expectations even when people fail it. The code defined the standard of courage, loyalty, honesty, and protection of the weak that society judged knights by."
+              },
+              {
+                "id": "h15-1-c3",
+                "question": "The reading gives two descriptions of the same castle: a medieval visitor who sees thick walls and guards, and a modern historian who sees a message of wealth and power. What does comparing these two accounts reveal?",
+                "answer": "Model answer: It reveals that the same building can tell more than one story. The visitor experienced the castle as a fortress, while the historian reads it as a statement of power, and both views are true at once."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "h15-1-e1",
+                "prompt": "Did chivalry describe real knights or only ideal ones? Outline an essay comparing the medieval visitor's and the modern historian's descriptions of a castle.",
+                "thesis": "Chivalry was a real code with real training behind it, but it described what knights were supposed to be, not what they always were.",
+                "points": [
+                  "Years as page and squire built genuine skill, courage, and loyalty through service and practice.",
+                  "The visitor's account shows the fortress as knights experienced it: thick walls, a towering keep, and guards watching day and night.",
+                  "The historian's account shows what the code was for: impressing visitors and displaying the lord's wealth and power."
+                ],
+                "conclusion": "End by explaining why societies need ideals even when people fall short of them."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "h15-1-vw1",
+                "words": [
+                  "chivalry",
+                  "keep"
+                ],
+                "prompt": "Use each word in an original sentence."
               }
             ]
           }
@@ -6525,6 +9539,57 @@ const MM_WEEKS_68 = [
                 "answer": "Each system has its own job, but they depend on each other. Running uses the nervous, muscular, skeletal, respiratory, and circulatory systems together. When one system struggles, the others feel it, so health depends on teamwork."
               }
             ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "s15-0-c1",
+                "question": "When you run across a field, which body systems work together, according to the reading?",
+                "answer": "Model answer: The nervous system sends the signal to move, the muscular and skeletal systems carry it out, the respiratory system brings in more oxygen, the circulatory system pumps that oxygen to the muscles, and the skin releases sweat to cool the body."
+              },
+              {
+                "id": "s15-0-c2",
+                "question": "Why does an infection in the lungs make the heart work harder?",
+                "answer": "Model answer: Because no system works alone. When one system struggles, others feel it, so the heart must pump harder to supply oxygen and help fight the infection."
+              },
+              {
+                "id": "s15-0-c3",
+                "question": "The reading compares body systems to 'the defenders of a castle' who 'win only when they fight together.' What does this analogy reveal about health?",
+                "answer": "Model answer: It reveals that health depends on teamwork, not on any single system. Like castle defenders each guarding their own wall, the systems each do their job but succeed only together."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "s15-0-e1",
+                "prompt": "Is the human body more like one machine or a team? Outline an essay comparing the body systems to a castle's defenders, as the reading does.",
+                "thesis": "The body is a team of eleven organ systems, and like a castle's defenders, they win only when they fight together.",
+                "points": [
+                  "Running uses the nervous, muscular, skeletal, respiratory, and circulatory systems at the same time.",
+                  "When one system struggles, such as lungs fighting an infection, the heart works harder to help.",
+                  "Scientists study each system separately to understand it, but health depends on teamwork."
+                ],
+                "conclusion": "End by explaining why treating one symptom often means checking the whole team."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "s15-0-vw1",
+                "words": [
+                  "contract"
+                ],
+                "prompt": "Use the word in an original sentence that shows its meaning in the context of muscles and movement."
+              }
+            ]
           }
         ]
       },
@@ -6594,6 +9659,57 @@ const MM_WEEKS_68 = [
                 "text": "Athletes often have lower resting heart rates because their hearts are efficient.",
                 "answer": "true",
                 "note": "A strong heart pumps more blood per beat, so it beats less often at rest."
+              }
+            ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "s15-1-c1",
+                "question": "How many times does the heart beat each day, and how many miles of blood vessels does blood travel through?",
+                "answer": "Model answer: The heart beats about 100,000 times every day, pumping blood through about 60,000 miles of blood vessels."
+              },
+              {
+                "id": "s15-1-c2",
+                "question": "Why do athletes often have lower resting heart rates?",
+                "answer": "Model answer: Because their hearts are strong and efficient, so each beat moves more blood and fewer beats are needed at rest."
+              },
+              {
+                "id": "s15-1-c3",
+                "question": "The reading says heart rate is 'a quick window into how hard the heart is working.' What does this reveal about why doctors measure it?",
+                "answer": "Model answer: It reveals that heart rate is a simple signal of effort. A faster rate means the heart is working harder to deliver oxygen, so doctors use it to judge strain and fitness."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "s15-1-e1",
+                "prompt": "Why does the reading call the heart 'your hardest-working muscle'? Outline an essay analyzing the facts about heart rate and blood.",
+                "thesis": "The heart never rests because every cell depends on it, and its beat rate is the body's simplest signal of effort.",
+                "points": [
+                  "One hundred thousand beats a day push blood through 60,000 miles of vessels, enough to circle the Earth more than twice.",
+                  "Red cells carry oxygen, white cells fight germs, platelets clot cuts, and plasma carries nutrients, hormones, and waste.",
+                  "Heart rate rises with exercise and falls with fitness, giving doctors a quick window into how hard the heart is working."
+                ],
+                "conclusion": "End by connecting the heart's constant watch to the castle guards in the reading: both stand watch without ever leaving their post."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "s15-1-vw1",
+                "words": [
+                  "contract"
+                ],
+                "prompt": "Use the word in an original sentence that shows its meaning in the context of the heart as a muscle."
               }
             ]
           }
@@ -6857,6 +9973,58 @@ const MM_WEEKS_68 = [
                 "note": "Saladin was admired for his honor on both sides."
               }
             ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "h16-0-c1",
+                "question": "What did Pope Urban II call for in 1095, and what did the crusaders capture in 1099?",
+                "answer": "Model answer: He called on Christians to march to the Holy Land and free Jerusalem from Muslim rule. The crusaders captured Jerusalem in 1099 and set up small Christian kingdoms along the coast."
+              },
+              {
+                "id": "h16-0-c2",
+                "question": "Why did younger sons, merchants, and pilgrims each join the Crusades?",
+                "answer": "Model answer: Younger sons who would inherit nothing saw a chance to win estates. Merchants saw new trade routes. Ordinary pilgrims joined out of deep faith, and knights hoped for adventure, land, and forgiveness of sins."
+              },
+              {
+                "id": "h16-0-c3",
+                "question": "The reading says 'faith, greed, adventure, and curiosity traveled in the same army.' What does this reveal about the Crusades' motives?",
+                "answer": "Model answer: It reveals that motives were mixed and tangled. The same army carried holy devotion and selfish ambition at once, so the Crusades cannot be explained by any single reason."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "h16-0-e1",
+                "prompt": "Were the Crusades driven more by faith or by greed and ambition? Outline an essay on motives for crusading.",
+                "thesis": "The Crusades mixed holy devotion with hunger for land and riches, so no single motive explains why thousands marched.",
+                "points": [
+                  "Pope Urban II's call gave the movement its religious frame: free Jerusalem and win forgiveness of sins.",
+                  "Younger sons, merchants, and knights each chased practical prizes: estates, trade routes, and adventure.",
+                  "The outcome mirrors the motives: the Crusades failed to hold the Holy Land yet cracked open Europe's isolation and connected it to Africa and Asia."
+                ],
+                "conclusion": "End by arguing that armies, like people, can carry more than one motive at a time."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "h16-0-vw1",
+                "words": [
+                  "crusade",
+                  "pilgrim"
+                ],
+                "prompt": "Use each word in an original sentence."
+              }
+            ]
           }
         ]
       },
@@ -6925,6 +10093,58 @@ const MM_WEEKS_68 = [
                 "accept": [
                   "Truces"
                 ]
+              }
+            ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "h16-1-c1",
+                "question": "According to the crusader's letter, what were the army's conditions on the march?",
+                "answer": "Model answer: They had marched many miles across dry land, their food was nearly gone, and the writer feared he might never see home again."
+              },
+              {
+                "id": "h16-1-c2",
+                "question": "Why did disease kill more crusaders than battles did?",
+                "answer": "Model answer: Armies marched through deserts with little water and poor conditions, so sickness spread easily and there was little medical help. Brutal conditions, not combat, did most of the killing."
+              },
+              {
+                "id": "h16-1-c3",
+                "question": "The letter writer asks for prayers because he does not know if he will see home again. What does this reveal about the human side of the Crusades?",
+                "answer": "Model answer: It reveals that crusaders were real people: exhausted, hungry, and afraid, caught between devotion and doubt on a road far from home, not just soldiers on a map."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "h16-1-e1",
+                "prompt": "What does the crusader's letter ('We have marched many miles across dry land...') reveal that battle accounts do not? Outline an essay analyzing the letter.",
+                "thesis": "The letter turns the Crusades from a map of battles into a human story of hunger, fear, and faith.",
+                "points": [
+                  "Three short sentences carry exhaustion, hunger, and the fear of never seeing home again.",
+                  "Asking for prayers shows devotion driving a man past his physical limits.",
+                  "Moments of truce and mutual respect between Christian and Muslim leaders prove the enemy was human too."
+                ],
+                "conclusion": "End by explaining why primary sources like letters change how we judge historical events."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "h16-1-vw1",
+                "words": [
+                  "sacred",
+                  "truce"
+                ],
+                "prompt": "Use each word in an original sentence."
               }
             ]
           }
@@ -7007,6 +10227,57 @@ const MM_WEEKS_68 = [
                 "answer": "Sensory neurons send a danger message from the hand to the spinal cord. Motor neurons fire back telling the hand to pull away. This reflex happens automatically, before the brain even forms a thought."
               }
             ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "s16-0-c1",
+                "question": "What are the two main parts of the nervous system?",
+                "answer": "Model answer: The central nervous system, which is the brain and spinal cord, and the peripheral nervous system, the network of nerves branching out to every part of the body."
+              },
+              {
+                "id": "s16-0-c2",
+                "question": "Why does pulling your hand away from something hot happen before you think about it?",
+                "answer": "Model answer: Because it is a reflex. Sensory neurons fire a message to the spinal cord, and motor neurons fire back telling the hand to pull away, protecting you before conscious thought."
+              },
+              {
+                "id": "s16-0-c3",
+                "question": "The reading says that when you practice a skill, the pathways involved 'grow stronger.' What does this reveal about learning?",
+                "answer": "Model answer: It reveals that learning is physical. Practice rewires the brain's connections across synapses, so mastery is literally built into the nervous system."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "s16-0-e1",
+                "prompt": "How is learning like rewiring? Outline an essay on the nervous system, analyzing the reading's description of a reflex.",
+                "thesis": "The nervous system protects the body automatically, and practice physically rebuilds it, so learning literally reshapes the brain.",
+                "points": [
+                  "The reflex arc fires before thought, pulling a hand from heat through sensory neurons, the spinal cord, and motor neurons.",
+                  "Neurons never touch; messages jump the tiny gaps called synapses using chemical messengers.",
+                  "Repetition strengthens the pathways involved, which is why practice builds mastery."
+                ],
+                "conclusion": "End by arguing that the brain is never finished growing, and every new skill is construction work."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "s16-0-vw1",
+                "words": [
+                  "stimulus"
+                ],
+                "prompt": "Use the word in an original sentence that shows its meaning in the context of the nervous system."
+              }
+            ]
           }
         ]
       },
@@ -7082,6 +10353,57 @@ const MM_WEEKS_68 = [
                 "accept": [
                   "Brainstem"
                 ]
+              }
+            ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "s16-1-c1",
+                "question": "Name the three main brain regions and each one's job.",
+                "answer": "Model answer: The cerebrum handles thinking, memory, and voluntary movement. The cerebellum coordinates balance and smooth motion. The brainstem runs automatic jobs like breathing and heartbeat."
+              },
+              {
+                "id": "s16-1-c2",
+                "question": "Why is sleep important for learning, according to the reading?",
+                "answer": "Model answer: Sleep is when the brain files away the day's learning and clears out waste, so rest protects memory and thinking."
+              },
+              {
+                "id": "s16-1-c3",
+                "question": "The reading says to 'treat your brain like the treasure it is.' What does this reveal about why helmets and seatbelts matter?",
+                "answer": "Model answer: It reveals that the brain is irreplaceable and runs everything a person is: memories, personality, humor, and dreams. Protecting it is protecting the self."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "s16-1-e1",
+                "prompt": "Why is the brain called 'command central'? Outline an essay analyzing how the three brain regions divide the work.",
+                "thesis": "The brain runs everything a person is by dividing labor: thinking, moving, and surviving each get their own region.",
+                "points": [
+                  "The cerebrum handles thinking, memory, and voluntary movement.",
+                  "The cerebellum coordinates balance and smooth motion, which athletes train with every drill.",
+                  "The brainstem runs breathing and heartbeat without ever being asked."
+                ],
+                "conclusion": "End by explaining why helmets, seatbelts, and rest guard not just an organ but the self."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "s16-1-vw1",
+                "words": [
+                  "stimulus"
+                ],
+                "prompt": "Use the word in an original sentence that shows its meaning in the context of the senses and the brain."
               }
             ]
           }
@@ -7359,6 +10681,58 @@ const MM_WEEKS_68 = [
                 "answer": "Thesis: The Mongols built their empire through speed, organization, and smart policy. Point 1: Disciplined horsemen and signal coordination won battles. Point 2: Destroying resisters while sparing surrendering cities spread fear and cooperation. Point 3: Dividing the empire into khanates let descendants rule the vast lands."
               }
             ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "h17-0-c1",
+                "question": "What title did Temujin take, and what did it mean?",
+                "answer": "Model answer: He took the title Genghis Khan, meaning universal ruler, after uniting the warring tribes of the Asian steppe."
+              },
+              {
+                "id": "h17-0-c2",
+                "question": "Why did the Mongols destroy cities that resisted but spare cities that surrendered?",
+                "answer": "Model answer: Destroyed cities served as warnings to others, making future conquests easier. Cities that surrendered were spared and folded into the Mongols' vast system of trade and taxation."
+              },
+              {
+                "id": "h17-0-c3",
+                "question": "The reading compares the Mongol Empire to Mansa Musa's Mali. What does this comparison reveal?",
+                "answer": "Model answer: It reveals that great power took different forms in the 1300s. One empire was built on horses and conquest, the other on gold and trade, yet each showed what organized power could achieve."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "h17-0-e1",
+                "prompt": "Were the Mongols mainly destroyers or connectors of the world? Outline an essay, and use the comparison with Mansa Musa's Mali.",
+                "thesis": "The Mongols were both: terror built the empire, but the peace they enforced connected the world.",
+                "points": [
+                  "Conquest was brutal: cities that resisted were destroyed as warnings to others.",
+                  "The largest land empire in history then became a trade network stretching from Korea to Hungary.",
+                  "Mansa Musa's Mali shows the contrast: wealth built on gold and pilgrimage rather than horses and war."
+                ],
+                "conclusion": "End by judging which legacy lasted longer, the destruction or the connection."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "h17-0-vw1",
+                "words": [
+                  "khan",
+                  "horde"
+                ],
+                "prompt": "Use each word in an original sentence."
+              }
+            ]
           }
         ]
       },
@@ -7418,6 +10792,58 @@ const MM_WEEKS_68 = [
                 "text": "The Mongols forced everyone in the empire to follow one religion.",
                 "answer": "false",
                 "note": "They let peoples keep their own faiths as long as they obeyed the law."
+              }
+            ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "h17-1-c1",
+                "question": "What three things did the Mongols do to make the Silk Road safe for trade?",
+                "answer": "Model answer: They protected traders, set up relay stations with fresh horses every few miles, and kept the roads clear of bandits."
+              },
+              {
+                "id": "h17-1-c2",
+                "question": "Why was Mongol religious tolerance 'practical' rather than just kind?",
+                "answer": "Model answer: Letting each people keep their own faiths and customs kept a giant, diverse empire from rebelling, as long as they paid taxes and obeyed the law."
+              },
+              {
+                "id": "h17-1-c3",
+                "question": "The merchant's account praises 'safe roads,' messengers riding 'day and night,' and 'food and shelter at every post station.' What does this reveal about what traders valued?",
+                "answer": "Model answer: It reveals that traders valued infrastructure: safety, speed, and comfort, not battles. The merchant describes roads, stations, and law, showing that peace, not war, is what trade needs."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "h17-1-e1",
+                "prompt": "Was Mongol tolerance real kindness or smart strategy? Outline an essay on Mongol tolerance, analyzing the merchant's account.",
+                "thesis": "Mongol tolerance was practical statecraft: peace on the roads and freedom of faith kept a giant empire profitable and calm.",
+                "points": [
+                  "The merchant praises safety, speed, and comfort, exactly what traders need, and describes infrastructure, not battles.",
+                  "Relay stations with fresh horses, cleared roads, and protected traders were deliberate policy, not accidents.",
+                  "Letting Buddhists, Christians, Muslims, and others keep their faiths prevented rebellion as long as taxes were paid and laws obeyed."
+                ],
+                "conclusion": "End by explaining how the Pax Mongolica helped ideas like printing and the compass travel west to Europe."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "h17-1-vw1",
+                "words": [
+                  "khan",
+                  "nomad"
+                ],
+                "prompt": "Use each word in an original sentence."
               }
             ]
           }
@@ -7490,6 +10916,57 @@ const MM_WEEKS_68 = [
                 "id": "s1-s1",
                 "prompt": "Why do ecologists use methods like tag and release instead of simply counting every animal?",
                 "answer": "Counting every individual is often impossible because animals hide, move, or live in huge areas. Tag and release lets scientists estimate the total from the ratio of tagged to untagged animals caught later. It is a clever, practical way to study wild populations."
+              }
+            ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "s17-0-c1",
+                "question": "What are population size, population density, and distribution?",
+                "answer": "Model answer: Population size is the number of individuals. Population density is how crowded they are, such as deer per square mile. Distribution describes how they are spread out: clumped together, evenly spaced, or scattered at random."
+              },
+              {
+                "id": "s17-0-c2",
+                "question": "How do ecologists estimate a population they cannot fully count?",
+                "answer": "Model answer: They tag and release animals, then use the ratio of tagged to untagged animals caught later to estimate the total."
+              },
+              {
+                "id": "s17-0-c3",
+                "question": "The reading says 'careful counting turns guesswork into real knowledge about the wild.' What does this reveal about why scientists track populations year after year?",
+                "answer": "Model answer: It reveals that steady data lets scientists spot trouble early, like a sudden drop that warns of disease or habitat loss. Counting carefully is the first step to protecting a species."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "s17-0-e1",
+                "prompt": "Why does counting nature matter? Outline an essay on populations, analyzing the tag-and-release method.",
+                "thesis": "Careful counting turns guesswork into knowledge, and that knowledge is the first step to protecting species.",
+                "points": [
+                  "Tag and release uses the ratio of tagged to untagged animals to estimate totals no one could count directly.",
+                  "Size, density, and distribution each reveal something different about how a species lives.",
+                  "Tracking numbers year after year spots trouble early, like a sudden drop warning of disease or habitat loss."
+                ],
+                "conclusion": "End by arguing that you cannot protect what you have not measured."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "s17-0-vw1",
+                "words": [
+                  "census"
+                ],
+                "prompt": "Use the word in an original sentence that shows its meaning in the context of counting populations."
               }
             ]
           }
@@ -7575,6 +11052,57 @@ const MM_WEEKS_68 = [
                 "id": "s2-m3",
                 "term": "immigration",
                 "answer": "c"
+              }
+            ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "s17-1-c1",
+                "question": "What is carrying capacity?",
+                "answer": "Model answer: Carrying capacity is the largest population an environment can support over time."
+              },
+              {
+                "id": "s17-1-c2",
+                "question": "Why does a population that overshoots its carrying capacity crash?",
+                "answer": "Model answer: Food runs short, waste builds up, and disease spreads more easily, so deaths rise until the environment recovers. Deer on a small island, for example, can eat every green plant and then starve."
+              },
+              {
+                "id": "s17-1-c3",
+                "question": "The reading compares humans to the Mongol khans: 'we must manage the living world within its limits.' What does this reveal?",
+                "answer": "Model answer: It reveals that power brings responsibility. Just as the khans managed vast lands, humans must manage nature within its limits, or face collapse like any overshooting population."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "s17-1-e1",
+                "prompt": "Why can't populations grow forever? Outline an essay on carrying capacity, analyzing the deer island example.",
+                "thesis": "Every environment has a limit, and populations that ignore it crash, so understanding limits is understanding survival.",
+                "points": [
+                  "Under perfect conditions growth is exponential, doubling again and again like a rumor spreading through school.",
+                  "Carrying capacity caps growth when food runs short, waste builds up, and disease spreads more easily.",
+                  "Deer on a small island can eat every green plant and then starve, overshooting the limit their home could support."
+                ],
+                "conclusion": "End by connecting the lesson to humans: farming and medicine raised our limit, but clean water, fertile soil, and a stable climate still set it."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "s17-1-vw1",
+                "words": [
+                  "census"
+                ],
+                "prompt": "Use the word in an original sentence that shows its meaning in the context of tracking population change."
               }
             ]
           }
@@ -7853,6 +11381,58 @@ const MM_WEEKS_68 = [
                 ]
               }
             ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "h18-0-c1",
+                "question": "What does the word 'Renaissance' mean, and where did it begin?",
+                "answer": "Model answer: Renaissance means rebirth. It began in Italy's wealthy trading cities around the 1300s."
+              },
+              {
+                "id": "h18-0-c2",
+                "question": "Why did rich merchant families matter so much to the Renaissance?",
+                "answer": "Model answer: They paid artists and thinkers to create beautiful works, funding the art, scholarship, and rediscovery of ancient writings that defined the age."
+              },
+              {
+                "id": "h18-0-c3",
+                "question": "The reading says Alessandro de' Medici, who was of African descent, became Duke of Florence in 1530. What does this reveal?",
+                "answer": "Model answer: It reveals that Black people were present at the heart of Renaissance Europe, not just watching from the edges. The age's light reached further than many textbooks admit."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "h18-0-e1",
+                "prompt": "Was the Renaissance a rebirth of old ideas or the birth of new ones? Outline an essay on the rebirth of ideas.",
+                "thesis": "The Renaissance did both: it revived ancient Greece and Rome and used them to invent something new.",
+                "points": [
+                  "Scholars rediscovered ancient writings while wealthy merchants funded new art and humanist learning.",
+                  "Perspective painting, lifelike sculpture, and the printing press had no ancient equal.",
+                  "Alessandro de' Medici's Florence shows the age belonged to more people than the textbooks admit."
+                ],
+                "conclusion": "End by judging whether 'rebirth' is the right word, or whether 'awakening' fits better."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "h18-0-vw1",
+                "words": [
+                  "humanism",
+                  "perspective"
+                ],
+                "prompt": "Use each word in an original sentence."
+              }
+            ]
           }
         ]
       },
@@ -7931,6 +11511,58 @@ const MM_WEEKS_68 = [
                 "answer": "c"
               }
             ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "h18-1-c1",
+                "question": "Name three roles Leonardo da Vinci filled, and two of his famous paintings.",
+                "answer": "Model answer: He was a painter, inventor, scientist, and engineer. He painted the Mona Lisa and The Last Supper."
+              },
+              {
+                "id": "h18-1-c2",
+                "question": "Why did Leonardo dissect human bodies?",
+                "answer": "Model answer: To learn how muscles work so he could paint them accurately. He studied the body with the same careful eye he used for water, birds, and light."
+              },
+              {
+                "id": "h18-1-c3",
+                "question": "The notebook page reads: 'The bird's wing moves in two ways, up and down and forward. I will study how air holds it up. If I understand the wing, I may build one for man.' What does this reveal about how Leonardo thought?",
+                "answer": "Model answer: It reveals the scientific method in action: observe closely, ask how it works, then imagine building it. For Leonardo, art and science were two ways of paying close attention to the world."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "h18-1-e1",
+                "prompt": "What made Leonardo da Vinci the 'ultimate Renaissance man'? Outline an essay analyzing his notebook page about the bird's wing.",
+                "thesis": "Leonardo united art and science through relentless observation, asking how things work and then imagining how to build them.",
+                "points": [
+                  "The wing note moves from watching the bird to studying air to dreaming of human flight: observe, question, build.",
+                  "Dissecting bodies served his painting; studying water and light served his engineering.",
+                  "His flying machines never flew, yet his drawings inspired engineers for centuries."
+                ],
+                "conclusion": "End by arguing that curiosity, not talent alone, made him the model of the age."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "h18-1-vw1",
+                "words": [
+                  "invent",
+                  "masterpiece"
+                ],
+                "prompt": "Use each word in an original sentence."
+              }
+            ]
           }
         ]
       }
@@ -7992,6 +11624,57 @@ const MM_WEEKS_68 = [
                 "id": "s1-s1",
                 "prompt": "Explain one way human activity ripples through a food web, using an example from the reading.",
                 "answer": "Overfishing empties parts of the ocean, removing species other animals depend on. In Australia, introduced rabbits with no predators multiplied and devoured native plants. One human action can reshape a whole ecosystem."
+              }
+            ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "s18-0-c1",
+                "question": "What is the leading cause of extinction worldwide, according to the reading?",
+                "answer": "Model answer: Habitat destruction, such as clearing forests for farms or cities, is the leading cause of extinction worldwide."
+              },
+              {
+                "id": "s18-0-c2",
+                "question": "Why did rabbits released in Australia become such a disaster?",
+                "answer": "Model answer: They had no natural predators, so they multiplied into the hundreds of millions and devoured native plants, throwing the whole ecosystem off balance."
+              },
+              {
+                "id": "s18-0-c3",
+                "question": "The reading says 'every plastic bottle and every gallon of gas leaves a mark on the living world.' What does this reveal?",
+                "answer": "Model answer: It reveals that individual choices add up. Small everyday actions ripple through food webs and the climate, so understanding our impact is the first step to reducing it."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "s18-0-e1",
+                "prompt": "How do human choices ripple through nature? Outline an essay on human impact, analyzing the rabbits in Australia.",
+                "thesis": "Human actions change ecosystems faster than any natural process, and the damage spreads through food webs in ways we rarely predict.",
+                "points": [
+                  "Habitat destruction is the leading cause of extinction worldwide.",
+                  "Rabbits with no predators multiplied into the hundreds of millions and devoured native plants.",
+                  "Burning coal, oil, and gas releases greenhouse gases that bleach coral reefs, melt glaciers, and strengthen storms."
+                ],
+                "conclusion": "End by arguing that understanding our impact is the first step to reducing it."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "s18-0-vw1",
+                "words": [
+                  "conserve"
+                ],
+                "prompt": "Use the word in an original sentence that shows its meaning in the context of protecting ecosystems."
               }
             ]
           }
@@ -8069,6 +11752,57 @@ const MM_WEEKS_68 = [
               {
                 "id": "s2-k3",
                 "text": "I will learn the name of one endangered species and how it is being helped."
+              }
+            ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "s18-1-c1",
+                "question": "What happened when wolves were reintroduced to Yellowstone in 1995?",
+                "answer": "Model answer: Their return balanced the park's elk herds and even changed river patterns."
+              },
+              {
+                "id": "s18-1-c2",
+                "question": "Why is conservation hopeful, according to the reading?",
+                "answer": "Model answer: Because successes like Yellowstone's wolves and the California condor prove nature can heal. Humans caused much of the damage, which means humans can fix it."
+              },
+              {
+                "id": "s18-1-c3",
+                "question": "The reading compares conservationists to 'a Renaissance artist restoring a faded painting.' What does this reveal?",
+                "answer": "Model answer: It reveals that conservation uncovers beauty that was already there. Like restoring art, it is careful, skilled work that reveals what damage had hidden."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "s18-1-e1",
+                "prompt": "Can damaged nature heal? Outline an essay on conservation, analyzing the Yellowstone wolves.",
+                "thesis": "Nature can heal when people study the problem, act carefully, and give it room, and the proof is already on the ground.",
+                "points": [
+                  "Wolves reintroduced in 1995 balanced elk herds and even changed river patterns.",
+                  "Restoration goes further: planting native trees, breeding condors in captivity, and removing dams that blocked salmon.",
+                  "Laws like the Endangered Species Act and daily choices like using less plastic shrink our footprint."
+                ],
+                "conclusion": "End with the reading's hopeful logic: humans caused much of the damage, so humans can fix it."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "s18-1-vw1",
+                "words": [
+                  "conserve"
+                ],
+                "prompt": "Use the word in an original sentence that shows its meaning in the context of conservation work."
               }
             ]
           }
@@ -8332,6 +12066,58 @@ const MM_WEEKS_68 = [
                 "note": "The split led to more than a century of religious wars."
               }
             ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "h19-0-c1",
+                "question": "What were indulgences, and why did Luther object to them?",
+                "answer": "Model answer: Indulgences were payments people made to reduce punishment for sins. Luther believed the church had become corrupt in selling them."
+              },
+              {
+                "id": "h19-0-c2",
+                "question": "Why did the printing press matter so much to the Reformation?",
+                "answer": "Model answer: It could copy Luther's writings by the thousands, so his ideas spread across Germany in weeks and across Europe in years. Ordinary people could read the Bible in their own languages instead of Latin."
+              },
+              {
+                "id": "h19-0-c3",
+                "question": "The reading says Ethiopia's ancient church 'quietly preserved some of the oldest Christian traditions on Earth' while Europe's Christians split apart. What does this reveal?",
+                "answer": "Model answer: It reveals that Christianity had more than one center. While Europe fought over reform, an older tradition endured independently in Africa, keeping sacred texts and practices older than many European kingdoms."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "h19-0-e1",
+                "prompt": "Did the printing press cause the Reformation, or only spread it? Outline an essay on the power of the printing press.",
+                "thesis": "Luther supplied the spark, but the press supplied the fire: without it, his 95 theses would have stayed on one church door.",
+                "points": [
+                  "The press copied Luther's writings by the thousands, spreading them across Germany in weeks and Europe in years.",
+                  "Pamphlets in plain German let ordinary people read and judge for themselves instead of trusting Latin authorities.",
+                  "The split led to more than a century of religious wars, proving printed ideas have real-world force."
+                ],
+                "conclusion": "End by arguing that technology decides how far an idea can travel."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "h19-0-vw1",
+                "words": [
+                  "thesis",
+                  "reform"
+                ],
+                "prompt": "Use each word in an original sentence."
+              }
+            ]
           }
         ]
       },
@@ -8402,6 +12188,58 @@ const MM_WEEKS_68 = [
                 ]
               }
             ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "h19-1-c1",
+                "question": "What did Luther say about buying forgiveness with money?",
+                "answer": "Model answer: He said Christians should be taught that buying forgiveness with money is wrong. True forgiveness comes from God, not from a piece of paper."
+              },
+              {
+                "id": "h19-1-c2",
+                "question": "Why was Luther's message 'explosive' in his world?",
+                "answer": "Model answer: The church controlled education, law, and eternal fate. Saying ordinary believers could approach God directly challenged the church's authority over salvation itself."
+              },
+              {
+                "id": "h19-1-c3",
+                "question": "The reading calls each pamphlet 'a small bomb made of paper and ink.' What does this reveal about the power of printed words?",
+                "answer": "Model answer: It reveals that ideas, once printed and shared, are almost impossible to take back. Thousands of pamphlets reshaped Europe without an army."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "h19-1-e1",
+                "prompt": "Why were Luther's words more powerful than armies? Outline an essay analyzing his excerpt: 'Christians should be taught that buying forgiveness with money is wrong. True forgiveness comes from God, not from a piece of paper.'",
+                "thesis": "Luther's pamphlets were paper bombs because they told ordinary believers they could approach God directly, bypassing the church's power.",
+                "points": [
+                  "The excerpt attacks not just money but the church's authority to sell forgiveness at all.",
+                  "In a world where the church controlled education, law, and eternal fate, that claim was explosive.",
+                  "Catholics answered with their own reforms, so one man's words reshaped both sides of the split."
+                ],
+                "conclusion": "End by explaining why ideas, once printed and shared, are almost impossible to take back."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "h19-1-vw1",
+                "words": [
+                  "reform",
+                  "doctrine"
+                ],
+                "prompt": "Use each word in an original sentence."
+              }
+            ]
           }
         ]
       }
@@ -8457,6 +12295,57 @@ const MM_WEEKS_68 = [
                 "text": "The Atlantic Ocean grows wider every year.",
                 "answer": "true",
                 "note": "Seafloor spreading at the mid-Atlantic ridge pushes the continents apart."
+              }
+            ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "s19-0-c1",
+                "question": "How fast do tectonic plates move?",
+                "answer": "Model answer: They move only a few centimeters per year, about as fast as your fingernails grow."
+              },
+              {
+                "id": "s19-0-c2",
+                "question": "Why did few scientists believe Wegener in 1912, and what later convinced them?",
+                "answer": "Model answer: He could not explain what moved the continents. Decades later, the discovery of seafloor spreading showed new crust forming at mid-ocean ridges, driven by heat from deep inside Earth."
+              },
+              {
+                "id": "s19-0-c3",
+                "question": "The reading says 'the map of the world is temporary.' What does this reveal about the planet?",
+                "answer": "Model answer: It reveals that the continents keep moving. The Atlantic Ocean grows wider every year, so the map we know is only a snapshot of a restless world."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "s19-0-e1",
+                "prompt": "How did a 'crazy' idea become the central theory of geology? Outline an essay analyzing Wegener's puzzle-piece evidence.",
+                "thesis": "Wegener was right about the pattern but wrong about the mechanism, and science accepted his idea only when the engine was found.",
+                "points": [
+                  "South America and Africa fit together like puzzle pieces, a pattern anyone could see.",
+                  "Few believed him because he could not explain what moved the continents.",
+                  "Seafloor spreading and Earth's inner heat supplied the missing mechanism decades later."
+                ],
+                "conclusion": "End by arguing that a good question can outlive its asker."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "s19-0-vw1",
+                "words": [
+                  "subduction"
+                ],
+                "prompt": "Use the word in an original sentence that shows its meaning in the context of plate tectonics."
               }
             ]
           }
@@ -8551,6 +12440,57 @@ const MM_WEEKS_68 = [
                 "accept": [
                   "san andreas"
                 ]
+              }
+            ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "s19-1-c1",
+                "question": "Describe what happens at divergent, convergent, and transform boundaries.",
+                "answer": "Model answer: At divergent boundaries, plates pull apart and magma rises to fill the gap. At convergent boundaries, plates collide, and the denser ocean plate dives beneath in subduction. At transform boundaries, plates slide sideways past each other."
+              },
+              {
+                "id": "s19-1-c2",
+                "question": "Why is Iceland so volcanic?",
+                "answer": "Model answer: Iceland sits right on top of the Mid-Atlantic Ridge, a divergent boundary where plates pull apart and magma rises to fill the gap."
+              },
+              {
+                "id": "s19-1-c3",
+                "question": "The reading says learning plate boundaries is 'like learning the rules of a slow, powerful game.' What does this reveal?",
+                "answer": "Model answer: It reveals that Earth's danger zones follow patterns. Once you know the three boundary moves, you can predict where volcanoes and earthquakes will strike."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "s19-1-e1",
+                "prompt": "Why do volcanoes and earthquakes cluster in the same places? Outline an essay analyzing the description of subduction.",
+                "thesis": "The three plate boundary types explain nearly every danger zone on Earth, because each boundary moves in its own violent way.",
+                "points": [
+                  "Divergent boundaries pull apart and let magma rise, building ridges and Iceland's volcanoes.",
+                  "At convergent boundaries, the denser plate dives in subduction, melting as it sinks and fueling volcanic ranges like the Andes.",
+                  "Transform boundaries grind sideways, building stress that snaps into earthquakes like those on the San Andreas Fault."
+                ],
+                "conclusion": "End by explaining why learning the rules of this slow game lets scientists predict where disaster will strike."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "s19-1-vw1",
+                "words": [
+                  "subduction"
+                ],
+                "prompt": "Use the word in an original sentence that shows its meaning in the context of colliding plates."
               }
             ]
           }
@@ -8826,6 +12766,58 @@ const MM_WEEKS_68 = [
                 ]
               }
             ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "h20-0-c1",
+                "question": "Name three motives that pushed Europeans to sail, and two technologies that made long voyages possible.",
+                "answer": "Model answer: They wanted Asian spices, silk, and gold; they wanted to spread Christianity; and they sought new lands and trade. New technology included the caravel, a fast ship that could sail against the wind, plus better maps and the astrolabe."
+              },
+              {
+                "id": "h20-0-c2",
+                "question": "Why did Portugal creep down the coast of Africa 'year by year' instead of sailing straight across the ocean?",
+                "answer": "Model answer: Navigation was uncertain and dangerous, so the Portuguese explored gradually, learning the coast, winds, and currents step by step before attempting longer voyages."
+              },
+              {
+                "id": "h20-0-c3",
+                "question": "The reading says Estevanico 'spoke several Native languages and served as an interpreter.' What does this reveal about the Age of Exploration?",
+                "answer": "Model answer: It reveals that exploration was not only a European story. Africans crossed these oceans too, willingly or forced, and their knowledge and skills shaped what the explorers found."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "h20-0-e1",
+                "prompt": "Did the Age of Exploration's costs outweigh its gains? Outline an essay on exploration's costs.",
+                "thesis": "Exploration connected the world, but the price, paid mostly by others, was higher than the explorers admitted.",
+                "points": [
+                  "New trade routes, better maps, and ships like the caravel enriched Europe and spread knowledge across oceans.",
+                  "Estevanico's story shows Africans crossed these oceans too, willingly or forced, shaping what was found.",
+                  "Conquest, enslavement, and disease followed the ships, costs the famous captains rarely counted."
+                ],
+                "conclusion": "End by judging who paid and who profited, and whether the ledger balances."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "h20-0-vw1",
+                "words": [
+                  "caravel",
+                  "colony"
+                ],
+                "prompt": "Use each word in an original sentence."
+              }
+            ]
           }
         ]
       },
@@ -8885,6 +12877,58 @@ const MM_WEEKS_68 = [
                 "text": "Ship logs recorded daily events like wind, distance, and sickness.",
                 "answer": "true",
                 "note": "Logs were brief, factual daily records of the voyage."
+              }
+            ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "h20-1-c1",
+                "question": "What was scurvy, and what caused it?",
+                "answer": "Model answer: Scurvy was a disease that rotted sailors' gums and sapped their strength on long voyages. It was caused by a lack of fresh fruit."
+              },
+              {
+                "id": "h20-1-c2",
+                "question": "Why did sailors watch birds, clouds, and currents so carefully?",
+                "answer": "Model answer: They read the ocean the way you read a book. Birds following the ship were evidence that land was near, and clouds and currents carried meaning for survival."
+              },
+              {
+                "id": "h20-1-c3",
+                "question": "The ship log reads: 'Day 32 at sea. The wind favors us and we made good distance. Two men are sick, but the rest hold their courage. Land must be near, for birds follow the ship.' What does this entry reveal about how sailors thought?",
+                "answer": "Model answer: It reveals that sailors were careful observers who treated nature as evidence. The writer notes wind and distance because those determined survival, admits sickness while stressing courage to keep hope alive, and reads the birds like a clue."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "h20-1-e1",
+                "prompt": "What does a ship's log reveal that a history book cannot? Outline an essay analyzing the log entry: 'Day 32 at sea... Land must be near, for birds follow the ship.'",
+                "thesis": "The log turns exploration from a line on a map into a daily struggle where observation meant survival.",
+                "points": [
+                  "The writer tracks wind and distance because those determined whether the crew lived or died.",
+                  "Admitting two men are sick while stressing courage keeps hope alive for whoever reads it.",
+                  "Reading birds like a clue shows sailors studied the ocean the way scholars study books."
+                ],
+                "conclusion": "End by honoring the hundreds of ordinary sailors whose courage, suffering, and skill made the voyages possible."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "h20-1-vw1",
+                "words": [
+                  "caravel",
+                  "settlement"
+                ],
+                "prompt": "Use each word in an original sentence."
               }
             ]
           }
@@ -8957,6 +13001,57 @@ const MM_WEEKS_68 = [
                 "accept": [
                   "Seismic waves"
                 ]
+              }
+            ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "s20-0-c1",
+                "question": "What is the difference between the focus and the epicenter of an earthquake?",
+                "answer": "Model answer: The focus is the point underground where the break begins. The epicenter is the point on the surface directly above it."
+              },
+              {
+                "id": "s20-0-c2",
+                "question": "Why does a magnitude 6 quake release about 32 times more energy than a magnitude 5?",
+                "answer": "Model answer: Because each whole-number step on the moment magnitude scale represents about 32 times more energy released."
+              },
+              {
+                "id": "s20-0-c3",
+                "question": "The reading compares rocks storing stress to 'a stretched rubber band.' What does this reveal about how earthquakes happen?",
+                "answer": "Model answer: It reveals that stress builds silently as plates push, pull, or grind against each other. When the stress finally overcomes the friction holding the rocks together, they snap to a new position and release energy all at once."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "s20-0-e1",
+                "prompt": "How do scientists find an earthquake's epicenter without seeing underground? Outline an essay analyzing the description of seismic waves.",
+                "thesis": "Seismic waves are messengers from the break, and their arrival times let scientists triangulate what they cannot see.",
+                "points": [
+                  "The focus breaks underground while the epicenter sits on the surface directly above it.",
+                  "Stations compare when seismic waves arrive: the closer a station is, the sooner the waves arrive.",
+                  "Each magnitude step means about 32 times more energy, so small numbers on the scale hide huge differences."
+                ],
+                "conclusion": "End by explaining why preparation, not prediction, is the honest response to earthquakes."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "s20-0-vw1",
+                "words": [
+                  "tremor"
+                ],
+                "prompt": "Use the word in an original sentence that shows its meaning in the context of earthquakes."
               }
             ]
           }
@@ -9036,6 +13131,57 @@ const MM_WEEKS_68 = [
                 "text": "Surface waves arrive last but cause the most destruction.",
                 "answer": "true",
                 "note": "They roll the ground like ocean swells."
+              }
+            ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "s20-1-c1",
+                "question": "Name the three fault types and the motion of each.",
+                "answer": "Model answer: At normal faults, rocks pull apart and one side drops down. At reverse faults, rocks push together and one side rides up over the other. At strike-slip faults, like the San Andreas, the two sides grind sideways past each other."
+              },
+              {
+                "id": "s20-1-c2",
+                "question": "Why do surface waves cause the most destruction even though they arrive last?",
+                "answer": "Model answer: They roll the ground like ocean swells, shaking it with the strongest motion after the faster P waves and S waves have passed."
+              },
+              {
+                "id": "s20-1-c3",
+                "question": "The reading says seismographs are so sensitive they can 'detect quakes on the other side of the planet.' What does this reveal?",
+                "answer": "Model answer: It reveals how powerful the instruments are. By studying wave patterns from far away, scientists map Earth's hidden interior, discovering the crust, mantle, and core without ever digging that deep."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "s20-1-e1",
+                "prompt": "Why is the ground less solid than it feels? Outline an essay comparing the three fault types.",
+                "thesis": "Faults are cracks where Earth's crust has moved, and each of the three types moves in a way that matches a plate boundary.",
+                "points": [
+                  "Normal faults pull apart and drop one side down; reverse faults push together and ride one side up over the other.",
+                  "Strike-slip faults like the San Andreas grind sideways, building stress that snaps into earthquakes.",
+                  "P waves arrive first, S waves shake side to side, and slower surface waves roll the ground like ocean swells and cause the worst damage."
+                ],
+                "conclusion": "End by explaining how studying wave patterns lets scientists map the planet's interior without digging."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "s20-1-vw1",
+                "words": [
+                  "tremor"
+                ],
+                "prompt": "Use the word in an original sentence that shows its meaning in the context of faults and seismic waves."
               }
             ]
           }
@@ -9299,6 +13445,58 @@ const MM_WEEKS_68 = [
                 "note": "Sugar plantations became enormously profitable and drove the slave trade."
               }
             ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "h21-0-c1",
+                "question": "Name three crops Europe gained and three things the Americas received in the Columbian Exchange.",
+                "answer": "Model answer: Europe gained potatoes, tomatoes, corn, and chocolate. The Americas received wheat, horses, cattle, and pigs."
+              },
+              {
+                "id": "h21-0-c2",
+                "question": "Why was the exchange 'not a fair trade'?",
+                "answer": "Model answer: One side gained new foods while the other faced catastrophe. Europeans carried diseases like smallpox and measles to which Native peoples had no immunity, and epidemic after epidemic killed millions."
+              },
+              {
+                "id": "h21-0-c3",
+                "question": "The reading says enslaved Africans' rice-growing skills 'made Carolina's rice plantations productive.' What does this reveal?",
+                "answer": "Model answer: It reveals that African hands and African knowledge shaped American farming. The exchange is often told as a European story, but African expertise transformed what grew in American soil."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "h21-0-e1",
+                "prompt": "Who were the winners and losers of the Columbian Exchange? Outline an essay, using the reading's evidence on both sides.",
+                "thesis": "The exchange fed Europe while devastating Native peoples, and its winners and losers depended on which side of the ocean you stood.",
+                "points": [
+                  "Europe gained potatoes, tomatoes, corn, and chocolate, crops that transformed diets and fed growing populations.",
+                  "Smallpox and measles swept through Native communities with no immunity, killing millions in epidemic after epidemic.",
+                  "Enslaved Africans' rice-growing skills and African crops like okra and black-eyed peas shaped American farming, a contribution history often overlooks."
+                ],
+                "conclusion": "End by arguing that 'exchange' is too gentle a word for what happened."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "h21-0-vw1",
+                "words": [
+                  "exchange",
+                  "epidemic"
+                ],
+                "prompt": "Use each word in an original sentence."
+              }
+            ]
           }
         ]
       },
@@ -9371,6 +13569,58 @@ const MM_WEEKS_68 = [
                 "id": "h2-m3",
                 "term": "smallpox",
                 "answer": "b"
+              }
+            ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "h21-1-c1",
+                "question": "What does the Spanish settler's account emphasize, and what does the Native account emphasize?",
+                "answer": "Model answer: The settler emphasizes prosperity: wheat, horses, gold, and a thriving settlement. The Native writer emphasizes loss: sickness sweeping the village, few families remaining, and grief."
+              },
+              {
+                "id": "h21-1-c2",
+                "question": "Why is neither account alone the whole truth?",
+                "answer": "Model answer: Each writer could only see part of the story. The settler counts gains and the Native writer counts the dead, so historians must read both to understand the exchange."
+              },
+              {
+                "id": "h21-1-c3",
+                "question": "The reading says 'history becomes a conversation between voices, not a single story told by the winners.' What does this reveal about studying history?",
+                "answer": "Model answer: It reveals that good history compares perspectives. Asking whose voice is telling the story and whose is missing makes you a sharper thinker in every subject."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "h21-1-e1",
+                "prompt": "Which account of the Columbian Exchange is true: the settler's or the Native writer's? Outline an essay comparing the two accounts.",
+                "thesis": "Both accounts are true and neither is complete: the settler counts gains while the Native writer counts the dead.",
+                "points": [
+                  "The settler sees wheat, horses, and gold: a prospering settlement.",
+                  "The Native writer sees sickness and empty homes: a village burying its dead and wondering why the gods were angry.",
+                  "Good historians read both, asking who wrote each one and what each writer could and could not see."
+                ],
+                "conclusion": "End by explaining why comparing voices makes history a conversation instead of one winner's story."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "h21-1-vw1",
+                "words": [
+                  "exchange",
+                  "staple"
+                ],
+                "prompt": "Use each word in an original sentence."
               }
             ]
           }
@@ -9453,6 +13703,57 @@ const MM_WEEKS_68 = [
                 "answer": "Eruptions can bury towns in ash and send deadly flows downhill. But volcanoes also build new islands, enrich soil with minerals, and released gases that formed the early atmosphere. They are Earth's pressure valves, releasing inner heat."
               }
             ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "s21-0-c1",
+                "question": "What is the difference between magma and lava?",
+                "answer": "Model answer: Magma is hot melted rock underground. When it reaches the surface, it is called lava."
+              },
+              {
+                "id": "s21-0-c2",
+                "question": "Why do shield volcanoes have gentle slopes while stratovolcanoes are steep?",
+                "answer": "Model answer: Runny lava spreads into wide, gentle shields. Thick, sticky lava and ash build tall, steep cones like Mount St. Helens."
+              },
+              {
+                "id": "s21-0-c3",
+                "question": "The reading calls volcanoes 'Earth's pressure valves.' What does this reveal?",
+                "answer": "Model answer: It reveals that eruptions release the planet's inner heat. Volcanoes are not random disasters but the way Earth lets off pressure, building new islands and enriching soil."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "s21-0-e1",
+                "prompt": "How does lava's thickness decide a volcano's shape? Outline an essay comparing the three volcano types.",
+                "thesis": "A volcano's shape is a record of its eruptions: runny lava builds gentle shields, sticky lava builds steep, explosive cones.",
+                "points": [
+                  "Shield volcanoes like Hawaii's spread wide on flowing lava with gentle slopes.",
+                  "Cinder cones pile small and steep from ash and rock chunks.",
+                  "Stratovolcanoes like Mount St. Helens layer lava and ash into tall cones that can erupt explosively."
+                ],
+                "conclusion": "End by explaining why classifying volcanoes helps scientists predict how each one will behave."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "s21-0-vw1",
+                "words": [
+                  "eruption"
+                ],
+                "prompt": "Use the word in an original sentence that shows its meaning in the context of volcanoes."
+              }
+            ]
           }
         ]
       },
@@ -9528,6 +13829,57 @@ const MM_WEEKS_68 = [
                 "accept": [
                   "yellowstone"
                 ]
+              }
+            ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "s21-1-c1",
+                "question": "How did the Hawaiian Islands form?",
+                "answer": "Model answer: The Pacific Plate drifted over a hotspot, a plume of extra-hot rock from the mantle, punching through again and again to create a chain of volcanoes, with the youngest island still growing today."
+              },
+              {
+                "id": "s21-1-c2",
+                "question": "Why do about 90 percent of the world's earthquakes happen around the Ring of Fire?",
+                "answer": "Model answer: The Ring of Fire is a horseshoe-shaped zone around the Pacific where plates collide and dive beneath each other, producing earthquakes and most stratovolcanoes."
+              },
+              {
+                "id": "s21-1-c3",
+                "question": "The reading says 'the planet's fire has a geography, and learning its map saves lives.' What does this reveal?",
+                "answer": "Model answer: It reveals that volcanic danger follows patterns. Studying where hotspots and plate collisions occur lets scientists warn communities before eruptions."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "s21-1-e1",
+                "prompt": "What is the difference between a hotspot volcano and a Ring of Fire volcano? Outline an essay analyzing the Hawaii description.",
+                "thesis": "Two different recipes make volcanoes: a deep mantle plume punching through a drifting plate, or plates colliding around the Pacific.",
+                "points": [
+                  "Hawaii formed as the Pacific Plate drifted over one hotspot, building islands one by one.",
+                  "The Ring of Fire's horseshoe of colliding plates produces 90 percent of the world's earthquakes and most stratovolcanoes.",
+                  "Yellowstone shows a hotspot can hide under a continent, not just an ocean."
+                ],
+                "conclusion": "End by arguing that mapping the planet's fire is what lets communities prepare."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "s21-1-vw1",
+                "words": [
+                  "eruption"
+                ],
+                "prompt": "Use the word in an original sentence that shows its meaning in the context of hotspots and the Ring of Fire."
               }
             ]
           }
@@ -9791,6 +14143,58 @@ const MM_WEEKS_68 = [
                 "note": "Captive Africans kept their cultures alive across the ocean."
               }
             ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "h22-0-c1",
+                "question": "Describe the three legs of the triangular trade.",
+                "answer": "Model answer: European ships carried guns and cloth to Africa and traded them for captive people. Then they sailed the Middle Passage to the Americas, where enslaved Africans were sold to work on plantations. The ships returned to Europe loaded with sugar, tobacco, and cotton."
+              },
+              {
+                "id": "h22-0-c2",
+                "question": "How did enslaved Africans resist during the Middle Passage?",
+                "answer": "Model answer: Some refused to eat, some rose up against crews, and most held onto their languages, music, and beliefs, keeping their cultures alive across the ocean."
+              },
+              {
+                "id": "h22-0-c3",
+                "question": "The reading says 'the trade never fully broke the human spirit it tried to crush.' What does this reveal?",
+                "answer": "Model answer: It reveals that resistance mattered as much as suffering. Survival itself, keeping culture, language, and memory alive, was a victory the trade could not take."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "h22-0-e1",
+                "prompt": "How did the triangular trade turn cruelty into profit? Outline an essay on the trade's mechanics.",
+                "thesis": "The trade was a machine with three moving parts, and every part was designed to convert human lives into European wealth.",
+                "points": [
+                  "Guns and cloth bought captives in Africa, the Middle Passage delivered them to the Americas, and sugar, tobacco, and cotton sailed home to Europe.",
+                  "The Middle Passage's crowding, hunger, and disease were not accidents but the cost of maximum profit.",
+                  "African resistance, from refusing food to keeping language and music, proved the machine never fully worked."
+                ],
+                "conclusion": "End by explaining why studying this crime honestly matters more than forgetting it."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "h22-0-vw1",
+                "words": [
+                  "middle passage",
+                  "abolition"
+                ],
+                "prompt": "Use each word in an original sentence."
+              }
+            ]
           }
         ]
       },
@@ -9861,6 +14265,58 @@ const MM_WEEKS_68 = [
                 ]
               }
             ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "h22-1-c1",
+                "question": "How did Equiano gain his freedom, and what did he do afterward?",
+                "answer": "Model answer: He endured the Middle Passage, labored in the Americas, and bought his own freedom. Then he wrote his life story and published it in 1789."
+              },
+              {
+                "id": "h22-1-c2",
+                "question": "Why did Equiano write that he remembers 'so others will know the truth'?",
+                "answer": "Model answer: He wanted readers who had never thought about slavery to face it. His book became a bestseller across Britain, and readers could no longer ignore the trade."
+              },
+              {
+                "id": "h22-1-c3",
+                "question": "The reading says 'the pen can be as mighty as any weapon ever forged.' What does Equiano's life reveal?",
+                "answer": "Model answer: It reveals that a personal story can help break a system. A man once treated as property used his own words to fuel the abolition movement."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "h22-1-e1",
+                "prompt": "How did one man's book help break the slave trade? Outline an essay analyzing Equiano's narrative.",
+                "thesis": "Equiano's narrative turned statistics into a human being, and readers who met him on the page could no longer ignore slavery.",
+                "points": [
+                  "His account of the Middle Passage, the foul air below deck and the fear of dying in the dark, still shocks readers today.",
+                  "He explains his purpose plainly: he remembers so others will know the truth.",
+                  "The book's success carried him into the abolition movement, where he traveled and spoke against the trade."
+                ],
+                "conclusion": "End by arguing that telling the truth is itself a form of resistance."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "h22-1-vw1",
+                "words": [
+                  "abolition",
+                  "shackle"
+                ],
+                "prompt": "Use each word in an original sentence."
+              }
+            ]
           }
         ]
       }
@@ -9916,6 +14372,57 @@ const MM_WEEKS_68 = [
                 "text": "Some mountains form when magma bulges the crust upward without erupting.",
                 "answer": "true",
                 "note": "This forms dome mountains."
+              }
+            ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "s22-0-c1",
+                "question": "How are the Himalayas still rising?",
+                "answer": "Model answer: India keeps pushing into Asia at a convergent boundary, crumpling the crust upward like a rug pushed against a wall, growing about as fast as your fingernails."
+              },
+              {
+                "id": "s22-0-c2",
+                "question": "Why are the Appalachians rounded and forested while the Himalayas are tall and jagged?",
+                "answer": "Model answer: The Appalachians were once as tall as the Himalayas, but hundreds of millions of years of wind, water, and ice erosion wore them into rounded, forested ridges. The Himalayas are still young and rising."
+              },
+              {
+                "id": "s22-0-c3",
+                "question": "The reading says 'the greatest forces work slowly, grain by grain, over ages.' What does this reveal about mountain building?",
+                "answer": "Model answer: It reveals that mountains are a balance between building up and wearing down, both happening over millions of years. Slow pressure shapes the tallest things on Earth."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "s22-0-e1",
+                "prompt": "Are mountains built up or worn down? Outline an essay analyzing the Himalayas and the Appalachians.",
+                "thesis": "Every mountain is a slow tug-of-war between building up and wearing down, and the winner depends on the mountain's age.",
+                "points": [
+                  "Colliding plates crumple the crust upward, and the Himalayas still rise as India pushes into Asia.",
+                  "Volcanoes layer lava higher, and magma can bulge the crust into domes without ever erupting.",
+                  "Wind, water, and ice grind peaks into sand; the Appalachians were once as tall as the Himalayas."
+                ],
+                "conclusion": "End by explaining why the greatest forces work slowly, grain by grain, over ages."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "s22-0-vw1",
+                "words": [
+                  "summit"
+                ],
+                "prompt": "Use the word in an original sentence that shows its meaning in the context of mountain building."
               }
             ]
           }
@@ -10010,6 +14517,57 @@ const MM_WEEKS_68 = [
                 "accept": [
                   "kilimanjaro"
                 ]
+              }
+            ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "s22-1-c1",
+                "question": "Name the four mountain types and give an example of each.",
+                "answer": "Model answer: Fold mountains, like the Himalayas and the Alps, form when colliding plates crumple the crust. Fault-block mountains, like the Sierra Nevada, form when crust blocks tilt and lift. Volcanic mountains, like Mount Fuji, grow from eruptions. Dome mountains, like the Black Hills, form when magma pushes the crust up without breaking through."
+              },
+              {
+                "id": "s22-1-c2",
+                "question": "What are the tallest mountains of Asia, North America, and Africa, according to the reading?",
+                "answer": "Model answer: Mount Everest at 29,032 feet in Asia, Denali at 20,310 feet in North America, and Kilimanjaro at 19,341 feet in Africa."
+              },
+              {
+                "id": "s22-1-c3",
+                "question": "The reading says 'to read a mountain's type and height is to read a chapter of Earth's deep history.' What does this reveal?",
+                "answer": "Model answer: It reveals that mountains are evidence. Their shape and size record how they formed over millions of years, like pages written in stone."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "s22-1-e1",
+                "prompt": "How can you read a mountain's history from its shape? Outline an essay comparing the four mountain types.",
+                "thesis": "A mountain's type is its birth certificate: fold, fault-block, volcanic, or dome each tells how the peak rose.",
+                "points": [
+                  "Fold mountains like the Himalayas record colliding plates; fault-block ranges like the Sierra Nevada record tilting crust.",
+                  "Volcanic peaks like Fuji record layer upon layer of eruptions; dome mountains like the Black Hills record magma pushing up from below.",
+                  "Elevation adds the next chapter: Everest, Denali, and Kilimanjaro each stand at a different height of the same long story."
+                ],
+                "conclusion": "End by explaining how mountains also shape the world around them, from rainfall to the rivers millions depend on."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "s22-1-vw1",
+                "words": [
+                  "summit"
+                ],
+                "prompt": "Use the word in an original sentence that shows its meaning in the context of measuring mountains."
               }
             ]
           }
@@ -10288,6 +14846,58 @@ const MM_WEEKS_68 = [
                 ]
               }
             ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "h23-0-c1",
+                "question": "What was mercantilism, and how did colonies serve it?",
+                "answer": "Model answer: Mercantilism was the belief that a nation's wealth came from gold, exports, and colonies. Colonies existed to serve the mother country: they supplied raw materials and bought finished goods, with wealth flowing one way to Europe."
+              },
+              {
+                "id": "h23-0-c2",
+                "question": "Why did colonial laws forbid colonists from trading with other nations or making competing products?",
+                "answer": "Model answer: To keep the colony serving the mother country. The laws protected home industries and made sure wealth flowed across the Atlantic to Europe."
+              },
+              {
+                "id": "h23-0-c3",
+                "question": "The reading calls Palmares 'a colony too, but one built on freedom instead of exploitation.' What does this reveal?",
+                "answer": "Model answer: It reveals that even inside brutal empires, people built free communities. Palmares resisted Portuguese attacks for nearly a century with its own farms, laws, and leaders, proving freedom could be defended."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "h23-0-e1",
+                "prompt": "Did mercantilism help the colonies or only the mother country? Outline an essay on empire economics.",
+                "thesis": "Mercantilism made colonies into tools: they existed to enrich Europe, and every law kept the wealth flowing one way.",
+                "points": [
+                  "Colonies supplied raw materials like Potosi silver and Brazilian sugar, then bought finished goods back from the mother country.",
+                  "Laws banned colonial trade with other nations and blocked products that competed with home industries.",
+                  "Palmares proved the alternative: a free community with its own farms, laws, and leaders, defended for nearly a century."
+                ],
+                "conclusion": "End by judging whether an empire built on extraction could ever be fair to the colonized."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "h23-0-vw1",
+                "words": [
+                  "colony",
+                  "mercantilism"
+                ],
+                "prompt": "Use each word in an original sentence."
+              }
+            ]
           }
         ]
       },
@@ -10347,6 +14957,58 @@ const MM_WEEKS_68 = [
                 "text": "Unfair colonial rules eventually helped fuel revolutions.",
                 "answer": "true",
                 "note": "Anger at rules written an ocean away grew into revolution."
+              }
+            ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "h23-1-c1",
+                "question": "What did the English charter grant, and what did it require of the settlers?",
+                "answer": "Model answer: It granted lands to the company for trade and settlement. The settlers had to obey the laws of England, and the crown promised to protect their ships and towns."
+              },
+              {
+                "id": "h23-1-c2",
+                "question": "Who is missing from the charter, and why does that matter?",
+                "answer": "Model answer: The Native peoples who lived on the land are missing. The charter assumes the king already owns the land, ignoring the people it was taken from."
+              },
+              {
+                "id": "h23-1-c3",
+                "question": "The reading says to ask 'who benefits, who is missing, and who pays the price.' What does this reveal about reading historical documents?",
+                "answer": "Model answer: It reveals that documents hide as much as they show. Every line of the charter serves the empire, and asking those three questions unlocks almost any historical document."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "h23-1-e1",
+                "prompt": "What does a colonial charter reveal about how empires thought? Outline an essay analyzing the charter excerpt: 'We grant these lands to the company for trade and settlement...'",
+                "thesis": "The charter is empire in miniature: every line grants, controls, or protects, and no line asks the Native inhabitants anything.",
+                "points": [
+                  "'We grant these lands' assumes the king already owns them, erasing the people who lived there.",
+                  "'The settlers shall obey the laws of England' keeps the colony under control from an ocean away.",
+                  "'The crown shall protect their ships and towns' sounds generous but really guards the empire's investment."
+                ],
+                "conclusion": "End by applying the three questions, who benefits, who is missing, and who pays the price, to any document you read."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "h23-1-vw1",
+                "words": [
+                  "colony",
+                  "governor"
+                ],
+                "prompt": "Use each word in an original sentence."
               }
             ]
           }
@@ -10423,6 +15085,57 @@ const MM_WEEKS_68 = [
                 "id": "s1-s1",
                 "prompt": "Why does the reading say that destruction, in nature, is also creation?",
                 "answer": "Weathering destroys solid rock, but the broken fragments become sediment and then soil. Soil grows the food and forests the world depends on. Without the breakdown of rock, there would be no farms or forests."
+              }
+            ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "s23-0-c1",
+                "question": "What is the difference between mechanical and chemical weathering?",
+                "answer": "Model answer: Mechanical weathering breaks rock into smaller pieces without changing what it is made of, like water freezing in cracks and prying rocks apart. Chemical weathering changes the minerals themselves, like slightly acidic rain dissolving limestone."
+              },
+              {
+                "id": "s23-0-c2",
+                "question": "Why does weathering work fastest in deserts and wet tropics?",
+                "answer": "Model answer: In deserts, daily heating and cooling crack rocks apart. In wet tropics, heavy rain and warmth speed chemical breakdown."
+              },
+              {
+                "id": "s23-0-c3",
+                "question": "The reading says 'destruction, in nature, is also creation.' What does this reveal about weathering?",
+                "answer": "Model answer: It reveals that breaking rock down is the first step toward soil. Without weathering there would be no soil, no farms, and no forests, so destruction feeds new life."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "s23-0-e1",
+                "prompt": "Which breaks rock faster: pounding it apart or dissolving it? Outline an essay comparing mechanical and chemical weathering.",
+                "thesis": "Mechanical and chemical weathering attack rock in different ways, and together they turn solid bedrock into the soil that feeds the world.",
+                "points": [
+                  "Freezing water wedges cracks open, roots split boulders, and wind-blown sand sandblasts stone, all without changing the minerals.",
+                  "Slightly acidic rain dissolves limestone into caves, and oxygen rusts iron-rich rock reddish brown.",
+                  "Extreme places speed the work: deserts crack rock with daily heating and cooling, while wet tropics dissolve it fast."
+                ],
+                "conclusion": "End by explaining why weathering is the first step in the journey from bedrock to farms and forests."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "s23-0-vw1",
+                "words": [
+                  "erosion"
+                ],
+                "prompt": "Use the word in an original sentence that shows its meaning in the context of weathering and moving rock."
               }
             ]
           }
@@ -10508,6 +15221,57 @@ const MM_WEEKS_68 = [
                 "id": "s2-o4",
                 "event": "Solid bedrock",
                 "answer": 4
+              }
+            ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "s23-1-c1",
+                "question": "What is humus, and why does soil need it?",
+                "answer": "Model answer: Humus is the dark remains of decayed plants and animals. Mixed with minerals, water, and air, it feeds the bacteria, fungi, worms, and insects that recycle nutrients in the soil."
+              },
+              {
+                "id": "s23-1-c2",
+                "question": "Why is losing topsoil such a serious problem?",
+                "answer": "Model answer: Forming just one inch of topsoil can take hundreds of years, so it is easy to lose through erosion and slow to replace. Ancient civilizations collapsed when their soil wore out."
+              },
+              {
+                "id": "s23-1-c3",
+                "question": "The reading compares caring for soil to the free people of Palmares tending their farms, calling it 'an act of independence and survival.' What does this reveal?",
+                "answer": "Model answer: It reveals that soil is freedom. Growing your own food on land you protect means no one can starve you into submission, whether you are a maroon colony or a modern farm."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "s23-1-e1",
+                "prompt": "Why is soil worth more than it looks? Outline an essay analyzing the fact that one inch of topsoil takes hundreds of years to form.",
+                "thesis": "Soil is a slow-made, easily lost treasure, and protecting it is protecting the future of food.",
+                "points": [
+                  "Good soil is half minerals plus water, air, and humus, holding more living organisms in a teaspoon than there are people on Earth.",
+                  "Horizons stack from rich topsoil down to bedrock, each layer built over centuries.",
+                  "Cleared forests and overplowed fields lose topsoil to erosion, the same battle ancient civilizations lost."
+                ],
+                "conclusion": "End by connecting soil care to independence, like the free farmers of Palmares tending their own land."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "s23-1-vw1",
+                "words": [
+                  "erosion"
+                ],
+                "prompt": "Use the word in an original sentence that shows its meaning in the context of losing soil."
               }
             ]
           }
@@ -10771,6 +15535,58 @@ const MM_WEEKS_68 = [
                 "note": "They argued governments are legitimate only when they protect people's rights."
               }
             ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "h24-0-c1",
+                "question": "What did Enlightenment thinkers believe should guide human life?",
+                "answer": "Model answer: Reason: clear thinking based on facts and logic, instead of tradition or unquestioned authority."
+              },
+              {
+                "id": "h24-0-c2",
+                "question": "Why were the claims that 'all people are born with rights' radical in their world?",
+                "answer": "Model answer: The world was ruled by kings who claimed God gave them power. Saying governments exist to protect rights, and that people could change a failing government, challenged the whole order."
+              },
+              {
+                "id": "h24-0-c3",
+                "question": "The reading says Phillis Wheatley and Benjamin Banneker 'turned Enlightenment ideals into a demand no one could honestly refuse.' What does this reveal?",
+                "answer": "Model answer: It reveals that Black achievement exposed the contradiction at the heart of the Enlightenment. If intellect knows no color, then the claim that all people have rights could not honestly exclude Black people."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "h24-0-e1",
+                "prompt": "Did Enlightenment ideas cause revolutions, or did revolutions just borrow the ideas? Outline an essay on ideas to revolution.",
+                "thesis": "Enlightenment ideas were the fuel and revolutions were the fire: the ideas made rebellion thinkable, and events made it unstoppable.",
+                "points": [
+                  "Reason, natural rights, and the claim that governments exist to protect rights gave rebels a language.",
+                  "Books, newspapers, and coffeehouse debates spread those ideas faster than kings could stop them.",
+                  "Wheatley and Banneker proved the ideals true in practice, turning philosophy into an undeniable demand."
+                ],
+                "conclusion": "End by arguing that ideas outlive the people who speak them and outgrow their limits."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "h24-0-vw1",
+                "words": [
+                  "reason",
+                  "rights"
+                ],
+                "prompt": "Use each word in an original sentence."
+              }
+            ]
           }
         ]
       },
@@ -10841,6 +15657,58 @@ const MM_WEEKS_68 = [
                 ]
               }
             ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "h24-1-c1",
+                "question": "What are the three steps in Locke's argument, as the reading explains them?",
+                "answer": "Model answer: First, rights belong to people by nature, not as gifts from kings. Second, government's job is protection, not control. Third, the people may change a government that betrays its trust."
+              },
+              {
+                "id": "h24-1-c2",
+                "question": "Why did American colonists and Jefferson find Locke's ideas so useful?",
+                "answer": "Model answer: His words became the blueprint for revolutions. Colonists quoted him when they protested British taxes and laws, and Jefferson borrowed his language for the Declaration of Independence."
+              },
+              {
+                "id": "h24-1-c3",
+                "question": "The reading notes that Locke himself invested in a company involved in slavery. What does this reveal about ideas?",
+                "answer": "Model answer: It reveals that ideas can outrun the people who speak them. Later generations, including Black abolitionists, took Locke's logic further than he did, and his words outgrew him."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "h24-1-e1",
+                "prompt": "What makes Locke's argument so hard to answer? Outline an essay analyzing his excerpt: 'All people are born free and equal. Governments exist to protect life, liberty, and property. When a government fails this trust, the people may change it.'",
+                "thesis": "Locke's argument is a ladder: each step follows from the last, so denying the conclusion means denying that people have rights at all.",
+                "points": [
+                  "Rights belong to people by nature, not as gifts from kings.",
+                  "Government's job is protection, not control.",
+                  "A government that betrays its trust may be changed by the people."
+                ],
+                "conclusion": "End by explaining how Black abolitionists climbed Locke's own ladder further than he did."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "h24-1-vw1",
+                "words": [
+                  "rights",
+                  "tyranny"
+                ],
+                "prompt": "Use each word in an original sentence."
+              }
+            ]
           }
         ]
       }
@@ -10905,6 +15773,57 @@ const MM_WEEKS_68 = [
                 "id": "s1-s1",
                 "prompt": "In the one-year calendar of Earth's history, when do humans appear, and what does that tell you?",
                 "answer": "All of human history fits in the last minute of December 31. Dinosaurs arrived December 13 and were gone by December 26. This shows humans are newcomers on a very old planet."
+              }
+            ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "s24-0-c1",
+                "question": "How old is Earth, and what is the largest division of the geologic time scale?",
+                "answer": "Model answer: Earth is about 4.6 billion years old. The largest divisions are eons, and we live in the Phanerozoic Eon."
+              },
+              {
+                "id": "s24-0-c2",
+                "question": "What marks the boundary between the Mesozoic and Cenozoic eras?",
+                "answer": "Model answer: An asteroid struck 66 million years ago, ending the age of dinosaurs and opening the age of mammals."
+              },
+              {
+                "id": "s24-0-c3",
+                "question": "The reading shrinks Earth's history into one year, with all of human history in 'the last minute of December 31.' What does this reveal?",
+                "answer": "Model answer: It reveals how new we are. The planet's story dwarfs our own, putting our moment in humbling perspective."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "s24-0-e1",
+                "prompt": "How can anyone picture 4.6 billion years? Outline an essay analyzing the one-year calendar analogy.",
+                "thesis": "The calendar shrinks deep time into a shape the mind can hold, and the result is humbling: humanity owns only the last minute.",
+                "points": [
+                  "Eons, eras, periods, and epochs divide Earth's biography like chapters, sections, and paragraphs.",
+                  "Dinosaurs arrive December 13 and vanish December 26; all of human history fits in one minute of December 31.",
+                  "Mass extinctions draw the chapter lines, ending old worlds and starting new ones."
+                ],
+                "conclusion": "End by reflecting on what it means to be newcomers on a very old planet."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "s24-0-vw1",
+                "words": [
+                  "extinct"
+                ],
+                "prompt": "Use the word in an original sentence that shows its meaning in the context of geologic time."
               }
             ]
           }
@@ -10982,6 +15901,57 @@ const MM_WEEKS_68 = [
                 "accept": [
                   "Superposition"
                 ]
+              }
+            ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "s24-1-c1",
+                "question": "What is the principle of superposition?",
+                "answer": "Model answer: In sedimentary rock, the oldest layers are on the bottom and the youngest on top, so a fossil in a lower layer is older than one above it."
+              },
+              {
+                "id": "s24-1-c2",
+                "question": "How do trilobites and the iridium layer each help geologists date rock?",
+                "answer": "Model answer: Trilobites appear only in specific time periods, so they work like bookmarks marking the Paleozoic Era. A thin worldwide layer of iridium marks the asteroid impact that ended the dinosaurs."
+              },
+              {
+                "id": "s24-1-c3",
+                "question": "The reading says 'clear thinking reveals truths hidden in plain sight,' linking Locke's arguments to reading strata. What does this reveal?",
+                "answer": "Model answer: It reveals that history and science use the same tools. Whether decoding an argument or decoding rock layers, patience and logic uncover what is hidden."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "s24-1-e1",
+                "prompt": "How do geologists read Earth's history in rock? Outline an essay analyzing the iridium layer as evidence.",
+                "thesis": "Rocks are history books, and geologists read them with superposition, fossil bookmarks, and radioactive clocks.",
+                "points": [
+                  "Superposition stacks time: lower layers are older, like a stack of newspapers read from the bottom up.",
+                  "Trilobites mark the Paleozoic Era, and the worldwide iridium layer marks the asteroid that ended the dinosaurs.",
+                  "Radioactive decay adds exact ages, turning relative order into measured years."
+                ],
+                "conclusion": "End by connecting rock-reading to the Enlightenment: patience and logic reveal truths hidden in plain sight."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "s24-1-vw1",
+                "words": [
+                  "extinct"
+                ],
+                "prompt": "Use the word in an original sentence that shows its meaning in the context of fossils and rock layers."
               }
             ]
           }
@@ -11245,6 +16215,58 @@ const MM_WEEKS_68 = [
                 "note": "The war became a global contest between Britain and its rivals."
               }
             ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "h25-0-c1",
+                "question": "Which nations helped the American cause, and where were battles fought beyond North America?",
+                "answer": "Model answer: France sent money, ships, and soldiers, and Spain and the Netherlands joined the fight. Battles were fought in the Caribbean, the Mediterranean, and India."
+              },
+              {
+                "id": "h25-0-c2",
+                "question": "Why did enslaved people in Virginia flee to British lines?",
+                "answer": "Model answer: Britain promised freedom to those who joined its cause, and the revolution's language of liberty made enslaved people ask why it did not apply to them."
+              },
+              {
+                "id": "h25-0-c3",
+                "question": "The reading says the fight for liberty 'depended on people the new nation did not yet consider free.' What does James Armistead Lafayette's story reveal?",
+                "answer": "Model answer: It reveals that the revolution was won with help from the unfree. An enslaved Virginian posed as a runaway servant, spied on British camps, and helped win Yorktown, showing liberty was a team effort."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "h25-0-e1",
+                "prompt": "Was the American Revolution really an American story? Outline an essay on the global revolution.",
+                "thesis": "The revolution was a world event: foreign armies made victory possible, and its ideas traveled further than its soldiers.",
+                "points": [
+                  "France, Spain, and the Netherlands turned a colonial rebellion into a global war fought across the Caribbean, the Mediterranean, and India.",
+                  "The language of natural rights inspired reformers and rebels from Ireland to Latin America.",
+                  "James Armistead Lafayette's spying shows the fight for liberty depended on people the new nation did not yet call free."
+                ],
+                "conclusion": "End by arguing that the revolution belonged to the world, and the world helped make it."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "h25-0-vw1",
+                "words": [
+                  "liberty",
+                  "loyalist"
+                ],
+                "prompt": "Use each word in an original sentence."
+              }
+            ]
           }
         ]
       },
@@ -11315,6 +16337,58 @@ const MM_WEEKS_68 = [
                 ]
               }
             ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "h25-1-c1",
+                "question": "What were the two things the Declaration of Independence did at once?",
+                "answer": "Model answer: It listed the colonists' complaints against King George III, and it stated the principles behind their rebellion."
+              },
+              {
+                "id": "h25-1-c2",
+                "question": "Why does the reading say Jefferson's logic is 'a ladder'?",
+                "answer": "Model answer: Each claim builds on the last: if all are equal and rights cannot be taken away, then a king who violates those rights can be rejected."
+              },
+              {
+                "id": "h25-1-c3",
+                "question": "The reading says 'its ideas changed the world, and its promises remained unfinished.' What does this reveal about reading the Declaration?",
+                "answer": "Model answer: It reveals that two truths must be held at once. The document's principles were world-changing, yet its author enslaved people and the new nation excluded many, so later generations had to finish the work."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "h25-1-e1",
+                "prompt": "What makes the Declaration's argument so powerful, and where does it fail? Outline an essay analyzing its famous lines: 'We hold these truths to be self-evident, that all men are created equal...'",
+                "thesis": "The Declaration's logic is a ladder anyone can climb, but its author stopped halfway up, leaving later generations to finish it.",
+                "points": [
+                  "'All men are created equal' borrows Locke: equality is self-evident, and rights come from the Creator, not from kings.",
+                  "If rights cannot be taken away, then a king who violates them can be rejected.",
+                  "Jefferson enslaved people and Loyalists fled as rebels, so the promises remained unfinished."
+                ],
+                "conclusion": "End by explaining why reading the Declaration means holding two truths at once."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "h25-1-vw1",
+                "words": [
+                  "liberty",
+                  "loyalist"
+                ],
+                "prompt": "Use each word in an original sentence."
+              }
+            ]
           }
         ]
       }
@@ -11370,6 +16444,57 @@ const MM_WEEKS_68 = [
                 "text": "Archaeopteryx shows features of both dinosaurs and birds.",
                 "answer": "true",
                 "note": "It had feathers and teeth, capturing evolution mid-step."
+              }
+            ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "s25-0-c1",
+                "question": "How does a fossil form?",
+                "answer": "Model answer: An organism is buried quickly by sediment before scavengers or decay can destroy it. Over millions of years, minerals seep into the remains and harden them into rock."
+              },
+              {
+                "id": "s25-0-c2",
+                "question": "What can a fossil fish on a mountaintop and dinosaur trackways each tell scientists?",
+                "answer": "Model answer: A fossil fish on a mountaintop proves the rock was once under the sea. Trackways show how dinosaurs walked, how fast they moved, and whether they traveled in herds."
+              },
+              {
+                "id": "s25-0-c3",
+                "question": "The reading calls fossils 'direct evidence from the past,' like primary sources in history. What does this reveal?",
+                "answer": "Model answer: It reveals that fossils let the dead speak. Like a letter from the past, each fossil is firsthand evidence that scientists read to reconstruct ancient worlds."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "s25-0-e1",
+                "prompt": "What can a single fossil prove? Outline an essay analyzing Archaeopteryx as evidence of evolution.",
+                "thesis": "Each fossil is a clue, and together they rebuild lost worlds; transitional fossils like Archaeopteryx catch evolution mid-step.",
+                "points": [
+                  "A fossil fish on a mountaintop proves the rock was once under the sea.",
+                  "Trackways record how dinosaurs walked, how fast they moved, and whether they traveled in herds.",
+                  "Archaeopteryx, with its feathers and teeth, links dinosaurs to birds."
+                ],
+                "conclusion": "End by arguing that fossils are primary sources: direct evidence that lets the dead speak."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "s25-0-vw1",
+                "words": [
+                  "preserved"
+                ],
+                "prompt": "Use the word in an original sentence that shows its meaning in the context of fossils."
               }
             ]
           }
@@ -11455,6 +16580,57 @@ const MM_WEEKS_68 = [
                 "id": "s2-m2",
                 "term": "absolute dating",
                 "answer": "b"
+              }
+            ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "s25-1-c1",
+                "question": "What is a half-life?",
+                "answer": "Model answer: A half-life is the time it takes for half of the atoms in a radioactive sample to decay into stable forms."
+              },
+              {
+                "id": "s25-1-c2",
+                "question": "If a rock starts with 100 atoms of a radioactive element, about how many remain after three half-lives?",
+                "answer": "Model answer: About 12 or 13. After one half-life 50 remain, after two 25 remain, and after three about 12 or 13."
+              },
+              {
+                "id": "s25-1-c3",
+                "question": "The reading compares atoms to 'a spy's coded message.' What does this reveal about half-life dating?",
+                "answer": "Model answer: It reveals that atoms carry hidden information about age. By measuring parent and daughter atoms, scientists decode the message and turn geology from storytelling into measurement."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "s25-1-e1",
+                "prompt": "How can atoms tell time? Outline an essay analyzing the 100-atom half-life example.",
+                "thesis": "Radioactive decay is nature's clock: steady, predictable, and readable in the ratio of parent to daughter atoms.",
+                "points": [
+                  "After one half-life half the atoms remain; after three, about 12 or 13 of 100.",
+                  "Potassium-argon dating, with a half-life of 1.3 billion years, dates ancient rocks; carbon-14 dates bones, wood, and cloth up to 50,000 years old.",
+                  "Measuring the ratio reveals how many half-lives have passed, and therefore the rock's age."
+                ],
+                "conclusion": "End by explaining how this turned geology from storytelling into measurement."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "s25-1-vw1",
+                "words": [
+                  "preserved"
+                ],
+                "prompt": "Use the word in an original sentence that shows its meaning in the context of dating ancient remains."
               }
             ]
           }
@@ -11732,6 +16908,58 @@ const MM_WEEKS_68 = [
                 "answer": 4
               }
             ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "h26-0-c1",
+                "question": "Name the three estates and explain which one paid taxes.",
+                "answer": "Model answer: The First Estate was the clergy, the Second the nobles, and the Third Estate was everyone else, about 98 percent of the people. The Third Estate paid almost all the taxes while the other two paid almost none."
+              },
+              {
+                "id": "h26-0-c2",
+                "question": "What was the Terror, and how did it begin?",
+                "answer": "Model answer: After the revolution's hopeful start with the Bastille and the Declaration of the Rights of Man, factions fought for control, and the government began executing suspected enemies by the thousands. Even revolutionary leaders ended up on the guillotine."
+              },
+              {
+                "id": "h26-0-c3",
+                "question": "The reading says Toussaint Louverture 'applied the revolution's own words' to demand freedom. What does this reveal?",
+                "answer": "Model answer: It reveals that ideas, once spoken, belong to everyone bold enough to claim them. A formerly enslaved man used France's ideals of liberty and equality to help birth free Haiti, while France's revolution devoured its children."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "h26-0-e1",
+                "prompt": "Did the French Revolution betray its own ideals? Outline an essay on how the revolution devoured its children.",
+                "thesis": "The revolution began with liberty and ended with the guillotine because each faction defined the revolution as itself and its enemies as traitors.",
+                "points": [
+                  "The Third Estate's fair demands, an end to feudal privilege and unfair taxes, won the Declaration of the Rights of Man.",
+                  "Factions then fought for control, and the Terror executed thousands of suspected enemies, including revolutionary leaders.",
+                  "Toussaint Louverture proved the ideals were sound; it was France's leaders who failed them."
+                ],
+                "conclusion": "End by arguing that ideas belong to everyone bold enough to claim them, even when their birthplace betrays them."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "h26-0-vw1",
+                "words": [
+                  "estate",
+                  "terror"
+                ],
+                "prompt": "Use each word in an original sentence."
+              }
+            ]
           }
         ]
       },
@@ -11800,6 +17028,58 @@ const MM_WEEKS_68 = [
                 "accept": [
                   "bastille"
                 ]
+              }
+            ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "h26-1-c1",
+                "question": "What did Robespierre claim about terror, and what did his critic answer?",
+                "answer": "Model answer: Robespierre declared that terror is the justice of the people, swift and severe. His critic answered that terror is not justice, and a republic built on fear will devour its own children."
+              },
+              {
+                "id": "h26-1-c2",
+                "question": "Why does the reading say the critic's warning 'proved true'?",
+                "answer": "Model answer: Robespierre's vision led to thousands of executions, including his own. The Terror consumed its creators, just as the critic predicted."
+              },
+              {
+                "id": "h26-1-c3",
+                "question": "The reading says 'the side that defines the words often decides who lives and who dies.' What does this reveal about revolutions?",
+                "answer": "Model answer: It reveals that in revolutions, words are weapons. Both men claimed to defend the revolution but defined it in opposite ways, and their debate still echoes whenever societies argue about security and freedom."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "h26-1-e1",
+                "prompt": "Who was right about terror: Robespierre or his critic? Outline an essay comparing the two speeches.",
+                "thesis": "Both men claimed to defend the revolution, but they defined it in opposite ways, and history judged the critic right.",
+                "points": [
+                  "Robespierre called terror 'the justice of the people, swift and severe,' a tool to protect the revolution from its enemies.",
+                  "His critic answered that a republic built on fear will devour its own children, and that they did not overthrow a king to become executioners.",
+                  "Robespierre himself died by the Terror, proving the warning true."
+                ],
+                "conclusion": "End by connecting their debate to modern arguments about security and freedom."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "h26-1-vw1",
+                "words": [
+                  "terror",
+                  "monarchy"
+                ],
+                "prompt": "Use each word in an original sentence."
               }
             ]
           }
@@ -11882,6 +17162,57 @@ const MM_WEEKS_68 = [
                 "answer": "Upwelling brings deep water loaded with nutrients to the surface. The nutrients feed plankton, which feed fish and entire food webs. More food at the base means more life all the way up."
               }
             ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "s26-0-c1",
+                "question": "What drives surface currents, and what is a gyre?",
+                "answer": "Model answer: Surface currents are powered mainly by wind. Earth's rotation bends these flows into giant circular patterns called gyres, one turning in each ocean basin."
+              },
+              {
+                "id": "s26-0-c2",
+                "question": "Why do some of the world's richest fisheries sit above upwelling zones?",
+                "answer": "Model answer: Deep water rising to the surface brings nutrients that feed plankton, fish, and entire food webs."
+              },
+              {
+                "id": "s26-0-c3",
+                "question": "The reading compares currents to 'trade winds that once carried revolutionary ideas across oceans.' What does this reveal?",
+                "answer": "Model answer: It reveals that currents are highways. Like winds carried ideas, currents carry the ingredients of life, heat, and nutrients, to every corner of the sea."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "s26-0-e1",
+                "prompt": "How do ocean currents feed the world? Outline an essay analyzing upwelling zones.",
+                "thesis": "Currents are rivers in the sea, and where deep water rises, life explodes, making currents the engine of ocean food webs.",
+                "points": [
+                  "Wind drives surface currents, and Earth's rotation bends them into gyres.",
+                  "Cold, dense water sinks at the poles and creeps along the seafloor in a thousand-year loop.",
+                  "Upwelling brings nutrients up, feeding plankton, fish, and the richest fisheries off Peru and California."
+                ],
+                "conclusion": "End by explaining why sailors rode these highways and why scientists still map them."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "s26-0-vw1",
+                "words": [
+                  "current"
+                ],
+                "prompt": "Use the word in an original sentence that shows its meaning in the context of ocean currents."
+              }
+            ]
           }
         ]
       },
@@ -11957,6 +17288,57 @@ const MM_WEEKS_68 = [
                 "accept": [
                   "el nino"
                 ]
+              }
+            ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "s26-1-c1",
+                "question": "How does the Gulf Stream affect Western Europe's climate?",
+                "answer": "Model answer: It carries tropical heat toward the poles, keeping Western Europe far milder than other places at the same latitude. Without it, London would have winters more like those of northern Canada."
+              },
+              {
+                "id": "s26-1-c2",
+                "question": "What happens around the world during El Nino?",
+                "answer": "Model answer: A shift warms the eastern Pacific, changing rainfall around the world. Peru's fisheries collapse, Indonesia suffers drought, and storms strike California."
+              },
+              {
+                "id": "s26-1-c3",
+                "question": "The reading says 'the ocean does not just respond to climate. In many ways, the ocean is the climate.' What does this reveal?",
+                "answer": "Model answer: It reveals that currents drive weather, not just react to it. Melting ice slowing deep circulation would change weather worldwide, so studying currents is studying our future."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "s26-1-e1",
+                "prompt": "Why does London stay mild while northern Canada freezes? Outline an essay analyzing the Gulf Stream.",
+                "thesis": "Ocean currents are Earth's climate control, moving heat around the planet, and disrupting them would rewrite weather worldwide.",
+                "points": [
+                  "The Gulf Stream carries tropical warmth to Western Europe, softening its winters.",
+                  "El Nino and La Nina show how one ocean's temperature rearranges rainfall across the globe.",
+                  "Melting ice adding fresh water to the North Atlantic could slow deep circulation and change weather everywhere."
+                ],
+                "conclusion": "End by arguing that to study currents is to study the engine of our weather and our future."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "s26-1-vw1",
+                "words": [
+                  "current"
+                ],
+                "prompt": "Use the word in an original sentence that shows its meaning in the context of climate."
               }
             ]
           }
@@ -12208,6 +17590,58 @@ const MM_WEEKS_68 = [
                 "answer": "Model answer: Louverture is saying that freedom cannot be taken back once people have claimed it. He warns the French government that the formerly enslaved people of Saint-Domingue will fight rather than return to chains."
               }
             ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "h27-0-c1",
+                "question": "In 1791, how many enslaved Africans worked the plantations of Saint-Domingue, and how did their number compare to the white colonists?",
+                "answer": "Model answer: Nearly half a million enslaved Africans worked the plantations, and they outnumbered white colonists by more than ten to one."
+              },
+              {
+                "id": "h27-0-c2",
+                "question": "Why did news of the French Revolution push the colony toward open conflict?",
+                "answer": "Model answer: Its promises of liberty and equality reached everyone, including free people of mixed race who demanded the same rights as white citizens, which raised expectations the colony's rulers would not meet."
+              },
+              {
+                "id": "h27-0-c3",
+                "question": "Louverture wrote to the French government: “We are free by natural right. Do you think men who have known how to be free will let themselves be chained again?” What does this passage reveal about his view of freedom?",
+                "answer": "Model answer: It reveals that he saw freedom as a natural right rather than a gift from rulers, and he believed that once people had claimed freedom, no power could take it back from them."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "h27-0-e1",
+                "prompt": "Was Haiti's revolution more radical than the American and French revolutions? Plan a 5-paragraph essay using Louverture's letter as one of your sources.",
+                "thesis": "Haiti's revolution was the most radical of the three because it was led by enslaved people themselves and it abolished slavery completely, while the American and French revolutions proclaimed liberty yet left slavery in place.",
+                "points": [
+                  "Louverture's letter shows that the revolutionaries claimed freedom as a natural right, not as a privilege granted by rulers.",
+                  "Haiti became the first free Black republic and the only nation ever founded by a successful revolt of enslaved people.",
+                  "Its 1804 constitution declared all citizens Black and abolished slavery, going further than the American and French declarations of liberty."
+                ],
+                "conclusion": "End by explaining what Haiti's example proved: that the idea of liberty belonged to everyone, and that its radical promise inspired hope among enslaved people and fear among slaveholding governments across the Atlantic world."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "h27-0-vw1",
+                "words": [
+                  "revolt",
+                  "emancipation"
+                ],
+                "prompt": "Use each word in an original sentence."
+              }
+            ]
           }
         ]
       },
@@ -12267,6 +17701,58 @@ const MM_WEEKS_68 = [
                 "id": "h2-s1",
                 "prompt": "Essay outline, Haiti's radical promise: list three points you would use in an essay arguing that Haiti's revolution went further than the American and French revolutions.",
                 "answer": "Model outline: 1. Haiti was founded by a successful revolt of enslaved people, not by colonists or citizens who already held rights. 2. Its founders abolished slavery completely, while the American and French revolutions left slavery in place. 3. Its constitution declared all citizens Black, directly answering the racial order of the plantation system."
+              }
+            ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "h27-1-c1",
+                "question": "What happened on January 1, 1804, and what name did Dessalines give the new nation?",
+                "answer": "Model answer: General Jean-Jacques Dessalines declared the colony independent and renamed it Haiti, taking the name from the island's Indigenous Taino people."
+              },
+              {
+                "id": "h27-1-c2",
+                "question": "Why did Haiti's founders write a constitution declaring all citizens Black?",
+                "answer": "Model answer: As a direct answer to the racial order of the plantation system, reversing a world where Blackness had meant enslavement by making Black citizenship the foundation of the republic."
+              },
+              {
+                "id": "h27-1-c3",
+                "question": "The reading says Haiti's example spread both “hope and fear across the Atlantic world.” What does this pairing reveal about how different groups viewed Haiti's independence?",
+                "answer": "Model answer: It reveals that enslaved people in the Americas heard the news and imagined their own freedom, while slaveholding governments tightened their laws in alarm, so the same event was a promise to the oppressed and a threat to those who profited from slavery."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "h27-1-e1",
+                "prompt": "Did Haiti pay too high a price for its freedom? Plan a 5-paragraph essay that weighs the cost of the French indemnity against what the revolution achieved.",
+                "thesis": "Although France's forced indemnity burdened Haiti with debt for more than a century, the price was worth paying because the revolution ended slavery, created the first free Black republic, and proved liberty belonged to everyone.",
+                "points": [
+                  "The indemnity punished Haiti for winning its freedom and drained the young nation's resources for over a hundred years.",
+                  "No other revolution had gone as far: Haiti abolished slavery completely while the American and French revolutions left it in place.",
+                  "Its example spread hope to enslaved people across the Americas and forced slaveholding governments onto the defensive."
+                ],
+                "conclusion": "Close by judging the debt against the achievement: money can be repaid, but Haiti bought something no price could measure, the proof that people who had been enslaved could found a free nation."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "h27-1-vw1",
+                "words": [
+                  "republic",
+                  "abolition"
+                ],
+                "prompt": "Use each word in an original sentence."
               }
             ]
           }
@@ -12335,6 +17821,57 @@ const MM_WEEKS_68 = [
                 "answer": "Model answer: Each layer protects Earth in a different way, like shields stacked inside one another. The troposphere holds the air we breathe, the stratosphere's ozone blocks harmful sunlight, and the upper layers burn up meteors, so together they guard the planet."
               }
             ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "s27-0-c1",
+                "question": "Name the five layers of the atmosphere in order from lowest to highest.",
+                "answer": "Model answer: The troposphere, the stratosphere, the mesosphere, the thermosphere, and the exosphere."
+              },
+              {
+                "id": "s27-0-c2",
+                "question": "Why does almost all weather happen in the troposphere rather than in the higher layers?",
+                "answer": "Model answer: Because the troposphere holds most of the atmosphere's mass, about three quarters of it, so it contains the dense air, water vapor, and clouds where weather forms."
+              },
+              {
+                "id": "s27-0-c3",
+                "question": "The reading says the thermosphere's temperatures soar but the air there “would feel freezing to a human visitor.” What does this passage reveal about how temperature and air density work together?",
+                "answer": "Model answer: It reveals that temperature alone does not determine how hot something feels; because the air is so thin in the thermosphere, there are too few molecules to transfer heat, so a visitor would feel freezing despite the high temperature readings."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "s27-0-e1",
+                "prompt": "Which layer of the atmosphere matters most to human life? Plan a 5-paragraph essay defending your choice.",
+                "thesis": "The troposphere matters most to human life because it holds most of the atmosphere's mass, contains nearly all weather, and is the layer where nearly all living things spend their lives.",
+                "points": [
+                  "It holds about three quarters of all the air's mass, so every breath you take comes from this layer.",
+                  "Almost all weather happens here, from the clouds outside your window to the storms that shape daily life.",
+                  "Scientists measure the upper layers with balloons, aircraft, and satellites, but the troposphere is the layer humans actually inhabit."
+                ],
+                "conclusion": "End by admitting the other layers protect us, like the ozone layer in the stratosphere, but argue that the troposphere is the one we live in, breathe from, and depend on every day."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "s27-0-vw1",
+                "words": [
+                  "troposphere"
+                ],
+                "prompt": "Use the word in an original sentence."
+              }
+            ]
           }
         ]
       },
@@ -12397,6 +17934,57 @@ const MM_WEEKS_68 = [
                 "id": "s2-s1",
                 "prompt": "Explain in your own words why city smog hangs near the ground instead of drifting into space.",
                 "answer": "Model answer: Smog enters the troposphere, the crowded lower layer that holds most of the air's mass. Because gravity keeps the air densest near the surface, pollutants stay trapped low instead of rising into the thin upper layers."
+              }
+            ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "s27-1-c1",
+                "question": "About how much does all the air in the atmosphere weigh, and what percent of that mass sits in the troposphere?",
+                "answer": "Model answer: All the air weighs about 5.5 quadrillion tons, and the troposphere holds roughly 75 to 80 percent of that mass."
+              },
+              {
+                "id": "s27-1-c2",
+                "question": "Why does air pile up near Earth's surface instead of spreading evenly through the atmosphere?",
+                "answer": "Model answer: Because gravity pulls air molecules toward Earth, so air is densest near the surface and thins out with height, just as ocean water presses harder the deeper you dive."
+              },
+              {
+                "id": "s27-1-c3",
+                "question": "The reading says that at the top of Mount Everest the air holds only about one third of the oxygen found at sea level. What does this passage reveal about life at high altitude?",
+                "answer": "Model answer: It reveals that climbers breathe much thinner air at high altitude, which is why they feel the difference so strongly: most of the atmosphere's mass lies in the crowded lower layers, far below the summit."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "s27-1-e1",
+                "prompt": "Why do scientists use percents and fractions instead of raw numbers when describing the atmosphere? Plan a 5-paragraph essay using the air's mass as your main example.",
+                "thesis": "Scientists use percents and fractions because raw numbers like 5.5 quadrillion tons are too large to picture, while percents like 75 percent make the pattern of the atmosphere easy to see and compare.",
+                "points": [
+                  "Saying the troposphere holds 75 to 80 percent of the air's mass instantly shows how crowded the lowest layer is.",
+                  "Converting fractions to percents reveals the pattern clearly: the lower you go, the denser the air becomes.",
+                  "Percents also help scientists predict weather and track pollution, such as why city smog hangs near the ground."
+                ],
+                "conclusion": "Close by arguing that percents turn invisible air into something the mind can hold: a bare number is trivia, but a percent is a story about how the world is built."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "s27-1-vw1",
+                "words": [
+                  "troposphere"
+                ],
+                "prompt": "Use the word in an original sentence."
               }
             ]
           }
@@ -12626,6 +18214,58 @@ const MM_WEEKS_68 = [
                 "answer": "Model answer: Their deaths did not end the movement because the ideas behind it had already spread. The promises of liberty from the American, French, and Haitian revolutions had crossed the ocean, and a new generation of liberators was ready to keep fighting."
               }
             ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "h28-0-c1",
+                "question": "In the colonial ranking system, who were the creoles and why did they resent their position?",
+                "answer": "Model answer: Creoles were people of Spanish descent born in the Americas who owned land and mines but were shut out of high government posts, which the peninsulares held; they resented being treated as second-class citizens in their own homeland."
+              },
+              {
+                "id": "h28-0-c2",
+                "question": "Why did Napoleon's invasion of Spain in 1808 weaken the empire's hold on Latin America?",
+                "answer": "Model answer: It removed the Spanish king and broke the chain of authority, so creoles formed local juntas and began to question why distant rulers should govern them at all."
+              },
+              {
+                "id": "h28-0-c3",
+                "question": "The reading says “the crack in the empire kept widening” after Hidalgo and Morelos were executed. What does this image reveal about the independence movement?",
+                "answer": "Model answer: It reveals that crushing individual leaders could not stop the movement, because the ideas of liberty from the American, French, and Haitian revolutions had already spread too far to be silenced."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "h28-0-e1",
+                "prompt": "Who deserves more credit for Latin American independence: the early rebels like Hidalgo and Morelos, or the later liberators like Bolivar? Plan a 5-paragraph essay.",
+                "thesis": "The later liberators deserve more credit because they turned failed uprisings into lasting independence, though the early rebels deserve honor for starting the crack that the liberators widened.",
+                "points": [
+                  "Hidalgo's Grito de Dolores and Morelos's organizing lit the first fires, but both men were executed and their revolts were crushed.",
+                  "Bolivar built on their example, won campaigns across five nations, and gave the movement a unifying vision of equality before the law.",
+                  "Haiti's aid to Bolivar shows the movement was part of a wider Atlantic struggle, not the work of one man alone."
+                ],
+                "conclusion": "End by weighing both contributions: the early rebels proved the empire could be challenged, but the liberators proved it could be defeated."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "h28-0-vw1",
+                "words": [
+                  "creole",
+                  "independence"
+                ],
+                "prompt": "Use each word in an original sentence."
+              }
+            ]
           }
         ]
       },
@@ -12685,6 +18325,58 @@ const MM_WEEKS_68 = [
                 "id": "h2-s1",
                 "prompt": "Analyze Bolivar's proclamation: what is he promising his soldiers? Then give a two-point essay outline on Bolivar's vision for Latin America.",
                 "answer": "Model answer: Bolivar promises his soldiers that after three hundred years without freedom, they will take back what is theirs and build nations where all are equal before the law. Essay outline on Bolivar's vision: 1. Latin America should be free from European kings and ruled by its own people. 2. The new nations should treat all people as equal before the law, including the enslaved people Petion asked him to free."
+              }
+            ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "h28-1-c1",
+                "question": "What did Alexandre Petion ask of Bolivar in return for ships, weapons, and soldiers?",
+                "answer": "Model answer: Petion asked only that Bolivar free the enslaved people wherever his armies marched."
+              },
+              {
+                "id": "h28-1-c2",
+                "question": "Why did Bolivar's grand vision of a united Latin America fail even though his armies won?",
+                "answer": "Model answer: The reading says the new nations split apart in the end, which suggests that winning battles was easier than holding distant regions together under one government once the common enemy was gone."
+              },
+              {
+                "id": "h28-1-c3",
+                "question": "In his proclamation, Bolivar declared: “We have been robbed of our freedom for three hundred years. The time has come to take back what is ours, and to build nations where all are equal before the law.” What does this passage reveal about his goals?",
+                "answer": "Model answer: It reveals that he framed independence as reclaiming something stolen rather than receiving a gift, and that his goal went beyond removing Spain: he wanted new nations built on equality before the law."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "h28-1-e1",
+                "prompt": "Was Bolivar's vision a success or a failure? Plan a 5-paragraph essay that uses his proclamation as a primary source.",
+                "thesis": "Bolivar's vision was a partial success: he failed to unite Latin America, but he succeeded in destroying Spanish rule and planting the ideal of equality before the law across a continent.",
+                "points": [
+                  "His proclamation promised nations where all are equal before the law, a goal bolder than simple independence.",
+                  "His campaigns freed five nations, including Bolivia, which was named for him, proving his military vision worked.",
+                  "The new nations split apart and slavery survived in places, yet Guerrero's abolition of slavery in Mexico kept the promise of liberty alive in the hemisphere."
+                ],
+                "conclusion": "Close by judging visions the way history does: not by whether every dream came true, but by whether the world was freer afterward than before."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "h28-1-vw1",
+                "words": [
+                  "liberator",
+                  "revolutionary"
+                ],
+                "prompt": "Use each word in an original sentence."
               }
             ]
           }
@@ -12753,6 +18445,57 @@ const MM_WEEKS_68 = [
                 "answer": "Model answer: Weather is what is happening outside right now, like a cool rainy day. Climate is the long-term pattern, like Pensacola's hot humid summers and mild winters. One rainy July day does not change the city's climate."
               }
             ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "s28-0-c1",
+                "question": "What is the difference between weather and climate as the reading defines them?",
+                "answer": "Model answer: Weather is what is happening outside right now, such as today's temperature or rain, while climate is the pattern of weather in a place over many years, usually thirty years or more."
+              },
+              {
+                "id": "s28-0-c2",
+                "question": "Why might a visitor experience a cool, rainy day in Pensacola in July even though its climate is hot and humid?",
+                "answer": "Model answer: Because weather is a single day's conditions while climate is the long-term pattern; one cool day does not change the decades-long average of warm, wet summers."
+              },
+              {
+                "id": "s28-0-c3",
+                "question": "The reading says, “A warming climate does not mean every day is hotter; it means the long-term average is shifting upward, one careful measurement at a time.” What does this passage reveal about how scientists think about climate change?",
+                "answer": "Model answer: It reveals that scientists judge climate by long-term averages, not single days, so a cold day does not disprove warming any more than a hot day proves it; the trend across decades is what matters."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "s28-0-e1",
+                "prompt": "Why do scientists need decades of data to describe a climate? Plan a 5-paragraph essay using mean and median as your key evidence.",
+                "thesis": "Scientists need decades of data because a single season can mislead, while long records let the mean and median reveal the true pattern beneath unusual days.",
+                "points": [
+                  "Weather changes daily, so one hot week or cold snap says nothing reliable about what is normal for a place.",
+                  "The mean averages all values and the median finds the middle value, and both smooth out unusual days across a long record.",
+                  "Farmers, builders, and families depend on that long-term picture to plan crops, design homes, and know what to pack."
+                ],
+                "conclusion": "End by arguing that patience is a scientific tool: climate is the story told by thousands of measurements, not by the weather outside your window today."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "s28-0-vw1",
+                "words": [
+                  "tropical"
+                ],
+                "prompt": "Use the word in an original sentence."
+              }
+            ]
           }
         ]
       },
@@ -12815,6 +18558,57 @@ const MM_WEEKS_68 = [
                 "id": "s2-s1",
                 "prompt": "Explain why the median gave a truer picture than the mean for the town's July temperatures.",
                 "answer": "Model answer: The mean was pulled upward to 96.7 by the one bad reading of 120 degrees. The median stayed at 93, the middle value, which matched what the town truly felt. The median resists outliers, so it told the truer story."
+              }
+            ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "s28-1-c1",
+                "question": "In the week's temperature example, what were the mean and the median, and why did they disagree?",
+                "answer": "Model answer: The mean was about 96.7 and the median was 93; they disagreed because one bad reading of 120 degrees, probably a broken thermometer, pulled the mean upward while the median resisted the outlier."
+              },
+              {
+                "id": "s28-1-c2",
+                "question": "Why do scientists often prefer the median when a data set has an outlier?",
+                "answer": "Model answer: Because the median is the middle value in the ordered list, so a single extreme value cannot drag it around the way it drags the mean."
+              },
+              {
+                "id": "s28-1-c3",
+                "question": "The reading says, “When a map says a city averages 72.4 degrees in April, that decimal comes from years of patient measuring, added and divided with care.” What does this passage reveal about climate data?",
+                "answer": "Model answer: It reveals that climate numbers are built from thousands of careful readings over many years, so even a precise-looking decimal represents patient, repeated work rather than a single measurement."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "s28-1-e1",
+                "prompt": "Is the mean or the median the more honest average? Plan a 5-paragraph essay that answers using the climate data example.",
+                "thesis": "The median is the more honest average when data contains outliers, because it describes what was truly typical, while the mean can be pulled away from reality by a single bad reading.",
+                "points": [
+                  "In the July example, the median of 93 matched what the town truly felt, while the mean of 96.7 was distorted by one broken thermometer.",
+                  "Lining numbers up in order and taking the middle value protects the average from mistakes and extremes.",
+                  "Real climate records use thousands of readings, and choosing the right average decides whether the map tells the truth."
+                ],
+                "conclusion": "Close by arguing that honesty in math means matching the method to the data: use the mean for clean data, but trust the median when outliers are lurking."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "s28-1-vw1",
+                "words": [
+                  "tropical"
+                ],
+                "prompt": "Use the word in an original sentence."
               }
             ]
           }
@@ -13044,6 +18838,58 @@ const MM_WEEKS_68 = [
                 "answer": "Model answer: Factories needed huge amounts of coal to power their steam engines, so building near the coalfields saved the cost of hauling fuel. Workers then poured in from the countryside, and new urban factory towns grew up around the mines."
               }
             ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "h29-0-c1",
+                "question": "What did James Watt improve in 1776, and what did it power?",
+                "answer": "Model answer: He improved the steam engine, which pumped water from coal mines, drove spinning machines, and later pulled trains along iron rails."
+              },
+              {
+                "id": "h29-0-c2",
+                "question": "Why did the Industrial Revolution begin in Britain rather than somewhere else?",
+                "answer": "Model answer: Britain had the right mix: rich coal and iron deposits, rivers and canals for transport, money from trade, and colonies supplying raw cotton."
+              },
+              {
+                "id": "h29-0-c3",
+                "question": "The reading says, “Within a single lifetime, the world moved from muscle power to machine power, and there was no going back.” What does this passage reveal about the speed of the change?",
+                "answer": "Model answer: It reveals that the transformation was so fast that people who were born into a world of hand labor lived to see steam and rail, making the change feel sudden and permanent rather than gradual."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "h29-0-e1",
+                "prompt": "Was the price of the Industrial Revolution worth the progress it brought? Plan a 5-paragraph essay that uses the mill worker's testimony as a primary source.",
+                "thesis": "The Industrial Revolution's progress came at a brutal human price, and it was worth it only because workers organized and forced that progress to be shared through laws, unions, and safer shops.",
+                "points": [
+                  "The mill worker's testimony shows the price plainly: twelve to sixteen hour days, dangerous machines, and children beaten for slowing down.",
+                  "The same age produced Elijah McCoy, whose lubricator kept the machines running, proving that innovation could come from anyone.",
+                  "Over time, unions and reform laws turned raw industrial power into shorter days and safer workplaces, which is the progress that actually reached workers."
+                ],
+                "conclusion": "End by arguing that machines alone were not progress; progress was what people forced the machines to serve, and the laws workers won are still paying the debt of those early years."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "h29-0-vw1",
+                "words": [
+                  "factory",
+                  "urban"
+                ],
+                "prompt": "Use each word in an original sentence."
+              }
+            ]
           }
         ]
       },
@@ -13103,6 +18949,58 @@ const MM_WEEKS_68 = [
                 "id": "h2-s1",
                 "prompt": "Analyze the worker's testimony: what two details show the hardest parts of factory life? Then give a two-point essay outline on progress's price.",
                 "answer": "Model answer: The testimony shows workers laboring from five in the morning until eight at night, and children falling asleep standing up while overseers beat anyone who slowed down. Essay outline on progress's price: 1. Factories produced goods faster and cheaper, but workers paid with brutal hours, child labor, and crowded unhealthy cities. 2. Public outrage at testimonies like this slowly forced laws and unions that made progress fairer."
+              }
+            ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "h29-1-c1",
+                "question": "According to the reading, how many hours did factory workers, including children, work each day?",
+                "answer": "Model answer: They worked twelve to sixteen hours a day, six days a week."
+              },
+              {
+                "id": "h29-1-c2",
+                "question": "Why did buyers ask for “the real McCoy”?",
+                "answer": "Model answer: Because Elijah McCoy's automatic lubricator worked so well at oiling steam engines while they ran that buyers wanted his genuine device and not an imitation."
+              },
+              {
+                "id": "h29-1-c3",
+                "question": "The mill worker testified: “We worked from five in the morning until eight at night. The machines never stopped, and neither could we.” What does this passage reveal about factory life?",
+                "answer": "Model answer: It reveals that workers were treated as extensions of the machines, denied rest even when exhausted, and punished by overseers for slowing down, which is why testimonies like this shocked the public into demanding reform laws."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "h29-1-e1",
+                "prompt": "Who paid the highest price for industrial progress: adult workers, child workers, or the families in crowded cities? Plan a 5-paragraph essay.",
+                "thesis": "Child workers paid the highest price because they lost not only their health and safety but also their childhoods, laboring at ages when they should have been learning and playing.",
+                "points": [
+                  "Children as young as six crawled under moving looms to fix threads, facing machines that could maim or kill them.",
+                  "Adult workers suffered long hours and low pay, but children endured the same dangers with smaller, more vulnerable bodies.",
+                  "Families crowded into dark tenements with no clean water, where disease spread quickly, so the price reached into the home as well."
+                ],
+                "conclusion": "Close by noting that the laws limiting hours and banning the worst child labor were won because testimonies made the price impossible to ignore: progress that eats its children is not progress."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "h29-1-vw1",
+                "words": [
+                  "factory",
+                  "innovation"
+                ],
+                "prompt": "Use each word in an original sentence."
               }
             ]
           }
@@ -13171,6 +19069,58 @@ const MM_WEEKS_68 = [
                 "answer": "Model answer: Fossil fuels are carbon that nature locked away underground millions of years ago. Burning them releases that ancient carbon into the air faster than plants and oceans can absorb it, so the cycle that was once balanced now gains extra carbon dioxide."
               }
             ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "s29-0-c1",
+                "question": "Name the four places carbon flows between in the carbon cycle.",
+                "answer": "Model answer: Carbon flows between the air, living things, the oceans, and the rocks below."
+              },
+              {
+                "id": "s29-0-c2",
+                "question": "Why does the reading compare buried fossil fuels to “savings in a bank”?",
+                "answer": "Model answer: Because coal, oil, and natural gas locked away carbon underground over millions of years like money saved up, and the Industrial Revolution began spending those ancient savings by burning them."
+              },
+              {
+                "id": "s29-0-c3",
+                "question": "The reading says that before industry, “the carbon released roughly equaled the carbon absorbed,” but now humans add carbon dioxide “faster than plants and oceans can absorb it.” What does this passage reveal about the problem?",
+                "answer": "Model answer: It reveals that the problem is not carbon itself, which nature balanced for ages, but the speed of the change: burning millions of years of stored carbon at once overwhelms the cycle's ability to keep up."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "s29-0-e1",
+                "prompt": "Is the carbon cycle broken, or just out of balance? Plan a 5-paragraph essay.",
+                "thesis": "The carbon cycle is not broken; it still works exactly as it always has, but humans have pushed it out of balance by releasing stored carbon far faster than plants and oceans can absorb it.",
+                "points": [
+                  "The cycle's machinery still runs: plants pull carbon dioxide from the air, animals and decomposers return it, and oceans store it for centuries.",
+                  "The imbalance comes from burning coal, oil, and gas, which releases carbon locked away for millions of years all at once.",
+                  "The rise from 280 ppm to far more today, measured in parts per million, shows how quickly humans have rewritten a balanced cycle."
+                ],
+                "conclusion": "End by arguing that because the cycle itself still works, restoring balance is possible: the same natural machinery that absorbed carbon for ages can do it again if we stop overwhelming it."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "s29-0-vw1",
+                "words": [
+                  "emission",
+                  "pollution"
+                ],
+                "prompt": "Use each word in an original sentence."
+              }
+            ]
           }
         ]
       },
@@ -13236,6 +19186,58 @@ const MM_WEEKS_68 = [
                 "id": "s2-s1",
                 "prompt": "Explain in your own words why percent change tells a fairer story than the raw number 140 ppm alone.",
                 "answer": "Model answer: The raw number 140 ppm sounds small on its own. Percent change compares it to the starting value of 280, showing the increase is 50 percent, or half again as much as before. That comparison reveals how large the change really is."
+              }
+            ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "s29-1-c1",
+                "question": "What was the carbon dioxide level before the Industrial Revolution, what is it today, and what is the percent change?",
+                "answer": "Model answer: It was about 280 ppm before industry and about 420 ppm today, a rise of 140 ppm, which is a 50 percent increase."
+              },
+              {
+                "id": "s29-1-c2",
+                "question": "Why is percent change more useful than the raw number 140 ppm when describing the rise in carbon dioxide?",
+                "answer": "Model answer: Because 140 ppm sounds small on its own, but percent change shows it is half again as much as the starting amount, which reveals the true size of the change."
+              },
+              {
+                "id": "s29-1-c3",
+                "question": "The reading says, “Whenever you see a headline about emissions, ask for the percent change: it turns a bare number into a story about how fast the world is changing.” What does this passage reveal about reading news critically?",
+                "answer": "Model answer: It reveals that headlines can hide the real meaning of a number, and that asking for percent change is a thinking tool that turns raw data into an honest picture of how fast something is growing."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "s29-1-e1",
+                "prompt": "Should every science student learn percent change? Plan a 5-paragraph essay defending your answer with examples from the reading.",
+                "thesis": "Every science student should learn percent change because it is the fairest way to judge growth, turning confusing raw numbers into clear stories about how fast the world is changing.",
+                "points": [
+                  "The carbon dioxide example proves it: 140 ppm sounds small, but 50 percent shows the air has gained half again as much as it started with.",
+                  "The formula is simple, subtract, divide, multiply by 100, yet it works on anything that grows, from city populations to factory output.",
+                  "Without percent change, headlines about emissions can mislead; with it, students can check the math themselves."
+                ],
+                "conclusion": "Close by arguing that percent change is not just a math skill but a citizenship skill: in a world of headlines and claims, it lets anyone measure the truth."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "s29-1-vw1",
+                "words": [
+                  "emission",
+                  "pollution"
+                ],
+                "prompt": "Use each word in an original sentence."
               }
             ]
           }
@@ -13465,6 +19467,58 @@ const MM_WEEKS_68 = [
                 "answer": "Model answer: The borders cut straight through kingdoms, languages, and families without asking Africans what they wanted. Many of those lines are still national borders today, so people who once belonged together can end up divided by a line drawn in Berlin."
               }
             ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "h30-0-c1",
+                "question": "How much of Africa did European powers control in 1880, and how much did they control thirty years later?",
+                "answer": "Model answer: In 1880 they controlled only small strips of coastline, but within thirty years they controlled almost the entire continent."
+              },
+              {
+                "id": "h30-0-c2",
+                "question": "Why did the Berlin Conference's “effective occupation” rule push armies deeper into Africa?",
+                "answer": "Model answer: Because the conference declared that a European claim counted only if the power actually occupied the territory, so each nation rushed soldiers inland to make its paper claims real before rivals did."
+              },
+              {
+                "id": "h30-0-c3",
+                "question": "The reading says Africa was “divided like a pie among people who had never asked Africans what they wanted.” What does this image reveal about the conference?",
+                "answer": "Model answer: It reveals that fourteen European nations treated the continent as property to be sliced up for themselves, with not a single African leader invited, which shows the total disregard for the people actually living there."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "h30-0-e1",
+                "prompt": "Was the Berlin Conference about order or about theft? Plan a 5-paragraph essay that analyzes the conference's “effective occupation” rule as a primary source.",
+                "thesis": "The Berlin Conference was about theft dressed up as order: its rules gave Europe's land grab a legal mask while treating Africa as empty land and its peoples as nothing.",
+                "points": [
+                  "The conference's own words promised that claims must be backed by “effective occupation, so that trade and civilization may advance,” language that sounded orderly while dividing a continent among outsiders.",
+                  "Not one African leader was invited to the table where their lands were split, which proves the rules were written for the thieves, not the owners.",
+                  "The borders drawn in Berlin cut through kingdoms, languages, and families, and many of those lines are still national borders today, so the theft is still visible on the map."
+                ],
+                "conclusion": "End by arguing that Adwa answered Berlin on the battlefield: Ethiopia's victory proved that Africa was never the empty land the conference pretended it was."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "h30-0-vw1",
+                "words": [
+                  "colony",
+                  "annex"
+                ],
+                "prompt": "Use each word in an original sentence."
+              }
+            ]
           }
         ]
       },
@@ -13526,6 +19580,58 @@ const MM_WEEKS_68 = [
                 "answer": "Model answer: The excerpt shows Europe treating Africa as empty land waiting to be taken, where a claim counted only if backed by occupation. It reveals that Africans were not consulted, since not one African leader was invited. Essay outline on the scramble: 1. Industrial powers raced to claim Africa's resources and markets, and Berlin set the rules without any African voice. 2. Africans resisted in many ways, and Ethiopia's victory at Adwa proved the continent could defeat a European army."
               }
             ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "h30-1-c1",
+                "question": "Name three examples of African resistance to conquest given in the reading.",
+                "answer": "Model answer: The Asante fought the British in a series of wars, the Zulu crushed a British army at Isandlwana in 1879, and Samori Toure resisted the French for sixteen years."
+              },
+              {
+                "id": "h30-1-c2",
+                "question": "How did Emperor Menelik II prepare Ethiopia for the Italian invasion?",
+                "answer": "Model answer: He spent years modernizing his army with rifles and artillery while Italian officials plotted to make Ethiopia a colony."
+              },
+              {
+                "id": "h30-1-c3",
+                "question": "The conference records declared that claims must be backed by “effective occupation, so that trade and civilization may advance.” What does this passage reveal about Europe's attitude?",
+                "answer": "Model answer: It reveals that Europe saw Africa as empty land waiting to be taken and dressed up conquest in the language of trade and civilization, an attitude Adwa answered when Ethiopia's army crushed the Italians in a single day."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "h30-1-e1",
+                "prompt": "Why does the reading call Ethiopia's victory at Adwa “more complete” than other resistance? Plan a 5-paragraph essay.",
+                "thesis": "Adwa was the most complete resistance because it did not just delay conquest or win a battle: it preserved Ethiopia's independence entirely, making Ethiopia a lasting symbol of African strength.",
+                "points": [
+                  "Other resistance, like the Zulu victory at Isandlwana or Samori Toure's sixteen-year struggle, was heroic but did not stop colonization in the end.",
+                  "At Adwa on March 1, Menelik's forces, including tens of thousands of women carrying supplies and tending the wounded, crushed the Italian army in a single day.",
+                  "Ethiopia remained independent and its victory is still celebrated today, inspiring freedom movements for generations."
+                ],
+                "conclusion": "Close by arguing that Adwa's completeness is measured in what survived: a free nation, a celebrated victory, and proof that the scramble could be beaten."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "h30-1-vw1",
+                "words": [
+                  "resistance",
+                  "colony"
+                ],
+                "prompt": "Use each word in an original sentence."
+              }
+            ]
           }
         ]
       }
@@ -13585,6 +19691,58 @@ const MM_WEEKS_68 = [
                 "id": "s1-s1",
                 "prompt": "In your own words, explain why a carefully cut forest can be renewable but a burned barrel of oil cannot.",
                 "answer": "Model answer: A forest is renewable because new trees can be replanted and regrown in decades if the cutting is careful. A barrel of oil took millions of years to form, so once it is burned it is gone forever on any human timescale."
+              }
+            ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "s30-0-c1",
+                "question": "Give two examples of renewable resources and two examples of nonrenewable resources from the reading.",
+                "answer": "Model answer: Renewable: sunlight, wind, or flowing water. Nonrenewable: coal, oil, or natural gas."
+              },
+              {
+                "id": "s30-0-c2",
+                "question": "Why are trees considered renewable while coal is not, even though both come from nature?",
+                "answer": "Model answer: Because trees can be replanted and regrow in decades, as fast as we use them, while coal takes millions of years to form, so the Earth is not making more on any timescale that matters to us."
+              },
+              {
+                "id": "s30-0-c3",
+                "question": "The reading says Africa holds “some of the best solar energy potential on Earth, and vast mineral reserves the world needs for batteries and electronics.” What does this passage reveal about Africa's future?",
+                "answer": "Model answer: It reveals that Africa holds both kinds of wealth at once: sunlight and wind that can power energy systems forever, and nonrenewable minerals the world needs, so its choices about how fast to use each will shape its future."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "s30-0-e1",
+                "prompt": "Which matters more for a country's future: its renewable resources or its nonrenewable ones? Plan a 5-paragraph essay.",
+                "thesis": "Renewable resources matter more for a country's future because they never run out, while nonrenewable wealth is spent once and then gone.",
+                "points": [
+                  "Sunlight, wind, and flowing water return every day whether or not we collect them, so nations rich in them can build energy systems that last forever.",
+                  "Coal, oil, and minerals exist in fixed amounts, and nations depending on them must plan for the day the mines and wells run dry.",
+                  "The reading's two questions decide it: can nature replace this, and how fast? A forest cut carefully regrows in decades, but a burned barrel of oil never comes back."
+                ],
+                "conclusion": "End by arguing that nonrenewable resources are a one-time gift to spend wisely, but renewables are an income that lasts: a wise country builds its future on the income."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "s30-0-vw1",
+                "words": [
+                  "renewable",
+                  "deplete"
+                ],
+                "prompt": "Use each word in an original sentence."
               }
             ]
           }
@@ -13649,6 +19807,58 @@ const MM_WEEKS_68 = [
                 "id": "s2-s1",
                 "prompt": "Explain in your own words why rates matter when judging how long a resource will last.",
                 "answer": "Model answer: A rate shows how fast a resource is being used, like 2 million tons of ore per year. Dividing the total deposit by that rate tells how many years it will last, so a rich mine can still run dry quickly if the rate is high."
+              }
+            ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "s30-1-c1",
+                "question": "If 9 of Africa's 54 countries are major oil producers, what percent is that?",
+                "answer": "Model answer: About 17 percent (9 divided by 54, times 100)."
+              },
+              {
+                "id": "s30-1-c2",
+                "question": "Why do resource maps use percents instead of listing millions of tons?",
+                "answer": "Model answer: Because percents make continent-sized numbers easier to grasp; saying “30 percent of the world's mineral reserves” is clearer than listing millions of tons."
+              },
+              {
+                "id": "s30-1-c3",
+                "question": "The reading says, “A mine that extracts 2 million tons of ore per year will empty a 20-million-ton deposit in about ten years.” What does this passage reveal about the link between the scramble and resource math?",
+                "answer": "Model answer: It reveals that rates turn wealth into a countdown: knowing how fast a resource is used shows how quickly it can be spent, which is exactly what Europeans raced to claim when the scramble began."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "s30-1-e1",
+                "prompt": "Do ratios and percents tell the story of the Scramble for Africa better than raw numbers do? Plan a 5-paragraph essay.",
+                "thesis": "Ratios and percents tell the scramble's story better because they turn huge, abstract numbers into clear comparisons that reveal both Africa's wealth and how quickly it could be spent.",
+                "points": [
+                  "Saying Africa holds about 30 percent of the world's known mineral reserves instantly shows the size of the prize Europe raced to claim.",
+                  "Rates like tons mined per year reveal the other half: a 20-million-ton deposit emptied at 2 million tons a year lasts only about ten years.",
+                  "When the scramble began, Europeans understood this math of wealth and speed, which is why understanding ratios lets us see the conquest the way its planners did."
+                ],
+                "conclusion": "Close by arguing that numbers are never neutral in history: the same ratios that helped empires measure their plunder can help us measure what was taken."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "s30-1-vw1",
+                "words": [
+                  "renewable",
+                  "deplete"
+                ],
+                "prompt": "Use each word in an original sentence."
               }
             ]
           }
@@ -13878,6 +20088,59 @@ const MM_WEEKS_68 = [
                 "answer": "Model answer: Britain pushed an addictive drug on China for profit, knowing it would harm millions of people. Then, when China tried to stop the trade, Britain used war to protect it and forced China to sign an unequal treaty."
               }
             ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "h31-0-c1",
+                "question": "Why did British traders begin selling opium in China?",
+                "answer": "Model answer: Britain had a trade imbalance: shoppers loved Chinese tea, silk, and porcelain, but China wanted little Britain made, so British silver flowed east; selling opium grown in British-ruled India reversed the flow of silver back west."
+              },
+              {
+                "id": "h31-0-c2",
+                "question": "What did the Treaty of Nanjing force China to give up in 1842?",
+                "answer": "Model answer: China had to open five ports to British trade, hand over Hong Kong, and pay a large indemnity."
+              },
+              {
+                "id": "h31-0-c3",
+                "question": "The reading calls the opium trade “imperialism at its cruelest.” What does this judgment reveal about the author's view of Britain's actions?",
+                "answer": "Model answer: It reveals the author sees Britain's actions as uniquely cruel because a government pushed an addictive drug on another nation for profit and then used war to protect the trade, turning addiction into a weapon of empire."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "h31-0-e1",
+                "prompt": "Were the Opium Wars about trade or about power? Plan a 5-paragraph essay that compares the Treaty of Nanjing with the Boxer Protocol.",
+                "thesis": "The Opium Wars were about power dressed as trade: Britain used a trade dispute to force open China, and each treaty that followed took more land, money, or control than the last.",
+                "points": [
+                  "The Treaty of Nanjing took Hong Kong, opened five ports, and imposed an indemnity, which is the language of conquest, not commerce.",
+                  "The Boxer Protocol of 1901 went further, demanding 450 million taels and stationing foreign troops in Peking, showing the pattern repeating.",
+                  "The spheres of influence carved out by Britain, France, Germany, Russia, and Japan treated China as a prize to be divided, proving power was the prize all along."
+                ],
+                "conclusion": "End by noting Du Bois's worldwide link: when colonized peoples saw China's humiliation, they recognized their own struggle, which is why the treaties mattered far beyond China's borders."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "h31-0-vw1",
+                "words": [
+                  "opium",
+                  "treaty",
+                  "sphere"
+                ],
+                "prompt": "Use each word in an original sentence."
+              }
+            ]
           }
         ]
       },
@@ -13937,6 +20200,58 @@ const MM_WEEKS_68 = [
                 "id": "h2-s1",
                 "prompt": "Compare the two treaty texts: what does each one take from China? Then give a two-point essay outline on unequal treaties.",
                 "answer": "Model answer: The 1842 Treaty of Nanjing takes Hong Kong and opens five ports to British merchants. The 1901 Boxer Protocol takes 450 million taels of silver and lets foreign troops stay in Peking. Essay outline on unequal treaties: 1. Each treaty forced China to give up more land, money, or control than the last, showing a pattern of growing foreign demands. 2. The Chinese people resisted, as in the Boxer Rebellion, and thinkers like Du Bois linked China's struggle to anti-colonial fights worldwide."
+              }
+            ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "h31-1-c1",
+                "question": "According to the two treaty texts quoted, what did China lose in 1842 and what did it owe in 1901?",
+                "answer": "Model answer: In 1842 China ceded Hong Kong and opened five ports to British merchants; in 1901 it owed an indemnity of 450 million taels and had to accept foreign troops stationed in Peking."
+              },
+              {
+                "id": "h31-1-c2",
+                "question": "Why did the Boxers rise up in 1900, and what happened to them?",
+                "answer": "Model answer: The Boxers, angry peasants and workers, rose up to drive foreigners out because they resented the unequal treaties, but an alliance of eight foreign armies crushed them and imposed the harsh 1901 protocol."
+              },
+              {
+                "id": "h31-1-c3",
+                "question": "The reading says Du Bois saw “colonialism in Asia and Africa and racism in America” as “branches of the same tree.” What does this image reveal about his thinking?",
+                "answer": "Model answer: It reveals that he believed these struggles shared one root, the denial of dignity and self-rule, so China's humiliation and Black Americans' fight were not separate causes but one worldwide fight."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "h31-1-e1",
+                "prompt": "Was Du Bois right to link China's struggle with the struggles of Black people? Plan a 5-paragraph essay.",
+                "thesis": "Du Bois was right, because the unequal treaties and colonial racism grew from the same belief: that powerful nations had the right to rule and humiliate weaker peoples.",
+                "points": [
+                  "The treaty texts show the pattern plainly: each agreement took more land, money, or control, treating China as a prize rather than a partner.",
+                  "Du Bois organized Pan-African congresses arguing that colonialism in Asia and Africa and racism in America were branches of the same tree.",
+                  "The Boxers' crushed uprising and the long burden of indemnities show colonized peoples shared one fight for dignity and self-rule."
+                ],
+                "conclusion": "Close by arguing that linking struggles was itself a strategy: once colonized peoples saw their fights as one, they could no longer be divided and ruled."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "h31-1-vw1",
+                "words": [
+                  "treaty",
+                  "sphere"
+                ],
+                "prompt": "Use each word in an original sentence."
               }
             ]
           }
@@ -14005,6 +20320,58 @@ const MM_WEEKS_68 = [
                 "answer": "Model answer: Protons and neutrons are found in the nucleus at the center of the atom. Protons carry a positive charge and decide the element, while neutrons have no charge and help hold the nucleus together. Electrons are tiny negatively charged particles that move in shells around the nucleus."
               }
             ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "s31-0-c1",
+                "question": "Name the three particles inside an atom and tell where each is found.",
+                "answer": "Model answer: Protons and neutrons are in the nucleus at the center; electrons swarm around the nucleus in shells."
+              },
+              {
+                "id": "s31-0-c2",
+                "question": "Why is chemistry “really the story of electrons”?",
+                "answer": "Model answer: Because the electrons, especially the outermost ones, decide how atoms join together, which determines how substances form and react."
+              },
+              {
+                "id": "s31-0-c3",
+                "question": "The reading says the number of protons “decides which element the atom is: one proton makes hydrogen, six make carbon, eight make oxygen.” What does this passage reveal about the identity of elements?",
+                "answer": "Model answer: It reveals that an element's identity comes down to a single number, the proton count, so changing that count changes the element itself, while neutrons only add weight."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "s31-0-e1",
+                "prompt": "If you could only teach one idea about atoms, would you teach the nucleus or the electrons? Plan a 5-paragraph essay.",
+                "thesis": "The electrons deserve the one lesson, because while the nucleus gives the atom its identity and weight, the electrons write the rules of how everything connects.",
+                "points": [
+                  "The proton count names the element and the neutrons add weight, which is essential but static information.",
+                  "The outermost electrons decide how atoms join together, which explains bonding, reactions, and the whole material world.",
+                  "Millions of atoms fit across a hair's width, yet their tiny electrons determine everything from water to living cells."
+                ],
+                "conclusion": "End by arguing that the nucleus is the atom's name tag, but the electrons are its personality: to understand how the world works, study the electrons."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "s31-0-vw1",
+                "words": [
+                  "nucleus",
+                  "electron"
+                ],
+                "prompt": "Use each word in an original sentence."
+              }
+            ]
           }
         ]
       },
@@ -14067,6 +20434,58 @@ const MM_WEEKS_68 = [
                 "id": "s2-s1",
                 "prompt": "Explain in your own words what a weighted average means, using chlorine's isotopes as an example.",
                 "answer": "Model answer: A weighted average counts each value in proportion to how common it is. For chlorine, about 3/4 of atoms have mass 35 and 1/4 have mass 37, so the average leans toward 35. Multiplying and adding gives 35.5, the number on the periodic table."
+              }
+            ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "s31-1-c1",
+                "question": "Why does the periodic table list chlorine's atomic mass as about 35.5 instead of a whole number?",
+                "answer": "Model answer: Because chlorine comes in two isotopes: about three out of four atoms have a mass of 35 and about one out of four has a mass of 37, and 35.5 is the weighted average of the blend."
+              },
+              {
+                "id": "s31-1-c2",
+                "question": "Show the math: how do you get 35.5 from chlorine's two isotopes?",
+                "answer": "Model answer: Multiply 35 by 3/4 and 37 by 1/4, then add: 26.25 plus 9.25 equals 35.5."
+              },
+              {
+                "id": "s31-1-c3",
+                "question": "The reading says, “Nature mixes isotopes in fixed fractions, and the table reports the blend, not any single atom.” What does this passage reveal about reading the periodic table?",
+                "answer": "Model answer: It reveals that the masses on the table are averages of natural mixtures, not the weight of any one atom, so the table describes populations of atoms the way a census describes a country."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "s31-1-e1",
+                "prompt": "Is a weighted average more honest than a simple average? Plan a 5-paragraph essay using chlorine's atomic mass as your main example.",
+                "thesis": "A weighted average is more honest when the parts are not equally common, because it lets each part count in proportion to how often it actually occurs.",
+                "points": [
+                  "A simple average of chlorine's isotopes would give 36, but that ignores the fact that three out of four atoms weigh 35.",
+                  "The weighted average counts each isotope by its fraction, 35 times 3/4 plus 37 times 1/4, giving the true 35.5.",
+                  "Fraction operations you already know unlock one of science's most useful numbers, proving that honest math respects how common each part is."
+                ],
+                "conclusion": "Close by arguing that weighted averages are fairness in math form: they refuse to let a rare outlier count as much as the common case."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "s31-1-vw1",
+                "words": [
+                  "nucleus",
+                  "electron"
+                ],
+                "prompt": "Use each word in an original sentence."
               }
             ]
           }
@@ -14296,6 +20715,59 @@ const MM_WEEKS_68 = [
                 "answer": "Model answer: Each nation had promised to defend its allies, so when Austria-Hungary clashed with Serbia, Russia backed Serbia and Germany backed Austria-Hungary. One by one the partners were pulled in, and within five weeks a regional crisis had become a world war."
               }
             ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "h32-0-c1",
+                "question": "Name the four long-term forces that built pressure in Europe before 1914.",
+                "answer": "Model answer: The alliance system, nationalism, militarism, and imperial rivalry."
+              },
+              {
+                "id": "h32-0-c2",
+                "question": "Why did the alliance system turn a Balkan crisis into a world war?",
+                "answer": "Model answer: Because each nation had promised to defend its partners, so a fight between two countries quickly dragged in all their allies, turning a regional assassination into a continental war within five weeks."
+              },
+              {
+                "id": "h32-0-c3",
+                "question": "The reading says, “None of the leaders expected a long war. Each side believed its armies would win in months, and cheering crowds filled the streets as soldiers marched off.” What does this passage reveal about 1914?",
+                "answer": "Model answer: It reveals a tragic overconfidence: leaders and crowds alike imagined a short, glorious war, and no one understood that the powder keg they had built would explode into four years of slaughter."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "h32-0-e1",
+                "prompt": "Which force deserves the most blame for World War I: alliances, nationalism, militarism, or imperial rivalry? Plan a 5-paragraph essay that analyzes the Willy-Nicky telegrams.",
+                "thesis": "The alliance system deserves the most blame, because the Willy-Nicky telegrams prove that even two determined emperors could not stop a war once alliance promises and mobilization timetables took over.",
+                "points": [
+                  "The telegrams show the Kaiser and the Czar, two cousins, personally begging each other to stop, yet the war began anyway.",
+                  "Mobilization plans drawn up years before were almost impossible to halt once started, with millions of soldiers already boarding trains.",
+                  "Nationalism, militarism, and imperial rivalry built the pressure, but the alliances were the fuse that turned a Balkan assassination into a world war."
+                ],
+                "conclusion": "End by arguing that systems can be more dangerous than intentions: when promises outrank judgment, even leaders who want peace cannot find it."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "h32-0-vw1",
+                "words": [
+                  "alliance",
+                  "nationalism",
+                  "militarism"
+                ],
+                "prompt": "Use each word in an original sentence."
+              }
+            ]
           }
         ]
       },
@@ -14355,6 +20827,58 @@ const MM_WEEKS_68 = [
                 "id": "h2-s1",
                 "prompt": "Analyze the Czar's telegram: what is he asking, and why did it fail? Then give a two-point essay outline on the powder keg.",
                 "answer": "Model answer: The Czar begs the Kaiser, in the name of their old friendship, to stop his ally Austria-Hungary from going too far. It failed because mobilization plans were already moving millions of soldiers on fixed timetables that were almost impossible to stop. Essay outline on the powder keg: 1. Alliances, nationalism, militarism, and imperial rivalry built pressure for decades, so one crisis could ignite them all. 2. The assassination in Sarajevo was only the spark; the real cause was the explosive system Europe's leaders had built."
+              }
+            ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "h32-1-c1",
+                "question": "Who were “Willy” and “Nicky,” and how were they related?",
+                "answer": "Model answer: Kaiser Wilhelm II of Germany and Czar Nicholas II of Russia, both grandsons of Britain's Queen Victoria, so they were cousins."
+              },
+              {
+                "id": "h32-1-c2",
+                "question": "Why couldn't the two cousins stop the war even though both wanted to?",
+                "answer": "Model answer: Because mobilization plans, once started, were almost impossible to stop: millions of soldiers were already boarding trains on timetables drawn up years before, and the machine their own militarism had built could not be halted."
+              },
+              {
+                "id": "h32-1-c3",
+                "question": "On July 29 the Czar wired: “I beg you in the name of our old friendship to do what you can to stop your ally from going too far.” What does this passage reveal about the limits of personal power?",
+                "answer": "Model answer: It reveals that even an absolute monarch's personal plea failed, because the alliance system and military timetables had more power than friendship or royal authority, which shows how institutions can overrule individuals."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "h32-1-e1",
+                "prompt": "Was Du Bois right to urge Black Americans to “close ranks” and fight in a war for democracy they were denied at home? Plan a 5-paragraph essay.",
+                "thesis": "Du Bois's call was understandable but tragically optimistic: he hoped sacrifice would force America to keep its promises, yet the war ended without delivering the democracy Black soldiers had earned.",
+                "points": [
+                  "More than 350,000 Black soldiers served, many believing their sacrifice would earn them the rights they were denied.",
+                  "America entered the war claiming to make the world safe for democracy while segregation and lynching continued at home.",
+                  "Du Bois argued that service would force America to keep its promises, a gamble on patriotism as a path to equality."
+                ],
+                "conclusion": "Close by weighing hope against history: the soldiers' courage was never in doubt, but the question is whether a nation that denies democracy at home can be shamed into granting it by loyalty abroad."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "h32-1-vw1",
+                "words": [
+                  "alliance",
+                  "nationalism"
+                ],
+                "prompt": "Use each word in an original sentence."
               }
             ]
           }
@@ -14423,6 +20947,58 @@ const MM_WEEKS_68 = [
                 "answer": "Model answer: The table revealed a pattern, so Mendeleev could leave gaps and predict the masses and properties of elements no one had found yet. When gallium and germanium were discovered and matched his predictions, it proved the table was a map of how nature is organized."
               }
             ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "s32-0-c1",
+                "question": "How did Mendeleev organize the elements in 1869?",
+                "answer": "Model answer: He wrote each element on a card with its mass and properties, then arranged them in rows so that elements with similar properties lined up in columns."
+              },
+              {
+                "id": "s32-0-c2",
+                "question": "How did Mendeleev's table “predict the future”?",
+                "answer": "Model answer: He left empty spaces where his pattern had gaps and described the missing elements' masses and properties; within twenty years, gallium and germanium were discovered and matched his predictions almost exactly."
+              },
+              {
+                "id": "s32-0-c3",
+                "question": "The reading says, “Learning the table is like learning the map of a city. Once you know the neighborhoods, you can predict what you will find there.” What does this comparison reveal about how chemists use the table?",
+                "answer": "Model answer: It reveals that the table is a working tool, not just a list: knowing an element's group lets chemists predict how it will behave, just as knowing a neighborhood tells you what to expect there."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "s32-0-e1",
+                "prompt": "Was Mendeleev's periodic table a discovery or an invention? Plan a 5-paragraph essay.",
+                "thesis": "Mendeleev's table was both: he discovered the pattern hidden in nature, but he invented the arrangement that made the pattern visible and useful.",
+                "points": [
+                  "The pattern itself was natural: elements with similar properties really do recur in order, which is why his predictions about gallium and germanium came true.",
+                  "The table's design was his invention: cards arranged like solitaire, rows and columns chosen to line up the similarities.",
+                  "Today's table, arranged by atomic number into periods and groups, still uses his invention to reveal nature's discovery every day."
+                ],
+                "conclusion": "End by arguing that the greatest science often works this way: nature hides the pattern, and the scientist builds the lens that lets everyone see it."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "s32-0-vw1",
+                "words": [
+                  "element",
+                  "metal"
+                ],
+                "prompt": "Use each word in an original sentence."
+              }
+            ]
           }
         ]
       },
@@ -14485,6 +21061,58 @@ const MM_WEEKS_68 = [
                 "id": "s2-s1",
                 "prompt": "Explain in your own words why percents make the element groups easier to understand.",
                 "answer": "Model answer: Percents turn big counts into a clear picture: 80 percent metals shows metals dominate the table, while 15 percent nonmetals shows how small that club is. One glance at the percents tells the table's biggest story without memorizing every element."
+              }
+            ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "s32-1-c1",
+                "question": "About what percent of the 118 known elements are metals, and about what percent are nonmetals?",
+                "answer": "Model answer: About 94 elements, or roughly 80 percent, are metals; about 18 elements, or roughly 15 percent, are nonmetals."
+              },
+              {
+                "id": "s32-1-c2",
+                "question": "Where are the metalloids found on the periodic table, and how do they behave?",
+                "answer": "Model answer: They sit along the staircase line that marks the border between metals and nonmetals, and elements like silicon behave a bit like both."
+              },
+              {
+                "id": "s32-1-c3",
+                "question": "The reading says, “The periodic table's percents are not trivia; they describe what the universe is mostly made of.” What does this passage reveal about why percents matter in science?",
+                "answer": "Model answer: It reveals that percents turn a scattered list of 118 elements into one clear picture: the world of elements is mostly metal, while life itself runs on a small club of nonmetals like carbon, oxygen, and nitrogen."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "s32-1-e1",
+                "prompt": "Why does it matter that most elements are metals? Plan a 5-paragraph essay.",
+                "thesis": "It matters because the dominance of metals shapes both human technology and life itself: engineers build with metals, while living things run on the rare nonmetals.",
+                "points": [
+                  "About 80 percent of elements are metals, which are shiny, conduct heat and electricity, and can be hammered into sheets or drawn into wires.",
+                  "Engineers choose metals for wires and bridges because of those shared properties, so the metal majority is the foundation of technology.",
+                  "Life runs on nonmetals like carbon, oxygen, and nitrogen, a small 15 percent club, which makes living things the exception in a mostly metal universe."
+                ],
+                "conclusion": "Close by arguing that the table's percents tell a story of two worlds: the built world of metals and the living world of nonmetals, both described by one honest set of numbers."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "s32-1-vw1",
+                "words": [
+                  "element",
+                  "metal"
+                ],
+                "prompt": "Use each word in an original sentence."
               }
             ]
           }
@@ -14714,6 +21342,58 @@ const MM_WEEKS_68 = [
                 "answer": "Model answer: Attackers had to climb out of their trenches and cross no man's land into machine-gun fire and barbed wire. Most attacks failed within hours, gaining only a few hundred yards while costing thousands of lives, so the line froze again."
               }
             ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "h33-0-c1",
+                "question": "What was “no man's land,” and what made crossing it so deadly?",
+                "answer": "Model answer: It was the blasted strip between the two trench lines, tangled with barbed wire and cratered by shells; climbing out meant facing machine-gun fire, and most attacks failed within hours."
+              },
+              {
+                "id": "h33-0-c2",
+                "question": "Why did attacks gain so little ground despite costing thousands of lives?",
+                "answer": "Model answer: Because the war had frozen into a stalemate: defensive weapons like machine guns and trenches were stronger than the tactics of mass charges, so attacks gained a few hundred yards and then the line froze again."
+              },
+              {
+                "id": "h33-0-c3",
+                "question": "The reading mentions the Christmas truce of December 1914, when enemies paused to share the holiday in some sectors. What does this passage reveal about the soldiers?",
+                "answer": "Model answer: It reveals that the men in the trenches still saw each other's humanity: amid mud, rats, and fear, they could pause the killing to recognize that the soldiers in the opposite trench were human too."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "h33-0-e1",
+                "prompt": "Was the trench stalemate caused more by technology or by the generals' tactics? Plan a 5-paragraph essay that analyzes the French soldier's diary.",
+                "thesis": "The stalemate was caused by the deadly mismatch between new technology and old tactics: generals ordered mass charges from an earlier age into machine guns, gas, and tanks that made such charges suicidal.",
+                "points": [
+                  "The diary shows the horror plainly: gas drifting like a yellow cloud, friends dying beside the writer, and machine guns destroying brave men.",
+                  "Generals still ordered the old mass charges, but weapons had leapt forward a century while tactics stood still.",
+                  "Tanks, airplanes, and poison gas were new, yet none could break the stalemate, which proves technology alone did not decide the war's shape."
+                ],
+                "conclusion": "End by arguing that the trenches were a lesson written in mud: when weapons change faster than thinking, soldiers pay for the gap."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "h33-0-vw1",
+                "words": [
+                  "stalemate",
+                  "trench"
+                ],
+                "prompt": "Use each word in an original sentence."
+              }
+            ]
           }
         ]
       },
@@ -14773,6 +21453,58 @@ const MM_WEEKS_68 = [
                 "id": "h2-s1",
                 "prompt": "Analyze the soldier's diary: what does it show about the war that official reports might hide? Then give a two-point essay outline on technology's horror.",
                 "answer": "Model answer: The diary shows the war as soldiers lived it: gas clouds, friends who never stood up again, and brave men mowed down by machine guns. It reveals fear and waiting instead of glory. Essay outline on technology's horror: 1. New weapons like machine guns, gas, and tanks made old mass charges suicidal, causing slaughter on an industrial scale. 2. Even amid the horror, units like the Harlem Hellfighters showed extraordinary courage, spending 191 days in combat."
+              }
+            ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "h33-1-c1",
+                "question": "How long did the Harlem Hellfighters spend in combat, and what honor did France give them?",
+                "answer": "Model answer: They spent 191 days in combat, longer than any other American unit, and France awarded the whole regiment the Croix de Guerre."
+              },
+              {
+                "id": "h33-1-c2",
+                "question": "Why did the Hellfighters end up fighting with the French instead of the American army?",
+                "answer": "Model answer: Because their own army denied them a combat role, so the 369th Infantry Regiment was assigned to fight alongside the French."
+              },
+              {
+                "id": "h33-1-c3",
+                "question": "The French soldier wrote: “They tell us the tanks will save us, but I have seen what the machine guns do to brave men.” What does this passage reveal about the soldier's experience of new technology?",
+                "answer": "Model answer: It reveals his bitter skepticism: each new weapon was promised as a savior, but from the trenches he had watched technology serve mainly to multiply the slaughter, so hope in machines felt hollow."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "h33-1-e1",
+                "prompt": "Did the Harlem Hellfighters prove their critics wrong? Plan a 5-paragraph essay.",
+                "thesis": "The Hellfighters proved their critics completely wrong: denied a combat role by their own army, they fought longer than any other American unit and never lost a man to capture or a foot of ground.",
+                "points": [
+                  "Their own army's racism denied them a combat role, yet they spent 191 days in combat, longer than any other American unit in the war.",
+                  "They never lost a man to capture or a foot of ground, a record of discipline and courage few units could match.",
+                  "France awarded the entire regiment the Croix de Guerre, and Private Henry Johnson became one of the war's great heroes, honors their own country was slow to give."
+                ],
+                "conclusion": "Close by arguing that their record answered racism with facts no prejudice could survive: bravery, measured in days under fire, knows no color."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "h33-1-vw1",
+                "words": [
+                  "trench",
+                  "casualty"
+                ],
+                "prompt": "Use each word in an original sentence."
               }
             ]
           }
@@ -14841,6 +21573,58 @@ const MM_WEEKS_68 = [
                 "answer": "Model answer: Water is a compound because hydrogen and oxygen are chemically joined in a fixed ratio and have new properties. Salt water is a mixture because the salt and water are only stirred together, keep their own properties, and can be separated by boiling."
               }
             ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "s33-0-c1",
+                "question": "What is the difference between a compound and a mixture?",
+                "answer": "Model answer: A compound forms when elements join by chemical bonds in a fixed ratio, like water's two hydrogens to one oxygen, while a mixture is substances stirred together but not chemically joined, like air, and can be separated by physical means."
+              },
+              {
+                "id": "s33-0-c2",
+                "question": "Why does water put out fires even though hydrogen burns and oxygen feeds fire?",
+                "answer": "Model answer: Because water is a compound with properties totally different from its ingredients: once hydrogen and oxygen bond in a fixed ratio, they become a new substance with its own behavior."
+              },
+              {
+                "id": "s33-0-c3",
+                "question": "The reading gives this test: “If it can be pulled apart by physical means, it is a mixture.” What does this passage reveal about how chemists classify matter?",
+                "answer": "Model answer: It reveals that chemists classify by what it takes to break something apart: chemistry for compounds, a single kind of atom for elements, and simple physical separation for mixtures, so the test is always about the bonds."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "s33-0-e1",
+                "prompt": "Which is more useful in daily life: understanding compounds or understanding mixtures? Plan a 5-paragraph essay.",
+                "thesis": "Understanding mixtures is more useful in daily life because the air we breathe, the water we drink, and the food we eat are mixtures we constantly separate, measure, and adjust.",
+                "points": [
+                  "Air is a mixture of nitrogen, oxygen, and other gases, and knowing its percent composition matters from hospitals to the trenches.",
+                  "Salt water is a mixture we can separate by boiling the water away, a physical change anyone can perform.",
+                  "Compounds like water and table salt matter too, but their fixed ratios never change, while mixtures are the recipes we actually cook with."
+                ],
+                "conclusion": "End by arguing that compounds are nature's finished products, but mixtures are the raw materials of daily life: learn both, but live in mixtures."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "s33-0-vw1",
+                "words": [
+                  "compound",
+                  "mixture"
+                ],
+                "prompt": "Use each word in an original sentence."
+              }
+            ]
           }
         ]
       },
@@ -14903,6 +21687,58 @@ const MM_WEEKS_68 = [
                 "id": "s2-s1",
                 "prompt": "Explain in your own words what percent composition means, using nitrogen in air as an example.",
                 "answer": "Model answer: Percent composition is the recipe of a mixture, showing how much of each ingredient it holds. In air, about 78 of every 100 liters is nitrogen, so nitrogen's percent composition is 78 percent, which also equals the fraction 78/100 and the decimal 0.78."
+              }
+            ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "s33-1-c1",
+                "question": "What is the percent composition of dry air?",
+                "answer": "Model answer: About 78 percent nitrogen, about 21 percent oxygen, and about 1 percent other gases like argon and carbon dioxide."
+              },
+              {
+                "id": "s33-1-c2",
+                "question": "How can oxygen be separated from air if the gases are not chemically joined?",
+                "answer": "Model answer: Because air is a mixture, not a compound, the gases can be separated by physical means: cooling air into a liquid and boiling off each gas in turn."
+              },
+              {
+                "id": "s33-1-c3",
+                "question": "The reading says, “In hospitals today, the percent composition of oxygen in breathing mixtures must be exact.” What does this passage reveal about why percent composition matters?",
+                "answer": "Model answer: It reveals that percent composition is not just classroom math: when the mixture is medicine, getting the recipe exactly right can be a matter of life and death."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "s33-1-e1",
+                "prompt": "Why does it matter that air is a mixture and not a compound? Plan a 5-paragraph essay.",
+                "thesis": "It matters because mixtures can be separated and adjusted while compounds cannot, which is why we can purify oxygen for hospitals, study poison gas in the trenches, and trust that the air's recipe stays flexible.",
+                "points": [
+                  "As a mixture, air's gases are simply stirred together, so cooling it into a liquid lets us boil off each gas in turn.",
+                  "Percent composition gives the exact recipe: 78 percent nitrogen, 21 percent oxygen, 1 percent other gases, in fractions, decimals, or percents.",
+                  "If air were a compound, its ratio would be fixed by chemical bonds and we could never adjust it; because it is a mixture, we can."
+                ],
+                "conclusion": "Close by arguing that the air's looseness is its gift: a compound's fixed bonds would lock the recipe, but a mixture lets life and science tune it."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "s33-1-vw1",
+                "words": [
+                  "compound",
+                  "mixture"
+                ],
+                "prompt": "Use each word in an original sentence."
               }
             ]
           }
@@ -15132,6 +21968,59 @@ const MM_WEEKS_68 = [
                 "answer": "Model outline: 1. He ruled as an absolute monarch and resisted reform, leaving Russia brittle with poor peasants and few factories. 2. He took personal command in World War I, tying his reputation to defeats, shortages, and millions of casualties. 3. Bread lines, corruption rumors, and soldiers refusing to fire on crowds destroyed his authority, forcing him to abdicate."
               }
             ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "h34-0-c1",
+                "question": "What fateful choice did Czar Nicholas II make when World War I began?",
+                "answer": "Model answer: He took personal command of the army, tying his own reputation to every defeat that followed."
+              },
+              {
+                "id": "h34-0-c2",
+                "question": "Why did soldiers refuse to fire on the crowds in Petrograd in March 1917?",
+                "answer": "Model answer: After defeats, bread lines, and millions killed, wounded, or captured, the army would no longer obey, so soldiers joined the striking workers and women marching for bread instead."
+              },
+              {
+                "id": "h34-0-c3",
+                "question": "The reading says Nicholas “had lost a war, his capital, and finally his crown.” What does this three-part list reveal about how his fall unfolded?",
+                "answer": "Model answer: It reveals that his fall came in stages, each loss feeding the next: military defeat destroyed his reputation, the revolt in Petrograd destroyed his authority, and his generals' abandonment destroyed his throne."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "h34-0-e1",
+                "prompt": "Was the czar's fall caused more by the war or by his own refusal to reform? Plan a 5-paragraph essay that analyzes a revolutionary poster.",
+                "thesis": "The czar's fall was caused more by his own refusal to reform, because the war only exposed weaknesses his resistance to change had been building for years.",
+                "points": [
+                  "Before the war, his empire was already brittle: poor peasants, few factories, and a ruler who resisted every demand for reform.",
+                  "Taking personal command of the army tied his reputation to defeats he could not prevent, with soldiers lacking rifles, food, and boots.",
+                  "The poster of the giant worker breaking chains shows what replaced him: when the czar would not bend, the soviets of workers and soldiers broke him instead."
+                ],
+                "conclusion": "End by arguing that rulers who refuse reform do not avoid revolution; they only ensure that when it comes, it will be total."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "h34-0-vw1",
+                "words": [
+                  "czar",
+                  "abdicate",
+                  "soviet"
+                ],
+                "prompt": "Use each word in an original sentence."
+              }
+            ]
           }
         ]
       },
@@ -15191,6 +22080,58 @@ const MM_WEEKS_68 = [
                 "id": "h2-s1",
                 "prompt": "Analyze the revolutionary poster: what message do the giant worker and the tiny fleeing kings send? Explain two details.",
                 "answer": "Model answer: The giant worker breaking his chains sends the message that united workers are strong enough to destroy the old order. The tiny kings and priests fleeing in fear show the old rulers as small and powerless. The blazing words \"Workers of the world, unite!\" call workers everywhere to join the same fight."
+              }
+            ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "h34-1-c1",
+                "question": "After the czar fell, which two powers competed for Russia, and what did each want?",
+                "answer": "Model answer: The temporary government, which tried to keep the war going, and the soviets, councils of workers and soldiers that demanded bread, land, and peace."
+              },
+              {
+                "id": "h34-1-c2",
+                "question": "Why did crowds in Russia celebrate the Jamaican poet Claude McKay in 1922?",
+                "answer": "Model answer: Because they saw him as a voice of the world's oppressed peoples, and his visit linked Harlem's writers to Moscow's revolutionaries in one worldwide story."
+              },
+              {
+                "id": "h34-1-c3",
+                "question": "The poster shows “a giant worker breaking his chains” towering over “tiny kings and priests fleeing in fear.” What does this image reveal about the revolution's message?",
+                "answer": "Model answer: It reveals that the revolution taught through size and fear: the old rulers were made small and frightened while united workers were made strong enough to break any chain, turning art into an argument that ordinary people could defeat mighty rulers."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "h34-1-e1",
+                "prompt": "Did the Russian Revolution belong to Russia or to the world? Plan a 5-paragraph essay.",
+                "thesis": "The Russian Revolution belonged to the world, because from its posters to Claude McKay's journey, it was received as proof that ordinary people everywhere could topple mighty rulers.",
+                "points": [
+                  "The revolution's posters carried a universal message, “Workers of the world, unite!,” aimed far beyond Russia's borders.",
+                  "McKay's 1922 journey shows the echo: a Jamaican poet celebrated in Moscow as a voice of the oppressed, linking Harlem to the revolution.",
+                  "For colonized and working people worldwide, the fall of the czar proved that even three hundred years of Romanov rule could end when people united."
+                ],
+                "conclusion": "Close by arguing that revolutions are judged by their echoes: Russia's mattered most in what it promised the world, even when the promise curdled at home."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "h34-1-vw1",
+                "words": [
+                  "soviet",
+                  "czar"
+                ],
+                "prompt": "Use each word in an original sentence."
               }
             ]
           }
@@ -15259,6 +22200,58 @@ const MM_WEEKS_68 = [
                 "answer": "Model answer: Atoms form bonds because most have outer shells that are not full, and a full shell is the most stable arrangement. By giving, taking, or sharing electrons, atoms reach that comfortable state, and the bonds holding them together make up nearly everything we touch."
               }
             ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "s34-0-c1",
+                "question": "What is the difference between an ionic bond and a covalent bond?",
+                "answer": "Model answer: In an ionic bond, one atom gives electrons to another, forming oppositely charged ions that pull together, like sodium and chlorine in table salt; in a covalent bond, atoms share electrons, like oxygen sharing with two hydrogens in water."
+              },
+              {
+                "id": "s34-0-c2",
+                "question": "Why do atoms form bonds at all?",
+                "answer": "Model answer: Because most atoms have outer shells that are not full, and they link up to reach the stable, comfortable arrangement of a full outer shell."
+              },
+              {
+                "id": "s34-0-c3",
+                "question": "The reading compares an ionic bond to “handing over spare change” and a covalent bond to “two friends sharing a bicycle.” What do these comparisons reveal about the two bonds?",
+                "answer": "Model answer: They reveal the core difference in plain terms: ionic bonding is a transfer where one atom gives and the other takes, while covalent bonding is a partnership where both atoms hold the shared electrons together."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "s34-0-e1",
+                "prompt": "Which is the better deal for atoms: giving electrons or sharing them? Plan a 5-paragraph essay.",
+                "thesis": "Sharing electrons is the better deal, because covalent sharing lets every atom reach a full shell while staying together as a molecule, the basis of water and of life itself.",
+                "points": [
+                  "In ionic bonds, sodium hands an electron to chlorine and both get full shells, but the result is a crystal locked in a repeating pattern.",
+                  "In covalent bonds, oxygen shares electrons with two hydrogens and all three get what they want while acting as one particle, a molecule.",
+                  "The sharing model explains water, the substance life depends on, which makes it the more important deal in nature."
+                ],
+                "conclusion": "End by arguing that both deals fill the shell, but sharing builds molecules: the give-and-take makes salt, while the sharing makes life."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "s34-0-vw1",
+                "words": [
+                  "bond",
+                  "molecule"
+                ],
+                "prompt": "Use each word in an original sentence."
+              }
+            ]
           }
         ]
       },
@@ -15321,6 +22314,58 @@ const MM_WEEKS_68 = [
                 "id": "s2-s1",
                 "prompt": "Explain in your own words why chemical formulas are called recipes.",
                 "answer": "Model answer: A formula lists the exact ratio of atoms in a compound, like 2 to 1 for water, and that ratio never changes. Just as a recipe tells you how much of each ingredient to use, a formula tells you how atoms combine, so counting atoms reveals how the compound is built."
+              }
+            ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "s34-1-c1",
+                "question": "What are the bond ratios in table salt, water, and carbon dioxide?",
+                "answer": "Model answer: Table salt is 1 to 1 (NaCl), water is 2 to 1 (H2O), and carbon dioxide is 1 to 2 (CO2)."
+              },
+              {
+                "id": "s34-1-c2",
+                "question": "If water needs 2 hydrogens for every 1 oxygen, how many oxygens do 10 hydrogens need, and why?",
+                "answer": "Model answer: 10 hydrogens need 5 oxygens, because multiplying both sides of a ratio by the same number keeps the ratio true."
+              },
+              {
+                "id": "s34-1-c3",
+                "question": "The reading says, “Same ratio, different atoms, brand-new substance: that is the quiet magic of bonds.” What does this passage reveal about water, carbon dioxide, and magnesium chloride?",
+                "answer": "Model answer: It reveals that the ratio alone does not decide what a substance is: all three share a 1 to 2 ratio yet behave completely differently, so the identity of the atoms matters as much as the recipe."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "s34-1-e1",
+                "prompt": "Are chemical formulas a code to memorize or recipes to understand? Plan a 5-paragraph essay.",
+                "thesis": "Chemical formulas are recipes to understand, because once you read the ratio, you can scale it, reverse it, and predict how much of each ingredient a reaction needs.",
+                "points": [
+                  "Reading a formula backward reveals its ratio: MgCl2 is one magnesium to two chlorines, no memorization required.",
+                  "Ratios work like fractions, so scaling is simple: if water needs 2 hydrogens per oxygen, 10 hydrogens need 5 oxygens.",
+                  "The same 1 to 2 ratio appears in water, carbon dioxide, and magnesium chloride, yet each behaves differently, which proves understanding beats memorizing."
+                ],
+                "conclusion": "Close by arguing that a code hides meaning but a recipe reveals it: learn to read the ratio, and the formula cooks itself."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "s34-1-vw1",
+                "words": [
+                  "bond",
+                  "molecule"
+                ],
+                "prompt": "Use each word in an original sentence."
               }
             ]
           }
@@ -15550,6 +22595,59 @@ const MM_WEEKS_68 = [
                 "answer": "Model outline: 1. Harsh peace terms and weak new democracies left resentment simmering through the 1920s. 2. The Great Depression of 1929 left millions desperate, and fear became the doorway for leaders promising order in exchange for freedom. 3. Mussolini and Hitler dismantled democracy piece by piece, crushing free speech and rival parties while glorifying the leader."
               }
             ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "h35-0-c1",
+                "question": "According to the reading, what two events set the stage for dictators to rise?",
+                "answer": "Model answer: The harsh Treaty of Versailles, which humiliated Germany and angered Italy, and then the Great Depression, which began with the 1929 stock market crash and spread worldwide."
+              },
+              {
+                "id": "h35-0-c2",
+                "question": "Why did desperate people listen to leaders like Mussolini and Hitler?",
+                "answer": "Model answer: Because the Depression had closed factories, failed banks, and cost millions their jobs and savings, so leaders who promised order, jobs, and national greatness in exchange for freedom sounded like rescue."
+              },
+              {
+                "id": "h35-0-c3",
+                "question": "The reading says, “Democracies did not fall in a single day; they were dismantled piece by piece by people who promised to save them.” What does this passage reveal about how tyranny arrives?",
+                "answer": "Model answer: It reveals that dictators rarely seize everything at once; instead they trade on fear and promises, taking freedom step by step while claiming to be the nation's saviors, which is why the lesson is to defend democracy especially in hard times."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "h35-0-e1",
+                "prompt": "What kills a democracy faster: economic collapse or the fear that follows it? Plan a 5-paragraph essay that analyzes a propaganda poster.",
+                "thesis": "Fear kills democracy faster than economic collapse, because hard times only open the door while fear is what invites the dictators through it.",
+                "points": [
+                  "The Depression closed factories and emptied savings, but hardship alone did not end democracies; desperate people choosing strongmen did.",
+                  "Mussolini and Hitler promised order, jobs, and national greatness in exchange for freedom, and fear made the trade sound reasonable.",
+                  "The propaganda poster shows how it worked: a giant leader, a simple chant, and a hated caricature, repeated until tyranny felt like common sense."
+                ],
+                "conclusion": "End with the reading's warning: when fear is louder than facts and people trade freedom for promises, the door stands open, so defending democracy matters most exactly when it feels hardest."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "h35-0-vw1",
+                "words": [
+                  "propaganda",
+                  "totalitarian",
+                  "censorship"
+                ],
+                "prompt": "Use each word in an original sentence."
+              }
+            ]
           }
         ]
       },
@@ -15609,6 +22707,58 @@ const MM_WEEKS_68 = [
                 "id": "h2-s1",
                 "prompt": "Analyze the propaganda poster: name two tricks it uses and explain how each one works on viewers.",
                 "answer": "Model answer: First, the giant portrait of the leader looks strong and certain while real problems go unmentioned, making the leader seem like the answer to everything. Second, the simple slogan \"One People, One Leader, One Future!\" replaces complicated truth with an easy chant. Third, the ugly caricature of the enemy teaches viewers to hate a whole group of people. Repeating these images until they feel like common sense is the trick."
+              }
+            ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "h35-1-c1",
+                "question": "What three tricks does the reading identify in the typical propaganda poster?",
+                "answer": "Model answer: The giant leader looks strong while real problems go unmentioned; the simple slogan replaces complicated truth with an easy chant; and the ugly caricature teaches viewers to hate a whole group of people."
+              },
+              {
+                "id": "h35-1-c2",
+                "question": "How did Black Americans respond to Mussolini's invasion of Ethiopia in 1935?",
+                "answer": "Model answer: Thousands rallied in Harlem, raised money, and volunteered to fight for Ethiopia, and its resistance became a symbol of dignity inspiring Black freedom movements for decades."
+              },
+              {
+                "id": "h35-1-c3",
+                "question": "Emperor Haile Selassie warned the League of Nations: “It is us today. It will be you tomorrow.” What does this passage reveal about his understanding of the invasion?",
+                "answer": "Model answer: It reveals that he saw Ethiopia's invasion not as a local war but as a test of whether the world would stop aggression: if the League let Mussolini take Ethiopia, every nation would eventually face the same threat."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "h35-1-e1",
+                "prompt": "Was Ethiopia's stand a military story or a moral one? Plan a 5-paragraph essay.",
+                "thesis": "Ethiopia's stand was a moral story wearing a military uniform: outgunned against poison gas and bombers, its true victory was becoming a symbol of dignity that inspired freedom movements for decades.",
+                "points": [
+                  "Militarily, Ethiopia faced Mussolini's bombers and poison gas with far weaker armies, a battle it could hardly win by force.",
+                  "Selassie's warning to the League of Nations framed the invasion as the world's problem: appeasing aggression today invites it tomorrow.",
+                  "Black Americans heard the call in Harlem rallies and volunteers, turning Ethiopia's resistance into a symbol that outlived the occupation."
+                ],
+                "conclusion": "Close by arguing that some defeats teach more than victories: Ethiopia's stand proved that dignity under attack can inspire generations who never saw the battlefield."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "h35-1-vw1",
+                "words": [
+                  "propaganda",
+                  "censorship"
+                ],
+                "prompt": "Use each word in an original sentence."
               }
             ]
           }
@@ -15677,6 +22827,58 @@ const MM_WEEKS_68 = [
                 "answer": "Model answer: During a reaction, old bonds break and new bonds form, rearranging atoms into new substances. No atoms are created or destroyed; the atoms in the reactants are the same atoms in the products, just organized differently."
               }
             ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "s35-0-c1",
+                "question": "What are reactants and products, and what happens to atoms during a reaction?",
+                "answer": "Model answer: Reactants are the starting materials and products are the new substances; old bonds break and new bonds form, but no atoms are created or destroyed."
+              },
+              {
+                "id": "s35-0-c2",
+                "question": "Name three clues that a chemical reaction is happening.",
+                "answer": "Model answer: Any three: a color change, bubbles of gas, a release of heat or light, or a solid appearing in a clear liquid."
+              },
+              {
+                "id": "s35-0-c3",
+                "question": "The reading says chemists read reaction clues “the way detectives read footprints.” What does this comparison reveal about how chemists work?",
+                "answer": "Model answer: It reveals that chemists cannot see atoms rearranging directly, so they work from observable evidence, color, gas, heat, and solids, to reconstruct the invisible change, exactly as detectives reconstruct a crime from clues."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "s35-0-e1",
+                "prompt": "Is rusting iron really the same kind of process as baking a cake? Plan a 5-paragraph essay.",
+                "thesis": "Rusting iron and baking a cake are the same kind of process, because both are chemical reactions that rearrange atoms into new substances, differing only in speed and ingredients.",
+                "points": [
+                  "Both follow the same definition: reactants become products as old bonds break and new bonds form, with no atoms created or destroyed.",
+                  "Both announce themselves with clues: the cake browns and rises with heat, while iron changes color and texture as it rusts.",
+                  "The difference is rate, not kind: an explosion finishes in a fraction of a second while rust takes years, and heat, concentration, and surface area control the pace."
+                ],
+                "conclusion": "End by arguing that chemistry's power is seeing one story in many costumes: once you recognize the reaction, the cake and the rust are the same chapter."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "s35-0-vw1",
+                "words": [
+                  "reactant",
+                  "catalyst"
+                ],
+                "prompt": "Use each word in an original sentence."
+              }
+            ]
           }
         ]
       },
@@ -15739,6 +22941,58 @@ const MM_WEEKS_68 = [
                 "id": "s2-s1",
                 "prompt": "Explain in your own words why the actual yield of a reaction is usually less than the theoretical yield.",
                 "answer": "Model answer: Some product sticks to the glassware, some escapes as gas, and some reactants never finish reacting. The theoretical yield is what the math predicts in a perfect world, but the actual yield is what is really collected after these losses."
+              }
+            ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "s35-1-c1",
+                "question": "If the math predicts 50 grams of product but you collect 40 grams, what is the percent yield?",
+                "answer": "Model answer: 80 percent (40 divided by 50, times 100)."
+              },
+              {
+                "id": "s35-1-c2",
+                "question": "Why is the actual yield usually less than the theoretical yield?",
+                "answer": "Model answer: Because some product sticks to the glassware, some escapes as gas, and some reactants never finish reacting."
+              },
+              {
+                "id": "s35-1-c3",
+                "question": "The reading says, “Factories watch percent yield closely because lost product means lost money.” What does this passage reveal about why percent yield matters outside school?",
+                "answer": "Model answer: It reveals that percent yield is an economic number, not just a lab exercise: in a chemical plant, every percent of lost product is profit disappearing, so efficiency is measured in money."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "s35-1-e1",
+                "prompt": "Is percent yield a measure of honesty? Plan a 5-paragraph essay.",
+                "thesis": "Percent yield is a measure of honesty, because it forces chemists to report what they actually got instead of what the math promised, and the gap tells the true story of the reaction.",
+                "points": [
+                  "The theoretical yield is the math's promise, but the actual yield is reality: product sticks to glassware, escapes as gas, or never forms.",
+                  "Dividing actual by theoretical and multiplying by 100 gives a single honest number, like 80 percent, that admits the loss.",
+                  "Factories live by this honesty because lost product means lost money, so percent yield decides real business choices."
+                ],
+                "conclusion": "Close by arguing that science respects the gap between hope and reality: percent yield is how chemistry tells the truth about itself."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "s35-1-vw1",
+                "words": [
+                  "reactant",
+                  "catalyst"
+                ],
+                "prompt": "Use each word in an original sentence."
               }
             ]
           }
@@ -15968,6 +23222,58 @@ const MM_WEEKS_68 = [
                 "answer": "Model answer: Blitzkrieg succeeded through speed and shock, with bombers, tanks, and troops overwhelming defenders before they could react. But supply lines stretched thin, winters froze engines, and conquered peoples began to resist, so the fast victories gave way to a long grinding war."
               }
             ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "h36-0-c1",
+                "question": "What were the three parts of a blitzkrieg attack?",
+                "answer": "Model answer: Dive bombers shattered defenses, tanks punched through the lines, and motorized troops poured into the gaps."
+              },
+              {
+                "id": "h36-0-c2",
+                "question": "Why did France fall in only six weeks in 1940?",
+                "answer": "Model answer: Because Germany's armies swept through Belgium and the Netherlands, looped around France's defenses, and trapped Allied forces at Dunkirk, moving too fast for France's older defenses to respond."
+              },
+              {
+                "id": "h36-0-c3",
+                "question": "The reading says, “Blitzkrieg worked by speed and shock, but speed has limits.” What does this passage reveal about Germany's early victories?",
+                "answer": "Model answer: It reveals that the fast victories of 1939 and 1940 contained the seeds of failure: stretched supply lines, freezing winters, and rising resistance meant speed could win battles but not the long war ahead."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "h36-0-e1",
+                "prompt": "Was blitzkrieg a brilliant strategy or a gamble that was bound to fail? Plan a 5-paragraph essay.",
+                "thesis": "Blitzkrieg was a brilliant tactic but a doomed strategy: it won stunning early victories, yet its need for speed made it fragile against distance, winter, and determined resistance.",
+                "points": [
+                  "In Poland, France, and the opening of the Russian invasion, dive bombers, tanks, and motorized troops shattered defenses in weeks.",
+                  "Speed had limits the reading names plainly: supply lines stretched thin, winters froze engines, and conquered peoples began to resist.",
+                  "The invasion of the Soviet Union with three million men opened the largest land war in history, a scale no lightning campaign could sustain."
+                ],
+                "conclusion": "End by arguing that blitzkrieg mistook fast wins for lasting victory: shock can break an army, but only staying power can hold a continent."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "h36-0-vw1",
+                "words": [
+                  "blitzkrieg",
+                  "occupation"
+                ],
+                "prompt": "Use each word in an original sentence."
+              }
+            ]
           }
         ]
       },
@@ -16027,6 +23333,58 @@ const MM_WEEKS_68 = [
                 "id": "h2-s1",
                 "prompt": "Analyze the resistance leaflet: what two arguments does it make to persuade readers to join? Then give a two-point essay outline on civilian courage.",
                 "answer": "Model answer: The leaflet argues that resistance works, since every delayed train and carried message brings freedom closer, and that ordinary readers can be heroes instead of waiting for them. Essay outline on civilian courage: 1. Across occupied Europe, ordinary people printed secret papers, hid pilots, and sabotaged railways despite terrible risks. 2. Soldiers like the Black Panthers of the 761st proved the same courage in uniform, fighting 183 days while facing racism from their own army."
+              }
+            ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "h36-1-c1",
+                "question": "What did resistance networks do across occupied Europe?",
+                "answer": "Model answer: They printed secret newspapers, hid downed pilots, sabotaged railways, and passed information to the Allies."
+              },
+              {
+                "id": "h36-1-c2",
+                "question": "Why was the 761st Tank Battalion's record remarkable beyond its battlefield success?",
+                "answer": "Model answer: Because the all-Black unit fought 183 days straight and earned hundreds of medals while facing racism from their own army, proving bravery knows no color."
+              },
+              {
+                "id": "h36-1-c3",
+                "question": "The French leaflet read: “Do not wait for heroes. Be one. Join us tonight.” What does this passage reveal about the resistance's view of courage?",
+                "answer": "Model answer: It reveals that the resistance saw courage as a choice ordinary people could make immediately, not a quality reserved for soldiers or legends: every delayed train and carried message brought freedom one day closer."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "h36-1-e1",
+                "prompt": "Who showed more courage: the civilian resisters or the Black Panthers of the 761st? Plan a 5-paragraph essay that analyzes the resistance leaflet.",
+                "thesis": "Both showed the same courage in different uniforms: the resisters fought without armies behind them, and the Panthers fought with an army that disrespected them, and both proved tyranny is beaten by people who refuse to obey it.",
+                "points": [
+                  "The leaflet's call, “Do not wait for heroes. Be one,” shows civilian courage was a daily choice made knowing capture meant torture and execution.",
+                  "The 761st fought 183 days straight through the war's hardest battles, spearheading Patton's drive while facing racism from their own side.",
+                  "By 1944 the resistance networks were blowing up bridges and guiding Allied bombers, so civilian courage became one of the war's most powerful weapons."
+                ],
+                "conclusion": "Close with the reading's shared lesson: whether in a French village or a tank battalion, tyranny falls to ordinary people who refuse to obey it."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "h36-1-vw1",
+                "words": [
+                  "resistance",
+                  "occupation"
+                ],
+                "prompt": "Use each word in an original sentence."
               }
             ]
           }
@@ -16095,6 +23453,58 @@ const MM_WEEKS_68 = [
                 "answer": "Model answer: You could use litmus paper, which turns red in acids and blue in bases. You could also feel for slipperiness, which signals a base, but chemists use indicators because tasting unknown chemicals is never safe."
               }
             ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "s36-0-c1",
+                "question": "How can you tell an acid from a base using litmus paper?",
+                "answer": "Model answer: Litmus paper turns red in acids and blue in bases."
+              },
+              {
+                "id": "s36-0-c2",
+                "question": "Why does a baking soda paste soothe a bee sting?",
+                "answer": "Model answer: Because the sting is mildly acidic and baking soda is a mild base, so they neutralize each other, forming water and a salt."
+              },
+              {
+                "id": "s36-0-c3",
+                "question": "The reading warns that “chemists never taste unknown chemicals to test them,” even though acids taste sour and bases taste bitter. What does this passage reveal about working safely in chemistry?",
+                "answer": "Model answer: It reveals that everyday clues like taste are too dangerous to use as tests: a sour taste might mean a harmless lemon or a skin-burning strong acid, so chemists use indicators like litmus paper instead."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "s36-0-e1",
+                "prompt": "Are acids and bases opposites or partners? Plan a 5-paragraph essay.",
+                "thesis": "Acids and bases are opposites that work as partners: their opposition is exactly what lets them neutralize each other into harmless water and salt.",
+                "points": [
+                  "Acids release hydrogen ions (H+) and bases release hydroxide ions (OH-), two opposite chemistries you meet in lemons and soap.",
+                  "When they meet, they cancel out: the baking soda paste that soothes a bee sting is a base defeating an acid.",
+                  "Your own stomach uses hydrochloric acid to digest food, showing that the body itself partners with these opposites every day."
+                ],
+                "conclusion": "End by arguing that opposition can be useful: acids and bases are enemies whose battles, fought correctly, leave peace behind."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "s36-0-vw1",
+                "words": [
+                  "acid",
+                  "neutralize"
+                ],
+                "prompt": "Use each word in an original sentence."
+              }
+            ]
           }
         ]
       },
@@ -16157,6 +23567,58 @@ const MM_WEEKS_68 = [
                 "id": "s2-s1",
                 "prompt": "Explain in your own words why a small change in pH can matter so much.",
                 "answer": "Model answer: Each whole step on the pH scale means ten times the strength, so a single point is a tenfold leap. That is why even small pH changes in lakes or soil can have huge effects on living things."
+              }
+            ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "s36-1-c1",
+                "question": "On the pH scale, what counts as acidic, neutral, and basic?",
+                "answer": "Model answer: Below 7 is acidic, 7 is neutral like pure water, and above 7 is basic."
+              },
+              {
+                "id": "s36-1-c2",
+                "question": "How much more acidic is a solution with pH 3 than one with pH 5?",
+                "answer": "Model answer: One hundred times more acidic, because each whole step on the pH scale means ten times the strength, and two steps is ten times ten."
+              },
+              {
+                "id": "s36-1-c3",
+                "question": "The reading says, “A single point on the scale is a tenfold leap, which is why even small pH changes in lakes or soil can matter so much.” What does this passage reveal about reading pH numbers?",
+                "answer": "Model answer: It reveals that the pH scale hides huge changes behind small numbers: a shift that looks tiny, like rain moving from pH 6.0 to 5.6, actually means a big jump in acidity that can harm living things."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "s36-1-e1",
+                "prompt": "Is the pH scale honest? Plan a 5-paragraph essay.",
+                "thesis": "The pH scale is honest but sneaky: it tells the truth in compact numbers, yet it hides powers of ten behind each single step, so readers must know the secret to understand it.",
+                "points": [
+                  "Fifteen numbers, 0 to 14, fit the whole chemical world, from stomach acid near 2 to bleach near 13.",
+                  "Each whole step means ten times the strength, so pH 3 is a hundred times more acidic than pH 5.",
+                  "Decimals pinpoint exact positions, like rain at pH 5.6, letting scientists track small differences such as acid rain."
+                ],
+                "conclusion": "Close by arguing that the scale rewards the informed reader: once you know each step is a tenfold leap, those small numbers speak loudly."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "s36-1-vw1",
+                "words": [
+                  "acid",
+                  "neutralize"
+                ],
+                "prompt": "Use each word in an original sentence."
               }
             ]
           }
@@ -16386,6 +23848,58 @@ const MM_WEEKS_68 = [
                 "answer": "Model answer: Attacking every island would have cost enormous lives and time against heavily defended positions. By capturing only key islands and cutting off the rest from supplies, American forces moved steadily closer to Japan while saving strength for the battles that mattered."
               }
             ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "h37-0-c1",
+                "question": "What was the American strategy of island-hopping?",
+                "answer": "Model answer: Instead of attacking every Japanese-held island, American forces captured key islands and skipped the heavily defended ones, cutting them off from supplies."
+              },
+              {
+                "id": "h37-0-c2",
+                "question": "Why does the reading call the kamikaze attacks “a sign of how desperate the fighting had become”?",
+                "answer": "Model answer: Because Japanese pilots were flying suicide missions, which shows a military so pressed that it spent its own pilots' lives as weapons."
+              },
+              {
+                "id": "h37-0-c3",
+                "question": "President Roosevelt called December 7, 1941 “a date which will live in infamy.” What does this phrase reveal about how America experienced Pearl Harbor?",
+                "answer": "Model answer: It reveals that the surprise attack was felt as a moral shock, not just a military loss: “infamy” frames Japan's unannounced strike as dishonorable, which is why the date burned into national memory."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "h37-0-e1",
+                "prompt": "Was island-hopping smart strategy or cruel math? Plan a 5-paragraph essay.",
+                "thesis": "Island-hopping was smart strategy: by capturing key islands and cutting off the rest, America moved steadily toward Japan while avoiding the slaughter of assaulting every fortress.",
+                "points": [
+                  "Attacking every defended island would have multiplied brutal battles like Guadalcanal, Iwo Jima, and Okinawa beyond bearing.",
+                  "Skipped islands were cut off from supplies, which neutralized them without a landing, saving American lives.",
+                  "The strategy worked: each captured island became a stepping stone closer to Japan until the war ended in September 1945."
+                ],
+                "conclusion": "End by weighing the cost that remained: island-hopping reduced the killing but the Pacific war still cost millions of lives, which is why strategy can limit horror but never remove it."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "h37-0-vw1",
+                "words": [
+                  "island-hopping",
+                  "ration"
+                ],
+                "prompt": "Use each word in an original sentence."
+              }
+            ]
           }
         ]
       },
@@ -16445,6 +23959,58 @@ const MM_WEEKS_68 = [
                 "id": "h2-s1",
                 "prompt": "Compare the two home-front accounts: what does each one reveal about wartime America? Then give a two-point essay outline on the Pacific war.",
                 "answer": "Model answer: The factory worker's account reveals proud sacrifice, with Americans working long shifts and believing every plane built brought a boy home sooner. The teenager's account reveals injustice, with loyal citizens behind barbed wire wondering when America would see them as Americans. Essay outline on the Pacific war: 1. After Pearl Harbor, island-hopping carried American forces across the Pacific toward Japan. 2. The war tested America's ideals at home, from internment's injustice to the heroism of Doris Miller and the 442nd."
+              }
+            ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "h37-1-c1",
+                "question": "What did the home front mean for most American families, and what did it mean for Japanese Americans?",
+                "answer": "Model answer: For most families it meant sacrifice and work: rationing, factory jobs, scrap drives, and war bonds; for Japanese Americans it meant injustice: more than 120,000 people of Japanese descent, most of them citizens, were forced into internment camps behind barbed wire."
+              },
+              {
+                "id": "h37-1-c2",
+                "question": "How did Japanese American soldiers answer the question of loyalty?",
+                "answer": "Model answer: Many volunteered, and the 442nd Regimental Combat Team became one of the most decorated units in American history, proving courage and patriotism belong to all Americans."
+              },
+              {
+                "id": "h37-1-c3",
+                "question": "A teenager in a camp wrote: “We pledge allegiance to the same flag every morning, behind the same barbed wire. I wonder when America will see us as Americans.” What does this passage reveal?",
+                "answer": "Model answer: It reveals the painful contradiction of the camps: the prisoners performed the same patriotic ritual as free Americans while imprisoned by their own country, which exposes the gap between America's ideals and its actions."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "h37-1-e1",
+                "prompt": "Compare the two home-front accounts in the reading: the factory worker proud of ten-hour shifts and the teenager behind barbed wire. What hard question do they ask together? Plan a 5-paragraph essay.",
+                "thesis": "Together the two accounts ask what loyalty means when a country fears its own people: one home front sacrificed willingly for America, while the other was sacrificed by America.",
+                "points": [
+                  "The factory worker's pride, “Every plane we built meant a boy coming home sooner,” shows a home front united in shared sacrifice.",
+                  "The teenager's question, “when will America see us as Americans,” shows a home front where citizens lost homes, farms, and businesses to prejudice.",
+                  "The 442nd's record and Doris Miller's heroism answer with service, yet the question remains why loyalty had to be proven at all."
+                ],
+                "conclusion": "End by arguing that remembering both home fronts is the honest history: America's war effort was heroic and unjust at once, and patriotism means facing both truths."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "h37-1-vw1",
+                "words": [
+                  "internment",
+                  "ration"
+                ],
+                "prompt": "Use each word in an original sentence."
               }
             ]
           }
@@ -16513,6 +24079,58 @@ const MM_WEEKS_68 = [
                 "answer": "Model answer: The ashes weigh less because much of the log's mass escaped as invisible gases like carbon dioxide and water vapor. If you burned the log in a sealed container and weighed everything including the gases, the total would match the original log. No atoms were created or destroyed, only rearranged."
               }
             ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "s37-0-c1",
+                "question": "What is the conservation of mass, and who discovered it?",
+                "answer": "Model answer: It is the rule that in a chemical reaction, the total mass of the starting materials always equals the total mass of the products; Antoine Lavoisier discovered it in the 1700s."
+              },
+              {
+                "id": "s37-0-c2",
+                "question": "Why does a burned log seem to break the rule, and why doesn't it really?",
+                "answer": "Model answer: The ashes weigh far less than the log, but the missing mass escaped as gases like carbon dioxide and water vapor, plus heat and light; weighed in a sealed container, the total would match exactly."
+              },
+              {
+                "id": "s37-0-c3",
+                "question": "The reading says, “Input equals output: that is the whole rule in three words.” What does this passage reveal about balanced equations?",
+                "answer": "Model answer: It reveals that every balanced chemical equation is the conservation of mass in action: the numbers in front of each formula make sure the atoms, and therefore the mass, match on both sides."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "s37-0-e1",
+                "prompt": "If mass is never lost, where does the “missing” mass go when a log burns? Plan a 5-paragraph essay.",
+                "thesis": "The missing mass goes into the air: burning only rearranges atoms, so the log's mass escapes as invisible gases, heat, and light, and careful weighing proves nothing vanished.",
+                "points": [
+                  "A burned log's ashes weigh far less, which looks like mass disappearing, but the gases, carbon dioxide and water vapor, carried it away.",
+                  "Lavoisier proved the rule by weighing sealed flasks before and after reactions, showing the total always balances.",
+                  "Reactions only rearrange atoms: none are created and none destroyed, so the total mass cannot change."
+                ],
+                "conclusion": "End by arguing that conservation of mass is science's promise that the books always balance: what seems lost is only hidden, waiting to be weighed."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "s37-0-vw1",
+                "words": [
+                  "conservation",
+                  "matter"
+                ],
+                "prompt": "Use each word in an original sentence."
+              }
+            ]
           }
         ]
       },
@@ -16575,6 +24193,58 @@ const MM_WEEKS_68 = [
                 "id": "s2-s1",
                 "prompt": "Explain in your own words why chemists balance chemical equations.",
                 "answer": "Model answer: An unbalanced equation is like a budget that does not add up, claiming atoms appeared or vanished. Balancing adjusts the numbers until input equals output exactly, so the equation predicts real masses and factories can order the right amount of each ingredient."
+              }
+            ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "s37-1-c1",
+                "question": "If a reaction starts with 10 grams of one reactant and 5 grams of another, what must the products weigh in total?",
+                "answer": "Model answer: 15 grams in total, because input always equals output."
+              },
+              {
+                "id": "s37-1-c2",
+                "question": "In the reading's example, 12 grams of reactants make products that are 2/3 solid and 1/3 gas. How many grams of each form?",
+                "answer": "Model answer: 8 grams of solid (2/3 of 12) and 4 grams of gas (1/3 of 12), which add back to 12."
+              },
+              {
+                "id": "s37-1-c3",
+                "question": "The reading says, “An unbalanced equation is like a budget that does not add up: it claims atoms appeared or vanished.” What does this comparison reveal about balancing equations?",
+                "answer": "Model answer: It reveals that balancing is an honesty check: just as a budget must account for every dollar, an equation must account for every atom, and chemists adjust the numbers until input equals output exactly."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "s37-1-e1",
+                "prompt": "Why do chemists bother balancing equations? Plan a 5-paragraph essay.",
+                "thesis": "Chemists balance equations because an unbalanced equation lies about nature, while a balanced one predicts real masses that factories and bakers depend on.",
+                "points": [
+                  "Conservation of mass demands it: input must equal output, and only a balanced equation keeps that promise.",
+                  "Balancing lets chemists predict real amounts, like the 8 grams of solid and 4 grams of gas from 12 grams of reactants.",
+                  "Factories use balanced equations to order exactly the right amount of each ingredient, so the math decides real purchases."
+                ],
+                "conclusion": "Close with the baker: a dough weighs the same as its flour, water, and yeast combined, which proves that wherever things change form, mass keeps its perfect books."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "s37-1-vw1",
+                "words": [
+                  "conservation",
+                  "matter"
+                ],
+                "prompt": "Use each word in an original sentence."
               }
             ]
           }
@@ -16804,6 +24474,58 @@ const MM_WEEKS_68 = [
                 "answer": "Model answer: The scale of six million murdered is almost impossible to grasp as a number alone. Individual stories return names and faces to history, showing real people with families, songs, and courage. Stories help each new generation understand and refuse to let hatred win twice."
               }
             ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "h38-0-c1",
+                "question": "How many Jewish people were murdered in the Holocaust, and what fraction of Europe's Jewish population was that?",
+                "answer": "Model answer: Six million Jewish people were murdered, which was two thirds of Europe's Jewish population."
+              },
+              {
+                "id": "h38-0-c2",
+                "question": "Why does the reading say the Holocaust “began with laws, not violence”?",
+                "answer": "Model answer: Because the Nuremberg Laws of 1935 first stripped Jews of citizenship, banned marriages, seized businesses, expelled children from schools, and forced families into ghettos, which shows persecution was built legally step by step before it became mass murder."
+              },
+              {
+                "id": "h38-0-c3",
+                "question": "The reading says, “The scale of the killing is almost impossible to grasp, which is why we remember it in individual stories, not only in numbers.” What does this passage reveal about remembrance?",
+                "answer": "Model answer: It reveals that numbers alone cannot carry the meaning of six million deaths, so remembrance works through individual stories that restore the humanity statistics erase."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "h38-0-e1",
+                "prompt": "Why remember the Holocaust? Plan a 5-paragraph essay that analyzes a survivor's testimony.",
+                "thesis": "We remember the Holocaust because remembrance is a promise: it keeps the victims' names alive, warns each new generation how hatred grows, and refuses to let hatred win twice.",
+                "points": [
+                  "The survivor's testimony returns names and faces to history's numbers, proving that dignity can survive even when everything else is taken.",
+                  "Remembering means learning how ordinary people allowed hatred to grow, from the Nuremberg Laws to the camps, so the pattern can be recognized.",
+                  "Memorials, museums, and days of remembrance teach each new generation, making memory a decision about the future we will build."
+                ],
+                "conclusion": "End by arguing that to remember is to join the promise: the survivors who speak and teach are giving the future both a warning and a hope."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "h38-0-vw1",
+                "words": [
+                  "genocide",
+                  "remembrance"
+                ],
+                "prompt": "Use each word in an original sentence."
+              }
+            ]
           }
         ]
       },
@@ -16865,6 +24587,58 @@ const MM_WEEKS_68 = [
                 "answer": "Model answer: The mother's singing represents identity and dignity that the Nazis could not take: her songs told her child who they were when everything else was stolen. Singing the songs now tells the world that the victims lived and mattered. Essay outline on why remember: 1. Testimonies return names and faces to history's numbers, honoring each victim as a person. 2. Remembering all victims, including Black Germans, teaches each generation to refuse hatred and build a better future."
               }
             ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "h38-1-c1",
+                "question": "Who was Hans Massaquoi, and what did his memoir describe?",
+                "answer": "Model answer: He grew up Black in Nazi Hamburg, and his memoir Destined to Witness told how his family survived years of fear under Nazi rule with dignity and defiance."
+              },
+              {
+                "id": "h38-1-c2",
+                "question": "How did Black Germans suffer under the Nazis' racial laws?",
+                "answer": "Model answer: They were denied jobs and schooling, and many were forcibly sterilized."
+              },
+              {
+                "id": "h38-1-c3",
+                "question": "The survivor testified: “They took our names and gave us numbers... But my mother sang to me at night in the barracks, and her songs told me who I was.” What does this passage reveal about resistance?",
+                "answer": "Model answer: It reveals that resistance was not only armed: a mother's songs preserved identity when the Nazis tried to erase it, proving that culture and memory themselves could defy dehumanization."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "h38-1-e1",
+                "prompt": "Does remembering have to include every victim to be honest? Plan a 5-paragraph essay.",
+                "thesis": "Honest remembrance must include every victim, because the Nazis' racial laws targeted Jews, Roma, disabled people, political prisoners, and Black Germans alike, and leaving anyone out repeats the erasure.",
+                "points": [
+                  "The survivor's songs show that remembrance restores what was taken: names, faces, and the declaration that “we were here, we lived, we mattered.”",
+                  "Black Germans like Hans Massaquoi suffered sterilization, lost schooling, and lost jobs, yet their stories are often left out of the telling.",
+                  "Remembering means refusing to look away from any victim and asking how ordinary people allowed hatred to grow against each group."
+                ],
+                "conclusion": "Close by arguing that a memorial with missing names is an unfinished promise: when you read a survivor's words, you join the vow to remember all of them."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "h38-1-vw1",
+                "words": [
+                  "testimony",
+                  "victim"
+                ],
+                "prompt": "Use each word in an original sentence."
+              }
+            ]
           }
         ]
       }
@@ -16924,6 +24698,57 @@ const MM_WEEKS_68 = [
                 "id": "s1-s1",
                 "prompt": "In your own words, explain the difference between speed and velocity, using the train example.",
                 "answer": "Model answer: Speed tells how fast something moves, like a train at 80 kilometers per hour. Velocity adds direction, like 80 kilometers per hour north. Two runners at the same speed can have different velocities because their directions keep changing."
+              }
+            ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "s38-0-c1",
+                "question": "What is the difference between speed and velocity?",
+                "answer": "Model answer: Speed tells how fast motion happens, while velocity is speed with a direction attached, such as 80 kilometers per hour north."
+              },
+              {
+                "id": "s38-0-c2",
+                "question": "If you walk 100 meters in 50 seconds, what is your speed?",
+                "answer": "Model answer: 2 meters per second (100 divided by 50)."
+              },
+              {
+                "id": "s38-0-c3",
+                "question": "The reading says two runners circling a track at the same speed have “constantly changing velocities.” What does this passage reveal about velocity?",
+                "answer": "Model answer: It reveals that velocity depends on direction, not just speed: because the runners keep turning, their direction changes every moment, so their velocity changes even while their speed stays the same."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "s38-0-e1",
+                "prompt": "Why isn't speed enough? Plan a 5-paragraph essay defending velocity.",
+                "thesis": "Speed is not enough because it cannot tell you where something is going: only velocity, speed plus direction, fully describes motion.",
+                "points": [
+                  "“The train moves at 80 kilometers per hour” tells you how fast, but “80 kilometers per hour north” tells you where it will arrive.",
+                  "Two runners at the same speed on a track have different velocities at every turn, which speed alone could never show.",
+                  "The formula speed equals distance over time unlocks all three quantities, but direction is what turns a number into a journey."
+                ],
+                "conclusion": "End by arguing that speed is the engine and velocity is the steering: you need both to know where motion is taking you."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "s38-0-vw1",
+                "words": [
+                  "motion"
+                ],
+                "prompt": "Use the word in an original sentence."
               }
             ]
           }
@@ -16988,6 +24813,57 @@ const MM_WEEKS_68 = [
                 "id": "s2-s1",
                 "prompt": "Explain in your own words how a timeline interval is like a distance in time.",
                 "answer": "Model answer: An interval measures the gap between two dates by subtraction, just as distance measures the gap between two places. The 12 years from 1933 to 1945 are a distance in time, showing how long people endured those events. The same careful math measures journeys through space and through history."
+              }
+            ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "s38-1-c1",
+                "question": "How long did the Nazi regime last, and how is that interval computed?",
+                "answer": "Model answer: 12 years, computed by subtracting 1933 from 1945."
+              },
+              {
+                "id": "s38-1-c2",
+                "question": "A train moves at 80 kilometers per hour for 3 hours. How far does it travel, and which form of the speed formula gives the answer?",
+                "answer": "Model answer: 240 kilometers, found by multiplying speed by time (distance equals speed times time)."
+              },
+              {
+                "id": "s38-1-c3",
+                "question": "The reading says, “Each interval is a small act of remembrance, measuring how long history's chapters lasted.” What does this passage reveal about the link between math and memory?",
+                "answer": "Model answer: It reveals that subtraction can be an act of respect: computing that the Nuremberg Laws came ten years before the regime fell turns dates into a measure of how long people endured."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "s38-1-e1",
+                "prompt": "Is a timeline interval a kind of distance? Plan a 5-paragraph essay.",
+                "thesis": "A timeline interval is a distance in time: the same careful bookkeeping that measures a train's journey measures how long people endured history's chapters.",
+                "points": [
+                  "The Nazi regime's 12 years and World War II's 6 years in Europe come from simple subtraction, just as speed comes from division.",
+                  "Rearranging speed equals distance over time finds distance or time, and the same step-by-step care works on dates.",
+                  "Calling each interval “a small act of remembrance” shows that math can honor memory: measuring how long a chapter lasted respects those who lived it."
+                ],
+                "conclusion": "Close by arguing that whether the journey is through space or through history, honest math turns dates and distances into understanding."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "s38-1-vw1",
+                "words": [
+                  "motion"
+                ],
+                "prompt": "Use the word in an original sentence."
               }
             ]
           }
@@ -17217,6 +25093,59 @@ const MM_WEEKS_68 = [
                 "answer": "Model answer: Both sides held nuclear weapons, so a direct war could destroy them both, which is the logic of deterrence. Instead they backed opposite sides in places like Korea and Vietnam, competing without risking a war between themselves."
               }
             ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "h39-0-c1",
+                "question": "What were NATO and the Warsaw Pact, and when was each formed?",
+                "answer": "Model answer: NATO was the Western alliance formed in 1949, promising an attack on one would be treated as an attack on all; the Warsaw Pact was the Soviet-led military alliance formed in 1955."
+              },
+              {
+                "id": "h39-0-c2",
+                "question": "Why did the superpowers avoid fighting each other directly?",
+                "answer": "Model answer: Because both soon held nuclear weapons, and deterrence meant neither dared attack since both could be destroyed in return, so they competed through proxy wars, spying, and arms races instead."
+              },
+              {
+                "id": "h39-0-c3",
+                "question": "Churchill declared that an “iron curtain” had fallen across Europe. What does this image reveal about the postwar division?",
+                "answer": "Model answer: It reveals that Europe was split into two sealed, hostile halves: like a curtain of iron, the division was rigid, opaque, and meant to separate the Soviet-controlled East from the Western allies completely."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "h39-0-e1",
+                "prompt": "Did deterrence keep the peace or just postpone the war? Plan a 5-paragraph essay that analyzes Kennedy's inaugural address.",
+                "thesis": "Deterrence kept an uneasy peace: it stopped a direct superpower war for over forty years, but it did so by holding the world hostage to the threat of mutual destruction.",
+                "points": [
+                  "NATO and the Warsaw Pact divided Europe into two armed camps, yet neither side dared attack because both could be destroyed in return.",
+                  "Kennedy's pledge to “pay any price and bear any burden” for liberty shows the standoff was framed as moral duty, not just military math.",
+                  "The price of this peace was proxy wars in Korea, Vietnam, and Afghanistan, plus generations of schoolchildren drilling under desks."
+                ],
+                "conclusion": "End by judging the trade: deterrence prevented the worst war in history, but a peace built on fear is a standoff, not a settlement."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "h39-0-vw1",
+                "words": [
+                  "deterrence",
+                  "proxy",
+                  "containment"
+                ],
+                "prompt": "Use each word in an original sentence."
+              }
+            ]
           }
         ]
       },
@@ -17278,6 +25207,58 @@ const MM_WEEKS_68 = [
                 "answer": "Model answer: Kennedy promises that America will pay any price to assure liberty's survival and pledges help to newly freed nations. He warns rivals that the United States will compete everywhere, including Africa. Essay outline on the long standoff: 1. Deterrence kept the superpowers from direct war, so they competed through proxy wars like Korea and Vietnam, nearly failing during the Cuban Missile Crisis. 2. African independence movements played both sides, winning aid while refusing to be owned by either."
               }
             ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "h39-1-c1",
+                "question": "What happened during the Cuban Missile Crisis of October 1962?",
+                "answer": "Model answer: Soviet missiles were discovered in Cuba, ninety miles from Florida, and for thirteen days the world held its breath until a secret deal removed the missiles."
+              },
+              {
+                "id": "h39-1-c2",
+                "question": "How did African leaders like Kwame Nkrumah handle the superpower rivalry?",
+                "answer": "Model answer: As colonies won independence, leaders like Nkrumah accepted aid from both Washington and Moscow, refusing to be owned by either side, and used the rivalry to win schools, roads, and arms."
+              },
+              {
+                "id": "h39-1-c3",
+                "question": "Kennedy pledged: “To those newly freed nations, we pledge our help in their struggle to remain free.” What does this passage reveal about America's Cold War strategy?",
+                "answer": "Model answer: It reveals that America courted newly independent nations as allies against communism, promising support while also warning rivals that the United States would compete everywhere, including in Africa."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "h39-1-e1",
+                "prompt": "Were African leaders pawns or players in the Cold War? Plan a 5-paragraph essay.",
+                "thesis": "African leaders were players, not pawns: they understood the superpower game and played it carefully, turning the rivalry into schools, roads, and arms for their new nations.",
+                "points": [
+                  "Nkrumah accepted aid from both Washington and Moscow while refusing to be owned by either side, which is strategy, not submission.",
+                  "Kennedy's pledge of help to newly freed nations shows the superpowers needed Africa's friendship, giving African leaders leverage.",
+                  "The fate of Patrice Lumumba of Congo proves the game was deadly, yet most leaders navigated it to win real gains for independence."
+                ],
+                "conclusion": "Close by arguing that the Cold War's African chapter belongs to the Africans: they turned a contest between empires into tools for building their own nations."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "h39-1-vw1",
+                "words": [
+                  "proxy",
+                  "tension"
+                ],
+                "prompt": "Use each word in an original sentence."
+              }
+            ]
           }
         ]
       }
@@ -17337,6 +25318,57 @@ const MM_WEEKS_68 = [
                 "id": "s1-s1",
                 "prompt": "In your own words, explain the difference between speed and acceleration, using a car as an example.",
                 "answer": "Model answer: Speed tells how fast the car is moving, like 60 kilometers per hour. Acceleration tells how fast that speed is changing, like gaining speed each second when pressing the gas. Braking and turning also count as acceleration because velocity changes."
+              }
+            ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "s39-0-c1",
+                "question": "What is acceleration, and what are its units?",
+                "answer": "Model answer: Acceleration is the rate at which velocity changes, measured in meters per second squared (m/s2), which means how many meters per second of speed are gained each second."
+              },
+              {
+                "id": "s39-0-c2",
+                "question": "Why does turning the steering wheel count as acceleration even if speed stays the same?",
+                "answer": "Model answer: Because velocity includes direction, so changing direction changes velocity, and any change in velocity is acceleration."
+              },
+              {
+                "id": "s39-0-c3",
+                "question": "The reading says the arms race “accelerated too, in the mathematical sense: weapons stockpiles did not just grow, they grew faster every decade.” What does this passage reveal about acceleration outside physics?",
+                "answer": "Model answer: It reveals that acceleration describes any speeding-up of growth: when each decade adds more weapons than the last, the growth itself is accelerating, which is why the same math fits physics and history."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "s39-0-e1",
+                "prompt": "Is acceleration only about speeding up? Plan a 5-paragraph essay.",
+                "thesis": "Acceleration is not only about speeding up: it is any change in velocity, so braking, turning, and even the arms race's quickening growth all count.",
+                "points": [
+                  "Pressing the gas is positive acceleration, but braking is negative acceleration, and turning counts too because direction is part of velocity.",
+                  "Falling objects gain about 9.8 meters per second every second, which shows acceleration as a steady, measurable rate.",
+                  "The arms race accelerated in the mathematical sense, with each decade adding more weapons than the last, proving the idea reaches beyond physics."
+                ],
+                "conclusion": "End by arguing that acceleration is really the mathematics of change: wherever growth itself speeds up, whether in cars or in history, acceleration is at work."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "s39-0-vw1",
+                "words": [
+                  "acceleration"
+                ],
+                "prompt": "Use the word in an original sentence."
               }
             ]
           }
@@ -17401,6 +25433,57 @@ const MM_WEEKS_68 = [
                 "id": "s2-s1",
                 "prompt": "Explain in your own words why the arms race graph bends upward steeply instead of rising in a straight line.",
                 "answer": "Model answer: The growth accelerated, with each decade adding more weapons than the last, so the curve bends upward instead of rising steadily. That upward bend is the signature shape of acceleration, the same pattern seen in populations and prices."
+              }
+            ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "s39-1-c1",
+                "question": "If a weapons stockpile grows from 1,000 to 10,000 warheads, what is the percent change?",
+                "answer": "Model answer: 900 percent (9,000 divided by 1,000, times 100)."
+              },
+              {
+                "id": "s39-1-c2",
+                "question": "Why does the Cold War weapons graph bend upward steeply instead of rising in a straight line?",
+                "answer": "Model answer: Because the growth accelerated: each decade added more weapons than the last, so the curve bends upward in the signature shape of acceleration."
+              },
+              {
+                "id": "s39-1-c3",
+                "question": "The reading says, “The math is neutral; what matters is what we choose to do with the warning.” What does this passage reveal about the role of graphs in history?",
+                "answer": "Model answer: It reveals that a graph cannot decide for us: the upward-bending curve honestly shows how fast the race was running, but humans must choose whether to heed the warning it gives."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "s39-1-e1",
+                "prompt": "Can a graph change history? Plan a 5-paragraph essay.",
+                "thesis": "A graph cannot change history by itself, but it can force honest seeing: the Cold War's upward-bending curve made the arms race's acceleration impossible to ignore.",
+                "points": [
+                  "Plotting years against weapons turns frightening numbers into a curve you can see, with the steep bend marking acceleration.",
+                  "Percent change shows that early growth is the most explosive in relative terms, like the 900 percent leap from 1,000 to 10,000.",
+                  "The same curve appears in populations, prices, and pandemics, so reading such graphs is a life skill, not just a math exercise."
+                ],
+                "conclusion": "Close with the reading's line: the math is neutral, and what matters is what we choose to do with the warning."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "s39-1-vw1",
+                "words": [
+                  "acceleration"
+                ],
+                "prompt": "Use the word in an original sentence."
               }
             ]
           }
@@ -17630,6 +25713,59 @@ const MM_WEEKS_68 = [
                 "answer": "He means the long struggle to end British colonial rule is over. \"The battle\" was the fight against Britain for self-government. He is telling Ghanaians that their country is now free to rule itself."
               }
             ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "h40-0-c1",
+                "question": "When did Nkrumah declare Ghana independent, and where did it happen?",
+                "answer": "Model answer: On March 6, 1957, before a huge crowd in Accra, Ghana's capital."
+              },
+              {
+                "id": "h40-0-c2",
+                "question": "Why did the experience of African soldiers in World War II help fuel the independence movement?",
+                "answer": "Model answer: They had fought for freedom abroad but had none at home, which made colonial rule feel unjust and gave them a powerful question to ask."
+              },
+              {
+                "id": "h40-0-c3",
+                "question": "Nkrumah told the crowd: \"At long last, the battle has ended. Ghana, your beloved country, is free forever.\" What does calling independence a \"battle\" reveal about how he viewed the struggle?",
+                "answer": "Model answer: It reveals that he saw independence as a hard-won fight, not a gift. The British did not simply hand it over. Ghanaians organized, sacrificed, and earned it."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "h40-0-e1",
+                "prompt": "Argue that Ghana's independence was the spark that lit Africa's freedom wave. Analyze Nkrumah's independence speech as evidence.",
+                "thesis": "Kwame Nkrumah's declaration of Ghana's independence on March 6, 1957, lit the spark for Africa's freedom wave because his words and his victory showed the whole continent that colonial rule could be defeated.",
+                "points": [
+                  "Nkrumah built a political party of workers, farmers, and students that won the election even while he sat in a British jail, proving that organized people could beat an empire.",
+                  "In his speech he declared, \"Ghana, your beloved country, is free forever,\" framing independence as a battle won rather than a gift given, which inspired fighters from Kenya to Nigeria.",
+                  "Ghana was the first country south of the Sahara to win independence, and its black star flag became a symbol of hope that other movements rallied around."
+                ],
+                "conclusion": "Conclude by restating that one nation's victory can change what millions believe is possible, and note that Nkrumah's dream of pan-African unity grew directly from that night in Accra."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "h40-0-vw1",
+                "words": [
+                  "independence",
+                  "pan-African",
+                  "liberate"
+                ],
+                "prompt": "Use each word in an original sentence about Ghana's independence."
+              }
+            ]
           }
         ]
       },
@@ -17697,6 +25833,59 @@ const MM_WEEKS_68 = [
                 "id": "h2-s1",
                 "prompt": "Outline an essay titled \"Freedom's Wave\": what would your beginning, middle, and end say?",
                 "answer": "Beginning: Ghana's 1957 independence showed Africans that freedom was possible. Middle: The wave spread through Kenya, Algeria, and the Congo, sometimes peacefully and sometimes through war. End: New nations faced hard problems like drawn borders, but Africans were now writing their own future."
+              }
+            ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "h40-1-c1",
+                "question": "Why was 1960 called the Year of Africa?",
+                "answer": "Model answer: Because seventeen new nations joined the United Nations that year."
+              },
+              {
+                "id": "h40-1-c2",
+                "question": "Why did new African nations face hard questions right after independence?",
+                "answer": "Model answer: Colonial rulers had drawn borders without asking the people, lumping different peoples together inside straight lines, and leaders had to build schools, roads, and governments almost from nothing."
+              },
+              {
+                "id": "h40-1-c3",
+                "question": "The reading says \"the map of Africa was redrawn by Africans themselves.\" What does that sentence reveal about what had changed?",
+                "answer": "Model answer: It reveals that for the first time in nearly a century, Africans rather than European colonizers were deciding their countries' borders and futures. The power to shape the map had shifted."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "h40-1-e1",
+                "prompt": "Did the wave of African independence fulfill the promise of Nkrumah's speech? Argue that freedom was only the beginning.",
+                "thesis": "The wave of African independence that followed Ghana fulfilled Nkrumah's dream of freedom but proved that winning independence was only the beginning of the struggle.",
+                "points": [
+                  "1960 became the Year of Africa as seventeen new nations joined the United Nations, showing how fast Nkrumah's spark spread.",
+                  "Not every path was peaceful, since Lumumba was killed within months of Congo's freedom and Portugal's colonies endured long guerrilla wars, proving that empires did not surrender quietly.",
+                  "New nations inherited borders drawn without their consent and had to build schools, roads, and governments almost from nothing while old powers still wanted their resources."
+                ],
+                "conclusion": "Conclude that the map was redrawn by Africans themselves, just as Nkrumah hoped, but that drawing the map was easier than building the nations inside it."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "h40-1-vw1",
+                "words": [
+                  "independence",
+                  "colonial",
+                  "liberate"
+                ],
+                "prompt": "Use each word in an original sentence about Africa's freedom wave."
               }
             ]
           }
@@ -17773,6 +25962,57 @@ const MM_WEEKS_68 = [
                 ]
               }
             ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "s40-0-c1",
+                "question": "What does Newton's first law say about an object in motion?",
+                "answer": "Model answer: It keeps moving at the same speed and in the same direction unless a force acts on it."
+              },
+              {
+                "id": "s40-0-c2",
+                "question": "Why do you lean forward when a bus stops suddenly?",
+                "answer": "Model answer: Because of inertia. Your body wants to keep moving forward even though the bus has stopped."
+              },
+              {
+                "id": "s40-0-c3",
+                "question": "The reading says, \"Motion does not need a push to continue. It only needs a push to change.\" What does this reveal about how Newton changed people's thinking?",
+                "answer": "Model answer: It reveals that Newton overturned the everyday belief that things need constant pushing to keep moving. He showed that friction is what stops things, and without friction motion continues on its own."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "s40-0-e1",
+                "prompt": "Analyze Newton's claim that motion needs no push to continue. Was it a radical break from everyday belief?",
+                "thesis": "Newton's first law was a radical break from everyday belief because it argued that objects keep moving on their own and that friction, not laziness, is what stops them.",
+                "points": [
+                  "Everyday experience suggests that things stop by themselves, like a ball rolling to a halt on grass, which made Newton's claim feel wrong at first.",
+                  "The hockey puck sliding far on smooth ice and the spacecraft drifting forever in space prove that with little friction, motion continues without any push.",
+                  "Seat belts and air bags exist because engineers trust the first law: in a crash, your body obeys inertia and keeps moving even when the car stops."
+                ],
+                "conclusion": "Conclude that Newton turned a confusing everyday observation into a simple rule, and that the rule still protects lives in every car on the road."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "s40-0-vw1",
+                "words": [
+                  "inertia"
+                ],
+                "prompt": "Use the word in an original sentence about Newton's first law."
+              }
+            ]
           }
         ]
       },
@@ -17831,6 +26071,57 @@ const MM_WEEKS_68 = [
                 "id": "s2-s1",
                 "prompt": "Give an everyday example of Newton's third law and explain the action-reaction pair.",
                 "answer": "Example: walking. Your foot pushes backward against the ground (action), and the ground pushes forward on your foot (reaction), which moves you forward. The two forces are equal and opposite, acting on the foot and the ground."
+              }
+            ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "s40-1-c1",
+                "question": "What is the equation for Newton's second law?",
+                "answer": "Model answer: Force equals mass times acceleration, or F = m times a."
+              },
+              {
+                "id": "s40-1-c2",
+                "question": "Why does a full shopping cart need a bigger push than an empty one to speed up the same amount?",
+                "answer": "Model answer: Because it has more mass, and the second law says a heavier object needs a bigger force for the same acceleration."
+              },
+              {
+                "id": "s40-1-c3",
+                "question": "The reading says a rocket rises because it pushes hot gas downward and the gas pushes the rocket upward. What does this example reveal about the third law?",
+                "answer": "Model answer: It reveals that forces always come in pairs acting on two different objects. The rocket and the gas push on each other with equal and opposite force, and the reaction is what lifts the rocket."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "s40-1-e1",
+                "prompt": "Analyze the shopping cart and the rocket as evidence for Newton's second and third laws. Which law is more visible in daily life?",
+                "thesis": "Newton's second and third laws are both visible in daily life, but the second law shows up every time we push something heavy, while the third law hides in plain sight.",
+                "points": [
+                  "The empty cart shooting forward and the full cart barely moving with the same push demonstrate that more mass needs more force for the same acceleration.",
+                  "Engineers use F equals m times a to calculate exactly how strong a rocket engine must be, turning the law into real machines.",
+                  "The third law appears when you push a wall and feel it push back, and a rocket rises because the gas it pushes down pushes it up with equal force."
+                ],
+                "conclusion": "Conclude that the three laws together explain almost all everyday motion, which is why engineers still use rules written more than three hundred years ago."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "s40-1-vw1",
+                "words": [
+                  "inertia"
+                ],
+                "prompt": "Use the word in an original sentence about Newton's laws of motion."
               }
             ]
           }
@@ -18059,6 +26350,58 @@ const MM_WEEKS_68 = [
                 "answer": "Both speeches promise freedom and a hopeful new beginning for their people. Nehru focuses on India awakening to life and freedom at midnight. Jinnah focuses on religious tolerance, saying all citizens are equal no matter their religion. Both leaders know their new nations must work hard to keep these promises."
               }
             ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "h41-0-c1",
+                "question": "How was British India partitioned in 1947?",
+                "answer": "Model answer: It was split into mostly Hindu India and mostly Muslim Pakistan."
+              },
+              {
+                "id": "h41-0-c2",
+                "question": "Why did independence come with such a painful price for India?",
+                "answer": "Model answer: Because partition forced about fifteen million people to move, terrible violence broke out along the way, and hundreds of thousands of people died. Freedom arrived alongside division and suffering."
+              },
+              {
+                "id": "h41-0-c3",
+                "question": "Compare Nehru's words, \"India will awake to life and freedom,\" with Jinnah's \"You are free to go to your temples... you are all citizens of Pakistan.\" What do these two quotes reveal about what each leader promised?",
+                "answer": "Model answer: They reveal that both promised freedom and a fresh start, but Nehru framed it as a nation awakening to a new life while Jinnah promised religious freedom and equal citizenship within Pakistan. Each promised hope, yet each new nation carried deep wounds from the division."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "h41-0-e1",
+                "prompt": "Compare Nehru's and Jinnah's independence speeches. Which promises were harder to keep, and why?",
+                "thesis": "Nehru and Jinnah both promised freedom on independence night, but Jinnah's promise of religious tolerance was harder to keep because partition had already divided the two nations by faith and blood.",
+                "points": [
+                  "Nehru promised that India would \"awake to life and freedom,\" framing independence as a hopeful new beginning for a united people.",
+                  "Jinnah promised that citizens of Pakistan would be free to attend temples or mosques, pledging equal citizenship across religions.",
+                  "Partition forced fifteen million people to move and killed hundreds of thousands, so both leaders' promises of peace were tested by violence from the very start."
+                ],
+                "conclusion": "Conclude that speeches can promise freedom in an evening, but keeping those promises took generations, and the wounds of partition still shape both nations."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "h41-0-vw1",
+                "words": [
+                  "partition",
+                  "friction"
+                ],
+                "prompt": "Use each word in an original sentence about the division of India."
+              }
+            ]
           }
         ]
       },
@@ -18117,6 +26460,59 @@ const MM_WEEKS_68 = [
                 "id": "h2-s1",
                 "prompt": "Outline an essay titled \"New Nations, Old Lines.\"",
                 "answer": "Beginning: After World War I, Britain and France drew Middle East borders to suit themselves. Middle: These old lines caused wars, from Israel's creation in 1948 to the Suez crisis in 1956. End: Nasser's stand at Suez showed new nations fighting to control their own land and resources."
+              }
+            ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "h41-1-c1",
+                "question": "What did Nasser do to the Suez Canal in 1956?",
+                "answer": "Model answer: He nationalized it, taking control of the waterway from Britain and France so that tolls went to Egypt."
+              },
+              {
+                "id": "h41-1-c2",
+                "question": "Why did people in the Middle East see the mandates as \"a new kind of colonial rule\"?",
+                "answer": "Model answer: Because Britain and France drew borders as they pleased and ruled the lands themselves while only promising eventual independence, so it felt like the old colonial pattern under a new name."
+              },
+              {
+                "id": "h41-1-c3",
+                "question": "The reading says \"The lines drawn on maps by outsiders became battle lines.\" What does this sentence reveal about the region's conflicts?",
+                "answer": "Model answer: It reveals that borders drawn without asking the people who lived there turned into real wars and lasting conflict. The mapmaking itself planted the seeds of fighting, as in the 1948 war and the displacement of Palestinian Arabs."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "h41-1-e1",
+                "prompt": "Argue that the lines drawn by outsiders caused more harm than independence healed. Use the mandates and the Suez crisis as evidence.",
+                "thesis": "The borders Britain and France drew across the Middle East caused more lasting harm than independence healed, because outsiders' lines became battle lines.",
+                "points": [
+                  "The mandates in Palestine, Syria, Lebanon, and Iraq were drawn almost as the Europeans pleased, and the people there experienced them as a new kind of colonial rule.",
+                  "When the British mandate in Palestine ended in 1948, war broke out at once and hundreds of thousands of Palestinian Arabs became refugees.",
+                  "Nasser's nationalization of the Suez Canal showed the pushback: Egypt took back its waterway and became a hero across the Arab world for defying old colonial powers."
+                ],
+                "conclusion": "Conclude that the region's new nations began shaping their own futures, but they did so inside lines they never chose, and those lines still burn today."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "h41-1-vw1",
+                "words": [
+                  "partition",
+                  "nationalize",
+                  "Suez"
+                ],
+                "prompt": "Use each word in an original sentence about the Middle East's new nations."
               }
             ]
           }
@@ -18186,6 +26582,58 @@ const MM_WEEKS_68 = [
                 "answer": "true"
               }
             ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "s41-0-c1",
+                "question": "What is the coefficient of friction?",
+                "answer": "Model answer: It is a number that measures friction. It is the ratio of the friction force to the force pressing the surfaces together, which scientists call the normal force."
+              },
+              {
+                "id": "s41-0-c2",
+                "question": "Why is friction not always the enemy?",
+                "answer": "Model answer: Because car tires grip the road through friction, athletes need grip from their shoes, and brake pads use friction to turn motion into heat. Without friction, every car would slide like it was on ice."
+              },
+              {
+                "id": "s41-0-c3",
+                "question": "The reading says, \"Under a microscope, every surface looks like a mountain range.\" What does this image reveal about why friction happens?",
+                "answer": "Model answer: It reveals that no surface is truly smooth. Tiny bumps catch and grind on each other as surfaces slide, and those microscopic collisions are what resist motion."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "s41-0-e1",
+                "prompt": "Analyze the claim that friction is \"not always the enemy.\" When should engineers fight it, and when should they use it?",
+                "thesis": "Friction is not always the enemy. Engineers fight it when it wastes energy and use it when it creates grip, and knowing the difference is the real skill.",
+                "points": [
+                  "Dragging a heavy box across a rough floor shows friction wasting effort, which is why engines and machines try to reduce it.",
+                  "Car tires grip the road through friction, and without it every car would slide like it was on ice, so grip is friction working for us.",
+                  "Brake pads deliberately turn motion into heat through friction, and athletes choose shoes with the right grip for their sport."
+                ],
+                "conclusion": "Conclude that the coefficient of friction lets engineers measure and choose, so the trick is knowing when to fight friction and when to use it."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "s41-0-vw1",
+                "words": [
+                  "friction",
+                  "drag"
+                ],
+                "prompt": "Use each word in an original sentence about forces that resist motion."
+              }
+            ]
           }
         ]
       },
@@ -18248,6 +26696,58 @@ const MM_WEEKS_68 = [
                 "id": "s2-s1",
                 "prompt": "Explain how a parachute uses air resistance on purpose.",
                 "answer": "A parachute has a huge canopy that catches as much air as possible. This creates strong air resistance, or drag, pushing upward against the fall. The drag slows the skydiver enough for a safe landing."
+              }
+            ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "s41-1-c1",
+                "question": "What happens to air resistance when you double your speed?",
+                "answer": "Model answer: The air pushes back about four times as hard."
+              },
+              {
+                "id": "s41-1-c2",
+                "question": "Why does a crumpled paper ball fall faster than a flat sheet of the same paper?",
+                "answer": "Model answer: Because the flat sheet catches a lot of air, creating more drag, while the ball is compact and streamlined so less air piles up against it."
+              },
+              {
+                "id": "s41-1-c3",
+                "question": "The reading says a parachute works \"the other way on purpose.\" What does that phrase reveal about how engineers use drag?",
+                "answer": "Model answer: It reveals that engineers do not just fight air resistance. They can also use it deliberately, designing a huge canopy to catch as much air as possible and slow a fall on purpose."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "s41-1-e1",
+                "prompt": "Analyze why race cars, cyclists, and swimmers all obsess over shape. What does drag teach us about design?",
+                "thesis": "Drag teaches designers that shape matters as much as power, because air resistance grows so fast with speed that a sleek shape beats a bigger engine.",
+                "points": [
+                  "Doubling speed makes air push back about four times as hard, which is why race cars use smooth, rounded noses.",
+                  "A flat sheet of paper falls slowly while the same paper crumpled into a ball drops fast, proving that shape decides drag.",
+                  "Cyclists crouch low, swimmers wear smooth caps, and car makers test models in wind tunnels because tiny shape changes save fuel."
+                ],
+                "conclusion": "Conclude that drag is a tax on speed, and good design is how engineers pay less of it."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "s41-1-vw1",
+                "words": [
+                  "drag",
+                  "friction"
+                ],
+                "prompt": "Use each word in an original sentence about moving through air."
               }
             ]
           }
@@ -18492,6 +26992,59 @@ const MM_WEEKS_68 = [
                 "note": "In 1956 the Supreme Court ruled segregated buses unconstitutional."
               }
             ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "h42-0-c1",
+                "question": "How long did the Montgomery bus boycott last, and how did Black residents get around?",
+                "answer": "Model answer: It lasted 381 days. Residents walked to work, shared carpools, and even rode mules rather than ride segregated buses."
+              },
+              {
+                "id": "h42-0-c2",
+                "question": "Why did the boycotters' nonviolence matter to their success?",
+                "answer": "Model answer: Because refusing to fight back even when attacked kept the moral high ground and drew sympathy, and the strategy won when the Supreme Court ruled segregated buses unconstitutional."
+              },
+              {
+                "id": "h42-0-c3",
+                "question": "The reading says ordinary people \"discovered that courage is contagious.\" What does that sentence reveal about what the boycott changed?",
+                "answer": "Model answer: It reveals that the boycott did more than desegregate buses. It transformed maids, janitors, and students into leaders, and bravery spread from person to person until a whole community acted together."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "h42-0-e1",
+                "prompt": "Was nonviolence the movement's smartest strategy? Analyze the evidence from the Montgomery boycott.",
+                "thesis": "Nonviolence was the movement's smartest strategy in Montgomery because it turned the boycotters' suffering into economic and moral pressure the city could not withstand.",
+                "points": [
+                  "For 381 days, Black residents walked, carpooled, and rode mules, draining the bus company's money every single day.",
+                  "They refused to fight back even when King's home was bombed, which kept the world's sympathy on their side.",
+                  "The strategy won twice: the Supreme Court ruled segregated buses unconstitutional, and the method became a model for freedom movements worldwide."
+                ],
+                "conclusion": "Conclude that Montgomery proved a whole community acting together with discipline could bend history, and that courage proved contagious."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "h42-0-vw1",
+                "words": [
+                  "nonviolence",
+                  "boycott",
+                  "segregation"
+                ],
+                "prompt": "Use each word in an original sentence about the Montgomery bus boycott."
+              }
+            ]
           }
         ]
       },
@@ -18550,6 +27103,59 @@ const MM_WEEKS_68 = [
                 "text": "The American civil rights movement had no influence outside the United States.",
                 "answer": "false",
                 "note": "Activists in South Africa and elsewhere studied King's methods."
+              }
+            ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "h42-1-c1",
+                "question": "Where was King when he wrote the Letter from Birmingham Jail, and why was he there?",
+                "answer": "Model answer: He was in jail in Birmingham, Alabama, for leading protests against segregation."
+              },
+              {
+                "id": "h42-1-c2",
+                "question": "Why did King's letter argue that no one can wait for a better time to do what is right?",
+                "answer": "Model answer: Because \"injustice anywhere is a threat to justice everywhere.\" People are tied in one network of mutuality, so waiting on freedom in Birmingham meant accepting injustice everywhere."
+              },
+              {
+                "id": "h42-1-c3",
+                "question": "King wrote, \"We are caught in an inescapable network of mutuality, tied in a single garment of destiny.\" What does this image reveal about his argument?",
+                "answer": "Model answer: It reveals that he saw all people as woven together like one cloth. Pulling one thread harms the whole garment, so no one's freedom can be separated from anyone else's, and justice cannot be scheduled for a convenient season."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "h42-1-e1",
+                "prompt": "Analyze King's argument in the Letter from Birmingham Jail. Why did he insist that waiting was not an option?",
+                "thesis": "King argued that waiting was not an option because injustice anywhere threatens justice everywhere, and freedom delayed is freedom denied.",
+                "points": [
+                  "He wrote that people are \"caught in an inescapable network of mutuality,\" meaning no one's freedom can be separated from anyone else's.",
+                  "He answered critics who said he was moving too fast by showing that the oppressed, not the comfortable, get to decide when the time is right.",
+                  "The March on Washington put the letter's ideas on a national stage, with 200,000 people demanding what the letter had argued for."
+                ],
+                "conclusion": "Conclude that the letter is still read worldwide because its argument reaches beyond one city or one year, speaking to everyone ever told to wait."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "h42-1-vw1",
+                "words": [
+                  "nonviolence",
+                  "march",
+                  "activist"
+                ],
+                "prompt": "Use each word in an original sentence about King's letter and the March on Washington."
               }
             ]
           }
@@ -18619,6 +27225,58 @@ const MM_WEEKS_68 = [
                 "note": "The lifting force points up while the pack moves sideways, so almost no work is done on it."
               }
             ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "s42-0-c1",
+                "question": "In science, when is work done?",
+                "answer": "Model answer: Work is done when a force moves an object over a distance. The formula is work equals force times distance, measured in joules."
+              },
+              {
+                "id": "s42-0-c2",
+                "question": "Why does carrying a backpack across a level hallway do almost no scientific work on the pack?",
+                "answer": "Model answer: Because only the force in the direction of motion counts. The lifting force points up while the pack moves sideways, so almost no work is done on it."
+              },
+              {
+                "id": "s42-0-c3",
+                "question": "The reading says that pushing hard against a wall that does not move means \"you did zero work.\" What does that example reveal about the difference between everyday and scientific work?",
+                "answer": "Model answer: It reveals that in science, effort and tiredness do not count. Only a force that actually moves something counts, so the scientific definition is stricter and measurable, unlike the everyday feeling of having worked hard."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "s42-0-e1",
+                "prompt": "Analyze the difference between everyday work and scientific work. Why does science use the stricter definition?",
+                "thesis": "Science uses a stricter definition of work than everyday speech because only a force that moves something can transfer energy, and energy transfer is what science needs to measure.",
+                "points": [
+                  "Pushing hard against a wall that does not move feels like work but counts as zero in science, since nothing moved.",
+                  "Carrying a backpack across a level hallway does almost no scientific work on the pack because the lifting force points up while the pack moves sideways.",
+                  "Lifting the same pack up the stairs is real work, since the force and the motion line up and energy moves into the pack."
+                ],
+                "conclusion": "Conclude that the strict definition lets scientists turn effort into numbers, like 50 joules for a 10-newton push over 5 meters, that anyone can compare."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "s42-0-vw1",
+                "words": [
+                  "march",
+                  "activist"
+                ],
+                "prompt": "Use each word in an original sentence."
+              }
+            ]
           }
         ]
       },
@@ -18681,6 +27339,58 @@ const MM_WEEKS_68 = [
                 "id": "s2-s1",
                 "prompt": "Two movers lift identical boxes up the same stairs. One finishes in 10 seconds, the other in 20 seconds. Who uses more power, and why?",
                 "answer": "The faster mover uses more power. Both did the same work, lifting the same box the same height. Power is work divided by time, so doing the same work in less time means more power."
+              }
+            ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "s42-1-c1",
+                "question": "What is power, and what unit measures it?",
+                "answer": "Model answer: Power is the rate at which work is done, or work divided by time. It is measured in watts, where one watt equals one joule per second."
+              },
+              {
+                "id": "s42-1-c2",
+                "question": "Why does a weightlifter who jerks a barbell overhead in one second show more power than one who takes three seconds?",
+                "answer": "Model answer: Because both do the same work, the same weight to the same height, but the faster lifter does it in less time, and power is work divided by time."
+              },
+              {
+                "id": "s42-1-c3",
+                "question": "The reading says sprinters produce huge bursts of power off the blocks while marathon runners produce less power but keep going far longer. What does that comparison reveal about power?",
+                "answer": "Model answer: It reveals that power is about speed of effort, not total effort. A short, explosive effort can show more power than a long, steady one even though the marathoner does more total work."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "s42-1-e1",
+                "prompt": "Analyze the claim that power matters more than work in sports. Is a sprinter really more powerful than a marathoner?",
+                "thesis": "Power matters more than total work in sports because contests are decided by speed, and the sprinter's explosive burst shows far more power than the marathoner's steady pace.",
+                "points": [
+                  "A weightlifter who jerks a barbell overhead in one second shows more power than one who takes three seconds for the same lift, though the work is equal.",
+                  "Sprinters produce huge bursts of power off the starting blocks, while marathon runners produce less power but sustain it far longer.",
+                  "Machines prove the same point: a big motor lifting an elevator quickly does the same work as a small motor lifting it slowly, but the big motor has more power."
+                ],
+                "conclusion": "Conclude that whenever you compare how fast jobs get done, you are comparing power, and that is why athletes train for it."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "s42-1-vw1",
+                "words": [
+                  "march",
+                  "boycott"
+                ],
+                "prompt": "Use each word in an original sentence."
               }
             ]
           }
@@ -18924,6 +27634,59 @@ const MM_WEEKS_68 = [
                 "note": "The U.S. withdrew in 1973, and North Vietnam took over the south in 1975."
               }
             ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "h43-0-c1",
+                "question": "Why did the United States send soldiers to South Vietnam?",
+                "answer": "Model answer: America feared that if one country fell to communism, its neighbors would fall too, like a row of dominoes."
+              },
+              {
+                "id": "h43-0-c2",
+                "question": "Why was the Tet Offensive a turning point even though the war continued?",
+                "answer": "Model answer: Because the surprise attack showed the enemy was far from beaten, which made many Americans begin to ask what the war was really for."
+              },
+              {
+                "id": "h43-0-c3",
+                "question": "The reading says, \"Remembering Vietnam means honoring their service while learning its hard lessons.\" What does that sentence reveal about how the author thinks we should view the war?",
+                "answer": "Model answer: It reveals that we should do two things at once: respect the soldiers who served and learn from the mistakes, rather than choosing between pride and criticism."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "h43-0-e1",
+                "prompt": "Did the draft make the Vietnam War unjust at home? Compare the view that the draft was fair national service with the view that it was unfair.",
+                "thesis": "The draft made the Vietnam War feel unjust at home because it fell hardest on the poor and working class while college students could delay service, turning a foreign war into a domestic wound.",
+                "points": [
+                  "The domino theory gave the war a rationale: if Vietnam fell to communism, its neighbors would fall like dominoes.",
+                  "The draft lottery chose young men by birthdate, but deferments let college students wait while poor and working-class men, including Black Americans in high numbers, were sent to fight.",
+                  "After the Tet Offensive showed the enemy was far from beaten, many Americans began to ask what the war was really for, and the unfair draft sharpened the question."
+                ],
+                "conclusion": "Conclude that the war's costs went beyond battlefields, since Agent Orange poisoned soldiers and villagers alike, and Americans still debate its lessons today."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "h43-0-vw1",
+                "words": [
+                  "draft",
+                  "guerrilla",
+                  "escalation"
+                ],
+                "prompt": "Use each word in an original sentence about the Vietnam War."
+              }
+            ]
           }
         ]
       },
@@ -18982,6 +27745,59 @@ const MM_WEEKS_68 = [
                 "text": "All Americans agreed the war was just and necessary.",
                 "answer": "false",
                 "note": "The country was deeply divided, with large protests against the war."
+              }
+            ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "h43-1-c1",
+                "question": "Why did many people feel the draft lottery was unfair?",
+                "answer": "Model answer: Because college students could delay service while poor and working-class young men, including Black Americans in high numbers, were sent to fight."
+              },
+              {
+                "id": "h43-1-c2",
+                "question": "How did the protests help turn the war around at home?",
+                "answer": "Model answer: They helped turn public opinion, so newspapers that once supported the war began to question it and politicians felt the pressure, which shaped the decision to withdraw."
+              },
+              {
+                "id": "h43-1-c3",
+                "question": "King said, \"I speak as a child of God and brother to the suffering poor of Vietnam.\" What does that quote reveal about why he opposed the war?",
+                "answer": "Model answer: It reveals that he saw the war through the eyes of the poor on both sides. He believed money spent bombing Vietnam should have been spent on the poor at home, tying civil rights to the war's cost."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "h43-1-e1",
+                "prompt": "Argue that the Vietnam War was fought and decided at home as much as in the jungle.",
+                "thesis": "The Vietnam War was decided at home because protests, media images, and shifting public opinion did what battlefield victories could not: they ended American involvement.",
+                "points": [
+                  "Protests erupted on campuses and in streets, with some calling protesters unpatriotic and others calling the war unjust, dividing families and friends.",
+                  "King argued that money spent on war should be spent on the poor at home, tying the war's cost to America's unmet needs.",
+                  "Newspapers that once supported the war began to question it, and politicians felt the pressure until the United States withdrew in 1973."
+                ],
+                "conclusion": "Conclude that the lesson endures: in a democracy, the people's voice is part of every war, and leaders learned the public will not support a long war without clear reasons."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "h43-1-vw1",
+                "words": [
+                  "draft",
+                  "protest",
+                  "escalation"
+                ],
+                "prompt": "Use each word in an original sentence about the war at home."
               }
             ]
           }
@@ -19055,6 +27871,57 @@ const MM_WEEKS_68 = [
                 "answer": "kinetic"
               }
             ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "s43-0-c1",
+                "question": "What energy transformations happen in a flashlight?",
+                "answer": "Model answer: Chemical energy stored in the battery becomes electrical energy in the circuit, which the bulb turns into light energy, plus a little heat."
+              },
+              {
+                "id": "s43-0-c2",
+                "question": "Why do you sweat during exercise, according to the reading?",
+                "answer": "Model answer: Because your muscles turn most of the food's chemical energy into heat, and your body has to dump that waste heat."
+              },
+              {
+                "id": "s43-0-c3",
+                "question": "The reading says, \"Every step follows the same rule: energy is never created or destroyed, only transformed.\" What does that rule reveal about the flashlight, the toaster, and your body?",
+                "answer": "Model answer: It reveals that all of them are doing the same thing in different ways: converting one form of energy into others, with the total amount staying the same even as light, heat, motion, and sound appear."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "s43-0-e1",
+                "prompt": "Analyze the flashlight as proof that energy is never created or destroyed. Trace its full journey.",
+                "thesis": "The flashlight proves that energy is never created or destroyed, only transformed, because every step of its operation converts one form of energy into another without any appearing or vanishing.",
+                "points": [
+                  "Chemical energy stored in the battery becomes electrical energy flowing through the circuit.",
+                  "The bulb turns electrical energy into light energy, plus a little heat that escapes as thermal energy.",
+                  "The same rule governs the toaster and your body: breakfast's chemical energy becomes motion, sound when you clap, and heat you release."
+                ],
+                "conclusion": "Conclude that once you can trace energy's journey with boxes and arrows, you can understand everything from a car engine to a thunderstorm."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "s43-0-vw1",
+                "words": [
+                  "kinetic"
+                ],
+                "prompt": "Use the word in an original sentence about energy changing form."
+              }
+            ]
           }
         ]
       },
@@ -19112,6 +27979,57 @@ const MM_WEEKS_68 = [
                 "id": "s2-s1",
                 "prompt": "Trace the energy transformations when you bounce a basketball, from your muscles to the sound of the bounce.",
                 "answer": "Chemical energy in my muscles becomes kinetic energy in my arms and the ball. When the ball hits the floor, some kinetic energy becomes sound energy (the bounce noise) and heat. The ball keeps some kinetic energy, which is why it bounces back up."
+              }
+            ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "s43-1-c1",
+                "question": "About how much of a gasoline car's fuel energy actually moves the car?",
+                "answer": "Model answer: Only about one quarter. The rest becomes waste heat and sound."
+              },
+              {
+                "id": "s43-1-c2",
+                "question": "Why do electric cars do better than gasoline cars, according to the reading?",
+                "answer": "Model answer: Because they turn most of their battery energy into motion, wasting far less as heat."
+              },
+              {
+                "id": "s43-1-c3",
+                "question": "The reading says engineers track each transformation \"to find where energy is wasted.\" What does that reveal about the purpose of energy flow charts?",
+                "answer": "Model answer: It reveals that the charts are not just diagrams. They are detective tools that show engineers exactly where energy leaks away so they can fix the weak spots and build better machines."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "s43-1-e1",
+                "prompt": "Analyze the car engine's energy flow. Why do engineers say most fuel is wasted?",
+                "thesis": "Engineers say most gasoline is wasted because only about one quarter of its energy moves the car, while the rest escapes as heat and sound that do no useful work.",
+                "points": [
+                  "Chemical energy in gasoline becomes heat in a tiny explosion, which pushes pistons and becomes kinetic energy turning the wheels.",
+                  "Much of that heat escapes uselessly out of the exhaust, which is why only one quarter of the fuel's energy does the job.",
+                  "Electric cars do much better, turning most of their battery energy into motion, which is exactly what the flow charts reveal."
+                ],
+                "conclusion": "Conclude that energy flow charts are detective tools: they show engineers precisely where energy leaks so they can build better machines."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "s43-1-vw1",
+                "words": [
+                  "kinetic"
+                ],
+                "prompt": "Use the word in an original sentence about tracking energy's journey."
               }
             ]
           }
@@ -19356,6 +28274,59 @@ const MM_WEEKS_68 = [
                 "answer": "The wall was the most visible symbol of communist control and divided families. By naming it directly, Reagan put public pressure on Gorbachev in front of the whole world. The words gave hope to people trapped behind the wall that freedom was possible."
               }
             ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "h44-0-c1",
+                "question": "What were glasnost and perestroika?",
+                "answer": "Model answer: Glasnost was openness, letting people criticize the government. Perestroika was restructuring, loosening state control of the economy. Gorbachev introduced both in 1985 to save the Soviet system."
+              },
+              {
+                "id": "h44-0-c2",
+                "question": "Why did glasnost fail to save the Soviet empire?",
+                "answer": "Model answer: Because openness exposed how broken the system was. Newspapers printed the truth about past crimes and failures, and people in Eastern Europe demanded the right to choose their own governments."
+              },
+              {
+                "id": "h44-0-c3",
+                "question": "Reagan said, \"Mr. Gorbachev, tear down this wall!\" in 1987. What does the reading suggest about whether the speech caused the wall's fall?",
+                "answer": "Model answer: It suggests the speech was a bold public challenge, but the wall fell two years later because the people themselves smashed it. The speech challenged the leader, but the crowds did the tearing down."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "h44-0-e1",
+                "prompt": "Analyze Reagan's \"tear down this wall\" speech. Was it a cause of the wall's fall or a well-timed statement?",
+                "thesis": "Reagan's \"tear down this wall\" speech was a bold public challenge rather than the cause of the wall's fall, because glasnost had already exposed the Soviet system's rot from within.",
+                "points": [
+                  "Reagan stood in West Berlin in 1987 and challenged Gorbachev directly, putting the wall on the world stage.",
+                  "Glasnost let newspapers print the truth about past crimes and failures, so ordinary people lost faith before the speech.",
+                  "Two years later, crowds smashed the wall with hammers themselves. The people, not the speech, did the tearing down."
+                ],
+                "conclusion": "Conclude that the speech mattered as a statement of moral clarity, but the empire cracked because its own people finally saw the truth."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "h44-0-vw1",
+                "words": [
+                  "glasnost",
+                  "wall",
+                  "dissolve"
+                ],
+                "prompt": "Use each word in an original sentence about the cracking Soviet empire."
+              }
+            ]
           }
         ]
       },
@@ -19414,6 +28385,59 @@ const MM_WEEKS_68 = [
                 "id": "h2-s1",
                 "prompt": "Outline an essay titled \"An Empire's End.\"",
                 "answer": "Beginning: The Soviet empire looked permanent, but its economy was failing by the 1980s. Middle: Gorbachev's openness exposed the problems, the Berlin Wall fell, and Eastern Europe broke free. End: The Soviet Union dissolved in 1991, ending the Cold War and redrawing the world map."
+              }
+            ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "h44-1-c1",
+                "question": "When did the Soviet flag come down over the Kremlin for the last time?",
+                "answer": "Model answer: On Christmas Day, 1991."
+              },
+              {
+                "id": "h44-1-c2",
+                "question": "Why did the end of the Cold War matter for South Africa?",
+                "answer": "Model answer: Because with the world's attention no longer split by the superpower standoff, pressure grew on South Africa to end white minority rule, and Mandela walked free in 1990."
+              },
+              {
+                "id": "h44-1-c3",
+                "question": "The reading says, \"Freedom, the world learned again, is only the beginning of the story.\" What does that sentence reveal about what happened after 1991?",
+                "answer": "Model answer: It reveals that winning independence was not enough. The new nations faced enormous challenges building economies, writing constitutions, and settling old scores, and some struggled with corruption and conflict."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "h44-1-e1",
+                "prompt": "Was freedom the end of the story for the nations freed after 1991? Argue that it was only the beginning.",
+                "thesis": "Freedom was only the beginning for the nations freed after 1991, because independence gave them the chance to build, but building proved far harder than breaking free.",
+                "points": [
+                  "The fall of the Berlin Wall set off a chain reaction, and fifteen Soviet republics declared independence, ending the Cold War.",
+                  "The new nations faced enormous challenges: building economies, writing constitutions, and settling old scores.",
+                  "Some, like Poland and the Czech Republic, built stable democracies, while others struggled with corruption and conflict."
+                ],
+                "conclusion": "Conclude that the world was redrawn once again, and everyone learned an old lesson: freedom is only the beginning of the story."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "h44-1-vw1",
+                "words": [
+                  "dissolve",
+                  "wall",
+                  "glasnost"
+                ],
+                "prompt": "Use each word in an original sentence about the end of the Soviet Union."
               }
             ]
           }
@@ -19483,6 +28507,58 @@ const MM_WEEKS_68 = [
                 "note": "Waves carry energy, not matter; the water mostly bobs up and down."
               }
             ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "s44-0-c1",
+                "question": "What are amplitude, wavelength, and frequency?",
+                "answer": "Model answer: Amplitude is the height of the wave from its resting position to its crest. Wavelength is the distance from one crest to the next. Frequency is how many waves pass a point each second, measured in hertz."
+              },
+              {
+                "id": "s44-0-c2",
+                "question": "Why does the water in an ocean wave mostly bob up and down instead of traveling with the wave?",
+                "answer": "Model answer: Because a wave carries energy forward without carrying matter along. The water moves up and down while the energy moves toward the shore."
+              },
+              {
+                "id": "s44-0-c3",
+                "question": "The reading compares high frequency to \"a fast drumbeat\" and low frequency to \"slow rolling swells.\" What do these images reveal about frequency?",
+                "answer": "Model answer: They reveal that frequency is about how crowded the waves are in time. A drumbeat's rapid hits are like many crests passing each second, while slow swells are like few crests passing, and the same idea describes sound, light, and ocean waves."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "s44-0-e1",
+                "prompt": "Analyze the claim that a wave carries energy without carrying matter. How does the ocean prove it?",
+                "thesis": "Ocean waves prove that waves carry energy without carrying matter, because the water bobs up and down while the wave's energy races forward to the shore.",
+                "points": [
+                  "Watching waves roll in shows the water mostly moving vertically while the energy travels horizontally.",
+                  "The rope experiment proves the same thing: flick one end and waves race down the rope while the rope itself stays put.",
+                  "Amplitude, wavelength, and frequency describe every wave, from earthquakes to radio stations, because all waves move energy the same way."
+                ],
+                "conclusion": "Conclude that naming the three properties lets you describe any wave in nature, from a stadium crowd's wave to light itself."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "s44-0-vw1",
+                "words": [
+                  "crest",
+                  "trough"
+                ],
+                "prompt": "Use each word in an original sentence about waves."
+              }
+            ]
           }
         ]
       },
@@ -19548,6 +28624,58 @@ const MM_WEEKS_68 = [
                 "id": "s2-s1",
                 "prompt": "A wave has a frequency of 5 hertz and a wavelength of 4 meters. What is its speed? Show your thinking.",
                 "answer": "Wave speed equals frequency times wavelength. So 5 times 4 equals 20 meters per second. The wave travels at 20 meters per second."
+              }
+            ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "s44-1-c1",
+                "question": "What is the formula linking wave speed, frequency, and wavelength?",
+                "answer": "Model answer: Wave speed equals frequency times wavelength."
+              },
+              {
+                "id": "s44-1-c2",
+                "question": "Why can you hear the thump of a neighbor's bass music through walls but not the high notes?",
+                "answer": "Model answer: Because low bass notes have long wavelengths, which bend around obstacles, while high-pitched sounds have short wavelengths that are easily blocked."
+              },
+              {
+                "id": "s44-1-c3",
+                "question": "The reading says scientists \"measure the universe\" with this formula by studying light waves \"stretched by motion.\" What does that reveal about the formula's power?",
+                "answer": "Model answer: It reveals that one simple formula works everywhere, from concert halls to distant galaxies. By reading how stretched a galaxy's light waves are, astronomers can find its speed without ever touching it."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "s44-1-e1",
+                "prompt": "Analyze why bass notes pass through walls but high notes do not. What does the wave speed formula explain?",
+                "thesis": "The wave speed formula explains why bass passes through walls: low-frequency notes have long wavelengths that bend around obstacles, while short high-pitched waves are easily blocked.",
+                "points": [
+                  "Wave speed equals frequency times wavelength, so when frequency drops, wavelength must stretch longer.",
+                  "Low bass notes from a speaker have long wavelengths that bend around walls, which is why you hear the thump but not the melody.",
+                  "Scientists use the same math to measure galaxies: studying light waves stretched by motion reveals how fast distant galaxies move."
+                ],
+                "conclusion": "Conclude that one simple formula opens windows into worlds we cannot touch, from concert hall design to ultrasound images."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "s44-1-vw1",
+                "words": [
+                  "crest",
+                  "trough"
+                ],
+                "prompt": "Use each word in an original sentence about wave speed."
               }
             ]
           }
@@ -19792,6 +28920,59 @@ const MM_WEEKS_68 = [
                 "note": "War broke out immediately with neighboring Arab states."
               }
             ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "h45-0-c1",
+                "question": "What were the mandates, and who created them?",
+                "answer": "Model answer: After World War I, Britain and France carved up the fallen Ottoman Empire and created mandates in Palestine, Syria, Lebanon, and Iraq, ruling these lands while promising eventual independence."
+              },
+              {
+                "id": "h45-0-c2",
+                "question": "Why did oil make the Middle East so important to the world?",
+                "answer": "Model answer: Because the world ran on oil, and vast petroleum reserves lay under the deserts of Saudi Arabia, Iraq, Kuwait, and Iran, so whoever controlled the oil could shape the world's economy."
+              },
+              {
+                "id": "h45-0-c3",
+                "question": "The reading says the Kurds \"remain the world's largest people without their own country.\" What does that sentence reveal about the cost of the map's lines?",
+                "answer": "Model answer: It reveals that borders drawn by outsiders split tens of millions of Kurds across Turkey, Iraq, Syria, and Iran, leaving a whole people without a nation. Arbitrary lines can wound for a century."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "h45-0-e1",
+                "prompt": "Argue that the borders drawn by Britain and France are the root of the modern Middle East's conflicts.",
+                "thesis": "The borders Britain and France drew across the Middle East are the root of the region's conflicts because they cut through peoples and tribes without asking them.",
+                "points": [
+                  "The mandates in Palestine, Syria, Lebanon, and Iraq were drawn almost as the Europeans pleased, and the people there felt them as a new kind of colonial rule.",
+                  "In 1948 the British mandate in Palestine ended, war broke out at once, and hundreds of thousands of Palestinian Arabs became refugees.",
+                  "The Kurds, tens of millions strong, were split across four countries and remain the world's largest people without their own nation."
+                ],
+                "conclusion": "Conclude that understanding this history is the first step toward peace, because every border in the region carries the story of who drew it."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "h45-0-vw1",
+                "words": [
+                  "mandate",
+                  "oil",
+                  "refugee"
+                ],
+                "prompt": "Use each word in an original sentence about the modern Middle East."
+              }
+            ]
           }
         ]
       },
@@ -19849,6 +29030,59 @@ const MM_WEEKS_68 = [
                 "id": "h2-t2",
                 "text": "Colin Powell led the coalition forces in the 1991 Gulf War.",
                 "answer": "true"
+              }
+            ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "h45-1-c1",
+                "question": "What did the UN Security Council demand of Iraq in 1990, and what happened when Iraq refused?",
+                "answer": "Model answer: It demanded that Iraq withdraw immediately from Kuwait. When Iraq refused, a coalition of 35 nations led by the United States drove Iraqi forces out in 1991."
+              },
+              {
+                "id": "h45-1-c2",
+                "question": "Why were Colin Powell and Condoleezza Rice significant figures in this era?",
+                "answer": "Model answer: Powell was the top general in the Gulf War and later the first Black secretary of state. Rice was the first Black woman to serve as secretary of state. Both shaped American policy in the Middle East during years of war and tension."
+              },
+              {
+                "id": "h45-1-c3",
+                "question": "The UN resolution said, \"The Security Council demands that Iraq withdraw immediately from Kuwait and return to the positions it held before the invasion.\" What does this quote reveal about how the world responded?",
+                "answer": "Model answer: It reveals that the world answered with unusual unity, using international law and a formal demand before force. The resolution gave the 35-nation coalition a legal basis to act together."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "h45-1-e1",
+                "prompt": "Analyze the UN resolution on Kuwait. Did united international action work in the Gulf War?",
+                "thesis": "The UN resolution on Kuwait worked because unusual international unity gave the 35-nation coalition legal authority and a clear mission, and Iraq was driven out.",
+                "points": [
+                  "The Security Council demanded that Iraq \"withdraw immediately from Kuwait and return to the positions it held before the invasion,\" setting a clear legal line.",
+                  "When Iraq refused, the coalition led by the United States drove Iraqi forces out in 1991 in a short ground war.",
+                  "Colin Powell's careful planning made the operation a success, and he and Condoleezza Rice later shaped American policy as the first Black secretaries of state."
+                ],
+                "conclusion": "Conclude that the Gulf War showed united action can reverse aggression, though the region's crossroads of oil, faith, and power kept generating new conflicts."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "h45-1-vw1",
+                "words": [
+                  "oil",
+                  "refugee",
+                  "mandate"
+                ],
+                "prompt": "Use each word in an original sentence about Desert Storm and its aftermath."
               }
             ]
           }
@@ -19936,6 +29170,58 @@ const MM_WEEKS_68 = [
                 "answer": "c"
               }
             ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "s45-0-c1",
+                "question": "List the electromagnetic spectrum in order from longest to shortest wavelength.",
+                "answer": "Model answer: Radio waves, microwaves, infrared, visible light, ultraviolet, X-rays, and gamma rays."
+              },
+              {
+                "id": "s45-0-c2",
+                "question": "Why can sunlight reach Earth even though space is empty?",
+                "answer": "Model answer: Because light needs no material to travel through. It races across empty space at 300,000 kilometers per second."
+              },
+              {
+                "id": "s45-0-c3",
+                "question": "The reading says, \"Your eyes are extraordinary detectors\" that \"miss almost the entire spectrum.\" What does that contrast reveal about human sight?",
+                "answer": "Model answer: It reveals that our eyes are both amazing and limited. They can sense a single photon in a dark room, yet they see only the tiny visible slice while missing radio waves, infrared, ultraviolet, and X-rays all around us."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "s45-0-e1",
+                "prompt": "Analyze the claim that light is \"a wave you can see\" but also mostly invisible. What does the spectrum reveal about our senses?",
+                "thesis": "The electromagnetic spectrum reveals that human sight is both extraordinary and narrow, since our eyes detect only a tiny visible slice of a vast family of waves.",
+                "points": [
+                  "Light needs no material to travel through, racing across empty space at 300,000 kilometers per second, unlike sound or ocean waves.",
+                  "Our eyes detect only the visible slice from red to violet, while bees see ultraviolet and night-vision goggles detect infrared.",
+                  "Every member of the spectrum has a job, from radio waves carrying music to X-rays showing doctors your bones."
+                ],
+                "conclusion": "Conclude that one family of waves connects your kitchen to the stars, and technology extends our senses into the invisible."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "s45-0-vw1",
+                "words": [
+                  "opaque",
+                  "transparent"
+                ],
+                "prompt": "Use each word in an original sentence about light."
+              }
+            ]
           }
         ]
       },
@@ -20003,6 +29289,58 @@ const MM_WEEKS_68 = [
                 "id": "s2-s1",
                 "prompt": "Why is sunscreen important, using what you learned about ultraviolet light?",
                 "answer": "Ultraviolet light has a shorter wavelength than visible light, so it carries more energy. That extra energy can damage and burn skin cells. Sunscreen blocks or absorbs UV rays before they can harm the skin."
+              }
+            ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "s45-1-c1",
+                "question": "What is the relationship between wavelength, frequency, and energy in the spectrum?",
+                "answer": "Model answer: Longer wavelength means lower frequency and lower energy. Shorter wavelength means higher frequency and higher energy."
+              },
+              {
+                "id": "s45-1-c2",
+                "question": "Why do radio waves pass safely through your body while X-rays can photograph your bones?",
+                "answer": "Model answer: Because radio waves are long with very little energy, while X-rays are much shorter with enough energy to pass through skin but not bone."
+              },
+              {
+                "id": "s45-1-c3",
+                "question": "The reading says ordering the spectrum by wavelength \"lines up energy from low to high.\" What does that reveal about why scientists organize it this way?",
+                "answer": "Model answer: It reveals that the order is not random. It explains behavior, showing why gentle radio waves pass through walls while fierce gamma rays are born in exploding stars, with each wave's energy matching its place in line."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "s45-1-e1",
+                "prompt": "Analyze why scientists order the spectrum by wavelength. What story does the order tell?",
+                "thesis": "Scientists order the spectrum by wavelength because the order tells a story about energy, lining waves up from gentle radio waves to fierce gamma rays.",
+                "points": [
+                  "Longer wavelength means lower frequency and lower energy, so radio waves pass safely through your body and walls.",
+                  "Ultraviolet has enough energy to burn skin, which is why sunscreen matters, and X-rays have enough to pass through skin but not bone.",
+                  "Gamma rays are the shortest of all, born in nuclear reactions and exploding stars, completing the slide from low to high energy."
+                ],
+                "conclusion": "Conclude that the order explains behavior: each wave's energy matches its place in line, from the longest radio wave to the tiniest gamma ray."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "s45-1-vw1",
+                "words": [
+                  "opaque",
+                  "transparent"
+                ],
+                "prompt": "Use each word in an original sentence about the electromagnetic spectrum."
               }
             ]
           }
@@ -20237,6 +29575,59 @@ const MM_WEEKS_68 = [
                 "note": "Power is shared between the national government and state governments."
               }
             ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "h46-0-c1",
+                "question": "What three problems does the reading say governments exist to solve?",
+                "answer": "Model answer: They keep order, protect people, and provide services no one person could manage alone."
+              },
+              {
+                "id": "h46-0-c2",
+                "question": "Why does it matter that the United States is both a republic and federal?",
+                "answer": "Model answer: Because citizens elect representatives to make laws, and power is shared between the national government and the fifty state governments, so neither level can boss the other around completely."
+              },
+              {
+                "id": "h46-0-c3",
+                "question": "The reading says, \"A government is only as good as the people who watch over it.\" What does that sentence reveal about the author's view of citizens?",
+                "answer": "Model answer: It reveals that government is not a machine that runs itself. Citizens must vote, obey just laws, pay taxes, and speak up, because without watchful people even a good system fails."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "h46-0-e1",
+                "prompt": "Do governments exist mainly to keep order or mainly to serve people? Analyze the Preamble's six purposes.",
+                "thesis": "Governments exist to do both: the Preamble shows they must keep order through justice and defense while serving people through welfare and liberty.",
+                "points": [
+                  "The Preamble promises to \"establish Justice\" and \"insure domestic Tranquility,\" which are the order-keeping purposes.",
+                  "It also promises to \"promote the general Welfare\" and \"secure the Blessings of Liberty,\" which are the serving purposes.",
+                  "The deal requires citizens to take part through voting, obeying just laws, paying taxes, and speaking up, since a government is only as good as the people who watch over it."
+                ],
+                "conclusion": "Conclude that order without service is tyranny and service without order is chaos, so the Preamble's six purposes must work together."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "h46-0-vw1",
+                "words": [
+                  "republic",
+                  "federal",
+                  "sovereign"
+                ],
+                "prompt": "Use each word in an original sentence about why governments exist."
+              }
+            ]
           }
         ]
       },
@@ -20295,6 +29686,59 @@ const MM_WEEKS_68 = [
                 "text": "Eatonville depended on white officials to run its government.",
                 "answer": "false",
                 "note": "Eatonville ran its own local government with its own mayor and council."
+              }
+            ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "h46-1-c1",
+                "question": "When and where was Eatonville founded, and what made it remarkable?",
+                "answer": "Model answer: In 1887 in Florida. It was one of the first Black towns in America to incorporate, with its own mayor, council, and laws."
+              },
+              {
+                "id": "h46-1-c2",
+                "question": "Why did the founders of Eatonville not wait for fair treatment from others?",
+                "answer": "Model answer: Because they had just come out of slavery and were building new lives. Instead of waiting, they bought land, built homes and churches, and ran their own government."
+              },
+              {
+                "id": "h46-1-c3",
+                "question": "The reading quotes the Preamble: \"We the People of the United States... do ordain and establish this Constitution.\" What does pairing that quote with Eatonville's story reveal?",
+                "answer": "Model answer: It reveals that Eatonville lived those words in practice. Ordinary Black citizens, excluded from much of American democracy, still formed a more perfect union on their own terms, proving self-government belongs to all people."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "h46-1-e1",
+                "prompt": "Argue that Eatonville proves the Preamble's \"We the People\" in action.",
+                "thesis": "Eatonville proves the Preamble's \"We the People\" in action because ordinary Black citizens built a working self-government just after slavery ended.",
+                "points": [
+                  "In 1887 the founders bought land, built homes and churches, and incorporated with their own mayor, council, and laws.",
+                  "They collected taxes, paved streets, ran schools, and settled disputes without asking permission from white officials.",
+                  "Zora Neale Hurston grew up there and wrote about its proud, independent spirit, showing the town lived the Preamble's promise of securing the \"Blessings of Liberty\"."
+                ],
+                "conclusion": "Conclude that Eatonville's story shows self-government belongs to all people, and that ordinary citizens can govern themselves well."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "h46-1-vw1",
+                "words": [
+                  "republic",
+                  "federal",
+                  "sovereign"
+                ],
+                "prompt": "Use each word in an original sentence about Eatonville."
               }
             ]
           }
@@ -20364,6 +29808,58 @@ const MM_WEEKS_68 = [
                 "answer": "true"
               }
             ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "s46-0-c1",
+                "question": "How does sound travel from a drum to your brain?",
+                "answer": "Model answer: The drum skin pushes air molecules together and pulls back, creating compressions and rarefactions that race outward. Your eardrum vibrates when they arrive, and your brain reads the vibrations as sound."
+              },
+              {
+                "id": "s46-0-c2",
+                "question": "Why is there no sound in outer space?",
+                "answer": "Model answer: Because sound needs a material to travel through, and space is an empty vacuum with no molecules to squeeze and stretch."
+              },
+              {
+                "id": "s46-0-c3",
+                "question": "The reading says, \"From pluck to perception, it is waves all the way down.\" What does that sentence reveal about hearing?",
+                "answer": "Model answer: It reveals that hearing is one unbroken chain of waves: a guitar string's vibration becomes waves in air, which become vibrations in the ear, which become signals in the brain, with no step that is not a wave."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "s46-0-e1",
+                "prompt": "Analyze the journey of sound from a drum to your brain. Why is it \"waves all the way down\"?",
+                "thesis": "Sound's journey from drum to brain is waves all the way down because every step, from air to eardrum to nerve signal, is a vibration passing energy along.",
+                "points": [
+                  "The drum skin squeezes and stretches air molecules, creating compressions and rarefactions that race outward.",
+                  "Sound moves fastest through solid steel and cannot travel through the vacuum of space, proving it needs matter to carry it.",
+                  "The eardrum vibrates when the waves arrive, and the brain reads those vibrations as sound, completing the chain."
+                ],
+                "conclusion": "Conclude that humming with a hand on your throat lets you feel the first link in the chain: your own body as a sound source."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "s46-0-vw1",
+                "words": [
+                  "echo",
+                  "vibrate"
+                ],
+                "prompt": "Use each word in an original sentence about sound."
+              }
+            ]
           }
         ]
       },
@@ -20426,6 +29922,58 @@ const MM_WEEKS_68 = [
                 "id": "s2-s1",
                 "prompt": "A blender runs at 90 decibels and a whisper is 30 decibels. Explain why the blender is far more than \"three times\" as loud.",
                 "answer": "Each 10-decibel step multiplies intensity by ten. From 30 to 90 is six steps of 10, so the blender is ten times ten times ten times ten times ten times ten, or one million times, more intense. The numbers add, but the intensity multiplies."
+              }
+            ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "s46-1-c1",
+                "question": "How much more intense is a 100-decibel sound than an 80-decibel sound?",
+                "answer": "Model answer: One hundred times more intense, because each 10-decibel increase means ten times the intensity."
+              },
+              {
+                "id": "s46-1-c2",
+                "question": "Why do scientists use a logarithmic scale for loudness?",
+                "answer": "Model answer: Because human hearing covers an enormous range, from the faintest rustle to a jet engine, and a scale that multiplies instead of adding can cover that whole range."
+              },
+              {
+                "id": "s46-1-c3",
+                "question": "The reading says, \"If a machine's noise drops from 100 decibels to 90, the intensity falls by 90 percent, even though the number only fell by 10.\" What does that example reveal about the decibel scale?",
+                "answer": "Model answer: It reveals that the numbers are misleading to human intuition. A small drop in decibels means a huge drop in real intensity, which is why understanding the scale helps protect hearing."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "s46-1-e1",
+                "prompt": "Analyze why the decibel scale confuses human intuition. Is a 100-decibel sound just a little louder than an 80-decibel sound?",
+                "thesis": "The decibel scale confuses intuition because it multiplies instead of adding, so a 100-decibel sound is one hundred times more intense than an 80-decibel sound, not just a little louder.",
+                "points": [
+                  "Each 10-decibel increase means ten times more intensity, so the scale is logarithmic by design.",
+                  "Scientists chose this scale because human hearing covers an enormous range, from the faintest rustle to a jet engine.",
+                  "Sounds above 85 decibels can damage hearing over time, and the damage does not grow back, which is why concerts hand out earplugs."
+                ],
+                "conclusion": "Conclude that understanding the scale protects the only ears you will ever get, and that cities now map noise like weather to design quieter streets."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "s46-1-vw1",
+                "words": [
+                  "echo",
+                  "vibrate"
+                ],
+                "prompt": "Use each word in an original sentence about the decibel scale."
               }
             ]
           }
@@ -20670,6 +30218,59 @@ const MM_WEEKS_68 = [
                 "note": "Power was split three ways so no one person could rule alone."
               }
             ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "h47-0-c1",
+                "question": "Why did the 1787 convention meet, and what did it produce?",
+                "answer": "Model answer: The Articles of Confederation had left the national government too weak to tax or keep order, so fifty-five men met in Philadelphia and wrote the United States Constitution."
+              },
+              {
+                "id": "h47-0-c2",
+                "question": "Why did the founders include \"ugly\" compromises about slavery in the Constitution?",
+                "answer": "Model answer: To keep southern states on board. Slavery was protected, and enslaved people were counted as three-fifths of a person for representation, building a brilliant system on a painful contradiction."
+              },
+              {
+                "id": "h47-0-c3",
+                "question": "The reading says James Madison's notes are \"how we know what happened inside\" the convention. What does that reveal about the value of the notes?",
+                "answer": "Model answer: It reveals that the secrecy rule would have left the summer of 1787 mostly mystery. Because Madison wrote detailed notes and they were published after his death, we can study the debates that created the Constitution."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "h47-0-e1",
+                "prompt": "Was the Constitution a brilliant system or a broken promise from the start? Analyze its compromises.",
+                "thesis": "The Constitution was both a brilliant system and a broken promise, because its design for dividing power was genius while its compromises with slavery betrayed its own ideals.",
+                "points": [
+                  "The document set up a federal republic with power split three ways so no one person could rule alone.",
+                  "To keep southern states on board, slavery was protected and enslaved people were counted as three-fifths of a person for representation.",
+                  "The promise of a Bill of Rights won over fearful states, and ratification debates in every state tested whether the people would accept the plan."
+                ],
+                "conclusion": "Conclude that the founders built a brilliant system on a painful contradiction, and later generations would spend centuries fixing it."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "h47-0-vw1",
+                "words": [
+                  "ratify",
+                  "amendment",
+                  "preamble"
+                ],
+                "prompt": "Use each word in an original sentence about writing the Constitution."
+              }
+            ]
           }
         ]
       },
@@ -20748,6 +30349,59 @@ const MM_WEEKS_68 = [
                 "answer": "c"
               }
             ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "h47-1-c1",
+                "question": "What did the 13th, 14th, and 15th Amendments do?",
+                "answer": "Model answer: The 13th ended slavery. The 14th declared that all persons born in the United States are citizens and promised equal protection of the laws. The 15th said the right to vote could not be denied because of race."
+              },
+              {
+                "id": "h47-1-c2",
+                "question": "Why is the Constitution called a living document?",
+                "answer": "Model answer: Because it can grow through amendments. It has been amended 27 times, and each amendment tells a story of Americans demanding that the nation's promises match its principles."
+              },
+              {
+                "id": "h47-1-c3",
+                "question": "Madison wrote, \"If men were angels, no government would be necessary.\" What does that quote reveal about why power must be divided?",
+                "answer": "Model answer: It reveals that government is run by imperfect humans over imperfect humans. Since no one is an angel, the government must be given power to control the governed and then forced to control itself through checks like the separation of powers."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "h47-1-e1",
+                "prompt": "Analyze Madison's Federalist 51 argument. Why must government be forced to control itself?",
+                "thesis": "Madison argued that government must control itself because it is run by imperfect men over imperfect men, and no one can be trusted with unchecked power.",
+                "points": [
+                  "He wrote, \"If men were angels, no government would be necessary,\" admitting that human imperfection is why government exists at all.",
+                  "He added that since angels will not govern us, the government must be enabled to control the governed and then obliged to control itself.",
+                  "The amendment process proved him right in practice: the 13th, 14th, and 15th Amendments rewrote the Constitution's promises to include Black Americans."
+                ],
+                "conclusion": "Conclude that 27 amendments tell the story of Americans demanding the nation's promises match its principles, which is why the document is called living."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "h47-1-vw1",
+                "words": [
+                  "amendment",
+                  "ratify",
+                  "preamble"
+                ],
+                "prompt": "Use each word in an original sentence about the living Constitution."
+              }
+            ]
           }
         ]
       }
@@ -20815,6 +30469,58 @@ const MM_WEEKS_68 = [
                 "note": "Resistance fights the flow of current."
               }
             ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "s47-0-c1",
+                "question": "What three parts does a circuit need, and what happens if the loop breaks?",
+                "answer": "Model answer: A power source like a battery, a path for current (usually wires), and something that uses the energy (like a bulb). Break the loop anywhere and the current stops everywhere."
+              },
+              {
+                "id": "s47-0-c2",
+                "question": "What is the difference between current, voltage, and resistance?",
+                "answer": "Model answer: Current is the flow of electrons, measured in amps. Voltage is the push that drives the current, measured in volts. Resistance is whatever fights the flow, measured in ohms."
+              },
+              {
+                "id": "s47-0-c3",
+                "question": "The reading compares voltage to \"water pressure in a pipe.\" What does that image reveal about how voltage works?",
+                "answer": "Model answer: It reveals that voltage pushes current the way pressure pushes water. Just as higher pressure moves more water through a pipe, higher voltage drives more current through a wire, while resistance acts like a narrow spot slowing the flow."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "s47-0-e1",
+                "prompt": "Analyze the water pipe comparison for electricity. Does thinking of voltage as pressure actually help?",
+                "thesis": "Thinking of voltage as water pressure genuinely helps because it makes the invisible flow of current behave like something you can picture: push, flow, and blockage.",
+                "points": [
+                  "Voltage is the push that drives current, just as water pressure pushes water through a pipe.",
+                  "Resistance is the narrow spot in the pipe that fights the flow, measured in ohms.",
+                  "Current is the flow itself, measured in amps, and breaking the loop anywhere stops it everywhere, like cutting the pipe."
+                ],
+                "conclusion": "Conclude that once you can read the map of a circuit diagram, you can build anything from a doorbell to a robot."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "s47-0-vw1",
+                "words": [
+                  "current",
+                  "conductor"
+                ],
+                "prompt": "Use each word in an original sentence about electric circuits."
+              }
+            ]
           }
         ]
       },
@@ -20877,6 +30583,58 @@ const MM_WEEKS_68 = [
                 "id": "s2-s1",
                 "prompt": "A 1.5-volt battery connects to 0.5 ohms of resistance. What is the current?",
                 "answer": "Current equals voltage divided by resistance. So 1.5 divided by 0.5 equals 3.0 amps."
+              }
+            ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "s47-1-c1",
+                "question": "State Ohm's law and use it: what current does a 9-volt battery push through 3 ohms of resistance?",
+                "answer": "Model answer: Voltage equals current times resistance. Nine divided by 3 equals 3 amps."
+              },
+              {
+                "id": "s47-1-c2",
+                "question": "Why can birds sit safely on a power line?",
+                "answer": "Model answer: Because both feet touch the same wire at nearly the same voltage, so there is no voltage difference to push current through the bird. Current needs a difference to flow."
+              },
+              {
+                "id": "s47-1-c3",
+                "question": "The reading says electricians calculate current before wiring a house \"so the wires do not overheat.\" What does that reveal about why Ohm's law matters in real life?",
+                "answer": "Model answer: It reveals that the formula is a safety tool, not just a math exercise. Predicting current lets electricians choose wires and resistors that keep homes and phone chargers from overheating."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "s47-1-e1",
+                "prompt": "Analyze Ohm's law as a safety tool. Why do electricians calculate before they wire?",
+                "thesis": "Ohm's law is a safety tool because predicting current before wiring lets electricians choose wires and resistors that will not overheat.",
+                "points": [
+                  "The formula is simple: voltage equals current times resistance, so a 9-volt battery through 3 ohms gives 3 amps.",
+                  "Doubling the voltage doubles the current, while doubling the resistance cuts it in half, giving electricians two ways to control a circuit.",
+                  "The bird on the power line proves the law: with no voltage difference between its feet, no current flows through it."
+                ],
+                "conclusion": "Conclude that Ohm's law never changes, from a tiny hearing aid to a city's power grid, which is why it is one of science's most useful formulas."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "s47-1-vw1",
+                "words": [
+                  "current",
+                  "conductor"
+                ],
+                "prompt": "Use each word in an original sentence about Ohm's law."
               }
             ]
           }
@@ -21150,6 +30908,59 @@ const MM_WEEKS_68 = [
                 "answer": "c"
               }
             ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "h48-0-c1",
+                "question": "What does each of the three branches do?",
+                "answer": "Model answer: Congress, the legislative branch, makes the laws. The president, the executive branch, carries them out. The courts, the judicial branch, interpret the laws and settle disputes."
+              },
+              {
+                "id": "h48-0-c2",
+                "question": "Give two examples of checks and balances from the reading.",
+                "answer": "Model answer: The president can veto a bill Congress passes, but Congress can override the veto with a two-thirds vote. The president appoints judges, but the Senate must approve them."
+              },
+              {
+                "id": "h48-0-c3",
+                "question": "The reading says, \"The system is slow on purpose.\" What does that reveal about what the founders valued most?",
+                "answer": "Model answer: It reveals that they feared concentrated power more than they feared delay. They wanted big decisions to require agreement among many people, so a bill must survive two houses, the president's desk, and possibly a court."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "h48-0-e1",
+                "prompt": "Are checks and balances worth the slowness? Argue that the founders' slow system is a feature, not a bug.",
+                "thesis": "Checks and balances are worth the slowness because the founders feared concentrated power more than delay, and the system forces broad agreement before big decisions.",
+                "points": [
+                  "Congress passes a bill but the president can veto it, and Congress can override the veto with a two-thirds vote.",
+                  "The president appoints judges but the Senate must approve them, and courts can strike down laws that violate the Constitution.",
+                  "The system is slow on purpose: a bill must survive two houses, the president's desk, and possibly a court's review."
+                ],
+                "conclusion": "Conclude that the machinery only works when citizens vote, journalists report, and ordinary people demand that each branch stay in its lane."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "h48-0-vw1",
+                "words": [
+                  "veto",
+                  "judicial",
+                  "override"
+                ],
+                "prompt": "Use each word in an original sentence about checks and balances."
+              }
+            ]
           }
         ]
       },
@@ -21208,6 +31019,59 @@ const MM_WEEKS_68 = [
                 "text": "Brown v. Board of Education supported segregated schools.",
                 "answer": "false",
                 "note": "It struck down segregated schools as unconstitutional."
+              }
+            ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "h48-1-c1",
+                "question": "What did the Supreme Court declare in Brown v. Board of Education?",
+                "answer": "Model answer: That \"separate educational facilities are inherently unequal,\" striking down segregated schools."
+              },
+              {
+                "id": "h48-1-c2",
+                "question": "How did Marshall's personal history shape his legal career?",
+                "answer": "Model answer: He was denied admission to the University of Maryland's law school because of his race, so he attended Howard instead. Years later he sued Maryland and won, and he spent his life opening doors others had closed."
+              },
+              {
+                "id": "h48-1-c3",
+                "question": "The reading says Marshall's life \"shows checks and balances in action.\" What does that claim reveal about the courts' role?",
+                "answer": "Model answer: It reveals that the judicial branch can check unjust laws made by others. A lawyer used the courts to check segregation, and the courts used the Constitution to check the states, moving the whole country forward."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "h48-1-e1",
+                "prompt": "Analyze the Brown v. Board opinion's key sentence: how did \"separate educational facilities are inherently unequal\" change America?",
+                "thesis": "The Brown opinion changed America because it declared that separation itself was the violation, turning the Constitution's promise of equal protection into real change.",
+                "points": [
+                  "Marshall won 29 of the 32 cases he argued before the Supreme Court, building a careful legal strategy over decades.",
+                  "The Court's words struck down segregated schools nationwide, ruling that separate could never be equal.",
+                  "In 1967 Marshall became the first Black Supreme Court justice, and for 24 years he defended the rights of the accused and protected free speech."
+                ],
+                "conclusion": "Conclude that Marshall's life shows checks and balances in action: one branch, armed with the founding promises, moved the whole country forward."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "h48-1-vw1",
+                "words": [
+                  "judicial",
+                  "veto",
+                  "override"
+                ],
+                "prompt": "Use each word in an original sentence about Thurgood Marshall and the courts."
               }
             ]
           }
@@ -21277,6 +31141,58 @@ const MM_WEEKS_68 = [
                 "note": "Each bulb gets dimmer because the same voltage must stretch further."
               }
             ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "s48-0-c1",
+                "question": "Why did one burned-out bulb darken a whole string of old Christmas lights?",
+                "answer": "Model answer: Because they were wired in series, with current following a single path. Break the loop anywhere and current stops everywhere."
+              },
+              {
+                "id": "s48-0-c2",
+                "question": "What happens to the brightness of bulbs when you add more bulbs to a series circuit?",
+                "answer": "Model answer: Each bulb gets dimmer, because the same voltage must stretch further. A 9-volt battery lighting three identical bulbs gives each only 3 volts."
+              },
+              {
+                "id": "s48-0-c3",
+                "question": "The reading calls a series break \"a single point of failure.\" What does that phrase reveal about the weakness of series circuits?",
+                "answer": "Model answer: It reveals that the design's simplicity is also its danger: one failure anywhere kills the whole circuit, which is why engineers avoid series wiring wherever lives depend on the circuit."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "s48-0-e1",
+                "prompt": "Analyze the old Christmas lights as a design failure. What does \"a single point of failure\" teach engineers?",
+                "thesis": "The old Christmas lights teach engineers that a single point of failure is unacceptable wherever reliability matters, because one break anywhere kills the whole series circuit.",
+                "points": [
+                  "The lights were wired in series, so current had only one path, and one burned-out bulb darkened the whole string.",
+                  "Voltage is shared in series: a 9-volt battery gives three bulbs only 3 volts each, and adding bulbs dims them all.",
+                  "Flashlights still use series circuits because they are simple and cheap, but engineers avoid them wherever lives depend on the circuit."
+                ],
+                "conclusion": "Conclude that predicting, testing, and observing with two bulbs and a battery lets you see the series rule with your own eyes."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "s48-0-vw1",
+                "words": [
+                  "series",
+                  "parallel"
+                ],
+                "prompt": "Use each word in an original sentence about circuit design."
+              }
+            ]
           }
         ]
       },
@@ -21335,6 +31251,58 @@ const MM_WEEKS_68 = [
                 "id": "s2-s1",
                 "prompt": "Would you wire a hospital's emergency lights in series or parallel? Explain your choice.",
                 "answer": "Parallel. In series, one failed bulb would darken every light on the circuit, which could be deadly in an emergency. In parallel, each light has its own branch, so the rest stay on if one fails."
+              }
+            ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "s48-1-c1",
+                "question": "Why does one burned-out bulb not darken your house?",
+                "answer": "Model answer: Because your home is wired in parallel. Each light and appliance has its own branch to the power source, so one branch failing does not stop the others."
+              },
+              {
+                "id": "s48-1-c2",
+                "question": "What is the trade-off of wiring in parallel?",
+                "answer": "Model answer: Each branch gets the full voltage and stays independent, but the power source must supply more total current as branches are added, and it costs more wire."
+              },
+              {
+                "id": "s48-1-c3",
+                "question": "The reading compares parallel branches to \"lanes on a highway.\" What does that image reveal about how current flows in parallel?",
+                "answer": "Model answer: It reveals that current splits up with some flowing down each lane, yet every lane still leads to the same destination. Like cars choosing lanes, current takes multiple paths at once while each branch gets the full voltage."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "s48-1-e1",
+                "prompt": "Argue that the parallel circuit is the better design for a home. Use evidence from the reading.",
+                "thesis": "The parallel circuit is the better design for a home because every branch gets full voltage and stays independent, so one failure never darkens the house.",
+                "points": [
+                  "Each light, outlet, and appliance has its own branch to the power source, like lanes on a highway.",
+                  "Plugging in a toaster while the fridge runs gives both the full 120 volts, and adding parts does not dim the others.",
+                  "The breaker box guards each branch, tripping when total current grows too large, which is why kitchens and bathrooms sit on separate circuits."
+                ],
+                "conclusion": "Conclude that parallel costs more wire but buys independence and safety, which is exactly the trade-off good engineering demands."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "s48-1-vw1",
+                "words": [
+                  "parallel",
+                  "series"
+                ],
+                "prompt": "Use each word in an original sentence comparing the two circuit designs."
               }
             ]
           }
@@ -21578,6 +31546,59 @@ const MM_WEEKS_68 = [
                 "answer": "It promises that no citizen can be denied the right to vote because of their sex. Neither the national government nor any state may take that right away. It made women's suffrage part of the Constitution itself."
               }
             ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "h49-0-c1",
+                "question": "What does the 19th Amendment say?",
+                "answer": "Model answer: It says the right of citizens of the United States to vote shall not be denied or abridged on account of sex."
+              },
+              {
+                "id": "h49-0-c2",
+                "question": "Why did the suffragists' bold tactics matter?",
+                "answer": "Model answer: Because picketing the White House and hunger strikes in prison embarrassed the nation into action, proving that persistent, peaceful pressure can rewrite the Constitution."
+              },
+              {
+                "id": "h49-0-c3",
+                "question": "The reading says, \"A right unused is a right that withers.\" What does that sentence reveal about the author's view of voting?",
+                "answer": "Model answer: It reveals that rights need exercise to survive. Voting is both a right and a duty, and if citizens stop showing up, the right itself fades away."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "h49-0-e1",
+                "prompt": "Was the 19th Amendment a finished victory or an unfinished one? Analyze its text and its limits.",
+                "thesis": "The 19th Amendment was a giant step but an unfinished victory, because its plain words promised the vote regardless of sex while racist laws still blocked many Black women in the South.",
+                "points": [
+                  "The amendment reads, \"The right of citizens of the United States to vote shall not be denied or abridged... on account of sex,\" changing the nation overnight.",
+                  "Suffragists fought for more than seventy years, picketing the White House and enduring hunger strikes in prison.",
+                  "The victory was incomplete: many Black women in the South were still blocked by racist laws, so the fight continued."
+                ],
+                "conclusion": "Conclude that the amendment proved persistent, peaceful pressure can rewrite the Constitution, but that a right unused is a right that withers."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "h49-0-vw1",
+                "words": [
+                  "suffrage",
+                  "due process",
+                  "duty"
+                ],
+                "prompt": "Use each word in an original sentence about the fight to vote."
+              }
+            ]
           }
         ]
       },
@@ -21635,6 +31656,59 @@ const MM_WEEKS_68 = [
                 "id": "h2-s1",
                 "prompt": "Outline an essay titled \"Expanding Rights.\"",
                 "answer": "Beginning: At first only white male property owners could vote in America. Middle: The 19th Amendment gave women suffrage in 1920, and the Voting Rights Act of 1965 finally protected Black voters. End: Each generation expanded \"we the people,\" but rights survive only when citizens use and defend them."
+              }
+            ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "h49-1-c1",
+                "question": "What happened on Bloody Sunday, and what law followed it?",
+                "answer": "Model answer: On the Edmund Pettus Bridge, peaceful marchers from Selma to Montgomery were beaten by state troopers. The nation was outraged, and President Johnson answered with the Voting Rights Act of 1965."
+              },
+              {
+                "id": "h49-1-c2",
+                "question": "Why did the 15th Amendment's promise mean \"nothing without protection in practice\"?",
+                "answer": "Model answer: Because southern states used poll taxes, literacy tests, and terror to block Black voters, so almost no Black citizens were registered in parts of the Deep South despite the amendment."
+              },
+              {
+                "id": "h49-1-c3",
+                "question": "The reading says rights \"are promises the people force their government to keep, again and again.\" What does that reveal about how voting rights were won?",
+                "answer": "Model answer: It reveals that rights are not gifts from rulers. Each generation had to march, suffer, and demand action, from the suffragists to the Selma marchers, to make the paper promises real."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "h49-1-e1",
+                "prompt": "Argue that the Voting Rights Act, not the 15th Amendment alone, made voting rights real.",
+                "thesis": "The Voting Rights Act of 1965 made voting rights real because the 15th Amendment's promise had meant nothing without federal protection in practice.",
+                "points": [
+                  "Southern states used poll taxes, literacy tests, and terror to block Black voters, leaving almost no Black citizens registered in parts of the Deep South.",
+                  "On Bloody Sunday, peaceful marchers were beaten on the Edmund Pettus Bridge, and television carried the violence into living rooms across America.",
+                  "The Act banned literacy tests and sent federal observers to watch elections, and within months hundreds of thousands of Black southerners registered."
+                ],
+                "conclusion": "Conclude that rights are promises the people force their government to keep again and again, and that memory, kept alive, keeps the promise alive."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "h49-1-vw1",
+                "words": [
+                  "suffrage",
+                  "due process",
+                  "duty"
+                ],
+                "prompt": "Use each word in an original sentence about Selma and the Voting Rights Act."
               }
             ]
           }
@@ -21704,6 +31778,58 @@ const MM_WEEKS_68 = [
                 "note": "In a strong magnet, countless atomic magnets all point the same way."
               }
             ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "s49-0-c1",
+                "question": "What happens when you bring two north poles of magnets together?",
+                "answer": "Model answer: They repel, or push away. Opposite poles attract and like poles repel."
+              },
+              {
+                "id": "s49-0-c2",
+                "question": "Why does a compass needle point north?",
+                "answer": "Model answer: Because Earth is a giant magnet, and the compass needle is a tiny magnet lining up with Earth's magnetic field."
+              },
+              {
+                "id": "s49-0-c3",
+                "question": "The reading says to sprinkle iron filings on paper over a magnet to \"see the invisible made visible.\" What does that experiment reveal about magnetic fields?",
+                "answer": "Model answer: It reveals that the field has a real shape even though we cannot see it. The filings line up along invisible field lines, drawing the magnet's hidden pattern."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "s49-0-e1",
+                "prompt": "Analyze the iron filings experiment. What does it prove about something we cannot see?",
+                "thesis": "The iron filings experiment proves that magnetic fields have a real shape, because the filings line up along invisible field lines and draw the magnet's hidden pattern.",
+                "points": [
+                  "Every magnet has north and south poles, and opposite poles attract while like poles repel.",
+                  "Earth itself is a giant magnet whose field shields us from harmful solar wind, and a compass needle simply lines up with it.",
+                  "Strength depends on the material and how its atoms line up: in a strong magnet, countless atomic magnets all point the same way."
+                ],
+                "conclusion": "Conclude that mapping the invisible is what scientists do, from iron filings on paper to mapping Earth's field from space."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "s49-0-vw1",
+                "words": [
+                  "attract",
+                  "repel"
+                ],
+                "prompt": "Use each word in an original sentence about magnets."
+              }
+            ]
           }
         ]
       },
@@ -21766,6 +31892,58 @@ const MM_WEEKS_68 = [
                 "id": "s2-s1",
                 "prompt": "Explain how you would build an electromagnet and how you would make it stronger.",
                 "answer": "Wrap insulated wire many times around an iron nail and connect the ends to a battery. Current flowing through the coils creates a magnetic field that magnetizes the nail. To make it stronger, add more loops of wire or use a battery that supplies more current."
+              }
+            ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "s49-1-c1",
+                "question": "How do you make an electromagnet, and how do you turn it off?",
+                "answer": "Model answer: Wrap wire around an iron nail and connect it to a battery. The nail becomes a magnet while current flows, and the magnetism vanishes when you disconnect the battery."
+              },
+              {
+                "id": "s49-1-c2",
+                "question": "How can an engineer make an electromagnet stronger?",
+                "answer": "Model answer: By adding more loops of wire or more current. Each loop adds its field to the others."
+              },
+              {
+                "id": "s49-1-c3",
+                "question": "The reading says, \"The same principle that lifts a car also writes your files to disk.\" What does that reveal about electromagnets?",
+                "answer": "Model answer: It reveals that one principle scales from heavy to delicate work. Scrap yards lift whole cars while hard drives use tiny electromagnets, and controlling the current controls the magnet in both cases."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "s49-1-e1",
+                "prompt": "Analyze why the switchable magnet beats the permanent magnet for heavy work.",
+                "thesis": "The electromagnet beats the permanent magnet for heavy work because engineers can turn it on and off and dial its strength up or down.",
+                "points": [
+                  "Wrapping wire around a nail and connecting a battery makes a magnet while current flows, and disconnecting the battery kills the magnetism.",
+                  "More loops and more current mean a stronger magnet, so engineers control both to dial strength precisely.",
+                  "Scrap yards lift whole cars by switching on to grab and off to drop, while maglev trains float on powerful electromagnets with no friction."
+                ],
+                "conclusion": "Conclude that the same principle scales from lifting cars to writing files on a hard drive: control the current, and you control the magnet."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "s49-1-vw1",
+                "words": [
+                  "attract",
+                  "repel"
+                ],
+                "prompt": "Use each word in an original sentence about electromagnets."
               }
             ]
           }
@@ -22041,6 +32219,59 @@ const MM_WEEKS_68 = [
                 "answer": "The bill must pass both the House and the Senate first. Then it goes to the president, who can sign it into law. If the president does not approve, he returns it, and Congress gets another chance through an override."
               }
             ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "h50-0-c1",
+                "question": "Where do most bills die, and why?",
+                "answer": "Model answer: In committee. The small group of lawmakers studies the bill, holds hearings, and debates every line, and most bills are quietly forgotten there."
+              },
+              {
+                "id": "h50-0-c2",
+                "question": "What is a filibuster, and how can it be broken?",
+                "answer": "Model answer: A long speech or delay tactic in the Senate to block a vote. It takes 60 of 100 senators to break one."
+              },
+              {
+                "id": "h50-0-c3",
+                "question": "The reading quotes Article I: \"Every bill which shall have passed the House of Representatives and the Senate shall, before it become a law, be presented to the President.\" What does that quote reveal about the founders' design?",
+                "answer": "Model answer: It reveals that they mapped every step from idea to signature on purpose. The long obstacle course of two chambers plus the president was deliberate, to force broad agreement before anything becomes law."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "h50-0-e1",
+                "prompt": "Is the long obstacle course of lawmaking a flaw or a feature? Argue that it is a feature.",
+                "thesis": "The long obstacle course of lawmaking is a feature, not a flaw, because forcing a bill through committees, two chambers, and the president's desk ensures broad agreement.",
+                "points": [
+                  "Most bills die quietly in committee, where a small group studies every line and holds hearings with experts.",
+                  "In the Senate a single senator can filibuster, and it takes 60 of 100 senators to break one, forcing compromise.",
+                  "Article I maps every step: a bill must pass both chambers and be presented to the president, who can sign or veto."
+                ],
+                "conclusion": "Conclude that the founders made the journey long on purpose, so that only ideas strong enough to survive scrutiny become law."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "h50-0-vw1",
+                "words": [
+                  "bill",
+                  "filibuster",
+                  "committee"
+                ],
+                "prompt": "Use each word in an original sentence about how laws are made."
+              }
+            ]
           }
         ]
       },
@@ -22099,6 +32330,59 @@ const MM_WEEKS_68 = [
                 "text": "Lewis believed laws defend themselves once passed.",
                 "answer": "false",
                 "note": "He spent his career defending civil rights laws from being weakened."
+              }
+            ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "h50-1-c1",
+                "question": "What did John Lewis mean by \"good trouble\"?",
+                "answer": "Model answer: Peaceful, principled disruption that forces the nation to face injustice, like sit-ins on the House floor to demand votes."
+              },
+              {
+                "id": "h50-1-c2",
+                "question": "How did Lewis's life show the full journey of a law?",
+                "answer": "Model answer: It began with people in the streets, moved through marches like Selma, survived the obstacle course of Congress, and then he spent 33 years in Congress defending the laws' promises."
+              },
+              {
+                "id": "h50-1-c3",
+                "question": "The reading says Lewis was \"arrested more than 40 times in his life, yet never with bitterness.\" What does that reveal about his character?",
+                "answer": "Model answer: It reveals that his courage came without hatred. His moral authority grew from lived sacrifice, and he showed that courage and kindness can share the same heart."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "h50-1-e1",
+                "prompt": "Argue that John Lewis proves laws begin with people, not with Congress.",
+                "thesis": "John Lewis proves that laws begin with people, because his journey ran from the Edmund Pettus Bridge to 33 years in Congress defending the very laws the marchers demanded.",
+                "points": [
+                  "As a teenager he joined the movement, and in 1965 he led marchers across the bridge in Selma where troopers beat him bloody.",
+                  "He called his method \"good trouble\": peaceful, principled disruption that forces the nation to face injustice.",
+                  "In Congress he helped pass and protect the great civil rights laws, showing that a law's journey starts in the streets and ends with citizens defending its promise."
+                ],
+                "conclusion": "Conclude that Lewis's 40 arrests without bitterness gave him moral authority, and his life teaches that courage and kindness can share the same heart."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "h50-1-vw1",
+                "words": [
+                  "bill",
+                  "committee",
+                  "filibuster"
+                ],
+                "prompt": "Use each word in an original sentence about John Lewis and lawmaking."
               }
             ]
           }
@@ -22182,6 +32466,58 @@ const MM_WEEKS_68 = [
                 "answer": 5
               }
             ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "s50-0-c1",
+                "question": "What are the six steps of the engineering design process?",
+                "answer": "Model answer: Ask, imagine, plan, create, test, and improve."
+              },
+              {
+                "id": "s50-0-c2",
+                "question": "Why do engineers build a prototype cheaply and quickly instead of building the final version first?",
+                "answer": "Model answer: Because testing is where the truth comes out. A cheap first version reveals flaws before big money is spent, and failure is data for the next iteration."
+              },
+              {
+                "id": "s50-0-c3",
+                "question": "The reading says, \"Failure is not the end; it is data.\" What does that sentence reveal about how engineers think?",
+                "answer": "Model answer: It reveals that engineers treat a failed test as information, not defeat. Each crash teaches something that improves the next version, so failure is a planned part of the process."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "s50-0-e1",
+                "prompt": "Analyze the paper airplane activity as a complete engineering cycle. Does it really contain all six steps?",
+                "thesis": "The paper airplane activity really does contain all six engineering steps, which proves that the design process works at a desk as well as in a laboratory.",
+                "points": [
+                  "Asking how the plane can fly farther and imagining three designs covers the first two steps.",
+                  "Planning the favorite, creating the prototype cheaply, and testing with three throws covers the middle steps.",
+                  "Measuring each flight, improving one fold, and testing again is the improve step, and failure becomes data."
+                ],
+                "conclusion": "Conclude that recording every distance in a table turns opinions into facts, which is the engineer's real superpower."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "s50-0-vw1",
+                "words": [
+                  "prototype",
+                  "iterate"
+                ],
+                "prompt": "Use each word in an original sentence about the engineering design process."
+              }
+            ]
           }
         ]
       },
@@ -22240,6 +32576,58 @@ const MM_WEEKS_68 = [
                 "id": "s2-s1",
                 "prompt": "How is passing a law like the engineering design process?",
                 "answer": "A bill is like a prototype: a first version to be tested. Debate and votes test it, and amendments iterate and improve it. Both processes repeat measure, test, and improve cycles until the result works."
+              }
+            ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "s50-1-c1",
+                "question": "What is one iteration in engineering?",
+                "answer": "Model answer: One round of test, measure, change, and test again, like folding a paper airplane, measuring its flight, changing one fold, and testing again."
+              },
+              {
+                "id": "s50-1-c2",
+                "question": "Why do engineers change only one thing between iterations?",
+                "answer": "Model answer: So they can tell what caused the change in results. Changing one fold at a time lets them spot patterns, like heavier nose weight helping."
+              },
+              {
+                "id": "s50-1-c3",
+                "question": "The reading says, \"A bill is a prototype, the debate is a test, and amendments are iterations.\" What does that comparison reveal about lawmaking?",
+                "answer": "Model answer: It reveals that laws and bridges improve by the same method: start with a rough version, test it against reality, and refine it step by step until it works."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "s50-1-e1",
+                "prompt": "Argue that changing one thing at a time is the most important rule in engineering. Use the paper airplane as evidence.",
+                "thesis": "Changing one thing at a time is the most important rule in engineering because it is the only way to know which change caused the improvement.",
+                "points": [
+                  "If version one flew 5 meters and version two flew 8 meters after one fold changed, the change clearly helped.",
+                  "Careful tables of each test reveal patterns, like heavier nose weight always helping or only helping on calm days.",
+                  "The rule works beyond workshops: coaches measure sprint times, change one part of training, and compare."
+                ],
+                "conclusion": "Conclude that the method even mirrors lawmaking, where a bill is a prototype, debate is the test, and amendments are iterations."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "s50-1-vw1",
+                "words": [
+                  "iterate",
+                  "prototype"
+                ],
+                "prompt": "Use each word in an original sentence about measuring and improving."
               }
             ]
           }
@@ -22474,6 +32862,59 @@ const MM_WEEKS_68 = [
                 "note": "Local elections for mayor, sheriff, and school board often matter most for daily life."
               }
             ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "h51-0-c1",
+                "question": "How many electoral votes does a candidate need to win the presidency?",
+                "answer": "Model answer: 270, a majority of the 538 total."
+              },
+              {
+                "id": "h51-0-c2",
+                "question": "Why do candidates campaign hardest in swing states?",
+                "answer": "Model answer: Because most states award all their electors to the statewide winner, so winning California by one vote or one million earns the same electors. Close states decide the outcome."
+              },
+              {
+                "id": "h51-0-c3",
+                "question": "The reading says local elections \"are frequently decided by a handful of votes.\" What does that reveal about where a single vote counts most?",
+                "answer": "Model answer: It reveals that while the presidency runs through the Electoral College, local races for mayor, sheriff, and school board are often decided by tiny margins, so showing up matters most close to home."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "h51-0-e1",
+                "prompt": "Does your vote count in the Electoral College system? Argue both sides, then take a stand.",
+                "thesis": "Your vote counts in the Electoral College system, but it counts most in close states and local races, so showing up matters even when the system feels distant.",
+                "points": [
+                  "A candidate needs 270 of 538 electoral votes, and most states award all their electors to the statewide winner.",
+                  "Five times the popular vote winner lost the election, most recently in 2000 and 2016, which fuels the critics' case.",
+                  "Local elections for mayor, sheriff, and school board are frequently decided by a handful of votes, where one ballot truly decides."
+                ],
+                "conclusion": "Conclude that debating the system is itself good citizenship, and that questioning the rules is how republics stay healthy."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "h51-0-vw1",
+                "words": [
+                  "ballot",
+                  "elector",
+                  "campaign"
+                ],
+                "prompt": "Use each word in an original sentence about presidential elections."
+              }
+            ]
           }
         ]
       },
@@ -22532,6 +32973,59 @@ const MM_WEEKS_68 = [
                 "text": "Chisholm only campaigned in her home state.",
                 "answer": "false",
                 "note": "She campaigned in 12 states."
+              }
+            ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "h51-1-c1",
+                "question": "What did Chisholm mean by \"unbought and unbossed\"?",
+                "answer": "Model answer: She refused to trade her principles for favors. She spoke bluntly about poverty, racism, and the Vietnam War and would not be controlled by party leaders."
+              },
+              {
+                "id": "h51-1-c2",
+                "question": "Why did Chisholm run for president in 1972 if she knew she would not win?",
+                "answer": "Model answer: She ran so that others would see it was possible. She campaigned in 12 states, won 152 delegates, and ran to crack open a door for those who followed."
+              },
+              {
+                "id": "h51-1-c3",
+                "question": "Chisholm said, \"I am not the candidate of black America, although I am black and proud... I am the candidate of the people.\" What does that quote reveal about her campaign?",
+                "answer": "Model answer: It reveals that she ran for all Americans, not just one group. She claimed her Blackness and her womanhood with pride while insisting her campaign belonged to the poor, the young, and everyone Washington ignored."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "h51-1-e1",
+                "prompt": "Argue that Chisholm's 1972 campaign proves a vote can count even in a losing race.",
+                "thesis": "Chisholm's 1972 campaign proves a vote can count even in defeat, because her run cracked open a door that later candidates walked through.",
+                "points": [
+                  "She arrived in Congress \"unbought and unbossed,\" refusing to trade principles for favors.",
+                  "She campaigned in 12 states and won 152 delegates, knowing she would not win but running so others would see it was possible.",
+                  "Decades later Obama stood on ground she had cleared, proving that her campaign's meaning outlasted its result."
+                ],
+                "conclusion": "Conclude that her question still challenges voters: if not now, when?"
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "h51-1-vw1",
+                "words": [
+                  "ballot",
+                  "campaign",
+                  "elector"
+                ],
+                "prompt": "Use each word in an original sentence about Shirley Chisholm."
               }
             ]
           }
@@ -22606,6 +33100,58 @@ const MM_WEEKS_68 = [
                 "text": "Draw where the egg sits and what touches down first"
               }
             ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "s51-0-c1",
+                "question": "What materials may you use for the egg drop, and what is banned?",
+                "answer": "Model answer: Paper, tape, straws, cotton balls, rubber bands, and a small plastic bag. The container cannot use a parachute bigger than your hand."
+              },
+              {
+                "id": "s51-0-c2",
+                "question": "Why does the reading say a longer, softer stop means less force on the egg?",
+                "answer": "Model answer: Because spreading the impact over more time reduces the force. Car crumple zones and helmet foam work the same way, collapsing slowly to protect what is inside."
+              },
+              {
+                "id": "s51-0-c3",
+                "question": "The reading says to sketch \"at least three different designs before you build.\" What does that instruction reveal about the imagine step?",
+                "answer": "Model answer: It reveals that good engineering starts with many ideas, not one. Comparing sketches first lets you pick the design that spreads impact over the longest time before you spend materials building."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "s51-0-e1",
+                "prompt": "Argue that planning beats improvising in a design challenge. Use the egg drop rules as evidence.",
+                "thesis": "Planning beats improvising in the egg drop because the rules reward the designer who thinks through cushioning, limits, and impact before touching materials.",
+                "points": [
+                  "The ask step forces a clear goal in one sentence: protect the egg from a shoulder-high drop within the material limits.",
+                  "Sketching three designs and comparing which spreads impact over the longest time prevents wasting the build on the first idea.",
+                  "Real engineers inspire the plan: car crumple zones and helmet foam both collapse slowly to protect what is inside."
+                ],
+                "conclusion": "Conclude that a plan clear enough to follow without guessing turns tomorrow's build into a fair test of the design."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "s51-0-vw1",
+                "words": [
+                  "cushion",
+                  "absorb"
+                ],
+                "prompt": "Use each word in an original sentence about planning the egg drop."
+              }
+            ]
           }
         ]
       },
@@ -22673,6 +33219,58 @@ const MM_WEEKS_68 = [
                 "id": "s2-s1",
                 "prompt": "Which design won, and what did the tests teach you about protecting the egg?",
                 "answer": "Example: My cotton-nest box won; the egg survived all three drops. The tests taught me that a thick crumple zone spreads the landing over more time, so less force reaches the egg. Changing one thing at a time showed me that extra cotton helped more than extra tape."
+              }
+            ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "s51-1-c1",
+                "question": "What should you record in your table after each test?",
+                "answer": "Model answer: The version number, what you changed, and whether the egg survived or cracked, plus which part of the design hit first."
+              },
+              {
+                "id": "s51-1-c2",
+                "question": "Why should you change only one thing between tests?",
+                "answer": "Model answer: So the test measures the design change, not your improvising. Changing one thing lets you know which change helped most."
+              },
+              {
+                "id": "s51-1-c3",
+                "question": "The reading says, \"Engineers do not marry their first idea; they let the tests choose.\" What does that reveal about the engineer's mindset?",
+                "answer": "Model answer: It reveals that engineers stay loyal to data, not to their favorite sketch. The winning design is the one the tests prove best, and being willing to abandon a first idea is part of the job."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "s51-1-e1",
+                "prompt": "Analyze the rule \"change one thing, just one.\" Why does good testing demand such discipline?",
+                "thesis": "Good testing demands changing one thing at a time because only disciplined tests can prove which change saved the egg.",
+                "points": [
+                  "Following the plan exactly for the first build means the test measures the design, not improvising.",
+                  "Recording version number, the change, and survived or cracked in a table turns each drop into comparable data.",
+                  "Comparing iterations picks the winner by evidence, which is why engineers let the tests choose instead of marrying the first idea."
+                ],
+                "conclusion": "Conclude that sharing the table and explaining the one change that helped most is practice for real engineering teamwork."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "s51-1-vw1",
+                "words": [
+                  "cushion",
+                  "absorb"
+                ],
+                "prompt": "Use each word in an original sentence about testing the egg drop."
               }
             ]
           }
@@ -22906,6 +33504,59 @@ const MM_WEEKS_68 = [
                 "note": "Shared problems need shared solutions because they ignore borders."
               }
             ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "h52-0-c1",
+                "question": "Give two examples of globalization from the reading.",
+                "answer": "Model answer: A phone designed in California, built with parts from Japan and Korea, and assembled in China. A shirt sewn in Bangladesh from cotton grown in Texas."
+              },
+              {
+                "id": "h52-0-c2",
+                "question": "Why did supply chain crises teach the world about interdependence?",
+                "answer": "Model answer: Because when one country's factories shut down, shelves went empty on the other side of the world, showing that trade links every nation."
+              },
+              {
+                "id": "h52-0-c3",
+                "question": "The reading says, \"These personal connections are globalization at its most human.\" What does that sentence reveal about the author's view?",
+                "answer": "Model answer: It reveals that globalization is not just trade statistics. Video calls with cousins in the Philippines and money sent home to villages show love crossing oceans, making the global web personal."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "h52-0-e1",
+                "prompt": "Has globalization's web of connections helped the world or harmed it? Analyze both sides like a news analyst.",
+                "thesis": "Globalization's web has both helped and harmed the world: it has lifted millions out of poverty while making every nation vulnerable to distant shocks.",
+                "points": [
+                  "Trade has filled stores with choices and lifted millions out of poverty, and the internet lets ideas cross borders in seconds.",
+                  "When one country's factories shut down, shelves go empty on the other side of the world, as supply chain crises proved.",
+                  "Shared problems like climate change and pandemics ignore borders, so nations must cooperate to solve them."
+                ],
+                "conclusion": "Conclude that what happens anywhere can touch everyone, so the connected age demands both gratitude for the gifts and honesty about the risks."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "h52-0-vw1",
+                "words": [
+                  "global",
+                  "interdependence",
+                  "diversity"
+                ],
+                "prompt": "Use each word in an original sentence about our connected world."
+              }
+            ]
           }
         ]
       },
@@ -22963,6 +33614,59 @@ const MM_WEEKS_68 = [
                 "id": "h2-t2",
                 "text": "Obama was the first Black president of the Harvard Law Review.",
                 "answer": "true"
+              }
+            ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "h52-1-c1",
+                "question": "What were Obama's parents' backgrounds?",
+                "answer": "Model answer: His father was a student from Kenya in East Africa. His mother was a young woman from Kansas."
+              },
+              {
+                "id": "h52-1-c2",
+                "question": "Why did crowds from Nairobi to Berlin celebrate Obama's 2008 election?",
+                "answer": "Model answer: Because his story, a son of Kenya and Kansas who became the first Black president, seemed to prove that old barriers could fall."
+              },
+              {
+                "id": "h52-1-c3",
+                "question": "The AP reported, \"Barack Obama was elected the nation's first Black president,\" and Obama said, \"Change has come to America.\" What do these two quotes together reveal about that night?",
+                "answer": "Model answer: They reveal that the night was both a historic fact and a felt promise. The AP recorded what happened while Obama's words told the cheering crowd what it meant: that old barriers had fallen and a new chapter had begun."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "h52-1-e1",
+                "prompt": "Analyze the AP's election night report and Obama's \"Change has come to America.\" What did his story symbolize?",
+                "thesis": "Obama's story symbolized that global roots can grow American dreams, and his election told the world that old barriers could fall.",
+                "points": [
+                  "Born in Hawaii to a Kenyan father and a Kansan mother, he grew up between Hawaii, Indonesia, and the mainland.",
+                  "He rose from community organizer in Chicago to the first Black president of the Harvard Law Review to the U.S. Senate.",
+                  "Crowds from Nairobi to Berlin celebrated his 2008 victory, and he credited his mother for teaching him to see through others' eyes."
+                ],
+                "conclusion": "Conclude that his journey remains a symbol of the connected age: a boy shaped by three continents who rose to lead one nation."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "h52-1-vw1",
+                "words": [
+                  "global",
+                  "interdependence",
+                  "diversity"
+                ],
+                "prompt": "Use each word in an original sentence about Barack Obama's story."
               }
             ]
           }
@@ -23037,6 +33741,58 @@ const MM_WEEKS_68 = [
                 "text": "Decide what you will measure and how"
               }
             ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "s52-0-c1",
+                "question": "What makes a good showcase question?",
+                "answer": "Model answer: One you can test at home with simple materials that compares two things, like which paper airplane design flies farthest or whether warm water dissolves sugar faster."
+              },
+              {
+                "id": "s52-0-c2",
+                "question": "Why should you test each version at least three times and keep everything the same except one thing?",
+                "answer": "Model answer: For fairness. Repeated trials make the results reliable, and changing only one thing lets you know what caused the difference."
+              },
+              {
+                "id": "s52-0-c3",
+                "question": "The reading says, \"Real scientists report all their data,\" including \"the tries that flop.\" What does that reveal about honest science?",
+                "answer": "Model answer: It reveals that hiding bad results is cheating. Reporting every trial, even the failures, is what makes the conclusion trustworthy."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "s52-0-e1",
+                "prompt": "Argue that a good question is the most important part of an experiment. What makes a showcase question good?",
+                "thesis": "A good question is the most important part of an experiment because everything else, from hypothesis to conclusion, depends on a question you can actually test.",
+                "points": [
+                  "Good questions compare two things with simple materials, like which paper airplane design flies farthest.",
+                  "A clear hypothesis states what you predict and why, giving the experiment a direction.",
+                  "Planning for fairness, with three trials and only one thing changed, makes the data trustworthy."
+                ],
+                "conclusion": "Conclude that curiosity is the fuel and the method is the engine, so the best experiment is one you genuinely wonder about."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "s52-0-vw1",
+                "words": [
+                  "hypothesis",
+                  "conclusion"
+                ],
+                "prompt": "Use each word in an original sentence about planning an experiment."
+              }
+            ]
           }
         ]
       },
@@ -23104,6 +33860,58 @@ const MM_WEEKS_68 = [
                 "id": "s2-s1",
                 "prompt": "What is your experiment question, and what do you predict will happen?",
                 "answer": "Example: My question is whether warm water dissolves sugar faster than cold water. I predict the warm water will win because heat makes molecules move faster. I will time three spoonfuls of sugar in each."
+              }
+            ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer in complete sentences.",
+            "items": [
+              {
+                "id": "s52-1-c1",
+                "question": "What are the four parts of a strong presentation?",
+                "answer": "Model answer: Your question, your method in brief, your results with a graph or chart, and your conclusion."
+              },
+              {
+                "id": "s52-1-c2",
+                "question": "Why should you not throw out data that surprises you?",
+                "answer": "Model answer: Because the unexpected result is often the most interesting one. Throwing it out would hide what the experiment really found."
+              },
+              {
+                "id": "s52-1-c3",
+                "question": "The reading says, \"Today's showcase is not a contest: it is a celebration of a year of thinking like scientists.\" What does that reveal about the purpose of the showcase?",
+                "answer": "Model answer: It reveals that the goal is sharing and learning, not winning. Presenting findings and asking kind questions about others' methods matters more than having the best result."
+              }
+            ]
+          },
+          {
+            "type": "essay",
+            "instructions": "Plan a 5-paragraph essay using this outline.",
+            "items": [
+              {
+                "id": "s52-1-e1",
+                "prompt": "Argue that honest reporting matters more than perfect results. Why must scientists report the tries that flop?",
+                "thesis": "Honest reporting matters more than perfect results because science runs on trust, and trust requires reporting every trial, including the flops.",
+                "points": [
+                  "Following numbered steps exactly and recording every result right away keeps the data honest.",
+                  "Doing three trials of each version and keeping surprising data protects the experiment from wishful thinking.",
+                  "A strong presentation shows the question, method, graphed results, and conclusion, letting the audience judge for themselves."
+                ],
+                "conclusion": "Conclude that the showcase is a celebration of thinking like scientists, where kind questions and shared findings matter more than winning."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows its meaning.",
+            "items": [
+              {
+                "id": "s52-1-vw1",
+                "words": [
+                  "hypothesis",
+                  "conclusion"
+                ],
+                "prompt": "Use each word in an original sentence about presenting an experiment."
               }
             ]
           }
