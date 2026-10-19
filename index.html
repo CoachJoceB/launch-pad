@@ -1717,11 +1717,9 @@ async function renderBoard(){
   window.__pendingLessonPdf = null;
   window.__pendingWorksheet = null;
 
-  // 52-week curriculum mode: from Oct 19, 2026 forward, show Micro Mastery content
-  const schoolDate = new Date(state.schoolDate + 'T12:00:00');
-  if(schoolDate >= MM52_START){
-    return render52WeekBoard(board);
-  }
+  // 52-week curriculum mode: always show the 52-week board (week selector
+  // defaults to the current week; Week 1 starts Oct 19, 2026)
+  return render52WeekBoard(board);
 
   if(!SCHOOL_DAYS.includes(wd)){
     const tzLabel = (TIMEZONE_OPTIONS.find(o=>o.value===state.timezone)||{}).label || state.timezone;
