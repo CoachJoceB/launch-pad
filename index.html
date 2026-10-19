@@ -667,8 +667,8 @@ const TIMEZONE_OPTIONS = [
 ];
 
 function defaultFieldLabels(){
-  return { addr1:"Home Address", addr2:"Mom's Address", addr3:"Dad's Address",
-           phone1:'Pooh', phone2:'Mom', phone3:'Dad', phone4:'My Phone' };
+  return { addr1:"Address 1", addr2:"Address 2", addr3:"Address 3",
+           phone1:'Caregiver 1', phone2:'Caregiver 2', phone3:'Caregiver 3', phone4:'My Phone' };
 }
 function defaultStudents(){
   return [
@@ -5030,7 +5030,7 @@ function openMM52Modal(){
     newPanel.className = 'settings-panel';
     newPanel.dataset.settingspanel = 'mm52';
     newPanel.innerHTML = `
-      <h3>52-Week Curriculum (Micro Mastery)</h3>
+      <h3>52-Week Plan</h3>
       <div class="sub">Browse the 52-week curriculum by week and grade band. Week 1 starts Oct 19, 2026. Each student's grade band (set in Students tab) determines which content they see on the dashboard.</div>
       <div style="display:flex;gap:10px;align-items:center;margin:12px 0;flex-wrap:wrap;">
         <select id="mm52SettingsWeek" style="font-size:14px;font-weight:700;padding:8px 12px;border:2px solid var(--orange);border-radius:8px;">
