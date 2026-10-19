@@ -1972,7 +1972,7 @@ async function renderBoard(){
   }
 
   const baseSubjList = allSubjects(c, {
-    weekSubjectName: weekSubject==='history' ? 'History' : (weekSubject==='science' ? 'Science' : ''),
+    weekSubjectName: isHistoryDay ? 'History' : (isScienceDay ? 'Science' : ''),
     lessonTopic: sharedLesson && sharedLesson.topic,
   });
   const seuGroups = await loadSeuToday();
