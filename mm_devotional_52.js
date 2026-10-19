@@ -3,6 +3,12 @@
 // Generated for Legacy Lab Academy family dashboard - parent review required before live use
 const MM_DEVOTIONAL_52 = [
   { w: 1, theme: "Courage",
+    words: [
+      { day: "Monday", word: "courage", def: "Doing what is right even when you feel afraid.", syn: "bravery", ant: "cowardice" },
+      { day: "Tuesday", word: "boldness", def: "Being brave enough to speak up or act when it matters.", syn: "confidence", ant: "timidity" },
+      { day: "Wednesday", word: "valor", def: "Great courage shown when facing real danger.", syn: "heroism", ant: "fear" },
+      { day: "Thursday", word: "daring", def: "Willingness to take a brave risk for a good reason.", syn: "fearlessness", ant: "hesitation" },
+    ],
     days: [
       {
         scripture: "Joshua 1:9",
@@ -35,6 +41,12 @@ const MM_DEVOTIONAL_52 = [
     ]
   },
   { w: 2, theme: "Kindness",
+    words: [
+      { day: "Monday", word: "kindness", def: "Treating others with care and thoughtfulness.", syn: "compassion", ant: "cruelty" },
+      { day: "Tuesday", word: "benevolence", def: "The desire to do good things for other people.", syn: "goodwill", ant: "unkindness" },
+      { day: "Wednesday", word: "tenderness", def: "A soft and gentle way of caring for others.", syn: "sensitivity", ant: "harshness" },
+      { day: "Thursday", word: "warmth", def: "A friendly kindness that makes others feel welcome.", syn: "friendliness", ant: "coldness" },
+    ],
     days: [
       {
         scripture: "Ephesians 4:32",
@@ -67,6 +79,12 @@ const MM_DEVOTIONAL_52 = [
     ]
   },
   { w: 3, theme: "Honesty",
+    words: [
+      { day: "Monday", word: "honesty", def: "Telling the truth and being real about who you are.", syn: "truthfulness", ant: "dishonesty" },
+      { day: "Tuesday", word: "sincerity", def: "Meaning exactly what you say with a pure heart.", syn: "genuineness", ant: "insincerity" },
+      { day: "Wednesday", word: "candor", def: "Speaking honestly and openly without hiding.", syn: "frankness", ant: "deceit" },
+      { day: "Thursday", word: "openness", def: "Being willing to share the truth about yourself.", syn: "transparency", ant: "secrecy" },
+    ],
     days: [
       {
         scripture: "Proverbs 12:22",
@@ -99,6 +117,12 @@ const MM_DEVOTIONAL_52 = [
     ]
   },
   { w: 4, theme: "Perseverance",
+    words: [
+      { day: "Monday", word: "perseverance", def: "Keeping going even when something is hard.", syn: "persistence", ant: "quitting" },
+      { day: "Tuesday", word: "endurance", def: "Staying strong through a long, hard challenge.", syn: "stamina", ant: "surrender" },
+      { day: "Wednesday", word: "tenacity", def: "Holding on tightly and refusing to give up.", syn: "determination", ant: "weakness" },
+      { day: "Thursday", word: "persistence", def: "Trying again and again until you succeed.", syn: "perseverance", ant: "inconsistency" },
+    ],
     days: [
       {
         scripture: "Galatians 6:9",
@@ -131,6 +155,12 @@ const MM_DEVOTIONAL_52 = [
     ]
   },
   { w: 5, theme: "Gratitude",
+    words: [
+      { day: "Monday", word: "gratitude", def: "A thankful heart that notices good gifts.", syn: "thankfulness", ant: "ingratitude" },
+      { day: "Tuesday", word: "appreciation", def: "Valuing what someone has done for you.", syn: "regard", ant: "disregard" },
+      { day: "Wednesday", word: "gratefulness", def: "Feeling deeply thankful for blessings.", syn: "thankfulness", ant: "thanklessness" },
+      { day: "Thursday", word: "acknowledgment", def: "Saying out loud that you are thankful.", syn: "thanks", ant: "denial" },
+    ],
     days: [
       {
         scripture: "1 Thessalonians 5:18",
@@ -163,6 +193,12 @@ const MM_DEVOTIONAL_52 = [
     ]
   },
   { w: 6, theme: "Wisdom",
+    words: [
+      { day: "Monday", word: "wisdom", def: "Knowing the right thing to do and doing it.", syn: "discernment", ant: "foolishness" },
+      { day: "Tuesday", word: "insight", def: "Seeing and understanding what really matters.", syn: "perception", ant: "ignorance" },
+      { day: "Wednesday", word: "understanding", def: "Knowing what something means and why.", syn: "comprehension", ant: "confusion" },
+      { day: "Thursday", word: "prudence", def: "Thinking carefully before you act.", syn: "caution", ant: "recklessness" },
+    ],
     days: [
       {
         scripture: "Proverbs 2:6",
@@ -195,6 +231,12 @@ const MM_DEVOTIONAL_52 = [
     ]
   },
   { w: 7, theme: "Patience",
+    words: [
+      { day: "Monday", word: "patience", def: "Waiting calmly without getting upset.", syn: "longsuffering", ant: "impatience" },
+      { day: "Tuesday", word: "tolerance", def: "Putting up with things that annoy you.", syn: "acceptance", ant: "intolerance" },
+      { day: "Wednesday", word: "forbearance", def: "Holding back anger when you have a reason to be mad.", syn: "tolerance", ant: "irritability" },
+      { day: "Thursday", word: "composure", def: "Staying calm and steady under pressure.", syn: "poise", ant: "agitation" },
+    ],
     days: [
       {
         scripture: "Proverbs 16:32",
@@ -227,6 +269,12 @@ const MM_DEVOTIONAL_52 = [
     ]
   },
   { w: 8, theme: "Faith",
+    words: [
+      { day: "Monday", word: "faith", def: "Trusting God even when you cannot see the answer.", syn: "belief", ant: "doubt" },
+      { day: "Tuesday", word: "belief", def: "Being sure that something is true.", syn: "conviction", ant: "disbelief" },
+      { day: "Wednesday", word: "reliance", def: "Depending on God to help you.", syn: "dependence", ant: "self-reliance" },
+      { day: "Thursday", word: "devotion", def: "Deep love and loyalty given to God.", syn: "dedication", ant: "apathy" },
+    ],
     days: [
       {
         scripture: "Hebrews 11:1",
@@ -259,6 +307,12 @@ const MM_DEVOTIONAL_52 = [
     ]
   },
   { w: 9, theme: "Love",
+    words: [
+      { day: "Monday", word: "love", def: "Choosing to care for someone no matter what.", syn: "affection", ant: "hatred" },
+      { day: "Tuesday", word: "affection", def: "Warm feelings of love for someone.", syn: "fondness", ant: "dislike" },
+      { day: "Wednesday", word: "charity", def: "Love that gives freely to help others.", syn: "generosity", ant: "selfishness" },
+      { day: "Thursday", word: "adoration", def: "Deep love mixed with great respect.", syn: "worship", ant: "contempt" },
+    ],
     days: [
       {
         scripture: "1 John 4:8",
@@ -291,6 +345,12 @@ const MM_DEVOTIONAL_52 = [
     ]
   },
   { w: 10, theme: "Humility",
+    words: [
+      { day: "Monday", word: "humility", def: "Thinking of others as important as yourself.", syn: "modesty", ant: "pride" },
+      { day: "Tuesday", word: "modesty", def: "Not bragging or showing off about yourself.", syn: "humbleness", ant: "arrogance" },
+      { day: "Wednesday", word: "lowliness", def: "A humble view of your own importance.", syn: "meekness", ant: "conceit" },
+      { day: "Thursday", word: "servanthood", def: "Living to serve others like Jesus did.", syn: "service", ant: "vanity" },
+    ],
     days: [
       {
         scripture: "Philippians 2:3",
@@ -323,6 +383,12 @@ const MM_DEVOTIONAL_52 = [
     ]
   },
   { w: 11, theme: "Diligence",
+    words: [
+      { day: "Monday", word: "diligence", def: "Working carefully and with steady effort.", syn: "industriousness", ant: "laziness" },
+      { day: "Tuesday", word: "industriousness", def: "Being a hard and steady worker.", syn: "diligence", ant: "idleness" },
+      { day: "Wednesday", word: "carefulness", def: "Paying close attention to do things well.", syn: "thoroughness", ant: "carelessness" },
+      { day: "Thursday", word: "thoroughness", def: "Doing a job completely without skipping steps.", syn: "carefulness", ant: "sloppiness" },
+    ],
     days: [
       {
         scripture: "Proverbs 13:4",
@@ -355,6 +421,12 @@ const MM_DEVOTIONAL_52 = [
     ]
   },
   { w: 12, theme: "Joy",
+    words: [
+      { day: "Monday", word: "joy", def: "Deep happiness that comes from God.", syn: "gladness", ant: "sorrow" },
+      { day: "Tuesday", word: "gladness", def: "A happy heart that shows on your face.", syn: "delight", ant: "sadness" },
+      { day: "Wednesday", word: "delight", def: "Great pleasure and happiness in something good.", syn: "joy", ant: "gloom" },
+      { day: "Thursday", word: "cheerfulness", def: "A bright, happy attitude that lifts others.", syn: "happiness", ant: "misery" },
+    ],
     days: [
       {
         scripture: "Nehemiah 8:10",
@@ -387,6 +459,12 @@ const MM_DEVOTIONAL_52 = [
     ]
   },
   { w: 13, theme: "Peace",
+    words: [
+      { day: "Monday", word: "peace", def: "Calm in your heart even when life is noisy.", syn: "calm", ant: "conflict" },
+      { day: "Tuesday", word: "calm", def: "Quiet and steady instead of worried.", syn: "serenity", ant: "turmoil" },
+      { day: "Wednesday", word: "serenity", def: "Deep, steady peace inside you.", syn: "tranquility", ant: "chaos" },
+      { day: "Thursday", word: "stillness", def: "A quiet heart that rests and listens.", syn: "quietness", ant: "unrest" },
+    ],
     days: [
       {
         scripture: "John 14:27",
@@ -419,6 +497,12 @@ const MM_DEVOTIONAL_52 = [
     ]
   },
   { w: 14, theme: "Self-Control",
+    words: [
+      { day: "Monday", word: "self-control", def: "Choosing right actions over strong feelings.", syn: "restraint", ant: "impulsiveness" },
+      { day: "Tuesday", word: "restraint", def: "Holding yourself back from doing wrong.", syn: "self-control", ant: "excess" },
+      { day: "Wednesday", word: "temperance", def: "Using good judgment to avoid too much of anything.", syn: "moderation", ant: "indulgence" },
+      { day: "Thursday", word: "moderation", def: "Keeping a healthy balance in all you do.", syn: "temperance", ant: "wildness" },
+    ],
     days: [
       {
         scripture: "Proverbs 25:28",
@@ -451,6 +535,12 @@ const MM_DEVOTIONAL_52 = [
     ]
   },
   { w: 15, theme: "Forgiveness",
+    words: [
+      { day: "Monday", word: "forgiveness", def: "Letting go of anger toward someone who hurt you.", syn: "pardon", ant: "revenge" },
+      { day: "Tuesday", word: "pardon", def: "Choosing not to punish someone who did wrong.", syn: "forgiveness", ant: "grudge" },
+      { day: "Wednesday", word: "absolution", def: "Being fully cleared of blame or guilt.", syn: "acquittal", ant: "punishment" },
+      { day: "Thursday", word: "reconciliation", def: "Restoring a broken friendship.", syn: "reunion", ant: "bitterness" },
+    ],
     days: [
       {
         scripture: "Colossians 3:13",
@@ -483,6 +573,12 @@ const MM_DEVOTIONAL_52 = [
     ]
   },
   { w: 16, theme: "Generosity",
+    words: [
+      { day: "Monday", word: "generosity", def: "Freely giving to help others.", syn: "liberality", ant: "greed" },
+      { day: "Tuesday", word: "giving", def: "Sharing what you have with others.", syn: "generosity", ant: "stinginess" },
+      { day: "Wednesday", word: "openhandedness", def: "Giving gladly without holding back.", syn: "liberality", ant: "miserliness" },
+      { day: "Thursday", word: "liberality", def: "Being generous in how much you share.", syn: "bounty", ant: "hoarding" },
+    ],
     days: [
       {
         scripture: "Acts 20:35",
@@ -515,6 +611,12 @@ const MM_DEVOTIONAL_52 = [
     ]
   },
   { w: 17, theme: "Trust",
+    words: [
+      { day: "Monday", word: "trust", def: "Believing someone will do what they say.", syn: "confidence", ant: "distrust" },
+      { day: "Tuesday", word: "confidence", def: "Being sure someone is reliable.", syn: "trust", ant: "doubt" },
+      { day: "Wednesday", word: "dependence", def: "Counting on someone to help you.", syn: "reliance", ant: "suspicion" },
+      { day: "Thursday", word: "certainty", def: "Being fully sure about something.", syn: "assurance", ant: "uncertainty" },
+    ],
     days: [
       {
         scripture: "Proverbs 3:5-6",
@@ -547,6 +649,12 @@ const MM_DEVOTIONAL_52 = [
     ]
   },
   { w: 18, theme: "Obedience",
+    words: [
+      { day: "Monday", word: "obedience", def: "Doing what you are told with a willing heart.", syn: "compliance", ant: "disobedience" },
+      { day: "Tuesday", word: "compliance", def: "Following rules and instructions.", syn: "obedience", ant: "defiance" },
+      { day: "Wednesday", word: "submission", def: "Yielding your will to someone in charge.", syn: "surrender", ant: "rebellion" },
+      { day: "Thursday", word: "deference", def: "Showing respect by yielding to others.", syn: "respect", ant: "stubbornness" },
+    ],
     days: [
       {
         scripture: "John 14:15",
@@ -579,6 +687,12 @@ const MM_DEVOTIONAL_52 = [
     ]
   },
   { w: 19, theme: "Respect",
+    words: [
+      { day: "Monday", word: "respect", def: "Treating others as valuable and important.", syn: "honor", ant: "disrespect" },
+      { day: "Tuesday", word: "honor", def: "Showing high respect to someone.", syn: "esteem", ant: "dishonor" },
+      { day: "Wednesday", word: "esteem", def: "Thinking highly of someone.", syn: "regard", ant: "contempt" },
+      { day: "Thursday", word: "reverence", def: "Deep respect mixed with awe.", syn: "veneration", ant: "scorn" },
+    ],
     days: [
       {
         scripture: "1 Peter 2:17",
@@ -611,6 +725,12 @@ const MM_DEVOTIONAL_52 = [
     ]
   },
   { w: 20, theme: "Responsibility",
+    words: [
+      { day: "Monday", word: "responsibility", def: "Doing what you are supposed to do.", syn: "duty", ant: "irresponsibility" },
+      { day: "Tuesday", word: "duty", def: "A job or task you are expected to do.", syn: "obligation", ant: "neglect" },
+      { day: "Wednesday", word: "accountability", def: "Owning up to your choices and actions.", syn: "answerability", ant: "unreliability" },
+      { day: "Thursday", word: "reliability", def: "Being someone others can count on.", syn: "dependability", ant: "avoidance" },
+    ],
     days: [
       {
         scripture: "Luke 16:10",
@@ -643,6 +763,12 @@ const MM_DEVOTIONAL_52 = [
     ]
   },
   { w: 21, theme: "Hope",
+    words: [
+      { day: "Monday", word: "hope", def: "Expecting good things from God in the future.", syn: "expectation", ant: "despair" },
+      { day: "Tuesday", word: "expectation", def: "Looking forward to something good happening.", syn: "anticipation", ant: "hopelessness" },
+      { day: "Wednesday", word: "optimism", def: "Believing the future will be good.", syn: "hope", ant: "pessimism" },
+      { day: "Thursday", word: "anticipation", def: "Excited waiting for something good.", syn: "expectancy", ant: "dread" },
+    ],
     days: [
       {
         scripture: "Romans 15:13",
@@ -675,6 +801,12 @@ const MM_DEVOTIONAL_52 = [
     ]
   },
   { w: 22, theme: "Compassion",
+    words: [
+      { day: "Monday", word: "compassion", def: "Caring deeply when someone is hurting.", syn: "empathy", ant: "indifference" },
+      { day: "Tuesday", word: "empathy", def: "Understanding how someone else feels.", syn: "sympathy", ant: "heartlessness" },
+      { day: "Wednesday", word: "sympathy", def: "Feeling sad with someone who is sad.", syn: "compassion", ant: "unconcern" },
+      { day: "Thursday", word: "kindheartedness", def: "A heart that naturally wants to help others.", syn: "benevolence", ant: "callousness" },
+    ],
     days: [
       {
         scripture: "Psalm 145:9",
@@ -707,6 +839,12 @@ const MM_DEVOTIONAL_52 = [
     ]
   },
   { w: 23, theme: "Integrity",
+    words: [
+      { day: "Monday", word: "integrity", def: "Doing right even when no one is watching.", syn: "uprightness", ant: "corruption" },
+      { day: "Tuesday", word: "uprightness", def: "Living in an honest and moral way.", syn: "righteousness", ant: "compromise" },
+      { day: "Wednesday", word: "honorableness", def: "Being worthy of respect through good character.", syn: "nobility", ant: "duplicity" },
+      { day: "Thursday", word: "wholeness", def: "Being the same person in private and in public.", syn: "consistency", ant: "crookedness" },
+    ],
     days: [
       {
         scripture: "Proverbs 10:9",
@@ -739,6 +877,12 @@ const MM_DEVOTIONAL_52 = [
     ]
   },
   { w: 24, theme: "Contentment",
+    words: [
+      { day: "Monday", word: "contentment", def: "Being happy with what you have.", syn: "satisfaction", ant: "discontent" },
+      { day: "Tuesday", word: "satisfaction", def: "Feeling pleased with what you have.", syn: "contentment", ant: "dissatisfaction" },
+      { day: "Wednesday", word: "fulfillment", def: "Feeling complete and at peace inside.", syn: "satisfaction", ant: "emptiness" },
+      { day: "Thursday", word: "sufficiency", def: "Having enough and knowing it is enough.", syn: "adequacy", ant: "restlessness" },
+    ],
     days: [
       {
         scripture: "Philippians 4:11",
@@ -771,6 +915,12 @@ const MM_DEVOTIONAL_52 = [
     ]
   },
   { w: 25, theme: "Strength",
+    words: [
+      { day: "Monday", word: "strength", def: "Power to do hard things and keep standing.", syn: "might", ant: "weakness" },
+      { day: "Tuesday", word: "might", def: "Great power and ability.", syn: "power", ant: "frailty" },
+      { day: "Wednesday", word: "power", def: "The ability to act and make things happen.", syn: "strength", ant: "powerlessness" },
+      { day: "Thursday", word: "fortitude", def: "Brave strength during pain or trouble.", syn: "courage", ant: "vulnerability" },
+    ],
     days: [
       {
         scripture: "Isaiah 40:31",
@@ -803,6 +953,12 @@ const MM_DEVOTIONAL_52 = [
     ]
   },
   { w: 26, theme: "Friendship",
+    words: [
+      { day: "Monday", word: "friendship", def: "A caring bond between friends.", syn: "fellowship", ant: "enmity" },
+      { day: "Tuesday", word: "fellowship", def: "Close friendship built on shared faith.", syn: "companionship", ant: "hostility" },
+      { day: "Wednesday", word: "companionship", def: "The joy of spending time with a friend.", syn: "friendship", ant: "isolation" },
+      { day: "Thursday", word: "camaraderie", def: "Warm friendship among a group.", syn: "brotherhood", ant: "loneliness" },
+    ],
     days: [
       {
         scripture: "Proverbs 18:24",
@@ -835,6 +991,12 @@ const MM_DEVOTIONAL_52 = [
     ]
   },
   { w: 27, theme: "Prayerfulness",
+    words: [
+      { day: "Monday", word: "prayerfulness", def: "A habit of talking with God often.", syn: "devotion", ant: "prayerlessness" },
+      { day: "Tuesday", word: "supplication", def: "Asking God earnestly for help.", syn: "pleading", ant: "self-reliance" },
+      { day: "Wednesday", word: "intercession", def: "Praying for someone else's needs.", syn: "mediation", ant: "silence" },
+      { day: "Thursday", word: "petition", def: "A humble request made to God.", syn: "request", ant: "distraction" },
+    ],
     days: [
       {
         scripture: "1 Thessalonians 5:17",
@@ -867,6 +1029,12 @@ const MM_DEVOTIONAL_52 = [
     ]
   },
   { w: 28, theme: "Thankfulness",
+    words: [
+      { day: "Monday", word: "thankfulness", def: "A heart that says thank you often.", syn: "gratitude", ant: "complaining" },
+      { day: "Tuesday", word: "praise", def: "Telling God how great He is.", syn: "worship", ant: "ungratefulness" },
+      { day: "Wednesday", word: "thanksgiving", def: "Giving thanks to God for His gifts.", syn: "gratitude", ant: "grumbling" },
+      { day: "Thursday", word: "recognition", def: "Noticing and naming the good you receive.", syn: "acknowledgment", ant: "criticism" },
+    ],
     days: [
       {
         scripture: "Psalm 136:1",
@@ -899,6 +1067,12 @@ const MM_DEVOTIONAL_52 = [
     ]
   },
   { w: 29, theme: "Service",
+    words: [
+      { day: "Monday", word: "service", def: "Helping others with your time and gifts.", syn: "ministry", ant: "selfishness" },
+      { day: "Tuesday", word: "ministry", def: "Serving others in Jesus' name.", syn: "service", ant: "idleness" },
+      { day: "Wednesday", word: "helpfulness", def: "Being ready and glad to help.", syn: "assistance", ant: "reluctance" },
+      { day: "Thursday", word: "assistance", def: "Giving help when someone needs it.", syn: "aid", ant: "neglect" },
+    ],
     days: [
       {
         scripture: "Mark 10:45",
@@ -931,6 +1105,12 @@ const MM_DEVOTIONAL_52 = [
     ]
   },
   { w: 30, theme: "Truthfulness",
+    words: [
+      { day: "Monday", word: "truthfulness", def: "Always speaking what is true.", syn: "veracity", ant: "lying" },
+      { day: "Tuesday", word: "veracity", def: "The habit of telling the exact truth.", syn: "truthfulness", ant: "falsehood" },
+      { day: "Wednesday", word: "accuracy", def: "Getting the facts exactly right.", syn: "precision", ant: "error" },
+      { day: "Thursday", word: "frankness", def: "Speaking the truth plainly and kindly.", syn: "candor", ant: "evasiveness" },
+    ],
     days: [
       {
         scripture: "John 14:6",
@@ -963,6 +1143,12 @@ const MM_DEVOTIONAL_52 = [
     ]
   },
   { w: 31, theme: "Gentleness",
+    words: [
+      { day: "Monday", word: "gentleness", def: "Being kind and soft in how you treat others.", syn: "mildness", ant: "roughness" },
+      { day: "Tuesday", word: "mildness", def: "A calm and gentle way of acting.", syn: "gentleness", ant: "severity" },
+      { day: "Wednesday", word: "softness", def: "A tender way of speaking and touching.", syn: "tenderness", ant: "aggression" },
+      { day: "Thursday", word: "tenderheartedness", def: "A heart that feels gently for others.", syn: "compassion", ant: "force" },
+    ],
     days: [
       {
         scripture: "Philippians 4:5",
@@ -995,6 +1181,12 @@ const MM_DEVOTIONAL_52 = [
     ]
   },
   { w: 32, theme: "Faithfulness",
+    words: [
+      { day: "Monday", word: "faithfulness", def: "Staying loyal and true over time.", syn: "constancy", ant: "unfaithfulness" },
+      { day: "Tuesday", word: "constancy", def: "Staying steady and unchanging in loyalty.", syn: "steadfastness", ant: "betrayal" },
+      { day: "Wednesday", word: "steadfastness", def: "Standing firm and not giving up.", syn: "constancy", ant: "fickleness" },
+      { day: "Thursday", word: "dependability", def: "Being someone others can trust.", syn: "reliability", ant: "desertion" },
+    ],
     days: [
       {
         scripture: "Lamentations 3:22-23",
@@ -1027,6 +1219,12 @@ const MM_DEVOTIONAL_52 = [
     ]
   },
   { w: 33, theme: "Encouragement",
+    words: [
+      { day: "Monday", word: "encouragement", def: "Lifting someone's heart with your words.", syn: "inspiration", ant: "discouragement" },
+      { day: "Tuesday", word: "inspiration", def: "Sparking hope and courage in someone.", syn: "motivation", ant: "disparagement" },
+      { day: "Wednesday", word: "support", def: "Standing with someone through hard times.", syn: "help", ant: "disheartenment" },
+      { day: "Thursday", word: "comfort", def: "Easing someone's sadness or pain.", syn: "consolation", ant: "scorn" },
+    ],
     days: [
       {
         scripture: "1 Thessalonians 5:11",
@@ -1059,6 +1257,12 @@ const MM_DEVOTIONAL_52 = [
     ]
   },
   { w: 34, theme: "Discernment",
+    words: [
+      { day: "Monday", word: "discernment", def: "Telling right from wrong with God's wisdom.", syn: "judgment", ant: "blindness" },
+      { day: "Tuesday", word: "judgment", def: "Making wise decisions about what is right.", syn: "discernment", ant: "misjudgment" },
+      { day: "Wednesday", word: "perception", def: "Seeing what is really going on.", syn: "insight", ant: "naivety" },
+      { day: "Thursday", word: "clarity", def: "Seeing things clearly without confusion.", syn: "clearness", ant: "dullness" },
+    ],
     days: [
       {
         scripture: "Hebrews 5:14",
@@ -1091,6 +1295,12 @@ const MM_DEVOTIONAL_52 = [
     ]
   },
   { w: 35, theme: "Hard Work",
+    words: [
+      { day: "Monday", word: "labor", def: "Honest work done with your hands or mind.", syn: "toil", ant: "laziness" },
+      { day: "Tuesday", word: "toil", def: "Hard, steady work that takes effort.", syn: "labor", ant: "idleness" },
+      { day: "Wednesday", word: "effort", def: "Trying your best at what you do.", syn: "exertion", ant: "sloth" },
+      { day: "Thursday", word: "industry", def: "The habit of working hard and staying busy.", syn: "diligence", ant: "inactivity" },
+    ],
     days: [
       {
         scripture: "Proverbs 14:23",
@@ -1123,6 +1333,12 @@ const MM_DEVOTIONAL_52 = [
     ]
   },
   { w: 36, theme: "Meekness",
+    words: [
+      { day: "Monday", word: "meekness", def: "Strength kept under gentle control.", syn: "humbleness", ant: "pride" },
+      { day: "Tuesday", word: "humbleness", def: "A quiet and modest view of yourself.", syn: "meekness", ant: "arrogance" },
+      { day: "Wednesday", word: "quietness", def: "A calm spirit that does not demand attention.", syn: "stillness", ant: "boastfulness" },
+      { day: "Thursday", word: "docility", def: "Being teachable and easy to guide.", syn: "teachableness", ant: "aggression" },
+    ],
     days: [
       {
         scripture: "Matthew 5:5",
@@ -1155,6 +1371,12 @@ const MM_DEVOTIONAL_52 = [
     ]
   },
   { w: 37, theme: "Bravery",
+    words: [
+      { day: "Monday", word: "bravery", def: "Facing danger without running away.", syn: "heroism", ant: "cowardice" },
+      { day: "Tuesday", word: "heroism", def: "Brave actions that help or save others.", syn: "gallantry", ant: "fearfulness" },
+      { day: "Wednesday", word: "gallantry", def: "Brave and noble behavior.", syn: "valor", ant: "faintheartedness" },
+      { day: "Thursday", word: "fearlessness", def: "Not letting fear control you.", syn: "daring", ant: "retreat" },
+    ],
     days: [
       {
         scripture: "Psalm 31:24",
@@ -1187,6 +1409,12 @@ const MM_DEVOTIONAL_52 = [
     ]
   },
   { w: 38, theme: "Loyalty",
+    words: [
+      { day: "Monday", word: "loyalty", def: "Standing by someone through thick and thin.", syn: "allegiance", ant: "disloyalty" },
+      { day: "Tuesday", word: "allegiance", def: "Faithful support given to someone.", syn: "fidelity", ant: "treachery" },
+      { day: "Wednesday", word: "fidelity", def: "Staying true to your promises.", syn: "loyalty", ant: "infidelity" },
+      { day: "Thursday", word: "dedication", def: "Giving your whole heart to a person or cause.", syn: "devotion", ant: "desertion" },
+    ],
     days: [
       {
         scripture: "Ruth 1:16",
@@ -1219,6 +1447,12 @@ const MM_DEVOTIONAL_52 = [
     ]
   },
   { w: 39, theme: "Mercy",
+    words: [
+      { day: "Monday", word: "mercy", def: "Not giving someone the punishment they deserve.", syn: "clemency", ant: "cruelty" },
+      { day: "Tuesday", word: "clemency", def: "Showing kindness instead of punishment.", syn: "leniency", ant: "harshness" },
+      { day: "Wednesday", word: "leniency", def: "Being gentle when you could be strict.", syn: "mercy", ant: "mercilessness" },
+      { day: "Thursday", word: "grace", def: "Undeserved kindness and favor from God.", syn: "favor", ant: "judgment" },
+    ],
     days: [
       {
         scripture: "Matthew 5:7",
@@ -1251,6 +1485,12 @@ const MM_DEVOTIONAL_52 = [
     ]
   },
   { w: 40, theme: "Goodness",
+    words: [
+      { day: "Monday", word: "goodness", def: "The quality of being morally good.", syn: "virtue", ant: "evil" },
+      { day: "Tuesday", word: "virtue", def: "Good character shown in right actions.", syn: "goodness", ant: "wickedness" },
+      { day: "Wednesday", word: "righteousness", def: "Living the right way before God.", syn: "uprightness", ant: "sin" },
+      { day: "Thursday", word: "excellence", def: "Doing your very best in all things.", syn: "distinction", ant: "badness" },
+    ],
     days: [
       {
         scripture: "Galatians 6:10",
@@ -1283,6 +1523,12 @@ const MM_DEVOTIONAL_52 = [
     ]
   },
   { w: 41, theme: "Self-Discipline",
+    words: [
+      { day: "Monday", word: "discipline", def: "Training yourself to do what is right.", syn: "willpower", ant: "indulgence" },
+      { day: "Tuesday", word: "willpower", def: "Inner strength to choose what is best.", syn: "resolve", ant: "weakness" },
+      { day: "Wednesday", word: "resolve", def: "A firm decision to keep going.", syn: "determination", ant: "irresolution" },
+      { day: "Thursday", word: "determination", def: "Refusing to quit until the job is done.", syn: "tenacity", ant: "laziness" },
+    ],
     days: [
       {
         scripture: "1 Corinthians 9:25",
@@ -1315,6 +1561,12 @@ const MM_DEVOTIONAL_52 = [
     ]
   },
   { w: 42, theme: "Confidence in God",
+    words: [
+      { day: "Monday", word: "rest", def: "Resting in the promise that God is in control.", syn: "repose", ant: "anxiety" },
+      { day: "Tuesday", word: "assurance", def: "A settled feeling that God is in control.", syn: "certainty", ant: "insecurity" },
+      { day: "Wednesday", word: "conviction", def: "A strong belief that shapes how you live.", syn: "belief", ant: "wavering" },
+      { day: "Thursday", word: "security", def: "Feeling safe because God holds you.", syn: "safety", ant: "uncertainty" },
+    ],
     days: [
       {
         scripture: "Philippians 1:6",
@@ -1347,6 +1599,12 @@ const MM_DEVOTIONAL_52 = [
     ]
   },
   { w: 43, theme: "Honoring Parents",
+    words: [
+      { day: "Monday", word: "honoring", def: "Treating your parents with special respect.", syn: "cherishing", ant: "dishonoring" },
+      { day: "Tuesday", word: "cherishing", def: "Holding your parents dear in your heart.", syn: "treasuring", ant: "neglecting" },
+      { day: "Wednesday", word: "valuing", def: "Seeing your parents as a gift from God.", syn: "appreciating", ant: "dismissing" },
+      { day: "Thursday", word: "listening", def: "Paying attention when your parents speak.", syn: "obeying", ant: "defying" },
+    ],
     days: [
       {
         scripture: "Ephesians 6:1",
@@ -1379,6 +1637,12 @@ const MM_DEVOTIONAL_52 = [
     ]
   },
   { w: 44, theme: "Stewardship",
+    words: [
+      { day: "Monday", word: "stewardship", def: "Taking good care of what God gives you.", syn: "management", ant: "wastefulness" },
+      { day: "Tuesday", word: "management", def: "Handling resources wisely and well.", syn: "stewardship", ant: "mismanagement" },
+      { day: "Wednesday", word: "care", def: "Looking after things with love.", syn: "tending", ant: "squandering" },
+      { day: "Thursday", word: "oversight", def: "Watching over something to keep it safe.", syn: "supervision", ant: "neglect" },
+    ],
     days: [
       {
         scripture: "1 Corinthians 4:2",
@@ -1411,6 +1675,12 @@ const MM_DEVOTIONAL_52 = [
     ]
   },
   { w: 45, theme: "Peacemaking",
+    words: [
+      { day: "Monday", word: "peacemaking", def: "Helping people in conflict become friends again.", syn: "mediation", ant: "strife" },
+      { day: "Tuesday", word: "mediation", def: "Helping two sides settle a disagreement.", syn: "peacemaking", ant: "discord" },
+      { day: "Wednesday", word: "harmony", def: "Living together in peace and agreement.", syn: "unity", ant: "division" },
+      { day: "Thursday", word: "unity", def: "Being joined together as one.", syn: "oneness", ant: "hostility" },
+    ],
     days: [
       {
         scripture: "Matthew 5:9",
@@ -1443,6 +1713,12 @@ const MM_DEVOTIONAL_52 = [
     ]
   },
   { w: 46, theme: "God's Faithfulness",
+    words: [
+      { day: "Monday", word: "trustworthy", def: "Someone you can always count on.", syn: "reliable", ant: "untrustworthy" },
+      { day: "Tuesday", word: "unfailing", def: "Something that never runs out or stops.", syn: "endless", ant: "failing" },
+      { day: "Wednesday", word: "unchanging", def: "Staying the same no matter what happens.", syn: "constant", ant: "changing" },
+      { day: "Thursday", word: "steadfast", def: "Firmly loyal and never giving up.", syn: "resolute", ant: "unsteady" },
+    ],
     days: [
       {
         scripture: "Deuteronomy 7:9",
@@ -1475,6 +1751,12 @@ const MM_DEVOTIONAL_52 = [
     ]
   },
   { w: 47, theme: "Trusting God's Plan",
+    words: [
+      { day: "Monday", word: "surrender", def: "Giving your plans to God and letting Him lead.", syn: "relinquishment", ant: "resistance" },
+      { day: "Tuesday", word: "yielding", def: "Letting go of your way for God's way.", syn: "submitting", ant: "defiance" },
+      { day: "Wednesday", word: "acceptance", def: "Being at peace with what God allows.", syn: "agreement", ant: "rejection" },
+      { day: "Thursday", word: "waiting", def: "Trusting God while His timing unfolds.", syn: "expecting", ant: "rushing" },
+    ],
     days: [
       {
         scripture: "Romans 8:28",
@@ -1507,6 +1789,12 @@ const MM_DEVOTIONAL_52 = [
     ]
   },
   { w: 48, theme: "Overcoming Fear",
+    words: [
+      { day: "Monday", word: "triumph", def: "A great win over something that scared you.", syn: "victory", ant: "defeat" },
+      { day: "Tuesday", word: "victory", def: "Winning the fight against fear.", syn: "triumph", ant: "loss" },
+      { day: "Wednesday", word: "conquer", def: "To defeat fear by trusting God.", syn: "overcome", ant: "surrender" },
+      { day: "Thursday", word: "overcome", def: "To get past fear instead of letting it stop you.", syn: "conquer", ant: "succumb" },
+    ],
     days: [
       {
         scripture: "Isaiah 43:1",
@@ -1539,6 +1827,12 @@ const MM_DEVOTIONAL_52 = [
     ]
   },
   { w: 49, theme: "Being a Light",
+    words: [
+      { day: "Monday", word: "light", def: "Shining God's goodness so others can see Him.", syn: "brightness", ant: "darkness" },
+      { day: "Tuesday", word: "radiance", def: "Bright, joyful goodness that others notice.", syn: "glow", ant: "dimness" },
+      { day: "Wednesday", word: "brightness", def: "The clear, happy glow of a life lived for God.", syn: "light", ant: "gloom" },
+      { day: "Thursday", word: "witness", def: "Showing and telling others what God has done.", syn: "testimony", ant: "silence" },
+    ],
     days: [
       {
         scripture: "Matthew 5:14",
@@ -1571,6 +1865,12 @@ const MM_DEVOTIONAL_52 = [
     ]
   },
   { w: 50, theme: "God's Love",
+    words: [
+      { day: "Monday", word: "unconditional", def: "Love with no strings attached.", syn: "boundless", ant: "conditional" },
+      { day: "Tuesday", word: "sacrificial", def: "Love that gives up something precious for others.", syn: "selfless", ant: "selfish" },
+      { day: "Wednesday", word: "everlasting", def: "Love that will never end.", syn: "eternal", ant: "temporary" },
+      { day: "Thursday", word: "infinite", def: "Love with no limits at all.", syn: "limitless", ant: "finite" },
+    ],
     days: [
       {
         scripture: "John 3:16",
@@ -1603,6 +1903,12 @@ const MM_DEVOTIONAL_52 = [
     ]
   },
   { w: 51, theme: "New Beginnings",
+    words: [
+      { day: "Monday", word: "beginning", def: "The fresh start of something new.", syn: "start", ant: "end" },
+      { day: "Tuesday", word: "renewal", def: "Being made new again.", syn: "revival", ant: "decay" },
+      { day: "Wednesday", word: "restoration", def: "Bringing something broken back to life.", syn: "repair", ant: "ruin" },
+      { day: "Thursday", word: "dawn", def: "The start of a brand new day.", syn: "sunrise", ant: "dusk" },
+    ],
     days: [
       {
         scripture: "Lamentations 3:22-23",
@@ -1635,6 +1941,12 @@ const MM_DEVOTIONAL_52 = [
     ]
   },
   { w: 52, theme: "Celebration",
+    words: [
+      { day: "Monday", word: "celebration", def: "Joyful honoring of something wonderful.", syn: "rejoicing", ant: "mourning" },
+      { day: "Tuesday", word: "rejoicing", def: "Showing great joy together.", syn: "jubilation", ant: "sorrow" },
+      { day: "Wednesday", word: "festivity", def: "Happy activities that mark a special time.", syn: "merriment", ant: "gloom" },
+      { day: "Thursday", word: "jubilee", def: "A special celebration of freedom and joy.", syn: "festival", ant: "lament" },
+    ],
     days: [
       {
         scripture: "Psalm 126:3",
