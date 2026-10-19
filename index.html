@@ -365,7 +365,7 @@
     <button class="icon-btn labeled" id="openArchive" title="Archive & upcoming weeks" aria-label="Archive and upcoming weeks">📅 <span class="lbl">Archive</span></button>
     <a class="icon-btn labeled" href="courses.html" title="College coursework (SEU dual enrollment)" aria-label="College coursework, SEU dual enrollment" style="text-decoration:none;">🎓 <span class="lbl">Courses</span></a>
     <button class="icon-btn labeled" id="openToday" title="Edit today" aria-label="Edit today">✏️ <span class="lbl">Edit Day</span></button>
-    <button class="icon-btn labeled" id="openSettings" title="Settings — day settings, students, curriculum, grading, 4-week plan" aria-label="Settings">⚙️ <span class="lbl">Settings</span></button>
+    <button class="icon-btn labeled" id="openSettings" title="Settings — day settings, students, curriculum, grading, 52-week plan" aria-label="Settings">⚙️ <span class="lbl">Settings</span></button>
   </div>
 </header>
 
@@ -395,7 +395,6 @@
       <div class="modal-tab" role="tab" tabindex="0" aria-selected="false" data-settingstab="curriculum">Curriculum</div>
       <div class="modal-tab" role="tab" tabindex="0" aria-selected="false" data-settingstab="mm52">52-Week Plan</div>
       <div class="modal-tab" role="tab" tabindex="0" aria-selected="false" data-settingstab="grading">Grading</div>
-      <div class="modal-tab" role="tab" tabindex="0" aria-selected="false" data-settingstab="plan">4-Week Plan</div>
       <div class="modal-tab" role="tab" tabindex="0" aria-selected="false" data-settingstab="pins">PINs</div>
     </div>
 
@@ -502,7 +501,7 @@
     </div>
 
     <div class="settings-panel" data-settingspanel="pins" style="display:none;">
-      <div class="sub">Two PINs. The <b>family PIN</b> opens the dashboard and courses page — the kids know this one. The <b>parent PIN</b> guards Settings, Edit Day, and the 4-week plan editors — just you. Both are stored in the cloud, so changing them here updates every device right away. Each needs at least 4 digits.</div>
+      <div class="sub">Two PINs. The <b>family PIN</b> opens the dashboard and courses page — the kids know this one. The <b>parent PIN</b> guards Settings, Edit Day, and the curriculum editors — just you. Both are stored in the cloud, so changing them here updates every device right away. Each needs at least 4 digits.</div>
       <label>Family PIN (kids use this to open the site)</label>
       <input type="password" inputmode="numeric" id="familyPinInput" autocomplete="off" style="font-family:'Oswald',sans-serif;font-size:18px;padding:10px;text-align:center;letter-spacing:6px;">
       <label>Parent PIN (Settings and editing — just you)</label>
@@ -520,7 +519,7 @@
 <div class="modal-overlay" id="archiveOverlay">
   <div class="modal wide">
     <h3>Plan Calendar</h3>
-    <div class="sub">Past days auto-save exactly as shown. Upcoming days preview the 4-week rotation. Click any day to open it.</div>
+    <div class="sub">Past days auto-save exactly as shown. Upcoming days preview the 52-week curriculum. Click any day to open it.</div>
     <div class="modal-tabs">
       <div class="modal-tab active" data-cal-tab="archive-view">Archive</div>
       <div class="modal-tab" data-cal-tab="upcoming-view">Upcoming</div>
@@ -685,7 +684,7 @@ function ce(headline, summary, applyIt){ return {headline, summary, applyIt}; }
 function devo(wordOfDay, scripture, reflection, prayer, intention){ return {wordOfDay, scripture, reflection, prayer, intention}; }
 
 // Content weeks 1-4: devotional, vocab, financial lit, real-world scenario, and
-// states/capitals all rotate on this 4-week block, then repeat (week 5 = week 1's
+// states/capitals cycle through 4 weeks of content
 // content again, etc.) for reinforcement across the 8-week quarter.
 function defaultContentWeeks(){
   return {
@@ -843,7 +842,7 @@ async function storageList(prefix){
    Two PINs, both changeable in Settings → PINs and stored in the cloud
    so every device (and the courses page) uses the same ones:
      Family PIN — unlocks the dashboard and courses page (the kids know this one).
-     Parent PIN — guards Settings, Edit Day, and the 4-week plan editors (parent only).
+     Parent PIN — guards Settings, Edit Day, and the curriculum editors (parent only).
    Soft gates only: this is plain client-side code, so anyone who views
    page source can see them — they stop casual snooping and accidental
    edits, they aren't real security. Uses a custom in-page dialog (not
@@ -881,7 +880,7 @@ function requirePinAccess(pin, action){
   cancelBtn.onclick = cleanup;
   input.onkeydown = (e)=>{ if(e.key==='Enter') onSubmit(); if(e.key==='Escape') cleanup(); };
 }
-/* Parent-only areas: Settings, Edit Day, 4-week plan editors. */
+/* Parent-only areas: Settings, Edit Day, curriculum editors. */
 function requireEditAccess(action){ requirePinAccess(PARENT_PIN, action); }
 /* Lock screens: dashboard and courses page. */
 function requireFamilyAccess(action){ requirePinAccess(FAMILY_PIN, action); }
@@ -1299,7 +1298,7 @@ async function loadAll(){
   const dstr = toDateStr(state.schoolDate);
   state.dateStr = dstr;
 
-  // Cycle anchor: the Monday the 4-week rotation started. Created once,
+  // Cycle anchor: the Monday the rotation started. Created once,
   // then reused forever so the rotation stays stable across devices.
   // If the backend read fails transiently, fall back to the last known good
   // value from the sticky local cache instead of inventing a new anchor
@@ -1348,7 +1347,7 @@ async function loadAll(){
   const isTodayView = dstr === toDateStr(getSchoolDate(new Date()));
   const snapStale = !!(state.todayOverride && state.todayOverride._snapV !== SNAP_V);
   if(SCHOOL_DAYS.includes(state.weekdayNum) && (!state.todayOverride || (isTodayView && snapStale))){
-    const cw = contentWeekForDate(state.schoolDate);
+    const cw = legacyContentWeekForDate(state.schoolDate);
     const resolved = JSON.parse(JSON.stringify((state.contentWeeks[cw] && state.contentWeeks[cw][state.weekdayNum]) || {}));
     if(resolved && Object.keys(resolved).length){
       resolved.students = JSON.parse(JSON.stringify(state.students));
@@ -1384,15 +1383,25 @@ function actualWeekForDate(dateObj){
   const diffWeeks = Math.round((mon.getTime() - startMs) / (7*24*3600*1000));
   return diffWeeks + 1;
 }
-// The 4-week content block (1-4) that repeats every quarter — used for
-// devotional, vocab, financial lit, real-world scenario, and states/capitals.
+// The 52-week content block (1-52) — Micro Mastery curriculum.
+// Used for history/science lessons and vocabulary.
 function contentWeekForDate(dateObj){
-  const aw = actualWeekForDate(dateObj);
-  return (((aw - 1) % 4) + 4) % 4 + 1;
+  const d = new Date(dateObj.getFullYear(), dateObj.getMonth(), dateObj.getDate());
+  const start = new Date(MM52_START.getFullYear(), MM52_START.getMonth(), MM52_START.getDate());
+  const diffDays = Math.floor((d - start) / 86400000);
+  if(diffDays < 0) return 1;
+  return Math.min(52, Math.floor(diffDays / 7) + 1);
+}
+// Legacy 4-week items (devotional, financial lit, etc.) cycle through their 4 weeks
+function legacyContentWeekForDate(dateObj){
+  const w52 = contentWeekForDate(dateObj);
+  return ((w52 - 1) % 4) + 1;
 }
 // Friday of week 4, 8, 12... (every 4th week) is the bigger cumulative Unit
 // Test instead of the normal single-week recap.
-function isUnitTestWeek(actualWeek){ return actualWeek % 4 === 0; }
+// With the 52-week curriculum, every Friday is a weekly review (from the week's
+// 'friday' field) — no separate "unit test week" concept.
+function isUnitTestWeek(actualWeek){ return false; }
 function quarterNumber(actualWeek){ return Math.ceil(actualWeek / 8); }
 
 async function getHistoryWeek(actualWeek){
@@ -1414,7 +1423,7 @@ async function getScienceWeek(actualWeek){
 async function computeWeekWordsFor(mon){
   const grades = ['5th','8th','10th'];
   const result = {'5th':[], '8th':[], '10th':[]};
-  const cw = contentWeekForDate(mon);
+  const cw = legacyContentWeekForDate(mon);
   for(let i=0;i<4;i++){
     const dt = new Date(mon); dt.setDate(mon.getDate()+i);
     const ds = toDateStr(dt);
@@ -1430,7 +1439,7 @@ async function computeWeekWordsFor(mon){
 
 function todayContent(){
   if(state.todayOverride) return state.todayOverride;
-  const cw = contentWeekForDate(state.schoolDate);
+  const cw = legacyContentWeekForDate(state.schoolDate);
   return (state.contentWeeks[cw] && state.contentWeeks[cw][state.weekdayNum]) || null;
 }
 
@@ -1665,6 +1674,7 @@ function mm52IsActive(){
   const start = new Date(MM52_START); start.setHours(0,0,0,0);
   return today >= start;
 }
+const MM52_BAND_LABELS = {'35':'Grades 3-5', '68':'Grades 6-8', '912':'Grades 9-12'};
 
 async function renderBoard(){
   const board = document.getElementById('board');
@@ -2029,6 +2039,7 @@ async function renderBoard(){
     <footer class="buzzer-strip">
       <div class="msg">Final buzzer <b>${formatBuzzerTime()}</b> — afternoon activities begin</div>
       <button class="link-btn" id="openTodayFooter">Edit today's plan</button>
+      <button class="link-btn" id="previewUpcomingBtn" style="margin-left:12px;">🔮 Preview upcoming days</button>
     </footer>
   `;
 
@@ -2224,8 +2235,56 @@ async function renderBoard(){
   });
   const footerBtn = document.getElementById('openTodayFooter');
   if(footerBtn) footerBtn.addEventListener('click', ()=> requireEditAccess(openTodayModal));
+  const previewBtn = document.getElementById('previewUpcomingBtn');
+  if(previewBtn) previewBtn.addEventListener('click', ()=> requireEditAccess(openPreviewModal));
   // 52-week curriculum section wiring
   try{ mm52WireSelector(); }catch(e){ console.warn('52-week init:', e); }
+}
+
+/* Preview upcoming days (PIN-gated) — lets parent see future dashboard content */
+function openPreviewModal(){
+  const today = new Date(state.schoolDate + 'T12:00:00');
+  let html = '<h3>🔮 Preview Upcoming Days</h3><div class="sub">Select a date to preview that day\'s dashboard. 52-week content starts Oct 19, 2026.</div>';
+  html += '<div style="display:flex;gap:8px;flex-wrap:wrap;margin:12px 0;">';
+  for(let i=1;i<=14;i++){
+    const d = new Date(today); d.setDate(d.getDate()+i);
+    const ds = toDateStr(d);
+    const label = d.toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'});
+    const weekNum = contentWeekForDate(d);
+    html += `<button type="button" class="btn btn-ghost" data-preview-date="${ds}" style="font-size:13px;padding:8px 12px;">${label}<br><span style="font-size:11px;color:var(--ink-soft);">Wk ${weekNum}</span></button>`;
+  }
+  html += '</div><div id="previewContent" style="margin-top:12px;"></div>';
+  openModal(html);
+
+  document.querySelectorAll('[data-preview-date]').forEach(btn=>{
+    btn.addEventListener('click', async ()=>{
+      const ds = btn.dataset.previewDate;
+      const d = new Date(ds + 'T12:00:00');
+      const weekNum = contentWeekForDate(d);
+      const container = document.getElementById('previewContent');
+      container.innerHTML = '<p>Loading...</p>';
+
+      let previewHTML = `<h4>${d.toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric'})} — Week ${weekNum}</h4>`;
+
+      // Show 52-week curriculum for each student's band
+      for(const student of state.students){
+        const band = student.band || mm52BandForGrade(student.grade);
+        const week = mm52GetWeek(weekNum, band);
+        if(!week) continue;
+        const wd = d.getDay();
+        const isHist = [1,3].includes(wd);
+        const isSci = [2,4].includes(wd);
+        if(wd===5){
+          previewHTML += `<div class="card" style="margin-bottom:10px;"><strong>${esc(firstName(student.name))}</strong> (${MM52_BAND_LABELS[band]||band})<br>Friday Review: ${esc(week.friday?.title||'Weekly review')}</div>`;
+        } else if(isHist || isSci){
+          const topic = isHist ? week.historyTopic : week.scienceTopic;
+          const sections = isHist ? (week.history||[]) : (week.science||[]);
+          previewHTML += `<div class="card" style="margin-bottom:10px;"><strong>${esc(firstName(student.name))}</strong> (${MM52_BAND_LABELS[band]||band})<br>${isHist?'🏛️':'🔬'} ${esc(topic)} — ${(sections||[]).length} sections</div>`;
+        }
+      }
+      container.innerHTML = previewHTML;
+    });
+  });
 }
 let allSectionsCollapsed = false;
 
@@ -2314,7 +2373,7 @@ function normAnswer(s){ return (s||'').trim().toLowerCase().replace(/\s+/g,' ');
 function autoGrade(given, expected){ return normAnswer(given) === normAnswer(expected) && normAnswer(given)!==''; }
 
 async function buildWeeklyTest(studentGrade, mon, studentId){
-  const cw = contentWeekForDate(mon);
+  const cw = legacyContentWeekForDate(mon);
   const aw = actualWeekForDate(mon);
   // Rotating weeks: only the week's own subject has a lesson to test.
   const weekSubj = (aw % 2 === 1) ? 'history' : 'science';
@@ -4090,7 +4149,7 @@ function openStudentsModal(){
       <label style="display:flex;align-items:center;gap:8px;font-weight:400;text-transform:none;letter-spacing:0;font-size:13.5px;margin:6px 0;">
         <input type="checkbox" data-subjtoggle="${s.id}" value="${escAttr(sub.name)}" ${excluded.includes(sub.name) ? '' : 'checked'} style="width:16px;height:16px;">
         ${esc(sub.name)}
-      </label>`).join('') || `<p style="color:var(--ink-soft);font-size:13px;">No subjects defined yet — add them via the 4-week plan or today's edit.</p>`;
+      </label>`).join('') || `<p style="color:var(--ink-soft);font-size:13px;">No subjects defined yet — add them via today's edit.</p>`;
     return `
     <div class="tab-panel ${i===0?'active':''}" id="stu-${s.id}">
       <div class="field-grid">
@@ -4116,7 +4175,7 @@ function openStudentsModal(){
         <div><label id="p-${s.id}-phone4-lbl">${esc(fl.phone4)}</label><input type="text" id="p-${s.id}-phone-p4" value="${escAttr(s.phone.p4)}"></div>
       </div>
       <div class="mini-lbl" style="margin-top:14px">Subjects for ${esc(s.name)}</div>
-      <div class="sub" style="margin:2px 0 6px;">Uncheck any this student doesn't do. New subjects can be added via the 🗓️ 4-week plan or ✏️ today editors — they'll show up here to turn on or off per student.</div>
+      <div class="sub" style="margin:2px 0 6px;">Uncheck any this student doesn't do. New subjects can be added via the ✏️ today editor — they'll show up here to turn on or off per student.</div>
       <div id="p-${s.id}-subjects">${subjectChecklist}</div>
       <label style="display:flex;align-items:center;gap:8px;font-weight:400;text-transform:none;letter-spacing:0;font-size:13.5px;margin-top:10px;">
         <input type="checkbox" id="p-${s.id}-showseu" ${s.showSeu ? 'checked' : ''} style="width:16px;height:16px;">
@@ -4422,11 +4481,8 @@ async function loadUpcomingTab(){
     weeksEl.querySelectorAll('.archive-week-btn').forEach(b=>b.classList.toggle('active', +b.dataset.idx===idx));
     const mon = upcomingMondays[idx];
     daysEl.innerHTML = `<div class="archive-empty">Loading…</div>`;
-    const cw = contentWeekForDate(mon);
-    const aw = actualWeekForDate(mon);
+    const cw = contentWeekForDate(mon); // 52-week number
     const weekWords = await computeWeekWordsFor(mon);
-    const histWk = await getHistoryWeek(aw);
-    const sciWk = await getScienceWeek(aw);
 
     const rows = [];
     const dayData = {};
@@ -4434,27 +4490,39 @@ async function loadUpcomingTab(){
       const dateObj = new Date(mon); dateObj.setDate(mon.getDate()+i);
       const wd = i+1;
       const override = await storageGet(dayKey(toDateStr(dateObj)));
-      const content = override || JSON.parse(JSON.stringify(state.contentWeeks[cw][wd]));
+      const legacyCw = legacyContentWeekForDate(mon);
+      const content = override || JSON.parse(JSON.stringify(state.contentWeeks[legacyCw][wd]));
       if(!override){
-        // Same whole-subject-week rotation as the live dashboard: odd actual
-        // weeks = History Mon-Thu, even actual weeks = Science Mon-Thu.
-        const weekSubject = (aw % 2 === 1) ? 'history' : 'science';
-        if(wd>=1 && wd<=4){
-          content.lesson = weekSubject==='history' ? histWk : sciWk;
-          content.lessonType = weekSubject==='history' ? 'History' : 'Science';
-        }
+        // 52-week curriculum: show topics by band
+        const bands = ['35','68','912'];
+        const bandTopics = bands.map(band=>{
+          const week = mm52GetWeek(cw, band);
+          if(!week) return null;
+          if(wd===5) return `${MM52_BAND_LABELS[band]}: ${week.friday?.title||'Review'}`;
+          // Mon-Thu: alternate History/Science by day (Mon/Wed=History, Tue/Thu=Science)
+          const isHist = [1,3].includes(wd);
+          const topic = isHist ? week.historyTopic : week.scienceTopic;
+          return `${MM52_BAND_LABELS[band]}: ${isHist?'🏛️':'🔬'} ${topic}`;
+        }).filter(Boolean);
+        content.mm52Topics = bandTopics;
+        content.mm52Week = cw;
       }
       const rowId = 'up-'+toDateStr(dateObj);
       dayData[rowId] = {dateObj, content};
-      rows.push(dayRowHTML(dateObj, content.devotional?.wordOfDay||'', wd===5, rowId));
+      const topicsHTML = content.mm52Topics ? `<div style="font-size:12px;margin-top:4px;">${content.mm52Topics.map(t=>`<div>• ${esc(t)}</div>`).join('')}</div>` : '';
+      rows.push(`<div class="archive-day-row" data-rowid="${rowId}" style="cursor:pointer;padding:10px;border-bottom:1px solid var(--line-light);">
+        <div style="font-weight:700;">${dateObj.toLocaleDateString('en-US',{weekday:'long',month:'short',day:'numeric'})}</div>
+        <div style="font-size:13px;color:var(--ink-soft);">Week ${content.mm52Week||cw} of 52-week curriculum</div>
+        ${topicsHTML}
+      </div>`);
     }
-    const unitTestNote = isUnitTestWeek(aw) ? ' · Friday is the Unit Test' : '';
-    daysEl.innerHTML = `<div class="archive-empty" style="padding:8px 4px 14px;text-align:left;">Actual week ${aw} (content week ${cw} of the 4-week block)${unitTestNote}</div>` + rows.join('');
+    daysEl.innerHTML = `<div class="archive-empty" style="padding:8px 4px 14px;text-align:left;">Week ${cw} of 52 (starts ${mm52WeekDateRange(cw)})</div>` + rows.join('');
 
     daysEl.querySelectorAll('[data-rowid]').forEach(row=>{
-      row.addEventListener('click', ()=>{
+      row.addEventListener('click', async ()=>{
         const {dateObj, content} = dayData[row.dataset.rowid];
-        openDayLightbox(dateObj, content, {}, dateObj.getDay()===5 ? weekWords : null, true);
+        const weekWords = dateObj.getDay()===5 ? await computeWeekWordsFor(mondayOfWeek(dateObj)) : null;
+        openDayLightbox(dateObj, content, {}, weekWords, true);
       });
     });
   }
@@ -4560,7 +4628,6 @@ function openSettingsTab(tab){
   else if(tab==='curriculum') openCurriculumModal();
   else if(tab==='mm52') openMM52Modal();
   else if(tab==='grading') openGradingModal();
-  else if(tab==='plan') openTemplateModal();
   else if(tab==='pins') openPinsModal();
 }
 document.querySelectorAll('#settingsTabs .modal-tab').forEach(t=>{
