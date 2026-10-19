@@ -2189,10 +2189,10 @@ async function renderBoard(){
       </div>
     </section>
 
-    <footer class="buzzer-strip">
+    <footer class="buzzer-strip" style="flex-wrap:wrap;gap:10px;">
       <div class="msg">Final buzzer <b>${formatBuzzerTime()}</b> — afternoon activities begin</div>
       <button class="link-btn" id="openTodayFooter">Edit today's plan</button>
-      <button class="link-btn" id="previewUpcomingBtn" style="margin-left:12px;">🔮 Preview upcoming days</button>
+      <button type="button" id="previewUpcomingBtn" style="background:var(--orange);color:#fff;border:none;border-radius:9px;padding:10px 18px;font-family:'Oswald',sans-serif;font-size:13px;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;margin-left:8px;">🔮 Preview Upcoming Days</button>
     </footer>
   `;
 
