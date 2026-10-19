@@ -3129,6 +3129,34 @@ function renderWorksheetFormHTML(entry, checks){
           <div data-wsnote="${it.id}" style="font-size:12px;margin-top:2px;"></div>
         </div>`;
       }).join('');
+    } else if(g.type==='comprehension' || g.type==='writing' || g.type==='essay' || g.type==='argument' || g.type==='vocabwrite'){
+      // ELA writing types: open-ended with model answer / guidance, self-marked like shortanswer
+      const minHeights = {comprehension:'64px', writing:'120px', essay:'160px', argument:'160px', vocabwrite:'80px'};
+      const minH = minHeights[g.type] || '80px';
+      body = (g.items||[]).map(it=>{
+        const field = p + it.id;
+        const st = checks[it.id];
+        const promptText = it.prompt || it.question || it.text || '';
+        const guidance = it.guidance || it.instructions || '';
+        const modelAns = it.answer || it.modelAnswer || it.sampleThesis || '';
+        const model = modelAns ? `<div data-wsmodel="${it.id}" style="display:${st?'block':'none'};margin-top:6px;padding:8px;border:1.5px dashed var(--line-light);border-radius:8px;background:var(--bg-soft,#fbf9f4);">
+            <div style="font-size:11.5px;font-weight:700;color:var(--ink-soft);">MODEL ANSWER — compare yours honestly:</div>
+            <div style="font-size:13px;margin:4px 0 8px;white-space:pre-wrap;">${esc(modelAns)}</div>
+            <div style="display:flex;gap:8px;">
+              <button type="button" class="btn ${st==='ok'?'btn-primary':'btn-ghost'}" data-selfmark="${it.id}" data-val="ok" style="font-size:12px;padding:6px 12px;">✓ Mine matches</button>
+              <button type="button" class="btn ${st==='bad'?'btn-primary':'btn-ghost'}" data-selfmark="${it.id}" data-val="bad" style="font-size:12px;padding:6px 12px;">✗ Not yet</button>
+            </div>
+          </div>` : `<div data-wsmodel="${it.id}" style="display:${st?'block':'none'};margin-top:6px;">
+            <button type="button" class="btn ${st?'btn-primary':'btn-ghost'}" data-selfmark="${it.id}" data-val="ok" style="font-size:12px;padding:6px 12px;">✓ Done</button>
+          </div>`;
+        return `<div style="margin-bottom:12px;">
+          <p style="font-size:13.5px;margin:0 0 6px;"><strong>${esc(promptText)}</strong><span data-wsmark="${it.id}"></span></p>
+          ${guidance ? `<p style="font-size:12px;color:var(--ink-soft);margin:0 0 6px;font-style:italic;">${esc(guidance)}</p>` : ''}
+          <textarea data-wsfield="${field}" data-wsitem="${it.id}"${dis} placeholder="Write your answer here" style="width:100%;min-height:${minH};padding:8px;border:1.5px solid var(--line-light);border-radius:8px;font-family:'Oswald',sans-serif;font-size:13.5px;">${esc(answers[field]||'')}</textarea>
+          <div data-wsnote="${it.id}" style="font-size:12px;margin-top:4px;"></div>
+          ${model}
+        </div>`;
+      }).join('');
     } else { // fillblank (default): either an inline ___ blank or a prompt + answer box
       body = (g.items||[]).map(it=>{
         const field = p + it.id;
@@ -3146,7 +3174,8 @@ function renderWorksheetFormHTML(entry, checks){
         </div>`;
       }).join('');
     }
-    const needsCheck = autoGraded || g.type==='shortanswer';
+    const ELA_TYPES = ['comprehension','writing','essay','argument','vocabwrite'];
+    const needsCheck = autoGraded || g.type==='shortanswer' || ELA_TYPES.indexOf(g.type)!==-1;
     const triesLeft = autoGraded ? Math.max(0, wsMaxTries()-attemptsUsed) : null;
     const checkBtn = needsCheck
       ? (locked
