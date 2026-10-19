@@ -301,7 +301,8 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
     .intention-card{padding:12px;border-radius:10px;}
     .intention-tag{font-size:9.5px;margin-bottom:4px;}
     .intention-text{font-size:clamp(14px,1.4vw,18px);line-height:1.2;}
-    .students-grid{gap:8px;}
+    .students-grid{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;gap:12px;padding-bottom:8px;}
+    .students-grid > *{flex:0 0 85%;max-width:85%;scroll-snap-align:start;}
     .student-head{padding:7px 10px;}
     .student-name{font-size:13px;}
     .grade-badge{font-size:9px;padding:2px 6px;}
@@ -2461,7 +2462,7 @@ function previewDay(ds){
 }
 
 /* Show full 52-week dashboard content for a date in the preview modal */
-function openUpcomingDayPreview(dateObj, targetContainer){
+async function openUpcomingDayPreview(dateObj, targetContainer){
   const container = targetContainer || document.getElementById('previewDayContent');
   if(!container){
     // If called from archive, open the preview overlay first
@@ -2470,60 +2471,42 @@ function openUpcomingDayPreview(dateObj, targetContainer){
     pc.innerHTML = '<div id="previewDayContent"></div>';
     return openUpcomingDayPreview(dateObj, document.getElementById('previewDayContent'));
   }
-  const d = dateObj;
-  const wd = d.getDay();
-  const weekNum = contentWeekForDate(d);
-  const dateLabel = d.toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric'});
+  // Render the EXACT dashboard layout for the preview day:
+  // temporarily swap state date + board element, render, then restore.
+  const realBoard = document.getElementById('board');
+  const realDate = state.schoolDate;
+  const realWeekday = state.weekdayNum;
+  const realDateStr = state.dateStr;
 
-  let html = `<h4 style="margin-bottom:12px;">${dateLabel} — Week ${weekNum}</h4>`;
+  // Create a temp board element for the render
+  const tempBoard = document.createElement('div');
+  tempBoard.id = 'board';
+  realBoard.id = 'board-real';
+  realBoard.parentNode.insertBefore(tempBoard, realBoard);
+  realBoard.style.display = 'none';
 
-  // Warm-Up preview
-  const devDay = mm52Devotional(weekNum, wd);
-  const devoWord = mm52DevoWord(weekNum, wd);
-  html += `<div class="card" style="margin-bottom:12px;">
-    <div class="word-badge">Warm-Up · Devotional</div>
-    ${devoWord ? `<div style="font-weight:700;font-size:15px;margin:6px 0;">Word of the Day: ${esc(devoWord.word)}</div>
-    <div style="font-size:13px;color:var(--ink-soft);">${esc(devoWord.def)}</div>` : ''}
-    ${devDay ? `<div style="margin-top:8px;font-size:13.5px;"><strong>${esc(devDay.scripture)}</strong><br>${esc(devDay.reflection)}</div>` : ''}
-  </div>`;
+  try {
+    const d = new Date(dateObj);
+    d.setHours(12,0,0,0);
+    state.schoolDate = d;
+    state.weekdayNum = d.getDay();
+    state.dateStr = d.toISOString().slice(0,10);
 
-  // Per-student lessons
-  for(const student of state.students){
-    const band = student.band || mm52BandForGrade(student.grade);
-    const week = mm52GetWeek(weekNum, band);
-    if(!week) continue;
-    const isHistDay = wd===1 || wd===2;
-    const isSciDay = wd===3 || wd===4;
-    let lessonHTML = '';
-    if(wd === 5){
-      lessonHTML = `<div style="margin-top:6px;">📝 Friday Review: ${esc(week.friday?.title || 'Weekly review')}</div>`;
-    } else if(isHistDay || isSciDay){
-      const topic = isHistDay ? week.historyTopic : week.scienceTopic;
-      const sections = isHistDay ? (week.history||[]) : (week.science||[]);
-      lessonHTML = `<div style="margin-top:6px;">${isHistDay?'🏛️':'🔬'} <strong>${esc(topic)}</strong> (${sections.length} sections)</div>`;
-    }
-    // Vocabulary for this student
-    const vocab = week.vocab || [];
-    const wordIdx = Math.min(wd - 1, vocab.length - 1);
-    const vWord = vocab[wordIdx >= 0 ? wordIdx : 0];
-    // Financial literacy
-    const fin = mm52Financial(weekNum, wd);
-    // States
-    const st = mm52States(weekNum);
-    // Scenario
-    const sc = mm52Scenario(weekNum, wd);
+    await renderBoard();
 
-    html += `<div class="card" style="margin-bottom:12px;">
-      <div style="font-weight:700;font-size:15px;">${esc(firstName(student.name))} <span style="font-weight:400;font-size:12px;color:var(--ink-soft);">(${MM52_BAND_LABELS[band]||band})</span></div>
-      ${lessonHTML}
-      ${vWord ? `<div style="margin-top:6px;font-size:13px;">📚 Vocab: <strong>${esc(vWord.word)}</strong> — ${esc(vWord.def)}</div>` : ''}
-      ${fin && fin.activity ? `<div style="margin-top:6px;font-size:13px;">💰 ${esc(fin.concept)}: ${esc(fin.activity.title)}</div>` : ''}
-      ${st && !st.review ? `<div style="margin-top:6px;font-size:13px;">🗺️ ${esc(st.state)} — ${esc(st.capital)}<br><span style="font-size:12px;color:var(--ink-soft);">${esc(mm52StateFact(weekNum, wd)||'')}</span></div>` : ''}
-      ${sc ? `<div style="margin-top:6px;font-size:13px;">🌍 Scenario: ${esc(sc.title)}</div>` : ''}
-    </div>`;
+    // Copy the rendered HTML into the preview container
+    const dateLabel = d.toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric'});
+    const weekNum = contentWeekForDate(d);
+    container.innerHTML = `<h4 style="margin-bottom:12px;">${dateLabel} — Week ${weekNum}</h4><div class="preview-board">${tempBoard.innerHTML}</div>`;
+  } finally {
+    // Restore everything
+    tempBoard.remove();
+    realBoard.id = 'board';
+    realBoard.style.display = '';
+    state.schoolDate = realDate;
+    state.weekdayNum = realWeekday;
+    state.dateStr = realDateStr;
   }
-
-  container.innerHTML = html;
 }
 let allSectionsCollapsed = false;
 
