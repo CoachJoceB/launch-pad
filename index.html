@@ -559,6 +559,19 @@
   </div>
 </div>
 
+<div class="modal-overlay" id="previewOverlay">
+  <div class="modal wide">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px;flex-wrap:wrap;">
+      <div>
+        <h3>🔮 Preview Upcoming Days</h3>
+        <div class="sub">Select a date to preview that day's full dashboard. 52-week content is live.</div>
+      </div>
+      <button class="btn btn-ghost" data-close>Close</button>
+    </div>
+    <div id="previewContent" style="margin-top:12px;"></div>
+  </div>
+</div>
+
 <!-- LESSON WORKSHEET MODAL -->
 <div class="modal-overlay" id="worksheetOverlay">
   <div class="modal wide">
@@ -2369,50 +2382,105 @@ async function renderBoard(){
   if(previewBtn) previewBtn.addEventListener('click', ()=> requireEditAccess(openPreviewModal));
 }
 
-/* Preview upcoming days (PIN-gated) — lets parent see future dashboard content */
+/* Preview upcoming days (PIN-gated) - shows full dashboard for selected day */
 function openPreviewModal(){
   const today = state.schoolDate;
-  let html = '<h3>🔮 Preview Upcoming Days</h3><div class="sub">Select a date to preview that day\'s dashboard. 52-week content starts Oct 19, 2026.</div>';
-  html += '<div style="display:flex;gap:8px;flex-wrap:wrap;margin:12px 0;">';
+  const container = document.getElementById('previewContent');
+  let html = '<div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px;">';
   for(let i=1;i<=14;i++){
     const d = new Date(today); d.setDate(d.getDate()+i);
+    // Skip weekends
+    if(d.getDay()===0 || d.getDay()===6) continue;
     const ds = toDateStr(d);
     const label = d.toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'});
     const weekNum = contentWeekForDate(d);
-    html += `<button type="button" class="btn btn-ghost" data-preview-date="${ds}" style="font-size:13px;padding:8px 12px;">${label}<br><span style="font-size:11px;color:var(--ink-soft);">Wk ${weekNum}</span></button>`;
+    html += `<button type="button" class="btn btn-ghost" data-preview-date="${ds}" style="font-size:13px;padding:8px 12px;">${label}<br><span style="font-size:11px;color:var(--ink-soft);">Week ${weekNum}</span></button>`;
   }
-  html += '</div><div id="previewContent" style="margin-top:12px;"></div>';
-  openModal(html);
+  html += '</div><div id="previewDayContent"></div>';
+  container.innerHTML = html;
+  document.getElementById('previewOverlay').classList.add('open');
 
-  document.querySelectorAll('[data-preview-date]').forEach(btn=>{
-    btn.addEventListener('click', async ()=>{
+  container.querySelectorAll('[data-preview-date]').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
       const ds = btn.dataset.previewDate;
-      const d = new Date(ds + 'T12:00:00');
-      const weekNum = contentWeekForDate(d);
-      const container = document.getElementById('previewContent');
-      container.innerHTML = '<p>Loading...</p>';
-
-      let previewHTML = `<h4>${d.toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric'})} — Week ${weekNum}</h4>`;
-
-      // Show 52-week curriculum for each student's band
-      for(const student of state.students){
-        const band = student.band || mm52BandForGrade(student.grade);
-        const week = mm52GetWeek(weekNum, band);
-        if(!week) continue;
-        const wd = d.getDay();
-        const isHist = [1,3].includes(wd);
-        const isSci = [2,4].includes(wd);
-        if(wd===5){
-          previewHTML += `<div class="card" style="margin-bottom:10px;"><strong>${esc(firstName(student.name))}</strong> (${MM52_BAND_LABELS[band]||band})<br>Friday Review: ${esc(week.friday?.title||'Weekly review')}</div>`;
-        } else if(isHist || isSci){
-          const topic = isHist ? week.historyTopic : week.scienceTopic;
-          const sections = isHist ? (week.history||[]) : (week.science||[]);
-          previewHTML += `<div class="card" style="margin-bottom:10px;"><strong>${esc(firstName(student.name))}</strong> (${MM52_BAND_LABELS[band]||band})<br>${isHist?'🏛️':'🔬'} ${esc(topic)} — ${(sections||[]).length} sections</div>`;
-        }
-      }
-      container.innerHTML = previewHTML;
+      previewDay(ds);
     });
   });
+}
+
+/* Render full dashboard preview for a given date string */
+function previewDay(ds){
+  const container = document.getElementById('previewDayContent');
+  if(!container) return;
+  const [y, mo, da] = ds.split('-').map(Number);
+  const d = new Date(y, mo-1, da, 12);
+  openUpcomingDayPreview(d, container);
+}
+
+/* Show full 52-week dashboard content for a date in the preview modal */
+function openUpcomingDayPreview(dateObj, targetContainer){
+  const container = targetContainer || document.getElementById('previewDayContent');
+  if(!container){
+    // If called from archive, open the preview overlay first
+    document.getElementById('previewOverlay').classList.add('open');
+    const pc = document.getElementById('previewContent');
+    pc.innerHTML = '<div id="previewDayContent"></div>';
+    return openUpcomingDayPreview(dateObj, document.getElementById('previewDayContent'));
+  }
+  const d = dateObj;
+  const wd = d.getDay();
+  const weekNum = contentWeekForDate(d);
+  const dateLabel = d.toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric'});
+
+  let html = `<h4 style="margin-bottom:12px;">${dateLabel} — Week ${weekNum}</h4>`;
+
+  // Warm-Up preview
+  const devDay = mm52Devotional(weekNum, wd);
+  const devoWord = mm52DevoWord(weekNum, wd);
+  html += `<div class="card" style="margin-bottom:12px;">
+    <div class="word-badge">Warm-Up · Devotional</div>
+    ${devoWord ? `<div style="font-weight:700;font-size:15px;margin:6px 0;">Word of the Day: ${esc(devoWord.word)}</div>
+    <div style="font-size:13px;color:var(--ink-soft);">${esc(devoWord.def)}</div>` : ''}
+    ${devDay ? `<div style="margin-top:8px;font-size:13.5px;"><strong>${esc(devDay.scripture)}</strong><br>${esc(devDay.reflection)}</div>` : ''}
+  </div>`;
+
+  // Per-student lessons
+  for(const student of state.students){
+    const band = student.band || mm52BandForGrade(student.grade);
+    const week = mm52GetWeek(weekNum, band);
+    if(!week) continue;
+    const isHistDay = [1,3].includes(wd);
+    const isSciDay = [2,4].includes(wd);
+    let lessonHTML = '';
+    if(wd === 5){
+      lessonHTML = `<div style="margin-top:6px;">📝 Friday Review: ${esc(week.friday?.title || 'Weekly review')}</div>`;
+    } else if(isHistDay || isSciDay){
+      const topic = isHistDay ? week.historyTopic : week.scienceTopic;
+      const sections = isHistDay ? (week.history||[]) : (week.science||[]);
+      lessonHTML = `<div style="margin-top:6px;">${isHistDay?'🏛️':'🔬'} <strong>${esc(topic)}</strong> (${sections.length} sections)</div>`;
+    }
+    // Vocabulary for this student
+    const vocab = week.vocab || [];
+    const wordIdx = Math.min(wd - 1, vocab.length - 1);
+    const vWord = vocab[wordIdx >= 0 ? wordIdx : 0];
+    // Financial literacy
+    const fin = mm52Financial(weekNum, wd);
+    // States
+    const st = mm52States(weekNum);
+    // Scenario
+    const sc = mm52Scenario(weekNum, wd);
+
+    html += `<div class="card" style="margin-bottom:12px;">
+      <div style="font-weight:700;font-size:15px;">${esc(firstName(student.name))} <span style="font-weight:400;font-size:12px;color:var(--ink-soft);">(${MM52_BAND_LABELS[band]||band})</span></div>
+      ${lessonHTML}
+      ${vWord ? `<div style="margin-top:6px;font-size:13px;">📚 Vocab: <strong>${esc(vWord.word)}</strong> — ${esc(vWord.def)}</div>` : ''}
+      ${fin && fin.activity ? `<div style="margin-top:6px;font-size:13px;">💰 ${esc(fin.concept)}: ${esc(fin.activity.title)}</div>` : ''}
+      ${st && !st.review ? `<div style="margin-top:6px;font-size:13px;">🗺️ ${esc(st.state)} — ${esc(st.capital)}</div>` : ''}
+      ${sc ? `<div style="margin-top:6px;font-size:13px;">🌍 Scenario: ${esc(sc.title)}</div>` : ''}
+    </div>`;
+  }
+
+  container.innerHTML = html;
 }
 let allSectionsCollapsed = false;
 
@@ -4660,10 +4728,10 @@ async function loadUpcomingTab(){
     daysEl.innerHTML = `<div class="archive-empty" style="padding:8px 4px 14px;text-align:left;">Week ${cw} of 52 (starts ${mm52WeekDateRange(cw)})</div>` + rows.join('');
 
     daysEl.querySelectorAll('[data-rowid]').forEach(row=>{
-      row.addEventListener('click', async ()=>{
-        const {dateObj, content} = dayData[row.dataset.rowid];
-        const weekWords = dateObj.getDay()===5 ? await computeWeekWordsFor(mondayOfWeek(dateObj)) : null;
-        openDayLightbox(dateObj, content, {}, weekWords, true);
+      row.addEventListener('click', ()=>{
+        const {dateObj} = dayData[row.dataset.rowid];
+        // Show full 52-week dashboard preview for this day
+        openUpcomingDayPreview(dateObj);
       });
     });
   }
