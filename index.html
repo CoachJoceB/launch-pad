@@ -5364,7 +5364,9 @@ function bootApp(){
       await Promise.race([loadAndRender(), timeout]);
     }catch(e){
       console.error('initial load failed', e);
-      document.getElementById('board').innerHTML = `<div class="weekend-card"><h2>Couldn't reach the cloud plan</h2><p style="margin-bottom:16px;">Today's plan didn't load. Check your internet connection, then try again.</p><button type="button" class="btn-warmup" onclick="location.reload()">Try again</button></div>`;
+      const errMsg = e && e.message ? e.message : String(e);
+      const errStack = e && e.stack ? e.stack.split('\n').slice(0,3).join('<br>') : '';
+      document.getElementById('board').innerHTML = `<div class="weekend-card"><h2>Couldn't reach the cloud plan</h2><p style="margin-bottom:16px;">Today's plan didn't load. Check your internet connection, then try again.</p><details style="margin-top:12px;font-size:12px;color:#666;"><summary>Error details (for debugging)</summary><p>${esc(errMsg)}</p><p style="font-size:11px;">${errStack}</p></details><button type="button" class="btn-warmup" onclick="location.reload()">Try again</button></div>`;
     }
   })();
 
