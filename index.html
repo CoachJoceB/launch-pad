@@ -354,6 +354,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
 <script src="mm_financial_52.js"></script>
 <script src="mm_states_52.js"></script>
 <script src="mm_scenarios_52.js"></script>
+<script src="mm_videos.js"></script>
 </head>
 <body>
 
@@ -1684,6 +1685,15 @@ function mm52StateFact(weekNum, weekdayNum){
   const dayFact = (st.facts||[]).find(f => f.day === dayNames[weekdayNum]);
   return dayFact ? dayFact.fact : st.funFact;
 }
+/* 52-week videos: get video for week/band/subject */
+function mm52Video(weekNum, band, subject){
+  if(typeof MM_VIDEOS === 'undefined') return null;
+  const bandData = MM_VIDEOS[band];
+  if(!bandData) return null;
+  const weekData = bandData[String(weekNum)];
+  if(!weekData) return null;
+  return weekData[subject] || null; // subject: 'history' or 'science'
+}
 /* 52-week real world scenarios: get day's scenario (Mon-Thu) */
 function mm52Scenario(weekNum, weekdayNum){
   if(typeof MM_SCENARIOS_52 === 'undefined') return null;
@@ -1843,10 +1853,33 @@ async function renderBoard(){
     const bhmTitleHTML = bhmTitle
       ? `<div style="font-size:13px;color:var(--ink-soft);margin:-2px 0 6px;">✊🏾 Black History: <strong style="color:var(--ink);">${esc(bhmTitle)}</strong></div>`
       : '';
+    // 52-week video embed (pilot: weeks 1-4)
+    let videoHTML = '';
+    if(mm52IsActive() && student && (isHistoryDay || isScienceDay)){
+      try {
+        const weekNum = mm52SelectedWeek || mm52WeekForDate(state.schoolDate);
+        const band = student.band || mm52BandForGrade(student.grade);
+        const video = mm52Video(weekNum < 1 ? 1 : weekNum, band, isHistoryDay ? 'history' : 'science');
+        if(video && video.youtubeId){
+          videoHTML = `<div style="margin:8px 0;">
+            <div style="font-size:13px;font-weight:600;margin-bottom:6px;">🎬 Watch: ${esc(video.title)}</div>
+            <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:8px;background:#000;">
+              <iframe src="https://www.youtube.com/embed/${escAttr(video.youtubeId)}" 
+                style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen
+                title="${escAttr(video.title)}"></iframe>
+            </div>
+            <div style="font-size:11.5px;color:var(--ink-soft);margin-top:4px;">${esc(video.channel)} · ${esc(video.duration)}</div>
+          </div>`;
+        }
+      } catch(e) {}
+    }
     return `<div class="card">
       <div class="word-badge">${esc(lessonType)} Lesson · Week ${aw}</div>
       <div style="font-size:15px;font-weight:600;line-height:1.4;margin:6px 0;">${esc(lesson.topic)}</div>
       ${bhmTitleHTML}
+      ${videoHTML}
       ${pdfBtn}${worksheetBtn}
     </div>`;
   }
