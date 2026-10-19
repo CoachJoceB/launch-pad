@@ -340,6 +340,7 @@
 <script src="mm_devotional_52.js"></script>
 <script src="mm_financial_52.js"></script>
 <script src="mm_states_52.js"></script>
+<script src="mm_scenarios_52.js"></script>
 </head>
 <body>
 
@@ -1462,7 +1463,14 @@ function allSubjects(c, opts){
       if(fin52 && fin52.concept) finConcept = fin52.concept;
     } catch(e) {}
   }
-  const rws = c.realWorldScenario || '';
+  let rws = c.realWorldScenario || '';
+  if(mm52IsActive()){
+    try {
+      const weekNum = contentWeekForDate(state.schoolDate);
+      const sc52 = mm52Scenario(weekNum, state.weekdayNum);
+      if(sc52 && sc52.title) rws = sc52.title;
+    } catch(e) {}
+  }
   const base = [
     {id:'math', name:'Math', topic:subj.math},
     {id:'reading', name:'Reading', topic:subj.reading},
@@ -1643,6 +1651,22 @@ function mm52States(weekNum){
   if(typeof MM_STATES_52 === 'undefined') return null;
   return MM_STATES_52.find(w => w.w === weekNum) || null;
 }
+/* 52-week real world scenarios: get day's scenario (Mon-Thu) */
+function mm52Scenario(weekNum, weekdayNum){
+  if(typeof MM_SCENARIOS_52 === 'undefined') return null;
+  const week = MM_SCENARIOS_52.find(w => w.w === weekNum);
+  if(!week || !week.days) return null;
+  const dayNames = {1:'Monday',2:'Tuesday',3:'Wednesday',4:'Thursday'};
+  return (week.days||[]).find(d => d.day === dayNames[weekdayNum]) || null;
+}
+/* 52-week devotional word: get day's theme word (Mon-Thu) */
+function mm52DevoWord(weekNum, weekdayNum){
+  if(typeof MM_DEVOTIONAL_52 === 'undefined') return null;
+  const week = MM_DEVOTIONAL_52.find(w => w.w === weekNum);
+  if(!week || !week.words) return null;
+  const dayNames = {1:'Monday',2:'Tuesday',3:'Wednesday',4:'Thursday'};
+  return (week.words||[]).find(d => d.day === dayNames[weekdayNum]) || null;
+}
 
 async function renderBoard(){
   const board = document.getElementById('board');
@@ -1698,22 +1722,22 @@ async function renderBoard(){
 
   const devo = c.devotional;
   const isTestDay = wd===5;
-  // 52-week curriculum: Word of the Day comes from the week's vocabulary
-  // Mon-Thu: one word per day (words 1-4). Friday: review all 4 words.
+  // 52-week: Word of the Day comes from the devotional theme word (Mon-Thu daily, Fri review)
   // Devotional (scripture, reflection, prayer, intention) from 52-week devotional.
   if(mm52IsActive() && devo){
     try {
       const weekNum = contentWeekForDate(state.schoolDate);
-      // Use the 3-5 band vocab as the shared Word of the Day (or first available band)
-      let weekData = mm52GetWeek(weekNum, '35') || mm52GetWeek(weekNum, '68') || mm52GetWeek(weekNum, '912');
-      if(weekData && weekData.vocab && weekData.vocab.length >= 4){
-        if(wd >= 1 && wd <= 4){
-          const wordIdx = wd - 1; // Mon=0, Tue=1, Wed=2, Thu=3
-          devo.wordOfDay = weekData.vocab[wordIdx].word;
-          devo.wordDef = weekData.vocab[wordIdx].def;
-        } else if(wd === 5){
-          // Friday: show all 4 words for review
-          const words = weekData.vocab.slice(0,4).map(v=>v.word).join(', ');
+      const devoWord = mm52DevoWord(weekNum, wd);
+      if(devoWord && wd >= 1 && wd <= 4){
+        devo.wordOfDay = devoWord.word;
+        devo.wordDef = devoWord.def;
+        devo.wordSyn = devoWord.syn;
+        devo.wordAnt = devoWord.ant;
+      } else if(wd === 5){
+        // Friday: review all 4 theme words
+        const week = (typeof MM_DEVOTIONAL_52 !== 'undefined') ? MM_DEVOTIONAL_52.find(w => w.w === weekNum) : null;
+        if(week && week.words){
+          const words = week.words.map(w=>w.word).join(', ');
           devo.wordOfDay = 'Review: ' + words;
         }
       }
@@ -1838,11 +1862,26 @@ async function renderBoard(){
     <p style="font-size:14px;line-height:1.5;white-space:pre-line;">${esc(flData.blank)}</p>
   </div>` : (!isTestDay ? missingCard('Financial Lit') : '');
 
-  // ---- Real World Scenario ----
-  const rwsHTML = (!isTestDay && c.realWorldScenario) ? `<div class="card">
+  // ---- Real World Scenario (52-week when active) ----
+  let rwsContent = c.realWorldScenario;
+  let rwsTitle = '';
+  let rwsDiscuss = '';
+  if(mm52IsActive()){
+    try {
+      const weekNum = contentWeekForDate(state.schoolDate);
+      const sc52 = mm52Scenario(weekNum, wd);
+      if(sc52){
+        rwsTitle = sc52.title;
+        rwsContent = sc52.scenario;
+        rwsDiscuss = sc52.discuss;
+      }
+    } catch(e) {}
+  }
+  const rwsHTML = (!isTestDay && rwsContent) ? `<div class="card">
     <div class="word-badge">Real World Scenario</div>
-    <p style="font-size:14px;line-height:1.5;margin-top:8px;">${esc(c.realWorldScenario)}</p>
-    <p style="font-size:12px;color:var(--ink-soft);margin-top:8px;">Talk it through or write your answer — nothing to submit yet.</p>
+    ${rwsTitle ? `<div style="font-size:15px;font-weight:600;margin:6px 0 8px;">${esc(rwsTitle)}</div>` : ''}
+    <p style="font-size:14px;line-height:1.5;margin-top:8px;">${esc(rwsContent)}</p>
+    ${rwsDiscuss ? `<p style="font-size:13px;line-height:1.5;margin-top:8px;color:var(--ink-soft);"><em>Discuss:</em> ${esc(rwsDiscuss)}</p>` : '<p style="font-size:12px;color:var(--ink-soft);margin-top:8px;">Talk it through or write your answer — nothing to submit yet.</p>'}
   </div>` : (!isTestDay ? missingCard('Real World Scenario') : '');
 
   // ---- States & Capitals (52-week when active) ----
@@ -2102,6 +2141,8 @@ async function renderBoard(){
         <div class="card">
           <div class="word-badge">Word of the Day</div>
           <div class="devo-word">${esc(devo.wordOfDay)}</div>
+          ${devo.wordDef ? `<div class="devo-row"><div class="lbl">Definition</div><div class="val">${esc(devo.wordDef)}</div></div>` : ''}
+          ${(devo.wordSyn || devo.wordAnt) ? `<div class="syn-ant" style="margin:8px 0;"><span><b>Syn:</b> ${esc(devo.wordSyn||'—')}</span><span class="ant"><b>Ant:</b> ${esc(devo.wordAnt||'—')}</span></div>` : ''}
           <p class="devo-scripture">${esc(devo.scripture)}</p>
           <div class="devo-row"><div class="lbl">Reflection Question</div><div class="val">${esc(devo.reflection)}</div></div>
           <div class="devo-row"><div class="lbl">Prayer</div><div class="val">${esc(devo.prayer)}</div></div>
@@ -4453,6 +4494,8 @@ function buildFullDayHTML(dateObj, content, checks, weekWords){
         <div class="card">
           <div class="word-badge">Word of the Day</div>
           <div class="devo-word">${esc(devo.wordOfDay)}</div>
+          ${devo.wordDef ? `<div class="devo-row"><div class="lbl">Definition</div><div class="val">${esc(devo.wordDef)}</div></div>` : ''}
+          ${(devo.wordSyn || devo.wordAnt) ? `<div class="syn-ant" style="margin:8px 0;"><span><b>Syn:</b> ${esc(devo.wordSyn||'—')}</span><span class="ant"><b>Ant:</b> ${esc(devo.wordAnt||'—')}</span></div>` : ''}
           <p class="devo-scripture">${esc(devo.scripture)}</p>
           <div class="devo-row"><div class="lbl">Reflection Question</div><div class="val">${esc(devo.reflection)}</div></div>
           <div class="devo-row"><div class="lbl">Prayer</div><div class="val">${esc(devo.prayer)}</div></div>
