@@ -412,6 +412,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
       <div class="modal-tab" role="tab" tabindex="0" aria-selected="false" data-settingstab="students">Students</div>
       <div class="modal-tab" role="tab" tabindex="0" aria-selected="false" data-settingstab="mm52">Weekly Plan</div>
       <div class="modal-tab" role="tab" tabindex="0" aria-selected="false" data-settingstab="grading">Grading</div>
+      <div class="modal-tab" role="tab" tabindex="0" aria-selected="false" data-settingstab="worksheet">Worksheet</div>
       <div class="modal-tab" role="tab" tabindex="0" aria-selected="false" data-settingstab="pins">PINs</div>
     </div>
 
@@ -2198,7 +2199,7 @@ async function renderBoard(){
   board.innerHTML = `
     <h1 class="sr-only">Legacy Lab Academy — today's game plan</h1>
     <div class="warmup-row">
-      <button type="button" class="btn-warmup" id="startWarmup">Start today's warm-up</button>
+      <button type="button" class="btn-warmup" id="printWorksheet" onclick="window.open('memory-worksheet.html','_blank')">🖨️ Print Memory Work Sheet</button>
     </div>
     <section class="qtr" id="q1">
       <div class="qtr-head"><div class="qtr-tag">Q1</div><h2 class="qtr-title">Warm-Up · Devotional</h2><div class="qtr-hint">Sets today's intention</div></div>
@@ -2256,17 +2257,7 @@ async function renderBoard(){
       if(bar) bar.setAttribute('aria-valuenow', pct);
     });
   })();
-  const warmupBtn = document.getElementById('startWarmup');
-  if(warmupBtn) warmupBtn.addEventListener('click', ()=>{
-    const q1 = document.getElementById('q1');
-    if(!q1) return;
-    q1.scrollIntoView({behavior:'smooth', block:'start'});
-    // Brief highlight pulse so the jump lands visibly.
-    q1.classList.remove('warmup-flash');
-    void q1.offsetWidth;
-    q1.classList.add('warmup-flash');
-    setTimeout(()=>q1.classList.remove('warmup-flash'), 1600);
-  });
+  // Print worksheet button uses inline onclick to open memory-worksheet.html
 
   board.querySelectorAll('[data-cefield]').forEach(el=>{
     const dateAtRender = state.dateStr;
@@ -4889,6 +4880,7 @@ function openSettingsTab(tab){
   else if(tab==='curriculum') openCurriculumModal();
   else if(tab==='mm52') openMM52Modal();
   else if(tab==='grading') openGradingModal();
+  else if(tab==='worksheet') window.open('memory-worksheet.html','_blank');
   else if(tab==='pins') openPinsModal();
 }
 document.querySelectorAll('#settingsTabs .modal-tab').forEach(t=>{
