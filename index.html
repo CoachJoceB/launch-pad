@@ -334,6 +334,9 @@
   .collapse-all-btn{background:transparent;border:1.5px solid var(--line-light);border-radius:7px;padding:5px 11px;font-family:'Oswald',sans-serif;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);cursor:pointer;margin-left:10px;white-space:nowrap;}
   .collapse-all-btn:hover{border-color:var(--orange);color:var(--orange);}
 </style>
+<script src="mm_weeks_35.js"></script>
+<script src="mm_weeks_68.js"></script>
+<script src="mm_weeks_912.js"></script>
 </head>
 <body>
 
@@ -1519,11 +1522,206 @@ function escAttr(s){ return esc(s).replace(/"/g,'&quot;'); }
 // Privacy: only ever display a student's first name on the public board.
 function firstName(n){ return String(n||'').trim().split(/\s+/)[0] || ''; }
 
+/* ========================= 52-WEEK CURRICULUM (Micro Mastery) =========================
+   Week 1 starts Monday Oct 19, 2026. Replaces the Unit 1 content going forward.
+   Archive (existing Supabase weeks/days) is untouched. */
+const MM52_START = new Date(2026, 9, 19); // Oct 19, 2026 (Monday)
+let mm52SelectedWeek = null; // null = auto (current week)
+
+function mm52WeekForDate(d){
+  const date = new Date(d.getFullYear(), d.getMonth(), d.getDate());
+  const start = new Date(MM52_START.getFullYear(), MM52_START.getMonth(), MM52_START.getDate());
+  const diffDays = Math.floor((date - start) / 86400000);
+  if(diffDays < 0) return 0; // before Week 1
+  return Math.min(52, Math.floor(diffDays / 7) + 1);
+}
+function mm52CurrentWeek(){
+  if(mm52SelectedWeek) return mm52SelectedWeek;
+  const w = mm52WeekForDate(new Date());
+  return w < 1 ? 1 : w;
+}
+function mm52BandForGrade(grade){
+  const g = String(grade||'').toLowerCase().replace(/[^a-z0-9]/g,'');
+  if(['3rd','4th','5th','3','4','5'].includes(g)) return '35';
+  if(['6th','7th','8th','6','7','8'].includes(g)) return '68';
+  if(['9th','10th','11th','12th','9','10','11','12'].includes(g)) return '912';
+  return '35'; // default
+}
+function mm52BandData(band){
+  if(band==='35' && typeof MM_WEEKS_35 !== 'undefined') return MM_WEEKS_35;
+  if(band==='68' && typeof MM_WEEKS_68 !== 'undefined') return MM_WEEKS_68;
+  if(band==='912' && typeof MM_WEEKS_912 !== 'undefined') return MM_WEEKS_912;
+  return null;
+}
+function mm52GetWeek(weekNum, band){
+  const data = mm52BandData(band);
+  if(!data) return null;
+  return data.find(w => w.w === weekNum) || null;
+}
+function mm52WeekDateRange(weekNum){
+  const start = new Date(MM52_START);
+  start.setDate(start.getDate() + (weekNum-1)*7);
+  const end = new Date(start);
+  end.setDate(end.getDate() + 4);
+  const fmt = d => d.toLocaleDateString('en-US',{month:'short',day:'numeric'});
+  return fmt(start) + ' - ' + fmt(end);
+}
+
+/* Render the 52-week curriculum board for the selected week. */
+async function render52WeekBoard(board){
+  const weekNum = mm52CurrentWeek();
+  const isCurrent = !mm52SelectedWeek || mm52SelectedWeek === mm52WeekForDate(new Date());
+
+  // Week selector bar
+  let options = '';
+  for(let w=1; w<=52; w++){
+    options += `<option value="${w}" ${w===weekNum?'selected':''}>Week ${w}</option>`;
+  }
+  const selectorHTML = `<div class="card" style="margin-bottom:16px;">
+    <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+      <div class="word-badge">52-Week Curriculum</div>
+      <select id="mm52WeekSelect" style="font-size:15px;font-weight:700;padding:8px 12px;border:2px solid var(--orange);border-radius:8px;background:#fff;cursor:pointer;">
+        ${options}
+      </select>
+      <button type="button" class="btn btn-ghost" id="mm52Prev" ${weekNum<=1?'disabled':''} style="padding:8px 14px;">◀ Prev</button>
+      <button type="button" class="btn btn-ghost" id="mm52Next" ${weekNum>=52?'disabled':''} style="padding:8px 14px;">Next ▶</button>
+      ${!isCurrent ? `<button type="button" class="btn btn-primary" id="mm52Today" style="padding:8px 16px;">📍 Back to Current Week</button>` : ''}
+      <span style="font-size:13px;color:var(--ink-soft);margin-left:auto;">${esc(mm52WeekDateRange(weekNum))}</span>
+    </div>
+  </div>`;
+
+  // Group students by band
+  const byBand = {'35':[], '68':[], '912':[]};
+  for(const s of state.students){
+    const band = mm52BandForGrade(s.grade);
+    if(byBand[band]) byBand[band].push(s);
+  }
+  const bandLabels = {'35':'Grades 3-5', '68':'Grades 6-8', '912':'Grades 9-12'};
+
+  let contentHTML = '';
+  for(const band of ['35','68','912']){
+    const students = byBand[band];
+    if(!students.length) continue;
+    const week = mm52GetWeek(weekNum, band);
+    if(!week){
+      contentHTML += `<div class="card"><div class="word-badge">${bandLabels[band]}</div><p>Week ${weekNum} content not loaded yet.</p></div>`;
+      continue;
+    }
+    const names = students.map(s=>esc(firstName(s.name))).join(', ');
+
+    // Vocab
+    const vocabHTML = (week.vocab||[]).map(v=>`
+      <div style="background:#fff;border:1px solid var(--line-light);border-radius:8px;padding:10px 12px;margin-bottom:8px;">
+        <div style="font-weight:700;font-size:14px;">${esc(v.word)}</div>
+        <div style="font-size:13px;color:var(--ink-soft);margin-top:2px;">${esc(v.def)}</div>
+        ${v.use?`<div style="font-size:12.5px;font-style:italic;margin-top:4px;">"${esc(v.use)}"</div>`:''}
+      </div>`).join('');
+
+    // History sections
+    const histHTML = (week.history||[]).map((h,hi)=>`
+      <div class="card" style="margin-bottom:12px;">
+        <div class="word-badge">History · Day ${hi+1}</div>
+        <div style="font-size:15px;font-weight:700;margin:6px 0;">${esc(h.title)}</div>
+        ${h.reading?`<p style="font-size:13.5px;line-height:1.6;">${esc(h.reading.substring(0,300))}${h.reading.length>300?'...':''}</p>`:''}
+        <button type="button" class="btn btn-primary" data-mm52worksheet data-band="${band}" data-week="${weekNum}" data-subject="history" data-section="${hi}" style="margin-top:8px;">📝 Open Worksheet</button>
+      </div>`).join('');
+
+    // Science sections
+    const sciHTML = (week.science||[]).map((s,si)=>`
+      <div class="card" style="margin-bottom:12px;">
+        <div class="word-badge">Science · Day ${si+1}</div>
+        <div style="font-size:15px;font-weight:700;margin:6px 0;">${esc(s.title)}</div>
+        ${s.reading?`<p style="font-size:13.5px;line-height:1.6;">${esc(s.reading.substring(0,300))}${s.reading.length>300?'...':''}</p>`:''}
+        <button type="button" class="btn btn-primary" data-mm52worksheet data-band="${band}" data-week="${weekNum}" data-subject="science" data-section="${si}" style="margin-top:8px;">📝 Open Worksheet</button>
+      </div>`).join('');
+
+    contentHTML += `<div style="margin-bottom:24px;">
+      <h2 style="font-family:'Oswald',sans-serif;font-size:20px;margin:0 0 4px;">${bandLabels[band]} <span style="font-size:14px;color:var(--ink-soft);font-family:'Inter',sans-serif;">(${names})</span></h2>
+      <p style="font-size:13.5px;color:var(--ink-soft);margin:0 0 12px;">History: ${esc(week.historyTopic||'')} · Science: ${esc(week.scienceTopic||'')}</p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px;align-items:start;">
+        <div>
+          <h3 style="font-size:14px;text-transform:uppercase;letter-spacing:.06em;margin:0 0 8px;">📚 This Week's Words</h3>
+          ${vocabHTML}
+        </div>
+        <div>
+          <h3 style="font-size:14px;text-transform:uppercase;letter-spacing:.06em;margin:0 0 8px;">🏛️ History</h3>
+          ${histHTML}
+        </div>
+        <div>
+          <h3 style="font-size:14px;text-transform:uppercase;letter-spacing:.06em;margin:0 0 8px;">🔬 Science</h3>
+          ${sciHTML}
+        </div>
+      </div>
+    </div>`;
+  }
+
+  board.innerHTML = selectorHTML + contentHTML;
+
+  // Wire up the selector
+  document.getElementById('mm52WeekSelect').addEventListener('change', (e)=>{
+    mm52SelectedWeek = parseInt(e.target.value, 10);
+    renderBoard();
+  });
+  const prevBtn = document.getElementById('mm52Prev');
+  if(prevBtn) prevBtn.addEventListener('click', ()=>{
+    if(weekNum > 1){ mm52SelectedWeek = weekNum - 1; renderBoard(); }
+  });
+  const nextBtn = document.getElementById('mm52Next');
+  if(nextBtn) nextBtn.addEventListener('click', ()=>{
+    if(weekNum < 52){ mm52SelectedWeek = weekNum + 1; renderBoard(); }
+  });
+  const todayBtn = document.getElementById('mm52Today');
+  if(todayBtn) todayBtn.addEventListener('click', ()=>{
+    mm52SelectedWeek = null;
+    renderBoard();
+  });
+
+  // Wire up worksheet buttons
+  board.querySelectorAll('[data-mm52worksheet]').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      open52WeekWorksheet(btn.dataset.band, parseInt(btn.dataset.week,10), btn.dataset.subject, parseInt(btn.dataset.section,10));
+    });
+  });
+}
+
+/* Open a 52-week curriculum section as a worksheet using the existing modal. */
+async function open52WeekWorksheet(band, weekNum, subject, sectionIdx){
+  const week = mm52GetWeek(weekNum, band);
+  if(!week) return;
+  const sections = subject === 'history' ? (week.history||[]) : (week.science||[]);
+  const section = sections[sectionIdx];
+  if(!section) return;
+
+  // Build a synthetic lesson the existing worksheet modal understands
+  const lesson = {
+    topic: section.title || (subject==='history' ? week.historyTopic : week.scienceTopic),
+    worksheetStudentIds: [], // all students
+    day1: {
+      title: section.title,
+      reading: section.reading || '',
+      vocab: week.vocab || [],
+      worksheet: { groups: section.groups || [] }
+    }
+  };
+  // Show all students in this band
+  const bandStudents = state.students.filter(s => mm52BandForGrade(s.grade) === band);
+  if(bandStudents.length){
+    lesson.worksheetStudentIds = bandStudents.map(s=>s.id);
+  }
+  await openWorksheetModal(subject, lesson, null, 1, null);
+}
+
 async function renderBoard(){
   const board = document.getElementById('board');
   const wd = state.weekdayNum;
   window.__pendingLessonPdf = null;
   window.__pendingWorksheet = null;
+
+  // 52-week curriculum mode: from Oct 19, 2026 forward, show Micro Mastery content
+  const schoolDate = new Date(state.schoolDate + 'T12:00:00');
+  if(schoolDate >= MM52_START){
+    return render52WeekBoard(board);
+  }
 
   if(!SCHOOL_DAYS.includes(wd)){
     const tzLabel = (TIMEZONE_OPTIONS.find(o=>o.value===state.timezone)||{}).label || state.timezone;
