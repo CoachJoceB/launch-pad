@@ -1807,9 +1807,7 @@ async function renderBoard(){
     ${(ceData && ceData.headline) ? `
     <p style="font-weight:700;font-size:14.5px;line-height:1.4;margin:8px 0 6px;">${esc(ceData.headline)}</p>
     ${ceData.summary ? `<p style="font-size:13.5px;line-height:1.55;margin:0 0 8px;">${esc(ceData.summary)}</p>` : ''}
-    ${ceData.applyIt ? `<p style="font-size:13px;line-height:1.5;margin:0 0 10px;color:var(--ink-soft);"><em>Think about it:</em> ${esc(ceData.applyIt)}</p>` : ''}` : ''}
-    <p style="font-size:13.5px;line-height:1.55;margin:6px 0 10px;">${(ceData && ceData.headline) ? 'Want to explore more? Read' : 'Read'} one story on NewsForKids.net today, then log the headline and a brief summary in your own words in your card below.</p>
-    <a href="https://newsforkids.net/" target="_blank" rel="noopener" class="btn btn-primary" style="text-decoration:none;display:inline-block;">📰 Open NewsForKids.net</a>
+    ${ceData.applyIt ? `<p style="font-size:13px;line-height:1.5;margin:0 0 10px;color:var(--ink-soft);"><em>Think about it:</em> ${esc(ceData.applyIt)}</p>` : ''}` : '<p style="font-size:13.5px;color:var(--ink-soft);margin-top:8px;">No current event set for today.</p>'}
   </div>` : '';
 
   // Placeholder shown when a day's life-skills content is missing, so gaps are
@@ -1835,11 +1833,9 @@ async function renderBoard(){
     } catch(e) { console.warn('52-week financial:', e); }
   }
   const financialLitHTML = (!isTestDay && flData && flData.concept) ? `<div class="card">
-    <div class="word-badge">Financial Lit · Week ${mm52IsActive() ? contentWeekForDate(state.schoolDate) : ''}</div>
+    <div class="word-badge">Financial Lit</div>
     <div style="font-size:15px;font-weight:600;margin:6px 0 8px;">${esc(flData.concept)}</div>
     <p style="font-size:14px;line-height:1.5;white-space:pre-line;">${esc(flData.blank)}</p>
-    ${flData.answer ? `<button type="button" class="btn btn-ghost" data-flanswer="${escAttr(flData.answer)}" id="revealFlAnswer" style="margin-top:8px;">Reveal Answer</button>
-    <div id="flAnswerText" style="display:none;margin-top:8px;font-weight:700;color:var(--green);"></div>` : ''}
   </div>` : (!isTestDay ? missingCard('Financial Lit') : '');
 
   // ---- Real World Scenario ----
@@ -1867,7 +1863,7 @@ async function renderBoard(){
     } catch(e) { console.warn('52-week states:', e); }
   }
   const statesHTML = (!isTestDay && statesCapitalsData && statesCapitalsData.length) ? `<div class="card">
-    <div class="word-badge">States & Capitals · Week ${mm52IsActive() ? contentWeekForDate(state.schoolDate) : ''}</div>
+    <div class="word-badge">States & Capitals</div>
     <div style="display:flex;flex-direction:column;gap:8px;margin-top:8px;">
       ${statesCapitalsData.map((sc,i)=>`
         <div class="info-line" style="cursor:pointer;" data-staterev="${i}">
@@ -1878,7 +1874,6 @@ async function renderBoard(){
     </div>
     ${statesFunFact ? `<p style="font-size:13.5px;line-height:1.5;margin-top:10px;"><strong>Fun fact:</strong> ${esc(statesFunFact)}</p>` : ''}
     ${statesNickname ? `<p style="font-size:12.5px;color:var(--ink-soft);margin-top:4px;"><em>${esc(statesNickname)}</em></p>` : ''}
-    <p style="font-size:12px;color:var(--ink-soft);margin-top:8px;">Bonus: share one fun fact about either state.</p>
   </div>` : (!isTestDay ? missingCard('States & Capitals') : '');
 
   const testSectionHTML = isTestDay ? await renderTestSection() : '';
@@ -2070,22 +2065,6 @@ async function renderBoard(){
           <div class="intention-text">${esc(devo.intention)}</div>
         </div>
       </div>
-      ${mm52IsActive() ? `
-      <div class="card" style="margin-top:12px;">
-        <div class="word-badge">📚 This Week's Words · Week ${mm52CurrentWeek()}</div>
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px;margin-top:10px;">
-          ${['35','68','912'].map(band=>{
-            const week = mm52GetWeek(mm52CurrentWeek(), band);
-            if(!week || !(week.vocab||[]).length) return '';
-            const hasStudents = state.students.some(s=>(s.band||mm52BandForGrade(s.grade))===band);
-            if(!hasStudents) return '';
-            return `<div>
-              <div style="font-weight:700;font-size:13px;margin-bottom:6px;">${MM52_BAND_LABELS[band]}</div>
-              ${(week.vocab||[]).map(v=>`<div style="margin-bottom:6px;font-size:13.5px;"><strong>${esc(v.word)}</strong> <span style="color:var(--ink-soft);">— ${esc(v.def)}</span></div>`).join('')}
-            </div>`;
-          }).join('')}
-        </div>
-      </div>` : ''}
     </section>
 
     <section class="qtr">
