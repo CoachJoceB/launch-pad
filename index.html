@@ -1454,7 +1454,7 @@ function allSubjects(c, opts){
   let finConcept = (c.financialLit && c.financialLit.concept) || 'Money lesson';
   if(mm52IsActive()){
     try {
-      const weekNum = contentWeekForDate(new Date(state.schoolDate + 'T12:00:00'));
+      const weekNum = contentWeekForDate(state.schoolDate);
       const st52 = mm52States(weekNum);
       if(st52 && !st52.review) scNames = st52.state;
       else if(st52 && st52.review) scNames = 'Review: ' + (st52.states||[]).join(', ');
@@ -1654,7 +1654,7 @@ async function renderBoard(){
     // Weekend: show next Monday's 52-week lesson preview instead of "No School Day"
     let today;
     try {
-      today = new Date(state.schoolDate + 'T12:00:00');
+      today = state.schoolDate;
       if(isNaN(today.getTime())) today = new Date();
     } catch(e) { today = new Date(); }
     today.setHours(12,0,0,0);
@@ -1703,7 +1703,7 @@ async function renderBoard(){
   // Devotional (scripture, reflection, prayer, intention) from 52-week devotional.
   if(mm52IsActive() && devo){
     try {
-      const weekNum = contentWeekForDate(new Date(state.schoolDate + 'T12:00:00'));
+      const weekNum = contentWeekForDate(state.schoolDate);
       // Use the 3-5 band vocab as the shared Word of the Day (or first available band)
       let weekData = mm52GetWeek(weekNum, '35') || mm52GetWeek(weekNum, '68') || mm52GetWeek(weekNum, '912');
       if(weekData && weekData.vocab && weekData.vocab.length >= 4){
@@ -1759,7 +1759,7 @@ async function renderBoard(){
     let lesson = sharedLesson, lessonType = sharedLessonType, dayPart = sharedDayPart;
     const student = state.students.find(s=>s.id===studentId);
     if(mm52IsActive() && student && (isHistoryDay || isScienceDay)){
-      const weekNum = mm52SelectedWeek || mm52WeekForDate(new Date(state.schoolDate + 'T12:00:00'));
+      const weekNum = mm52SelectedWeek || mm52WeekForDate(state.schoolDate);
       const band = student.band || mm52BandForGrade(student.grade);
       const mm52Lesson = mm52LessonForStudent(student, weekNum < 1 ? 1 : weekNum, isHistoryDay ? 'History' : 'Science');
       if(mm52Lesson){
@@ -1823,7 +1823,7 @@ async function renderBoard(){
   let flData = c.financialLit;
   if(mm52IsActive()){
     try {
-      const weekNum = contentWeekForDate(new Date(state.schoolDate + 'T12:00:00'));
+      const weekNum = contentWeekForDate(state.schoolDate);
       const fin52 = mm52Financial(weekNum, wd);
       if(fin52 && fin52.concept){
         flData = {
@@ -1835,7 +1835,7 @@ async function renderBoard(){
     } catch(e) { console.warn('52-week financial:', e); }
   }
   const financialLitHTML = (!isTestDay && flData && flData.concept) ? `<div class="card">
-    <div class="word-badge">Financial Lit · Week ${mm52IsActive() ? contentWeekForDate(new Date(state.schoolDate + 'T12:00:00')) : ''}</div>
+    <div class="word-badge">Financial Lit · Week ${mm52IsActive() ? contentWeekForDate(state.schoolDate) : ''}</div>
     <div style="font-size:15px;font-weight:600;margin:6px 0 8px;">${esc(flData.concept)}</div>
     <p style="font-size:14px;line-height:1.5;white-space:pre-line;">${esc(flData.blank)}</p>
     ${flData.answer ? `<button type="button" class="btn btn-ghost" data-flanswer="${escAttr(flData.answer)}" id="revealFlAnswer" style="margin-top:8px;">Reveal Answer</button>
@@ -1855,7 +1855,7 @@ async function renderBoard(){
   let statesNickname = '';
   if(mm52IsActive()){
     try {
-      const weekNum = contentWeekForDate(new Date(state.schoolDate + 'T12:00:00'));
+      const weekNum = contentWeekForDate(state.schoolDate);
       const st52 = mm52States(weekNum);
       if(st52 && !st52.review){
         statesCapitalsData = [{state: st52.state, capital: st52.capital}];
@@ -1867,7 +1867,7 @@ async function renderBoard(){
     } catch(e) { console.warn('52-week states:', e); }
   }
   const statesHTML = (!isTestDay && statesCapitalsData && statesCapitalsData.length) ? `<div class="card">
-    <div class="word-badge">States & Capitals · Week ${mm52IsActive() ? contentWeekForDate(new Date(state.schoolDate + 'T12:00:00')) : ''}</div>
+    <div class="word-badge">States & Capitals · Week ${mm52IsActive() ? contentWeekForDate(state.schoolDate) : ''}</div>
     <div style="display:flex;flex-direction:column;gap:8px;margin-top:8px;">
       ${statesCapitalsData.map((sc,i)=>`
         <div class="info-line" style="cursor:pointer;" data-staterev="${i}">
@@ -1959,7 +1959,7 @@ async function renderBoard(){
           <div class="vocab-word">${esc(word.word)}</div>
           <div class="vocab-row"><b>Define:</b> ${esc(word.def)}</div>
           <div class="vocab-row"><b>Use it:</b> ${esc(word.sent)}</div>
-          <div class="syn-ant"><span><b>Syn</b> ${esc(word.syn)}</span><span class="ant"><b>Ant</b> ${esc(word.ant)}</span></div>
+          <div class="syn-ant"><span><b>Syn:</b> ${esc(word.syn)}</span><span class="ant"><b>Ant:</b> ${esc(word.ant)}</span></div>
         </div>`;
       }
     }
@@ -2017,7 +2017,7 @@ async function renderBoard(){
         <div class="grade-badge">${esc(s.grade)} GRADE</div>
       </div>
       ${isTestDay ? '' : `<div class="student-progress">
-        <div class="sp-count"><b data-sp-done>0</b> of <span data-sp-total>0</span> checked off</div>
+        <div class="sp-count"><b data-sp-done>0</b>&nbsp;of&nbsp;<span data-sp-total>0</span>&nbsp;checked off</div>
         <div class="sp-bar" data-sp-bar role="progressbar" aria-label="${escAttr(firstName(s.name))}’s check-offs today" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="sp-fill" data-sp-fill></div></div>
       </div>`}
       <div class="student-body">
@@ -2202,7 +2202,7 @@ async function renderBoard(){
       const student = state.students.find(s=>s.id===studentId);
       // 52-week mode: build per-student lesson from their band
       if(mm52IsActive() && student && (isHistoryDay || isScienceDay)){
-        const weekNum = mm52SelectedWeek || mm52WeekForDate(new Date(state.schoolDate + 'T12:00:00'));
+        const weekNum = mm52SelectedWeek || mm52WeekForDate(state.schoolDate);
         const mm52Lesson = mm52LessonForStudent(student, weekNum < 1 ? 1 : weekNum, isHistoryDay ? 'History' : 'Science');
         if(mm52Lesson){
           openWorksheetModal(isHistoryDay ? 'history' : 'science', mm52Lesson, studentId, state.weekdayNum);
@@ -2305,7 +2305,7 @@ async function renderBoard(){
 
 /* Preview upcoming days (PIN-gated) — lets parent see future dashboard content */
 function openPreviewModal(){
-  const today = new Date(state.schoolDate + 'T12:00:00');
+  const today = state.schoolDate;
   let html = '<h3>🔮 Preview Upcoming Days</h3><div class="sub">Select a date to preview that day\'s dashboard. 52-week content starts Oct 19, 2026.</div>';
   html += '<div style="display:flex;gap:8px;flex-wrap:wrap;margin:12px 0;">';
   for(let i=1;i<=14;i++){
@@ -4345,7 +4345,7 @@ function buildFullDayHTML(dateObj, content, checks, weekWords){
           <div class="vocab-word">${esc(word.word)}</div>
           <div class="vocab-row"><b>Define:</b> ${esc(word.def)}</div>
           <div class="vocab-row"><b>Use it:</b> ${esc(word.sent)}</div>
-          <div class="syn-ant"><span><b>Syn</b> ${esc(word.syn)}</span><span class="ant"><b>Ant</b> ${esc(word.ant)}</span></div>
+          <div class="syn-ant"><span><b>Syn:</b> ${esc(word.syn)}</span><span class="ant"><b>Ant:</b> ${esc(word.ant)}</span></div>
         </div>`;
       }
     }
