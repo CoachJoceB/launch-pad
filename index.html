@@ -1948,7 +1948,21 @@ async function renderBoard(){
         <ul class="test-list">${words.map(w=>`<li>${esc(w)}</li>`).join('') || '<li style="text-transform:none;font-family:Oswald;font-size:13px;color:var(--ink-soft)">No words logged this week yet</li>'}</ul>
       </div>`;
     } else {
-      const word = c.vocab && c.vocab[grade];
+      // 52-week: vocabulary from the student's grade band weekly words
+      let word = c.vocab && c.vocab[grade];
+      if(mm52IsActive()){
+        try {
+          const weekNum = mm52SelectedWeek || mm52WeekForDate(state.schoolDate);
+          const band = s.band || mm52BandForGrade(s.grade);
+          const week = mm52GetWeek(weekNum < 1 ? 1 : weekNum, band);
+          if(week && week.vocab && week.vocab.length){
+            // Mon-Thu: one word per day; show the day's word
+            const wordIdx = Math.min(wd - 1, week.vocab.length - 1);
+            const v = week.vocab[wordIdx >= 0 ? wordIdx : 0];
+            word = { word: v.word, def: v.def, sent: v.use, syn: v.syn, ant: v.ant };
+          }
+        } catch(e) {}
+      }
       if(word){
         vocabHTML = `<div class="vocab-box">
           <div class="vocab-word">${esc(word.word)}</div>
@@ -1968,8 +1982,19 @@ async function renderBoard(){
 
     const excluded = s.excludedSubjects || [];
     const orderedSubjList = applySubjectOrder(baseSubjList, s.id);
-    // Vocabulary topic is per-grade: stamp this student's word onto their copy.
-    const gradeWord = c.vocab && c.vocab[grade] && c.vocab[grade].word;
+    // Vocabulary topic is per-grade band: use 52-week word when active
+    let gradeWord = c.vocab && c.vocab[grade] && c.vocab[grade].word;
+    if(mm52IsActive()){
+      try {
+        const weekNum = mm52SelectedWeek || mm52WeekForDate(state.schoolDate);
+        const band = s.band || mm52BandForGrade(s.grade);
+        const week = mm52GetWeek(weekNum < 1 ? 1 : weekNum, band);
+        if(week && week.vocab && week.vocab.length){
+          const wordIdx = Math.min(wd - 1, week.vocab.length - 1);
+          gradeWord = week.vocab[wordIdx >= 0 ? wordIdx : 0].word;
+        }
+      } catch(e) {}
+    }
     // 52-week: each student's History/Science topic comes from their band's lesson
     let studentLessonTopic = null;
     let studentLessonName = null;
