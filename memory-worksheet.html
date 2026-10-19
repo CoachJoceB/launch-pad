@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Daily Worksheet - Legacy Lab Academy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1a1a1a;
+    --ink-soft:#555;
+    --accent:#c65d1e;      /* burnt orange brand accent */
+    --accent-light:#f5e9dd;
+    --line:#bbb;
+    --line-light:#ddd;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{
+    font-family:'Inter',Arial,sans-serif;
+    color:var(--ink);
+    background:#f4f1ea;
+    padding:24px;
+    -webkit-print-color-adjust:exact;
+    print-color-adjust:exact;
+  }
+  .page{
+    max-width:8.5in;
+    margin:0 auto 24px;
+    background:#fff;
+    padding:0.7in 0.75in;
+    box-shadow:0 2px 12px rgba(0,0,0,.12);
+    border-radius:4px;
+  }
+  /* ---------- header ---------- */
+  .masthead{
+    display:flex;justify-content:space-between;align-items:flex-end;
+    border-bottom:3px solid var(--ink);
+    padding-bottom:10px;margin-bottom:14px;
+  }
+  .brand{font-family:'Oswald',sans-serif;font-size:26px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;}
+  .brand .accent{color:var(--accent);}
+  .doc-title{font-family:'Oswald',sans-serif;font-size:15px;font-weight:500;letter-spacing:2px;text-transform:uppercase;color:var(--accent);}
+  .meta-grid{
+    display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;
+    margin-bottom:14px;
+  }
+  .meta-field{font-size:13px;color:var(--ink-soft);}
+  .meta-field .label{font-weight:600;color:var(--ink);font-size:11px;text-transform:uppercase;letter-spacing:1px;}
+  .meta-line{border-bottom:1.5px solid var(--ink);min-height:22px;margin-top:2px;}
+  /* ---------- sections ---------- */
+  .section{margin-bottom:18px;}
+  .section-head{
+    font-family:'Oswald',sans-serif;font-size:16px;font-weight:600;letter-spacing:1.2px;text-transform:uppercase;
+    background:var(--ink);color:#fff;padding:7px 12px;border-radius:4px;margin-bottom:10px;
+    display:flex;align-items:center;gap:8px;
+  }
+  .section-head .num{
+    background:var(--accent);border-radius:50%;width:24px;height:24px;flex:0 0 24px;
+    display:flex;align-items:center;justify-content:center;font-size:13px;
+  }
+  .sub-head{
+    font-family:'Oswald',sans-serif;font-size:13px;font-weight:600;letter-spacing:1px;text-transform:uppercase;
+    color:var(--accent);margin:12px 0 6px;border-bottom:1px solid var(--line-light);padding-bottom:3px;
+  }
+  .field{margin-bottom:9px;}
+  .field .flabel{font-size:12px;font-weight:600;color:var(--ink-soft);margin-bottom:3px;}
+  .write-line{border-bottom:1px solid var(--line);min-height:26px;}
+  .write-lines .write-line{margin-bottom:2px;}
+  .write-box{
+    border:1.5px solid var(--line);border-radius:4px;min-height:64px;padding:6px;
+    background:
+      repeating-linear-gradient(transparent, transparent 25px, var(--line-light) 25px, var(--line-light) 26px);
+    line-height:26px;
+  }
+  .write-box.tall{min-height:90px;}
+  .two-col{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+  .hint{font-size:11px;color:var(--ink-soft);font-style:italic;margin-top:2px;}
+  /* ---------- footer ---------- */
+  .page-footer{
+    margin-top:20px;padding-top:10px;border-top:2px solid var(--ink);
+    display:flex;justify-content:space-between;align-items:center;
+    font-size:11px;color:var(--ink-soft);
+  }
+  .page-footer .verse{font-style:italic;text-align:right;max-width:70%;}
+  .check-row{display:flex;align-items:center;gap:8px;margin-top:10px;font-size:12px;color:var(--ink-soft);}
+  .check-box{width:16px;height:16px;border:1.5px solid var(--ink);border-radius:3px;flex:0 0 16px;}
+  .no-print-note{
+    max-width:8.5in;margin:0 auto 16px;background:#fff8ec;border:1px solid #e0c98f;
+    border-radius:6px;padding:10px 14px;font-size:13px;color:#6b5518;
+  }
+  .no-print-note button{
+    font-family:'Oswald',sans-serif;letter-spacing:1px;text-transform:uppercase;
+    background:var(--accent);color:#fff;border:none;border-radius:4px;
+    padding:8px 18px;font-size:13px;cursor:pointer;margin-left:10px;
+  }
+  /* ---------- print ---------- */
+  @media print{
+    body{background:#fff;padding:0;}
+    .no-print-note{display:none;}
+    .page{box-shadow:none;border-radius:0;margin:0;max-width:none;padding:0.6in 0.65in;page-break-after:always;}
+    .page:last-child{page-break-after:auto;}
+    .section-head{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  }
+</style>
+</head>
+<body>
+
+<div class="no-print-note">
+  Print this worksheet for each school day. Fill in the header, then complete each section by hand.
+  <button onclick="window.print()">Print</button>
+</div>
+
+<!-- ================= PAGE 1 ================= -->
+<div class="page">
+  <div class="masthead">
+    <div>
+      <div class="brand">Legacy <span class="accent">Lab</span> Academy</div>
+      <div class="doc-title">Daily Written Work</div>
+    </div>
+    <div style="text-align:right;font-size:12px;color:var(--ink-soft);">Daily Worksheet</div>
+  </div>
+
+  <div class="meta-grid">
+    <div class="meta-field"><div class="label">Student Name</div><div class="meta-line"></div></div>
+    <div class="meta-field"><div class="label">Date</div><div class="meta-line"></div></div>
+    <div class="meta-field"><div class="label">Week # &nbsp;/ Day</div><div class="meta-line"></div></div>
+  </div>
+
+  <!-- WARM UP -->
+  <div class="section">
+    <div class="section-head"><span class="num">1</span> Warm-Up &middot; Devotional</div>
+
+    <div class="sub-head">Word of the Day</div>
+    <div class="two-col">
+      <div class="field"><div class="flabel">Word</div><div class="write-line"></div></div>
+      <div class="field"><div class="flabel">Part of speech</div><div class="write-line"></div></div>
+    </div>
+    <div class="field"><div class="flabel">Definition (in your own words)</div><div class="write-box" style="min-height:130px;"></div></div>
+    <div class="two-col">
+      <div class="field"><div class="flabel">Synonym</div><div class="write-line"></div></div>
+      <div class="field"><div class="flabel">Antonym</div><div class="write-line"></div></div>
+    </div>
+    <div class="field"><div class="flabel">Use it in a sentence</div><div class="write-box" style="min-height:130px;"></div></div>
+
+    <div class="sub-head">Scripture</div>
+    <div class="two-col">
+      <div class="field"><div class="flabel">Reference (book chapter:verse)</div><div class="write-line"></div></div>
+      <div class="field"><div class="flabel">Key phrase I remember</div><div class="write-line"></div></div>
+    </div>
+    <div class="field"><div class="flabel">Write the scripture</div><div class="write-box" style="min-height:130px;"></div></div>
+
+    <div class="sub-head">Reflection</div>
+    <div class="field"><div class="flabel">Reflection question</div><div class="write-line"></div></div>
+    <div class="field"><div class="flabel">My response (5 lines)</div><div class="write-box" style="min-height:130px;"></div></div>
+
+    <div class="sub-head">Prayer &amp; Intention</div>
+    <div class="field"><div class="flabel">My prayer today</div><div class="write-box" style="min-height:130px;"></div></div>
+    <div class="field"><div class="flabel">Today's intention (one thing I will do on purpose today)</div><div class="write-line"></div></div>
+  </div>
+
+  <div class="page-footer">
+    <div>Legacy Lab Academy &middot; Daily Written Work</div>
+    <div class="verse">&ldquo;Thy word is a lamp unto my feet, and a light unto my path.&rdquo; (Psalm 119:105, KJV)</div>
+  </div>
+</div>
+
+<!-- ================= PAGE 2 ================= -->
+<div class="page">
+  <div class="masthead">
+    <div>
+      <div class="brand">Legacy <span class="accent">Lab</span> Academy</div>
+      <div class="doc-title">Daily Written Work &middot; Page 2</div>
+    </div>
+    <div style="font-size:12px;color:var(--ink-soft);">
+      <span style="display:inline-block;min-width:150px;border-bottom:1.5px solid var(--ink);">&nbsp;</span> Name &nbsp;
+      <span style="display:inline-block;min-width:110px;border-bottom:1.5px solid var(--ink);">&nbsp;</span> Date
+    </div>
+  </div>
+
+  <!-- LIFE SKILLS -->
+  <div class="section">
+    <div class="section-head"><span class="num">2</span> Life Skills &amp; Drills</div>
+
+    <div class="sub-head">Financial Literacy</div>
+    <div class="field"><div class="flabel">Today's concept</div><div class="write-line"></div></div>
+    <div class="field"><div class="flabel">Today's activity</div><div class="write-line"></div></div>
+    <div class="field"><div class="flabel">My work / answer</div><div class="write-box" style="min-height:130px;"></div></div>
+
+    <div class="sub-head">States &amp; Capitals</div>
+    <div class="two-col">
+      <div class="field"><div class="flabel">State</div><div class="write-line"></div></div>
+      <div class="field"><div class="flabel">Capital</div><div class="write-line"></div></div>
+    </div>
+    <div class="field"><div class="flabel">Fun fact about this state (in my own words)</div><div class="write-box" style="min-height:130px;"></div></div>
+
+    <div class="sub-head">Real World Scenario</div>
+    <div class="field"><div class="flabel">Scenario title</div><div class="write-line"></div></div>
+    <div class="field"><div class="flabel">What would I do, and why?</div><div class="write-box" style="min-height:130px;"></div></div>
+  </div>
+
+  <div class="check-row"><span class="check-box"></span> I completed every section above on my own, without being reminded.</div>
+
+  <div class="page-footer">
+    <div>Legacy Lab Academy &middot; Daily Written Work</div>
+    <div class="verse">&ldquo;Study to shew thyself approved unto God, a workman that needeth not to be ashamed.&rdquo; (2 Timothy 2:15, KJV)</div>
+  </div>
+</div>
+
+<!-- ================= PAGE 3 ================= -->
+<div class="page">
+  <div class="masthead">
+    <div>
+      <div class="brand">Legacy <span class="accent">Lab</span> Academy</div>
+      <div class="doc-title">Personal Information Practice &middot; Page 3</div>
+    </div>
+    <div style="font-size:12px;color:var(--ink-soft);">
+      <span style="display:inline-block;min-width:150px;border-bottom:1.5px solid var(--ink);">&nbsp;</span> Name &nbsp;
+      <span style="display:inline-block;min-width:110px;border-bottom:1.5px solid var(--ink);">&nbsp;</span> Date
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-head"><span class="num">3</span> Personal Information Practice</div>
+    <p class="hint" style="margin-bottom:10px;">Write each item from memory first. Then check your work and correct anything in a different color.</p>
+
+    <div class="field"><div class="flabel">My full legal name</div><div class="write-line"></div></div>
+    <div class="two-col">
+      <div class="field"><div class="flabel">Date of birth</div><div class="write-line"></div></div>
+      <div class="field"><div class="flabel">Age / Grade</div><div class="write-line"></div></div>
+    </div>
+    <div class="sub-head">Addresses (for students with more than one home)</div>
+    <div class="field"><div class="flabel">Address 1 (street, city, state, zip)</div><div class="write-lines"><div class="write-line"></div><div class="write-line"></div></div></div>
+    <div class="field"><div class="flabel">Address 2 (street, city, state, zip)</div><div class="write-lines"><div class="write-line"></div><div class="write-line"></div></div></div>
+    <div class="field"><div class="flabel">Address 3 (street, city, state, zip)</div><div class="write-lines"><div class="write-line"></div><div class="write-line"></div></div></div>
+    <div class="sub-head">Phone Numbers</div>
+    <div class="two-col">
+      <div class="field"><div class="flabel">My phone number</div><div class="write-line"></div></div>
+      <div class="field"><div class="flabel">Caregiver 1 phone number</div><div class="write-line"></div></div>
+    </div>
+    <div class="two-col">
+      <div class="field"><div class="flabel">Caregiver 2 phone number</div><div class="write-line"></div></div>
+      <div class="field"><div class="flabel">Caregiver 3 phone number</div><div class="write-line"></div></div>
+    </div>
+    <div class="field"><div class="flabel">Emergency contact (name + number)</div><div class="write-line"></div></div>
+
+    <div class="sub-head">Safety Check</div>
+    <div class="field"><div class="flabel">If I am lost, what do I do first?</div><div class="write-box" style="min-height:130px;"></div></div>
+    <div class="field"><div class="flabel">The emergency number is:</div><div class="write-line" style="max-width:220px;"></div></div>
+  </div>
+
+  <div class="page-footer">
+    <div>Legacy Lab Academy &middot; Daily Written Work</div>
+    <div class="verse">&ldquo;The name of the Lord is a strong tower: the righteous runneth into it, and is safe.&rdquo; (Proverbs 18:10, KJV)</div>
+  </div>
+</div>
+
+</body>
+</html>
