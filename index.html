@@ -3895,11 +3895,22 @@ async function openWorksheetModal(subject, lesson, preferredStudentId, weekdayNu
   // worksheet form (below), not in the shared reading area.
 
   const assignedIds = Array.isArray(lesson.worksheetStudentIds) ? lesson.worksheetStudentIds : [];
-  const worksheetStudents = assignedIds.length ? state.students.filter(s=>assignedIds.includes(s.id)) : state.students;
+  let worksheetStudents = assignedIds.length ? state.students.filter(s=>assignedIds.includes(s.id)) : state.students;
   if(!worksheetStudents.length){ showToast('This worksheet has no students assigned.'); return; }
+  // No student toggle: when opened from a student's card, show only that student
+  if(preferredStudentId && worksheetStudents.some(s=>s.id===preferredStudentId)){
+    worksheetStudents = worksheetStudents.filter(s=>s.id===preferredStudentId);
+  }
   const tabsWrap = document.getElementById('worksheetStudentTabs');
-  const defaultId = (preferredStudentId && worksheetStudents.some(s=>s.id===preferredStudentId)) ? preferredStudentId : worksheetStudents[0].id;
-  tabsWrap.innerHTML = worksheetStudents.map((s)=>`<div class="modal-tab ${s.id===defaultId?'active':''}" data-wstab="${s.id}">${esc(s.name)}</div>`).join('');
+  const defaultId = worksheetStudents[0].id;
+  // Hide tabs when there's only one student (no switching needed)
+  if(worksheetStudents.length <= 1){
+    tabsWrap.innerHTML = '';
+    tabsWrap.style.display = 'none';
+  } else {
+    tabsWrap.style.display = '';
+    tabsWrap.innerHTML = worksheetStudents.map((s)=>`<div class="modal-tab ${s.id===defaultId?'active':''}" data-wstab="${s.id}">${esc(s.name)}</div>`).join('');
+  }
 
   worksheetCache = {};
   wsChecksCache = {};
