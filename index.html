@@ -1683,11 +1683,37 @@ async function renderBoard(){
   window.__pendingWorksheet = null;
 
   if(!SCHOOL_DAYS.includes(wd)){
-    const tzLabel = (TIMEZONE_OPTIONS.find(o=>o.value===state.timezone)||{}).label || state.timezone;
-    board.innerHTML = `<div class="weekend-card">
-      <h2>No School Day Scheduled</h2>
-      <p>The command center runs Monday–Friday and switches automatically at midnight ${esc(tzLabel)}. Enjoy the weekend! 🏀</p>
+    // Weekend: show next Monday's 52-week lesson preview instead of "No School Day"
+    const today = new Date(state.schoolDate + 'T12:00:00');
+    const daysUntilMonday = (8 - today.getDay()) % 7 || 7;
+    const nextMonday = new Date(today);
+    nextMonday.setDate(today.getDate() + daysUntilMonday);
+    const mondayWeek = contentWeekForDate(nextMonday);
+    const mondayStr = nextMonday.toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric'});
+
+    let mondayPreview = '';
+    if(mm52IsActive()){
+      for(const student of state.students){
+        const band = student.band || mm52BandForGrade(student.grade);
+        const week = mm52GetWeek(mondayWeek, band);
+        if(!week) continue;
+        // Monday is typically History day (adjust based on your rotation)
+        mondayPreview += `<div class="card" style="margin-bottom:10px;">
+          <div style="font-weight:700;">${esc(firstName(student.name))} <span style="font-weight:400;font-size:13px;color:var(--ink-soft);">(${MM52_BAND_LABELS[band]})</span></div>
+          <div style="margin-top:6px;">🏛️ ${esc(week.historyTopic||'History')}</div>
+          <div style="font-size:13px;color:var(--ink-soft);margin-top:4px;">${(week.history||[]).length} sections · ${(week.vocab||[]).length} vocab words</div>
+        </div>`;
+      }
+    }
+
+    board.innerHTML = `<div class="weekend-card" style="max-width:800px;margin:0 auto;">
+      <h2>📚 Monday Preview</h2>
+      <p style="margin-bottom:16px;">${mondayStr} — Week ${mondayWeek} of 52</p>
+      ${mondayPreview || '<p style="color:var(--ink-soft);">52-week content starts Oct 19, 2026.</p>'}
+      <p style="margin-top:16px;font-size:13px;color:var(--ink-soft);">The command center runs Monday–Friday. Enjoy the weekend! 🏀</p>
     </div>`;
+    // Wire up the 52-week section if present
+    try{ mm52WireSelector(); }catch(e){}
     return;
   }
 
@@ -2008,6 +2034,22 @@ async function renderBoard(){
           <div class="intention-text">${esc(devo.intention)}</div>
         </div>
       </div>
+      ${mm52IsActive() ? `
+      <div class="card" style="margin-top:12px;">
+        <div class="word-badge">📚 This Week's Words · Week ${mm52CurrentWeek()}</div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px;margin-top:10px;">
+          ${['35','68','912'].map(band=>{
+            const week = mm52GetWeek(mm52CurrentWeek(), band);
+            if(!week || !(week.vocab||[]).length) return '';
+            const hasStudents = state.students.some(s=>(s.band||mm52BandForGrade(s.grade))===band);
+            if(!hasStudents) return '';
+            return `<div>
+              <div style="font-weight:700;font-size:13px;margin-bottom:6px;">${MM52_BAND_LABELS[band]}</div>
+              ${(week.vocab||[]).map(v=>`<div style="margin-bottom:6px;font-size:13.5px;"><strong>${esc(v.word)}</strong> <span style="color:var(--ink-soft);">— ${esc(v.def)}</span></div>`).join('')}
+            </div>`;
+          }).join('')}
+        </div>
+      </div>` : ''}
     </section>
 
     <section class="qtr">
