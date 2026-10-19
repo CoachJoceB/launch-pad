@@ -36,6 +36,18 @@ const MM_WEEKS_912 = [
             {id: "h1-o4", event: "The Iroquois Confederacy is formed in the Northeast.", answer: 4},
             {id: "h1-o5", event: "Columbus reaches the Americas, ending the pre-Columbian era.", answer: 5}
           ]}
+        ,
+          {type: "comprehension", instructions: "Answer each question in 3-5 sentences, using evidence from the reading.", items: [
+            {id: "h1-0-c1", question: "Why does the author argue that calling the Americas a 'wilderness' in 1491 is misleading?", answer: "Because the reading shows the Americas were farmed, governed, and managed: Tenochtitlan held 200,000 people, Cahokia built Monks Mound, the Inca ran a 10-million-person empire, and the Three Sisters system fed cities."},
+            {id: "h1-0-c2", question: "How does the reading use the Three Sisters planting system to support its larger claim about Native societies?", answer: "It presents the Three Sisters as evidence of applied ecological knowledge: each crop helped the others, since corn stalks gave beans a climbing pole, beans fixed nitrogen, and squash leaves shaded the soil. This deliberate, productive system fed cities, armies, and trade networks, which supports the claim that Native societies were as complex as any in Europe or Asia."},
+            {id: "h1-0-c3", question: "Evaluate the significance of the Las Casas quotation in the author's argument.", answer: "The quotation gives a firsthand European witness who described Taino farming as abundant, with yuca roots as thick as a man's leg, fish from the sea, and no hunger. The author uses it to show that even a Spanish observer confirmed the productivity of Native agriculture, which strengthens the claim that the Americas were a managed world rather than an empty wilderness."}
+          ]},
+          {type: "argument", instructions: "Write two paragraphs defending or challenging the thesis.", items: [
+            {id: "h1-0-a1", prompt: "Defend or challenge this thesis: 'The societies of the pre-Columbian Americas were as complex and sophisticated as any in Europe or Asia.'", guidance: "Thesis: take a clear position on the comparison. Evidence: use at least two examples from the reading (Tenochtitlan's 200,000 residents, Cahokia's Monks Mound, the Inca quipu system, the Great Law of Peace) plus one fact from your own research on Native agriculture. Counterargument: address the claim that these societies lacked writing or iron tools, and explain why that does or does not settle the question of complexity."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows you understand its meaning in the context of this week's topic.", items: [
+            {id: "h1-0-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["pre-Columbian", "kinship", "confederacy"]}
+          ]}
         ]
       },
       {
@@ -55,6 +67,18 @@ const MM_WEEKS_912 = [
             {id: "h2-f2", text: "The ___ nation of Florida absorbed large numbers of Africans and fought beside them.", answer: "Seminole", accept: ["Seminole"]},
             {id: "h2-f3", text: "Once adopted into a clan, a stranger became a relative, which is how ___ made the partnership durable.", answer: "kinship", accept: ["kinship"]}
           ]}
+        ,
+          {type: "comprehension", instructions: "Answer each question in 3-5 sentences, using evidence from the reading.", items: [
+            {id: "h1-1-c1", question: "Why does the author insist the Black-Native alliances were 'strategy' rather than 'charity'?", answer: "Because each side gained something concrete: Native nations gained fighters and farmers, while Africans gained refuge and relatives. The reading frames the alliance as a mutual exchange sealed by kinship obligations, not one-sided generosity."},
+            {id: "h1-1-c2", question: "How did kinship make these alliances durable, according to the reading?", answer: "Once adopted into a clan, a person was no longer a stranger but a relative owed protection. Kinship's obligations of mutual defense, shared labor, and loyalty in war turned fugitives into kin and made the partnership last for decades, as with the Seminoles and the Black fighters beside them."},
+            {id: "h1-1-c3", question: "What is the author's critique of the 'standard story' that moves neatly from Columbus to Jamestown?", answer: "The author argues that the neat line erases the centuries in which Black and Native peoples built shared communities, shared families, and shared resistance. Leaving them out teaches that only Europeans acted in early American history, which narrows everyone's understanding; asking whose history counts decides which ancestors we remember."}
+          ]},
+          {type: "argument", instructions: "Write two paragraphs defending or challenging the thesis.", items: [
+            {id: "h1-1-a1", prompt: "Defend or challenge this thesis: 'The standard American story should center the Black-Native alliances of the early contact era.'", guidance: "Thesis: take a clear position on whether these alliances belong at the center of the story. Evidence: use at least two examples from the reading (Fort Mose and its militia, the Black Seminoles, kinship adoption networks) plus one fact from your own research on an early Black-Native alliance or maroon community. Counterargument: address the claim that these alliances were marginal side stories compared with Jamestown and the Revolution, and explain why that judgment does or does not reflect whose history we have chosen to count."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows you understand its meaning in the context of this week's topic.", items: [
+            {id: "h1-1-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["pre-Columbian", "kinship", "confederacy"]}
+          ]}
         ]
       }
     ],
@@ -73,6 +97,18 @@ const MM_WEEKS_912 = [
           {type: "fillblank", instructions: "Use the word bank to fill each blank. Each sentence has one blank.", wordBank: ["7", "below", "above", "buffers", "hydrogen", "polarity"], items: [
             {id: "s1-f1", text: "Acids release ___ ions and have a pH below 7.", answer: "hydrogen", accept: ["hydrogen"]},
             {id: "s1-f2", text: "Chemical systems called ___ absorb extra acid or base to keep blood pH between 7.35 and 7.45.", answer: "buffers", accept: ["buffers"]}
+          ]}
+        ,
+          {type: "comprehension", instructions: "Answer each question in 3-5 sentences, using evidence from the reading.", items: [
+            {id: "s1-0-c1", question: "Why does the reading call life 'a balancing act performed in water'?", answer: "Because cells must hold their internal pH within a narrow range, with human blood staying between 7.35 and 7.45 through buffers that absorb extra acid or base. If pH drifts outside that range, proteins unfold, enzymes fail, and cells die, so life depends on constantly balancing water's chemistry."},
+            {id: "s1-0-c2", question: "How does the reading connect water's polarity to its role as the 'universal solvent'?", answer: "Oxygen pulls shared electrons toward itself, giving the oxygen end a slight negative charge and the hydrogen ends a slight positive charge. These charged ends surround ions and molecules, tugging salt crystals apart and slipping between sugar molecules to pull them into solution."},
+            {id: "s1-0-c3", question: "Evaluate why a logarithmic pH scale makes small pH changes biologically significant.", answer: "Each whole-number step on the pH scale means a tenfold change in hydrogen ion concentration, so a drop from pH 5 to pH 3 means 100 times more hydrogen ions. That is why cells guard blood pH so fiercely: a tiny-looking shift represents a huge chemical change."}
+          ]},
+          {type: "argument", instructions: "Write two paragraphs defending or challenging the thesis.", items: [
+            {id: "s1-0-a1", prompt: "Defend or challenge this thesis: 'Water's chemical properties, more than any other single factor, explain why life as we know it depends on it.'", guidance: "Thesis: take a clear position on whether water's chemistry is the primary explanation. Evidence: use at least two properties from the reading (polarity and solvent power, hydrogen bonding and heat capacity, pH buffering of blood) plus one fact from your own research on water in living systems. Counterargument: address the claim that other molecules, such as carbon compounds or proteins, matter more to life, and explain why water's role is or is not primary."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows you understand its meaning in the context of this week's topic.", items: [
+            {id: "s1-0-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["enzyme", "monomer"]}
           ]}
         ]
       },
@@ -98,6 +134,18 @@ const MM_WEEKS_912 = [
             {id: "s2-k2", text: "I can explain what a monomer and a polymer are, with an example."},
             {id: "s2-k3", text: "I can describe how dehydration synthesis and hydrolysis are opposites."},
             {id: "s2-k4", text: "I can explain why a protein's shape determines its function."}
+          ]}
+        ,
+          {type: "comprehension", instructions: "Answer each question in 3-5 sentences, using evidence from the reading.", items: [
+            {id: "s1-1-c1", question: "Why does the reading argue that a protein's shape is the key to its function?", answer: "Proteins are chains of amino acids folded into precise shapes, and enzymes, antibodies, and keratin each work only because of their shape. The shape depends on the exact amino acid sequence, so the sequence determines the fold and the fold determines the job."},
+            {id: "s1-1-c2", question: "How does the monomer-to-polymer principle unify the four macromolecule classes?", answer: "Despite their different jobs, all four are built the same way: small monomers link into long polymers, with glucose building starch, amino acids building proteins, and nucleotides building DNA. Dehydration synthesis joins monomers by removing water, and hydrolysis breaks polymers apart by adding water back."},
+            {id: "s1-1-c3", question: "Evaluate the significance of the reading's claim that 'life builds itself up and breaks itself down with the same water it swims in.'", answer: "It ties the lesson back to water's centrality: dehydration synthesis joins monomers by removing water and hydrolysis breaks polymers by adding water back. Water is therefore both the medium of life and a direct participant in building and dismantling its molecules."}
+          ]},
+          {type: "argument", instructions: "Write two paragraphs defending or challenging the thesis.", items: [
+            {id: "s1-1-a1", prompt: "Defend or challenge this thesis: 'Of the four macromolecule classes, proteins are the most important to life.'", guidance: "Thesis: take a clear position ranking the macromolecules. Evidence: use at least two examples from the reading (enzymes that speed reactions, antibodies that fight infection, keratin in hair and nails; shape determining function) plus one fact from your own research on a protein's role in the body. Counterargument: address the claim that nucleic acids, which store the instructions, or carbohydrates, which supply the energy, are more fundamental, and explain why the work proteins do does or does not outweigh them."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows you understand its meaning in the context of this week's topic.", items: [
+            {id: "s1-1-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["enzyme", "monomer"]}
           ]}
         ]
       }
@@ -176,6 +224,18 @@ const MM_WEEKS_912 = [
             {id: "h1-c1", prompt: "Why did European diseases devastate Native populations so completely?", options: ["Native peoples had no prior exposure and therefore no immunity to these diseases.", "Native peoples refused all European medicine on religious grounds.", "The diseases were deliberately engineered in European laboratories."], answer: "Native peoples had no prior exposure and therefore no immunity to these diseases."},
             {id: "h1-c2", prompt: "Which pairing correctly shows the two directions of the Columbian Exchange?", options: ["Corn and potatoes to Europe; wheat, horses, and smallpox to the Americas", "Wheat and horses to Europe; corn and potatoes to the Americas", "Smallpox to Europe; corn and immunity to the Americas"], answer: "Corn and potatoes to Europe; wheat, horses, and smallpox to the Americas"}
           ]}
+        ,
+          {type: "comprehension", instructions: "Answer each question in 3-5 sentences, using evidence from the reading.", items: [
+            {id: "h2-0-c1", question: "Why does the author describe the collision as 'many things at once' rather than choosing one word for it?", answer: "Because the evidence cuts both ways: conquest and enslavement of the Taino alongside genuine exchange of crops and animals that fed population booms. The author argues honest history must hold invasion and trade, genocide and garden together without letting one erase the others."},
+            {id: "h2-0-c2", question: "How does the reading show that disease did 'as much conquering as any army'?", answer: "Smallpox, measles, and influenza raced ahead of European soldiers into virgin soil populations with no immunity, emptying villages and toppling empires. Some historians estimate that 90 percent of Native peoples in the hardest-hit regions died in the century after contact."},
+            {id: "h2-0-c3", question: "Evaluate the significance of Columbus's journal entry in the author's argument.", answer: "The quotation shows Columbus immediately framing the Taino as potential servants and assessing how quickly they repeat what is said to them. It lets a primary source reveal the colonizer's mindset at first contact and foreshadows the enslavement and forced labor that followed within a generation."}
+          ]},
+          {type: "argument", instructions: "Write two paragraphs defending or challenging the thesis.", items: [
+            {id: "h2-0-a1", prompt: "Defend or challenge this thesis: 'The Columbian Exchange should be remembered primarily as a catastrophe rather than as an exchange.'", guidance: "Thesis: take a clear position on how the exchange should be framed. Evidence: use at least two examples from the reading (the Taino collapse on Hispaniola, the virgin soil epidemics, the two-way flow of crops and animals) plus one fact from your own research on the 1619 arrival. Counterargument: address the claim that the exchange of crops and animals benefited both hemispheres and fed population booms, and explain whether those benefits outweigh or reframe the catastrophe."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows you understand its meaning in the context of this week's topic.", items: [
+            {id: "h2-0-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["collision", "virgin soil", "exchange"]}
+          ]}
         ]
       },
       {
@@ -195,6 +255,18 @@ const MM_WEEKS_912 = [
             {id: "h2-f1", text: "In August ___, the White Lion arrived at Point Comfort carrying Africans seized from a Portuguese ship.", answer: "1619", accept: ["1619"]},
             {id: "h2-f2", text: "As ___ profits soared, planters demanded more bound labor and pushed for harsher laws.", answer: "tobacco", accept: ["tobacco"]},
             {id: "h2-f3", text: "By the 1660s, Virginia made slavery ___ and racial by declaring that enslaved status passed from mother to child.", answer: "hereditary", accept: ["hereditary"]}
+          ]}
+        ,
+          {type: "comprehension", instructions: "Answer each question in 3-5 sentences, using evidence from the reading.", items: [
+            {id: "h2-1-c1", question: "Why does the author say understanding 1619 means 'holding both facts at once'?", answer: "Because the reading shows African resilience from the very beginning, with early Africans like Anthony Johnson gaining freedom and owning land, alongside a legal machine being built to crush it, with laws making slavery hereditary and racial by the 1660s. Neither fact alone explains what 1619 means."},
+            {id: "h2-1-c2", question: "How does the reading connect the collapse of Native populations to the rise of race-based slavery?", answer: "Disease hollowed out Native nations in a virgin soil catastrophe, clearing land colonists claimed as empty. Together with the arrival of Africans and soaring tobacco profits, this created the labor crisis that planters solved with hereditary, race-based slavery."},
+            {id: "h2-1-c3", question: "Evaluate the historians' debate described in the reading: was 1619 the beginning of American slavery?", answer: "The reading notes that Virginia had no law of lifelong, race-based slavery in 1619 and some arrivals worked terms of years, which suggests slavery hardened decades later. Yet the sale of those twenty Africans set in motion the demand for bound labor that became race-based slavery, so the answer depends on whether one dates slavery to the first sale or to the first laws."}
+          ]},
+          {type: "argument", instructions: "Write two paragraphs defending or challenging the thesis.", items: [
+            {id: "h2-1-a1", prompt: "Defend or challenge this thesis: '1619 marks the moment when American slavery became inevitable.'", guidance: "Thesis: take a clear position on whether the outcome was fixed in 1619. Evidence: use at least two examples from the reading (the murky early legal status and Johnson's freedom versus the hereditary laws of the 1660s; the labor crisis created by tobacco profits and Native population collapse) plus one fact from your own research on the 1619 arrival. Counterargument: address the claim that slavery was not yet racial or inevitable in 1619, and explain what would have had to change for a different outcome."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows you understand its meaning in the context of this week's topic.", items: [
+            {id: "h2-1-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["collision", "virgin soil", "exchange"]}
           ]}
         ]
       }
@@ -216,6 +288,18 @@ const MM_WEEKS_912 = [
           ]},
           {type: "shortanswer", instructions: "Write 4-6 sentences, then compare your answer with the model.", items: [
             {id: "s1-s1", prompt: "Explain why the cell theory's claim that all cells come from preexisting cells was revolutionary.", answer: "Before the cell theory, many people believed life could appear spontaneously from nonliving matter, such as maggots arising from rotting meat. The claim that all cells come from preexisting cells replaced that idea with an unbroken chain of descent stretching back to the first cells. It meant every cell in your body is the product of billions of cell divisions, not a fresh creation. This gave biology a single origin story and made evolution possible, since inherited traits pass through this chain. It also changed medicine: if cells only come from cells, then infections and cancers can be traced to specific cellular sources instead of mysterious spontaneous causes."}
+          ]}
+        ,
+          {type: "comprehension", instructions: "Answer each question in 3-5 sentences, using evidence from the reading.", items: [
+            {id: "s2-0-c1", question: "Why was Virchow's claim that all cells come from preexisting cells 'revolutionary'?", answer: "Because it meant life does not spontaneously appear: every cell in the body descends from earlier cells in an unbroken chain. The claim rules out spontaneous generation and grounds biology in continuity."},
+            {id: "s2-0-c2", question: "How does the reading use the house analogy to explain organelles?", answer: "It says organelles divide labor the way rooms divide a house: mitochondria burn fuel to make ATP, chloroplasts capture sunlight, the endoplasmic reticulum folds and ships proteins, the Golgi apparatus packages them, lysosomes digest waste, and the nucleus serves as the control room holding DNA."},
+            {id: "s2-0-c3", question: "Evaluate how the reading connects last week's chemistry lesson to cell structure.", answer: "It notes that every organelle is wrapped in membrane made of the phospholipids studied last week, presenting this as proof that the chemistry of life scales up into the structure of life. The same molecules that dissolve in water now form the compartments of the cell."}
+          ]},
+          {type: "argument", instructions: "Write two paragraphs defending or challenging the thesis.", items: [
+            {id: "s2-0-a1", prompt: "Defend or challenge this thesis: 'The invention of the compartmentalized eukaryotic cell was the most important step in the history of life.'", guidance: "Thesis: take a clear position on what mattered most. Evidence: use at least two examples from the reading (organelles dividing labor, such as mitochondria and chloroplasts; the nucleus sealing DNA inside a control room) plus one fact from your own research on cells or cell biology. Counterargument: address the claim that something else, such as photosynthesis, multicellularity, or DNA itself, was more important, and explain why compartmentalization does or does not deserve the top rank."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows you understand its meaning in the context of this week's topic.", items: [
+            {id: "s2-0-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["immunity", "exchange"]}
           ]}
         ]
       },
@@ -240,6 +324,18 @@ const MM_WEEKS_912 = [
           ]},
           {type: "shortanswer", instructions: "Write 4-6 sentences, then compare your answer with the model.", items: [
             {id: "s2-s1", prompt: "Explain why the surface area to volume ratio forces large organisms to use many small cells instead of a few huge ones.", answer: "A cell feeds itself and expels waste across its surface membrane, while its volume sets how much fuel it burns and waste it makes. As a cell grows, volume increases faster than surface area, so a huge cell's membrane could not keep up with its interior's needs. The center would starve while waste piled up. Using trillions of small cells keeps every cell's ratio high enough for diffusion to work. That is why you are built from microscopic cells, not a handful of giant ones."}
+          ]}
+        ,
+          {type: "comprehension", instructions: "Answer each question in 3-5 sentences, using evidence from the reading.", items: [
+            {id: "s2-1-c1", question: "Why does the surface-area-to-volume ratio force cells to stay microscopic?", answer: "A cell absorbs nutrients and expels waste across its surface membrane, while its volume determines how much fuel it burns and how much waste it makes. As a cell grows, volume increases faster than surface area, so a giant cell would starve at its center while its membrane struggled to keep up."},
+            {id: "s2-1-c2", question: "How does the reading explain that 30 trillion different cells can run on the same DNA?", answer: "Through specialization: every cell carries the same DNA but with different chapters open. A muscle cell packs itself with mitochondria to power contraction, while a root hair cell grows long and thin to absorb water."},
+            {id: "s2-1-c3", question: "Evaluate the significance of stem cells in the reading's account of how bodies are built.", answer: "Stem cells are unspecialized and able to divide indefinitely into many cell types, which is why researchers study them for repairing damaged hearts, spinal cords, and retinas. They represent the starting potential from which division plus specialization builds a human of 30 trillion cells."}
+          ]},
+          {type: "argument", instructions: "Write two paragraphs defending or challenging the thesis.", items: [
+            {id: "s2-1-a1", prompt: "Defend or challenge this thesis: 'Stem cell research is worth pursuing even though it raises difficult ethical questions.'", guidance: "Thesis: take a clear position on whether the research should continue. Evidence: use at least two examples from the reading (stem cells can become many cell types; researchers study them for repairing damaged hearts, spinal cords, and retinas) plus one fact from your own research on stem cells. Counterargument: address the ethical concern that research on embryonic stem cells destroys potential life, and explain how the medical promise does or does not outweigh that concern."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows you understand its meaning in the context of this week's topic.", items: [
+            {id: "s2-1-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["immunity", "exchange"]}
           ]}
         ]
       }
@@ -318,6 +414,18 @@ const MM_WEEKS_912 = [
             {id: "h1-o4", event: "The crown issues the New Laws of 1542 to limit encomienda abuses.", answer: 4},
             {id: "h1-o5", event: "Colonists largely ignore the New Laws and the system continues.", answer: 5}
           ]}
+        ,
+          {type: "comprehension", instructions: "Answer each question in 3-5 sentences, using evidence from the reading.", items: [
+            {id: "h3-0-c1", question: "Why does the reading structure Spain's empire around 'two engines: silver and souls'?", answer: "Because silver from Potosi and Zacatecas drove the economic engine, making Spanish coins the world's first global currency, while the missions drove the religious engine from Florida to California. The frame lets the author show how both engines mixed genuine achievement, such as cities, churches, and universities, with forced labor and demographic catastrophe."},
+            {id: "h3-0-c2", question: "How does the reading show the gap between what the encomienda claimed and what it did?", answer: "In theory, encomenderos owed their workers protection and Christian instruction, but in practice the system became forced labor that worked thousands to death in mines and on plantations. Even the crown's reforming New Laws of 1542 were largely ignored by colonists in the Americas."},
+            {id: "h3-0-c3", question: "Evaluate the role of Bartolome de las Casas in the author's judgment of the empire.", answer: "Las Casas, a friar who sailed on Columbus's later voyages, denounced the cruelty and argued that Native peoples possessed reason and rights, sparking debates at the Spanish court. The author uses him to show that even within Spain the justice of conquest was contested, so the empire cannot be judged only by its own claims."}
+          ]},
+          {type: "argument", instructions: "Write two paragraphs defending or challenging the thesis.", items: [
+            {id: "h3-0-a1", prompt: "Defend or challenge this thesis: 'The Spanish empire in the Americas should be judged by its outcomes, not its motives.'", guidance: "Thesis: take a clear position on how empires should be judged. Evidence: use at least two examples from the reading (the encomienda's claimed protection versus its forced labor; the missions' teaching versus disease and labor drafts; the ignored New Laws of 1542) plus one fact from your own research on Fort Mose. Counterargument: address the claim that Spain's motives, including religious zeal and building cities and universities, were sincere and should count in its favor, and explain why outcomes do or do not outweigh them."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows you understand its meaning in the context of this week's topic.", items: [
+            {id: "h3-0-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["encomienda", "mission", "hegemony"]}
+          ]}
         ]
       },
       {
@@ -336,6 +444,18 @@ const MM_WEEKS_912 = [
             {id: "h2-m1", term: "Fort Mose", answer: "b"},
             {id: "h2-m2", term: "James Oglethorpe", answer: "c"},
             {id: "h2-m3", term: "Cuba", answer: "d"}
+          ]}
+        ,
+          {type: "comprehension", instructions: "Answer each question in 3-5 sentences, using evidence from the reading.", items: [
+            {id: "h3-1-c1", question: "Why does the author say 'good fruit can grow from mixed roots' about Fort Mose?", answer: "Because Spain offered freedom partly from Catholic conviction and partly to weaken English rivals, yet the outcome was real liberty for real families: a chartered free Black town with its own fort, elected leaders, and militia that stood for twenty-five years."},
+            {id: "h3-1-c2", question: "How did Fort Mose function as both a community and a weapon, according to the reading?", answer: "It was a community of free Black families who farmed, fished, elected their own leaders, and stood guard on the frontier, and it was a weapon because its existence terrified Carolina and Georgia planters whose enslaved workers had heard the news. Its militia also proved its worth in 1740 by helping drive off the English attack on St. Augustine."},
+            {id: "h3-1-c3", question: "Evaluate the significance of the residents' choice in 1763.", answer: "When Spain ceded Florida to Britain, Mose's residents chose exile in Cuba over re-enslavement and sailed away free. The choice proves the town's freedom was real and prized above home and property, and it underscores that liberty, once tasted, was not surrendered quietly."}
+          ]},
+          {type: "argument", instructions: "Write two paragraphs defending or challenging the thesis.", items: [
+            {id: "h3-1-a1", prompt: "Defend or challenge this thesis: 'Fort Mose proves that freedom offered for strategic reasons is still real freedom.'", guidance: "Thesis: take a clear position on whether mixed motives taint the outcome. Evidence: use at least two examples from the reading (the chartered town with elected leaders and a militia; the 1740 defense of St. Augustine; the 1763 choice of exile in Cuba over re-enslavement) plus one fact from your own research on Fort Mose. Counterargument: address the claim that Spain's offer was merely a cynical military tactic that made the town's freedom conditional and fragile, and explain why the residents' lived experience does or does not settle the question."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows you understand its meaning in the context of this week's topic.", items: [
+            {id: "h3-1-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["mission", "hegemony", "tribute"]}
           ]}
         ]
       }
@@ -357,6 +477,18 @@ const MM_WEEKS_912 = [
           ]},
           {type: "shortanswer", instructions: "Write 4-6 sentences, then compare your answer with the model.", items: [
             {id: "s1-s1", prompt: "Explain how the structure of a phospholipid creates the bilayer, and why that arrangement is stable in water.", answer: "A phospholipid has a hydrophilic head that is attracted to water and two hydrophobic tails that repel it. In the watery environment inside and outside the cell, the heads face outward toward the water on both sides while the tails hide together in the middle. This tail-to-tail double layer is stable because every part sits in the environment it prefers: heads in water, tails away from it. If the membrane is torn, the exposed tails avoid water by snapping back together, so the bilayer seals itself automatically. The result is a thin, flexible barrier that separates the cell's interior from the outside world."}
+          ]}
+        ,
+          {type: "comprehension", instructions: "Answer each question in 3-5 sentences, using evidence from the reading.", items: [
+            {id: "s3-0-c1", question: "Why is the membrane called a 'fluid mosaic' rather than simply a wall?", answer: "Because it is fluid, with phospholipids drifting sideways like guests at a crowded party, and a mosaic, with proteins of many shapes embedded throughout, including channel proteins, receptor proteins, and marker proteins. It is a selective, busy border crossing, not a static barrier."},
+            {id: "s3-0-c2", question: "How does the reading explain transplant rejection through membrane structure?", answer: "Sugars attached to membrane proteins form a fuzzy coat that helps cells recognize each other. A transplanted organ's sugar coat looks foreign, so immune cells identify it as not-self and attack it."},
+            {id: "s3-0-c3", question: "Evaluate why cholesterol is described as essential to the membrane.", answer: "Cholesterol wedged between the phospholipid tails keeps the membrane flexible, preventing it from stiffening in the cold or melting in the heat. Without it, the membrane could not stay fluid across temperature changes, and its selectivity would fail."}
+          ]},
+          {type: "argument", instructions: "Write two paragraphs defending or challenging the thesis.", items: [
+            {id: "s3-0-a1", prompt: "Defend or challenge this thesis: 'The cell membrane, not the nucleus, is the structure that most defines what a cell is.'", guidance: "Thesis: take a clear position on which structure is most defining. Evidence: use at least two examples from the reading (the membrane's selective border-crossing controlling everything that enters and leaves; marker proteins and sugar coats defining self versus non-self) plus one fact from your own research on cell membranes or transport. Counterargument: address the claim that the nucleus, which holds DNA and directs which proteins get built, is more defining, and explain why the boundary does or does not matter more."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows you understand its meaning in the context of this week's topic.", items: [
+            {id: "s3-0-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["osmosis", "hegemony"]}
           ]}
         ]
       },
@@ -385,6 +517,18 @@ const MM_WEEKS_912 = [
           {type: "choice", instructions: "Read each question, then choose the best answer based on the reading.", items: [
             {id: "s2-c1", prompt: "Which process requires the cell to spend ATP?", options: ["Active transport, which pumps substances against their gradients", "Diffusion, which moves molecules down their gradients", "Osmosis, which moves water toward more solute"], answer: "Active transport, which pumps substances against their gradients"},
             {id: "s2-c2", prompt: "A red blood cell is placed in pure water. What happens and why?", options: ["It swells, because water flows by osmosis toward the side with more solute, which is inside the cell.", "It shrivels, because salt flows out of the cell.", "Nothing happens, because membranes block all water movement."], answer: "It swells, because water flows by osmosis toward the side with more solute, which is inside the cell."}
+          ]}
+        ,
+          {type: "comprehension", instructions: "Answer each question in 3-5 sentences, using evidence from the reading.", items: [
+            {id: "s3-1-c1", question: "Why does the reading say a membrane that sealed perfectly 'would be a tomb'?", answer: "Because cells must constantly import food, export waste, and hold their internal chemistry steady against a changing world. A perfect seal would stop diffusion, osmosis, and transport, so the cell could not feed itself or remove waste and would die."},
+            {id: "s3-1-c2", question: "How does the reading distinguish active transport from the other methods?", answer: "Diffusion, osmosis, and facilitated diffusion all move substances down their concentration gradients without energy. Active transport pumps substances against their gradients, from scarce to crowded, which costs ATP, as in the nerve cell's sodium-potassium pumps that keep the charge letting neurons fire."},
+            {id: "s3-1-c3", question: "Evaluate the significance of the red blood cell examples in explaining osmosis.", answer: "They make the abstract concrete: in pure water the cell swells as water rushes in through aquaporins, while in salty water it shrivels as water rushes out. The pair shows that osmosis always moves water toward the side with more dissolved solute."}
+          ]},
+          {type: "argument", instructions: "Write two paragraphs defending or challenging the thesis.", items: [
+            {id: "s3-1-a1", prompt: "Defend or challenge this thesis: 'Active transport is worth its enormous energy cost.'", guidance: "Thesis: take a clear position on whether the expense is justified. Evidence: use at least two examples from the reading (nerve cells running sodium-potassium pumps nonstop to keep the electrical charge that lets neurons fire; cells spending enormous energy to stay chemically different from their surroundings) plus one fact from your own research on transport in cells. Counterargument: address the claim that passive methods like diffusion and osmosis move most substances for free and cells could rely on them, and explain what would fail without the energy expense."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows you understand its meaning in the context of this week's topic.", items: [
+            {id: "s3-1-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["osmosis", "hegemony"]}
           ]}
         ]
       }
@@ -462,6 +606,18 @@ const MM_WEEKS_912 = [
             {id: "h1-t1", text: "About half of all English migrants to the Chesapeake came under indenture.", answer: "true", note: "The reading states roughly half arrived as indentured servants."},
             {id: "h1-t2", text: "The Virginia Company's charter was originally written to establish a tobacco plantation.", answer: "false", note: "The charter aimed at gold and a passage to Asia; tobacco came later."}
           ]}
+        ,
+          {type: "comprehension", instructions: "Answer each question in 3-5 sentences, using evidence from the reading.", items: [
+            {id: "h4-0-c1", question: "Why does the author say Jamestown's plantation society arose 'almost by accident'?", answer: "Because the charter was written for gold and a passage to Asia, not for tobacco and bound labor. The colony stumbled into tobacco through Rolfe's sweeter West Indian strain and into indenture through the desperate need for workers, producing a plantation society no investor had planned."},
+            {id: "h4-0-c2", question: "How does the reading explain why the Starving Time happened?", answer: "The settlers were gentlemen unprepared for farming, drank brackish river water, and quarreled with the powerful Powhatan Confederacy whose land they occupied. By the winter of 1609, only 60 of 500 colonists remained alive, driven to eat horses, dogs, rats, and in one documented case each other."},
+            {id: "h4-0-c3", question: "Evaluate the significance of tobacco in the colony's transformation.", answer: "Tobacco made Virginia profitable because England's appetite for the leaf was bottomless, but it demanded enormous labor that the colony filled with indenture. That hunger for workers, the reading argues, would soon reshape the meaning of race itself."}
+          ]},
+          {type: "argument", instructions: "Write two paragraphs defending or challenging the thesis.", items: [
+            {id: "h4-0-a1", prompt: "Defend or challenge this thesis: 'Tobacco, more than prejudice, made slavery racial in Virginia.'", guidance: "Thesis: take a clear position on whether economics or prejudice was decisive. Evidence: use at least two examples from the reading (tobacco's bottomless English demand creating the labor hunger; indenture filling the need until planters wanted permanent workers) plus one fact from your own research on Anthony Johnson. Counterargument: address the claim that racial prejudice already existed and would have produced slavery regardless of the crop, and explain whether economics or prejudice was the decisive force."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows you understand its meaning in the context of this week's topic.", items: [
+            {id: "h4-0-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["charter", "indenture", "colony"]}
+          ]}
         ]
       },
       {
@@ -481,6 +637,18 @@ const MM_WEEKS_912 = [
             {id: "h2-m2", term: "1662 statute", answer: "b"},
             {id: "h2-m3", term: "1670 statute", answer: "c"},
             {id: "h2-m4", term: "1705 slave codes", answer: "d"}
+          ]}
+        ,
+          {type: "comprehension", instructions: "Answer each question in 3-5 sentences, using evidence from the reading.", items: [
+            {id: "h4-1-c1", question: "Why does the author call the Johnson-Casor ruling 'ironic'?", answer: "Because a free Black landowner who had himself completed indenture and won freedom sued in court and won a ruling declaring John Casor his property for life. Johnson thereby helped establish the legal precedent for lifelong bondage that would soon enslave people of his own race."},
+            {id: "h4-1-c2", question: "How does the reading show that slavery became racial 'by legislation, one statute at a time'?", answer: "It traces the statutes: in 1662 Virginia declared enslaved status passed through the mother, in 1670 that only Africans could be enslaved for life, and by 1705 the slave codes had built a complete system. Each law wrote race further into bondage until Blackness meant permanent, inherited enslavement."},
+            {id: "h4-1-c3", question: "Evaluate what the seizure of Johnson's land after his death reveals about the hardening color line.", answer: "Virginia courts declared his 250-acre farm belonged to a white man because Johnson had been an alien, not a citizen. The ruling shows that even a Black man who had owned land and sued in court could be stripped of property retroactively, proving freedom and property were being closed to Black people by law."}
+          ]},
+          {type: "argument", instructions: "Write two paragraphs defending or challenging the thesis.", items: [
+            {id: "h4-1-a1", prompt: "Defend or challenge this thesis: 'Anthony Johnson's life proves that race-based slavery was a choice, not an inevitability.'", guidance: "Thesis: take a clear position on whether the outcome was chosen. Evidence: use at least two examples from the reading (Johnson's freedom, farm, and servants showing an early world where a Black man could own property; the later statutes that deliberately closed that world) plus one fact from your own research on Anthony Johnson. Counterargument: address the claim that one man's story is an exception that proves nothing about the system's direction, and explain why his arc does or does not reveal deliberate choice."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows you understand its meaning in the context of this week's topic.", items: [
+            {id: "h4-1-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["indenture", "charter", "colony"]}
           ]}
         ]
       }
@@ -502,6 +670,18 @@ const MM_WEEKS_912 = [
             {id: "s1-m2", term: "Thylakoid membranes", answer: "b"},
             {id: "s1-m3", term: "RuBisCO", answer: "c"},
             {id: "s1-m4", term: "G3P", answer: "d"}
+          ]}
+        ,
+          {type: "comprehension", instructions: "Answer each question in 3-5 sentences, using evidence from the reading.", items: [
+            {id: "s4-0-c1", question: "Why does the reading emphasize that the oxygen you breathe is a 'byproduct'?", answer: "Because in the light-dependent reactions, chlorophyll captures photons and uses their energy to split water molecules, releasing oxygen as waste. The reading stresses that the air's oxygen is a leftover of photosynthesis, not its purpose, which was storing energy in the ATP and NADPH batteries."},
+            {id: "s4-0-c2", question: "How do the two stages of photosynthesis depend on each other?", answer: "The light-dependent reactions in the thylakoid membranes charge the ATP and NADPH batteries by splitting water, and the Calvin cycle in the stroma spends those batteries to fix carbon dioxide into G3P and then glucose. Without the first stage's energy carriers, the second stage cannot run."},
+            {id: "s4-0-c3", question: "Evaluate the significance of RuBisCO being 'the most abundant protein on Earth.'", answer: "It shows how central carbon fixation is to life: every plant, alga, and photosynthetic bacterium relies on RuBisCO to grab carbon dioxide from the air and fasten it onto a five-carbon molecule. The single most common protein on the planet exists to feed the Calvin cycle."}
+          ]},
+          {type: "argument", instructions: "Write two paragraphs defending or challenging the thesis.", items: [
+            {id: "s4-0-a1", prompt: "Defend or challenge this thesis: 'Photosynthesis is the most important chemical process on Earth.'", guidance: "Thesis: take a clear position ranking chemical processes. Evidence: use at least two examples from the reading (nearly every meal began as sunlight; the oxygen you breathe is its byproduct; plants build their bodies from thin air and water) plus one fact from your own research on photosynthesis. Counterargument: address the claim that cellular respiration or another process matters more, and explain whether any process rivals photosynthesis as the foundation of food chains and the atmosphere."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows you understand its meaning in the context of this week's topic.", items: [
+            {id: "s4-0-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["autotroph", "mortality"]}
           ]}
         ]
       },
@@ -532,6 +712,18 @@ const MM_WEEKS_912 = [
             {id: "s2-m2", term: "G3P", answer: "b"},
             {id: "s2-m3", term: "Stroma", answer: "c"},
             {id: "s2-m4", term: "Photorespiration", answer: "d"}
+          ]}
+        ,
+          {type: "comprehension", instructions: "Answer each question in 3-5 sentences, using evidence from the reading.", items: [
+            {id: "s4-1-c1", question: "Why does the reading call the coefficients a story about conservation?", answer: "Because the balanced equation proves matter is neither created nor destroyed: six carbons in match six out, twelve hydrogens match twelve, and eighteen oxygens match eighteen. Every atom is accounted for on both sides of the equation."},
+            {id: "s4-1-c2", question: "How do C4 and CAM plants solve the photorespiration problem?", answer: "Photorespiration wastes energy when RuBisCO accidentally grabs oxygen instead of carbon dioxide, especially in hot, dry weather. C4 plants like corn and sugarcane pre-fix carbon to concentrate CO2 around RuBisCO, and CAM plants like cacti open their pores only at night to save water."},
+            {id: "s4-1-c3", question: "Evaluate why the reading says farmers and climate scientists 'care deeply about these details.'", answer: "Because the photosynthesis equation, scaled across every leaf on Earth, sets the level of oxygen in the air and the amount of carbon pulled from the atmosphere each year. The efficiency of carbon fixation therefore shapes both food production and the climate."}
+          ]},
+          {type: "argument", instructions: "Write two paragraphs defending or challenging the thesis.", items: [
+            {id: "s4-1-a1", prompt: "Defend or challenge this thesis: 'Genetic engineering of crops to improve photosynthesis is worth the ecological risk.'", guidance: "Thesis: take a clear position on whether the engineering should proceed. Evidence: use at least two examples from the reading (photorespiration wastes energy; C4 and CAM workarounds show efficiency can be improved; the equation's balance sets atmospheric carbon) plus one fact from your own research on crop science. Counterargument: address the claim that altering the planet's carbon-fixing machinery could have unpredictable consequences, and explain how the food and climate benefits do or do not outweigh the risk."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows you understand its meaning in the context of this week's topic.", items: [
+            {id: "s4-1-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["autotroph", "mortality"]}
           ]}
         ]
       }
@@ -607,6 +799,18 @@ const MM_WEEKS_912 = [
             {id: "h1-t1", text: "At first, only church members could vote in Massachusetts.", answer: "true", note: "Church membership, held by a minority of men, was required for voting."},
             {id: "h1-t2", text: "The Puritans welcomed Roger Williams and Anne Hutchinson as valued reformers.", answer: "false", note: "Both were tried and banished for their dissent."}
           ]}
+        ,
+          {type: "comprehension", instructions: "Answer each question in 3-5 sentences, using evidence from the reading.", items: [
+            {id: "h5-0-c1", question: "Why does the author say the Puritans' demand for purity made dissent 'inevitable'?", answer: "Because the colony required a convincing account of conversion for church membership and punished religious disagreement. Sincere believers like Roger Williams and Anne Hutchinson who followed their conscience to different conclusions had to be banished, since a system built on purity cannot tolerate disagreement."},
+            {id: "h5-0-c2", question: "How does the Half-Way Covenant reveal the limits of the 'city upon a hill' vision?", answer: "By 1662 the colony had to let the unconverted children of members baptize their own children, which admitted the godly city was leaking members. The compromise shows the pure community could not sustain itself and had to dilute its own standards."},
+            {id: "h5-0-c3", question: "Evaluate the author's claim that New England's legacy is 'double-edged.'", answer: "The reading credits the Puritans with town meetings, public schools, and the habit of moral argument, but notes they also established the pattern of banishing dissenters in the name of purity. Both the democratic habits and the intolerance are presented as real inheritances."}
+          ]},
+          {type: "argument", instructions: "Write two paragraphs defending or challenging the thesis.", items: [
+            {id: "h5-0-a1", prompt: "Defend or challenge this thesis: 'The Puritans' true legacy is the habit of dissent, not the godly city they meant to build.'", guidance: "Thesis: take a clear position on which inheritance mattered more. Evidence: use at least two examples from the reading (the banishments of Williams and Hutchinson; the habit of judging authority and moral argument) plus one fact from your own research on Wheatley. Counterargument: address the claim that the Puritans' intended legacy, including town meetings, schools, and covenant community, is what actually endured, and explain which inheritance shaped America more."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows you understand its meaning in the context of this week's topic.", items: [
+            {id: "h5-0-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["dissent", "covenant", "theocracy"]}
+          ]}
         ]
       },
       {
@@ -628,6 +832,18 @@ const MM_WEEKS_912 = [
             {id: "h2-f2", text: "Eighteen prominent Bostonians signed an ___ swearing the poems were hers.", answer: "attestation", accept: ["attestation"]},
             {id: "h2-f3", text: "She corresponded with George ___, who invited her to visit his headquarters.", answer: "Washington", accept: ["Washington"]}
           ]}
+        ,
+          {type: "comprehension", instructions: "Answer each question in 3-5 sentences, using evidence from the reading.", items: [
+            {id: "h5-1-c1", question: "Why does the author call Wheatley 'the voice of the Revolution's contradictions'?", answer: "Because she celebrated the Revolution's ideals of liberty while living enslaved in a city ringing with talk of freedom, and she used the language of liberty to indict the slaveholders who preached it. Her life embodied the gap between the promise of natural rights and the practice of slavery."},
+            {id: "h5-1-c2", question: "How does the reading show that Wheatley's genius had to be proven in a way white poets' did not?", answer: "Boston's leading men demanded proof she had written her poems, and her book carried an attestation signed by eighteen prominent Bostonians, including the governor, swearing the poems were hers. Even then, Thomas Jefferson dismissed her poetry as beneath criticism."},
+            {id: "h5-1-c3", question: "Evaluate the debate over the opening lines of 'On Being Brought from Africa to America.'", answer: "Readers debate whether she was thanking slavery for her Christianity or using the master's religion to claim her own soul's worth. The reading presents the second reading as stronger, since Wheatley left no doubt she stood for liberty and used Christian language to assert her humanity."}
+          ]},
+          {type: "argument", instructions: "Write two paragraphs defending or challenging the thesis.", items: [
+            {id: "h5-1-a1", prompt: "Defend or challenge this thesis: 'Phillis Wheatley exposed the Revolution's contradictions more powerfully than any patriot pamphlet.'", guidance: "Thesis: take a clear position comparing her impact to the pamphleteers. Evidence: use at least two examples from the reading (her poetry celebrating liberty while she was enslaved; the attestation and Jefferson's dismissal showing what she was up against) plus one fact from your own research on Wheatley. Counterargument: address the claim that her poetry accommodated slavery, through lines like 'mercy brought me,' rather than attacking it, and explain why her work does or does not count as indictment."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows you understand its meaning in the context of this week's topic.", items: [
+            {id: "h5-1-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["persecution", "dissent", "covenant"]}
+          ]}
         ]
       }
     ],
@@ -647,6 +863,18 @@ const MM_WEEKS_912 = [
           ]},
           {type: "shortanswer", instructions: "Write 4-6 sentences, then compare your answer with the model.", items: [
             {id: "s1-s1", prompt: "Explain how photosynthesis and cellular respiration form a cycle, using the inputs and outputs of each.", answer: "Photosynthesis takes in carbon dioxide and water and, using light energy, produces glucose and oxygen. Cellular respiration takes in glucose and oxygen and produces carbon dioxide, water, and ATP energy. The waste products of each process are the raw materials of the other, so matter cycles between them continuously. Energy flows one way, from sunlight into glucose and then into ATP and heat, while atoms are recycled. This is why plants and animals depend on each other: plants make the oxygen and food that animals burn, and animals return the carbon dioxide plants need."}
+          ]}
+        ,
+          {type: "comprehension", instructions: "Answer each question in 3-5 sentences, using evidence from the reading.", items: [
+            {id: "s5-0-c1", question: "Why does the reading call glycolysis 'ancient'?", answer: "Because it needs no oxygen and no mitochondria, taking place in the cytoplasm. The earliest cells on Earth ran some version of it before oxygen filled the air, so it predates the oxygen-dependent stages of respiration."},
+            {id: "s5-0-c2", question: "How does the electron transport chain turn electron energy into ATP?", answer: "Carrier molecules deliver electrons to proteins in the mitochondrial inner membrane, and the released energy pumps hydrogen ions across the membrane to build a gradient. The ions then rush back through ATP synthase, spinning the molecular turbine to manufacture ATP the way a dam's water spins generators."},
+            {id: "s5-0-c3", question: "Evaluate the significance of the respiration equation mirroring photosynthesis in reverse.", answer: "It shows the two processes are coupled: the waste products of respiration, carbon dioxide and water, are the raw materials of photosynthesis and vice versa. Plants and animals are locked in a reciprocal exchange of energy and materials."}
+          ]},
+          {type: "argument", instructions: "Write two paragraphs defending or challenging the thesis.", items: [
+            {id: "s5-0-a1", prompt: "Defend or challenge this thesis: 'Glycolysis, not the electron transport chain, is the most remarkable stage of respiration.'", guidance: "Thesis: take a clear position ranking the stages. Evidence: use at least two examples from the reading (glycolysis is ancient and needs no oxygen or mitochondria; it keeps running through fermentation when everything else stalls) plus one fact from your own research on cellular respiration. Counterargument: address the claim that the electron transport chain delivers the real payoff, about 28 of the 32 ATP, and makes complex life possible, and explain whether antiquity and resilience outweigh raw yield."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows you understand its meaning in the context of this week's topic.", items: [
+            {id: "s5-0-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["aerobic", "persecution"]}
           ]}
         ]
       },
@@ -672,6 +900,18 @@ const MM_WEEKS_912 = [
             {id: "s2-k2", text: "I can explain the textbook ATP total of about 32 per glucose."},
             {id: "s2-k3", text: "I can explain why fermentation nets only 2 ATP."},
             {id: "s2-k4", text: "I can explain why you cannot sprint at full speed forever, using ATP yield."}
+          ]}
+        ,
+          {type: "comprehension", instructions: "Answer each question in 3-5 sentences, using evidence from the reading.", items: [
+            {id: "s5-1-c1", question: "Why can't you sprint forever, according to the reading's math?", answer: "Sprinting outruns the oxygen supply, forcing muscles onto fermentation, which nets only 2 ATP per glucose versus about 32 aerobically. The backup is fifteen times less efficient, so energy runs out quickly."},
+            {id: "s5-1-c2", question: "How does the reading use the Warburg effect to show that ATP accounting raises open questions?", answer: "Cancer cells often prefer glycolysis even when oxygen is available, a puzzle researchers still study. It shows that cells do not always choose the highest ATP yield, so efficiency alone does not explain cellular behavior."},
+            {id: "s5-1-c3", question: "Evaluate why biologists argue about the exact ATP yield.", answer: "The textbook total is about 32, but real cells lose energy to leaky membranes and the cost of moving molecules, so working estimates range from 30 to 32. The argument reflects the gap between ideal bookkeeping and messy cellular reality."}
+          ]},
+          {type: "argument", instructions: "Write two paragraphs defending or challenging the thesis.", items: [
+            {id: "s5-1-a1", prompt: "Defend or challenge this thesis: 'The Warburg effect means cancer treatment should target cancer cells' energy metabolism.'", guidance: "Thesis: take a clear position on whether metabolism is a valid target. Evidence: use at least two examples from the reading (cancer cells prefer glycolysis even with oxygen available; fermentation nets only 2 ATP, making glycolytic cells energetically fragile) plus one fact from your own research on cancer metabolism. Counterargument: address the claim that the Warburg effect is still a puzzle and that targeting metabolism could harm healthy cells that also use glycolysis, and explain whether the metabolic difference is a safe therapeutic target."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows you understand its meaning in the context of this week's topic.", items: [
+            {id: "s5-1-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["aerobic", "dissent"]}
           ]}
         ]
       }
@@ -750,6 +990,18 @@ const MM_WEEKS_912 = [
             {id: "h1-o4", event: "Philadelphia grows into the colonies' largest city and busiest port.", answer: 4},
             {id: "h1-o5", event: "Franklin writes his 1751 complaint about German immigration.", answer: 5}
           ]}
+        ,
+          {type: "comprehension", instructions: "Answer each question in 3-5 sentences, using evidence from the reading.", items: [
+            {id: "h6-0-c1", question: "Why does the author call Pennsylvania's pluralism 'deliberate'?", answer: "Because William Penn founded it in 1681 as a holy experiment, with a Frame of Government promising liberty of conscience to all who believed in God. The colony actively recruited diverse settlers, including English Quakers, German Mennonites and Lutherans, Scots-Irish Presbyterians, Welsh Baptists, and Jews."},
+            {id: "h6-0-c2", question: "How does Franklin's 1751 complaint reveal the limits of his own tolerance?", answer: "He worried that Germans would 'Germanize' Pennsylvania instead of being Anglified, claiming they could never adopt English language or customs 'any more than they can acquire our Complexion.' The reading uses it to show that even the colony's most enlightened man drew the line at cultural comfort."},
+            {id: "h6-0-c3", question: "Evaluate the author's claim that Middle Colony pluralism was 'real, broad, and profitable, and also bounded.'", answer: "It was real, with a dozen languages heard on a single Philadelphia street and family-labor farms earning the breadbasket nickname, and it was profitable. But it was bounded by race, since Philadelphia merchants traded in enslaved people, by language, and by the prejudices of even its most enlightened men."}
+          ]},
+          {type: "argument", instructions: "Write two paragraphs defending or challenging the thesis.", items: [
+            {id: "h6-0-a1", prompt: "Defend or challenge this thesis: 'Pennsylvania's holy experiment failed its own test of pluralism.'", guidance: "Thesis: take a clear position on whether the experiment failed. Evidence: use at least two examples from the reading (Franklin's anti-German complaint; the colony's profit from slavery alongside its promise of liberty of conscience) plus one fact from your own research on Philadelphia's Black artisans. Counterargument: address the claim that Pennsylvania was still the most tolerant colony in British America and should be judged against its contemporaries, and explain whether the fair standard is its own ideals or its neighbors' practices."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows you understand its meaning in the context of this week's topic.", items: [
+            {id: "h6-0-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["pluralism", "Quaker", "tolerance"]}
+          ]}
         ]
       },
       {
@@ -770,6 +1022,18 @@ const MM_WEEKS_912 = [
             {id: "h2-f2", text: "Children born to enslaved mothers owed labor until age ___.", answer: "twenty-eight", accept: ["twenty-eight", "28"]},
             {id: "h2-f3", text: "Free Black communities built churches including Richard Allen's ___ Church.", answer: "Bethel", accept: ["Bethel"]}
           ]}
+        ,
+          {type: "comprehension", instructions: "Answer each question in 3-5 sentences, using evidence from the reading.", items: [
+            {id: "h6-1-c1", question: "Why does the author argue that maritime work was especially significant for enslaved Black men?", answer: "Because ships offered wages and mobility: Black sailors loaded cargo, caulked hulls, and sailed Atlantic routes. That movement gave some of the best chances for enslaved men to earn or seize freedom."},
+            {id: "h6-1-c2", question: "How does the 1780 gradual abolition law illustrate 'pluralism's limits'?", answer: "It was the first abolition law in America, yet it freed no one immediately: children born to enslaved mothers owed their masters labor until age twenty-eight. The law announced liberty while postponing it for a generation."},
+            {id: "h6-1-c3", question: "Evaluate the author's closing question: 'how plural is a society that welcomes your labor but not your liberty?'", answer: "The reading builds the case that Black skill built and ran Philadelphia, through sailors, artisans, and market women whose earnings sometimes bought their families' freedom, while Black people could not vote, testify equally in court, or walk the streets without risk of kidnapping. The question forces the reader to judge whether economic inclusion without political liberty counts as pluralism at all."}
+          ]},
+          {type: "argument", instructions: "Write two paragraphs defending or challenging the thesis.", items: [
+            {id: "h6-1-a1", prompt: "Defend or challenge this thesis: 'The Black artisans of Philadelphia, not William Penn, are the true test of the holy experiment.'", guidance: "Thesis: take a clear position on who tests the experiment. Evidence: use at least two examples from the reading (Black sailors and artisans building the port and city; the 1780 law freeing no one immediately; the kidnapping risk on the streets) plus one fact from your own research on Philadelphia's Black artisans. Counterargument: address the claim that Penn's framework of liberty made later Black freedom possible and deserves the credit, and explain whether the promise or the lived exclusion is the truer measure."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows you understand its meaning in the context of this week's topic.", items: [
+            {id: "h6-1-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["pluralism", "tolerance", "asylum"]}
+          ]}
         ]
       }
     ],
@@ -789,6 +1053,18 @@ const MM_WEEKS_912 = [
           ]},
           {type: "shortanswer", instructions: "Write 4-6 sentences, then compare your answer with the model.", items: [
             {id: "s1-s1", prompt: "Explain why checkpoints are necessary, using the body's production of two million red blood cells per second.", answer: "With two million divisions per second, even a tiny error rate would flood the body with defective cells. Checkpoints inspect the process at three points: G1 checks size and DNA damage, G2 verifies the copy, and metaphase confirms spindle attachment. If a checkpoint fails, the cell pauses for repairs or self-destructs instead of dividing. Without this quality control, damaged DNA would be copied into daughter cells, which is how mutations accumulate and cancers begin. Checkpoints turn reckless copying into reliable manufacturing."}
+          ]}
+        ,
+          {type: "comprehension", instructions: "Answer each question in 3-5 sentences, using evidence from the reading.", items: [
+            {id: "s6-0-c1", question: "Why does the reading compare checkpoints to inspectors?", answer: "Because they verify quality before allowing progress: the G1 checkpoint asks whether the cell is big enough with undamaged DNA, the G2 checkpoint verifies DNA was copied correctly, and the metaphase checkpoint confirms every chromosome is attached to the spindle. When they fail, the cell pauses for repairs or self-destructs."},
+            {id: "s6-0-c2", question: "How does the reading explain that most of a cell's life is 'quiet'?", answer: "Most time is spent in interphase, growing and copying DNA through the G1, S, and G2 stages, before the drama of mitosis begins. Division itself is brief compared with the long preparation, so the visible event is only a fraction of the cycle."},
+            {id: "s6-0-c3", question: "Evaluate the significance of the 'two million new cells per second' statistic.", answer: "It establishes the stakes of quality control: with that volume of division, even a tiny error rate would be catastrophic. Checkpoints that pause or destroy faulty cells are what keep the system from becoming a disaster."}
+          ]},
+          {type: "argument", instructions: "Write two paragraphs defending or challenging the thesis.", items: [
+            {id: "s6-0-a1", prompt: "Defend or challenge this thesis: 'Checkpoints, not division itself, are the most important part of the cell cycle.'", guidance: "Thesis: take a clear position ranking the cycle's parts. Evidence: use at least two examples from the reading (the three checkpoints verifying size, DNA copying, and spindle attachment; failed checkpoints triggering repair or self-destruction) plus one fact from your own research on the cell cycle or cancer. Counterargument: address the claim that division is the point of the cycle and checkpoints are merely safeguards, and explain whether quality control does or does not deserve primacy."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows you understand its meaning in the context of this week's topic.", items: [
+            {id: "s6-0-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["tumor", "tolerance"]}
           ]}
         ]
       },
@@ -814,6 +1090,18 @@ const MM_WEEKS_912 = [
             {id: "s2-m2", term: "Metastasis", answer: "b"},
             {id: "s2-m3", term: "Apoptosis", answer: "c"},
             {id: "s2-m4", term: "Tumor suppressor genes", answer: "d"}
+          ]}
+        ,
+          {type: "comprehension", instructions: "Answer each question in 3-5 sentences, using evidence from the reading.", items: [
+            {id: "s6-1-c1", question: "Why does the reading argue that early detection matters 'so much'?", answer: "Because cancer grows exponentially, following N = 2^n: after 10 divisions 1,024 cells, after 20 over a million, and after 30 over a billion, roughly a detectable tumor. Each missed division multiplies the problem, so finding it early means fighting far fewer cells."},
+            {id: "s6-1-c2", question: "How does the reading explain cancer as a failure of both accelerators and brakes?", answer: "Mutated proto-oncogenes become stuck accelerators that promote division without stopping, while mutated tumor suppressor genes are failed brakes that no longer halt division. Together with ignored contact inhibition and apoptosis, the cell divides without permission."},
+            {id: "s6-1-c3", question: "Evaluate how understanding the cell cycle explains the logic of cancer treatments.", answer: "Each treatment exploits the cancer cell's recklessness: chemotherapy targets rapidly dividing cells, radiation shatters DNA in the tumor, and immunotherapy trains the immune system on the disguised cells. Oncologists even use doubling time to plan how aggressive therapy must be."}
+          ]},
+          {type: "argument", instructions: "Write two paragraphs defending or challenging the thesis.", items: [
+            {id: "s6-1-a1", prompt: "Defend or challenge this thesis: 'Preventing cancer (avoiding carcinogens, early detection) matters more than improving cancer treatment.'", guidance: "Thesis: take a clear position on where effort belongs. Evidence: use at least two examples from the reading (carcinogens like tobacco smoke and UV radiation cause the mutations; exponential growth means each missed division multiplies the tumor) plus one fact from your own research on cancer. Counterargument: address the claim that treatment advances, such as immunotherapy and targeted therapy, save people prevention cannot reach, and explain which investment saves more lives."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows you understand its meaning in the context of this week's topic.", items: [
+            {id: "s6-1-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["tumor", "tolerance"]}
           ]}
         ]
       }
@@ -892,6 +1180,18 @@ const MM_WEEKS_912 = [
             {id: "h1-f2", text: "By 1740, enslaved Africans were a ___ of South Carolina's population.", answer: "majority", accept: ["majority"]},
             {id: "h1-f3", text: "Fear of revolt led planters to pass harsher slave ___.", answer: "codes", accept: ["codes"]}
           ]}
+        ,
+          {type: "comprehension", instructions: "Answer each question in 3-5 sentences, using evidence from the reading.", items: [
+            {id: "h7-0-c1", question: "Why does the author call it 'Carolina Gold' with irony?", answer: "Because the wealth came from rice knowledge that enslaved Africans from the Rice Coast brought with them, including how to dike swamps, flood fields, and thresh grain. The 'gold' was African expertise, yet the profits bought Charleston mansions for planters while the experts remained in chains."},
+            {id: "h7-0-c2", question: "How does the reading connect the Black majority in South Carolina to the harshness of its slave codes?", answer: "By 1740 enslaved Africans outnumbered white colonists, and that imbalance terrified planters. Their fear wrote the law, producing codes that restricted Black movement, banned gatherings, punished literacy, and funded slave patrols to hunt escapees."},
+            {id: "h7-0-c3", question: "Evaluate the author's claim that the plantation South rested on a 'contradiction.'", answer: "The contradiction is that the system's wealth depended on keeping skilled, knowledgeable people in chains: Africans who knew rice cultivation, warfare, and the terrain were the source of planter riches and the object of planter terror. The author argues such an arrangement could not hold forever."}
+          ]},
+          {type: "argument", instructions: "Write two paragraphs defending or challenging the thesis.", items: [
+            {id: "h7-0-a1", prompt: "Defend or challenge this thesis: 'The plantation South was built more on African knowledge than on European capital.'", guidance: "Thesis: take a clear position on which input mattered more. Evidence: use at least two examples from the reading (Rice Coast expertise in diking, flooding, and threshing; African military and terrain knowledge) plus one fact from your own research on Stono. Counterargument: address the claim that European capital, land ownership, and legal power were the true foundation, and explain whether knowledge or capital was the decisive input."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows you understand its meaning in the context of this week's topic.", items: [
+            {id: "h7-0-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["plantation", "enslave", "revolt"]}
+          ]}
         ]
       },
       {
@@ -910,6 +1210,18 @@ const MM_WEEKS_912 = [
             {id: "h2-m1", term: "Stono River", answer: "a"},
             {id: "h2-m2", term: "Spanish Florida", answer: "b"},
             {id: "h2-m3", term: "Negro Act of 1740", answer: "c"}
+          ]}
+        ,
+          {type: "comprehension", instructions: "Answer each question in 3-5 sentences, using evidence from the reading.", items: [
+            {id: "h7-1-c1", question: "Why does the author argue Stono 'succeeded as agency' even though it failed?", answer: "Because the rebels chose the terms of their resistance: they marched as soldiers with drums beating and banners flying rather than dying as property. They also forced an empire to rewrite its laws in fear through the Negro Act of 1740, so defeat did not erase their having acted."},
+            {id: "h7-1-c2", question: "How did the rebels' military background shape the revolt, according to the reading?", answer: "Most were Angolans and several had been soldiers before capture. They seized guns and powder, marched in formation like soldiers, moved with drums and banners calling out 'Liberty,' and fought a pitched battle, which is why the colony's leaders recognized it as organized military revolt, their worst fear."},
+            {id: "h7-1-c3", question: "Evaluate the significance of the Negro Act of 1740 as a response.", answer: "It was one of the harshest slave codes in the colonies, banning enslaved people from growing their own food, assembling in groups, earning money, or learning to read, and paying masters a bounty for killing rebels. The reading presents it as proof the revolt worked as agency, since terrorized lawmakers rewrote the legal order."}
+          ]},
+          {type: "argument", instructions: "Write two paragraphs defending or challenging the thesis.", items: [
+            {id: "h7-1-a1", prompt: "Defend or challenge this thesis: 'Stono proves that resistance is meaningful even in defeat.'", guidance: "Thesis: take a clear position on whether defeated resistance matters. Evidence: use at least two examples from the reading (the rebels marching as soldiers and choosing their terms; the Negro Act of 1740 rewritten in fear) plus one fact from your own research on Stono. Counterargument: address the claim that the revolt only made conditions worse, since the harshest slave code followed, and therefore harmed the very people it meant to free, and explain whether agency does or does not outweigh the backlash."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows you understand its meaning in the context of this week's topic.", items: [
+            {id: "h7-1-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["revolt", "plantation", "enslave"]}
           ]}
         ]
       }
@@ -931,6 +1243,18 @@ const MM_WEEKS_912 = [
           ]},
           {type: "shortanswer", instructions: "Write 4-6 sentences, then compare your answer with the model.", items: [
             {id: "s1-s1", prompt: "Explain the two sources of genetic shuffling in meiosis I and why both matter.", answer: "Crossing over in prophase I lets homologous chromosomes swap segments, creating brand-new combinations of genes on a single chromosome. Independent assortment in metaphase I lines up the chromosome pairs randomly, so each gamete gets a random mix of maternal and paternal whole chromosomes. Crossing over invents new gene combinations, while independent assortment deals the existing chromosomes into over 8 million possible hands. Together they guarantee that no two gametes are alike. That diversity gives populations the raw material for adaptation and evolution."}
+          ]}
+        ,
+          {type: "comprehension", instructions: "Answer each question in 3-5 sentences, using evidence from the reading.", items: [
+            {id: "s7-0-c1", question: "Why does the reading say meiosis 'trades the safety of copying for the power of variety'?", answer: "Because mitosis makes identical copies while meiosis shuffles the deck through crossing over and independent assortment, producing gametes no two of which are alike. The gamble is that variety lets species adapt, which copying cannot do."},
+            {id: "s7-0-c2", question: "How do crossing over and independent assortment each create diversity?", answer: "In prophase I, homologous chromosomes pair up and swap segments in crossing over, trading genes between maternal and paternal copies. In metaphase I, the pairs line up randomly in independent assortment, dealing each daughter cell a random mix of maternal and paternal chromosomes."},
+            {id: "s7-0-c3", question: "Evaluate the significance of the 2^23 statistic.", answer: "It quantifies the lottery: independent assortment alone can produce over 8 million different chromosome combinations in a human gamete, and crossing over multiplies that further. The number makes concrete why no two children, except identical twins, are genetically identical."}
+          ]},
+          {type: "argument", instructions: "Write two paragraphs defending or challenging the thesis.", items: [
+            {id: "s7-0-a1", prompt: "Defend or challenge this thesis: 'Meiosis is more important to evolution than natural selection.'", guidance: "Thesis: take a clear position ranking the two processes. Evidence: use at least two examples from the reading (meiosis creates variation through crossing over and independent assortment; without it every generation would copy the last and evolution would grind to a halt) plus one fact from your own research on meiosis or genetics. Counterargument: address the claim that natural selection does the actual work of adaptation while meiosis only supplies raw material, and explain whether the supplier or the filter matters more."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows you understand its meaning in the context of this week's topic.", items: [
+            {id: "s7-0-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["heredity", "gamete"]}
           ]}
         ]
       },
@@ -958,6 +1282,18 @@ const MM_WEEKS_912 = [
           ]},
           {type: "shortanswer", instructions: "Write 4-6 sentences, then compare your answer with the model.", items: [
             {id: "s2-s1", prompt: "Explain the three lotteries of variation and why they make sexually reproducing populations resilient.", answer: "Independent assortment deals each gamete a random mix of maternal and paternal chromosomes, over 8 million possible hands in humans. Crossing over swaps segments between homologous chromosomes, inventing brand-new gene combinations. Fertilization multiplies the variation into the trillions, since which sperm meets which egg is pure chance. Together they guarantee no two offspring are alike, giving the population thousands of responses to any disease or drought. A population of clones has only one response, so variation is what lets species survive change."}
+          ]}
+        ,
+          {type: "comprehension", instructions: "Answer each question in 3-5 sentences, using evidence from the reading.", items: [
+            {id: "s7-1-c1", question: "Why does the reading call sexual reproduction 'expensive' yet worth the price?", answer: "It costs two parents, halves each one's genetic contribution, and requires finding a mate. But the variation it creates is the raw material of natural selection, so a varied population has thousands of responses to disease or drought while a population of clones has only one."},
+            {id: "s7-1-c2", question: "How do the aphid and whiptail lizard examples support the reading's argument?", answer: "Aphids clone themselves all summer when conditions are good but switch to sexual reproduction in autumn when winter demands tougher offspring, while whiptail lizards reproduce entirely without males in stable desert environments. Both show organisms matching reproductive strategy to environmental stability, confirming that variation exists for surviving change."},
+            {id: "s7-1-c3", question: "Evaluate the author's generalization: 'Systems that copy themselves perfectly are efficient until conditions change.'", answer: "The reading supports it biologically: asexual copying is fast and cheap but fragile, since one disease can wipe out clones, while varied populations survive. The claim's strength is that it explains why nearly all large organisms pay the cost of sex despite its expense."}
+          ]},
+          {type: "argument", instructions: "Write two paragraphs defending or challenging the thesis.", items: [
+            {id: "s7-1-a1", prompt: "Defend or challenge this thesis: 'Human societies should be organized for variation the way biology favors it.'", guidance: "Thesis: take a clear position on whether the biological lesson transfers. Evidence: use at least two examples from the reading (varied populations survive disease and drought while clones perish; systems that copy perfectly are efficient until conditions change) plus one fact from your own research on variation or diversity. Counterargument: address the claim that the biological analogy is misleading because societies are not gene pools and uniformity has real benefits, such as coordination and shared norms, and explain whether the lesson transfers."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows you understand its meaning in the context of this week's topic.", items: [
+            {id: "s7-1-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["heredity", "gamete"]}
           ]}
         ]
       }
@@ -1035,6 +1371,18 @@ const MM_WEEKS_912 = [
             {id: "h1-c1", prompt: "How did the Great Awakening affect colonial politics?", options: ["It taught ordinary colonists to judge authority for themselves, a habit later turned against Parliament.", "It convinced colonists to obey all established authority without question.", "It had no political effects at all."], answer: "It taught ordinary colonists to judge authority for themselves, a habit later turned against Parliament."},
             {id: "h1-c2", prompt: "What radical seed did revival preaching plant regarding slavery?", options: ["If all souls are equal before God, then slavery and hierarchy stand condemned.", "Slavery was declared God's punishment for sin.", "Preachers ordered enslaved people never to attend revivals."], answer: "If all souls are equal before God, then slavery and hierarchy stand condemned."}
           ]}
+        ,
+          {type: "comprehension", instructions: "Answer each question in 3-5 sentences, using evidence from the reading.", items: [
+            {id: "h8-0-c1", question: "Why does the author treat the pamphlet war between New Lights and Old Lights as politically significant?", answer: "Because ministers publishing attacks on each other trained colonists in public debate. The habits of judging religious authority, gathering in voluntary associations, and challenging established power would soon be turned against Parliament."},
+            {id: "h8-0-c2", question: "How does the reading show that the Awakening's theology contained a 'radical seed'?", answer: "Preachers insisted that all souls were equal before God, and enslaved and free Black colonists heard that message clearly. The logic condemned slavery and hierarchy, so the revivals armed their own critics."},
+            {id: "h8-0-c3", question: "Evaluate the contrast between Whitefield and Edwards as the reading presents it.", answer: "Whitefield was the emotional showman whose voice could reach 20,000 people without amplification, weeping and pleading across seven colonial tours. Edwards read quietly from a manuscript, yet listeners still clutched pews and cried out in terror. The contrast shows the Awakening worked through both spectacle and sober dread."}
+          ]},
+          {type: "argument", instructions: "Write two paragraphs defending or challenging the thesis.", items: [
+            {id: "h8-0-a1", prompt: "Defend or challenge this thesis: 'The Great Awakening did more to cause the American Revolution than any tax Parliament passed.'", guidance: "Thesis: take a clear position comparing ideas to taxes as causes. Evidence: use at least two examples from the reading (revivals teaching colonists to judge authority and gather in associations; the pamphlet war training public debate; habits later turned against Parliament) plus one fact from your own research on Black preachers. Counterargument: address the claim that ideas alone do not make revolutions and that British taxation and military occupation were the real triggers, and explain whether the Awakening was a cause or merely a backdrop."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows you understand its meaning in the context of this week's topic.", items: [
+            {id: "h8-0-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["revival", "itinerant", "conversion"]}
+          ]}
         ]
       },
       {
@@ -1054,6 +1402,18 @@ const MM_WEEKS_912 = [
             {id: "h2-m2", term: "Francis Asbury", answer: "b"},
             {id: "h2-m3", term: "Richard Allen", answer: "c"},
             {id: "h2-m4", term: "Lemuel Haynes", answer: "d"}
+          ]}
+        ,
+          {type: "comprehension", instructions: "Answer each question in 3-5 sentences, using evidence from the reading.", items: [
+            {id: "h8-1-c1", question: "Why does the author say religion was 'liberation twice over' for Black preachers?", answer: "Because it freed their souls in a theology of equality and also gave them a platform, an income, and an audience that slavery denied. Preaching delivered both spiritual and material emancipation."},
+            {id: "h8-1-c2", question: "How does Asbury's journal entry strengthen the author's argument about Hosier?", answer: "A leading white bishop called the illiterate Hosier 'one of the best preachers in the world' and said he would rather hear him than the finest scholars of the church. The testimony of an establishment figure, with crowds rivaling any white minister's, proves Hosier's power crossed the color line."},
+            {id: "h8-1-c3", question: "Evaluate the significance of the phrase 'God was no respecter of persons' in the reading.", answer: "When Hosier thundered it, enslaved listeners heard a verdict on their masters: if God judged all souls equally, slavery stood condemned. The reading presents the sermon line as theology turned into abolitionist argument."}
+          ]},
+          {type: "argument", instructions: "Write two paragraphs defending or challenging the thesis.", items: [
+            {id: "h8-1-a1", prompt: "Defend or challenge this thesis: 'Black preachers like Harry Hosier turned the Great Awakening's promise into a weapon against slavery.'", guidance: "Thesis: take a clear position on whether the preachers weaponized the revival. Evidence: use at least two examples from the reading (Hosier's 'no respecter of persons' preaching to enslaved listeners; Allen and Jones building independent churches; Haynes's antislavery sermons) plus one fact from your own research on Black preachers. Counterargument: address the claim that Christianity was also used to defend slavery and pacify the enslaved, and explain why the liberating use does or does not outweigh the oppressive one."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows you understand its meaning in the context of this week's topic.", items: [
+            {id: "h8-1-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["revival", "itinerant", "egalitarian"]}
           ]}
         ]
       }
@@ -1075,6 +1435,18 @@ const MM_WEEKS_912 = [
           ]},
           {type: "shortanswer", instructions: "Write 4-6 sentences, then compare your answer with the model.", items: [
             {id: "s1-s1", prompt: "Explain how Mendel's pea experiments revealed dominant and recessive alleles.", answer: "Mendel crossed purebred purple and white flowered peas and found every first-generation offspring bloomed purple, suggesting purple dominated. When those purple plants self-pollinated, white flowers reappeared in about one quarter of the next generation, proving the white trait had been hidden, not destroyed. He concluded each plant carries paired factors, one from each parent, and the purple version masks the white one. The white trait appears only when an offspring inherits two white copies. This pattern of masking and reappearance is the signature of dominant and recessive alleles."}
+          ]}
+        ,
+          {type: "comprehension", instructions: "Answer each question in 3-5 sentences, using evidence from the reading.", items: [
+            {id: "s8-0-c1", question: "Why was the reappearance of white flowers in the second generation the key result?", answer: "When the purple offspring self-pollinated, white flowers reappeared in about one quarter of the next generation, proving the white factor had been hidden, not destroyed. It showed traits are carried as paired factors that separate, with recessive versions reappearing when two copies combine."},
+            {id: "s8-0-c2", question: "How does the reading explain the 3:1 ratio?", answer: "Each trait is controlled by paired factors, with one copy inherited from each parent. The dominant purple allele masks the recessive white one in the first generation, and the law of segregation separates the alleles during gamete formation, so about one quarter of the next generation inherits two recessive copies."},
+            {id: "s8-0-c3", question: "Evaluate the significance of Mendel's work being ignored from 1866 to 1900.", answer: "The reading presents it as a caution about how science advances: a monk counting peas had found the rules governing every inherited trait, yet his paper gathered dust for 34 years until three botanists rediscovered it. Discovery alone does not guarantee recognition."}
+          ]},
+          {type: "argument", instructions: "Write two paragraphs defending or challenging the thesis.", items: [
+            {id: "s8-0-a1", prompt: "Defend or challenge this thesis: 'Mendel's method (careful crosses and honest counting) matters as much as his discoveries.'", guidance: "Thesis: take a clear position on method versus discovery. Evidence: use at least two examples from the reading (29,000 pea plants tracked for generations; the 3:1 ratio confirmed by counting again and again) plus one fact from your own research on Mendel or genetics. Counterargument: address the claim that the laws themselves are what matter and the method was just gardening, and explain whether the counting does or does not deserve equal credit."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows you understand its meaning in the context of this week's topic.", items: [
+            {id: "s8-0-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["dominant", "conversion"]}
           ]}
         ]
       },
@@ -1103,6 +1475,18 @@ const MM_WEEKS_912 = [
           {type: "choice", instructions: "Read each question, then choose the best answer based on the reading.", items: [
             {id: "s2-c1", prompt: "In a Tt x Tt cross, what is the probability of a tt offspring?", options: ["1/4", "1/2", "3/4"], answer: "1/4"},
             {id: "s2-c2", prompt: "In (p + q)^2 = p^2 + 2pq + q^2, what does 2pq represent?", options: ["The expected frequency of heterozygotes", "The expected frequency of dominant homozygotes", "The total number of offspring"], answer: "The expected frequency of heterozygotes"}
+          ]}
+        ,
+          {type: "comprehension", instructions: "Answer each question in 3-5 sentences, using evidence from the reading.", items: [
+            {id: "s8-1-c1", question: "Why does the reading call the Punnett square 'probability made visible'?", answer: "Because each box represents the product of independent gamete probabilities: each parent contributes T with probability 1/2, so TT occurs with probability 1/2 x 1/2 = 1/4. The grid turns the binomial math of (p + q)^2 into a picture."},
+            {id: "s8-1-c2", question: "How does the Hardy-Weinberg principle use the Punnett square's math?", answer: "With allele frequencies p and q, genotype frequencies follow p^2 + 2pq + q^2 and stay constant generation after generation in a large population with no selection. Deviations from the prediction reveal evolution, through selection, migration, or drift, at work."},
+            {id: "s8-1-c3", question: "Evaluate the significance of the cystic fibrosis example.", answer: "It shows the square is not just a classroom exercise: when two carriers of the recessive disease have a child, each child has a 1/4 chance of the disease. That information helps families make hard decisions, so Mendel's arithmetic guides real medical choices."}
+          ]},
+          {type: "argument", instructions: "Write two paragraphs defending or challenging the thesis.", items: [
+            {id: "s8-1-a1", prompt: "Defend or challenge this thesis: 'Genetic counselors should be required to explain Punnett square probabilities to every at-risk couple.'", guidance: "Thesis: take a clear position on whether the explanation should be mandatory. Evidence: use at least two examples from the reading (the 1/4 risk calculation for two cystic fibrosis carriers; families using the information to make hard decisions) plus one fact from your own research on genetic counseling. Counterargument: address the claim that probabilities can mislead, since each child is an independent 1/4 chance rather than one in four children, and that counseling must go beyond numbers, and explain whether the requirement would help or harm."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows you understand its meaning in the context of this week's topic.", items: [
+            {id: "s8-1-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["dominant", "itinerant"]}
           ]}
         ]
       }
@@ -1178,7 +1562,19 @@ const MM_WEEKS_912 = [
           {id:"h1-k2", text:"The Proclamation Line angered frontier settlers"},
           {id:"h1-k3", text:"Native nations doubted British promises"}
         ]}
-      ]
+      ,
+          {type: "comprehension", instructions: "Answer each question in 3-5 sentences, using evidence from the reading.", items: [
+            {id: "h9-0-c1", question: "Why does the author call 1763 both Britain's greatest victory and the start of its troubles?", answer: "Because France's surrender gave Britain a vast North American empire but nearly doubled the national debt. Paying for it required taxing the colonies and garrisoning the frontier, which produced the Proclamation, Pontiac's War, and the imperial crisis."},
+            {id: "h9-0-c2", question: "How does the reading show that the 'peace' satisfied none of the communities involved?", answer: "Settlers read the Proclamation as betrayal of lands they had fought to conquer, Native leaders doubted Britain could keep its promise, and Black laborers, soldiers, and families appear in the fighting's accounts yet vanish from the standard story. The closing line states the peace satisfied none of them."},
+            {id: "h9-0-c3", question: "Evaluate the significance of Pontiac's recorded speech in the author's argument.", answer: "The French chronicler's account has Pontiac urging his brothers to drive the English from their lands, because the English sought only to destroy the Native peoples while the French had been better neighbors. The author uses it to show the uprising was a reasoned response to British contempt, not mindless violence."}
+          ]},
+          {type: "argument", instructions: "Write two paragraphs defending or challenging the thesis.", items: [
+            {id: "h9-0-a1", prompt: "Defend or challenge this thesis: 'Britain lost the peace of 1763 the moment it won the war.'", guidance: "Thesis: take a clear position on whether the victory was self-defeating. Evidence: use at least two examples from the reading (the doubled debt forcing colonial taxation; the Proclamation betraying settlers while failing Native nations; Pontiac's uprising) plus one fact from your own research on Pontiac's war. Counterargument: address the claim that Britain's victory secured North America and the later crisis came from colonial ingratitude, and explain whether the peace was lost by policy or by circumstance."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows you understand its meaning in the context of this week's topic.", items: [
+            {id: "h9-0-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["imperial", "frontier", "proclamation"]}
+          ]}
+        ]
     },
     {
       title: "Pontiac's War and the Proclamation Line",
@@ -1200,7 +1596,19 @@ const MM_WEEKS_912 = [
           {id:"h2-t1", text:"Pontiac's warriors captured most of the British forts in the Great Lakes and Ohio region.", answer:"true", note:"Eight of twelve forts fell; only Detroit and Pitt held."},
           {id:"h2-t2", text:"Pontiac's War ended with a formal peace treaty signed by all sides.", answer:"false", note:"It ended through exhaustion, not a treaty."}
         ]}
-      ]
+      ,
+          {type: "comprehension", instructions: "Answer each question in 3-5 sentences, using evidence from the reading.", items: [
+            {id: "h9-1-c1", question: "Why does the author stress that the war began before the Proclamation existed?", answer: "To correct the causal story: the uprising was not a reaction to the Proclamation but to British contempt after the French defeat, including cut presents, raised prices, and treating Native leaders as conquered subjects. The Proclamation was Britain's terrified response to the war, not its cause."},
+            {id: "h9-1-c2", question: "How did Pontiac's War change British imperial policy, according to the reading?", answer: "Britain kept the ground but learned that holding the frontier would require soldiers, money, and diplomacy it could barely afford. That lesson produced the Proclamation Line and Parliament's taxation of the colonies to pay for frontier armies."},
+            {id: "h9-1-c3", question: "Evaluate the author's point that Black participation in the war is 'usually left out.'", answer: "The reading documents enslaved Black laborers sustaining besieged forts, free Black soldiers and traders fighting and scouting, and Black captives taken in raids, with Black participants on every side of the fighting. Leaving them out makes the frontier story falsely white, so the author treats inclusion as a correction to the record."}
+          ]},
+          {type: "argument", instructions: "Write two paragraphs defending or challenging the thesis.", items: [
+            {id: "h9-1-a1", prompt: "Defend or challenge this thesis: 'Pontiac's War, not the Stamp Act, was the true start of the American Revolution.'", guidance: "Thesis: take a clear position on when the Revolution began. Evidence: use at least two examples from the reading (the war forcing the Proclamation Line and the taxes to pay for frontier armies; the lesson that Britain could not hold the frontier cheaply) plus one fact from your own research on Pontiac's war. Counterargument: address the claim that the war was a frontier conflict with no constitutional argument and that the Revolution began with ideas about taxation and representation, and explain which start date is more defensible."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows you understand its meaning in the context of this week's topic.", items: [
+            {id: "h9-1-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["frontier", "insurgency", "proclamation"]}
+          ]}
+        ]
     }
   ],
   science: [
@@ -1221,7 +1629,19 @@ const MM_WEEKS_912 = [
           {id:"s1-t1", text:"In codominance, both alleles are fully expressed at the same time.", answer:"true", note:"Type AB blood shows both A and B markers."},
           {id:"s1-t2", text:"Mendel's 3:1 ratio appears in crosses showing incomplete dominance.", answer:"false", note:"Incomplete dominance gives a 1:2:1 ratio."}
         ]}
-      ]
+      ,
+          {type: "comprehension", instructions: "Answer each question in 3-5 sentences, using evidence from the reading.", items: [
+            {id: "s9-0-c1", question: "Why does the reading distinguish incomplete dominance from codominance so carefully?", answer: "Because they produce different heterozygotes: incomplete dominance blends, as in pink snapdragons, while codominance shows both alleles fully, as in AB blood with both markers or roan cattle with intermingled red and white hairs, not pink ones. Confusing them misreads the cross."},
+            {id: "s9-0-c2", question: "How does the 1:2:1 ratio serve as a diagnostic tool?", answer: "Mendel's crosses give a 3:1 phenotype ratio, but a 1:2:1 ratio of phenotypes is the signature of incomplete dominance or codominance. The ratio lets a geneticist read the inheritance pattern straight from the offspring."},
+            {id: "s9-0-c3", question: "Evaluate why the reading says 'the math of inheritance still works; it just describes a richer world.'", answer: "Because patterns like multiple alleles in ABO blood and polygenic traits like height and skin color complicate Mendel's categories without breaking his logic. The same probability rules apply, but the phenotypes form blends and smooth ranges instead of all-or-nothing outcomes."}
+          ]},
+          {type: "argument", instructions: "Write two paragraphs defending or challenging the thesis.", items: [
+            {id: "s9-0-a1", prompt: "Defend or challenge this thesis: 'Teaching only Mendel's pea plants gives students a false picture of inheritance.'", guidance: "Thesis: take a clear position on how genetics should be taught. Evidence: use at least two examples from the reading (incomplete dominance and codominance producing blends and dual expression; polygenic traits forming smooth ranges) plus one fact from your own research on genetics. Counterargument: address the claim that Mendel's simple ratios are the necessary foundation and complications can come later, and explain whether starting simple does or does not mislead."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows you understand its meaning in the context of this week's topic.", items: [
+            {id: "s9-0-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["polygenic", "frontier"]}
+          ]}
+        ]
     },
     {
       title: "Polygenic Traits, Epistasis, and Environment",
@@ -1246,7 +1666,19 @@ const MM_WEEKS_912 = [
           {key:"b", text:"many genes shape one trait"},
           {key:"c", text:"a gene on the X chromosome"}
         ]}
-      ]
+      ,
+          {type: "comprehension", instructions: "Answer each question in 3-5 sentences, using evidence from the reading.", items: [
+            {id: "s9-1-c1", question: "Why does the Labrador example clarify epistasis better than a definition alone?", answer: "Because it shows the mechanism concretely: one gene controls whether the coat is black or chocolate, but a second gene determines whether any pigment appears at all, so a dog with two recessive copies of the second gene is yellow no matter what the first gene says. The second gene is epistatic to the first."},
+            {id: "s9-1-c2", question: "How does the reading explain why color blindness is far more common in men?", answer: "The genes are X-linked and males carry only one X chromosome, so a recessive allele on that single X always shows. A woman needs two copies of the recessive allele to show the trait, while a man needs only one."},
+            {id: "s9-1-c3", question: "Evaluate the author's closing line: 'Genes set the possibilities.'", answer: "The reading supports it with environment overriding identical genotypes: Siamese cats carry an allele for dark fur that only activates in cooler body parts, hydrangeas turn blue in acidic soil and pink in alkaline soil with the same genes, and identical twins diverge after years of different environments. Genes define the range, but other genes, sex, and environment determine which possibilities appear."}
+          ]},
+          {type: "argument", instructions: "Write two paragraphs defending or challenging the thesis.", items: [
+            {id: "s9-1-a1", prompt: "Defend or challenge this thesis: 'Because environment shapes which genes appear, genetic determinism is false.'", guidance: "Thesis: take a clear position on whether genes determine outcomes. Evidence: use at least two examples from the reading (Siamese cats' temperature-sensitive fur; hydrangeas changing color with soil pH; identical twins diverging) plus one fact from your own research on genes and environment. Counterargument: address the claim that genes still set hard limits no environment can cross, and explain whether the 'possibilities' language does or does not refute determinism."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows you understand its meaning in the context of this week's topic.", items: [
+            {id: "s9-1-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["polygenic", "insurgency"]}
+          ]}
+        ]
     }
   ],
   friday: { title:"Show What You Know: Week 9", reading:"This week you studied the aftermath of the French and Indian War and the genetics beyond Mendel. Show what you remember.", groups:[
@@ -1312,7 +1744,19 @@ const MM_WEEKS_912 = [
           {id:"h1-c1", prompt:"Why did the boycott of British goods work as a protest tactic?", options:["It hurt British merchants, who then pressured Parliament","It was illegal and frightened Parliament","It gave the colonies their own factories"], answer:"It hurt British merchants, who then pressured Parliament"},
           {id:"h1-c2", prompt:"What did the Stamp Act Congress of 1765 do?", options:["Petitioned the king for repeal of the Stamp Act","Declared independence from Britain","Sent soldiers to Boston"], answer:"Petitioned the king for repeal of the Stamp Act"}
         ]}
-      ]
+      ,
+          {type: "comprehension", instructions: "Answer each question in 3-5 sentences, using evidence from the reading.", items: [
+            {id: "h10-0-c1", question: "Why does the author say the Stamp Act crisis was 'postponed, not solved'?", answer: "Because Parliament repealed the Stamp Act but paired repeal with the Declaratory Act, which asserted that Parliament could bind the colonies in all cases whatsoever. The underlying question of who could tax the colonists was left unanswered, so the Townshend Acts reignited it."},
+            {id: "h10-0-c2", question: "How does the reading show that resistance was broader than the Sons of Liberty?", answer: "Merchants organized boycotts of British goods, women wove homespun cloth instead of buying British fabric and were celebrated as patriots, nine colonies sent delegates to the Stamp Act Congress, and Patrick Henry pushed resolves in Virginia. The resistance spanned commerce, households, and legislatures."},
+            {id: "h10-0-c3", question: "Evaluate the significance of the Declaratory Act in the author's narrative.", answer: "It is presented as the tell: Parliament gave up the stamp tax but claimed unlimited authority, proving to colonists that repeal was tactical rather than principled. The Act kept the constitutional conflict alive and guaranteed the next crisis."}
+          ]},
+          {type: "argument", instructions: "Write two paragraphs defending or challenging the thesis.", items: [
+            {id: "h10-0-a1", prompt: "Defend or challenge this thesis: 'The boycott, not the pamphlet, was the colonists' most effective weapon.'", guidance: "Thesis: take a clear position ranking the resistance tactics. Evidence: use at least two examples from the reading (the merchants' boycott pressuring Parliament to repeal the Stamp Act; women weaving homespun and the second, larger boycott answering the Townshend Acts) plus one fact from your own research on Attucks. Counterargument: address the claim that ideas, such as Henry's resolves and the Stamp Act Congress's petitions, moved people while boycotts merely hurt trade, and explain which weapon forced Parliament's hand."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows you understand its meaning in the context of this week's topic.", items: [
+            {id: "h10-0-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["boycott", "repeal", "propaganda"]}
+          ]}
+        ]
     },
     {
       title: "The Boston Massacre and Crispus Attucks",
@@ -1334,7 +1778,19 @@ const MM_WEEKS_912 = [
           {id:"h2-f1", text:"Crispus ___ was the first colonist killed in the Boston Massacre.", answer:"Attucks"},
           {id:"h2-f2", text:"Revere's engraving of the Massacre was effective ___ that spread faster than the facts.", answer:"propaganda"}
         ]}
-      ]
+      ,
+          {type: "comprehension", instructions: "Answer each question in 3-5 sentences, using evidence from the reading.", items: [
+            {id: "h10-1-c1", question: "Why does the author say 'symbols simplify' about Attucks's martyrdom?", answer: "Because the patriot cause needed a symbol and made him one, but the real Attucks was a working sailor of African and Native ancestry who stood his ground with a cordwood stick, not a pamphlet patriot. The politics of his martyrdom would be argued over for generations."},
+            {id: "h10-1-c2", question: "How does the reading use Revere's engraving to make a point about propaganda?", answer: "The engraving showed disciplined British soldiers firing into a peaceful crowd, which was not what happened, but the image traveled faster than the facts. It demonstrates how a simplified picture can shape a cause more than the messy truth."},
+            {id: "h10-1-c3", question: "Evaluate the significance of Attucks's funeral as described in the Boston Gazette.", answer: "Thousands followed the bodies through streets with shops closed and bells tolling to a shared grave. The procession shows an escaped enslaved man, whom the law had treated as property, being buried as a hero of liberty, a public verdict the trial's acquittals could not erase."}
+          ]},
+          {type: "argument", instructions: "Write two paragraphs defending or challenging the thesis.", items: [
+            {id: "h10-1-a1", prompt: "Defend or challenge this thesis: 'Crispus Attucks's martyrdom mattered more than the facts of the Boston Massacre.'", guidance: "Thesis: take a clear position on symbol versus fact. Evidence: use at least two examples from the reading (Revere's engraving traveling faster than the facts; the grand funeral procession burying an escaped enslaved man as a hero of liberty) plus one fact from your own research on Attucks. Counterargument: address the claim that building a cause on an inaccurate image, a peaceful crowd and a pamphlet patriot, corrupts the history, and explain whether the symbol's power does or does not justify the simplification."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows you understand its meaning in the context of this week's topic.", items: [
+            {id: "h10-1-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["martyr", "propaganda", "boycott"]}
+          ]}
+        ]
     }
   ],
   science: [
@@ -1357,7 +1813,19 @@ const MM_WEEKS_912 = [
           {id:"s1-c1", prompt:"Which base always pairs with adenine in DNA?", options:["Thymine","Guanine","Cytosine"], answer:"Thymine"},
           {id:"s1-c2", prompt:"What did Rosalind Franklin's Photo 51 reveal?", options:["The helical shape of DNA","The sequence of human genes","How proteins are built"], answer:"The helical shape of DNA"}
         ]}
-      ]
+      ,
+          {type: "comprehension", instructions: "Answer each question in 3-5 sentences, using evidence from the reading.", items: [
+            {id: "s10-0-c1", question: "Why does the reading insist Franklin's contribution was 'essential' rather than merely helpful?", answer: "Because Photo 51 revealed the molecule's helical shape and dimensions, the structural clue the model required. Combined with Chargaff's pairing rules, her evidence made the double helix deducible, which is why modern science credits her work as essential despite her lifetime undervaluation."},
+            {id: "s10-0-c2", question: "How do the base-pairing rules explain the reading's claim that each strand is 'a perfect template for the other'?", answer: "Because adenine always pairs with thymine and guanine always pairs with cytosine, knowing one strand's sequence lets you predict the other exactly. That complementarity is what would soon explain how DNA copies itself."},
+            {id: "s10-0-c3", question: "Evaluate the significance of the Nobel Prize going to Watson, Crick, and Wilkins but not Franklin.", answer: "Franklin died in 1958 and was therefore ineligible, but the reading frames the omission as part of her undervaluation. The prize story shows how credit in science can follow politics and timing rather than the weight of the evidence."}
+          ]},
+          {type: "argument", instructions: "Write two paragraphs defending or challenging the thesis.", items: [
+            {id: "s10-0-a1", prompt: "Defend or challenge this thesis: 'Rosalind Franklin deserves to be called the co-discoverer of the double helix.'", guidance: "Thesis: take a clear position on how she should be credited. Evidence: use at least two examples from the reading (Photo 51 revealing the helical shape and dimensions; her work now credited as essential to the model) plus one fact from your own research on DNA's discovery. Counterargument: address the claim that Watson and Crick built the model and that providing data is not the same as discovering the structure, and explain whether her evidence does or does not merit co-discoverer status."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows you understand its meaning in the context of this week's topic.", items: [
+            {id: "s10-0-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["nucleotide", "repeal"]}
+          ]}
+        ]
     },
     {
       title: "Copying DNA",
@@ -1375,7 +1843,19 @@ const MM_WEEKS_912 = [
         {type:"shortanswer", instructions:"Write 4-6 sentences, then compare your answer with the model.", items:[
           {id:"s2-s1", prompt:"Argue: Was the discovery of DNA's structure a triumph of teamwork or of individual genius? Take a position using evidence from Wednesday and Thursday.", answer:"The discovery of DNA's structure was a triumph of teamwork, even if the prizes went to individuals. Rosalind Franklin's Photo 51 gave Watson and Crick the helical shape and dimensions their model required, and they could not have solved the structure without it. The pairing rules came from other researchers' chemistry, and Meselson and Stahl later confirmed the replication mechanism with their own elegant experiment. Individual brilliance mattered, but every breakthrough in these lessons rested on evidence gathered by many hands. Science advances fastest when credit and collaboration travel together."}
         ]}
-      ]
+      ,
+          {type: "comprehension", instructions: "Answer each question in 3-5 sentences, using evidence from the reading.", items: [
+            {id: "s10-1-c1", question: "Why was the Meselson-Stahl experiment 'elegant'?", answer: "Because it tested the model with a single clean prediction: bacteria grown in heavy nitrogen and then switched to normal nitrogen produced DNA that got lighter over generations, exactly as semi-conservative replication predicted. It confirmed that each new molecule keeps one original strand."},
+            {id: "s10-1-c2", question: "How does the reading explain the need for Okazaki fragments?", answer: "Because the strands are antiparallel, DNA polymerase can only build in one chemical direction. One new strand is built smoothly while the other must be built in short pieces, the Okazaki fragments, which ligase stitches together."},
+            {id: "s10-1-c3", question: "Evaluate why replication needs so many different enzymes.", answer: "Each step is a distinct chemical job: helicase unzips the double helix, primase lays the RNA primer that polymerase requires, polymerase adds matching nucleotides, and ligase stitches fragments. The division of labor, plus proofreading enzymes, is what makes copying billions of base pairs fast and accurate."}
+          ]},
+          {type: "argument", instructions: "Write two paragraphs defending or challenging the thesis.", items: [
+            {id: "s10-1-a1", prompt: "Defend or challenge this thesis: 'Understanding DNA replication is the key to understanding cancer.'", guidance: "Thesis: take a clear position on whether replication is the key. Evidence: use at least two examples from the reading (proofreading enzymes catching most mistakes; the fast, accurate copying behind growth, healing, and heredity) plus one fact from your own research on DNA or cancer. Counterargument: address the claim that cancer is about failed checkpoints and runaway division rather than copying errors, and explain whether replication does or does not sit at the root."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows you understand its meaning in the context of this week's topic.", items: [
+            {id: "s10-1-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["nucleotide", "repeal"]}
+          ]}
+        ]
     }
   ],
   friday: { title:"Show What You Know: Week 10", reading:"This week you studied the imperial crisis and the structure and copying of DNA. Show what you remember.", groups:[
@@ -1444,7 +1924,19 @@ const MM_WEEKS_912 = [
           {id:"h1-o4", event:"Congress appoints a committee to draft a declaration", answer:2},
           {id:"h1-o5", event:"Jefferson writes the draft", answer:3}
         ]}
-      ]
+      ,
+          {type: "comprehension", instructions: "Answer each question in 3-5 sentences, using evidence from the reading.", items: [
+            {id: "h11-0-c1", question: "Why does the author emphasize that signing was 'an act of treason'?", answer: "Because the first printed Dunlap broadsides carried John Hancock's name alone, and the other signers were not named in print for months. The detail shows the Declaration was not safe rhetoric but a gamble with the signers' lives, which measures their commitment."},
+            {id: "h11-0-c2", question: "How does the deleted passage on the slave trade sharpen the author's point about contradiction?", answer: "Jefferson's original draft condemned the slave trade, but Congress deleted it to keep the southern colonies on board. The deletion proves the founders saw the contradiction and chose unity over principle, writing both the promise and the practice into the birth certificate."},
+            {id: "h11-0-c3", question: "Evaluate the author's claim that the Declaration's voice is Jefferson's.", answer: "The committee of five assigned the writing mainly to Jefferson, with Adams and Franklin suggesting only small edits. The reading uses this to attribute both the soaring preamble and its slaveholding author's blind spots to one man, making the contradiction personal."}
+          ]},
+          {type: "argument", instructions: "Write two paragraphs defending or challenging the thesis.", items: [
+            {id: "h11-0-a1", prompt: "Defend or challenge this thesis: 'The Declaration of Independence is a hypocritical document.'", guidance: "Thesis: take a clear position on whether the charge fits. Evidence: use at least two examples from the reading (the preamble's 'all men are created equal' versus Jefferson enslaving more than a hundred people; the deleted condemnation of the slave trade) plus one fact from your own research on antislavery petitions. Counterargument: address the claim that the ideals outgrew their authors and gave later generations the tools to end slavery, and explain whether the promise redeems the practice."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows you understand its meaning in the context of this week's topic.", items: [
+            {id: "h11-0-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["natural rights", "grievance", "self-evident"]}
+          ]}
+        ]
     },
     {
       title: "The Antislavery Promise",
@@ -1466,7 +1958,19 @@ const MM_WEEKS_912 = [
           {key:"b", text:"a formal complaint of wrongdoing"},
           {key:"c", text:"a written request to an authority"}
         ]}
-      ]
+      ,
+          {type: "comprehension", instructions: "Answer each question in 3-5 sentences, using evidence from the reading.", items: [
+            {id: "h11-1-c1", question: "Why does the author say the antislavery promise 'could not be unsaid'?", answer: "Because once liberty was declared a natural right, enslaved and free Black people used the founders' own words in petitions, seized Dunmore's offer by the thousands, and helped write the first antislavery constitution in Vermont. Every later generation, from Frederick Douglass to Martin Luther King Jr., would return to those words and demand the nation keep them."},
+            {id: "h11-1-c2", question: "How does the reading show that Black Americans were agents, not bystanders, in the Revolution's ideals?", answer: "They petitioned governors and legislatures in writing, seized Dunmore's offer by the thousands, and helped write the first antislavery constitution in Vermont. The reading presents them as seizing the language of liberty and forcing it to include them."},
+            {id: "h11-1-c3", question: "Evaluate the significance of the Somerset case in the author's argument.", answer: "The 1772 English ruling that slavery had no basis in English common law raised hopes that courts might do what legislatures would not. It shows the antislavery promise was being tested in law on both sides of the Atlantic, not just in rhetoric."}
+          ]},
+          {type: "argument", instructions: "Write two paragraphs defending or challenging the thesis.", items: [
+            {id: "h11-1-a1", prompt: "Defend or challenge this thesis: 'The antislavery promise of the Revolution was kept.'", guidance: "Thesis: take a clear position on whether the promise was honored. Evidence: use at least two examples from the reading (Vermont's 1777 ban and Pennsylvania's 1780 gradual law versus the small, grudging steps and most patriots' refusal to apply the Declaration to Black people) plus one fact from your own research on antislavery petitions. Counterargument: address the claim that slavery survived and expanded after the Revolution, and explain whether the petitions and early laws count as keeping the promise or merely speaking it."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows you understand its meaning in the context of this week's topic.", items: [
+            {id: "h11-1-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["grievance", "natural rights", "independence"]}
+          ]}
+        ]
     }
   ],
   science: [
@@ -1487,7 +1991,19 @@ const MM_WEEKS_912 = [
           {id:"s1-t1", text:"Transcription copies a DNA segment into mRNA.", answer:"true", note:"RNA polymerase builds the mRNA strand."},
           {id:"s1-t2", text:"RNA polymerase makes fewer mistakes than DNA polymerase.", answer:"false", note:"It makes about one mistake per hundred thousand nucleotides, more than DNA replication."}
         ]}
-      ]
+      ,
+          {type: "comprehension", instructions: "Answer each question in 3-5 sentences, using evidence from the reading.", items: [
+            {id: "s11-0-c1", question: "Why does the cell accept RNA polymerase's high error rate?", answer: "Because mRNA is temporary: at about one mistake in every 100,000 nucleotides, the error rate is far higher than DNA replication, but mistakes in a short-lived copy matter less. The cell trades accuracy for speed."},
+            {id: "s11-0-c2", question: "How does alternative splicing multiply the genome's output?", answer: "Introns are cut out and exons are spliced together, and different combinations of exons produce different proteins from a single gene. That flexibility lets about 20,000 human genes make over 100,000 proteins."},
+            {id: "s11-0-c3", question: "Evaluate the significance of transcription factors in the reading.", answer: "They must unlock the promoter before RNA polymerase can attach, so the cell controls which genes switch on. The reading presents them as the regulatory gate that makes gene expression selective rather than automatic."}
+          ]},
+          {type: "argument", instructions: "Write two paragraphs defending or challenging the thesis.", items: [
+            {id: "s11-0-a1", prompt: "Defend or challenge this thesis: 'Alternative splicing, not the number of genes, is what makes humans complex.'", guidance: "Thesis: take a clear position on what drives complexity. Evidence: use at least two examples from the reading (20,000 genes making over 100,000 proteins; introns cut and exons recombined into different combinations) plus one fact from your own research on genes or proteins. Counterargument: address the claim that the DNA sequence itself, including regulatory regions and gene count, drives complexity and that splicing is just editing, and explain whether the editing does or does not deserve the credit."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows you understand its meaning in the context of this week's topic.", items: [
+            {id: "s11-0-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["synthesis", "independence"]}
+          ]}
+        ]
     },
     {
       title: "Translation: RNA to Protein",
@@ -1507,7 +2023,19 @@ const MM_WEEKS_912 = [
           {id:"s2-o4", event:"The ribosome reads codons on the mRNA", answer:2},
           {id:"s2-o5", event:"Amino acids link into a chain", answer:4}
         ]}
-      ]
+      ,
+          {type: "comprehension", instructions: "Answer each question in 3-5 sentences, using evidence from the reading.", items: [
+            {id: "s11-1-c1", question: "Why does the reading call the genetic code's redundancy a protective feature?", answer: "Because 64 codons specify only 20 amino acids, so most amino acids are specified by more than one codon. This degeneracy means many DNA mutations change nothing at all, buffering the protein against errors."},
+            {id: "s11-1-c2", question: "How does the sickle cell example prove the reading's point about folding?", answer: "A single changed codon swaps one amino acid in hemoglobin, breaking the fold and disabling the protein. It shows that the precise three-dimensional shape determines function and that one wrong link can destroy it."},
+            {id: "s11-1-c3", question: "Evaluate why translation is described as the cell 'reading so carefully.'", answer: "Ribosomes move three bases at a time with tRNA anticodons matching each codon, and special codons mark the start and stop of the protein. The care is warranted because a single wrong amino acid can break the fold, yet mistakes still happen and some cause disease."}
+          ]},
+          {type: "argument", instructions: "Write two paragraphs defending or challenging the thesis.", items: [
+            {id: "s11-1-a1", prompt: "Defend or challenge this thesis: 'The sickle cell mutation shows that the genetic code is dangerously fragile.'", guidance: "Thesis: take a clear position on whether the code is fragile. Evidence: use at least two examples from the reading (one changed codon swaps one amino acid and disables hemoglobin; a single wrong amino acid can break the protein's fold) plus one fact from your own research on mutations. Counterargument: address the claim that the code's degeneracy buffers most mutations and that sickle cell persists because carriers resist malaria, and explain whether one dramatic case does or does not prove fragility."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows you understand its meaning in the context of this week's topic.", items: [
+            {id: "s11-1-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["synthesis", "self-evident"]}
+          ]}
+        ]
     }
   ],
   friday: { title:"Show What You Know: Week 11", reading:"This week you studied the Declaration of Independence and how cells build proteins. Show what you remember.", groups:[
@@ -1576,7 +2104,19 @@ const MM_WEEKS_912 = [
           {id:"h1-t1", text:"Washington's main strategy was to keep his army alive and avoid decisive defeat.", answer:"true", note:"Survival kept the cause alive each year."},
           {id:"h1-t2", text:"The French alliance mattered mainly because it sent the Americans extra muskets.", answer:"false", note:"Most importantly, France provided a navy."}
         ]}
-      ]
+      ,
+          {type: "comprehension", instructions: "Answer each question in 3-5 sentences, using evidence from the reading.", items: [
+            {id: "h12-0-c1", question: "Why did Britain's divide-and-conquer strategy fail, according to the reading?", answer: "Because the loyalists never rose in the expected numbers, and supplying an army across an ocean was brutally hard. The plan assumed a friendly population and easy logistics, and both assumptions collapsed."},
+            {id: "h12-0-c2", question: "How does the reading explain Washington's strategy as the mirror image of Britain's?", answer: "Where Britain sought quick, decisive victories, Washington chose survival: avoiding pitched battles he could not win, striking quickly and retreating, and keeping his army in the field as a living symbol. Every year of survival was a year Britain paid for an increasingly unpopular war."},
+            {id: "h12-0-c3", question: "Evaluate the author's closing claim: 'Strategy, not just courage, won American independence.'", answer: "The reading supports it with the Fabian approach borrowed from the Roman general Fabius, von Steuben's drill at Valley Forge, Saratoga convincing France to ally, and the Franco-American trap at Yorktown. Courage was constant on both sides, but the coordinated strategy of outlasting Britain and winning French sea power decided the outcome."}
+          ]},
+          {type: "argument", instructions: "Write two paragraphs defending or challenging the thesis.", items: [
+            {id: "h12-0-a1", prompt: "Defend or challenge this thesis: 'France, not American arms, won the Revolutionary War.'", guidance: "Thesis: take a clear position on who deserves primary credit. Evidence: use at least two examples from the reading (Saratoga convincing France to ally; French money, soldiers, and the navy that trapped the British at Yorktown) plus one fact from your own research on Black soldiers. Counterargument: address the claim that Washington's survival strategy and American endurance made French help possible and that decisive American action won the battles, and explain whether the ally or the army deserves primary credit."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows you understand its meaning in the context of this week's topic.", items: [
+            {id: "h12-0-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["strategy", "alliance", "siege"]}
+          ]}
+        ]
     },
     {
       title: "Black Soldiers of the Revolution",
@@ -1598,7 +2138,19 @@ const MM_WEEKS_912 = [
           {key:"b", text:"a Black soldier cited for bravery at Bunker Hill"},
           {key:"c", text:"a plan to achieve a long-term goal"}
         ]}
-      ]
+      ,
+          {type: "comprehension", instructions: "Answer each question in 3-5 sentences, using evidence from the reading.", items: [
+            {id: "h12-1-c1", question: "Why does the author say British policy 'forced' Washington's hand on Black enlistment?", answer: "Because Dunmore's November 1775 promise of freedom drew hundreds of enslaved people to British lines. Faced with losing manpower to the enemy, Washington reversed the 1775 ban and welcomed free Black men into the ranks."},
+            {id: "h12-1-c2", question: "How does the 1818 pension application function as evidence in the reading?", answer: "The formerly enslaved Massachusetts veteran testified that he enlisted in 1777, endured the winter at Valley Forge, and received a written certificate of freedom at discharge. His words put one man's service into the federal record, proving the patriot cause depended on soldiers it had once refused."},
+            {id: "h12-1-c3", question: "Evaluate the author's phrase 'unfinished work' for the war's meaning to Black soldiers.", answer: "About 5,000 Black soldiers served the patriot cause and thousands more chose the British side, yet liberty remained unfinished for most of them. The phrase judges the Revolution by its own promise, finding that those who fought for freedom did not reliably receive it."}
+          ]},
+          {type: "argument", instructions: "Write two paragraphs defending or challenging the thesis.", items: [
+            {id: "h12-1-a1", prompt: "Defend or challenge this thesis: 'The Revolutionary War was a failure for Black Americans.'", guidance: "Thesis: take a clear position on how the war should be judged for Black Americans. Evidence: use at least two examples from the reading (the 1st Rhode Island men earning freedom through service versus the thousands whose liberty remained 'unfinished work'; Dunmore's promise versus patriot betrayals) plus one fact from your own research on Black soldiers. Counterargument: address the claim that the war opened paths to freedom, including manumissions, certificates of freedom, and the northern abolition movement it sparked, and explain whether those gains do or do not outweigh what was left unfinished."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows you understand its meaning in the context of this week's topic.", items: [
+            {id: "h12-1-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["alliance", "strategy", "guerrilla"]}
+          ]}
+        ]
     }
   ],
   science: [
@@ -1618,7 +2170,19 @@ const MM_WEEKS_912 = [
           {id:"s1-t1", text:"Modern insulin is produced by bacteria carrying the human insulin gene.", answer:"true", note:"Recombinant insulin replaced animal insulin in 1982."},
           {id:"s1-t2", text:"CRISPR is slower and less precise than older gene-editing methods.", answer:"false", note:"It is faster, cheaper, and more precise."}
         ]}
-      ]
+      ,
+          {type: "comprehension", instructions: "Answer each question in 3-5 sentences, using evidence from the reading.", items: [
+            {id: "s12-0-c1", question: "Why does the reading present the 1982 insulin breakthrough as foundational?", answer: "Because it proved recombinant DNA worked in practice: bacteria carrying the human insulin gene became tiny factories. The method, with restriction enzymes cutting and plasmids carrying, then produced human growth hormone, clotting factor, and vaccines more safely and cheaply than animal sources."},
+            {id: "s12-0-c2", question: "How does the reading show that CRISPR is a step change, not just an improvement?", answer: "It is faster, cheaper, and more precise than older methods, cutting DNA at an exact chosen location with RNA guidance. It has moved from laboratories to approved treatments, with sickle cell therapies editing patients' own blood stem cells, the first cures written directly into human DNA."},
+            {id: "s12-0-c3", question: "Evaluate the author's warning that 'the science always arrives with hard questions attached.'", answer: "The reading pairs every advance with its shadow: the same CRISPR that cures sickle cell can reshape ecosystems and human heredity, and engineered crops raise yields while changing agriculture worldwide. The warning insists the power and the questions are inseparable."}
+          ]},
+          {type: "argument", instructions: "Write two paragraphs defending or challenging the thesis.", items: [
+            {id: "s12-0-a1", prompt: "Defend or challenge this thesis: 'Golden Rice proves that genetic engineering serves the poor, not just corporations.'", guidance: "Thesis: take a clear position on who biotechnology serves. Evidence: use at least two examples from the reading (Golden Rice carrying vitamin A genes aimed at preventing childhood blindness in poor countries; Bt corn cutting pesticide spraying) plus one fact from your own research on biotechnology. Counterargument: address the claim that most engineered crops, such as herbicide-tolerant varieties, serve agribusiness profits and consolidate corporate control of seeds, and explain whether the humanitarian cases do or do not outweigh the commercial pattern."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows you understand its meaning in the context of this week's topic.", items: [
+            {id: "s12-0-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["ethics", "alliance"]}
+          ]}
+        ]
     },
     {
       title: "The Ethics of Editing Genes",
@@ -1636,7 +2200,19 @@ const MM_WEEKS_912 = [
           {id:"s2-k2", text:"Expensive therapies could widen inequality"},
           {id:"s2-k3", text:"Edited crops might harm ecosystems"}
         ]}
-      ]
+      ,
+          {type: "comprehension", instructions: "Answer each question in 3-5 sentences, using evidence from the reading.", items: [
+            {id: "s12-1-c1", question: "Why does the reading draw a bright line between editing adults and editing embryos?", answer: "Because editing a consenting adult to cure disease affects one person who agreed, while embryo edits pass to every future generation and no one can consent for the unborn. The heritability and the consent gap make the two cases ethically different in kind."},
+            {id: "s12-1-c2", question: "How does the history of American eugenics function in the author's argument?", answer: "The 1920s forced sterilizations of tens of thousands of people, endorsed by the Supreme Court in Buck v. Bell in 1927, are cited as a warning that genetic tools can serve prejudice as easily as medicine. The history proves good science can be captured by bad values, which is why ethicists demand rules before the technology spreads."},
+            {id: "s12-1-c3", question: "Evaluate Asilomar 1975 as the reading's model for handling CRISPR.", answer: "Researchers voluntarily paused recombinant DNA experiments to write safety rules, showing scientists can police themselves. The author offers it as the precedent for today's calls for a global pause on heritable editing, implying the same self-restraint is needed now."}
+          ]},
+          {type: "argument", instructions: "Write two paragraphs defending or challenging the thesis.", items: [
+            {id: "s12-1-a1", prompt: "Defend or challenge this thesis: 'Heritable human gene editing should be banned worldwide.'", guidance: "Thesis: take a clear position on whether a ban is warranted. Evidence: use at least two examples from the reading (embryo edits pass to every future generation without the consent of the unborn; the He Jiankui case showing the technology outrunning the rules; the eugenics warning) plus one fact from your own research on gene editing. Counterargument: address the claim that a ban would block cures for devastating inherited diseases and that regulated research on the Asilomar model is safer than prohibition, and explain whether the risks do or do not justify a ban."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows you understand its meaning in the context of this week's topic.", items: [
+            {id: "s12-1-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["ethics", "siege"]}
+          ]}
+        ]
     }
   ],
   friday: { title:"Show What You Know: Week 12", reading:"This week you studied Revolutionary War strategy and the promises and perils of biotechnology. Show what you remember.", groups:[
@@ -1703,7 +2279,19 @@ const MM_WEEKS_912 = [
           {id:"h1-k2", text:"Camp followers supporting the armies"},
           {id:"h1-k3", text:"Enslaved people escaping amid the chaos"}
         ]}
-      ]
+      ,
+          {type: "comprehension", instructions: "Answer each question in 3-5 sentences, using evidence from the reading.", items: [
+            {id: "h13-0-c1", question: "Why does the author say the war was 'endured, managed, and sometimes redirected' by those who stayed behind?", answer: "Because women managed farms, shops, and family finances under coverture, waged economic warfare through boycotts and homespun cloth, and camp followers sustained the armies, while enslaved people used the disorder to escape. The home front did not merely suffer the war but shaped its course."},
+            {id: "h13-0-c2", question: "How does the Continental currency collapse illustrate the war's unequal burdens?", answer: "Congress printed paper money called Continentals with no gold behind it, prices soared, and 'not worth a Continental' became shorthand for worthlessness. Families hoarded goods, speculators profiteered, and the poor suffered most while both armies seized crops and livestock."},
+            {id: "h13-0-c3", question: "Evaluate the significance of Abigail Adams's 'remember the ladies' letter.", answer: "Writing in March 1776 while managing the family farm through shortages and inflation, she put women's political voice into the revolutionary record. That John laughed it off shows how even revolutionary men dismissed the claim, making her letter both a demand and evidence of the dismissal."}
+          ]},
+          {type: "argument", instructions: "Write two paragraphs defending or challenging the thesis.", items: [
+            {id: "h13-0-a1", prompt: "Defend or challenge this thesis: 'Women won the Revolutionary War as surely as the soldiers did.'", guidance: "Thesis: take a clear position on who won the war. Evidence: use at least two examples from the reading (women managing farms, shops, and finances under coverture; economic warfare through boycotts and homespun cloth that clothed soldiers) plus one fact from your own research on Boston King. Counterargument: address the claim that wars are decided by armies and that home-front labor, however vital, was supporting rather than decisive, and explain whether the distinction holds."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows you understand its meaning in the context of this week's topic.", items: [
+            {id: "h13-0-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["loyalist", "choice", "refugee"]}
+          ]}
+        ]
     },
     {
       title: "The Loyalists' Choice",
@@ -1725,7 +2313,19 @@ const MM_WEEKS_912 = [
           {id:"h2-t1", text:"About one in five white colonists remained loyal to Britain.", answer:"true", note:"Roughly twenty percent were loyalists."},
           {id:"h2-t2", text:"Boston King fought for the patriot cause at Yorktown.", answer:"false", note:"He escaped to the British lines and served them."}
         ]}
-      ]
+      ,
+          {type: "comprehension", instructions: "Answer each question in 3-5 sentences, using evidence from the reading.", items: [
+            {id: "h13-1-c1", question: "Why does the author say Boston King 'chose the losing side of the war and won his freedom'?", answer: "Because he escaped to British lines in 1780 on the promise of liberty, served as a pilot and orderly, survived smallpox, and sailed to Nova Scotia free. Though Britain lost, his loyalty bought what the patriot side would not have given him, and he later led his people to Sierra Leone as a preacher."},
+            {id: "h13-1-c2", question: "How does the reading show that 'loyalty' meant opposite things to white loyalists and enslaved people?", answer: "For white loyalists, about one in five colonists, loyalty to the king brought tarring and feathering, confiscated property, banishment, and exile to Canada. For enslaved people, loyalty to Britain meant freedom, which is why thousands made the dangerous journey to British lines."},
+            {id: "h13-1-c3", question: "Evaluate the author's point that the states ignored the Treaty of Paris on loyalist property.", answer: "The treaty ordered Congress to urge the states to restore confiscated loyalist property, but the states ignored it and auctioned loyalist estates to pay their own bills. The reading uses this to show revolutionary justice was selective, punishing the defeated even against the peace terms."}
+          ]},
+          {type: "argument", instructions: "Write two paragraphs defending or challenging the thesis.", items: [
+            {id: "h13-1-a1", prompt: "Defend or challenge this thesis: 'Boston King made the right choice.'", guidance: "Thesis: take a clear position judging his decision. Evidence: use at least two examples from the reading (his escape to British lines and written path to freedom in Nova Scotia; his leadership of the Sierra Leone migration and preaching) plus one fact from your own research on Boston King. Counterargument: address the claim that he backed the losing side and traded slavery for bitter cold, poor land, and hunger in Nova Scotia, and explain whether freedom under hardship does or does not vindicate the choice."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows you understand its meaning in the context of this week's topic.", items: [
+            {id: "h13-1-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["loyalist", "choice", "refugee"]}
+          ]}
+        ]
     }
   ],
   science: [
@@ -1748,7 +2348,19 @@ const MM_WEEKS_912 = [
           {id:"s1-f1", text:"Without ___, there is nothing for nature to select among.", answer:"variation"},
           {id:"s1-f2", text:"___ means the winners pass their advantages to offspring.", answer:"heritability"}
         ]}
-      ]
+      ,
+          {type: "comprehension", instructions: "Answer each question in 3-5 sentences, using evidence from the reading.", items: [
+            {id: "s13-0-c1", question: "Why is the peppered moth the 'classic demonstration' of natural selection?", answer: "Because it shows all three ingredients in fast motion: variation between light and dark moths, competition as birds ate the visible ones, and heritability as the survivors passed on their color. When soot darkened the trees the dark moths dominated within decades, and when clean-air laws reduced the soot the light moths returned."},
+            {id: "s13-0-c2", question: "How does the reading use Malthus to explain Darwin's insight?", answer: "Malthus argued that populations grow faster than their food supply, and Darwin saw the same struggle everywhere in nature. With more offspring than can survive and variation among them, individuals with traits that fit their environment tend to survive and reproduce, passing those traits to the next generation."},
+            {id: "s13-0-c3", question: "Evaluate the author's closing metaphor: evolution is 'a filter, keeping whatever works here and now.'", answer: "The reading rejects the ladder-to-perfection view: antibiotic resistance shows bacteria 'winning' without improving in any absolute sense, and the moths reversed direction when the air cleaned. The filter metaphor captures that selection favors only what fits current conditions."}
+          ]},
+          {type: "argument", instructions: "Write two paragraphs defending or challenging the thesis.", items: [
+            {id: "s13-0-a1", prompt: "Defend or challenge this thesis: 'Antibiotic resistance proves that evolution is still happening.'", guidance: "Thesis: take a clear position on whether resistance confirms the theory. Evidence: use at least two examples from the reading (antibiotics killing most bacteria while resistant mutants survive and multiply; the peppered moth reversing with clean-air laws) plus one fact from your own research on evolution. Counterargument: address the claim that these are just small shifts within species rather than the large-scale change Darwin described, and explain whether observable selection does or does not confirm the theory."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows you understand its meaning in the context of this week's topic.", items: [
+            {id: "s13-0-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["adaptation", "choice"]}
+          ]}
+        ]
     },
     {
       title: "Drift, Flow, and Selection's Limits",
@@ -1765,7 +2377,19 @@ const MM_WEEKS_912 = [
           {id:"s2-v1", label:"genetic drift", content:"random change in allele frequencies, strongest in small populations"},
           {id:"s2-v2", label:"gene flow", content:"movement of genes between populations through migration and mating"}
         ]}
-      ]
+      ,
+          {type: "comprehension", instructions: "Answer each question in 3-5 sentences, using evidence from the reading.", items: [
+            {id: "s13-1-c1", question: "Why does the reading say drift 'matters most in small populations'?", answer: "Because chance events overwhelm selection when numbers are tiny: if a rockslide randomly kills four of five red beetles in a population of ten, the next generation is bluer for no adaptive reason at all. In a million beetles the same accident would barely register."},
+            {id: "s13-1-c2", question: "How do the founder effect and bottleneck each illustrate drift?", answer: "Both slash genetic diversity by chance: a few hundred Amish founders carried rare alleles to high frequency, and northern elephant seals hunted down to about twenty animals in the 1890s rebuilt into millions that are nearly identical genetically. Neither outcome reflects adaptation, only the luck of who survived."},
+            {id: "s13-1-c3", question: "Evaluate the author's claim that mutation 'supplies the raw material for everything.'", answer: "The reading assigns each mechanism a role: mutation creates new alleles while selection, drift, and flow only shuffle existing ones. Without mutation there would be nothing new to select, so it is the ultimate source of the variation the other mechanisms act on."}
+          ]},
+          {type: "argument", instructions: "Write two paragraphs defending or challenging the thesis.", items: [
+            {id: "s13-1-a1", prompt: "Defend or challenge this thesis: 'Genetic drift, not natural selection, explains most of the differences between human populations.'", guidance: "Thesis: take a clear position on which mechanism explains more. Evidence: use at least two examples from the reading (the founder effect in the Amish; bottlenecks in elephant seals and cheetahs; gene flow reducing differences between populations) plus one fact from your own research on human genetics or evolution. Counterargument: address the claim that selection shaped the traits that matter most, such as disease resistance and altitude adaptation, and that drift is mostly noise, and explain which mechanism deserves the larger role."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows you understand its meaning in the context of this week's topic.", items: [
+            {id: "s13-1-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["adaptation", "refugee"]}
+          ]}
+        ]
     }
   ],
   friday: { title:"Show What You Know: Week 13", reading:"This week you studied the Revolution's home front and the mechanisms of evolution. Show what you remember.", groups:[
@@ -1834,7 +2458,19 @@ const MM_WEEKS_912 = [
           {id:"h1-o4", event:"Britain keeps forts on American soil after the war", answer:2},
           {id:"h1-o5", event:"Leaders call for a stronger national government", answer:5}
         ]}
-      ]
+      ,
+          {type: "comprehension", instructions: "Answer each question in 2 to 4 sentences, using evidence from the reading. These are analytical questions: explain why and how, not just what.", items: [
+            {id: "h14-0-c1", question: "Why did the framers of the Articles give the central government so little power, and how did that fear backfire?", answer: "They had just declared independence and feared creating another king, so each state kept its sovereignty while Congress could not tax, regulate trade, or enforce its laws. The fear backfired because Congress could not pay its debts or its soldiers, could not fund an ambassador to enforce the generous Treaty of Paris terms, and watched Britain keep forts on American soil while Spain closed the Mississippi to American trade."},
+            {id: "h14-0-c2", question: "How did the Articles' amendment rule make reform nearly impossible?", answer: "Amending the Articles required all thirteen states to agree, which meant a single state could block any reform. The reading gives the concrete example: when Congress proposed a five percent import tax to pay the war debt, Rhode Island alone vetoed it and the plan died."},
+            {id: "h14-0-c3", question: "Why does the reading end by saying that by 1786 leaders 'began to fear weak government more' than strong government?", answer: "The confederation had won independence but could not govern it: Congress's requests for money were ignored, unpaid officers at Newburgh nearly mutinied in 1783, and foreign nations defied American authority. That record of failure convinced leaders who had once feared a king that a government too weak to act was the greater danger."}
+          ]},
+          {type: "argument", instructions: "Write a thesis-driven argument of at least two paragraphs. State your thesis clearly, support it with evidence from the reading and your research, and address the counterargument named in the guidance.", items: [
+            {id: "h14-0-a1", prompt: "Argue: the Articles' failure. Take a position on whether the Articles of Confederation failed because of their design or because the states simply refused to cooperate, and defend it in at least two paragraphs.", guidance: "Defend this thesis: the Articles failed by design, not merely because of bad behavior by the states. Use evidence from the reading: Congress's lack of power to tax or regulate trade, the unanimity rule that let Rhode Island kill the import tax, the unpaid debts, and the Newburgh near-mutiny. For research, investigate the free Black petitions of the confederation years and how the weak central government shaped ordinary people's demands. Address this counterargument: that the Articles' genuine successes, winning the war and passing the Northwest Ordinance, prove the design was sound and the states were the problem. Explain why those successes do not fix the structural flaws the reading documents."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", items: [
+            {id: "h14-0-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["confederation", "sovereignty"]}
+          ]}
+        ]
     },
     {
       title: "Free Black Petitions",
@@ -1856,7 +2492,19 @@ const MM_WEEKS_912 = [
           {id:"h2-c1", prompt:"What did the Dartmouth petitioners ask for?", options:["Relief from taxes until they received representation","Immediate voting rights for all","An end to all taxation"], answer:"Relief from taxes until they received representation"},
           {id:"h2-c2", prompt:"How did Shays' Rebellion affect the confederation?", options:["It frightened leaders into calling the Constitutional Convention","It overthrew the Massachusetts government","It had no effect"], answer:"It frightened leaders into calling the Constitutional Convention"}
         ]}
-      ]
+      ,
+          {type: "comprehension", instructions: "Answer each question in 2 to 4 sentences, using evidence from the reading. These are analytical questions: explain why and how, not just what.", items: [
+            {id: "h14-1-c1", question: "How did the Dartmouth petitioners turn the Revolution's own logic against the new Massachusetts government?", answer: "Seven free Black men of Dartmouth wrote in 1780 that they were taxed like other citizens yet denied the vote, asking to be relieved of taxes until they received representation. Having watched the colonies demand no taxation without representation, they applied the slogan to their own situation, using the Revolution's principles to indict the government claiming those principles."},
+            {id: "h14-1-c2", question: "Why does the reading emphasize that these petitions 'rarely succeeded' but still mattered?", answer: "The legislature did not grant the Dartmouth request, and Prince Hall's 1797 petitions likewise failed in the short term. They mattered because they created a paper trail of protest that abolitionists would use for decades, proving that the demand for liberty was continuous and documented, not invented later."},
+            {id: "h14-1-c3", question: "What different lesson did Black petitioners and frightened national leaders draw from Shays' Rebellion?", answer: "Leaders saw debt-crushed farmers marching on the Springfield arsenal and concluded the weak national government must be replaced, which led to the Constitutional Convention. Black petitioners drew the opposite lesson about liberty itself: the new nation would not grant freedom by accident, so it would have to be demanded, in writing, again and again."}
+          ]},
+          {type: "argument", instructions: "Write a thesis-driven argument of at least two paragraphs. State your thesis clearly, support it with evidence from the reading and your research, and address the counterargument named in the guidance.", items: [
+            {id: "h14-1-a1", prompt: "Argue: the Articles' failure and the fight for liberty. Take a position on whether the confederation's weak central government helped or harmed free Black Americans' struggle for rights in the 1780s, and defend it in at least two paragraphs.", guidance: "Defend a clear thesis choosing helped or harmed. Use evidence from the reading: the Dartmouth petition of 1780, Prince Hall's 1797 petitions, Pennsylvania's 1780 gradual abolition law, and Shays' Rebellion as proof of the confederation's impotence. For research, investigate the free Black petitions of the era and what they asked for. Address this counterargument: that a weak central government at least left individual states free to abolish slavery on their own, as Pennsylvania and Massachusetts courts did, so a stronger national government was not the answer Black petitioners needed."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", items: [
+            {id: "h14-1-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["petition", "sovereignty"]}
+          ]}
+        ]
     }
   ],
   science: [
@@ -1877,7 +2525,19 @@ const MM_WEEKS_912 = [
           {id:"s1-k2", text:"Archaeopteryx mixes reptile and bird traits"},
           {id:"s1-k3", text:"Whale ancestors show nostrils migrating over time"}
         ]}
-      ]
+      ,
+          {type: "comprehension", instructions: "Answer each question in 2 to 4 sentences, using evidence from the reading. These are analytical questions: explain why and how, not just what.", items: [
+            {id: "s14-0-c1", question: "Why does the reading call transitional fossils like Tiktaalik the 'most powerful' evidence in the fossil record?", answer: "Transitional forms blend traits of two groups: Tiktaalik has wrist-like fins and a neck, caught in the act of becoming a land animal, while whale ancestors show nostrils migrating to the top of the head across millions of years. They are most powerful because Tiktaalik confirmed a prediction: scientists knew a fish-to-tetrapod link must exist in rocks of a certain age, went looking, and found it."},
+            {id: "s14-0-c2", question: "How does radiometric dating turn stacked rock layers into a numbered timeline?", answer: "Sedimentary rock forms in strata with older layers at the bottom, so a fossil's depth reveals its relative age. Radiometric dating measures the decay of radioactive isotopes in surrounding rock: each isotope decays at a steady half-life rate, so the ratio of parent to daughter atoms works like a clock. Carbon-14 dates recent remains and potassium-argon dates rocks millions of years old."},
+            {id: "s14-0-c3", question: "Evaluate the critic's claim that gaps in the fossil record disprove evolution, using the reading's response.", answer: "The reading rejects the claim because the gaps keep filling: every new transitional fossil is a prediction confirmed, as Tiktaalik was. The record does not show every creature that ever lived, but what it shows points in one direction, so incompleteness is not contradiction."}
+          ]},
+          {type: "argument", instructions: "Write a thesis-driven argument of at least two paragraphs. State your thesis clearly, support it with evidence from the reading and your research, and address the counterargument named in the guidance.", items: [
+            {id: "s14-0-a1", prompt: "Argue: should fossil-hunting expeditions be a priority for public science funding? Take a position on whether public money should support searches for transitional fossils like the one that found Tiktaalik, and defend it in at least two paragraphs.", guidance: "Defend a clear thesis for or against prioritizing fossil expeditions. Use evidence from the reading: transitional fossils confirm evolutionary predictions, fill the gaps critics exploit, and turned up Tiktaalik exactly where theory said to look. For research, investigate how fossil discoveries are funded and what they have contributed to science. Address this counterargument: that public money would be better spent on applied science with direct payoffs, such as medicine or technology. Explain why basic discoveries about life's history do or do not deserve priority over applied research."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", items: [
+            {id: "s14-0-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["fossil", "vestigial"]}
+          ]}
+        ]
     },
     {
       title: "Anatomy, Embryos, and DNA",
@@ -1899,7 +2559,19 @@ const MM_WEEKS_912 = [
           {key:"b", text:"reduced leftovers of once-useful parts"},
           {key:"c", text:"a species blending traits of two groups"}
         ]}
-      ]
+      ,
+          {type: "comprehension", instructions: "Answer each question in 2 to 4 sentences, using evidence from the reading. These are analytical questions: explain why and how, not just what.", items: [
+            {id: "s14-1-c1", question: "Why do homologous structures point to common ancestry rather than coincidence?", answer: "The human arm, bat wing, whale flipper, and cat leg share the same underlying pattern of bones despite serving entirely different jobs. The reading says the best explanation is common ancestry with modification for different functions; coincidence cannot explain identical architecture doing different work."},
+            {id: "s14-1-c2", question: "How does the broken vitamin C gene function as a 'fossil' inside our genomes?", answer: "Humans and other primates share a dead copy of the gene for making vitamin C, disabled by the same mutation, which is why we must get the vitamin from food while most other mammals make their own. Sharing the exact same disabling mutation shows inheritance from a common ancestor that lost the gene, a fossil preserved in DNA rather than rock."},
+            {id: "s14-1-c3", question: "Why does the reading say the evidence from rocks, bodies, embryos, and molecules 'converges,' and what makes DNA the most precise?", answer: "Fossils, anatomy, embryos, and molecules each independently point to the same tree of life, so separate lines of evidence agree. DNA is most precise because it quantifies similarity: humans and chimpanzees share about ninety-eight percent of their DNA, and cytochrome c differs by one amino acid between humans and chimpanzees but dozens between humans and yeast, exactly as the tree predicts."}
+          ]},
+          {type: "argument", instructions: "Write a thesis-driven argument of at least two paragraphs. State your thesis clearly, support it with evidence from the reading and your research, and address the counterargument named in the guidance.", items: [
+            {id: "s14-1-a1", prompt: "Argue: is DNA evidence alone enough to settle the tree of life, or do fossils and anatomy remain necessary? Take a position and defend it in at least two paragraphs.", guidance: "Defend a clear thesis choosing DNA alone or DNA plus fossils and anatomy. Use evidence from the reading: DNA's precise measurements, from the ninety-eight percent human-chimpanzee match to cytochrome c differences, versus the fact that molecular clocks must be calibrated against fossils and that convergent evolution, like the torpedo bodies of dolphins and sharks, can mislead anatomy. For research, investigate one case where DNA overturned an anatomy-based placement, such as whales descending from hippo relatives or birds as living dinosaurs. Address this counterargument: that DNA is the most precise evidence available, so the older lines of evidence are now redundant."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", items: [
+            {id: "s14-1-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["vestigial", "fossil"]}
+          ]}
+        ]
     }
   ],
   friday: { title:"Show What You Know: Week 14", reading:"This week you studied the confederation government and the evidence for evolution. Show what you remember.", groups:[
@@ -1968,7 +2640,19 @@ const MM_WEEKS_912 = [
           {id:"h1-c1", prompt:"What did the Great Compromise decide?", options:["Proportional representation in the House and equal state votes in the Senate","A single national legislature","No Senate at all"], answer:"Proportional representation in the House and equal state votes in the Senate"},
           {id:"h1-c2", prompt:"Why did the Constitution never use the word slave?", options:["Delegates used euphemisms to avoid naming slavery directly","The word had not been invented","Slavery was already abolished"], answer:"Delegates used euphemisms to avoid naming slavery directly"}
         ]}
-      ]
+      ,
+          {type: "comprehension", instructions: "Answer each question in 2 to 4 sentences, using evidence from the reading. These are analytical questions: explain why and how, not just what.", items: [
+            {id: "h15-0-c1", question: "Why did the delegates work in strict secrecy, and what did that secrecy cost later historians?", answer: "They shut the windows against the summer heat so they could argue freely without public pressure. The cost is that we know what they said only because James Madison took detailed notes, published decades later, so the entire record of the convention depends on one man's account."},
+            {id: "h15-0-c2", question: "How did the Great Compromise resolve the representation fight, and whose interests did each half serve?", answer: "The Virginia Plan gave large states power proportional to population, while the New Jersey Plan gave every state one equal vote. The compromise created a House of Representatives apportioned by population, favoring large states, and a Senate giving every state two senators, protecting small states."},
+            {id: "h15-0-c3", question: "Evaluate the reading's claim that 'every bargain at Philadelphia had a price, and the enslaved people of America paid much of it.'", answer: "Southern delegates made clear they would walk out if the Constitution threatened slavery, so the document protected it in careful euphemisms that never used the word slave. The bargains made a stronger union possible, but they wove slavery into the nation's founding law, and the framers' hope that the problem would fade proved false."}
+          ]},
+          {type: "argument", instructions: "Write a thesis-driven argument of at least two paragraphs. State your thesis clearly, support it with evidence from the reading and your research, and address the counterargument named in the guidance.", items: [
+            {id: "h15-0-a1", prompt: "Argue: a pact with slavery. Take a position on whether the framers' compromises at Philadelphia were a necessary price for creating the union or a moral failure that doomed the nation to civil war, and defend it in at least two paragraphs.", guidance: "Defend a clear thesis choosing necessary price or moral failure. Use evidence from the reading: the Southern walkout threat, the euphemisms that never used the word slave, and the commerce compromise that banned export taxes to win merchants. For research, investigate the Three-Fifths debate at the convention. Address this counterargument: that without the bargains there would have been no union at all, and a divided continent might have fared worse. Weigh whether a union built on slavery's protection was worth its later cost in blood."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", items: [
+            {id: "h15-0-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["compromise", "republic"]}
+          ]}
+        ]
     },
     {
       title: "The Slavery Compromises",
@@ -1985,7 +2669,19 @@ const MM_WEEKS_912 = [
           {id:"h2-f1", text:"The Three-Fifths ___ counted enslaved people as partial persons for representation.", answer:"compromise"},
           {id:"h2-f2", text:"Gouverneur ___ denounced the slavery bargains at the convention.", answer:"Morris"}
         ]}
-      ]
+      ,
+          {type: "comprehension", instructions: "Answer each question in 2 to 4 sentences, using evidence from the reading. These are analytical questions: explain why and how, not just what.", items: [
+            {id: "h15-1-c1", question: "How did the Three-Fifths Compromise give the South political power 'built directly on bondage'?", answer: "Each enslaved person counted as three-fifths of a person for representation and taxation. The clause gave the South roughly a dozen extra seats in the House and extra votes in the Electoral College, and historians argue this bonus representation helped deliver the presidency to Thomas Jefferson in the election of 1800."},
+            {id: "h15-1-c2", question: "Why does the reading present Gouverneur Morris's speech, and what does his defeat show?", answer: "According to Madison's notes, Morris denounced the deal, asking whether Georgians and South Carolinians who tore Africans from their dearest connections should be rewarded with extra votes, calling the trade a nefarious practice violating the sacred laws of humanity. His defeat shows the convention heard the moral case and approved the compromises anyway, making the choice deliberate rather than ignorant."},
+            {id: "h15-1-c3", question: "Evaluate whether the three slavery bargains together justify calling the Constitution 'a pact with slavery.'", answer: "The three-fifths clause rewarded slaveholding with representation, the slave trade clause guaranteed twenty more years of the Middle Passage until 1808, and the fugitive slave clause nationalized the return of escapees. Together they embedded slavery's protection in founding law, and the nation paid for it in blood, which supports the judgment."}
+          ]},
+          {type: "argument", instructions: "Write a thesis-driven argument of at least two paragraphs. State your thesis clearly, support it with evidence from the reading and your research, and address the counterargument named in the guidance.", items: [
+            {id: "h15-1-a1", prompt: "Argue: a pact with slavery. Take a position on whether the Three-Fifths Compromise was primarily a dispute about representation or primarily a bargain to protect slavery's future, and defend it in at least two paragraphs.", guidance: "Defend a clear thesis choosing representation dispute or proslavery bargain. Use evidence from the reading: the Southern demand to count enslaved people fully, the Northern objection that property should not boost masters' power, Morris's speech, and the clause's role in the election of 1800. For research, investigate the convention's debate over the three-fifths ratio. Address this counterargument: that it was a pragmatic apportionment formula like any other, not a proslavery plot. Respond by weighing the clause's effects, extra Southern power and two more decades of the slave trade, against its neutral appearance."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", items: [
+            {id: "h15-1-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["compromise", "clause"]}
+          ]}
+        ]
     }
   ],
   science: [
@@ -2010,7 +2706,19 @@ const MM_WEEKS_912 = [
           {id:"s1-t1", text:"Reproductive isolation is required for two populations to become separate species.", answer:"true", note:"Without it, gene flow keeps them one species."},
           {id:"s1-t2", text:"Sympatric speciation requires a mountain range or river.", answer:"false", note:"It happens without a physical barrier."}
         ]}
-      ]
+      ,
+          {type: "comprehension", instructions: "Answer each question in 2 to 4 sentences, using evidence from the reading. These are analytical questions: explain why and how, not just what.", items: [
+            {id: "s15-0-c1", question: "Why is reproductive isolation, not just physical separation, the decisive test of speciation?", answer: "Geographic barriers start the split, as with Darwin's finches on different Galapagos islands or the Kaibab and Abert's squirrels divided by the Grand Canyon. But the reading says what matters in every case is whether two populations can no longer produce fertile offspring together; without that, they remain one species no matter how far apart they live."},
+            {id: "s15-0-c2", question: "How do the apple maggot flies and the ring species show that speciation is a process rather than an event?", answer: "Apple maggot flies shifted from native hawthorn fruit to introduced apples and now breed on different schedules while living side by side, diverging without a completed split. The salamanders around California's Central Valley interbreed with their neighbors all the way around the ring except where the two ends meet, showing the process caught midstream."},
+            {id: "s15-0-c3", question: "Compare allopatric and sympatric speciation: why does the reading call Darwin's finches the 'textbook case' of the first?", answer: "Allopatric speciation needs a geographic barrier dividing a population, while sympatric speciation diverges side by side through different mating preferences or chromosome doubling, as with apple maggot flies and polyploid wheat. The finches are the textbook case because the islands visibly isolated the birds, different foods shaped their beaks by natural selection, and the island populations became unable to interbreed."}
+          ]},
+          {type: "argument", instructions: "Write a thesis-driven argument of at least two paragraphs. State your thesis clearly, support it with evidence from the reading and your research, and address the counterargument named in the guidance.", items: [
+            {id: "s15-0-a1", prompt: "Argue: is reproductive isolation the right definition of a species? Take a position on whether the ability to produce fertile offspring should define specieshood, and defend it in at least two paragraphs.", guidance: "Defend a clear thesis for or against the reproductive-isolation definition. Use evidence from the reading: ring species that blur the line, apple maggot flies diverging on different breeding schedules, and polyploid wheat becoming a new species in a single generation. For research, investigate competing species definitions scientists have proposed. Address this counterargument: that reproductive isolation is the only testable, practical standard biologists have. Explain why testability does or does not settle the question."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", items: [
+            {id: "s15-0-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["isolation"]}
+          ]}
+        ]
     },
     {
       title: "Barriers and Radiations",
@@ -2031,7 +2739,19 @@ const MM_WEEKS_912 = [
           {id:"s2-k2", text:"Incompatible courtship rituals prevent mating"},
           {id:"s2-k3", text:"Sterile hybrids block gene flow"}
         ]}
-      ]
+      ,
+          {type: "comprehension", instructions: "Answer each question in 2 to 4 sentences, using evidence from the reading. These are analytical questions: explain why and how, not just what.", items: [
+            {id: "s15-1-c1", question: "Why would natural selection 'strengthen' prezygotic barriers where diverging populations meet?", answer: "Where populations meet, mating across the divide produces weak, sterile, or feeble hybrids, as with mules or hybrid breakdown. Selection favors individuals that avoid wasting reproductive effort on doomed matings, so barriers like different mating seasons or courtship codes grow stronger at contact zones through reinforcement."},
+            {id: "s15-1-c2", question: "How do the frog, cicada, firefly, and sea urchin examples show that isolation takes many forms?", answer: "Two frog species in one pond breed in different months, thirteen-year and seventeen-year cicada broods emerge on different cycles, fireflies answer only their species' flash code, and sea urchin gametes are chemically incompatible. Each is a prezygotic barrier preventing mating or fertilization, yet the mechanisms, temporal, behavioral, and gametic, are entirely different."},
+            {id: "s15-1-c3", question: "Evaluate the claim that 'speciation is not an event but a process' using adaptive radiation and hybrid zones.", answer: "Hybrid zones, where diverging populations meet and interbreed at their borders, let scientists watch speciation in progress. Adaptive radiation shows one ancestor diversifying rapidly into dozens of forms, from Galapagos finches to Hawaiian honeycreepers to African cichlids, after isolation opens new opportunities. Both show branches still growing rather than finished splits."}
+          ]},
+          {type: "argument", instructions: "Write a thesis-driven argument of at least two paragraphs. State your thesis clearly, support it with evidence from the reading and your research, and address the counterargument named in the guidance.", items: [
+            {id: "s15-1-a1", prompt: "Argue: does adaptive radiation show evolution's creativity or mere opportunism? Take a position on whether rapid diversification after isolation reveals something profound about life or simply fills empty niches, and what that distinction means for how we value biodiversity, in at least two paragraphs.", guidance: "Defend a clear thesis choosing creativity or opportunism. Use evidence from the reading: single lineages exploding into dozens of forms, hybrid zones showing the process alive today, and reinforcement sharpening barriers at contact zones. For research, investigate one adaptive radiation, such as the cichlids of Africa's Great Lakes, and how conservationists value it. Address this counterargument: that radiation is mechanical niche-filling with no deeper significance, so it deserves no special value beyond any other ecological pattern."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", items: [
+            {id: "s15-1-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["isolation"]}
+          ]}
+        ]
     }
   ],
   friday: { title:"Show What You Know: Week 15", reading:"This week you studied the Constitution's compromises and how new species form. Show what you remember.", groups:[
@@ -2097,7 +2817,19 @@ const MM_WEEKS_912 = [
           {id:"h1-t1", text:"The Federalist Papers were essays defending the Constitution.", answer:"true", note:"Hamilton, Madison, and Jay wrote eighty-five of them."},
           {id:"h1-t2", text:"The Constitution took effect as soon as it was signed in Philadelphia.", answer:"false", note:"Nine states had to ratify it first."}
         ]}
-      ]
+      ,
+          {type: "comprehension", instructions: "Answer each question in 2 to 4 sentences, using evidence from the reading. These are analytical questions: explain why and how, not just what.", items: [
+            {id: "h16-0-c1", question: "Why was the missing bill of rights 'the most powerful argument against the Constitution,' and how did Federalists answer it?", answer: "Anti-Federalists warned that a strong national government would swallow the states and crush individual liberty, and the Constitution's silence on rights made the fear concrete. Federalists answered that listing rights might imply unlisted rights did not exist, but the objection would not die: Massachusetts ratified only narrowly, and only after Federalists promised amendments would be added at once."},
+            {id: "h16-0-c2", question: "How did the Federalist Papers function as a political weapon in the ratification fight?", answer: "Hamilton, Madison, and Jay wrote eighty-five essays as Publius aimed at New York's ratifying convention, one of the hardest sells. In No. 10 Madison argued a large republic would control dangerous factions better than small states, and in No. 51 he explained how ambition would be made to counteract ambition. They were targeted persuasion for a specific vote, not abstract philosophy."},
+            {id: "h16-0-c3", question: "The reading calls the ratification fight 'democracy at its best' but notes it was 'among a narrow slice of the population.' Evaluate that tension.", answer: "It was an open, public argument about the nature of government conducted in newspapers and state conventions, genuinely democratic in form. But 'We the People' excluded the nearly seven hundred thousand enslaved Black people, most free Black people, women, and Native nations. The fight modeled democratic debate while postponing the question of who counted, leaving it for another day."}
+          ]},
+          {type: "argument", instructions: "Write a thesis-driven argument of at least two paragraphs. State your thesis clearly, support it with evidence from the reading and your research, and address the counterargument named in the guidance.", items: [
+            {id: "h16-0-a1", prompt: "Argue: whose 'we the people.' Take a position on whether the ratification debate can honestly be called democratic when most of the nation's inhabitants were excluded from it, and defend it in at least two paragraphs.", guidance: "Defend a clear thesis answering yes or no. Use evidence from the reading: the open newspaper and convention debate, the Federalist Papers campaign, versus the exclusion of the enslaved, free Black people, women, and Native nations. For research, investigate Black exclusion voices during the ratification era. Address this counterargument: that by the standards of the 1780s the debate was remarkably broad, and the promised Bill of Rights showed the system could expand. Weigh the reading's own framing that the exclusion was the price of the union."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", items: [
+            {id: "h16-0-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["ratify", "amendment"]}
+          ]}
+        ]
     },
     {
       title: "Whose Rights?",
@@ -2122,7 +2854,19 @@ const MM_WEEKS_912 = [
           {id:"h2-o4", event:"The Federalist Papers are published", answer:2},
           {id:"h2-o5", event:"The Pennsylvania Abolition Society petitions Congress", answer:4}
         ]}
-      ]
+      ,
+          {type: "comprehension", instructions: "Answer each question in 2 to 4 sentences, using evidence from the reading. These are analytical questions: explain why and how, not just what.", items: [
+            {id: "h16-1-c1", question: "Why did the Bill of Rights initially protect so few people, and what makes the exclusion deliberate rather than an oversight?", answer: "It guaranteed freedoms of speech, religion, and the press, protection against unreasonable searches, and fair trials, yet 'We the People' did not include nearly seven hundred thousand enslaved Black people, most free Black people, women, or Native nations. The reading states the exclusion was not an oversight but the price of the union the framers had built."},
+            {id: "h16-1-c2", question: "How did the Pennsylvania Abolition Society's 1790 petition use the founding's own logic, and why did Congress's response matter?", answer: "Presented to the first Congress under Benjamin Franklin's signature, it described slavery as an atrocious debasement of human nature, inconsistent with the new government's principles. Congress debated the petition and then tabled it, establishing a pattern of avoidance that would last for decades and showing that petitions created a paper trail but not yet power."},
+            {id: "h16-1-c3", question: "Evaluate the reading's claim that the founding promise became 'a weapon' for later movements.", answer: "Because the promise was written in universal language, excluded groups could hold the nation to its own words: abolitionists, suffragists, and civil rights marchers spent two centuries widening the circle of 'We the People' until it meant everyone. The Fourteenth Amendment began extending protections nationwide after the 1833 ruling that the Bill of Rights restrained only the federal government, confirming the promise outgrew its authors."}
+          ]},
+          {type: "argument", instructions: "Write a thesis-driven argument of at least two paragraphs. State your thesis clearly, support it with evidence from the reading and your research, and address the counterargument named in the guidance.", items: [
+            {id: "h16-1-a1", prompt: "Argue: whose 'we the people.' Take a position on whether the Bill of Rights should be celebrated as a triumph of liberty or condemned as a document that protected a slaveholding republic, and defend it in at least two paragraphs.", guidance: "Defend a clear thesis choosing triumph or condemnation. Use evidence from the reading: the magnificent promises of the amendments, the Ninth Amendment's guard for unlisted rights, versus the deliberate exclusion of the enslaved and the 1833 ruling limiting the Bill of Rights to the federal government. For research, investigate Black exclusion voices and how they answered the founding promises. Address this counterargument: that the universal language gave later movements the very weapon they needed, so the document's promise exceeded its original limits."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", items: [
+            {id: "h16-1-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["exclusion", "amendment"]}
+          ]}
+        ]
     }
   ],
   science: [
@@ -2143,7 +2887,19 @@ const MM_WEEKS_912 = [
           {id:"s1-k2", text:"Anatomy reveals shared structures"},
           {id:"s1-k3", text:"DNA measures how far apart lineages have grown"}
         ]}
-      ]
+      ,
+          {type: "comprehension", instructions: "Answer each question in 2 to 4 sentences, using evidence from the reading. These are analytical questions: explain why and how, not just what.", items: [
+            {id: "s16-0-c1", question: "Why did Carl Woese's 1977 discovery rewrite the tree of life?", answer: "By comparing ribosomal RNA, Woese found that some microbes were as different from bacteria as humans are, revealing the archaea as a third branch of life hiding in plain sight. The base of the tree split into three domains, Bacteria, Archaea, and Eukarya, and some researchers now think the first eukaryotic cell arose when an ancient archaeon absorbed a bacterium."},
+            {id: "s16-0-c2", question: "How does endosymbiosis explain the power of complex life?", answer: "Mitochondria and chloroplasts began as free-living bacteria swallowed by a larger cell, a partnership called endosymbiosis that powers nearly all complex life. The eukaryotic cell is therefore a merger rather than a single invention, and its borrowed machinery supplies energy and photosynthesis."},
+            {id: "s16-0-c3", question: "Evaluate the reading's claim that the tree of life is 'a bush, not a ladder.'", answer: "Millions of living tips each represent four billion years of unbroken survival, making humans one twig among millions rather than the top rung. Bacteria complicate the picture further with horizontal gene transfer, swapping genes directly so parts of their tree look like a web. The ladder image wrongly ranks life; the bush shows every lineage equally successful at surviving."}
+          ]},
+          {type: "argument", instructions: "Write a thesis-driven argument of at least two paragraphs. State your thesis clearly, support it with evidence from the reading and your research, and address the counterargument named in the guidance.", items: [
+            {id: "s16-0-a1", prompt: "Argue: should the search for extremophile archaea guide the search for extraterrestrial life? Take a position on whether archaea's survival in boiling hot springs and deep-sea vents makes them the best model for alien life, and defend it in at least two paragraphs.", guidance: "Defend a clear thesis for or against using archaea as the model. Use evidence from the reading: extremophiles thriving where nothing else survives, unique membrane chemistry stable in destructive conditions, and new archaea turning up in every extreme environment explored, from Antarctic lakes to deep mines. For research, investigate how astrobiologists use extremophiles to define habitable zones. Address this counterargument: that Earth life may be a poor guide and the search should stay open to truly alien biochemistry."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", items: [
+            {id: "s16-0-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["divergence"]}
+          ]}
+        ]
     },
     {
       title: "Reading the Branches",
@@ -2160,7 +2916,19 @@ const MM_WEEKS_912 = [
           {id:"s2-t1", text:"Each branching point on a phylogenetic tree marks a shared common ancestor.", answer:"true", note:"Everything above the branch descends from it."},
           {id:"s2-t2", text:"DNA evidence showed that fungi are closer to plants than to animals.", answer:"false", note:"Fungi are closer relatives of animals."}
         ]}
-      ]
+      ,
+          {type: "comprehension", instructions: "Answer each question in 2 to 4 sentences, using evidence from the reading. These are analytical questions: explain why and how, not just what.", items: [
+            {id: "s16-1-c1", question: "Why must molecular clocks be calibrated against fossils?", answer: "Clocks count mutations to estimate when two lineages diverged, but the steady tick of mutations needs a known date to convert ticks into years. Fossils date the splits while DNA measures how far apart lineages have grown, so together they give dates for splits that no fossil directly records."},
+            {id: "s16-1-c2", question: "How do convergent evolution and parsimony complicate and discipline tree-building?", answer: "Convergence misleads: dolphins and sharks share torpedo bodies, but DNA places dolphins with mammals, not fish. Parsimony disciplines: where evidence is thin, scientists prefer the simplest tree explaining the data, and outgroups root the tree in time. DNA corrected old mistakes, showing fungi are closer to animals than plants, whales descend from hippo relatives, and birds are living dinosaurs."},
+            {id: "s16-1-c3", question: "Evaluate the claim that the tree of life is 'a working document.'", answer: "It is redrawn with every new genome sequenced: DNA overturned anatomy-based placements and revealed horizontal gene transfer's web-like pattern in bacteria. Each revision brings the four-billion-year story into sharper focus, so the tree is provisional and improving rather than finished."}
+          ]},
+          {type: "argument", instructions: "Write a thesis-driven argument of at least two paragraphs. State your thesis clearly, support it with evidence from the reading and your research, and address the counterargument named in the guidance.", items: [
+            {id: "s16-1-a1", prompt: "Argue: when DNA and fossils conflict in tree-building, which line of evidence should win? Take a position and defend it in at least two paragraphs.", guidance: "Defend a clear thesis choosing DNA or fossils and anatomy. Use evidence from the reading: DNA's corrections of fungi, whales, and birds as living dinosaurs, versus the fact that molecular clocks must be calibrated against fossils and that shared derived traits like feathers and mammary glands anchor the branches. For research, investigate one dispute where molecular and fossil evidence pointed in different directions. Address this counterargument: that DNA is the most precise and quantitative evidence available, so older methods should yield whenever they disagree."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", items: [
+            {id: "s16-1-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["divergence"]}
+          ]}
+        ]
     }
   ],
   friday: { title:"Show What You Know: Week 16", reading:"This week you studied ratification, the Bill of Rights, and the tree of life. Show what you remember.", groups:[
@@ -2227,7 +2995,19 @@ const MM_WEEKS_912 = [
           {id:"h1-t1", text:"Nine of the thirteen states had to ratify the Constitution before it could take effect.", answer:"true", note:"The Constitution required ratification by nine states."},
           {id:"h1-t2", text:"The Anti-Federalists wanted a stronger national government than the Federalists did.", answer:"false", note:"The Anti-Federalists feared a strong central government and wanted power to stay with the states."}
         ]}
-      ]
+      ,
+          {type: "comprehension", instructions: "Answer each question in 2 to 4 sentences, using evidence from the reading. These are analytical questions: explain why and how, not just what.", items: [
+            {id: "h17-0-c1", question: "Why does Madison's Federalist No. 51 argue that government must be obliged to 'control itself,' and what mechanism does he propose?", answer: "Madison wrote that if men were angels no government would be necessary, but government is administered by men over men, so it must first control the governed and then be obliged to control itself. His mechanism is structural: ambition must be made to counteract ambition through checks and balances across three branches."},
+            {id: "h17-0-c2", question: "How did the Anti-Federalists lose the ratification fight but still win something lasting?", answer: "The Federalists won ratification, with nine states approving by June 1788 and stubborn Rhode Island holding out until 1790. But Anti-Federalist insistence that any constitution must explicitly protect individual rights forced the Federalists' promise of a Bill of Rights, added in 1791, so their fears shaped the Constitution's first amendments."},
+            {id: "h17-0-c3", question: "Evaluate the contradiction the reading notes: a celebrated debate about liberty in a nation where nearly 700,000 Black people were enslaved.", answer: "The debate's liberty belonged to white citizens, while the Constitution contained three bargains with slavery: the three-fifths rule, the fugitive return requirement, and twenty years of protected slave trade. The contradiction defines the debate's limits and explains why free Black petitioners would soon force the issue into the open."}
+          ]},
+          {type: "argument", instructions: "Write a thesis-driven argument of at least two paragraphs. State your thesis clearly, support it with evidence from the reading and your research, and address the counterargument named in the guidance.", items: [
+            {id: "h17-0-a1", prompt: "Argue: big vs. small government. Take a position on whether the Federalists or the Anti-Federalists had the stronger case about the danger of centralized power, and defend it in at least two paragraphs.", guidance: "Defend a clear thesis choosing the Federalists or the Anti-Federalists. Use evidence from the reading: Madison's argument in No. 51 that ambition counteracts ambition, No. 10's claim that a large republic controls factions, versus Patrick Henry's and George Mason's warnings that distant power would crush the liberties just won from Britain. For research, investigate Black ratification voices and how they judged the new government's power. Address this counterargument: the other side's strongest point. If defending the Federalists, answer the Anti-Federalist proof that their fears were valid, the Bill of Rights itself. If defending the Anti-Federalists, answer the Federalist proof that the Articles' weakness had already failed."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", items: [
+            {id: "h17-0-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["federal", "tyranny"]}
+          ]}
+        ]
     },
     {
       title:"Black Voices in the Ratification Debate",
@@ -2248,7 +3028,19 @@ const MM_WEEKS_912 = [
         {type:"shortanswer", instructions:"Write 4-6 sentences, then compare your answer with the model.", items:[
           {id:"h2-s1", prompt:"Argue: Did the Constitution's compromises with slavery make the new nation stronger or weaker? Defend your answer with evidence from the lesson.", answer:"The Constitution's compromises with slavery made the new nation weaker in the long run, even if they helped it survive in the short run. The three-fifths clause gave slave states extra representation, which let them protect slavery in Congress for decades. The fugitive slave clause and the twenty-year protection of the slave trade wrote injustice into the nation's founding law. Black petitioners like Prince Hall showed that the contradiction was obvious even at the time. A nation founded on liberty but built on slavery was storing up a conflict that would eventually explode into civil war."}
         ]}
-      ]
+      ,
+          {type: "comprehension", instructions: "Answer each question in 2 to 4 sentences, using evidence from the reading. These are analytical questions: explain why and how, not just what.", items: [
+            {id: "h17-1-c1", question: "How did Black petitioners use the Revolution's language against the new republic?", answer: "Massachusetts free Black men petitioned through the 1780s arguing slavery violated the principles the Revolution claimed to defend. Prince Hall's 1797 petition asked the legislature to stop the kidnapping of free Black sailors and confront the slave trade, and Lemuel Haynes attacked slavery as a violation of natural rights. They insisted the republic's promises applied to them as well."},
+            {id: "h17-1-c2", question: "Why does the reading say the ratification debate 'was never only a white argument about government power'?", answer: "While white Americans argued over the Constitution, Black Americans were petitioning legislatures, writing essays, and running toward freedom whenever war opened a door. Their petitions created a paper trail of Black political thought that later abolitionists would pick up and carry forward, making the debate about the Constitution's meaning for everyone."},
+            {id: "h17-1-c3", question: "Evaluate Lemuel Haynes's position: supporting the Federalist cause while demanding that liberty be universal.", answer: "Haynes, a Black Congregationalist minister and Revolutionary War veteran, backed a stronger Constitution yet demanded liberty for all, exposing that the Federalist promise of ordered liberty meant little while the document protected slavery three ways. His stance shows Black Americans engaging the debate on its own terms and finding it wanting, holding the Constitution to its own words."}
+          ]},
+          {type: "argument", instructions: "Write a thesis-driven argument of at least two paragraphs. State your thesis clearly, support it with evidence from the reading and your research, and address the counterargument named in the guidance.", items: [
+            {id: "h17-1-a1", prompt: "Argue: big vs. small government. Take a position on whether a stronger federal government helped or harmed Black Americans' freedom struggle during the ratification era, and defend it in at least two paragraphs.", guidance: "Defend a clear thesis choosing helped or harmed. Use evidence from the reading: the Constitution's three bargains with slavery, which a stronger government would enforce, versus Black Americans' use of Federalist natural-rights language, Haynes's essays, and the petition campaigns. For research, investigate Black ratification voices. Address this counterargument: if you argue it harmed, answer that centralized power later became emancipation's instrument while states were the immediate oppressors; if you argue it helped, answer that the document's slavery protections show centralization first served slaveholders."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", items: [
+            {id: "h17-1-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["federal", "centralization"]}
+          ]}
+        ]
     }
   ],
   science: [
@@ -2270,7 +3062,19 @@ const MM_WEEKS_912 = [
           {id:"s1-k2", text:"In the lytic cycle, new viruses burst out of the host cell."},
           {id:"s1-k3", text:"In the lysogenic cycle, viral DNA can hide inside the host's DNA for years."}
         ]}
-      ]
+      ,
+          {type: "comprehension", instructions: "Answer each question in 2 to 4 sentences, using evidence from the reading. These are analytical questions: explain why and how, not just what.", items: [
+            {id: "s17-0-c1", question: "Why are antibiotics useless against viruses, and what does medicine use instead?", answer: "Antibiotics are drugs that kill bacteria, but viruses are not truly alive and have no bacterial machinery to attack. Instead doctors use antiviral drugs that block specific steps of viral reproduction, and vaccines that train the immune system to recognize a virus before it can cause disease."},
+            {id: "s17-0-c2", question: "How does the lysogenic cycle make viruses like HIV so hard to cure?", answer: "In the lytic cycle a virus injects its genetic material, forces the cell to build new viruses, and bursts the cell open. In the lysogenic cycle the viral DNA instead hides quietly inside the host cell's own DNA, sometimes for years, before switching to the lytic cycle. HIV uses this hiding strategy, and hidden DNA cannot be attacked without harming the host cell, which is one reason it resists cure."},
+            {id: "s17-0-c3", question: "Evaluate the claim that viruses sit 'on the border between living and nonliving.'", answer: "Viruses cannot eat, grow, or reproduce on their own; they only make copies by hijacking a living host cell. Yet they carry genetic material, evolve, and shaped evolution itself, since ancient viral DNA is buried in the human genome. The border status is justified: they possess life's information without life's independence."}
+          ]},
+          {type: "argument", instructions: "Write a thesis-driven argument of at least two paragraphs. State your thesis clearly, support it with evidence from the reading and your research, and address the counterargument named in the guidance.", items: [
+            {id: "s17-0-a1", prompt: "Argue: in pandemic preparedness, should vaccine development be prioritized over antiviral drugs? Take a position and defend it in at least two paragraphs.", guidance: "Defend a clear thesis choosing vaccines or antivirals. Use evidence from the reading: vaccines train the immune system to recognize a virus before it causes disease, while antivirals block specific steps of viral reproduction in the already infected. For research, investigate how vaccine and antiviral strategies performed in a recent pandemic. Address this counterargument: that vaccines take time to develop and cannot help the already sick, while antivirals treat people in the crisis at hand."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", items: [
+            {id: "s17-0-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["host"]}
+          ]}
+        ]
     },
     {
       title:"Prions: Infectious Proteins",
@@ -2287,7 +3091,19 @@ const MM_WEEKS_912 = [
         {type:"shortanswer", instructions:"Write 4-6 sentences, then compare your answer with the model.", items:[
           {id:"s2-s1", prompt:"Argue: Which is the greater threat to human health, a fast-spreading virus or a prion disease? Defend your answer with evidence from both lessons.", answer:"A fast-spreading virus is the greater threat to human health because it can infect millions of people in weeks. Viruses like influenza and SARS-CoV-2 travel through the air and across borders, overwhelming hospitals before vaccines can be made. Prion diseases are terrifying and almost always fatal, but they spread slowly and rarely, through contaminated meat or inherited genes. A prion outbreak harms dozens or hundreds, while a pandemic virus harms billions. Speed and scale make viruses the larger danger, even though prions are harder to destroy."}
         ]}
-      ]
+      ,
+          {type: "comprehension", instructions: "Answer each question in 2 to 4 sentences, using evidence from the reading. These are analytical questions: explain why and how, not just what.", items: [
+            {id: "s17-1-c1", question: "How can a protein with no DNA or RNA be infectious?", answer: "A prion is a misfolded chain of amino acids whose wrong shape acts like a bad template: when it touches a healthy brain protein, it forces that protein to misfold too. The chain reaction fills the brain with clumps of useless protein, so infection spreads by shape corrupting shape rather than by genetic replication."},
+            {id: "s17-1-c2", question: "Why are prion diseases so hard to prevent, detect, and treat?", answer: "Prions survive cooking, freezing, and disinfectants that would destroy any virus, and there is no cure once symptoms begin. Because they contain no genetic material, the usual tests that find viruses or bacteria cannot detect them, so diagnosis often comes only after death when brain tissue can be examined. The main defenses remain strict controls on cattle feed and blood donations."},
+            {id: "s17-1-c3", question: "Evaluate the reading's claim that prions are 'one of biology's great unsolved puzzles.'", answer: "Scientists still debate exactly how a mere shape can be infectious, which defies the central rule that infection requires genetic material. Researchers are still hunting for early blood tests and drugs that might block the misfolding chain reaction. The mechanism's defiance of basic expectations justifies calling it an unsolved puzzle."}
+          ]},
+          {type: "argument", instructions: "Write a thesis-driven argument of at least two paragraphs. State your thesis clearly, support it with evidence from the reading and your research, and address the counterargument named in the guidance.", items: [
+            {id: "s17-1-a1", prompt: "Argue: should governments ban feeding animal protein to livestock worldwide to prevent prion disease? Take a position and defend it in at least two paragraphs.", guidance: "Defend a clear thesis for or against a global feed ban. Use evidence from the reading: people catch variant Creutzfeldt-Jakob disease by eating contaminated beef, prions survive cooking, there is no cure once symptoms begin, and strict controls on cattle feed remain among the main defenses. For research, investigate the history of mad cow disease and the feed bans that followed. Address this counterargument: that prion diseases are rare and a global ban would burden farmers and food systems out of proportion to the risk."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", items: [
+            {id: "s17-1-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["host"]}
+          ]}
+        ]
     }
   ],
   friday: {
@@ -2349,7 +3165,19 @@ const MM_WEEKS_912 = [
           {id:"h1-c1", prompt:"Washington's Farewell Address warned most strongly against...", options:["the destructive spirit of political parties","expanding the navy","building roads to the west"], answer:"the destructive spirit of political parties"},
           {id:"h1-c2", prompt:"Hamilton's financial plan included all of the following EXCEPT...", options:["a national bank","federal assumption of state debts","free land for every farmer"], answer:"free land for every farmer"}
         ]}
-      ]
+      ,
+          {type: "comprehension", instructions: "Answer each question in 2 to 4 sentences, using evidence from the reading. These are analytical questions: explain why and how, not just what.", items: [
+            {id: "h18-0-c1", question: "Why did Washington consider stepping down after two terms his most important precedent?", answer: "He knew every move as the first president would become a precedent, so he created a cabinet, delivered an inaugural address, and then voluntarily relinquished power after two terms. The step-down established a tradition of limited presidential power lasting 140 years and proved the republic was not a monarchy in disguise."},
+            {id: "h18-0-c2", question: "How did Hamilton's financial plan create America's first party system?", answer: "Hamilton's plan had the federal government assume state debts, create a national bank, and raise tariffs to encourage manufacturing. Jefferson and Madison opposed it as favoring wealthy merchants and claiming powers the Constitution never granted. The fight produced Hamilton's Federalists and Jefferson's Democratic-Republicans, each accusing the other of plotting tyranny."},
+            {id: "h18-0-c3", question: "Evaluate Washington's Farewell Address warning about parties in light of what followed.", answer: "He warned that the alternate domination of one faction over another, sharpened by revenge, leads to despotism, and urged Americans to avoid permanent foreign alliances. Yet the party system formed immediately around him and persisted, so his warning described the danger accurately without preventing it. The address also carries the contradiction he embodied: he spoke of liberty while freeing the people he enslaved only in his will."}
+          ]},
+          {type: "argument", instructions: "Write a thesis-driven argument of at least two paragraphs. State your thesis clearly, support it with evidence from the reading and your research, and address the counterargument named in the guidance.", items: [
+            {id: "h18-0-a1", prompt: "Argue: the republic's tests. Take a position on whether the early republic passed its first great test, the peaceful clash between Hamilton's and Jefferson's visions of government, and defend it in at least two paragraphs.", guidance: "Defend a clear thesis answering passed or failed. Use evidence from the reading: Washington's precedents of limited power, the Farewell Address warnings, the formation of parties from the Hamilton-Jefferson fight, and the peaceful transfer of power that followed. For research, investigate Haiti's shockwaves as an external test the young republic faced. Address this counterargument: that the slavery contradiction, Washington freeing his enslaved people only in his will while the republic spoke of liberty, means the republic failed its moral test even if it passed the institutional one."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", items: [
+            {id: "h18-0-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["precedent", "party"]}
+          ]}
+        ]
     },
     {
       title:"Haiti's Shockwaves in America",
@@ -2370,7 +3198,19 @@ const MM_WEEKS_912 = [
         {type:"shortanswer", instructions:"Write 4-6 sentences, then compare your answer with the model.", items:[
           {id:"h2-s1", prompt:"Argue: Did the Haitian Revolution help or hurt the cause of freedom in the United States? Defend your answer with evidence from the lesson.", answer:"The Haitian Revolution helped the cause of freedom by proving that enslaved people could defeat empires and win independence. Haiti's example inspired planned rebellions like Gabriel's and gave enslaved Americans hope that freedom was possible. At the same time, it terrified Southern slaveholders, who responded with harsher laws and tighter control over enslaved people. The United States even refused to recognize Haiti for decades, showing how deeply white leaders feared a free Black nation. In the short run Haiti made life harder for enslaved Americans, but in the long run it proved that slavery could be overthrown."}
         ]}
-      ]
+      ,
+          {type: "comprehension", instructions: "Answer each question in 2 to 4 sentences, using evidence from the reading. These are analytical questions: explain why and how, not just what.", items: [
+            {id: "h18-1-c1", question: "Why did the Haitian Revolution terrify Southern slaveholders even though it happened in a French colony?", answer: "Led by Toussaint Louverture, enslaved people defeated the armies of France, Spain, and Britain and declared Haiti in 1804, the first Black republic and the first nation founded by formerly enslaved people. White refugees brought terrifying stories to American cities, Gabriel's 1800 Richmond plot drew inspiration from Haiti's news, and slaveholders feared rebellion for the next sixty years."},
+            {id: "h18-1-c2", question: "How did Haiti reshape America's map and its diplomacy in opposite directions?", answer: "After losing Saint-Domingue, Napoleon abandoned his American empire and sold Louisiana to the United States in 1803, doubling the nation's size. Yet the United States refused to recognize Haiti's independence until 1862, because Southern politicians would not accept a free Black nation as an equal, showing slavery's grip on American foreign policy."},
+            {id: "h18-1-c3", question: "Evaluate the reading's claim that for enslaved Americans, Haiti proved freedom was 'a right to be seized,' not 'a gift to be granted.'", answer: "Haiti's founders won independence by force rather than waiting for emancipation, and Black sailors carried the news from port to port. Gabriel's plot and the fear it inspired show enslaved Americans drew the lesson of self-liberation. The proof haunted slaveholders precisely because it removed the excuse that enslaved people accepted bondage."}
+          ]},
+          {type: "argument", instructions: "Write a thesis-driven argument of at least two paragraphs. State your thesis clearly, support it with evidence from the reading and your research, and address the counterargument named in the guidance.", items: [
+            {id: "h18-1-a1", prompt: "Argue: the republic's tests. Take a position on whether the United States' refusal to recognize Haiti until 1862 was pragmatic diplomacy or a moral failure revealing the republic's true priorities, and defend it in at least two paragraphs.", guidance: "Defend a clear thesis choosing pragmatism or moral failure. Use evidence from the reading: Southern politicians blocking recognition for sixty years, the Louisiana Purchase benefiting from Haiti's victory while denying its legitimacy, and Gabriel's execution showing the fear Haiti inspired. For research, investigate Haiti's shockwaves in American politics. Address this counterargument: that recognizing a revolutionary Black republic might have provoked domestic crisis or foreign conflict, making delay prudent statecraft. Weigh that prudence against sixty years of denying a free Black nation's equality."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", items: [
+            {id: "h18-1-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["precedent"]}
+          ]}
+        ]
     }
   ],
   science: [
@@ -2390,7 +3230,19 @@ const MM_WEEKS_912 = [
           {id:"s1-v1", label:"binary fission", content:"Asexual reproduction in which one bacterial cell splits into two identical daughter cells."},
           {id:"s1-v2", label:"antibiotic resistance", content:"The ability of bacteria to survive drugs that once killed them, developed through natural selection."}
         ]}
-      ]
+      ,
+          {type: "comprehension", instructions: "Answer each question in 2 to 4 sentences, using evidence from the reading. These are analytical questions: explain why and how, not just what.", items: [
+            {id: "s18-0-c1", question: "Why does the reading call humans 'walking communities' rather than individuals?", answer: "The human gut holds trillions of bacteria that digest food and train the immune system, and microbes from the mother colonize skin and gut at birth. The body holds as many bacterial cells as human ones, and disruptions to the microbiome are linked to obesity, allergies, and even mood disorders, making bacteria partners in health rather than passengers."},
+            {id: "s18-0-c2", question: "How does binary fission make bacteria both useful and dangerous?", answer: "One cell splitting into two identical copies every twenty minutes can become millions overnight. That speed is useful when bacteria decompose dead matter, fix nitrogen for plants, or turn milk into yogurt and cheese, and dangerous when pathogens multiply just as fast or evolve into antibiotic-resistant superbugs."},
+            {id: "s18-0-c3", question: "Evaluate the claim that antibiotic overuse created 'superbugs.'", answer: "Antibiotics transformed twentieth-century medicine, but bacteria evolve quickly and overuse selected resistant strains that shrug off our best drugs. The reading presents resistance as a direct consequence of overuse, which is why it prescribes probiotics and careful antibiotic use to keep the inner ecosystem balanced."}
+          ]},
+          {type: "argument", instructions: "Write a thesis-driven argument of at least two paragraphs. State your thesis clearly, support it with evidence from the reading and your research, and address the counterargument named in the guidance.", items: [
+            {id: "s18-0-a1", prompt: "Argue: should antibiotics require a prescription everywhere in the world? Take a position on whether restricting antibiotic access is worth its costs, and defend it in at least two paragraphs.", guidance: "Defend a clear thesis for or against universal prescription requirements. Use evidence from the reading: overuse created resistant superbugs, careful antibiotic use keeps the microbiome balanced, and disruptions are linked to obesity, allergies, and mood disorders. For research, investigate antibiotic stewardship policies and resistance rates. Address this counterargument: that restrictions delay treatment for poor and rural patients who cannot easily reach a doctor, so open access saves lives the restrictions would cost."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", items: [
+            {id: "s18-0-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["asexual", "neutral"]}
+          ]}
+        ]
     },
     {
       title:"Archaea: Life at the Extremes",
@@ -2409,7 +3261,19 @@ const MM_WEEKS_912 = [
         {type:"shortanswer", instructions:"Write 4-6 sentences, then compare your answer with the model.", items:[
           {id:"s2-s1", prompt:"Argue: Why does it matter that scientists discovered archaea are a separate domain of life rather than just unusual bacteria? Defend your answer.", answer:"Discovering archaea as a separate domain matters because it rewrote the entire tree of life. It showed that the deepest divisions in biology are far older and stranger than scientists assumed. The discovery revealed that life can thrive in boiling acid and crushing pressure, which expanded the search for life on other planets. It also suggested that our own eukaryotic cells may have evolved from an ancient archaeon, connecting us to these extremophiles. Science advances when old categories break, and archaea broke one of the oldest."}
         ]}
-      ]
+      ,
+          {type: "comprehension", instructions: "Answer each question in 2 to 4 sentences, using evidence from the reading. These are analytical questions: explain why and how, not just what.", items: [
+            {id: "s18-1-c1", question: "Why did Woese's discovery prove that scientific categories are 'always provisional'?", answer: "For most of scientific history every single-celled organism without a nucleus was called a bacterium. When Woese compared genetic code in 1977 and found archaea as different from bacteria as humans are, the tree of life was rewritten into three domains. One comparison overturned centuries of classification, showing categories reflect current knowledge, not final truth."},
+            {id: "s18-1-c2", question: "How do archaea shape Earth's climate and possibly our own ancestry?", answer: "Methanogens in wetlands and rice paddies release methane, a powerful greenhouse gas, while other archaea cycle nitrogen in the oceans, feeding the plankton that feed the world. Some researchers think the first eukaryotic cell arose when an ancient archaeon absorbed a bacterium, which would make archaea our most distant ancestors."},
+            {id: "s18-1-c3", question: "Evaluate the significance of the fact that 'no known archaea cause human disease.'", answer: "It contrasts with bacteria's disease-causing minority and reframes archaea's importance: they matter for ecosystems, climate, ancestry, and biotechnology, where their enzymes serve DNA testing and heat-needing industrial processes, rather than for medicine. Their value lies in planetary systems, not pathology."}
+          ]},
+          {type: "argument", instructions: "Write a thesis-driven argument of at least two paragraphs. State your thesis clearly, support it with evidence from the reading and your research, and address the counterargument named in the guidance.", items: [
+            {id: "s18-1-a1", prompt: "Argue: should bioprospecting for archaeal enzymes expand even in fragile extreme environments? Take a position on whether harvesting extremophile enzymes justifies disturbing places like deep-sea vents and Antarctic lakes, and defend it in at least two paragraphs.", guidance: "Defend a clear thesis for or against expanded bioprospecting. Use evidence from the reading: archaeal enzymes enable DNA testing and industrial processes needing extreme heat, and every new extreme environment explored turns up more archaea. For research, investigate how bioprospecting is regulated in fragile habitats. Address this counterargument: that these ecosystems are irreplaceable and poorly understood, so industrial harvesting risks destroying what science has barely begun to study."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", items: [
+            {id: "s18-1-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["neutral"]}
+          ]}
+        ]
     }
   ],
   friday: {
@@ -2474,7 +3338,19 @@ const MM_WEEKS_912 = [
           {id:"h1-o4", event:"Lewis and Clark return from exploring the West.", answer:4},
           {id:"h1-o5", event:"The Embargo Act bans American trade with Britain and France.", answer:5}
         ]}
-      ]
+      ,
+          {type: "comprehension", instructions: "Answer each question in 2 to 4 sentences, using evidence from the reading. These are analytical questions: explain why and how, not just what.", items: [
+            {id: "h19-0-c1", question: "Why does the reading call Jefferson's 1800 election the 'Revolution of 1800'?", answer: "It marked the first peaceful transfer of power between rival parties in American history. That a sitting party could lose and surrender the government without violence proved the republic could survive partisan change, which was genuinely revolutionary."},
+            {id: "h19-0-c2", question: "How did the Louisiana Purchase contradict Jefferson's own principles?", answer: "Jefferson preached small government close to the people: he shrank the army and navy, cut taxes, and paid down the debt. Yet he doubled the nation's size for $15 million through executive action, vastly expanding federal power, and the purchase doubled the territory open to slavery, contradicting his celebration of liberty."},
+            {id: "h19-0-c3", question: "Evaluate whether the Embargo Act's failure reveals a flaw in Jefferson's philosophy.", answer: "The 1807 Embargo Act banned American trade with Britain and France to coerce them peacefully, but it devastated American merchants and changed neither nation's behavior. It exposed the limits of peaceful coercion and showed his small-government ideal could not manage a commercial nation's foreign crises."}
+          ]},
+          {type: "argument", instructions: "Write a thesis-driven argument of at least two paragraphs. State your thesis clearly, support it with evidence from the reading and your research, and address the counterargument named in the guidance.", items: [
+            {id: "h19-0-a1", prompt: "Argue: Jefferson judged. Take a position on whether Jefferson's achievements outweigh his failures, and defend it in at least two paragraphs.", guidance: "Defend a clear thesis weighing achievements against failures. Use evidence from the reading: the Revolution of 1800, the Louisiana Purchase, debt reduction, and Marbury v. Madison's check on his power, versus the Embargo Act's failure, the expansion of slavery's territory, and the fact that the author of equality enslaved more than 600 people. For research, investigate Hemings and the contradiction at Monticello. Address this counterargument: that he should be judged by his era's standards and by his ideas' long-run contribution to liberty. Respond using the reading's demand to hold two truths at once."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", items: [
+            {id: "h19-0-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["yeoman", "agrarian"]}
+          ]}
+        ]
     },
     {
       title:"Jefferson and Hemings: The Contradiction at Monticello",
@@ -2492,7 +3368,19 @@ const MM_WEEKS_912 = [
         {type:"shortanswer", instructions:"Write 4-6 sentences, then compare your answer with the model.", items:[
           {id:"h2-s1", prompt:"Argue: How should we judge Thomas Jefferson: by his words about liberty, by his actions as a slaveholder, or by both? Defend your answer.", answer:"We should judge Jefferson by both his words and his actions, because each reveals something the other hides. His words gave the world the language of human equality and helped build a republic. His actions show he understood that language did not apply to the Black people he enslaved, including his own children. Judging him only by his words erases Sally Hemings and the hundreds he held in bondage. Judging him only by his actions erases the ideals that later generations used to end slavery. Honest history holds both truths: Jefferson expanded freedom's promise while personally denying it."}
         ]}
-      ]
+      ,
+          {type: "comprehension", instructions: "Answer each question in 2 to 4 sentences, using evidence from the reading. These are analytical questions: explain why and how, not just what.", items: [
+            {id: "h19-1-c1", question: "Why does the reading present both the DNA study and Madison Hemings's memoir as evidence?", answer: "The 1998 DNA study provides scientific proof that Jefferson fathered several of Sally Hemings's children. Madison Hemings's 1873 memoir provides the human account: his mother, free under French law in Paris, agreed to return to Virginia after Jefferson promised to free their children. Together they combine biological and testimonial evidence."},
+            {id: "h19-1-c2", question: "How does Jefferson's Notes on the State of Virginia deepen the contradiction beyond his slaveholding?", answer: "Slaveholding might be framed as inherited practice, but in Notes (1785) Jefferson argued Black inferiority was nature's doing, not condition's: in reason 'much inferior,' in imagination 'dull, tasteless, and anomalous.' He used his pen to declare natural inferiority while enslaving his own children, making the contradiction intellectual and deliberate, not merely practical."},
+            {id: "h19-1-c3", question: "Evaluate the reading's demand that Americans 'hold two truths at once' about Jefferson.", answer: "His ideas helped build a free republic while his life sustained slavery: he wrote that all men are created equal, yet enslaved more than 600 people, freed only a few in his lifetime, and argued for Black inferiority in print. Holding both truths avoids hagiography and dismissal alike, forcing separate judgments of the man and his ideas."}
+          ]},
+          {type: "argument", instructions: "Write a thesis-driven argument of at least two paragraphs. State your thesis clearly, support it with evidence from the reading and your research, and address the counterargument named in the guidance.", items: [
+            {id: "h19-1-a1", prompt: "Argue: Jefferson judged. Take a position on whether Monticello should present Jefferson primarily as the author of liberty or primarily as an enslaver, given that both are true, and defend it in at least two paragraphs.", guidance: "Defend a clear thesis choosing which framing should lead. Use evidence from the reading: the Hemings evidence, the Notes on the State of Virginia quotations, the few manumissions, and the children freed in his will or allowed to walk away. For research, investigate Hemings and how Monticello presents the story today. Address this counterargument: that public memory needs heroes and his ideas outlived his sins, or the reverse, that centering his ideas erases the enslaved people who built Monticello. Respond through the reading's two-truths frame."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", items: [
+            {id: "h19-1-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["contradiction"]}
+          ]}
+        ]
     }
   ],
   science: [
@@ -2513,7 +3401,19 @@ const MM_WEEKS_912 = [
           {id:"s1-k2", text:"Ocean algae produce much of the oxygen we breathe."},
           {id:"s1-k3", text:"Plasmodium is a protist that causes malaria."}
         ]}
-      ]
+      ,
+          {type: "comprehension", instructions: "Answer each question in 2 to 4 sentences, using evidence from the reading. These are analytical questions: explain why and how, not just what.", items: [
+            {id: "s19-0-c1", question: "Why do scientists call protists the 'grab bag kingdom'?", answer: "The only thing all protists share is what they are not: they fit neither the plant, animal, nor fungus kingdoms. The group spans animal-like hunters such as the amoeba and paramecium, plant-like photosynthesizers such as algae and giant kelp, and fungus-like slime molds, united only by exclusion."},
+            {id: "s19-0-c2", question: "How do protists both sustain and threaten human life?", answer: "Ocean algae produce much of the oxygen we breathe, and diatom shells rain down into deposits mined for filters and abrasives. The threats are equally real: Plasmodium, the protist behind malaria, kills hundreds of thousands yearly and spreads through mosquito bites, while red tides poison seafood and sicken coastal communities."},
+            {id: "s19-0-c3", question: "Evaluate the claim that studying protists is 'reading the earliest chapters of our own cellular history.'", answer: "Protists were among the first eukaryotes, so their diversity displays early eukaryotic creativity: pseudopods, cilia, photosynthesis, and diatoms' geometric silica shells. Scientists still discover new protist species in every drop of seawater examined, meaning the earliest chapters are still being written."}
+          ]},
+          {type: "argument", instructions: "Write a thesis-driven argument of at least two paragraphs. State your thesis clearly, support it with evidence from the reading and your research, and address the counterargument named in the guidance.", items: [
+            {id: "s19-0-a1", prompt: "Argue: in fighting malaria, should the priority be killing mosquitoes or attacking the Plasmodium parasite? Take a position and defend it in at least two paragraphs.", guidance: "Defend a clear thesis choosing mosquito control or parasite treatment. Use evidence from the reading: Plasmodium kills hundreds of thousands of people every year and spreads through mosquito bites, so breaking either link stops transmission. For research, investigate current malaria strategies and their results. Address this counterargument: that mosquito control harms ecosystems and breeds resistance, or conversely that drugs are expensive and parasites evolve resistance, so the other approach is more practical."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", items: [
+            {id: "s19-0-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["decomposer"]}
+          ]}
+        ]
     },
     {
       title:"Fungi: Nature's Recyclers",
@@ -2531,7 +3431,19 @@ const MM_WEEKS_912 = [
           {id:"s2-m2", term:"Yeast", answer:"b"},
           {id:"s2-m3", term:"Mushroom", answer:"d"}
         ]}
-      ]
+      ,
+          {type: "comprehension", instructions: "Answer each question in 2 to 4 sentences, using evidence from the reading. These are analytical questions: explain why and how, not just what.", items: [
+            {id: "s19-1-c1", question: "Why does the reading say the mushroom is only the surface of the fungus?", answer: "Most fungi grow as networks of tiny hyphae threads, the mycelium, which can stretch for acres underground; the Oregon honey mushroom's mycelium spans more than three square miles and may be Earth's largest organism. The mushroom is merely the reproductive structure poking above the surface."},
+            {id: "s19-1-c2", question: "How do mycorrhizae show that fungi are partners, not just decomposers?", answer: "Mycorrhizae are partnerships where fungi trade minerals for sugars with plant roots, one of nature's most important alliances. Lichens, fungi partnered with algae, survive in deserts and on bare rock. Fungi build and sustain ecosystems rather than merely recycling them."},
+            {id: "s19-1-c3", question: "Evaluate the warning that countless fungal species may vanish before they are ever named.", answer: "Scientists have described only about 150,000 fungal species yet estimate millions exist, and disappearing habitats may erase them unnamed. Since fungal networks stitch forests together and free the nutrients plants need, losing them unseen threatens ecosystems we depend on, which justifies the warning."}
+          ]},
+          {type: "argument", instructions: "Write a thesis-driven argument of at least two paragraphs. State your thesis clearly, support it with evidence from the reading and your research, and address the counterargument named in the guidance.", items: [
+            {id: "s19-1-a1", prompt: "Argue: should forest conservation prioritize protecting fungal networks even when the trees look healthy? Take a position and defend it in at least two paragraphs.", guidance: "Defend a clear thesis for or against prioritizing fungal networks. Use evidence from the reading: mycelium stitches forests together, mycorrhizae trade minerals for sugars with roots, and protecting forests means protecting the fungal networks that hold them together. For research, investigate mycorrhizal conservation and what happens to forests when fungal networks are damaged. Address this counterargument: that limited conservation dollars should target visible endangered species rather than invisible underground networks."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", items: [
+            {id: "s19-1-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["decomposer"]}
+          ]}
+        ]
     }
   ],
   friday: {
@@ -2594,7 +3506,19 @@ const MM_WEEKS_912 = [
           {id:"h1-m2", term:"Andrew Jackson", answer:"b"},
           {id:"h1-m3", term:"Impressment", answer:"c"}
         ]}
-      ]
+      ,
+          {type: "comprehension", instructions: "Answer each question in 2 to 4 sentences, using evidence from the reading. These are analytical questions: explain why and how, not just what.", items: [
+            {id: "h20-0-c1", question: "Why does the reading mention that British impressment swept up 'many Black sailors,' and what does that detail reveal?", answer: "Britain's warships stopped American vessels and impressed sailors into the Royal Navy, including many Black sailors. The detail reveals that Black sailors were already part of the maritime workforce whose rights the nation claimed to defend, and that the war's causes touched all Americans."},
+            {id: "h20-0-c2", question: "How did the Battle of New Orleans shape the war's memory more than the Treaty of Ghent did?", answer: "The Treaty of Ghent, signed in December 1814, changed almost nothing on paper. But Jackson's crushing victory two weeks later was celebrated as a great triumph, the anti-war Federalist Party collapsed, and nationalism surged. Memory favored the dramatic victory over the inconclusive treaty."},
+            {id: "h20-0-c3", question: "Evaluate whether the war deserves to be remembered as a victorious 'second fight' with Britain.", answer: "It began with failed invasions of Canada and British troops burning the Capitol and the President's Mansion, and ended with Fort McHenry's defense, Key's anthem, and New Orleans. The reading shows Americans celebrated it as victory despite Ghent's empty terms, suggesting the framing served nationalism's needs more than the facts."}
+          ]},
+          {type: "argument", instructions: "Write a thesis-driven argument of at least two paragraphs. State your thesis clearly, support it with evidence from the reading and your research, and address the counterargument named in the guidance.", items: [
+            {id: "h20-0-a1", prompt: "Argue: the war's meaning. Take a position on whether the War of 1812 should be remembered as a second war of independence or as an unnecessary war that achieved nothing, and defend it in at least two paragraphs.", guidance: "Defend a clear thesis choosing second independence or unnecessary war. Use evidence from the reading: impressment of American sailors, the failed Canadian invasions, the burning of Washington, the Treaty of Ghent's empty terms, the defense of Fort McHenry, New Orleans, and the Federalist collapse. For research, investigate the Black defenders of New Orleans. Address this counterargument: the other side's strongest case. If defending independence, answer that Ghent changed nothing and New Orleans was fought after peace. If defending unnecessary, answer that the war ended impressment's era and proved the republic could survive."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", items: [
+            {id: "h20-0-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["nationalism", "anthem"]}
+          ]}
+        ]
     },
     {
       title:"Black Defenders of New Orleans",
@@ -2614,7 +3538,19 @@ const MM_WEEKS_912 = [
         {type:"shortanswer", instructions:"Write 4-6 sentences, then compare your answer with the model.", items:[
           {id:"h2-s1", prompt:"Argue: Why did free Black men fight for the United States at New Orleans even though the nation enslaved Black people? Defend your answer with evidence.", answer:"Free Black men fought at New Orleans for a mix of duty, opportunity, and hope. Jackson promised them equal pay and respect, and military service had long been a path for Black men to prove their citizenship. They were also defending their own homes and families in Louisiana from a foreign invader. Many likely hoped that brave service would earn the nation’s gratitude and expand Black rights. That hope was betrayed, since Jackson later backed policies that expanded slavery. Their courage stands on its own, even though the country failed to honor what it owed them."}
         ]}
-      ]
+      ,
+          {type: "comprehension", instructions: "Answer each question in 2 to 4 sentences, using evidence from the reading. These are analytical questions: explain why and how, not just what.", items: [
+            {id: "h20-1-c1", question: "Why did Jackson turn to free Black militiamen, and what did he promise them?", answer: "Facing a desperate troop shortage in late 1814, Jackson issued a September proclamation calling Louisiana's free men of color to arms, promising the same pay, rations, and respect as white soldiers. Two battalions of about 500 men joined, alongside Black soldiers from Saint-Domingue, free Black sailors, and Jean Lafitte's Black gunners and sailors."},
+            {id: "h20-1-c2", question: "How does Jordan Noble's story function in the reading's argument?", answer: "Noble was a fourteen-year-old Black drummer boy whose steady beat guided troops through the smoke and chaos of battle. His youth and steadiness make the later betrayal concrete: the nation honored individual courage while tightening Louisiana's Black codes, so praise never became policy."},
+            {id: "h20-1-c3", question: "Evaluate the reading's claim that the defenders' story proves 'Black Americans have fought for the United States in every war, even when the United States would not fight for them.'", answer: "The Black battalions were praised for courage under fire on January 8, 1815, yet Jackson did nothing to extend freedom to the enslaved whose labor had built Louisiana, and within years he championed Indian removal expanding slavery's reach. Service was celebrated while freedom was withheld, which supports the claim."}
+          ]},
+          {type: "argument", instructions: "Write a thesis-driven argument of at least two paragraphs. State your thesis clearly, support it with evidence from the reading and your research, and address the counterargument named in the guidance.", items: [
+            {id: "h20-1-a1", prompt: "Argue: the war's meaning. Take a position on whether the Black defenders of New Orleans prove the war advanced American liberty or exposed its hollowness, and defend it in at least two paragraphs.", guidance: "Defend a clear thesis choosing advanced liberty or exposed hollowness. Use evidence from the reading: Jackson's proclamation promising equal pay and respect, the official praise in his dispatches, versus the tightened Black codes afterward and Jackson's later removal policies expanding slavery. For research, investigate the Black defenders of New Orleans. Address this counterargument: that their service was genuinely celebrated in New Orleans for years and opened a lasting tradition of Black military service. Respond with the reading's verdict that praise did not become policy."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", items: [
+            {id: "h20-1-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["nationalism"]}
+          ]}
+        ]
     }
   ],
   science: [
@@ -2634,7 +3570,19 @@ const MM_WEEKS_912 = [
           {id:"s1-c1", prompt:"Which plant group dominates Earth today?", options:["Angiosperms","Bryophytes","Ferns"], answer:"Angiosperms"},
           {id:"s1-c2", prompt:"Mosses are limited to damp places mainly because they...", options:["lack true roots and water-carrying veins","cannot photosynthesize","have no leaves"], answer:"lack true roots and water-carrying veins"}
         ]}
-      ]
+      ,
+          {type: "comprehension", instructions: "Answer each question in 2 to 4 sentences, using evidence from the reading. These are analytical questions: explain why and how, not just what.", items: [
+            {id: "s20-0-c1", question: "How did each plant group solve a new problem of living on land?", answer: "Bryophytes like mosses clung to damp places absorbing water directly; ferns evolved true roots, stems, and leaves with vein-like tubes; gymnosperms evolved seeds, reproducing without standing water; angiosperms added flowers and fruits. Supporting innovations included lignin for standing tall, waxy cuticle against drying, stomata for gas trade, and mining roots."},
+            {id: "s20-0-c2", question: "Why does the reading say 'a walk through any meadow is mostly a walk through angiosperm triumph'?", answer: "Flowering plants exploded into more than 300,000 species and now dominate nearly every ecosystem on Earth. Their latest solutions, flowers, fruits, and seeds, were the most successful, so a meadow's diversity is overwhelmingly the product of angiosperm innovation over 400 million years."},
+            {id: "s20-0-c3", question: "Evaluate the claim that 'every food chain begins with a photosynthesizer.'", answer: "Without plants there would be no soil, no forests, and no animals, since plants convert sunlight into food energy. Even ocean food chains begin with photosynthetic protists like algae. The claim holds because all animal life depends on photosynthesizers directly or indirectly."}
+          ]},
+          {type: "argument", instructions: "Write a thesis-driven argument of at least two paragraphs. State your thesis clearly, support it with evidence from the reading and your research, and address the counterargument named in the guidance.", items: [
+            {id: "s20-0-a1", prompt: "Argue: is the flowering plants' partnership strategy the reason for their dominance? Take a position on whether co-evolution with animals explains angiosperm success better than their other innovations, and defend it in at least two paragraphs.", guidance: "Defend a clear thesis choosing partnership or other innovations. Use evidence from the reading: the nectar-for-pollination trade, flowers and pollinators shaping each other over millions of years, fruits bribing animals to carry seeds, versus seeds, double fertilization, and the sheer count of 300,000-plus species. For research, investigate plant conservation and which groups are most threatened. Address this counterargument: that gymnosperms dominate vast regions like the taiga without animal partnerships, so dominance is habitat-dependent rather than strategy-driven."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", items: [
+            {id: "s20-0-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["germination"]}
+          ]}
+        ]
     },
     {
       title:"How Plants Reproduce",
@@ -2653,7 +3601,19 @@ const MM_WEEKS_912 = [
           {id:"s2-k2", text:"Double fertilization creates both an embryo and a food supply."},
           {id:"s2-k3", text:"Strawberries can reproduce asexually through runners."}
         ]}
-      ]
+      ,
+          {type: "comprehension", instructions: "Answer each question in 2 to 4 sentences, using evidence from the reading. These are analytical questions: explain why and how, not just what.", items: [
+            {id: "s20-1-c1", question: "Why is double fertilization an evolutionary advantage unique to flowering plants?", answer: "One sperm fuses with the egg to form the embryo while a second sperm fuses with other cells to form the endosperm, a built-in food supply for the young plant. No other group provisions its offspring this way; the seed carries its own food, improving the young plant's survival odds."},
+            {id: "s20-1-c2", question: "How does the flower's 'trade' with animals beat wind pollination?", answer: "Wind-pollinated plants like grasses and oaks release clouds of pollen and hope for luck. Animal-pollinated plants offer nectar and advertise with color and scent, so bees, butterflies, birds, and bats carry pollen precisely from flower to flower. Precision beats chance, and the partnership drove co-evolution."},
+            {id: "s20-1-c3", question: "Evaluate why plants keep both sexual reproduction and cloning.", answer: "Seeds mix genes for new environments and can sleep for decades, even centuries, before sprouting. Cloning through runners, tubers, or cuttings rapidly multiplies a proven winner locally, as with strawberries or a single giant aspen grove. Both serve the same goal, getting the next generation into the world, by complementary strategies."}
+          ]},
+          {type: "argument", instructions: "Write a thesis-driven argument of at least two paragraphs. State your thesis clearly, support it with evidence from the reading and your research, and address the counterargument named in the guidance.", items: [
+            {id: "s20-1-a1", prompt: "Argue: should agriculture rely more on cloned crops or on seed-grown diversity? Take a position on whether cloning's uniformity or seeds' genetic diversity better serves food security, and defend it in at least two paragraphs.", guidance: "Defend a clear thesis choosing cloning or seed diversity. Use evidence from the reading: cloning multiplies proven winners through tubers, runners, and cuttings, while seeds mix genes, survive decades dormant, and disperse to new ground. For research, investigate how crop diversity affects food security. Address this counterargument: that uniformity gives predictable yields and feeds more people now, or conversely that uniformity invites catastrophic disease, so the other approach better serves the future."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", items: [
+            {id: "s20-1-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["germination"]}
+          ]}
+        ]
     }
   ],
   friday: {
@@ -2716,7 +3676,19 @@ const MM_WEEKS_912 = [
           {id:"h1-k2", text:"Regional specialization meant the South grew cotton while the Northeast manufactured goods."},
           {id:"h1-k3", text:"The Market Revolution moved Americans from subsistence farming toward producing for distant buyers."}
         ]}
-      ]
+      ,
+          {type: "comprehension", instructions: "Answer each question in 2 to 4 sentences, using evidence from the reading. These are analytical questions: explain why and how, not just what.", items: [
+            {id: "h21-0-c1", question: "How did the Erie Canal reshape America's economy and geography?", answer: "Completed in 1825, it cut the cost of moving goods between the Great Lakes and New York City by more than 90 percent, turning New York into the nation's commercial capital. It tied regions into a single market and enabled regional specialization: the South grew cotton, the West grew grain and raised livestock, and the Northeast manufactured goods."},
+            {id: "h21-0-c2", question: "Why does the reading say the Lowell girls earned 'cash independence their mothers never had,' and what was the cost?", answer: "Textile mill work gave young farm women wages and economic autonomy unknown to the previous generation. The cost was long hours for low wages in factories, which sparked early debates about labor rights as women and children entered industrial work in growing numbers."},
+            {id: "h21-0-c3", question: "Evaluate the claim that the Market Revolution's wealth 'had a dark foundation.'", answer: "The cotton feeding the Lowell mills was grown by enslaved people, Northern banks financed the trade, and British factories wove the cloth. The reading insists the wealth cannot be separated from the whips that produced it, presenting American prosperity and slavery as one integrated system."}
+          ]},
+          {type: "argument", instructions: "Write a thesis-driven argument of at least two paragraphs. State your thesis clearly, support it with evidence from the reading and your research, and address the counterargument named in the guidance.", items: [
+            {id: "h21-0-a1", prompt: "Argue: the market's moral cost. Take a position on whether the Market Revolution should be celebrated as progress or condemned as prosperity built on slavery, and defend it in at least two paragraphs.", guidance: "Defend a clear thesis choosing progress or condemnation. Use evidence from the reading: the Erie Canal, steamboats, railroads, and telegraph tying the nation together, the Lowell girls' cash independence, and the confident middle class, versus the cotton grown by enslaved people, the pushing system, and the claim that the wealth cannot be separated from the whips. For research, investigate slavery and capitalism. Address this counterargument: the other side's strongest case. If celebrating progress, answer that the prosperity depended on calibrated violence. If condemning, answer that the era created genuine independence and modern America."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", items: [
+            {id: "h21-0-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["market", "industrialization"]}
+          ]}
+        ]
     },
     {
       title:"Cotton, Slavery, and American Capitalism",
@@ -2734,7 +3706,19 @@ const MM_WEEKS_912 = [
         {type:"shortanswer", instructions:"Write 4-6 sentences, then compare your answer with the model.", items:[
           {id:"h2-s1", prompt:"Argue: Was the Market Revolution's prosperity worth the human suffering that produced it? Defend your answer with evidence from the lesson.", answer:"The Market Revolution's prosperity was not worth the human suffering behind it, because that suffering was the system, not a side effect. The pushing system used whipping to raise cotton output year after year, so every bale carried deliberate cruelty. Northern mills, banks, and British factories all profited, which means the whole economy was complicit. Defenders say the wealth built modern America, but a prosperity that requires torturing workers is morally bankrupt. The lesson is that economic growth must be judged by how it treats people, not just by how much it produces."}
         ]}
-      ]
+      ,
+          {type: "comprehension", instructions: "Answer each question in 2 to 4 sentences, using evidence from the reading. These are analytical questions: explain why and how, not just what.", items: [
+            {id: "h21-1-c1", question: "How did the 'pushing system' increase productivity without any new machines?", answer: "Each enslaved worker was assigned a daily picking quota that rose every year, and anyone who fell short was whipped. The cotton gin only cleaned cotton; planting, hoeing, and picking remained human labor. Productivity soared through calibrated violence rather than technology."},
+            {id: "h21-1-c2", question: "Why does the reading quote Solomon Northup at length?", answer: "Northup, a free Black man kidnapped into Louisiana slavery, described the two-hundred-pound daily picking quota and its punishments from inside the system in Twelve Years a Slave (1853). His firsthand testimony makes the abstract pushing system concrete and irrefutable, a witness slavery's defenders could not dismiss."},
+            {id: "h21-1-c3", question: "Evaluate historians' argument that 'American capitalism itself was built on slavery's foundation.'", answer: "Profits flowed everywhere: planters bought more land and more enslaved people, Northern banks financed the trade, Lowell mills spun the fiber, and British factories wove the cloth. Cotton became America's leading export, and by 1860 the South produced most of the world's supply. The reading presents capitalism and slavery as one system, not separate spheres."}
+          ]},
+          {type: "argument", instructions: "Write a thesis-driven argument of at least two paragraphs. State your thesis clearly, support it with evidence from the reading and your research, and address the counterargument named in the guidance.", items: [
+            {id: "h21-1-a1", prompt: "Argue: the market's moral cost. Take a position on whether Northern banks, mills, and consumers bear moral responsibility for slavery's profits, or whether responsibility lies only with Southern planters, and defend it in at least two paragraphs.", guidance: "Defend a clear thesis assigning responsibility broadly or narrowly. Use evidence from the reading: the profit flows to Northern banks, Lowell mills, and British factories, Northup's account of the pushing system, and cotton as America's leading export. For research, investigate slavery and capitalism. Address this counterargument: that Northerners did not own enslaved people and many opposed slavery, so financing and buying are not the same as enslaving. Respond by weighing whether profiting from a system constitutes participation in it."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", items: [
+            {id: "h21-1-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["cotton", "market"]}
+          ]}
+        ]
     }
   ],
   science: [
@@ -2754,7 +3738,19 @@ const MM_WEEKS_912 = [
           {id:"s1-v1", label:"invertebrate", content:"An animal without a backbone, such as an insect, clam, or jellyfish."},
           {id:"s1-v2", label:"bilateral symmetry", content:"A body plan with matching left and right halves and distinct head and tail ends."}
         ]}
-      ]
+      ,
+          {type: "comprehension", instructions: "Answer each question in 2 to 4 sentences, using evidence from the reading. These are analytical questions: explain why and how, not just what.", items: [
+            {id: "s21-0-c1", question: "Why does the reading insist that most people picture animals wrong?", answer: "People picture mammals, birds, or fish, but more than 95 percent of animal species are invertebrates, most of them arthropods. There are more described species of beetles alone than of all vertebrates combined, making the familiar animals a tiny minority."},
+            {id: "s21-0-c2", question: "How does body-plan symmetry relate to an animal's way of life?", answer: "Sponges with no symmetry filter food from water passively; jellyfish with radial symmetry interact with the environment from all sides; bilaterally symmetric animals like humans have matching halves and distinct head and tail ends for directed movement. Each plan solves the same problems: finding food, avoiding being eaten, and reproducing."},
+            {id: "s21-0-c3", question: "Evaluate the claim that 'most experiments succeeded.'", answer: "Each phylum is framed as an experiment in being an animal: sponges filter without nerves, cnidarians sting, octopuses solve puzzles, starfish regrow arms, earthworms shaped Darwin's soil studies. Their persistence shows diverse body plans work, and the invertebrate majority runs the ecosystems vertebrates depend on, from pollinating crops to recycling the ocean floor."}
+          ]},
+          {type: "argument", instructions: "Write a thesis-driven argument of at least two paragraphs. State your thesis clearly, support it with evidence from the reading and your research, and address the counterargument named in the guidance.", items: [
+            {id: "s21-0-a1", prompt: "Argue: should conservation funding prioritize invertebrates over charismatic vertebrates? Take a position and defend it in at least two paragraphs.", guidance: "Defend a clear thesis choosing invertebrates or charismatic vertebrates. Use evidence from the reading: invertebrates are over 95 percent of species and run the ecosystems vertebrates depend on, from pollination to ocean-floor recycling. For research, investigate invertebrate conservation and where funding currently goes. Address this counterargument: that charismatic vertebrates serve as umbrella species whose protection saves whole habitats, and that donors give to pandas, not beetles, so vertebrate-first funding protects more in practice."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", items: [
+            {id: "s21-0-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["vertebrate"]}
+          ]}
+        ]
     },
     {
       title:"Vertebrates: Backbones and Beyond",
@@ -2775,7 +3771,19 @@ const MM_WEEKS_912 = [
           {id:"s2-m2", term:"Reptiles", answer:"b"},
           {id:"s2-m3", term:"Mammals", answer:"d"}
         ]}
-      ]
+      ,
+          {type: "comprehension", instructions: "Answer each question in 2 to 4 sentences, using evidence from the reading. These are analytical questions: explain why and how, not just what.", items: [
+            {id: "s21-1-c1", question: "How did the amniotic egg let reptiles 'colonize dry land'?", answer: "Amphibians like frogs must return to water to lay their eggs, but the reptile's amniotic egg is a waterproof, self-contained nursery. Freed from water for reproduction and armored with scaly skin, reptiles colonized dry habitats that amphibians could never hold."},
+            {id: "s21-1-c2", question: "Why does the reading call humans 'half a billion years of innovation' in one body?", answer: "Humans are mammals, primates, vertebrates, and chordates all at once, carrying every breakthrough in the vertebrate story: jaws and paired fins from fish, the amniotic egg's legacy, feathers' distant cousins in birds, and endothermy for night hunting and surviving ice ages. One body stacks the entire sequence."},
+            {id: "s21-1-c3", question: "Evaluate whether endothermy or flight was the more revolutionary breakthrough.", answer: "Endothermy let mammals keep a constant body temperature, hunt at night, and survive ice ages, opening time niches. Flight gave birds the skies no other vertebrate could reach, opening spatial niches. The reading presents them as parallel revolutions, and the verdict depends on whether one values endurance through change or access to new worlds."}
+          ]},
+          {type: "argument", instructions: "Write a thesis-driven argument of at least two paragraphs. State your thesis clearly, support it with evidence from the reading and your research, and address the counterargument named in the guidance.", items: [
+            {id: "s21-1-a1", prompt: "Argue: is the vertebrate blueprint's adaptability proof of superiority or just one successful experiment? Take a position on whether vertebrates are evolutionarily more significant than the invertebrate majority, and defend it in at least two paragraphs.", guidance: "Defend a clear thesis choosing superiority or one experiment among many. Use evidence from the reading: vertebrates' breakthroughs in jaws, the amniotic egg, flight, and endothermy, and their inclusion of the largest animals ever, versus the fact that vertebrates are a small branch while 95 percent of species are invertebrates running the ecosystems vertebrates depend on. For research, investigate how biologists measure evolutionary significance. Address this counterargument: that significance is human bias toward the large and familiar, and ecological indispensability is the truer measure."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", items: [
+            {id: "s21-1-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["vertebrate"]}
+          ]}
+        ]
     }
   ],
   friday: {
@@ -2837,7 +3845,19 @@ const MM_WEEKS_912 = [
           {id:"h1-c1", prompt:"The spoils system meant that Jackson...", options:["gave government jobs to his political supporters","banned all political parties","appointed only wealthy bankers"], answer:"gave government jobs to his political supporters"},
           {id:"h1-c2", prompt:"Jackson vetoed the Second Bank of the United States because he believed it...", options:["served wealthy elites at the people's expense","was too small to matter","should be moved to the South"], answer:"served wealthy elites at the people's expense"}
         ]}
-      ]
+      ,
+          {type: "comprehension", instructions: "Answer each question in 2 to 4 sentences, using evidence from the reading. These are analytical questions: explain why and how, not just what.", items: [
+            {id: "h22-0-c1", question: "How did Jacksonian democracy expand and restrict political participation at the same time?", answer: "States dropped property requirements for voting, so by 1840 nearly all white men could vote, turnout soared, and the spoils system rotated government jobs to supporters. At the same time women could not vote, free Black men were stripped of voting rights in several states, and enslaved Black people counted only as property. Expansion for white men was built on others' exclusion."},
+            {id: "h22-0-c2", question: "Why did Jackson's opponents call him 'King Andrew,' and does the reading think they were partly right?", answer: "They saw his Bank veto, defiance of the Court, and spoils system as tyranny, and formed the Whig Party to oppose him. The reading says both sides were partly right: he defended ordinary citizens against entrenched elites while concentrating dangerous power in the presidency, which is why historians still argue about him."},
+            {id: "h22-0-c3", question: "Evaluate the reading's claim that Jacksonian democracy's 'exclusions were as defining as its expansions.'", answer: "The era is remembered as America's first mass democracy, with torchlight parades, slogans, and soaring turnout. But its boundaries, white men only, determined who benefited from the Bank War, the spoils system, and territorial expansion. The exclusions define it because they reveal a democracy built on unfreedom, the pattern of the entire era."}
+          ]},
+          {type: "argument", instructions: "Write a thesis-driven argument of at least two paragraphs. State your thesis clearly, support it with evidence from the reading and your research, and address the counterargument named in the guidance.", items: [
+            {id: "h22-0-a1", prompt: "Argue: democracy for whom. Take a position on whether Jacksonian democracy deserves to be called democracy at all, given that it served white men only, and defend it in at least two paragraphs.", guidance: "Defend a clear thesis answering yes or no. Use evidence from the reading: dropped property requirements, mass turnout, the spoils system, and the Bank veto as democratic expansion, versus stripped Black voting rights, women's exclusion, and slavery as the foundation. For research, investigate Indian Removal and how it served Jacksonian voters. Address this counterargument: that by the era's global standards it was radically democratic, and later movements built on its tools of mass parties and campaigns. Respond with the reading's framing that the exclusions were defining, not incidental."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", items: [
+            {id: "h22-0-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["suffrage", "populism"]}
+          ]}
+        ]
     },
     {
       title:"Removal: Expanding Slavery and Stealing Land Together",
@@ -2858,7 +3878,19 @@ const MM_WEEKS_912 = [
         {type:"shortanswer", instructions:"Write 4-6 sentences, then compare your answer with the model.", items:[
           {id:"h2-s1", prompt:"Argue: For whom was Jacksonian democracy actually democratic? Defend your answer with evidence about voters, Native nations, and enslaved people.", answer:"Jacksonian democracy was democratic only for white men, and even that freedom was built on others' suffering. It expanded suffrage to poor white men and broke elite control of politics, which was a real democratic gain. But it stripped voting rights from free Black men, left women voteless, and forced Native nations off their land through removal. Enslaved Black people, meanwhile, were marched west to work the very land taken from Native peoples. A democracy that expands by shrinking others' freedom deserves the question in its name: democracy for whom?"}
         ]}
-      ]
+      ,
+          {type: "comprehension", instructions: "Answer each question in 2 to 4 sentences, using evidence from the reading. These are analytical questions: explain why and how, not just what.", items: [
+            {id: "h22-1-c1", question: "How did Jackson's 1830 message to Congress misrepresent removal as voluntary?", answer: "He wrote that it would be as cruel as unjust to compel the aborigines to abandon the graves of their fathers, promising the emigration should be voluntary. In reality his armies delivered force: some 16,000 Cherokee were forced west in 1838 on the Trail of Tears, where about 4,000 died of cold, hunger, and disease. The words promised choice while the policy was compulsion."},
+            {id: "h22-1-c2", question: "Why does the reading say Indian removal and Black enslavement expanded 'together'?", answer: "Removal cleared the land, which was quickly sold to cotton planters, who then marched enslaved Black people west to work it. One system cleared the land and the other worked it, making them economically a single expansion rather than two separate policies."},
+            {id: "h22-1-c3", question: "Evaluate the significance of Worcester v. Georgia (1832) in the removal story.", answer: "The Supreme Court ruled Georgia had no authority over Cherokee land, and the Cherokee Nation's written constitution, schools, and newspapers proved that adopting white civilization was no defense. Jackson reportedly defied the ruling, showing that even a legal victory could not stop removal when the president refused enforcement, which exposes the limits of law without power."}
+          ]},
+          {type: "argument", instructions: "Write a thesis-driven argument of at least two paragraphs. State your thesis clearly, support it with evidence from the reading and your research, and address the counterargument named in the guidance.", items: [
+            {id: "h22-1-a1", prompt: "Argue: democracy for whom. Take a position on whether the Trail of Tears proves Jacksonian democracy's promise was a lie or proves that democracy itself failed, and defend it in at least two paragraphs.", guidance: "Defend a clear thesis choosing broken promise or failed system. Use evidence from the reading: the Worcester v. Georgia defiance, the 4,000 dead on the Trail of Tears, the stolen land sold to cotton planters, and enslaved people marched west to work it. For research, investigate Indian Removal. Address this counterargument: that the system worked exactly as designed for its intended beneficiaries, white voters, so the problem was the definition of 'the people' rather than democracy itself. Respond using the reading's verdict that one system cleared the land while the other worked it."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", items: [
+            {id: "h22-1-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["removal"]}
+          ]}
+        ]
     }
   ],
   science: [
@@ -2879,7 +3911,19 @@ const MM_WEEKS_912 = [
           {id:"s1-t1", text:"In a reflex arc, the signal travels to the spinal cord and back without going to the brain.", answer:"true", note:"Reflexes bypass the brain for maximum speed."},
           {id:"s1-t2", text:"Neurons touch each other directly to pass along signals.", answer:"false", note:"Neurons are separated by synapses and use chemical messengers."}
         ]}
-      ]
+      ,
+          {type: "comprehension", instructions: "Answer each question in 2 to 4 sentences, using evidence from the reading. These are analytical questions: explain why and how, not just what.", items: [
+            {id: "s22-0-c1", question: "Why don't neurons touch, and how do they still communicate?", answer: "Neurons communicate across tiny gaps called synapses by releasing chemical messengers called neurotransmitters. The signal travels down the axon as an electrical wave, the action potential, at up to 120 meters per second, then chemicals cross the gap. Separation allows precise, switchable connections."},
+            {id: "s22-0-c2", question: "How does a reflex arc prove that not all responses need the brain?", answer: "In a reflex arc the signal travels to the spinal cord and straight back to the muscle, jerking the hand from a hot stove before the pain is even felt. The spinal cord handles the response alone, showing the peripheral system can act without central processing when speed matters."},
+            {id: "s22-0-c3", question: "Evaluate the role of myelin: why does insulation matter so much?", answer: "Myelin coats many axons like insulation on a wire, speeding signals dramatically to as fast as 120 meters per second. Without it coordination would lag, and damage to the wiring causes numbness, weakness, or chronic pain. Speed is the nervous system's purpose, and myelin is what delivers it."}
+          ]},
+          {type: "argument", instructions: "Write a thesis-driven argument of at least two paragraphs. State your thesis clearly, support it with evidence from the reading and your research, and address the counterargument named in the guidance.", items: [
+            {id: "s22-0-a1", prompt: "Argue: should full-contact youth sports be restricted to protect developing nervous systems? Take a position and defend it in at least two paragraphs.", guidance: "Defend a clear thesis for or against restrictions. Use evidence from the reading: damage to neural wiring causes numbness, weakness, or chronic pain, and protecting the nervous system through helmets and care protects the very thing that makes you you. For research, investigate youth sports safety and head-injury findings. Address this counterargument: that sports build discipline, fitness, and opportunity, and that protective gear already manages the risk."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", items: [
+            {id: "s22-0-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["stimulus"]}
+          ]}
+        ]
     },
     {
       title:"The Brain: Command Central",
@@ -2896,7 +3940,19 @@ const MM_WEEKS_912 = [
         {type:"shortanswer", instructions:"Write 4-6 sentences, then compare your answer with the model.", items:[
           {id:"s2-s1", prompt:"Argue: Is the brain's division of labor into specialized regions a strength or a weakness? Defend your answer.", answer:"The brain's division of labor is a strength because specialization makes processing fast and efficient. The visual cortex can analyze a scene while the frontal lobe plans a response, letting us react in fractions of a second. Specialized regions also allow incredible expertise, from language to music to mathematics. The weakness is that damage to one region can wipe out a specific ability, as strokes sometimes do. But the brain can partly rewire itself, with nearby regions taking over lost jobs. Overall, specialization plus this plasticity makes the brain both powerful and resilient."}
         ]}
-      ]
+      ,
+          {type: "comprehension", instructions: "Answer each question in 2 to 4 sentences, using evidence from the reading. These are analytical questions: explain why and how, not just what.", items: [
+            {id: "s22-1-c1", question: "How do the brain's divisions of labor produce a unified self?", answer: "The frontal lobe plans and decides, the parietal processes touch and space, the temporal handles hearing and memory, the occipital processes vision, the cerebellum fine-tunes movement, and the brainstem runs breathing and heartbeat. The autonomic branches work as gas pedal and brake: sympathetic for fight-or-flight, parasympathetic for rest and digest. Every memory and plan is a pattern of neurons firing across these regions."},
+            {id: "s22-1-c2", question: "Why does the brain consume 20 percent of the body's energy at only 2 percent of its weight?", answer: "About 86 billion neurons firing constantly is metabolically expensive. The cost funds conscious thought, sleep's consolidation of memories and clearing of waste, and plasticity: learning physically rewires the brain and injuries can be overcome as it reroutes around damage."},
+            {id: "s22-1-c3", question: "Evaluate the claim that 'understanding the brain is ultimately an attempt to understand ourselves.'", answer: "The reading ties every memory and plan to patterns of neurons firing, shows learning physically rewiring connections, and notes injuries can change function until plasticity reroutes. If the self is what the brain does, studying it is self-study, which holds within the reading's materialist frame."}
+          ]},
+          {type: "argument", instructions: "Write a thesis-driven argument of at least two paragraphs. State your thesis clearly, support it with evidence from the reading and your research, and address the counterargument named in the guidance.", items: [
+            {id: "s22-1-a1", prompt: "Argue: should high schools start later to protect teenage sleep and brain development? Take a position and defend it in at least two paragraphs.", guidance: "Defend a clear thesis for or against later start times. Use evidence from the reading: sleep gives the brain time to consolidate memories and clear waste, learning physically rewires the brain, and the brain consumes a fifth of the body's energy doing this work. For research, investigate school start-time studies and their findings on learning. Address this counterargument: that later starts disrupt bus schedules, after-school jobs, and family routines, so the logistical costs outweigh the neurological benefits."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", items: [
+            {id: "s22-1-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["stimulus"]}
+          ]}
+        ]
     }
   ],
   friday: {
@@ -2959,7 +4015,19 @@ const MM_WEEKS_912 = [
           {id:"h1-m2", term:"Ordinance of Nullification", answer:"b"},
           {id:"h1-m3", term:"Force Bill", answer:"c"}
         ]}
-      ]
+      ,
+          {type: "comprehension", instructions: "Answer each question in 2 to 4 sentences, using evidence from the reading. These are analytical questions: explain why and how, not just what.", items: [
+            {id: "h23-0-c1", question: "Why did Calhoun's nullification theory appeal to South Carolina beyond the tariff itself?", answer: "The Tariff of Abominations raised the prices Southerners paid for tools, cloth, and iron while protecting Northern factories. But the deeper appeal was the theory itself: the Union as a compact of sovereign states, each keeping the right to judge the compact's limits. The reading says everyone understood the same states' rights argument would soon be used to defend slavery itself."},
+            {id: "h23-0-c2", question: "How did Jackson, a Southerner and states' rights believer, justify opposing nullification?", answer: "In his December 1832 proclamation he denied that any state could annul federal law, calling the power incompatible with the existence of the Union and destructive of the great object for which it was formed. He insisted the Constitution forms a government, not a league, operating directly on the people individually rather than upon the states. Union loyalty overrode sectional sympathy."},
+            {id: "h23-0-c3", question: "Evaluate Henry Clay's compromise as a resolution: did it settle anything?", answer: "The compromise tariff plus the Force Bill authorizing military action let both sides back down, so the crisis passed. But it settled nothing in principle: everyone understood the real subject was slavery, making the outcome a truce that previewed the coming conflict rather than a solution."}
+          ]},
+          {type: "argument", instructions: "Write a thesis-driven argument of at least two paragraphs. State your thesis clearly, support it with evidence from the reading and your research, and address the counterargument named in the guidance.", items: [
+            {id: "h23-0-a1", prompt: "Argue: states' rights vs. human rights. Take a position on whether South Carolina's nullification stand was a principled defense of constitutional limits or a cover for protecting slavery, and defend it in at least two paragraphs.", guidance: "Defend a clear thesis choosing principle or cover. Use evidence from the reading: the genuine grievance of the Tariff of Abominations, Calhoun's compact theory in the South Carolina Exposition and Protest, Jackson's proclamation, the Force Bill, and Clay's compromise. For research, investigate Vesey and how South Carolina treated Black rights at home. Address this counterargument: that the tariff genuinely harmed the Southern economy and constitutional limits matter regardless of motive. Respond with the reading's claim that everyone understood the real subject was slavery."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", items: [
+            {id: "h23-0-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["nullify", "tariff"]}
+          ]}
+        ]
     },
     {
       title:"The Vesey Conspiracy: Fear in Charleston",
@@ -2979,7 +4047,19 @@ const MM_WEEKS_912 = [
         {type:"shortanswer", instructions:"Write 4-6 sentences, then compare your answer with the model.", items:[
           {id:"h2-s1", prompt:"Argue: When South Carolina claimed states' rights, was it defending liberty or defending slavery? Defend your answer using the nullification crisis and the Vesey conspiracy.", answer:"South Carolina was defending slavery, not liberty, when it claimed states' rights. The nullification crisis was fought over tariffs, but Calhoun's theory was quickly turned into a shield for slavery. The Vesey conspiracy trials prove the point: the same leaders who demanded freedom from Washington built armories and banned Black literacy to keep Black people enslaved. A state that claims liberty while executing men for plotting freedom is not defending liberty. States' rights was the language; protecting slavery was the cause."}
         ]}
-      ]
+      ,
+          {type: "comprehension", instructions: "Answer each question in 2 to 4 sentences, using evidence from the reading. These are analytical questions: explain why and how, not just what.", items: [
+            {id: "h23-1-c1", question: "Why does it matter that historians still debate how vast the Vesey conspiracy was?", answer: "The trials were rushed and secret, and the prosecution's case may have been exaggerated. If the plot was smaller than claimed, then Charleston's terror-driven response, the citadel and armory, Black codes, and literacy bans, was built on possibly inflated fears, showing that fear rather than fact drove the repression."},
+            {id: "h23-1-c2", question: "How did white Charleston's response reveal the hollowness of its liberty rhetoric?", answer: "Leaders who demanded states' rights from Washington denied every right to Black people at home: they fortified the city against its own Black population, restricted Black assembly and movement, cracked down on Black churches, and banned teaching enslaved people to read. Their liberty meant the freedom to keep others enslaved, using any power, state or federal, to protect it."},
+            {id: "h23-1-c3", question: "Evaluate the reading's claim that the Vesey conspiracy became 'a warning that slaveholders cited for decades.'", answer: "Whether the conspiracy was as vast as prosecutors claimed is debated, but the aftermath is certain: Vesey and 34 others executed, dozens banished, and ever harsher control justified in its name. Its legacy lies less in the plot than in the repression it licensed, as slaveholders cited it for decades to tighten slavery's chains."}
+          ]},
+          {type: "argument", instructions: "Write a thesis-driven argument of at least two paragraphs. State your thesis clearly, support it with evidence from the reading and your research, and address the counterargument named in the guidance.", items: [
+            {id: "h23-1-a1", prompt: "Argue: states' rights vs. human rights. Take a position on whether Denmark Vesey's planned rebellion was justified resistance or unjustifiable violence, and defend it in at least two paragraphs.", guidance: "Defend a clear thesis choosing justified or unjustifiable. Use evidence from the reading: Vesey bought his freedom with lottery winnings and built a respected life, the plot aimed to seize Charleston and sail to Haiti, it was betrayed before it began, and the trials were rushed and secret with the prosecution's case still debated. For research, investigate Vesey and the debate over the conspiracy. Address this counterargument: the violence question. If defending justification, answer that the plot's planned violence must be weighed against slavery, literacy bans, and repression. If condemning, answer that seizing a city cannot be justified regardless of the system's evil. Do not fabricate claims about the plot's details beyond what the reading states."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", items: [
+            {id: "h23-1-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["nullify", "secession"]}
+          ]}
+        ]
     }
   ],
   science: [
@@ -3000,7 +4080,19 @@ const MM_WEEKS_912 = [
           {id:"s1-v1", label:"hormone", content:"A chemical messenger released by a gland into the bloodstream to regulate distant target cells."},
           {id:"s1-v2", label:"target cell", content:"A cell with receptors that recognize and respond to a specific hormone."}
         ]}
-      ]
+      ,
+          {type: "comprehension", instructions: "Answer each question in 2 to 4 sentences, using evidence from the reading. These are analytical questions: explain why and how, not just what.", items: [
+            {id: "s23-0-c1", question: "Why is the pituitary called the 'master gland,' and what limits that title?", answer: "Its hormones control many other glands: the thyroid's metabolic pace, the adrenals' emergency response, growth, and puberty's cascade. But the hypothalamus links brain to pituitary, sensing blood conditions and ordering releases, and some glands respond directly, the pancreas sensing blood sugar itself and the adrenals answering nerve signals in seconds. Mastery is shared with the brain."},
+            {id: "s23-0-c2", question: "How does hormone signaling differ from nerve signaling, and why does the body need both?", answer: "Nerves send fast, targeted electrical signals; hormones are slow, long-lasting chemical messages carried by the bloodstream, acting over minutes to days, with only receptor-bearing cells responding. The body needs both: nerves for instant reactions and hormones for growth, metabolism, stress responses, and reproduction."},
+            {id: "s23-0-c3", question: "Evaluate the claim that the endocrine system 'shapes who we are as much as how we function.'", answer: "Hormones govern mood, growth, and metabolism: puberty's cascade transforms the body, thyroid disorders swing weight and energy, and disorders from diabetes to thyroid disease are common and treatable. The reading supports the claim because the chemical command network directs development and daily state, not just maintenance."}
+          ]},
+          {type: "argument", instructions: "Write a thesis-driven argument of at least two paragraphs. State your thesis clearly, support it with evidence from the reading and your research, and address the counterargument named in the guidance.", items: [
+            {id: "s23-0-a1", prompt: "Argue: should insulin be price-capped as a public good? Take a position and defend it in at least two paragraphs.", guidance: "Defend a clear thesis for or against price caps on insulin. Use evidence from the reading: in type 1 diabetes the body destroys its own insulin-making cells, so patients must carefully manage insulin themselves for life, and hormone disorders are described as common and treatable, which assumes treatment is obtainable. For research, investigate insulin pricing and access. Address this counterargument: that price controls stifle the innovation that produces better treatments, so caps would harm future patients to help present ones."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", items: [
+            {id: "s23-0-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["homeostasis"]}
+          ]}
+        ]
     },
     {
       title:"Hormones in Action: Balance and Response",
@@ -3018,7 +4110,19 @@ const MM_WEEKS_912 = [
           {id:"s2-c1", prompt:"In type 1 diabetes, the core problem is that...", options:["the body destroys its own insulin-making cells","the thyroid releases too much hormone","adrenaline can never be released"], answer:"the body destroys its own insulin-making cells"},
           {id:"s2-c2", prompt:"Negative feedback works most like a...", options:["thermostat","one-way street","broken clock"], answer:"thermostat"}
         ]}
-      ]
+      ,
+          {type: "comprehension", instructions: "Answer each question in 2 to 4 sentences, using evidence from the reading. These are analytical questions: explain why and how, not just what.", items: [
+            {id: "s23-1-c1", question: "How does blood sugar regulation demonstrate negative feedback?", answer: "After a meal, rising blood sugar triggers insulin release, cells absorb sugar, and the level falls. If sugar falls too low, the pancreas releases glucagon, the liver releases stored sugar, and the level rises. The response reverses the change that triggered it, like a thermostat shutting off the heat, and in type 1 diabetes the destroyed insulin cells break the loop."},
+            {id: "s23-1-c2", question: "Why is cortisol helpful in emergencies but harmful when constantly elevated?", answer: "Cortisol is the long-term stress hormone: in emergencies it helps flood muscles with energy alongside adrenaline's quickened heartbeat and sharpened focus. But the reading warns it harms health when constantly elevated, distinguishing acute usefulness from chronic damage."},
+            {id: "s23-1-c3", question: "Evaluate the thermostat analogy for feedback loops.", answer: "It captures negative feedback's essence: the response reverses the triggering change, fitting blood sugar regulation and the parasympathetic calming to rest and digest. But bodies are more complex than houses: puberty runs as a cascade from brain to pituitary to gonads, melatonin regulates sleep cycles, and loop failures cause disease. The analogy introduces the idea while simplifying it."}
+          ]},
+          {type: "argument", instructions: "Write a thesis-driven argument of at least two paragraphs. State your thesis clearly, support it with evidence from the reading and your research, and address the counterargument named in the guidance.", items: [
+            {id: "s23-1-a1", prompt: "Argue: should high schools drug-test student athletes for performance-enhancing hormones? Take a position and defend it in at least two paragraphs.", guidance: "Defend a clear thesis for or against testing. Use evidence from the reading: growth hormone from the pituitary drives childhood growth, sex hormones transform the body at puberty, and endocrinologists treat hormone balance as the foundation of health, so artificial manipulation carries real stakes. For research, investigate youth doping testing policies and their results. Address this counterargument: that testing invades student privacy, costs money schools lack, and risks false positives that ruin reputations."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", items: [
+            {id: "s23-1-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["homeostasis"]}
+          ]}
+        ]
     }
   ],
   friday: {
@@ -3081,7 +4185,19 @@ const MM_WEEKS_912 = [
           {id:"h1-t1", text:"Manifest destiny claimed the United States had a God-given right to spread across the continent.", answer:"true", note:"O'Sullivan argued Providence had given the continent to America."},
           {id:"h1-t2", text:"The western lands settlers crossed were empty and unclaimed.", answer:"false", note:"Native nations had lived on those lands for thousands of years."}
         ]}
-      ]
+      ,
+          {type: "comprehension", instructions: "Answer each question in 2 to 4 sentences, using evidence from the reading. These are analytical questions: explain why and how, not just what.", items: [
+            {id: "h24-0-c1", question: "How did O'Sullivan's phrase function as justification rather than description?", answer: "Manifest destiny declared a God-given right to overspread the continent, and the reading says the idea justified everything that followed: the Texas annexation, the Oregon demands, and the settler flood. It framed conquest as Providence's inevitable law, making opposition seem unnatural."},
+            {id: "h24-0-c2", question: "Why does the reading present two experiences of the same migration?", answer: "Hundreds of thousands of settlers crossing the Oregon, California, and Mormon Trails between 1840 and 1860 called it progress. But the land they called empty was home to Native nations who had lived there for thousands of years, and they experienced it as invasion and catastrophe. The continent's future was decided by that collision, and one story without the other is false."},
+            {id: "h24-0-c3", question: "Evaluate Polk's Oregon settlement against the '54-40 or fight' slogan.", answer: "The slogan demanded the whole Oregon territory up to Alaska, but Polk compromised at the 49th parallel. The gap shows manifest destiny's rhetoric outrunning its reality: maximalist slogans mobilized voters while diplomacy settled for less, a recurring pattern of expansionist politics."}
+          ]},
+          {type: "argument", instructions: "Write a thesis-driven argument of at least two paragraphs. State your thesis clearly, support it with evidence from the reading and your research, and address the counterargument named in the guidance.", items: [
+            {id: "h24-0-a1", prompt: "Argue: the West's true story. Take a position on whether manifest destiny should be taught primarily as American progress or primarily as a catastrophe for Native peoples, and defend it in at least two paragraphs.", guidance: "Defend a clear thesis choosing progress or catastrophe as the primary frame. Use evidence from the reading: O'Sullivan's 1845 declaration, the Texas annexation, the trail migrations, and the Native experience of invasion on homelands held for thousands of years. For research, investigate the Buffalo Soldiers and Black pioneers of the West. Address this counterargument: the other side's strongest case. If teaching progress, answer the catastrophe of invasion. If teaching catastrophe, answer the continental nation and opportunity created. Respond with the reading's insistence that the collision of the two experiences is the honest story."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", items: [
+            {id: "h24-0-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["destiny", "annexation"]}
+          ]}
+        ]
     },
     {
       title:"Black Pioneers and Buffalo Soldiers",
@@ -3101,7 +4217,19 @@ const MM_WEEKS_912 = [
           {id:"h2-o4", event:"Exodusters found the Black town of Nicodemus, Kansas.", answer:4},
           {id:"h2-o5", event:"Cathay Williams's service as a Buffalo Soldier is documented.", answer:5}
         ]}
-      ]
+      ,
+          {type: "comprehension", instructions: "Answer each question in 2 to 4 sentences, using evidence from the reading. These are analytical questions: explain why and how, not just what.", items: [
+            {id: "h24-1-c1", question: "Why does the reading call the Buffalo Soldiers' service 'a painful irony'?", answer: "The 9th and 10th Cavalry and the 24th and 25th Infantry, formed in 1866 from Black Civil War veterans, built roads, strung telegraph lines, and fought in the Indian Wars. They helped the Army conquer Native peoples for a nation that still denied Black citizens equal rights: they served a country that would not serve them."},
+            {id: "h24-1-c2", question: "How do the Exodusters and Black cowboys change the West's 'white story'?", answer: "After the Civil War, Exodusters fled Southern violence for Kansas and founded all-Black towns like Nicodemus in 1877, with schools and churches proving free Black communities could thrive. About one in four cowboys was Black, men like Nat Love. The West was built by many hands, and Black hands were among the first."},
+            {id: "h24-1-c3", question: "Evaluate Cathay Williams's place in the story.", answer: "She served disguised as a man in the 38th Infantry, the only documented woman Buffalo Soldier. Her story expands the narrative beyond men to show Black women's hidden participation, and the disguise itself reveals the barriers she had to defeat simply to serve."}
+          ]},
+          {type: "argument", instructions: "Write a thesis-driven argument of at least two paragraphs. State your thesis clearly, support it with evidence from the reading and your research, and address the counterargument named in the guidance.", items: [
+            {id: "h24-1-a1", prompt: "Argue: the West's true story. Take a position on whether the Buffalo Soldiers should be honored as heroes or critically examined as agents of Native conquest, and defend it in at least two paragraphs.", guidance: "Defend a clear thesis choosing honor or critical examination. Use evidence from the reading: the nickname given by Native warriors who respected their fighting spirit, the road and telegraph building, service in Cuba and the Philippines, versus the Indian Wars role and the nation's denial of equal rights to the soldiers themselves. For research, investigate the Buffalo Soldiers. Address this counterargument: the opposing frame. If honoring heroes, answer their participation in conquest. If examining critically, answer their courage under a racist nation. Respond by holding both truths through the reading's painful irony."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", items: [
+            {id: "h24-1-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["pioneer", "destiny"]}
+          ]}
+        ]
     }
   ],
   science: [
@@ -3122,7 +4250,19 @@ const MM_WEEKS_912 = [
           {id:"s1-k2", text:"B cells make antibodies; killer T cells destroy infected cells."},
           {id:"s1-k3", text:"Allergies are immune overreactions to harmless substances."}
         ]}
-      ]
+      ,
+          {type: "comprehension", instructions: "Answer each question in 2 to 4 sentences, using evidence from the reading. These are analytical questions: explain why and how, not just what.", items: [
+            {id: "s24-0-c1", question: "Why is immune memory the adaptive system's 'superpower'?", answer: "After defeating an invader, the adaptive system keeps memory cells that recognize it for years, so the next attack is crushed before sickness is felt, which is why chickenpox usually strikes once. Innate immunity is fast but general; adaptive immunity is slower but precise and lasting, and memory makes the second response immediate."},
+            {id: "s24-0-c2", question: "How do helper T cells, killer T cells, and B cells divide the labor of defense?", answer: "B cells produce antibodies, Y-shaped proteins marking invaders for destruction; helper T cells coordinate the attack; killer T cells destroy infected body cells directly. Without helper T cells, as in untreated HIV, the whole defense collapses, showing coordination is the linchpin."},
+            {id: "s24-0-c3", question: "Evaluate the claim that a healthy immune system 'knows when to stand down.'", answer: "Allergies are overreactions to harmless substances, and autoimmune diseases occur when the system attacks the body's own tissues. Strength without discrimination is itself disease, so health requires specificity plus restraint: strong, specific, and knowing when to stand down."}
+          ]},
+          {type: "argument", instructions: "Write a thesis-driven argument of at least two paragraphs. State your thesis clearly, support it with evidence from the reading and your research, and address the counterargument named in the guidance.", items: [
+            {id: "s24-0-a1", prompt: "Argue: should parents be allowed to refuse childhood vaccinations for non-medical reasons? Take a position and defend it in at least two paragraphs.", guidance: "Defend a clear thesis for or against allowing non-medical exemptions. Use evidence from the reading: vaccines train the immune system without the suffering of real disease, and herd immunity protects babies, cancer patients, and others who cannot be vaccinated, so refusal weakens the community shield. For research, investigate vaccine exemption policies and their public-health results. Address this counterargument: that parents have the right to make medical decisions for their children and the state should not override bodily autonomy."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", items: [
+            {id: "s24-0-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["antibody"]}
+          ]}
+        ]
     },
     {
       title:"Vaccines and Herd Immunity",
@@ -3140,7 +4280,19 @@ const MM_WEEKS_912 = [
         {type:"shortanswer", instructions:"Write 4-6 sentences, then compare your answer with the model.", items:[
           {id:"s2-s1", prompt:"Argue: Is vaccination a personal choice or a community responsibility? Defend your answer with evidence from the lesson.", answer:"Vaccination is a community responsibility because herd immunity protects people who cannot protect themselves. Babies, cancer patients, and the immunocompromised depend on the shield that high vaccination rates create. One person's refusal weakens that shield and can let diseases like measles return. Personal choice matters, but no choice is purely personal when it affects neighbors' safety. Like stopping at red lights, vaccination is a small individual act that keeps the whole community alive."}
         ]}
-      ]
+      ,
+          {type: "comprehension", instructions: "Answer each question in 2 to 4 sentences, using evidence from the reading. These are analytical questions: explain why and how, not just what.", items: [
+            {id: "s24-1-c1", question: "How does the math of R0 explain why measles needs about 95 percent coverage?", answer: "Each disease's herd immunity threshold is often estimated by 1 minus 1 divided by its R0, the average number of people one case infects. With measles' R0 near 15, about 95 percent must be immune; below the threshold each case causes less than one new case, and recent measles outbreaks show the math is unforgiving when coverage drops."},
+            {id: "s24-1-c2", question: "Why does refusing vaccination harm others, not just the refuser?", answer: "Herd immunity is a community shield: when enough people are immune, a disease cannot find new hosts and stops spreading. That shield protects babies, cancer patients, and others who cannot be vaccinated, so refusal weakens protection for the most vulnerable members of the community."},
+            {id: "s24-1-c3", question: "Evaluate the reading's closing line: 'Herd immunity is mathematics made into mercy.'", answer: "The phrase claims that numbers, R0 and coverage thresholds, translate into protection for the vulnerable. Vaccines eradicated smallpox entirely and nearly eliminated polio, saving hundreds of millions of lives. The claim holds where coverage is maintained; where it drops, as with recent measles outbreaks, the mercy fails, which proves the math rather than refuting it."}
+          ]},
+          {type: "argument", instructions: "Write a thesis-driven argument of at least two paragraphs. State your thesis clearly, support it with evidence from the reading and your research, and address the counterargument named in the guidance.", items: [
+            {id: "s24-1-a1", prompt: "Argue: during an outbreak, should governments mandate vaccination or rely on persuasion? Take a position and defend it in at least two paragraphs.", guidance: "Defend a clear thesis choosing mandates or persuasion. Use evidence from the reading: herd immunity thresholds, the eradication of smallpox, the near-elimination of polio, and the unforgiving math of measles outbreaks when coverage drops. For research, investigate vaccine mandate policies and their outcomes. Address this counterargument: that mandates breed distrust and resistance while persuasion respects autonomy, or conversely that persuasion is too slow when disease moves exponentially."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", items: [
+            {id: "s24-1-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["antibody"]}
+          ]}
+        ]
     }
   ],
   friday: {
@@ -3202,7 +4354,19 @@ const MM_WEEKS_912 = [
           {id:"h1-c1", prompt:"Critics like Abraham Lincoln questioned Polk's war by asking...", options:["for the exact spot where American blood was shed","for higher taxes","for an alliance with Britain"], answer:"for the exact spot where American blood was shed"},
           {id:"h1-c2", prompt:"The Wilmot Proviso would have...", options:["banned slavery in territory taken from Mexico","annexed all of Mexico","ended the tariff"], answer:"banned slavery in territory taken from Mexico"}
         ]}
-      ]
+      ,
+          {type: "comprehension", instructions: "Answer each question in 2 to 4 sentences, using evidence from the reading. These are analytical questions: explain why and how, not just what.", items: [
+            {id: "h25-0-c1", question: "Why did Abraham Lincoln demand to know 'the exact spot' where American blood was shed?", answer: "Polk told Congress that Mexico had invaded American territory and shed American blood on American soil, but he had sent Taylor's army into the disputed zone between the Nueces River, which Mexico recognized, and the Rio Grande, which Polk claimed. Lincoln suspected Polk had manufactured the crisis to force a war Congress would then have to support."},
+            {id: "h25-0-c2", question: "How did the war's victory 'poison American politics'?", answer: "The Treaty of Guadalupe Hidalgo forced Mexico to cede half its territory for $15 million, giving the United States California and the Southwest. But the Wilmot Proviso, which would have banned slavery in the new lands, turned every debate about the territory into a fight over slavery's future, and the question Polk unleashed consumed the nation within a decade."},
+            {id: "h25-0-c3", question: "Evaluate Polk's claim that 'war exists by the act of Mexico herself.'", answer: "Mexican troops did attack an American patrol in April 1846, but only after Polk moved an army into land Mexico considered its own and unilaterally claimed the Rio Grande border. The reading presents Polk as taking office determined to take the continent, making his claim a justification for a designed war rather than a plain fact."}
+          ]},
+          {type: "argument", instructions: "Write a thesis-driven argument of at least two paragraphs. State your thesis clearly, support it with evidence from the reading and your research, and address the counterargument named in the guidance.", items: [
+            {id: "h25-0-a1", prompt: "Argue: a just war. Take a position on whether the Mexican-American War was a justified defense of American territory or an unjust war of conquest, and defend it in at least two paragraphs.", guidance: "Defend a clear thesis choosing justified defense or unjust conquest. Use evidence from the reading: the disputed Nueces versus Rio Grande border, Taylor's deployment into the disputed zone, Polk's message to Congress, Lincoln's spot resolutions, and the Treaty of Guadalupe Hidalgo's terms. For research, investigate the Black soldiers who served in the war. Address this counterargument: that Mexico attacked first and the United States won every battle, so the outcome legitimizes the war, or conversely that victory never establishes justice. Weigh outcome against justification."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", items: [
+            {id: "h25-0-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["annex", "cede"]}
+          ]}
+        ]
     },
     {
       title:"Black Soldiers Served; Mexico Had Already Abolished Slavery",
@@ -3223,7 +4387,19 @@ const MM_WEEKS_912 = [
         {type:"shortanswer", instructions:"Write 4-6 sentences, then compare your answer with the model.", items:[
           {id:"h2-s1", prompt:"Argue: Was the Mexican-American War a just war? Defend your answer using the causes of the war and Mexico's abolition of slavery.", answer:"The Mexican-American War was not a just war, because it was a war of conquest dressed up as self-defense. Polk provoked the conflict by sending troops into disputed territory, then claimed Mexico had shed American blood on American soil. The deeper motive was expansion, and Southern leaders openly hoped the seized land would become slave states. The deepest irony is that Mexico had abolished slavery in 1829, so the United States took land from a free nation to extend bondage. A war fought for territory and slavery cannot be called just."}
         ]}
-      ]
+      ,
+          {type: "comprehension", instructions: "Answer each question in 2 to 4 sentences, using evidence from the reading. These are analytical questions: explain why and how, not just what.", items: [
+            {id: "h25-1-c1", question: "What is the central irony of Black service in the Mexican-American War?", answer: "Black sailors served in the integrated U.S. Navy and Black soldiers served in Army units, fighting for a country that enslaved their people. They fought against Mexico, which had abolished slavery in 1829 under President Vicente Guerrero, himself of African descent: the enslaving nation against the free one."},
+            {id: "h25-1-c2", question: "How did Mexico function as a 'southern underground railroad'?", answer: "Enslaved Americans fled south across the border to freedom because Mexico's 1829 abolition recognized their humanity, a stark contrast to the nation they fled. Mexican officials sometimes returned fugitives under diplomatic pressure, but the principle of abolition stood."},
+            {id: "h25-1-c3", question: "Evaluate Frederick Douglass's denunciation of the war as a land grab designed to extend slavery.", answer: "Southern expansionists made no secret of hoping the new territories would become slave states tipping the Senate's balance, and the Wilmot Proviso's failure kept the question open. The reading supports Douglass: American power stretched to the Pacific while slavery gained new lands to poison, a double legacy requiring both truths."}
+          ]},
+          {type: "argument", instructions: "Write a thesis-driven argument of at least two paragraphs. State your thesis clearly, support it with evidence from the reading and your research, and address the counterargument named in the guidance.", items: [
+            {id: "h25-1-a1", prompt: "Argue: a just war. Take a position on whether Black soldiers were right to serve in a war that expanded slavery's territory, and defend it in at least two paragraphs.", guidance: "Defend a clear thesis answering right or wrong to serve. Use evidence from the reading: the integrated Navy service, Mexico's 1829 abolition under Guerrero, Douglass's denunciation of the war in The North Star, and the contradiction of fighting for an enslaving nation against a free one. For research, investigate the Black soldiers who served. Address this counterargument: that military service was honorable duty opening a lasting tradition of Black service, or conversely that serving an unjust war of conquest was morally indefensible. Do not fabricate claims about individual soldiers' motives beyond what the reading states."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", items: [
+            {id: "h25-1-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["abolition", "annex"]}
+          ]}
+        ]
     }
   ],
   science: [
@@ -3243,7 +4419,19 @@ const MM_WEEKS_912 = [
           {id:"s1-c1", prompt:"Logistic growth levels off because...", options:["limiting factors slow growth as the population nears carrying capacity","all organisms stop reproducing at once","predators disappear"], answer:"limiting factors slow growth as the population nears carrying capacity"},
           {id:"s1-c2", prompt:"A J-shaped curve on a population graph indicates...", options:["exponential growth","a declining population","a stable population"], answer:"exponential growth"}
         ]}
-      ]
+      ,
+          {type: "comprehension", instructions: "Answer each question in 2 to 4 sentences, using evidence from the reading. These are analytical questions: explain why and how, not just what.", items: [
+            {id: "s25-0-c1", question: "Why can't any population grow exponentially forever?", answer: "Exponential growth assumes unlimited resources and traces a J-shaped curve, as with bacteria in fresh broth or rabbits in Australia. But the real world imposes limiting factors: food runs out, predators arrive, disease spreads, and waste accumulates, slowing growth into an S-shaped logistic curve that levels at carrying capacity."},
+            {id: "s25-0-c2", question: "How do the rabbit and reindeer examples show both sides of carrying capacity?", answer: "Rabbits introduced to Australia with no predators exploded exponentially, showing growth without limits. Reindeer introduced to isolated islands overshot carrying capacity and crashed, showing overshoot's punishment. Carrying capacity is not fixed: drought lowers it while a new food source raises it."},
+            {id: "s25-0-c3", question: "Evaluate the claim that humans are 'the great exception that tests the rule.'", answer: "Technology keeps raising our apparent carrying capacity, but ecologists warn every environment still has limits. The Atlantic cod fishery collapsed when harvests ignored carrying capacity, and climate change is shifting carrying capacities worldwide. The exception may prove temporary rather than real."}
+          ]},
+          {type: "argument", instructions: "Write a thesis-driven argument of at least two paragraphs. State your thesis clearly, support it with evidence from the reading and your research, and address the counterargument named in the guidance.", items: [
+            {id: "s25-0-a1", prompt: "Argue: should governments limit human population growth to respect carrying capacity? Take a position and defend it in at least two paragraphs.", guidance: "Defend a clear thesis for or against population limits. Use evidence from the reading: logistic growth leveling at carrying capacity, overshoot crashes like the island reindeer, the cod collapse from ignored limits, and climate change shifting capacities worldwide. For research, investigate population policies and their outcomes. Address this counterargument: that technology keeps raising carrying capacity and coercive limits violate fundamental rights, so innovation rather than restriction is the answer."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", items: [
+            {id: "s25-0-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["predator"]}
+          ]}
+        ]
     },
     {
       title:"Communities: Living Together",
@@ -3262,7 +4450,19 @@ const MM_WEEKS_912 = [
           {id:"s2-m2", term:"Commensalism", answer:"b"},
           {id:"s2-m3", term:"Parasitism", answer:"c"}
         ]}
-      ]
+      ,
+          {type: "comprehension", instructions: "Answer each question in 2 to 4 sentences, using evidence from the reading. These are analytical questions: explain why and how, not just what.", items: [
+            {id: "s25-1-c1", question: "How does the sea otter example prove a keystone species' outsized role?", answer: "Remove sea otters and urchins devour the kelp forest. Otters are few in number, yet their predation holds the whole web together, demonstrating the reading's image: every community is a web of relationships, and tugging one strand shakes the whole web."},
+            {id: "s25-1-c2", question: "Why do invasive species like zebra mussels wreck communities?", answer: "They arrive without natural enemies, so nothing checks their growth. In the Great Lakes, zebra mussels outcompete natives, showing that communities depend on evolved balances which newcomers bypass."},
+            {id: "s25-1-c3", question: "Evaluate the claim that 'no organism, including humans, stands alone.'", answer: "Each species occupies a niche defined by what it eats, where it lives, and when it is active, and succession shows communities replacing one another until a stable climax emerges. Competition, predation, and symbiosis bind members together, and humans depend on pollinators, fisheries, and forests, which confirms the claim."}
+          ]},
+          {type: "argument", instructions: "Write a thesis-driven argument of at least two paragraphs. State your thesis clearly, support it with evidence from the reading and your research, and address the counterargument named in the guidance.", items: [
+            {id: "s25-1-a1", prompt: "Argue: should conservation protect whole ecosystems or focus on single endangered species? Take a position and defend it in at least two paragraphs.", guidance: "Defend a clear thesis choosing ecosystems or single species. Use evidence from the reading: conservation biology protects whole webs, keystone species hold communities together, biodiversity makes communities resilient, and succession shows the community as the real unit. For research, investigate conservation strategies and their results. Address this counterargument: that flagship single species win funding and legal protection that ecosystem-level efforts cannot attract, so species-first conservation protects more in practice."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", items: [
+            {id: "s25-1-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["predator"]}
+          ]}
+        ]
     }
   ],
   friday: {
@@ -3326,7 +4526,19 @@ const MM_WEEKS_912 = [
           {id:"h1-m2", term:"Escaped slavery in Maryland and became an antislavery speaker", answer:"b"},
           {id:"h1-m3", term:"Editor who demanded immediatism and refused to retreat a single inch", answer:"a"}
         ]}
-      ]
+      ,
+          {type: "comprehension", instructions: "Answer each question in 2 to 4 sentences, using evidence from the reading. These are analytical questions: explain why and how, not just what.", items: [
+            {id: "h26-0-c1", question: "Why was immediatism 'radical' compared to what came before it?", answer: "Before 1830 most white critics of slavery supported gradual emancipation, a slow process in which slaveholders would eventually free enslaved people and even be paid for them. Garrison's Liberator, first published January 1, 1831, demanded slavery end at once, unconditionally, and without compensation: 'I will not retreat a single inch, and I will be heard.' Immediacy plus moral absolutism broke the polite consensus."},
+            {id: "h26-0-c2", question: "How did the press function as the abolitionists' 'most powerful weapon'?", answer: "Printed arguments traveled past local mobs and into homes across the North. Douglass's 1845 Narrative sold thousands of copies and made it impossible for Northern readers to pretend slavery was a mild institution. Print carried testimony where speakers could not safely go, joining Black witness to a white-run press."},
+            {id: "h26-0-c3", question: "Evaluate the partnership of Garrison and Douglass as abolitionism 'at its strongest.'", answer: "Garrison the editor plus Douglass the living witness combined institutional press power with firsthand testimony of whippings, hunger, and family separation, delivered with a calm that made the facts land harder. It worked for years until strategy split them, showing both the alliance's power and its limits."}
+          ]},
+          {type: "argument", instructions: "Write a thesis-driven argument of at least two paragraphs. State your thesis clearly, support it with evidence from the reading and your research, and address the counterargument named in the guidance.", items: [
+            {id: "h26-0-a1", prompt: "Argue: moral suasion vs. politics. Take a position on whether Garrison's press-based moral crusade or political action was the more effective weapon against slavery in the 1830s, and defend it in at least two paragraphs.", guidance: "Defend a clear thesis choosing the moral crusade or political action. Use evidence from the reading: the Liberator's immediatism, the Narrative's thousands of copies, and print carrying arguments past mobs, versus the Liberty Party's few votes as proof abolitionists could work inside the system. For research, investigate Douglass and Garrison and their eventual split. Address this counterargument: that moral suasion changed no laws while politics eventually did, or conversely that politics meant complicity with a Constitution Garrison called a covenant with death."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", items: [
+            {id: "h26-0-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["immediatism", "press"]}
+          ]}
+        ]
     },
     {
       title:"Abolitionism: Moral Suasion vs. Political Action",
@@ -3345,7 +4557,19 @@ const MM_WEEKS_912 = [
           {id:"h2-f2", text:"The ___ Party, founded in 1840, was the first antislavery national party.", answer:"Liberty"},
           {id:"h2-f3", text:"Henry Highland ___ was a Black abolitionist who pushed the movement toward practical action.", answer:"Garnet"}
         ]}
-      ]
+      ,
+          {type: "comprehension", instructions: "Answer each question in 2 to 4 sentences, using evidence from the reading. These are analytical questions: explain why and how, not just what.", items: [
+            {id: "h26-1-c1", question: "Why did Garrison refuse to vote, and how did Douglass come to disagree?", answer: "Garrison believed in moral suasion, the idea that slavery would end when slaveholders were convinced of its sinfulness, and he refused on principle to vote or hold office under a Constitution he called a covenant with death. Douglass came to believe the Constitution could be read as an antislavery document and that political action, including voting, was a moral duty, breaking with Garrison publicly by the early 1850s."},
+            {id: "h26-1-c2", question: "How did Black abolitionists beyond the famous men push the movement toward 'practical action'?", answer: "Men like Henry Highland Garnet and women like Maria Stewart raised money to buy freedom for the enslaved, hid fugitives, and insisted Black voices lead the cause. Stewart told Black audiences in Boston that knowledge and unity were weapons against oppression, one of the first American women of any race to address a mixed audience. They moved the cause from argument to action."},
+            {id: "h26-1-c3", question: "Evaluate the reading's conclusion: 'moral arguments move consciences, but votes, laws, and organized resistance move power.'", answer: "Garrison's moral crusade shifted Northern opinion through the Liberator and Douglass's Narrative, but the Liberty Party, political antislavery, and direct resistance like hiding fugitives attacked slavery's legal power. The split between moral suasion and politics shaped every later battle from Congress to Boston's streets, and the conclusion judges both necessary but neither sufficient alone."}
+          ]},
+          {type: "argument", instructions: "Write a thesis-driven argument of at least two paragraphs. State your thesis clearly, support it with evidence from the reading and your research, and address the counterargument named in the guidance.", items: [
+            {id: "h26-1-a1", prompt: "Argue: moral suasion vs. politics. Take a position on whether Douglass was right to break with Garrison and embrace political action, and defend it in at least two paragraphs.", guidance: "Defend a clear thesis answering right or wrong to break. Use evidence from the reading: Garrison's refusal to vote, his flirtation with disunion, and his covenant-with-death view of the Constitution, versus Douglass's antislavery reading of the Constitution, his duty-to-vote position, and the Liberty Party precedent. For research, investigate Douglass and Garrison. Address this counterargument: that Garrison's moral clarity kept abolitionism from being corrupted by compromise, and that political abolitionism won few votes for decades. Assess what actually moved power."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", items: [
+            {id: "h26-1-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["immediatism", "emancipation"]}
+          ]}
+        ]
     }
   ],
   science: [
@@ -3370,7 +4594,19 @@ const MM_WEEKS_912 = [
           {id:"s1-k3", text:"Tundra has permafrost that limits root growth."},
           {id:"s1-k4", text:"Taiga is a treeless plain near the poles."}
         ]}
-      ]
+      ,
+          {type: "comprehension", instructions: "Answer each question in 2 to 4 sentences, using evidence from the reading. These are analytical questions: explain why and how, not just what.", items: [
+            {id: "s26-0-c1", question: "Why can two places at the same latitude host entirely different biomes?", answer: "Biomes are defined mainly by temperature and precipitation, but rainfall, elevation, and ocean currents reshape what plants can survive. Latitude sets solar input, yet water decides the biome, so equal latitude does not mean equal climate."},
+            {id: "s26-0-c2", question: "How does the rainforest-to-savanna-to-desert sequence show climate's control?", answer: "The tropical rainforest receives over 200 centimeters of rain yearly and stays warm every month; where a long dry season sets in, savanna grassland with scattered trees takes over; where air sinks and dries near 30 degrees north and south, deserts receive under 25 centimeters. Each step tracks declining water, and temperate forest, taiga, and tundra continue the sequence toward the poles."},
+            {id: "s26-0-c3", question: "Evaluate why biome boundaries matter for predicting the future.", answer: "Biomes are not fixed: as climates shift, boundaries shift with them, and ecologists track those movements to predict which species will gain ground and which will be stranded. Understanding current boundaries provides the baseline for forecasting, from tundra giving way to shrubs to the taiga advancing into former tundra."}
+          ]},
+          {type: "argument", instructions: "Write a thesis-driven argument of at least two paragraphs. State your thesis clearly, support it with evidence from the reading and your research, and address the counterargument named in the guidance.", items: [
+            {id: "s26-0-a1", prompt: "Argue: should conservation prioritize biodiversity hotspots like rainforests or the most threatened biomes? Take a position and defend it in at least two paragraphs.", guidance: "Defend a clear thesis choosing hotspots or threatened biomes. Use evidence from the reading: the rainforest's unmatched biodiversity, the tundra's permafrost-limited fragility, and biome boundaries creeping poleward and uphill as temperatures rise. For research, investigate conservation prioritization frameworks. Address this counterargument: that hotspots protect the most species per dollar, or conversely that the most threatened biomes need triage before they vanish."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", items: [
+            {id: "s26-0-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["deforestation"]}
+          ]}
+        ]
     },
     {
       title:"Ecology: Human Impact on Biomes",
@@ -3389,7 +4625,19 @@ const MM_WEEKS_912 = [
           {id:"s2-t2", text:"Desertification is caused by too much rainfall.", answer:"false", note:"Desertification is land degradation from overgrazing and plowing in dry regions, not from excess rain."},
           {id:"s2-t3", text:"Habitat fragmentation can harm species even where trees remain.", answer:"true", note:"Species needing large connected territories decline when forests are split into isolated patches."}
         ]}
-      ]
+      ,
+          {type: "comprehension", instructions: "Answer each question in 2 to 4 sentences, using evidence from the reading. These are analytical questions: explain why and how, not just what.", items: [
+            {id: "s26-1-c1", question: "How could parts of the Amazon 'flip' into savanna, and why would that matter beyond Brazil?", answer: "Deforestation has cleared rainforest larger than many countries, and burning and logging can dry the region past a threshold where it flips into savanna. The shift would cut a vast carbon store and alter rainfall across South America, so a regional biome change cascades continentally."},
+            {id: "s26-1-c2", question: "Why does forest fragmentation harm species 'even where trees remain'?", answer: "Cities and farms split forests into isolated patches, and species needing large connected territories, like wolves and migratory songbirds, decline even where trees stand. Fragmentation isolates populations without removing every tree, so the presence of trees does not equal habitat."},
+            {id: "s26-1-c3", question: "Evaluate the reading's claim that 'none of this is inevitable.'", answer: "Reforestation projects, protected corridors between habitat patches, and greenhouse gas cuts can slow or reverse biome damage, and ecologists track forest cover, species richness, and soil carbon to measure success. The claim is conditional: reversibility exists, but only with action, and some losses like bleached coral reefs and Sahel desertification may prove hard to undo."}
+          ]},
+          {type: "argument", instructions: "Write a thesis-driven argument of at least two paragraphs. State your thesis clearly, support it with evidence from the reading and your research, and address the counterargument named in the guidance.", items: [
+            {id: "s26-1-a1", prompt: "Argue: should nations be required to reforest a fixed share of cleared land? Take a position and defend it in at least two paragraphs.", guidance: "Defend a clear thesis for or against mandatory reforestation shares. Use evidence from the reading: Amazon clearing larger than many countries, desertification degrading the Sahel, and the finding that reforestation, corridors, and emissions cuts can slow or reverse damage, with quantitative indicators to verify progress. For research, investigate reforestation policies and their results. Address this counterargument: that nations hold sovereignty over land use and that cleared land feeds people, so mandates impose rich nations' priorities on the poor."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", items: [
+            {id: "s26-1-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["deforestation"]}
+          ]}
+        ]
     }
   ],
   friday: { title:"Show What You Know: Week 26", reading:"This week you studied the abolitionist movement and Earth's biomes. Answer the review questions, then make your case in the final argument.", groups:[
@@ -3452,7 +4700,19 @@ const MM_WEEKS_912 = [
           {id:"h1-c1", prompt:"Why was the Fugitive Slave Act a 'poison pill' in the compromise?", options:["It denied accused fugitives a jury trial and forced Northerners to help catch them","It freed all enslaved people in the South","It banned slavery in the new territories"], answer:"It denied accused fugitives a jury trial and forced Northerners to help catch them"},
           {id:"h1-c2", prompt:"What did Texas give up under the compromise?", options:["Its claims to New Mexico, in exchange for federal payment of its debts","Its status as a slave state","Its border with Mexico"], answer:"Its claims to New Mexico, in exchange for federal payment of its debts"}
         ]}
-      ]
+      ,
+          {type: "comprehension", instructions: "Answer each question in 2-3 complete sentences, citing evidence from the reading.", items: [
+            {id: "h27-0-c1", question: "Why did the compromise package pass as a series of separate bills rather than as one omnibus bill?", answer: "Because no single coalition supported the whole package, so the measures could only pass as separate bills, each carried by a different coalition. Henry Clay's original single package approach had to be broken apart for anything to pass at all."},
+            {id: "h27-0-c2", question: "How did the Fugitive Slave Act's provisions for commissioners undermine any claim that accused fugitives received a fair hearing?", answer: "The act denied accused fugitives a jury trial and paid commissioners more for returning an alleged fugitive than for freeing one, which gave the deciding officials a direct financial incentive to rule against the accused."},
+            {id: "h27-0-c3", question: "In what way did the Fugitive Slave Act teach Northerners the opposite of the lesson the compromise's authors intended?", answer: "Instead of settling the slavery question, the act's cruelty, denying jury trials, paying commissioners to return people, and forcing Northern citizens into slave-catching posses while endangering free-born Black citizens, taught a generation of Northerners, Black and white, that bargains with slavery only made it bolder."}
+          ]},
+          {type: "argument", instructions: "Write a thesis-driven argument of two paragraphs. State your claim clearly, support it with evidence from the reading and your research, and address one counterargument.", items: [
+            {id: "h27-0-a1", prompt: "Defend or challenge this thesis: The Compromise of 1850 failed because it tried to bargain over slavery, and bargaining with slavery only made it bolder. Write two paragraphs with a clear thesis.", guidance: "Thesis to defend or challenge: the compromise's failure was caused by treating slavery as a negotiable political interest rather than a moral wrong. Use evidence from the reading, especially the Fugitive Slave Act's provisions (no jury trial, paid commissioners, forced posses) and the Northern reaction it provoked, plus research on resistance networks such as vigilance committees and the Underground Railroad. Address this counterargument: some historians argue the compromise bought the North a decade to grow stronger for the coming war, so the delay was a success, not a failure. Explain whether buying time counts as success when the price was a harsher fugitive slave law."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows you understand its meaning in the context of this week's topic.", items: [
+            {id: "h27-0-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["fugitive", "sovereignty", "omnibus"]}
+          ]}
+        ]
     },
     {
       title:"The Fugitive Slave Act: Resistance and Rescue",
@@ -3473,7 +4733,19 @@ const MM_WEEKS_912 = [
           {id:"h2-o4", event:"Anthony Burns is returned to slavery from Boston", answer:4},
           {id:"h2-o5", event:"Northern states pass personal liberty laws", answer:5}
         ]}
-      ]
+      ,
+          {type: "comprehension", instructions: "Answer each question in 2-3 complete sentences, citing evidence from the reading.", items: [
+            {id: "h27-1-c1", question: "Why did the acquittal at Christiana count as a public defeat for the Fugitive Slave Act beyond the fate of one defendant?", answer: "Federal authorities charged dozens of Black and white residents with treason to make an example of them, but a jury acquitted the first defendant and the rest went free, turning an attempted show of federal power into a public defeat for the law."},
+            {id: "h27-1-c2", question: "How did the Anthony Burns case convert onlookers into committed antislavery voters, according to the reading?", answer: "President Pierce sent federal troops and a revenue cutter to return Burns to slavery at a cost that exceeded his market value, and the spectacle of that massive federal effort to re-enslave one man converted thousands of onlookers into committed antislavery voters."},
+            {id: "h27-1-c3", question: "The reading says resistance worked on two levels at once. Explain how a single rescue achieved both levels.", answer: "A rescue saved an individual life by hiding a fugitive or raising legal defense funds, and it also made the law unenforceable in much of the North, so each rescue both freed a person and proved what the compromise's authors had denied: the slavery question could not be bargained away."}
+          ]},
+          {type: "argument", instructions: "Write a thesis-driven argument of two paragraphs. State your claim clearly, support it with evidence from the reading and your research, and address one counterargument.", items: [
+            {id: "h27-1-a1", prompt: "Defend or challenge this thesis: The Fugitive Slave Act failed because Black-led resistance networks made it unenforceable. Write two paragraphs with a clear thesis.", guidance: "Thesis to defend or challenge: the law's defeat came from organized resistance rather than from politics alone. Use evidence from the reading (Christiana, the Burns rendition, vigilance committees, personal liberty laws, Douglass's 1852 speech) plus research on resistance networks. Address this counterargument: the law might have collapsed anyway once the South seceded and the war began, so resistance may not have been the decisive cause. Explain whether unenforceability before the war, rather than repeal during it, is what counts as failure."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows you understand its meaning in the context of this week's topic.", items: [
+            {id: "h27-1-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["fugitive", "sovereignty"]}
+          ]}
+        ]
     }
   ],
   science: [
@@ -3497,7 +4769,19 @@ const MM_WEEKS_912 = [
           {id:"s1-k3", text:"Electrons determine how an atom behaves chemically."},
           {id:"s1-k4", text:"Atoms with nearly full outer shells react eagerly."}
         ]}
-      ]
+      ,
+          {type: "comprehension", instructions: "Answer each question in 2-3 complete sentences, citing evidence from the reading.", items: [
+            {id: "s27-0-c1", question: "Why does chlorine's listed atomic mass of 35.45 come out as a decimal rather than a whole number?", answer: "Chlorine is a mix of two isotopes with different numbers of neutrons, so 35.45 is the weighted average of the two isotopes' mass numbers, not the mass of any single chlorine atom."},
+            {id: "s27-0-c2", question: "How does the arrangement of electrons in shells explain why noble gases barely react while other atoms react eagerly?", answer: "Noble gases have full outer shells and therefore no tendency to gain or lose electrons, while atoms with nearly full or nearly empty outer shells react eagerly to complete or empty those shells."},
+            {id: "s27-0-c3", question: "What does the century-long revision of atomic models, from Dalton's solid spheres to Bohr's quantized shells, suggest about the nature of scientific models?", answer: "It shows that scientific models are refined rather than carved in stone: each experiment, from Thomson's discovery of the electron to Rutherford's nuclear atom, chipped away at the previous picture and improved the model as new evidence arrived."}
+          ]},
+          {type: "argument", instructions: "Write a thesis-driven argument of two paragraphs. State your claim clearly, support it with evidence from the reading and your research, and address one counterargument.", items: [
+            {id: "s27-0-a1", prompt: "Defend or challenge this thesis: Teaching chemistry through the history of atomic models (Dalton, Thomson, Rutherford, Bohr) builds better understanding than memorizing the finished model. Write two paragraphs with a clear thesis.", guidance: "Thesis to defend or challenge: the historical path to the model teaches more than the model alone. Use evidence from the reading, especially how each experiment chipped away at the previous picture and how models are refined, not carved in stone, plus research on how students learn scientific models. Address this counterargument: teaching outdated models wastes class time and may confuse students with wrong ideas they must later unlearn. Explain whether encountering wrong models helps or hinders learning the right one."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows you understand its meaning in the context of this week's topic.", items: [
+            {id: "s27-0-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["element", "ion"]}
+          ]}
+        ]
     },
     {
       title:"Atomic Structure: Electrons in Action",
@@ -3516,7 +4800,19 @@ const MM_WEEKS_912 = [
           {id:"s2-t2", text:"Valence electrons are the electrons in the innermost shell.", answer:"false", note:"Valence electrons are in the outermost shell."},
           {id:"s2-t3", text:"Lithium ions shuttle between electrodes in rechargeable batteries.", answer:"true", note:"That shuttling is how lithium-ion batteries store energy."}
         ]}
-      ]
+      ,
+          {type: "comprehension", instructions: "Answer each question in 2-3 complete sentences, citing evidence from the reading.", items: [
+            {id: "s27-1-c1", question: "Why is the electron cloud described with orbitals rather than fixed paths, and what does an orbital represent?", answer: "Electrons behave as clouds of probabilities rather than particles on fixed orbits, so modern chemistry describes an orbital as a region of space where an electron is likely to be found, specified by quantum numbers."},
+            {id: "s27-1-c2", question: "How does the reading connect the repeating pattern of valence electrons to the shape of the periodic table?", answer: "The first shell holds at most two electrons and the second holds eight, and this repeating pattern of shell filling gives the periodic table its shape, since elements with similar valence arrangements behave alike."},
+            {id: "s27-1-c3", question: "Why does the reading say that asking how structure explains behavior is the engine of chemistry rather than memorization?", answer: "Because questions like why sodium explodes in water or why neon refuses to react cannot be answered by memorizing facts; they are answered by connecting each element's electron arrangement to its behavior, which is the habit the reading says to apply to every new element."}
+          ]},
+          {type: "argument", instructions: "Write a thesis-driven argument of two paragraphs. State your claim clearly, support it with evidence from the reading and your research, and address one counterargument.", items: [
+            {id: "s27-1-a1", prompt: "Defend or challenge this thesis: The practical applications of atomic structure (medical isotopes, carbon-14 dating, nuclear power) justify teaching chemistry as inquiry into structure-behavior links rather than as memorized facts. Write two paragraphs with a clear thesis.", guidance: "Thesis to defend or challenge: applications justify an inquiry-first approach to atomic structure. Use evidence from the reading (technetium-99m imaging, carbon-14 dating, uranium-235 fission, lithium-ion batteries, sodium ions in nerve signals) plus research on inquiry-based science learning. Address this counterargument: students cannot inquire into structure-behavior links without first memorizing foundational facts like shell capacities and definitions, so memorization must come first. Explain how you would sequence facts and inquiry."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows you understand its meaning in the context of this week's topic.", items: [
+            {id: "s27-1-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["element", "ion"]}
+          ]}
+        ]
     }
   ],
   friday: { title:"Show What You Know: Week 27", reading:"This week you studied the Compromise of 1850 and atomic structure. Answer the review questions, then make your case in the final argument.", groups:[
@@ -3581,7 +4877,19 @@ const MM_WEEKS_912 = [
           {id:"h1-t2", text:"Black abolitionists raised money to supply free-state settlers in Kansas.", answer:"true", note:"Black churches and antislavery societies funded rifles and supplies for the free-state cause."},
           {id:"h1-t3", text:"The Kansas-Nebraska Act strengthened the Missouri Compromise.", answer:"false", note:"It repealed the Missouri Compromise's ban on slavery north of 36°30'."}
         ]}
-      ]
+      ,
+          {type: "comprehension", instructions: "Answer each question in 2-3 complete sentences, citing evidence from the reading.", items: [
+            {id: "h28-0-c1", question: "Why did Stephen Douglas propose popular sovereignty for the Kansas-Nebraska territories, and what did he sacrifice to get Southern support?", answer: "Douglas wanted a railroad to the Pacific and offered popular sovereignty to win Southern votes; the price was repealing the Missouri Compromise's ban on slavery north of 36 degrees 30 minutes."},
+            {id: "h28-0-c2", question: "How did Black abolitionists, who were barred from Kansas politics themselves, still shape the territory's outcome?", answer: "They raised money through churches and antislavery societies to arm and supply free-state settlers, and Black communities held fundraising fairs whose proceeds bought rifles for Kansas, investing scarce dollars in a fight they could not vote in because Kansas would decide whether slavery expanded."},
+            {id: "h28-0-c3", question: "Why did popular sovereignty produce two rival governments in Kansas instead of one democratic decision?", answer: "Both sides raced to fill Kansas with voters, so fraudulent proslavery legislatures seized control through illegal Missouri voting while free-state settlers set up their own rival government, leaving Kansas with two capitals and two constitutions. The promised democratic solution became a contest of which side could ship in more guns and voters."}
+          ]},
+          {type: "argument", instructions: "Write a thesis-driven argument of two paragraphs. State your claim clearly, support it with evidence from the reading and your research, and address one counterargument.", items: [
+            {id: "h28-0-a1", prompt: "Defend or challenge this thesis: Popular sovereignty failed in Kansas because it treated a moral question about human freedom as a local procedural vote. Write two paragraphs with a clear thesis.", guidance: "Thesis to defend or challenge: the principle itself, not just the fraud, doomed popular sovereignty in Kansas. Use evidence from the reading (the repeal, the voter race, the two rival governments, the armed population) plus research on the role of Black abolitionists. Address this counterargument: popular sovereignty worked in Utah and New Mexico, so Kansas failed because of fraud and outside interference, not because of the principle. Explain whether a procedure can be fair when the question itself is about fundamental rights."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows you understand its meaning in the context of this week's topic.", items: [
+            {id: "h28-0-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["sovereignty", "guerrilla"]}
+          ]}
+        ]
     },
     {
       title:"Bleeding Kansas: Sack, Murder, and Caning",
@@ -3599,7 +4907,19 @@ const MM_WEEKS_912 = [
           {id:"h2-f2", text:"John Brown retaliated with killings at ___ Creek.", answer:"Pottawatomie"},
           {id:"h2-f3", text:"Congressman Preston ___ beat Senator Sumner with a cane.", answer:"Brooks"}
         ]}
-      ]
+      ,
+          {type: "comprehension", instructions: "Answer each question in 2-3 complete sentences, citing evidence from the reading.", items: [
+            {id: "h28-1-c1", question: "How did the sequence from the sack of Lawrence to Pottawatomie to the caning of Sumner illustrate the reading's claim that each side's violence becomes the other side's justification?", answer: "The proslavery sack of Lawrence was answered by John Brown's retaliatory murders at Pottawatomie Creek, and the violence then leaped to the Senate floor where Brooks caned Sumner for his speech while Southerners celebrated, each act fueling the next round of justification."},
+            {id: "h28-1-c2", question: "Why did the caning of Sumner alarm Northerners beyond the fate of one senator?", answer: "It told Northerners that Southern honor now required violence against free speech itself, turning a political disagreement into an attack on the democratic process and the Senate floor."},
+            {id: "h28-1-c3", question: "In what sense was Bleeding Kansas the Civil War in miniature?", answer: "Democratic process was corrupted by fraud, fraud was answered with force, and guerrilla war raged for two more years with raids, reprisals, and burned homesteads on both sides, prefiguring the national war that would follow Fort Sumter."}
+          ]},
+          {type: "argument", instructions: "Write a thesis-driven argument of two paragraphs. State your claim clearly, support it with evidence from the reading and your research, and address one counterargument.", items: [
+            {id: "h28-1-a1", prompt: "Defend or challenge this thesis: John Brown's violence at Pottawatomie was a justifiable response to the sack of Lawrence and the corruption of democracy in Kansas. Write two paragraphs with a clear thesis.", guidance: "Thesis to defend or challenge: retaliatory violence against the proslavery forces was morally defensible. Use evidence from the reading (the sack of Lawrence, fraudulent legislatures, the caning of Sumner) plus research on how Black abolitionists viewed John Brown. Address this counterargument: Brown's murders shocked even many antislavery Northerners, and retaliatory murder risks becoming the other side's justification, exactly the cycle the reading describes. Explain where, if anywhere, the line between resistance and unjustifiable violence lies."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows you understand its meaning in the context of this week's topic.", items: [
+            {id: "h28-1-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["sack", "guerrilla", "sovereignty"]}
+          ]}
+        ]
     }
   ],
   science: [
@@ -3623,7 +4943,19 @@ const MM_WEEKS_912 = [
         {type:"shortanswer", instructions:"Write 4-6 sentences, then compare your answer with the model.", items:[
           {id:"s1-s1", prompt:"Argue: was Mendeleev's decision to leave gaps for undiscovered elements an act of scientific courage or reckless guessing? Write 4-6 sentences, then compare your answer with the model.", answer:"It was scientific courage because the gaps were not guesses but predictions derived from a real pattern. Mendeleev trusted the periodic logic enough to say the pattern mattered more than the missing data, and he specified the unknown elements' properties in detail. When gallium and germanium matched his predictions, the confirmations were precise enough to rule out luck. Reckless guessing would have produced vague claims; his were testable and specific. The episode shows that a strong theory earns trust by risking falsification."}
         ]}
-      ]
+      ,
+          {type: "comprehension", instructions: "Answer each question in 2-3 complete sentences, citing evidence from the reading.", items: [
+            {id: "s28-0-c1", question: "Why did Mendeleev's successful predictions about gallium and germanium matter more than his table's arrangement alone?", answer: "The predictions matched the discovered elements almost exactly, which proved the table captured a real pattern rather than a coincidence, and that is what made it the organizing principle of chemistry."},
+            {id: "s28-0-c2", question: "How does the reading explain the link between the table's rows and columns and electron arrangement, even though Mendeleev knew nothing about electrons?", answer: "Each period corresponds to an outermost electron shell being filled, and each group shares the same number of valence electrons, which is why group members behave alike. The pattern Mendeleev found was electron arrangement all along, which is why his table survived the discovery of the atom's inner structure."},
+            {id: "s28-0-c3", question: "Why does the reading call reading the periodic table a skill rather than a memorization task?", answer: "Because position predicts behavior and behavior confirms position: chemists can predict the properties of elements they have never handled, like newly synthesized superheavy elements, instead of memorizing isolated facts."}
+          ]},
+          {type: "argument", instructions: "Write a thesis-driven argument of two paragraphs. State your claim clearly, support it with evidence from the reading and your research, and address one counterargument.", items: [
+            {id: "s28-0-a1", prompt: "Defend or challenge this thesis: Mendeleev succeeded because he trusted the pattern over the established data of his day, leaving gaps for undiscovered elements. Write two paragraphs with a clear thesis.", guidance: "Thesis to defend or challenge: trusting a pattern over accepted data is what made the periodic table possible. Use evidence from the reading (the gaps, the detailed predictions, the confirmation by gallium and germanium) plus research on Mendeleev's methods. Address this counterargument: leaving gaps was risky speculation that could easily have been dismissed, and science should follow data, not hunches. Explain when trusting a pattern over data is warranted in science."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows you understand its meaning in the context of this week's topic.", items: [
+            {id: "s28-0-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["period", "group"]}
+          ]}
+        ]
     },
     {
       title:"Periodic Trends: Predicting from Position",
@@ -3643,7 +4975,19 @@ const MM_WEEKS_912 = [
           {id:"s2-m2", term:"Atomic radius moving across a period", answer:"b"},
           {id:"s2-m3", term:"Ionization energy moving down a group", answer:"b"}
         ]}
-      ]
+      ,
+          {type: "comprehension", instructions: "Answer each question in 2-3 complete sentences, citing evidence from the reading.", items: [
+            {id: "s28-1-c1", question: "Why does atomic radius decrease across a period but increase down a group?", answer: "Across a period, each step right adds a proton that pulls the same shell's electrons tighter through effective nuclear charge, shrinking the atom. Down a group, each new period adds another electron shell farther from the nucleus, making the atom larger."},
+            {id: "s28-1-c2", question: "How does the reading explain why fluorine is the most electronegative element, using trend logic?", answer: "Electronegativity increases across a period and decreases down a group, peaking at fluorine in the upper right, where many protons pull on few shells of electrons, giving the strongest pull on shared electrons."},
+            {id: "s28-1-c3", question: "Why does the reading treat broken trends, like small dips in ionization energy, as valuable rather than as failures of the model?", answer: "Because when a trend breaks, chemists look for the deeper cause, and the small dips reveal subshell structure, so exceptions deepen understanding instead of destroying it."}
+          ]},
+          {type: "argument", instructions: "Write a thesis-driven argument of two paragraphs. State your claim clearly, support it with evidence from the reading and your research, and address one counterargument.", items: [
+            {id: "s28-1-a1", prompt: "Defend or challenge this thesis: The periodic table's predictive power shows that explaining why a pattern holds matters more in science than cataloguing the pattern itself. Write two paragraphs with a clear thesis.", guidance: "Thesis to defend or challenge: explanation outranks description as a scientific achievement. Use evidence from the reading (the electrostatic logic behind radius, ionization energy, and electronegativity trends; the lithium-sodium-potassium staircase predicting rubidium). Address this counterargument: Mendeleev's patterns were enormously useful before anyone knew the cause, so prediction without explanation is already a major achievement. Explain whether explanation or prediction deserves the higher rank."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows you understand its meaning in the context of this week's topic.", items: [
+            {id: "s28-1-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["period", "group"]}
+          ]}
+        ]
     }
   ],
   friday: { title:"Show What You Know: Week 28", reading:"This week you studied Bleeding Kansas and the periodic table. Answer the review questions, then make your case in the final argument.", groups:[
@@ -3706,7 +5050,19 @@ const MM_WEEKS_912 = [
           {id:"h1-c1", prompt:"How did Lincoln win the presidency in 1860?", options:["He won the Electoral College with just under 40 percent of the popular vote","He won a majority of the popular vote nationwide","Southern states voted for him overwhelmingly"], answer:"He won the Electoral College with just under 40 percent of the popular vote"},
           {id:"h1-c2", prompt:"Why could Black Americans not shape the 1860 election?", options:["Enslaved people could not vote anywhere and most states barred free Black men","They chose not to participate","Only landowners could vote in 1860"], answer:"Enslaved people could not vote anywhere and most states barred free Black men"}
         ]}
-      ]
+      ,
+          {type: "comprehension", instructions: "Answer each question in 2-3 complete sentences, citing evidence from the reading.", items: [
+            {id: "h29-0-c1", question: "Why did Lincoln win the Electoral College decisively while winning under 40 percent of the popular vote and appearing on no Southern ballots?", answer: "The Democratic split between Douglas and Breckinridge, plus Bell's fourth candidacy, divided his opposition, and Lincoln carried every Northern state. The Constitution requires only an Electoral College majority, so his Northern sweep was decisive even without a popular majority or Southern votes."},
+            {id: "h29-0-c2", question: "What bitter irony did Frederick Douglass note about the election, according to the reading?", answer: "White voters were deciding the nation's future by arguing over whether Black people were property, while four million Black Americans, enslaved people who could not vote anywhere and free Black men barred in most states, had essentially no voice in the decision."},
+            {id: "h29-0-c3", question: "Why did Southern leaders read Lincoln's victory as proof the South had become a permanent minority rather than just a lost election?", answer: "Lincoln won without a single Southern electoral vote, which showed the South could be outvoted by the North alone under the constitutional rules, so Southern leaders prepared to leave rather than accept a Union they believed they could no longer control."}
+          ]},
+          {type: "argument", instructions: "Write a thesis-driven argument of two paragraphs. State your claim clearly, support it with evidence from the reading and your research, and address one counterargument.", items: [
+            {id: "h29-0-a1", prompt: "Defend or challenge this thesis: The election of 1860 shows that democracy breaks when the losers decide the rules no longer bind them. Write two paragraphs with a clear thesis.", guidance: "Thesis to defend or challenge: secession, not the election result, was what broke democracy in 1860. Use evidence from the reading (Lincoln's constitutional victory, the four-way split, South Carolina's secession convention within weeks) plus research on the franchise denied to Black Americans in 1860. Address this counterargument: the South had its own grievance, Northern nullification of the Fugitive Slave Act through personal liberty laws, so both sides were arguably breaking the rules. Explain whether one side's rule-breaking justified the other's exit."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows you understand its meaning in the context of this week's topic.", items: [
+            {id: "h29-0-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["secede", "platform", "unionist"]}
+          ]}
+        ]
     },
     {
       title:"Secession: The Union Breaks",
@@ -3726,7 +5082,19 @@ const MM_WEEKS_912 = [
           {id:"h2-k3", text:"Stephens said the Confederacy's cornerstone was white supremacy."},
           {id:"h2-k4", text:"Lincoln ordered the attack on Fort Sumter."}
         ]}
-      ]
+      ,
+          {type: "comprehension", instructions: "Answer each question in 2-3 complete sentences, citing evidence from the reading.", items: [
+            {id: "h29-1-c1", question: "How does the reading use the Confederate constitution and Stephens's Cornerstone Speech to answer claims that secession was about tariffs or abstract states' rights?", answer: "The Confederate constitution copied the United States Constitution almost word for word but explicitly protected slavery in every clause where the old document had stayed silent, and Stephens himself said the new government's cornerstone was that slavery, subordination to the superior race, was the Black man's natural and normal condition. The Confederacy's own documents name slavery as the cause."},
+            {id: "h29-1-c2", question: "Why was Buchanan's position, that secession was illegal but he had no power to stop it, strategically disastrous?", answer: "It gave secessionists months to organize, arm, and form a government in Montgomery with Jefferson Davis as president, all without federal resistance, while Lincoln waited to take office."},
+            {id: "h29-1-c3", question: "Why did the Upper South, which had first rejected secession, follow its neighbors out of the Union?", answer: "After Confederate guns fired on Fort Sumter, Lincoln's call for troops forced the Upper South to choose sides, and it chose to follow its neighbors into the Confederacy once war began."}
+          ]},
+          {type: "argument", instructions: "Write a thesis-driven argument of two paragraphs. State your claim clearly, support it with evidence from the reading and your research, and address one counterargument.", items: [
+            {id: "h29-1-a1", prompt: "Defend or challenge this thesis: Alexander Stephens's Cornerstone Speech proves that secession was caused by slavery and white supremacy, not by tariffs or abstract constitutional theory. Write two paragraphs with a clear thesis.", guidance: "Thesis to defend or challenge: the Confederacy's own words settle the cause of secession. Use evidence from the reading (the constitution's slavery clauses, the Cornerstone Speech's claim about the negro's natural condition) plus research on secession declarations. Address this counterargument: speeches can be rhetoric, and most Confederate soldiers owned no slaves, so the leaders' stated cause may not have been the people's cause. Explain whether the cause named by leaders or the motives of ordinary soldiers should define why the war was fought."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows you understand its meaning in the context of this week's topic.", items: [
+            {id: "h29-1-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["secede", "platform"]}
+          ]}
+        ]
     }
   ],
   science: [
@@ -3749,7 +5117,19 @@ const MM_WEEKS_912 = [
           {id:"s1-o4", event:"Ions arrange into a crystal lattice", answer:4},
           {id:"s1-o5", event:"The lattice gives salt its high melting point", answer:5}
         ]}
-      ]
+      ,
+          {type: "comprehension", instructions: "Answer each question in 2-3 complete sentences, citing evidence from the reading.", items: [
+            {id: "s29-0-c1", question: "Why does solid salt have a high melting point and brittleness, and why does it conduct electricity only when melted or dissolved?", answer: "The crystal lattice takes enormous energy to break, so salt melts at 801 degrees Celsius; shifting the lattice lines up like charges that repel, which shatters the crystal. In solid salt the ions are locked in place and cannot carry current, but melted or dissolved ions move freely and conduct electricity."},
+            {id: "s29-0-c2", question: "How does the electronegativity-difference rule of thumb (about 1.7) connect to the definition of an ionic bond?", answer: "A large electronegativity difference, typically when a metal meets a nonmetal, means the electron is transferred rather than shared. The bond is then the ongoing electrostatic attraction between the resulting positive and negative ions."},
+            {id: "s29-0-c3", question: "Why does the reading say the electron in an ionic bond is not truly shared?", answer: "Because one atom transfers the electron to the other, forming a positive ion and a negative ion, and the bond is the attraction between those ions, not a shared pair of electrons held between the nuclei."}
+          ]},
+          {type: "argument", instructions: "Write a thesis-driven argument of two paragraphs. State your claim clearly, support it with evidence from the reading and your research, and address one counterargument.", items: [
+            {id: "s29-0-a1", prompt: "Defend or challenge this thesis: Classifying bonds as purely ionic or purely covalent is a useful simplification, but real bonds exist on a continuum and chemistry teaching should say so. Write two paragraphs with a clear thesis.", guidance: "Thesis to defend or challenge: students should learn the bond continuum, not just two boxes. Use evidence from the reading (the 1.7 electronegativity difference is called a rule of thumb, and polar covalent bonds show unequal sharing) plus research on how bond character is taught. Address this counterargument: beginners need clear categories before they can handle nuance, and introducing a continuum too early causes confusion. Explain how you would sequence simple categories and later nuance."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows you understand its meaning in the context of this week's topic.", items: [
+            {id: "s29-0-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["covalent", "valence"]}
+          ]}
+        ]
     },
     {
       title:"Covalent Bonding: Sharing Electrons",
@@ -3769,7 +5149,19 @@ const MM_WEEKS_912 = [
           {id:"s2-m2", term:"Hydrogen gas, H2", answer:"b"},
           {id:"s2-m3", term:"Hydrogen chloride, HCl", answer:"c"}
         ]}
-      ]
+      ,
+          {type: "comprehension", instructions: "Answer each question in 2-3 complete sentences, citing evidence from the reading.", items: [
+            {id: "s29-1-c1", question: "Why is water's polarity, rather than just its composition, what makes it the universal solvent?", answer: "Water's bent shape and polar bonds give it partial charges that let it dissolve ionic compounds, which pure even sharing cannot touch. Composition alone does not explain it; the unequal sharing and the shape do."},
+            {id: "s29-1-c2", question: "How are bond length and bond energy related, and what evidence does the reading give?", answer: "They are inversely related: shorter bonds are stronger bonds. The reading cites nitrogen's triple bond, which takes 945 kilojoules per mole to break, far more than a single bond between the same atoms."},
+            {id: "s29-1-c3", question: "Why do covalent compounds generally have lower melting points than ionic ones and not conduct electricity?", answer: "Covalent compounds form discrete molecules rather than charged lattices, so less energy is needed to separate the molecules, and with no free ions to carry charge, they do not conduct electricity."}
+          ]},
+          {type: "argument", instructions: "Write a thesis-driven argument of two paragraphs. State your claim clearly, support it with evidence from the reading and your research, and address one counterargument.", items: [
+            {id: "s29-1-a1", prompt: "Defend or challenge this thesis: The ability to read molecular architecture bond by bond, as chemists do when designing medicines, is the real payoff of learning covalent bonding, not passing a test on definitions. Write two paragraphs with a clear thesis.", guidance: "Thesis to defend or challenge: bonding should be taught toward design, not definitions. Use evidence from the reading (DNA, plastics, new medicines, stronger materials, cleaner fuels all built from covalent architecture) plus research on how bonding knowledge transfers to real problems. Address this counterargument: design-level mastery is unrealistic for beginners, and definitions plus basic skills are the honest goal of an introductory course. Explain what a realistic first step toward design thinking looks like."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows you understand its meaning in the context of this week's topic.", items: [
+            {id: "s29-1-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["covalent", "valence"]}
+          ]}
+        ]
     }
   ],
   friday: { title:"Show What You Know: Week 29", reading:"This week you studied the election of 1860, secession, and chemical bonding. Answer the review questions, then make your case in the final argument.", groups:[
@@ -3835,7 +5227,19 @@ const MM_WEEKS_912 = [
           {id:"h1-t2", text:"General Butler returned the three fugitives to slavery.", answer:"false", note:"He declared them contraband of war and refused to return them."},
           {id:"h1-t3", text:"The contraband camps were founded by people who freed themselves.", answer:"true", note:"Enslaved people fled to Union lines before any proclamation freed them."}
         ]}
-      ]
+      ,
+          {type: "comprehension", instructions: "Answer each question in 2-3 complete sentences, citing evidence from the reading.", items: [
+            {id: "h30-0-c1", question: "Why did Butler's contraband of war designation matter legally, even though the escapees were people and not property?", answer: "By declaring the three men contraband of war, enemy property liable to seizure, Butler turned the Confederacy's own legal fiction of slavery as property against it. He could refuse to return them without yet freeing them outright, which Union policy in 1861 was not ready to do."},
+            {id: "h30-0-c2", question: "How did the contraband camps force a question on Washington that Lincoln wanted to avoid?", answer: "The camps were founded by people who had freed themselves before any proclamation freed them, and their existence forced the question of what the Union was fighting for if it fought a war while returning fugitives to slavery."},
+            {id: "h30-0-c3", question: "According to the reading, who was the real engine of emancipation in 1861?", answer: "The enslaved themselves. Word spread through the slave quarters that reaching Union lines meant freedom, and by year's end hundreds had gathered at Fort Monroe, building shelters, schools, and churches in the Grand Contraband Camp, with similar camps springing up wherever Union armies advanced."}
+          ]},
+          {type: "argument", instructions: "Write a thesis-driven argument of two paragraphs. State your claim clearly, support it with evidence from the reading and your research, and address one counterargument.", items: [
+            {id: "h30-0-a1", prompt: "Defend or challenge this thesis: Emancipation was driven from below by enslaved people who freed themselves, not granted from above by Lincoln. Write two paragraphs with a clear thesis.", guidance: "Thesis to defend or challenge: self-emancipation, not presidential action, was the primary engine of emancipation. Use evidence from the reading (Butler at Fort Monroe, the Grand Contraband Camp, the Confiscation Acts as Washington catching up) plus research on contraband camps. Address this counterargument: without federal power and the Emancipation Proclamation, self-emancipation could not have been made permanent, since only Union victory secured freedom. Explain whether the first mover or the final guarantor deserves the primary credit."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows you understand its meaning in the context of this week's topic.", items: [
+            {id: "h30-0-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["contraband", "border", "conscription"]}
+          ]}
+        ]
     },
     {
       title:"The Civil War: 1862, Antietam and Emancipation",
@@ -3853,7 +5257,19 @@ const MM_WEEKS_912 = [
         {type:"shortanswer", instructions:"Write 4-6 sentences, then compare your answer with the model.", items:[
           {id:"h2-s1", prompt:"Research the contraband camps, such as the Grand Contraband Camp at Fort Monroe. Then argue: did the camps prove that emancipation came from below rather than from Lincoln? Write 4-6 sentences, then compare your answer with the model.", answer:"The camps prove that self-emancipation drove the process, because thousands fled to Union lines and built free communities before Lincoln acted. Butler's contraband decision was forced on him by the three men who arrived at Fort Monroe; he improvised a legal label for what they had already done. The camps' schools and churches showed that freed people were ready for citizenship, undermining every claim that they needed preparation. Lincoln's proclamation then ratified a freedom that was already being lived. Emancipation came from below and was confirmed from above; neither level alone tells the whole story."}
         ]}
-      ]
+      ,
+          {type: "comprehension", instructions: "Answer each question in 2-3 complete sentences, citing evidence from the reading.", items: [
+            {id: "h30-1-c1", question: "Why did Lincoln wait for a battlefield victory before issuing the Preliminary Emancipation Proclamation?", answer: "So that emancipation would look like strength rather than desperation. Antietam, the bloodiest single day in American history with over 22,000 casualties, ended in a strategic Union victory when Lee's invasion of Maryland was turned back, and five days later Lincoln issued the proclamation."},
+            {id: "h30-1-c2", question: "How did the proclamation change the war's meaning even though it freed no one immediately and exempted the Border States?", answer: "It transformed the war into a fight against slavery, which kept Britain and France from recognizing the Confederacy, and it aligned official Washington with what the contraband camps had already done, catching up to people who had freed themselves."},
+            {id: "h30-1-c3", question: "What tension does Lincoln's letter to Horace Greeley reveal about his priorities?", answer: "Lincoln wrote that his paramount object was saving the Union, not freeing or destroying slavery, yet he had already decided emancipation was a military necessity. The letter shows politics and principle pulling in the same direction for different reasons: Union victory required striking at slavery."}
+          ]},
+          {type: "argument", instructions: "Write a thesis-driven argument of two paragraphs. State your claim clearly, support it with evidence from the reading and your research, and address one counterargument.", items: [
+            {id: "h30-1-a1", prompt: "Defend or challenge this thesis: Lincoln's Emancipation Proclamation was a military strategy first and a moral act second, and that is exactly why it succeeded. Write two paragraphs with a clear thesis.", guidance: "Thesis to defend or challenge: strategic framing, not moral framing, is what made the proclamation work. Use evidence from the reading (the Greeley letter, emancipation as military necessity, the timing after Antietam, the foreign policy effects on Britain and France) plus research on contraband camps. Address this counterargument: treating the proclamation as mere strategy diminishes the genuine moral transformation it represented for millions. Explain whether motive or effect should matter more in judging the act."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows you understand its meaning in the context of this week's topic.", items: [
+            {id: "h30-1-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["contraband", "conscription"]}
+          ]}
+        ]
     }
   ],
   science: [
@@ -3875,7 +5291,19 @@ const MM_WEEKS_912 = [
         {type:"shortanswer", instructions:"Write 4-6 sentences, then compare your answer with the model.", items:[
           {id:"s1-s1", prompt:"Argue: is writing chemical formulas a form of literacy, like learning to read? Write 4-6 sentences, then compare your answer with the model.", answer:"Writing formulas is literacy because a formula is a compact text that carries exact meaning, just like a sentence. H2O communicates composition, ratio, and structure to anyone trained to read it, across every language on Earth. Like reading, it requires learning symbols, grammar rules such as charge balance, and conventions like the crossover method. Miswriting a formula changes the meaning entirely, just as a misspelled word does. Chemistry's formulas are a true written language, and fluency in them unlocks every text the science produces."}
         ]}
-      ]
+      ,
+          {type: "comprehension", instructions: "Answer each question in 2-3 complete sentences, citing evidence from the reading.", items: [
+            {id: "s30-0-c1", question: "Why would changing a subscript be a far more serious error than changing a coefficient, using H2O and H2O2 as the example?", answer: "Subscripts define the substance itself: H2O is water but H2O2 is hydrogen peroxide, entirely different substances. Coefficients only change the amount, so changing a subscript changes what you are describing."},
+            {id: "s30-0-c2", question: "How does the crossover method guarantee that an ionic compound's charges balance to zero?", answer: "Writing the ions, swapping their charge numbers as subscripts, and reducing gives the exact ratio needed for positive and negative charges to cancel, as when magnesium's 2+ charge requires two chloride ions to form MgCl2."},
+            {id: "s30-0-c3", question: "Why does the reading call formulas the vocabulary of chemistry rather than just a notation system?", answer: "Because without formulas you cannot name a compound, predict a reaction, or read a label. Formulas are the prerequisite for every other chemical task, and every equation ever balanced is built from formulas written correctly first."}
+          ]},
+          {type: "argument", instructions: "Write a thesis-driven argument of two paragraphs. State your claim clearly, support it with evidence from the reading and your research, and address one counterargument.", items: [
+            {id: "s30-0-a1", prompt: "Defend or challenge this thesis: Learning chemical formulas through charge logic (like the crossover method) builds deeper understanding than memorizing common compounds. Write two paragraphs with a clear thesis.", guidance: "Thesis to defend or challenge: logic beats memorization for learning formulas. Use evidence from the reading (the crossover method, Roman numerals for transition metals like iron(II) versus iron(III) oxide, polyatomic ions acting as single units) plus research on how students learn chemical nomenclature. Address this counterargument: working chemists rely on memorized fluency with common compounds, and logic alone is too slow in practice. Explain what balance of logic and memorization produces real fluency."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows you understand its meaning in the context of this week's topic.", items: [
+            {id: "s30-0-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["reactant", "product"]}
+          ]}
+        ]
     },
     {
       title:"Balancing Chemical Equations",
@@ -3895,7 +5323,19 @@ const MM_WEEKS_912 = [
           {id:"s2-m2", term:"Number inside a formula; changing it changes the substance", answer:"b"},
           {id:"s2-m3", term:"Substance formed on the right side of the arrow", answer:"c"}
         ]}
-      ]
+      ,
+          {type: "comprehension", instructions: "Answer each question in 2-3 complete sentences, citing evidence from the reading.", items: [
+            {id: "s30-1-c1", question: "Why is writing H instead of H2 described as one of the most common balancing mistakes?", answer: "Because seven elements always travel in pairs as gases or liquids (H2, N2, O2, F2, Cl2, Br2, and I2), so writing H misrepresents the actual substance and throws off the entire atom count."},
+            {id: "s30-1-c2", question: "How does the propane combustion example show that balancing is algebra with atoms?", answer: "Each coefficient is an unknown and conservation of mass supplies the equations, so working through carbon, then hydrogen, then oxygen in turn solves for the unknowns systematically, exactly like solving a system of equations."},
+            {id: "s30-1-c3", question: "Why must coefficients be adjusted rather than subscripts when balancing?", answer: "Because subscripts define the substance, so changing them changes the reaction itself, while coefficients only change amounts and preserve the substances involved. Conservation of mass requires rearranging atoms, never redefining them."}
+          ]},
+          {type: "argument", instructions: "Write a thesis-driven argument of two paragraphs. State your claim clearly, support it with evidence from the reading and your research, and address one counterargument.", items: [
+            {id: "s30-1-a1", prompt: "Defend or challenge this thesis: Balancing equations teaches a transferable problem-solving method (identify unknowns, apply constraints, check the result), not just a chemistry chore. Write two paragraphs with a clear thesis.", guidance: "Thesis to defend or challenge: balancing is general reasoning training, not mere drill. Use evidence from the reading (the systematic approach of balancing metals, then nonmetals, then hydrogen, then oxygen, and checking the count after each step) plus research on transfer of problem-solving skills. Address this counterargument: students experience balancing as rote drill with no transfer to other domains. Explain what would have to change in how it is taught for the transfer to be real."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows you understand its meaning in the context of this week's topic.", items: [
+            {id: "s30-1-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["reactant", "product"]}
+          ]}
+        ]
     }
   ],
   friday: { title:"Show What You Know: Week 30", reading:"This week you studied the Civil War's first two years and chemical formulas and equations. Answer the review questions, then make your case in the final argument.", groups:[
@@ -3958,7 +5398,19 @@ const MM_WEEKS_912 = [
           {id:"h1-t1", text:"Lincoln issued the Emancipation Proclamation mainly to win votes in the North.", answer:"false", note:"It was issued as a war measure to weaken the Confederacy and reshape the war's purpose."},
           {id:"h1-t2", text:"Enslaved people in Texas learned of their freedom nearly two and a half years after the proclamation.", answer:"true"}
         ]}
-      ]
+      ,
+          {type: "comprehension", instructions: "Answer each question in 2-3 complete sentences, citing evidence from the reading.", items: [
+            {id: "h31-0-c1", question: "How did the Emancipation Proclamation function as foreign policy even though it was a domestic order?", answer: "Once Lincoln framed the war as a fight against slavery, Britain and France, which had already abolished slavery, could not openly side with the Confederacy to keep Southern cotton flowing to their textile mills, so the proclamation diplomatically isolated the South."},
+            {id: "h31-0-c2", question: "Why does the reading call the proclamation a military strategy at heart rather than purely a moral declaration?", answer: "Because its core purpose was to strike at the one resource the South could not spare, the labor of nearly four million enslaved people, by welcoming freedom seekers into Union lines and enlisting Black men as soldiers, draining the Confederacy's workforce while strengthening Union armies."},
+            {id: "h31-0-c3", question: "What does the gap between January 1, 1863 and Juneteenth reveal about the relationship between law and freedom?", answer: "It reveals that a proclamation is only words until someone enforces it. Texas enslaved people did not hear the news for nearly two and a half years, and the gap between the promise and its enforcement shaped what freedom meant for generations of Black Americans."}
+          ]},
+          {type: "argument", instructions: "Write a thesis-driven argument of two paragraphs. State your claim clearly, support it with evidence from the reading and your research, and address one counterargument.", items: [
+            {id: "h31-0-a1", prompt: "Defend or challenge this thesis: Juneteenth shows that freedom is defined not by the date of a proclamation but by the date of its enforcement. Write two paragraphs with a clear thesis.", guidance: "Thesis to defend or challenge: enforcement, not declaration, is what makes freedom real. Use evidence from the reading (the proclamation's limits, the two-and-a-half-year delay in Texas, the claim that freedom arrived only as fast as Union power could carry it) plus research on how Juneteenth was first celebrated. Address this counterargument: the legal declaration itself transformed the war and made enforcement possible, so the law deserves primacy. Explain whether law or enforcement should define the date freedom begins."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows you understand its meaning in the context of this week's topic.", items: [
+            {id: "h31-0-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["proclamation", "strategy", "manumission"]}
+          ]}
+        ]
     },
     {
       title:"Juneteenth: Freedom Arrives Late",
@@ -3978,7 +5430,19 @@ const MM_WEEKS_912 = [
         {type:"shortanswer", instructions:"Write 4-6 sentences, then compare your answer with the model.", items:[
           {id:"h2-s1", prompt:"Argue: Is freedom real when it is declared on paper, or only when people can actually live it? Use evidence from Juneteenth in your answer.", answer:"Freedom is only real when people can live it, because a declaration without enforcement changes nothing on the ground. The Emancipation Proclamation declared enslaved people in rebelling states free in January 1863, yet roughly 250,000 enslaved Texans did not hear the news until June 19, 1865. During those two and a half years, enslavers kept profiting from forced labor that was already legally ended. Juneteenth shows that the meaning of freedom depends on who enforces it and when it arrives. Freed people understood this: they celebrated the announcement, but they also claimed freedom themselves by leaving plantations, reuniting families, and building schools."}
         ]}
-      ]
+      ,
+          {type: "comprehension", instructions: "Answer each question in 2-3 complete sentences, citing evidence from the reading.", items: [
+            {id: "h31-1-c1", question: "Why was the delay in Texas not an accident, according to the reading?", answer: "Texas was far from the battlefields, slaveholders had every reason to keep the news quiet since emancipation meant the loss of their entire forced labor system, and many enslavers had moved to Texas precisely to avoid Union armies and the reach of the proclamation."},
+            {id: "h31-1-c2", question: "How did freed people's actions after Granger's order show that freedom was seized and shaped from below?", answer: "They left plantations, searched for separated family members, took new surnames, built churches and schools, and in Houston pooled their money to buy ten acres of land that became Emancipation Park, acting immediately rather than waiting for freedom to be administered to them."},
+            {id: "h31-1-c3", question: "What hard lesson does the reading draw from the date of Juneteenth about legal rights?", answer: "A legal right means little until it is enforced. The abstract promise of emancipation became concrete reality for roughly 250,000 enslaved Texans only on June 19, 1865, when General Granger read General Order No. 3 in Galveston."}
+          ]},
+          {type: "argument", instructions: "Write a thesis-driven argument of two paragraphs. State your claim clearly, support it with evidence from the reading and your research, and address one counterargument.", items: [
+            {id: "h31-1-a1", prompt: "Defend or challenge this thesis: Juneteenth becoming a federal holiday in 2021 matters because it commemorates enforcement, not just declaration. Write two paragraphs with a clear thesis.", guidance: "Thesis to defend or challenge: the federal holiday's significance lies in what it commemorates. Use evidence from the reading (the deliberate delay, freedom seized from below, the 2021 federal holiday) plus research on early Juneteenth celebrations. Address this counterargument: making Juneteenth a federal holiday risks turning a story of struggle and delay into a feel-good celebration that forgets the hard lesson. Explain how commemoration should preserve the lesson that rights require enforcement."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows you understand its meaning in the context of this week's topic.", items: [
+            {id: "h31-1-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["proclamation", "manumission"]}
+          ]}
+        ]
     }
   ],
   science: [
@@ -4002,7 +5466,19 @@ const MM_WEEKS_912 = [
           {id:"s1-c1", prompt:"How many molecules are in 2 moles of water?", options:["12.04 x 10^23","6.02 x 10^23","18"], answer:"12.04 x 10^23"},
           {id:"s1-c2", prompt:"A sample contains 24 grams of carbon. How many moles is that?", options:["2","12","24"], answer:"2"}
         ]}
-      ]
+      ,
+          {type: "comprehension", instructions: "Answer each question in 2-3 complete sentences, citing evidence from the reading.", items: [
+            {id: "s31-0-c1", question: "Why is the mole necessary at all, given that chemists could theoretically count atoms?", answer: "Atoms are far too small and numerous to count one by one, yet reactions depend on exact ratios of particles. The mole bridges the invisible world of atoms and the visible world of beakers and balances by bundling 6.02 x 10^23 particles into a workable unit."},
+            {id: "s31-0-c2", question: "How do molar mass and Avogadro's number work together to connect grams to particle counts?", answer: "Molar mass converts grams to moles, as when 36 grams of water divided by 18 grams per mole equals 2 moles, and Avogadro's number converts moles to particles, so together they let chemists move between the laboratory scale and the atomic scale."},
+            {id: "s31-0-c3", question: "Why does the reading say mole ratios turn a recipe written for atoms into amounts a chemist can actually weigh out?", answer: "A balanced equation gives particle ratios, and mole ratios convert those ratios into moles, which convert into grams through molar mass, making the atomic-scale recipe weighable on a laboratory balance."}
+          ]},
+          {type: "argument", instructions: "Write a thesis-driven argument of two paragraphs. State your claim clearly, support it with evidence from the reading and your research, and address one counterargument.", items: [
+            {id: "s31-0-a1", prompt: "Defend or challenge this thesis: The mole is the most important concept in quantitative chemistry because every calculation, from stoichiometry to percent yield, runs through it. Write two paragraphs with a clear thesis.", guidance: "Thesis to defend or challenge: the mole deserves its central place in the curriculum. Use evidence from the reading (the mole as the center of quantitative chemistry, the gram-to-mole-to-particle conversions, mole ratios in stoichiometry) plus research on student difficulties with the mole concept. Address this counterargument: dimensional analysis is the real skill and the mole is just one unit among many, so the emphasis should be on the method, not the concept. Explain what is concept and what is technique in mole calculations."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows you understand its meaning in the context of this week's topic.", items: [
+            {id: "s31-0-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["molar", "yield"]}
+          ]}
+        ]
     },
     {
       title:"Limiting Reactants and Percent Yield",
@@ -4024,7 +5500,19 @@ const MM_WEEKS_912 = [
           {id:"s2-t1", text:"The limiting reactant is the reactant you start with the most of.", answer:"false", note:"It is the one that runs out first, determined by mole ratios, not by starting mass."},
           {id:"s2-t2", text:"Percent yield compares what you actually collect to the theoretical maximum.", answer:"true"}
         ]}
-      ]
+      ,
+          {type: "comprehension", instructions: "Answer each question in 2-3 complete sentences, citing evidence from the reading.", items: [
+            {id: "s31-1-c1", question: "In the ammonia example, why is nitrogen the limiting reactant even though hydrogen is present in fewer grams?", answer: "The equation demands 3 moles of H2 for every mole of N2, so 1 mole of N2 needs only 3 moles of H2. With 6 moles of H2 available, hydrogen is in excess, and nitrogen limits the product to 2 moles of NH3, or 34 grams."},
+            {id: "s31-1-c2", question: "Why do real reactions rarely reach their theoretical yield, and what does percent yield measure?", answer: "Some product sticks to glassware, side reactions consume reactants, and some steps simply do not finish, so the actual yield falls short of the theoretical maximum. Percent yield, actual divided by theoretical times 100, turns the experiment into a report card on how well the reaction performed."},
+            {id: "s31-1-c3", question: "How does the limiting reactant concept apply beyond the chemistry lab?", answer: "It models any process where one input runs out first and stops production. The reading's logic of comparing available amounts against required ratios transfers to manufacturing, cooking, or any resource-limited system where the scarcest input caps the output."}
+          ]},
+          {type: "argument", instructions: "Write a thesis-driven argument of two paragraphs. State your claim clearly, support it with evidence from the reading and your research, and address one counterargument.", items: [
+            {id: "s31-1-a1", prompt: "Defend or challenge this thesis: Percent yield is a report card on the reaction's performance, but it is also a report card on the chemist. Write two paragraphs with a clear thesis.", guidance: "Thesis to defend or challenge: low yield reflects the experimenter, not just the chemistry. Use evidence from the reading (product lost to glassware, side reactions, incomplete steps) plus research on sources of experimental error. Address this counterargument: some losses are inherent to the chemistry itself rather than the chemist's skill, so blaming the experimenter is unfair. Explain when a low yield signals bad technique and when it signals hard chemistry."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows you understand its meaning in the context of this week's topic.", items: [
+            {id: "s31-1-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["molar", "yield"]}
+          ]}
+        ]
     }
   ],
   friday: {
@@ -4107,7 +5595,19 @@ const MM_WEEKS_912 = [
           {id:"h1-c1", prompt:"Why did Sherman target railroads and mills rather than only armies?", options:["To destroy the South's ability to keep fighting","To protect Southern civilians from harm","To impress European observers"], answer:"To destroy the South's ability to keep fighting"},
           {id:"h1-c2", prompt:"How did the Gettysburg Address redefine the war?", options:["It tied the war to liberty and equality, not just reunion","It announced a new military strategy","It ended slavery immediately"], answer:"It tied the war to liberty and equality, not just reunion"}
         ]}
-      ]
+      ,
+          {type: "comprehension", instructions: "Answer each question in 2-3 complete sentences, citing evidence from the reading.", items: [
+            {id: "h32-0-c1", question: "What was the brutal and simple logic of total war, and how did Sherman's March to the Sea apply it?", answer: "The logic was that a nation cannot fight without food, transport, and supplies. Sherman's army cut a path from Atlanta to Savannah, living off the land and destroying rail lines, mills, and warehouses, striking the economy and infrastructure that sustained the Confederate war effort."},
+            {id: "h32-0-c2", question: "How did total war and emancipation work together as strategies?", answer: "As Union armies advanced under total war, enslaved people fled to their lines by the thousands and many enlisted, so the Confederacy simultaneously lost its workers and, increasingly, the argument that its cause could survive."},
+            {id: "h32-0-c3", question: "Why does the reading present both supporters' and critics' views of Sherman's march instead of settling the question?", answer: "Supporters argued that breaking the South's will to fight shortened the war and saved lives overall, while critics then and now point to the suffering of civilians and question whether the destruction was justified. Presenting both leaves the moral judgment open for the reader to evaluate."}
+          ]},
+          {type: "argument", instructions: "Write a thesis-driven argument of two paragraphs. State your claim clearly, support it with evidence from the reading and your research, and address one counterargument.", items: [
+            {id: "h32-0-a1", prompt: "Defend or challenge this thesis: Sherman's March and total war were justified because breaking the South's will shortened the war and saved lives overall. Write two paragraphs with a clear thesis.", guidance: "Thesis to defend or challenge: the ends justified the means in Sherman's campaign. Use evidence from the reading (the logic of striking supply lines, the synergy with emancipation, Lincoln's Gettysburg framing of a new birth of freedom) plus research on the role of Black regiments in the war's turning. Address this counterargument: the reading's critics point to civilian suffering and question whether the destruction was justified, raising the issue of proportionality. Explain how you weigh lives supposedly saved against suffering certainly inflicted."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows you understand its meaning in the context of this week's topic.", items: [
+            {id: "h32-0-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["total war", "regiment", "siege"]}
+          ]}
+        ]
     },
     {
       title:"Black Regiments Turn the War",
@@ -4125,7 +5625,19 @@ const MM_WEEKS_912 = [
         {type:"shortanswer", instructions:"Write 4-6 sentences, then compare your answer with the model.", items:[
           {id:"h2-s1", prompt:"Argue: What was the true turning point of the Civil War: a battle, emancipation, or the enlistment of Black soldiers? Defend your choice with evidence.", answer:"The war's true turning point was the decision to fight it as a war against slavery, sealed by Black enlistment. The Emancipation Proclamation kept European powers from backing the Confederacy and opened Union ranks to roughly 180,000 Black soldiers. Their service, from Fort Wagner onward, proved that the Union now drew strength from the very people the Confederacy had enslaved. Gettysburg and Vicksburg were military victories, but emancipation changed the war's meaning and its math. A war for reunion could have ended in compromise; a war for freedom could only end with the Confederacy's destruction."}
         ]}
-      ]
+      ,
+          {type: "comprehension", instructions: "Answer each question in 2-3 complete sentences, citing evidence from the reading.", items: [
+            {id: "h32-1-c1", question: "How did the 54th Massachusetts's assault on Fort Wagner answer claims that Black men would not fight?", answer: "The regiment charged a heavily fortified position at Fort Wagner in July 1863 and suffered terrible casualties, including Colonel Shaw, while Sergeant William Carney, though wounded, carried the regiment's flag through the battle and refused to let it fall. Their courage answered the claim on the battlefield itself."},
+            {id: "h32-1-c2", question: "In what way was Black soldiers' service itself an argument for citizenship?", answer: "By the war's end roughly 180,000 Black soldiers had served in the United States Colored Troops, about one tenth of the Union Army, most of them born enslaved. When the war ended, their service stood as the strongest argument that citizenship had been earned in blood."},
+            {id: "h32-1-c3", question: "What extra dangers did Black soldiers face that white soldiers did not?", answer: "The Confederacy threatened to enslave or execute captured Black troops and their officers, and Black regiments were long paid less than white ones until Congress corrected the injustice, so they risked worse fates in defeat and received worse treatment in service."}
+          ]},
+          {type: "argument", instructions: "Write a thesis-driven argument of two paragraphs. State your claim clearly, support it with evidence from the reading and your research, and address one counterargument.", items: [
+            {id: "h32-1-a1", prompt: "Defend or challenge this thesis: Black soldiers' service was the decisive factor that turned the Civil War and earned Black citizenship. Write two paragraphs with a clear thesis.", guidance: "Thesis to defend or challenge: Black service was decisive, not merely contributory. Use evidence from the reading (180,000 troops, one tenth of the Union Army, garrisoning the South, guarding supply lines, freeing white regiments for the front, citizenship earned in blood) plus research on Black regiments. Address this counterargument: Northern industrial and manpower advantages would have won the war regardless, so Black service, while heroic, was not the deciding factor. Explain what counts as decisive in a war won by many causes."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows you understand its meaning in the context of this week's topic.", items: [
+            {id: "h32-1-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["regiment", "siege", "total war"]}
+          ]}
+        ]
     }
   ],
   science: [
@@ -4148,7 +5660,19 @@ const MM_WEEKS_912 = [
           {id:"s1-f3", text:"Heating a gas makes its particles move ___, raising the pressure.", answer:"faster"},
           {id:"s1-f4", text:"The theory assumes particle collisions are perfectly ___, losing no energy.", answer:"elastic"}
         ]}
-      ]
+      ,
+          {type: "comprehension", instructions: "Answer each question in 2-3 complete sentences, citing evidence from the reading.", items: [
+            {id: "s32-0-c1", question: "How does the kinetic molecular theory explain pressure?", answer: "The theory models a gas as a huge crowd of tiny particles in constant, random motion, colliding with each other and with the walls of the container. Those collisions create pressure, the force the gas exerts on every square inch of its container."},
+            {id: "s32-0-c2", question: "Why does the reading say no real gas follows the theory's rules perfectly, yet the model still works?", answer: "Real particles take up space and attract each other slightly, especially under high pressure or near the temperature where the gas would liquefy. But at ordinary conditions the deviations are small, so the model predicts real behavior remarkably well."},
+            {id: "s32-0-c3", question: "How does the link between temperature and particle motion explain a hot air balloon rising and a cold tire reading low?", answer: "Temperature measures the average kinetic energy of the particles. Heating a gas makes its particles move faster and hit harder, which lifts a balloon or raises pressure, while cooling slows the motion and lowers the pressure in a tire."}
+          ]},
+          {type: "argument", instructions: "Write a thesis-driven argument of two paragraphs. State your claim clearly, support it with evidence from the reading and your research, and address one counterargument.", items: [
+            {id: "s32-0-a1", prompt: "Defend or challenge this thesis: Simplified models like the kinetic theory are more useful in science than perfectly accurate ones, because their simplifications are what make calculation possible. Write two paragraphs with a clear thesis.", guidance: "Thesis to defend or challenge: simplification is a strength, not a weakness, of scientific models. Use evidence from the reading (the clear assumptions of point particles, no attraction, and perfectly elastic collisions, plus the model's success at ordinary conditions) plus research on the role of idealization in science. Address this counterargument: oversimplified models mislead students into believing gases really behave that way, so the simplification comes at the cost of truth. Explain how to teach a model's limits honestly while keeping its power."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows you understand its meaning in the context of this week's topic.", items: [
+            {id: "s32-0-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["pressure", "diffusion"]}
+          ]}
+        ]
     },
     {
       title:"The Gas Laws: Pressure, Volume, and Temperature",
@@ -4169,7 +5693,19 @@ const MM_WEEKS_912 = [
           {id:"s2-t1", text:"The ideal gas law works best at very high pressure and very low temperature.", answer:"false", note:"It works best at low pressure and high temperature, where real gases act most ideally."},
           {id:"s2-t2", text:"In Charles's law, warming a gas at constant pressure increases its volume.", answer:"true"}
         ]}
-      ]
+      ,
+          {type: "comprehension", instructions: "Answer each question in 2-3 complete sentences, citing evidence from the reading.", items: [
+            {id: "s32-1-c1", question: "Why must Charles's law use kelvin rather than Celsius or Fahrenheit?", answer: "Because the kelvin scale starts at absolute zero, where particle motion theoretically stops. The direct proportion between volume and temperature holds only on a scale anchored at zero motion, which Celsius and Fahrenheit are not."},
+            {id: "s32-1-c2", question: "How does the ideal gas law unify Boyle's and Charles's laws?", answer: "PV = nRT connects pressure, volume, amount in moles, and temperature in kelvin through the gas constant R in a single equation. Boyle's law (constant temperature) and Charles's law (constant pressure) become special cases of it."},
+            {id: "s32-1-c3", question: "Why does the reading emphasize that Boyle's law dates to the 1600s as a reminder?", answer: "To show that careful observation of simple patterns can unlock the behavior of the invisible world. A simple inverse relationship between pressure and volume, discovered centuries ago, still powers modern calculations like sizing scuba tanks."}
+          ]},
+          {type: "argument", instructions: "Write a thesis-driven argument of two paragraphs. State your claim clearly, support it with evidence from the reading and your research, and address one counterargument.", items: [
+            {id: "s32-1-a1", prompt: "Defend or challenge this thesis: The gas laws prove that mathematics is the language in which nature's patterns are best expressed and tested. Write two paragraphs with a clear thesis.", guidance: "Thesis to defend or challenge: mathematization is what makes the gas laws powerful. Use evidence from the reading (P1V1 = P2V2, Charles's law, PV = nRT, and their uses by engineers, meteorologists, and chemists) plus research on the mathematization of science. Address this counterargument: the math describes the pattern without explaining why it holds, and the kinetic theory provides the real explanation. Explain whether description or explanation is the greater achievement."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows you understand its meaning in the context of this week's topic.", items: [
+            {id: "s32-1-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["pressure", "diffusion"]}
+          ]}
+        ]
     }
   ],
   friday: {
@@ -4249,7 +5785,19 @@ const MM_WEEKS_912 = [
           {id:"h1-k2", text:"I can describe three things the Freedmen's Bureau did."},
           {id:"h1-k3", text:"I can explain why land ownership mattered to freed people."}
         ]}
-      ]
+      ,
+          {type: "comprehension", instructions: "Answer each question in 2-3 complete sentences, citing evidence from the reading.", items: [
+            {id: "h33-0-c1", question: "Why did Lincoln's Ten Percent Plan and the Radical Republicans' approach represent fundamentally different theories of how to heal the nation?", answer: "Lincoln believed mercy and quick restoration would heal the nation faster than punishment, while the Radical Republicans wanted the federal government to protect the rights of freedmen and remake Southern society so that slavery could never return in another form."},
+            {id: "h33-0-c2", question: "How did the Freedmen's Bureau serve freed people beyond material relief?", answer: "Its schools gave many freed people their first chance at formal education, its courts gave Black workers a place to challenge unfair labor contracts for the first time, and it negotiated those contracts, providing legal standing and not just food and medical care."},
+            {id: "h33-0-c3", question: "Why was the land question the key to whether Reconstruction would succeed?", answer: "Without land of their own, most freedmen had little choice but to work for their former enslavers. The debate over breaking up plantations versus respecting property rights therefore determined whether freedom meant independence or continued dependence."}
+          ]},
+          {type: "argument", instructions: "Write a thesis-driven argument of two paragraphs. State your claim clearly, support it with evidence from the reading and your research, and address one counterargument.", items: [
+            {id: "h33-0-a1", prompt: "Defend or challenge this thesis: Reconstruction was betrayed at its root when the federal government refused to redistribute land to freed people. Write two paragraphs with a clear thesis.", guidance: "Thesis to defend or challenge: land, not just legal rights, was the foundation Reconstruction needed. Use evidence from the reading (the land debate, the Bureau's limited power, the slide into sharecropping) plus research on 40 acres and Special Field Orders No. 15. Address this counterargument: property rights were constitutionally protected, and confiscating land would have set a dangerous precedent for government power. Explain whether justice for freed people required violating the property rights of former Confederates."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows you understand its meaning in the context of this week's topic.", items: [
+            {id: "h33-0-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["freedmen", "land", "pardon"]}
+          ]}
+        ]
     },
     {
       title:"Forty Acres: The Promise of Land",
@@ -4269,7 +5817,19 @@ const MM_WEEKS_912 = [
         {type:"shortanswer", instructions:"Write 4-6 sentences, then compare your answer with the model.", items:[
           {id:"h2-s1", prompt:"Argue: Was Reconstruction's promise of land betrayed, or was it never a real promise at all? Use evidence from Special Field Orders No. 15 and its reversal.", answer:"The land promise was a genuine commitment that was then deliberately broken. Sherman's Special Field Orders No. 15 set aside coastal land and directed that each freed family receive up to forty acres, and thousands of families moved onto the land and began to farm it. The freed people themselves, through leaders like Garrison Frazier, had asked for exactly this: land to work by their own labor. President Johnson's order returning the land to former Confederates erased that progress in a single stroke. When a government grants land, watches families build lives on it, and then takes it back, the only honest word for it is betrayal."}
         ]}
-      ]
+      ,
+          {type: "comprehension", instructions: "Answer each question in 2-3 complete sentences, citing evidence from the reading.", items: [
+            {id: "h33-1-c1", question: "What did Garrison Frazier's statement reveal about how freed people understood freedom?", answer: "It revealed that freedom required land to work for oneself: the way freed people could best take care of themselves, Frazier said, was to have land and turn it and till it by their own labor. Freedom meant no longer depending on a former enslaver for survival, which was true independence."},
+            {id: "h33-1-c2", question: "How did Johnson's reversal turn the land promise into sharecropping?", answer: "After Lincoln's assassination, President Andrew Johnson ordered the coastal land returned to its former Confederate owners, forcing most freed families off the plots they had begun to farm. Without land, most freed people were pushed into sharecropping, a system that kept them in debt and dependence."},
+            {id: "h33-1-c3", question: "Why does the reading call the betrayal of the land promise one of Reconstruction's deepest wounds?", answer: "Because the promise was specific and concrete, up to forty acres per family under Sherman's orders, families had already begun farming the plots, and the reversal was deliberate. The result, sharecropping, reproduced economic dependence that the phrase forty acres and a mule still symbolizes."}
+          ]},
+          {type: "argument", instructions: "Write a thesis-driven argument of two paragraphs. State your claim clearly, support it with evidence from the reading and your research, and address one counterargument.", items: [
+            {id: "h33-1-a1", prompt: "Defend or challenge this thesis: Sherman's Special Field Orders No. 15, not the Emancipation Proclamation, was the measure that would have made freedom real. Write two paragraphs with a clear thesis.", guidance: "Thesis to defend or challenge: land distribution mattered more than legal emancipation for making freedom real. Use evidence from the reading (Frazier's testimony, the orders' terms setting aside coastal land, Johnson's reversal, the sharecropping outcome) plus research on what happened to coastal communities after the land was returned. Address this counterargument: a military field order was never a durable legal foundation, and only constitutional amendment could secure freedom permanently. Explain whether durability or substance should define what made freedom real."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows you understand its meaning in the context of this week's topic.", items: [
+            {id: "h33-1-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["freedmen", "land"]}
+          ]}
+        ]
     }
   ],
   science: [
@@ -4293,7 +5853,19 @@ const MM_WEEKS_912 = [
           {id:"s1-t1", text:"To make a 2 M solution, dissolve 2 moles of solute and add solvent until the total volume is 1 liter.", answer:"true"},
           {id:"s1-t2", text:"Molarity measures grams of solute per liter of solvent.", answer:"false", note:"Molarity measures moles of solute per liter of solution."}
         ]}
-      ]
+      ,
+          {type: "comprehension", instructions: "Answer each question in 2-3 complete sentences, citing evidence from the reading.", items: [
+            {id: "s33-0-c1", question: "Why does the reading define molarity using the volume of the whole solution rather than the volume of solvent added?", answer: "Because molarity is moles of solute per liter of solution, so a chemist dissolves the solute and then adds solvent until the total volume is exactly one liter. Using the solvent volume alone would give the wrong total volume and the wrong concentration."},
+            {id: "s33-0-c2", question: "How does molarity connect solution chemistry back to stoichiometry?", answer: "Molarity ties directly to moles: once the concentration and the volume are known, the exact moles of reactant are known, which links the solution to the mole ratios of balanced equations."},
+            {id: "s33-0-c3", question: "Why does the reading insist concentration must be exact in its examples of IV drips, fertilizer, and pool chlorine?", answer: "Because real applications depend on precise dosing. A doctor prescribing an IV drip, a farmer mixing fertilizer, and a lifeguard chlorinating a pool all need the concentration to be exactly what the label claims, or the results are wrong or unsafe."}
+          ]},
+          {type: "argument", instructions: "Write a thesis-driven argument of two paragraphs. State your claim clearly, support it with evidence from the reading and your research, and address one counterargument.", items: [
+            {id: "s33-0-a1", prompt: "Defend or challenge this thesis: Molarity is the most practical unit in chemistry because it is the one that connects the lab bench to real-world dosing. Write two paragraphs with a clear thesis.", guidance: "Thesis to defend or challenge: molarity deserves its status as the default concentration unit. Use evidence from the reading (IV drips, fertilizer, pool chlorine, stock solutions, the link to stoichiometry) plus research on concentration units in practice. Address this counterargument: molality and other units are more precise for some applications, such as work across temperature changes, so molarity is not universally best. Explain when molarity falls short and whether that undermines its primacy."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows you understand its meaning in the context of this week's topic.", items: [
+            {id: "s33-0-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["solute", "solvent"]}
+          ]}
+        ]
     },
     {
       title:"Dilution: Making Solutions Weaker",
@@ -4314,7 +5886,19 @@ const MM_WEEKS_912 = [
           {id:"s2-m2", term:"Adding solvent to lower a solution's concentration.", answer:"b"},
           {id:"s2-m3", term:"In M1V1 = M2V2, this symbol stands for the final concentration.", answer:"c"}
         ]}
-      ]
+      ,
+          {type: "comprehension", instructions: "Answer each question in 2-3 complete sentences, citing evidence from the reading.", items: [
+            {id: "s33-1-c1", question: "Why does M1V1 = M2V2 work as a dilution equation?", answer: "Dilution adds only solvent, so no solute is added or removed and the moles of solute do not change. Since moles equal molarity times volume, moles before dilution equal moles after, which gives M1V1 = M2V2."},
+            {id: "s33-1-c2", question: "In the worked example, why must the chemist add water until the total reaches 500 milliliters rather than simply adding 475 milliliters to the 25 milliliters of stock?", answer: "Because volumes do not always add perfectly, so the reliable procedure is to add solvent until the final total volume is reached. That careful step guarantees the calculated concentration is exact."},
+            {id: "s33-1-c3", question: "Why does the reading warn that a small measuring error at the dilution stage multiplies through every calculation that follows?", answer: "Because every later calculation, from reaction yields to medicine doses, depends on the concentration being exactly what the label claims. An error in the stock dilution propagates into all of them."}
+          ]},
+          {type: "argument", instructions: "Write a thesis-driven argument of two paragraphs. State your claim clearly, support it with evidence from the reading and your research, and address one counterargument.", items: [
+            {id: "s33-1-a1", prompt: "Defend or challenge this thesis: Dilution is the most underappreciated laboratory skill because every quantitative result downstream depends on getting it right. Write two paragraphs with a clear thesis.", guidance: "Thesis to defend or challenge: dilution deserves more instructional emphasis than it gets. Use evidence from the reading (stock solutions, the careful final-volume step, error propagation into yields and medicine doses) plus research on common student laboratory errors. Address this counterargument: automated dispensers and pre-made standards have made manual dilution nearly obsolete in modern labs. Explain whether a skill's importance survives its automation."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows you understand its meaning in the context of this week's topic.", items: [
+            {id: "s33-1-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["solute", "solvent"]}
+          ]}
+        ]
     }
   ],
   friday: {
@@ -4396,7 +5980,19 @@ const MM_WEEKS_912 = [
           {id:"h1-o4", event:"Southern states pass Jim Crow segregation laws.", answer:4},
           {id:"h1-o5", event:"The Supreme Court decides Plessy v. Ferguson.", answer:5}
         ]}
-      ]
+      ,
+          {type: "comprehension", instructions: "Answer each question in 2-3 complete sentences, citing evidence from the reading.", items: [
+            {id: "h34-0-c1", question: "Why does the reading call Reconstruction's expansion of democracy a revolution rather than just reform?", answer: "Because the results were unprecedented: the Thirteenth, Fourteenth, and Fifteenth Amendments plus federal troops produced soaring Black voter turnout, more than 1,500 Black officeholders including two United States senators from Mississippi, and the South's first public school systems."},
+            {id: "h34-0-c2", question: "How did voting and officeholding translate into concrete daily-life changes for formerly enslaved people?", answer: "Voting meant choosing sheriffs who would not look the other way at violence, and holding office meant shaping the laws on land, wages, and education in legislatures where Black voices now had votes. For formerly enslaved people, politics was not abstract."},
+            {id: "h34-0-c3", question: "Why was the federal government's strike against the Klan through the Enforcement Acts not enough to save Reconstruction?", answer: "Congress passed Enforcement Acts and President Grant used federal power against the Klan, but Northern commitment was already fading while the Redeemers were patient. Temporary federal force could not substitute for sustained political will."}
+          ]},
+          {type: "argument", instructions: "Write a thesis-driven argument of two paragraphs. State your claim clearly, support it with evidence from the reading and your research, and address one counterargument.", items: [
+            {id: "h34-0-a1", prompt: "Defend or challenge this thesis: Reconstruction failed because Northern commitment faded, not because its goals were unachievable. Write two paragraphs with a clear thesis.", guidance: "Thesis to defend or challenge: the failure was a failure of will, not of possibility. Use evidence from the reading (the amendments, the officeholders, the schools, the Enforcement Acts followed by fading commitment) plus research on Redemption. Address this counterargument: the goals required a sustained military occupation that no democracy could maintain indefinitely, so the failure was structural and inevitable. Explain whether a democratic republic can ever sustain the force needed to remake a defeated region."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows you understand its meaning in the context of this week's topic.", items: [
+            {id: "h34-0-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["redemption", "Jim Crow", "disenfranchise"]}
+          ]}
+        ]
     },
     {
       title:"Redemption and the Birth of Jim Crow",
@@ -4413,7 +6009,19 @@ const MM_WEEKS_912 = [
         {type:"shortanswer", instructions:"Write 4-6 sentences, then compare your answer with the model.", items:[
           {id:"h2-s1", prompt:"Argue: How was freedom stolen after Reconstruction: through law, through violence, or through political bargains? Defend your answer with evidence.", answer:"Freedom was stolen most decisively through law, because laws outlasted both the violence and the bargains. The Ku Klux Klan's terror and the Compromise of 1877 cleared the way, but poll taxes, literacy tests, and Jim Crow statutes made disenfranchisement permanent and respectable. Plessy v. Ferguson then gave the whole system the Supreme Court's approval, over Justice Harlan's lone dissent. Violence can be resisted and bargains can be revisited, but a legal order of segregation shaped Southern life for more than half a century. That is why the theft of freedom was, at its core, a legal theft."}
         ]}
-      ]
+      ,
+          {type: "comprehension", instructions: "Answer each question in 2-3 complete sentences, citing evidence from the reading.", items: [
+            {id: "h34-1-c1", question: "How did the tools of disenfranchisement manage to look neutral while targeting Black voters?", answer: "Poll taxes, literacy tests, and grandfather clauses were written without racial language, but literacy tests were applied unfairly against Black voters and grandfather clauses exempted white voters from the new rules, so the neutral appearance hid a racial target."},
+            {id: "h34-1-c2", question: "Why was the Compromise of 1877 the turning point that made Redemption possible?", answer: "The bargain handed the presidency to Rutherford B. Hayes in exchange for withdrawing the last federal troops from the South. Without troops to enforce the law, Black voters were left exposed to force and fraud, and elections they had won were overturned."},
+            {id: "h34-1-c3", question: "What did Harlan's dissent in Plessy v. Ferguson warn, and why does the reading say the civil rights movement would later build on his words?", answer: "Harlan warned that the Constitution is color-blind and neither knows nor tolerates classes among citizens, and that all citizens are equal before the law. His dissent became the legal foundation the civil rights movement later used against segregation, after going unheeded for decades."}
+          ]},
+          {type: "argument", instructions: "Write a thesis-driven argument of two paragraphs. State your claim clearly, support it with evidence from the reading and your research, and address one counterargument.", items: [
+            {id: "h34-1-a1", prompt: "Defend or challenge this thesis: The Compromise of 1877 was the single decision that doomed Reconstruction, because removing federal troops removed the only enforcement Black rights had. Write two paragraphs with a clear thesis.", guidance: "Thesis to defend or challenge: one bargain bears the weight of Reconstruction's collapse. Use evidence from the reading (the troop withdrawal, overturned elections, the rapid rewriting of state constitutions, the disenfranchisement tools) plus research on Redemption. Address this counterargument: Reconstruction was already collapsing before 1877, the remaining troops were too few to matter, and Northern will was gone regardless. Explain whether a single decision can doom a cause or only ratify a doom already decided."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows you understand its meaning in the context of this week's topic.", items: [
+            {id: "h34-1-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["redemption", "disenfranchise", "Jim Crow"]}
+          ]}
+        ]
     }
   ],
   science: [
@@ -4437,7 +6045,19 @@ const MM_WEEKS_912 = [
           {id:"s1-f3", text:"A neutral solution has a pH of ___.", answer:"7"},
           {id:"s1-f4", text:"Each step on the pH scale is a ___fold change in hydrogen ion concentration.", answer:"10"}
         ]}
-      ]
+      ,
+          {type: "comprehension", instructions: "Answer each question in 2-3 complete sentences, citing evidence from the reading.", items: [
+            {id: "s34-0-c1", question: "Why does the reading distinguish acid strength from danger, using hydrochloric acid and vinegar as examples?", answer: "Strength describes how completely a substance releases hydrogen ions, not how dangerous it is. Strong hydrochloric acid releases essentially all its hydrogen ions while weak vinegar releases only a few, but danger depends on concentration and context, not on strength alone."},
+            {id: "s34-0-c2", question: "Why is the pH scale logarithmic rather than linear, and what does each step represent?", answer: "Because hydrogen ion concentrations are usually tiny decimals, the scale compresses an enormous range into readable numbers. Each step represents a tenfold change: pH 3 has ten times the hydrogen ions of pH 4 and one hundred times that of pH 5."},
+            {id: "s34-0-c3", question: "How does the blood pH example show why the pH scale matters beyond the laboratory?", answer: "Blood must stay near pH 7.4 to keep a person alive, which shows that life depends on precise pH control. That is why the scale appears on everything from pool test kits to medical lab reports, not just in chemistry classrooms."}
+          ]},
+          {type: "argument", instructions: "Write a thesis-driven argument of two paragraphs. State your claim clearly, support it with evidence from the reading and your research, and address one counterargument.", items: [
+            {id: "s34-0-a1", prompt: "Defend or challenge this thesis: The pH scale is chemistry's best example of how a mathematical transformation (the logarithm) makes the invisible world readable. Write two paragraphs with a clear thesis.", guidance: "Thesis to defend or challenge: the logarithm is what makes pH powerful. Use evidence from the reading (tiny decimals compressed into 0 to 14, tenfold steps, the pH plus pOH equals 14 relationship, everyday uses) plus research on logarithmic scales in science. Address this counterargument: the log scale confuses beginners who think linearly, so the readability comes at the cost of misunderstanding. Explain whether the transformation's power is worth the confusion it causes."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows you understand its meaning in the context of this week's topic.", items: [
+            {id: "s34-0-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["acidic", "alkaline"]}
+          ]}
+        ]
     },
     {
       title:"Titration: Finding the Equivalence Point",
@@ -4456,7 +6076,19 @@ const MM_WEEKS_912 = [
         {type:"shortanswer", instructions:"Write 4-6 sentences, then compare your answer with the model.", items:[
           {id:"s2-s1", prompt:"Explain in 4 to 6 sentences how a titration lets a chemist determine an unknown concentration.", answer:"A titration finds an unknown concentration by reacting it with a solution whose concentration is known. The chemist adds the known solution slowly until the reaction is exactly complete, which is the equivalence point. An indicator's color change marks the endpoint, signaling that the equivalence point has been reached. From the volume of known solution used, the chemist calculates the moles that reacted. Because the moles of acid equal the moles of base at the equivalence point, those moles reveal the unknown concentration. The technique turns careful measurement into a precise answer."}
         ]}
-      ]
+      ,
+          {type: "comprehension", instructions: "Answer each question in 2-3 complete sentences, citing evidence from the reading.", items: [
+            {id: "s34-1-c1", question: "Why is the equivalence point not always at pH 7?", answer: "It depends on the acid and base involved. A weak acid with a strong base lands above 7, and a strong acid with a weak base lands below 7. Only a strong acid with a strong base gives an equivalence point at pH 7, where the products are simply water and a neutral salt."},
+            {id: "s34-1-c2", question: "Why does choosing the right indicator matter so much in a titration?", answer: "The indicator's color change must happen as close to the equivalence point as possible. The wrong indicator changes color too early or too late, giving a wrong volume of known solution and therefore a wrong calculated concentration for the unknown."},
+            {id: "s34-1-c3", question: "How does a titration turn the abstract math of moles and pH into a measurement a student can perform?", answer: "The volume of known solution used at the equivalence point reveals the unknown concentration through stoichiometry, since moles of known equal moles of unknown there. A burette, a flask, and a single drop of phenolphthalein turning pink do the work of the equations."}
+          ]},
+          {type: "argument", instructions: "Write a thesis-driven argument of two paragraphs. State your claim clearly, support it with evidence from the reading and your research, and address one counterargument.", items: [
+            {id: "s34-1-a1", prompt: "Defend or challenge this thesis: Titration remains worth teaching even in an age of digital sensors because it forces students to connect measurement, stoichiometry, and chemical reasoning in one procedure. Write two paragraphs with a clear thesis.", guidance: "Thesis to defend or challenge: manual titration has enduring pedagogical value. Use evidence from the reading (the burette and flask, indicator choice, titration curves, the equivalence point logic) plus research on laboratory learning. Address this counterargument: pH meters and autotitrators do the job faster and more precisely, so manual titration is nostalgia rather than education. Explain what, if anything, is lost when the procedure is automated."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows you understand its meaning in the context of this week's topic.", items: [
+            {id: "s34-1-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["acidic", "alkaline"]}
+          ]}
+        ]
     }
   ],
   friday: {
@@ -4541,6 +6173,18 @@ const MM_WEEKS_912 = [
             {id:"h1-m2", term:"John D. Rockefeller", answer:"b"},
             {id:"h1-m3", term:"Pullman porters", answer:"c"}
           ]}
+        ,
+          {type: "comprehension", instructions: "Answer each question in 2-3 complete sentences, citing evidence from the reading.", items: [
+            {id: "h35-0-c1", question: "How did Bessemer's steel process make Carnegie's empire possible?", answer: "The new process cut the cost of a ton of steel from about one hundred dollars to less than twenty. Railroad demand gave Carnegie the market, and he bought up mines, mills, and railroads until his company produced more steel than all of Britain."},
+            {id: "h35-0-c2", question: "Why does the reading say Black Americans were part of the industrial story from the start, though the history books often leave them out?", answer: "Black workers dug coal and iron ore and labored in the furnaces of Birmingham's new Southern steel industry, and on the railroads they worked as brakemen, firemen, and track laborers doing dangerous jobs for the lowest pay. The most visible were the Pullman porters, who served white passengers in sleeping cars for tips more than wages."},
+            {id: "h35-0-c3", question: "What contrast does the reading draw between Carnegie's Gospel of Wealth and the porters' reality?", answer: "Carnegie's 1889 essay defended great fortunes as the proper administration of wealth binding rich and poor in harmonious relationship, while the porters and furnace workers who built those fortunes lived a different reality of long hours and low pay."}
+          ]},
+          {type: "argument", instructions: "Write a thesis-driven argument of two paragraphs. State your claim clearly, support it with evidence from the reading and your research, and address one counterargument.", items: [
+            {id: "h35-0-a1", prompt: "Defend or challenge this thesis: The fortunes of the Gilded Age were built by workers, especially Black workers, whose names never made the newspapers. Write two paragraphs with a clear thesis.", guidance: "Thesis to defend or challenge: labor, not capital, was the true builder of Gilded Age wealth. Use evidence from the reading (Birmingham's Black furnace workers, railroad brakemen and firemen, Pullman porters, the Homestead steelworker's twelve-hour days) plus research on Pullman porters. Address this counterargument: capital, organization, and innovation, Bessemer's process, Carnegie's integration, Rockefeller's trust, created the wealth, and labor was replaceable. Explain how you apportion credit between the organizers and the workers."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows you understand its meaning in the context of this week's topic.", items: [
+            {id: "h35-0-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["trust", "porter", "monopoly"]}
+          ]}
         ]
       },
       {
@@ -4559,6 +6203,18 @@ const MM_WEEKS_912 = [
             {id:"h2-f1", text:"Carnegie's fortune depended on cheap ___ made with the Bessemer process.", answer:"steel"},
             {id:"h2-f2", text:"Pullman porters worked sixteen-hour days and survived largely on ___ from passengers.", answer:"tips"},
             {id:"h2-f3", text:"A typical industrial workday lasted ___ hours or more.", answer:"twelve"}
+          ]}
+        ,
+          {type: "comprehension", instructions: "Answer each question in 2-3 complete sentences, citing evidence from the reading.", items: [
+            {id: "h35-1-c1", question: "Why did a workplace injury often mean a lost job with no compensation for Gilded Age workers?", answer: "Employers treated labor as cheap and replaceable, accidents were common, safety rules were rare, and when workers asked for more, owners answered with locked gates and hired guards. A lost hand or crushed leg meant a lost job with no compensation because no system protected the worker."},
+            {id: "h35-1-c2", question: "How did the color line shape which jobs Black workers got, and what did Black workers build despite it?", answer: "Skilled trades and many unions barred Black men outright, pushing them toward the hardest and most dangerous work: digging coal, laying track, and stoking furnaces. Yet porters' steady pay helped build Black middle-class neighborhoods in Chicago and other cities."},
+            {id: "h35-1-c3", question: "What made the Pullman porter job both exploitative and a source of pride?", answer: "Porters carried bags, shined shoes, and smiled through sixteen-hour shifts, enduring insults with patience because a complaint could cost them the job, and they survived on tips more than wages. Yet the job carried pride, and the steady pay helped build Black middle-class neighborhoods."}
+          ]},
+          {type: "argument", instructions: "Write a thesis-driven argument of two paragraphs. State your claim clearly, support it with evidence from the reading and your research, and address one counterargument.", items: [
+            {id: "h35-1-a1", prompt: "Defend or challenge this thesis: The Pullman porters prove that dignity and exploitation can coexist in the same job, and that workers can build community power even inside an unjust system. Write two paragraphs with a clear thesis.", guidance: "Thesis to defend or challenge: the porters' story is one of agency within exploitation. Use evidence from the reading (sixteen-hour shifts, tip dependence, the pride of the job, the Black middle-class neighborhoods their pay built) plus research on Pullman porters. Address this counterargument: celebrating pride in such jobs romanticizes exploitation and lets the system that created the conditions off the hook. Explain whether honoring the workers' dignity excuses or indicts the system."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows you understand its meaning in the context of this week's topic.", items: [
+            {id: "h35-1-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["porter", "trust"]}
           ]}
         ]
       }
@@ -4588,6 +6244,18 @@ const MM_WEEKS_912 = [
             {id:"s1-f2", text:"Burning wood is an ___ reaction because it gives off heat.", answer:"exothermic"},
             {id:"s1-f3", text:"Melting ice is an ___ process because it absorbs heat from its surroundings.", answer:"endothermic"}
           ]}
+        ,
+          {type: "comprehension", instructions: "Answer each question in 2-3 complete sentences, citing evidence from the reading.", items: [
+            {id: "s35-0-c1", question: "Why do chemists measure changes in enthalpy (delta H) rather than absolute enthalpy?", answer: "Because no one can measure absolute enthalpy. Chemists measure the heat absorbed or released when a reaction happens at constant pressure, and the sign of delta H tells the story: negative means the system releases heat, positive means it absorbs heat."},
+            {id: "s35-0-c2", question: "How does the system-versus-surroundings distinction keep thermochemical bookkeeping straight?", answer: "Scientists define the system as the chemicals being studied and the surroundings as everything else, then compare every reaction under standard conditions of pure substances, one atmosphere, and usually 25 degrees Celsius. That consistent framing lets every reaction be classified as exothermic or endothermic."},
+            {id: "s35-0-c3", question: "Why does the reading call the human body a machine for converting enthalpy into useful work?", answer: "Like power plants and car engines, the body converts the enthalpy stored in chemical bonds into useful work. Every such design starts with the same question thermochemistry asks: where does the heat go?"}
+          ]},
+          {type: "argument", instructions: "Write a thesis-driven argument of two paragraphs. State your claim clearly, support it with evidence from the reading and your research, and address one counterargument.", items: [
+            {id: "s35-0-a1", prompt: "Defend or challenge this thesis: Thermochemistry matters most outside the lab, in engines, power plants, and bodies, so it should be taught through those applications first. Write two paragraphs with a clear thesis.", guidance: "Thesis to defend or challenge: applications-first is the right pedagogy for thermochemistry. Use evidence from the reading (burning natural gas, gasoline, rusting iron, baking bread, photosynthesis, power plants, car engines, the human body) plus research on context-based science teaching. Address this counterargument: applications-first teaching skips the definitions, system, surroundings, and standard conditions, that make the applications intelligible. Explain how you would sequence definitions and applications."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows you understand its meaning in the context of this week's topic.", items: [
+            {id: "s35-0-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["exothermic", "endothermic"]}
+          ]}
         ]
       },
       {
@@ -4607,6 +6275,18 @@ const MM_WEEKS_912 = [
           {type:"truefalse", instructions:"Decide whether each statement is true or false.", items:[
             {id:"s2-t1", text:"A calorimeter measures heat flow by tracking temperature changes in a known mass of water.", answer:"true", note:"Water's high specific heat makes it a reliable heat absorber."},
             {id:"s2-t2", text:"According to Hess's law, a reaction's enthalpy change depends on the number of steps used.", answer:"false", note:"Enthalpy change depends only on the starting and ending states."}
+          ]}
+        ,
+          {type: "comprehension", instructions: "Answer each question in 2-3 complete sentences, citing evidence from the reading.", items: [
+            {id: "s35-1-c1", question: "Why is water the perfect measuring tool for calorimetry?", answer: "Its specific heat is high and well known: it takes 4.18 joules to raise one gram of water by one degree Celsius. Letting a reaction happen inside an insulated container of water and watching the temperature change lets the equation q = mc(delta T) turn a thermometer reading into an energy measurement."},
+            {id: "s35-1-c2", question: "When would a chemist use Hess's law instead of a calorimeter, and why does the law work?", answer: "When a reaction is too slow, too dangerous, or too messy to run in a calorimeter. The law works because enthalpy is a state function: the total enthalpy change is the same no matter how many steps the reaction takes, so chemists can add the equations and enthalpy values of easy reactions to calculate a hard one."},
+            {id: "s35-1-c3", question: "Why does the reading call Hess's law conservation of energy applied to chemistry?", answer: "Because it guarantees that no matter which path a reaction follows, the energy books always balance. Heat is never lost or created, only moved from one substance to another, which is conservation of energy stated for chemical reactions."}
+          ]},
+          {type: "argument", instructions: "Write a thesis-driven argument of two paragraphs. State your claim clearly, support it with evidence from the reading and your research, and address one counterargument.", items: [
+            {id: "s35-1-a1", prompt: "Defend or challenge this thesis: Hess's law shows that in science, clever bookkeeping can substitute for impossible experiments, and that is a legitimate form of discovery. Write two paragraphs with a clear thesis.", guidance: "Thesis to defend or challenge: calculation can be discovery. Use evidence from the reading (adding easy reactions to find the enthalpy of hard ones, Germain Hess's 1840 formulation, predicting heats of never-run reactions from tables) plus research on the role of theory in chemistry. Address this counterargument: calculated values are not discoveries at all, and only measurement discovers anything real. Explain what, if anything, is genuinely learned when bookkeeping replaces the experiment."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows you understand its meaning in the context of this week's topic.", items: [
+            {id: "s35-1-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["exothermic", "endothermic"]}
           ]}
         ]
       }
@@ -4681,6 +6361,18 @@ const MM_WEEKS_912 = [
             {id:"h1-m2", term:"Haymarket, 1886", answer:"b"},
             {id:"h1-m3", term:"Homestead, 1892", answer:"c"}
           ]}
+        ,
+          {type: "comprehension", instructions: "Answer each question in 2-3 complete sentences, citing evidence from the reading.", items: [
+            {id: "h36-0-c1", question: "Why did the Knights of Labor's inclusive membership make it both powerful and vulnerable?", answer: "Welcoming skilled and unskilled workers, men and women, Black and white built it to more than 700,000 members by 1886, but that breadth made it harder to bargain from strength than the American Federation of Labor's narrower strategy of organizing only skilled craftsmen."},
+            {id: "h36-0-c2", question: "How did the defeats at Haymarket, Homestead, and Pullman each teach workers the same lesson?", answer: "Each defeat showed that without organization, the individual laborer stood no chance against concentrated capital: Haymarket brought years of public blame after a bombing, Homestead brought armed lockouts with more than a dozen dead, and Pullman brought federal troops shutting down the strike."},
+            {id: "h36-0-c3", question: "Why did the 1877 railroad strike spread nationally yet still fail?", answer: "Railroad workers walked off over wage cuts and the walkout spread across the country, showing the grievance was national, but federal troops crushed it, showing that even national organization could not yet withstand state power."}
+          ]},
+          {type: "argument", instructions: "Write a thesis-driven argument of two paragraphs. State your claim clearly, support it with evidence from the reading and your research, and address one counterargument.", items: [
+            {id: "h36-0-a1", prompt: "Defend or challenge this thesis: The labor movement's exclusion of Black workers weakened every strike it touched. Write two paragraphs with a clear thesis.", guidance: "Thesis to defend or challenge: the color line was labor's strategic wound, not just its moral one. Use evidence from the reading (AFL craft exclusion, employers hiring Black workers as strikebreakers and firing them after, the trump card employers held) plus research on Black labor organizing such as the Colored National Labor Union. Address this counterargument: the AFL's narrow strategy won real gains for its members, and inclusion might have diluted bargaining power. Explain whether solidarity or exclusivity produced stronger labor power in the long run."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows you understand its meaning in the context of this week's topic.", items: [
+            {id: "h36-0-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["strike", "exclude", "unionize"]}
+          ]}
         ]
       },
       {
@@ -4699,6 +6391,18 @@ const MM_WEEKS_912 = [
             {id:"h2-f1", text:"Craft unions voted to ___ Black workers from membership.", answer:"exclude"},
             {id:"h2-f2", text:"Isaac ___ led the founding of the Colored National Labor Union.", answer:"Myers"},
             {id:"h2-f3", text:"Employers hired Black workers as ___ to weaken walkouts.", answer:"strikebreakers"}
+          ]}
+        ,
+          {type: "comprehension", instructions: "Answer each question in 2-3 complete sentences, citing evidence from the reading.", items: [
+            {id: "h36-1-c1", question: "How did employers turn the unions' exclusion of Black workers into a weapon against white strikers?", answer: "Employers hired Black workers as strikebreakers during walkouts and then fired them once the strike ended. The excluded workers became a trump card the employer could always play, which weakened every strike the color line touched."},
+            {id: "h36-1-c2", question: "Why does the reading say the fight for workers' rights and the fight for racial justice were never separate struggles?", answer: "Because when unions excluded Black workers they weakened themselves, and when Black organizers built their own unions they kept the demand for dignity alive through the hardest decades of segregation. Each struggle's fate depended on the other's, so they were one fight in two forms."},
+            {id: "h36-1-c3", question: "What did Black workers build when white unions shut them out, beyond unions themselves?", answer: "They built the Colored National Labor Union in 1869 under Isaac Myers, plus Black-led locals and mutual aid societies among washerwomen, dockworkers, and miners. These organizations served as banks, burial societies, and political clubs in communities the white labor movement ignored."}
+          ]},
+          {type: "argument", instructions: "Write a thesis-driven argument of two paragraphs. State your claim clearly, support it with evidence from the reading and your research, and address one counterargument.", items: [
+            {id: "h36-1-a1", prompt: "Defend or challenge this thesis: Black workers' independent organizing (the Colored National Labor Union, mutual aid societies) was more effective than integration into white unions would have been. Write two paragraphs with a clear thesis.", guidance: "Thesis to defend or challenge: separate Black organizing was the stronger strategy. Use evidence from the reading (the 1869 Baltimore caulkers, the washerwomen, dockworkers, and miners, the banks and burial societies, the demand for dignity kept alive through segregation) plus research on Black labor organizing. Address this counterargument: separate organizations accepted segregation and could never match white unions' bargaining power with employers. Explain whether independence or integration would have won more for Black workers."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows you understand its meaning in the context of this week's topic.", items: [
+            {id: "h36-1-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["exclude", "unionize", "strike"]}
           ]}
         ]
       }
@@ -4730,6 +6434,18 @@ const MM_WEEKS_912 = [
             {id:"s1-o4", event:"The particles are oriented correctly.", answer:4},
             {id:"s1-o5", event:"Bonds break and new products form.", answer:5}
           ]}
+        ,
+          {type: "comprehension", instructions: "Answer each question in 2-3 complete sentences, citing evidence from the reading.", items: [
+            {id: "s36-0-c1", question: "Why does raising the temperature speed up a reaction, according to collision theory?", answer: "Higher temperature makes particles move faster and hit harder, so more collisions carry the minimum energy needed to react, called the activation energy. That increases the number of effective collisions."},
+            {id: "s36-0-c2", question: "How does a catalyst speed up a reaction without being used up?", answer: "It provides an alternate reaction path with lower activation energy, so the reaction runs faster while the catalyst itself is not consumed. Enzymes in the body are biological catalysts, which is why food digests in hours instead of decades."},
+            {id: "s36-0-c3", question: "Why must reaction orders be found by experiment rather than guessed from the balanced equation?", answer: "The exponents in a rate law describe how the rate actually depends on concentration, which is an observed relationship. They cannot be derived from the equation's coefficients, so chemists must change one concentration at a time and watch what happens to the rate."}
+          ]},
+          {type: "argument", instructions: "Write a thesis-driven argument of two paragraphs. State your claim clearly, support it with evidence from the reading and your research, and address one counterargument.", items: [
+            {id: "s36-0-a1", prompt: "Defend or challenge this thesis: Enzymes prove that catalysts are the most important idea in kinetics because they show the principle operating in every living cell. Write two paragraphs with a clear thesis.", guidance: "Thesis to defend or challenge: the biological catalyst is kinetics' central example. Use evidence from the reading (enzymes as biological catalysts, digestion in hours instead of decades, catalysts providing lower-energy paths) plus research on enzyme function. Address this counterargument: industrial catalysts, such as those in the Haber process for fertilizer, changed human history more than enzymes did. Explain how you measure importance: by ubiquity in life or by historical impact."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows you understand its meaning in the context of this week's topic.", items: [
+            {id: "s36-0-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["catalyst", "equilibrium"]}
+          ]}
         ]
       },
       {
@@ -4751,6 +6467,18 @@ const MM_WEEKS_912 = [
           {type:"truefalse", instructions:"Decide whether each statement is true or false.", items:[
             {id:"s2-t1", text:"At equilibrium, the forward and reverse reactions have both stopped.", answer:"false", note:"Both reactions continue; their rates are simply equal."},
             {id:"s2-t2", text:"Removing product as it forms shifts an equilibrium toward more product.", answer:"true", note:"The system replaces what is removed, a trick used in industry."}
+          ]}
+        ,
+          {type: "comprehension", instructions: "Answer each question in 2-3 complete sentences, citing evidence from the reading.", items: [
+            {id: "s36-1-c1", question: "Why is equilibrium called dynamic even though concentrations stop changing?", answer: "At the molecular level, particles keep colliding and reacting in both directions. The forward and reverse rates are simply equal, so the reaction has not stopped even though the concentrations hold steady."},
+            {id: "s36-1-c2", question: "How does Le Chatelier's principle explain the industrial trick of removing product as it forms?", answer: "Removing product applies a stress to the system at equilibrium, and the system adjusts to relieve the stress by pulling the forward reaction onward. Industry uses this trick to make ammonia for fertilizer."},
+            {id: "s36-1-c3", question: "What does the equilibrium constant K tell a chemist that Le Chatelier's principle does not?", answer: "Le Chatelier's principle predicts the direction of a shift, while K describes the extent of the balance with a single number comparing products to reactants. A large K means products dominate at equilibrium; a small K means reactants dominate."}
+          ]},
+          {type: "argument", instructions: "Write a thesis-driven argument of two paragraphs. State your claim clearly, support it with evidence from the reading and your research, and address one counterargument.", items: [
+            {id: "s36-1-a1", prompt: "Defend or challenge this thesis: Le Chatelier's principle is more useful to working chemists than the equilibrium constant because it predicts what to do, not just what is. Write two paragraphs with a clear thesis.", guidance: "Thesis to defend or challenge: actionable prediction beats static description. Use evidence from the reading (steering equilibrium by adding reactant, removing product, and changing temperature or pressure; blood carrying carbon dioxide; factories maximizing output) plus research on industrial applications. Address this counterargument: without K you cannot know whether a shift is worth pursuing, so direction without extent is incomplete guidance. Explain whether a chemist needs the principle, the constant, or both to act wisely."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows you understand its meaning in the context of this week's topic.", items: [
+            {id: "s36-1-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["equilibrium", "catalyst"]}
           ]}
         ]
       }
@@ -4828,6 +6556,18 @@ const MM_WEEKS_912 = [
             {id:"h1-m2", term:"Farmers' Alliances", answer:"b"},
             {id:"h1-m3", term:"People's Party", answer:"c"}
           ]}
+        ,
+          {type: "comprehension", instructions: "Answer each question in 2-3 complete sentences, citing evidence from the reading.", items: [
+            {id: "h37-0-c1", question: "Why was abundance a curse for farmers after the Civil War?", answer: "New machinery and new land pushed crop production to record highs, but so much cotton, wheat, and corn flooded the market that prices collapsed: a bale of cotton that sold for fifty dollars in 1870 might fetch fifteen in 1890, while the debts farmers owed and the railroad rates they paid never fell."},
+            {id: "h37-0-c2", question: "How did the Farmers' Alliances move farmers from economic cooperation to political action?", answer: "Alliance lecturers traveled the countryside urging farmers to vote as one bloc, and by 1890 the Alliances claimed over a million members. In 1892 the movement became a political party at Omaha, nominating James Weaver for president on a platform denouncing the money power."},
+            {id: "h37-0-c3", question: "Which Populist demands from the Omaha platform shaped American politics for decades, and why were they radical in 1892?", answer: "Government ownership of railroads, free coinage of silver, and a graduated income tax. They were radical because they proposed direct government intervention in an economy the Gilded Age had left to trusts and banks."}
+          ]},
+          {type: "argument", instructions: "Write a thesis-driven argument of two paragraphs. State your claim clearly, support it with evidence from the reading and your research, and address one counterargument.", items: [
+            {id: "h37-0-a1", prompt: "Defend or challenge this thesis: The Populists' Omaha platform was the right diagnosis of Gilded Age corruption even though the party itself failed. Write two paragraphs with a clear thesis.", guidance: "Thesis to defend or challenge: the platform outlived the party because the diagnosis was correct. Use evidence from the reading (the platform's language about corruption dominating ballot box, legislatures, and Congress; the demands that later shaped politics) plus research on the Colored Farmers' Alliance. Address this counterargument: the platform's radicalism, such as government ownership of railroads, is precisely what doomed the party politically. Explain whether being right matters if being radical makes you unelectable."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows you understand its meaning in the context of this week's topic.", items: [
+            {id: "h37-0-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["populist", "alliance", "bimetallism"]}
+          ]}
         ]
       },
       {
@@ -4846,6 +6586,18 @@ const MM_WEEKS_912 = [
             {id:"h2-f1", text:"The People's Party adopted its platform at ___ in 1892.", answer:"Omaha"},
             {id:"h2-f2", text:"In 1896 the Populists fused with the Democrats behind William Jennings ___.", answer:"Bryan"},
             {id:"h2-f3", text:"Southern constitutions were rewritten to ___ Black voters.", answer:"disfranchise"}
+          ]}
+        ,
+          {type: "comprehension", instructions: "Answer each question in 2-3 complete sentences, citing evidence from the reading.", items: [
+            {id: "h37-1-c1", question: "Why was the Colored Farmers' Alliance both a sign of hope and structurally vulnerable?", answer: "With more than a million members it was one of the largest Black organizations in nineteenth-century America, making a genuine biracial coalition seem possible. But as a separate parallel organization, it could be targeted and destroyed without white Populists defending it as their own."},
+            {id: "h37-1-c2", question: "How did wealthy white Democrats destroy the coalition, according to the reading?", answer: "They answered the Populist threat with campaigns of white supremacy, warning poor white farmers that voting with Black men meant surrendering white rule. Violence and fraud stole elections the Populists might have won, and after the 1896 defeat, Southern states rewrote constitutions to disfranchise Black voters through poll taxes, literacy tests, and white primaries."},
+            {id: "h37-1-c3", question: "What lesson does the reading draw for later organizers from the coalition's destruction?", answer: "Whenever poor Americans divided along racial lines, the wealthy kept their power without a fight. Later generations of organizers, from labor unions to civil rights movements, studied this failure and worked deliberately to build the biracial alliances the Populists could not hold."}
+          ]},
+          {type: "argument", instructions: "Write a thesis-driven argument of two paragraphs. State your claim clearly, support it with evidence from the reading and your research, and address one counterargument.", items: [
+            {id: "h37-1-a1", prompt: "Defend or challenge this thesis: The destruction of the Populist coalition proves that racial division has always been the wealthy elite's most effective tool against economic reform. Write two paragraphs with a clear thesis.", guidance: "Thesis to defend or challenge: race was the decisive weapon used to kill economic reform. Use evidence from the reading (the white supremacy campaigns, the fraud and violence, the disfranchising constitutions, the lesson that the wealthy kept power without a fight) plus research on the Colored Farmers' Alliance. Address this counterargument: the coalition also failed from the 1896 fusion with the Democrats and internal disagreements, so race was one factor among several. Explain whether race was the weapon or merely one of the causes."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows you understand its meaning in the context of this week's topic.", items: [
+            {id: "h37-1-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["alliance", "populist"]}
           ]}
         ]
       }
@@ -4877,6 +6629,18 @@ const MM_WEEKS_912 = [
             {id:"s1-o4", event:"Solve so the numbers add up to the total charge.", answer:4},
             {id:"s1-o5", event:"Check whether each atom was oxidized or reduced.", answer:5}
           ]}
+        ,
+          {type: "comprehension", instructions: "Answer each question in 2-3 complete sentences, citing evidence from the reading.", items: [
+            {id: "s37-0-c1", question: "Why must oxidation and reduction always happen together?", answer: "Because an electron lost by one atom must be gained by another. Oxidation is loss and reduction is gain, the OILRIG pairing, so the two are halves of a single electron transfer, as when iron loses electrons to oxygen in rusting."},
+            {id: "s37-0-c2", question: "How do oxidation numbers let chemists track electron flow in a reaction like rusting?", answer: "When iron rusts, iron's oxidation number rises, showing it lost electrons and was oxidized, while oxygen's oxidation number falls, showing it gained electrons and was reduced. The numbers turn the electron transfer into readable bookkeeping."},
+            {id: "s37-0-c3", question: "Why is the oxidizing agent the substance that gets reduced?", answer: "Because the oxidizing agent causes oxidation by taking electrons from another substance, and taking electrons means gaining them, which is reduction. The names describe what each substance does to the other, not what happens to itself."}
+          ]},
+          {type: "argument", instructions: "Write a thesis-driven argument of two paragraphs. State your claim clearly, support it with evidence from the reading and your research, and address one counterargument.", items: [
+            {id: "s37-0-a1", prompt: "Defend or challenge this thesis: Oxidation numbers are bookkeeping, not physical reality, but that bookkeeping is what makes redox chemistry learnable. Write two paragraphs with a clear thesis.", guidance: "Thesis to defend or challenge: artificial rules earn their place by making the invisible trackable. Use evidence from the reading (the straightforward rules, the NaCl and H2O checks where the numbers add to zero, the oxidizing versus reducing agent logic) plus research on how students learn redox. Address this counterargument: teaching artificial numbers confuses students about what electrons actually do, since oxidation numbers are not real charges. Explain whether a useful fiction helps or harms understanding."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows you understand its meaning in the context of this week's topic.", items: [
+            {id: "s37-0-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["oxidation", "reduction"]}
+          ]}
         ]
       },
       {
@@ -4898,6 +6662,18 @@ const MM_WEEKS_912 = [
           {type:"truefalse", instructions:"Decide whether each statement is true or false.", items:[
             {id:"s2-t1", text:"In a galvanic cell, electrons flow through the wire from the anode to the cathode.", answer:"true", note:"Oxidation at the anode releases electrons that travel to the cathode."},
             {id:"s2-t2", text:"Galvanizing protects steel because zinc oxidizes before iron does.", answer:"true", note:"The zinc coating sacrifices itself to protect the steel underneath."}
+          ]}
+        ,
+          {type: "comprehension", instructions: "Answer each question in 2-3 complete sentences, citing evidence from the reading.", items: [
+            {id: "s37-1-c1", question: "How does separating the half-reactions into two compartments turn a redox reaction into a battery?", answer: "The oxidation half-reaction and the reduction half-reaction are placed in two compartments, so the electrons travel from one to the other through a wire instead of directly, creating an electric current. The anode hosts oxidation and the cathode hosts reduction, as in the Daniell cell's zinc and copper."},
+            {id: "s37-1-c2", question: "Why does galvanizing protect steel, using the reading's redox logic?", answer: "Galvanizing coats steel with zinc, which oxidizes first and sacrifices itself to protect the iron underneath. The zinc gives up electrons more readily, so the iron is spared."},
+            {id: "s37-1-c3", question: "What trade-offs do engineers weigh when choosing battery chemistry?", answer: "Energy, weight, cost, and lifespan. Lithium-ion cells pack the most energy into the least weight, which is why they power phones and electric cars, while lead-acid batteries are heavy but cheap and reliable, which is why they still start most automobiles."}
+          ]},
+          {type: "argument", instructions: "Write a thesis-driven argument of two paragraphs. State your claim clearly, support it with evidence from the reading and your research, and address one counterargument.", items: [
+            {id: "s37-1-a1", prompt: "Defend or challenge this thesis: Rechargeable batteries prove that redox reactions are reversible processes, and reversibility is the key idea that makes modern energy storage possible. Write two paragraphs with a clear thesis.", guidance: "Thesis to defend or challenge: reversibility is the central concept of electrochemistry. Use evidence from the reading (lithium-ion cells running the reaction in reverse when plugged in, forcing electrons back and restoring the starting chemicals) plus research on battery technology. Address this counterargument: corrosion shows many redox processes are effectively irreversible in practice, so reversibility is the exception rather than the rule. Explain whether the exception or the rule should anchor the teaching."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows you understand its meaning in the context of this week's topic.", items: [
+            {id: "s37-1-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["oxidation", "reduction"]}
           ]}
         ]
       }
@@ -4983,6 +6759,18 @@ const MM_WEEKS_912 = [
             {id:"h1-m2", term:"Puerto Rico", answer:"b"},
             {id:"h1-m3", term:"Hawaii", answer:"c"}
           ]}
+        ,
+          {type: "comprehension", instructions: "Answer each question in 2-3 complete sentences, citing evidence from the reading.", items: [
+            {id: "h38-0-c1", question: "How did yellow journalism turn the Maine explosion into a war, even though the cause was never proven?", answer: "Competing newspapers filled their pages with sensational stories of Spanish cruelty, and when the battleship Maine exploded in Havana harbor killing 266 sailors, the press blamed Spain at once. Remember the Maine became a battle cry and war fever swept the country before the facts were established."},
+            {id: "h38-0-c2", question: "What contradiction does the reading identify between the Teller Amendment and the Treaty of Paris?", answer: "Congress added the Teller Amendment promising the United States would not annex Cuba, yet the Treaty of Paris gave the United States Puerto Rico, Guam, and the Philippines. America disavowed one annexation while taking an empire elsewhere."},
+            {id: "h38-0-c3", question: "Why did the lopsided military result convince many Americans they had become a world power, and what question did few ask?", answer: "American troops with modern rifles and steel battleships defeated older Spanish equipment in barely four months, which looked like proof of world-power status. Few paused to ask what that power would cost."}
+          ]},
+          {type: "argument", instructions: "Write a thesis-driven argument of two paragraphs. State your claim clearly, support it with evidence from the reading and your research, and address one counterargument.", items: [
+            {id: "h38-0-a1", prompt: "Defend or challenge this thesis: The Spanish-American War's real cost was not the four months of fighting but the empire America took on without asking what it would cost. Write two paragraphs with a clear thesis.", guidance: "Thesis to defend or challenge: the war's consequences outweighed its combat. Use evidence from the reading (the Treaty of Paris, the Philippines, McKinley's war message, the observation that few asked what power would cost) plus research on Black soldiers' experience in the Philippines. Address this counterargument: the war liberated Cuba from Spanish rule, so the empire was an unintended byproduct rather than the goal. Explain whether unintended consequences count against a war's justification."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows you understand its meaning in the context of this week's topic.", items: [
+            {id: "h38-0-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["empire", "annex", "hegemony"]}
+          ]}
         ]
       },
       {
@@ -5001,6 +6789,18 @@ const MM_WEEKS_912 = [
             {id:"h2-f1", text:"The Black regiments were known as ___ Soldiers.", answer:"Buffalo"},
             {id:"h2-f2", text:"They charged San Juan Hill alongside Roosevelt's Rough ___.", answer:"Riders"},
             {id:"h2-f3", text:"After Cuba, Black regiments were sent to fight in the ___.", answer:"Philippines"}
+          ]}
+        ,
+          {type: "comprehension", instructions: "Answer each question in 2-3 complete sentences, citing evidence from the reading.", items: [
+            {id: "h38-1-c1", question: "What contradiction did Black soldiers' service force the nation to confront?", answer: "They fought for freedom abroad in Cuba while being denied freedom at home. Their heroism at San Juan Hill challenged a nation that lynched Black citizens yet claimed to civilize others."},
+            {id: "h38-1-c2", question: "Why did the Philippine phase of the war change the meaning of Black soldiers' service?", answer: "Filipino nationalists who had been fighting Spain for independence turned their guns on the new American occupiers, so Black regiments sent to put down the rebellion faced the irony of conquering a dark-skinned people struggling for the same liberty Black Americans were denied."},
+            {id: "h38-1-c3", question: "How did Black leaders split over imperialism, and what united both sides' later use of the soldiers' record?", answer: "Some argued that loyal service would earn white respect, while others asked how a nation that lynched Black citizens could claim to civilize anyone. Afterward, both pride and challenge drew on the same record: Black newspapers and orators pointed to the soldiers' service whenever America claimed to stand for freedom."}
+          ]},
+          {type: "argument", instructions: "Write a thesis-driven argument of two paragraphs. State your claim clearly, support it with evidence from the reading and your research, and address one counterargument.", items: [
+            {id: "h38-1-a1", prompt: "Defend or challenge this thesis: Black soldiers in the Philippines faced an impossible moral position, ordered to deny others the liberty they were denied themselves. Write two paragraphs with a clear thesis.", guidance: "Thesis to defend or challenge: the soldiers' position was morally impossible. Use evidence from the reading (the irony of conquering people seeking the same liberty, soldiers writing home questioning the war, desertions to join the Filipinos, the split among Black leaders) plus research on Black soldiers in the Philippine war. Address this counterargument: soldiers serve the nation's policy rather than their own conscience, so the moral question belongs to policymakers, not to the troops. Explain where moral responsibility for an unjust war actually sits."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows you understand its meaning in the context of this week's topic.", items: [
+            {id: "h38-1-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["empire", "annex"]}
           ]}
         ]
       }
@@ -5032,6 +6832,18 @@ const MM_WEEKS_912 = [
             {id:"s1-o4", event:"Note that alkenes react more readily.", answer:4},
             {id:"s1-o5", event:"Identify the triple bond in an alkyne.", answer:5}
           ]}
+        ,
+          {type: "comprehension", instructions: "Answer each question in 2-3 complete sentences, citing evidence from the reading.", items: [
+            {id: "s38-0-c1", question: "Why is carbon able to build chains, branched trees, and rings of almost unlimited variety?", answer: "Each carbon atom can form four strong bonds, including bonds to other carbon atoms. That bonding capacity lets carbon build long chains, branched trees, and rings of almost unlimited variety."},
+            {id: "s38-0-c2", question: "How do functional groups make organic chemistry predictable despite carbon's enormous variety?", answer: "Each functional group reacts in predictable ways no matter how long the carbon chain behind it: alcohols carry an OH group and acids carry a COOH group. Chemists can predict behavior from the group rather than memorizing each whole molecule."},
+            {id: "s38-0-c3", question: "Why does the reading insist organic chemistry is the chemistry of being alive rather than a distant industrial subject?", answer: "Proteins, sugars, fats, and DNA are all organic molecules built from carbon chains decorated with functional groups. Digesting food breaks those chains apart and building muscle links small organic molecules into larger ones, all inside the reader's own body."}
+          ]},
+          {type: "argument", instructions: "Write a thesis-driven argument of two paragraphs. State your claim clearly, support it with evidence from the reading and your research, and address one counterargument.", items: [
+            {id: "s38-0-a1", prompt: "Defend or challenge this thesis: IUPAC nomenclature is worth its tedium because in chemistry, as in law, the exact wording can be a matter of life and death. Write two paragraphs with a clear thesis.", guidance: "Thesis to defend or challenge: systematic naming earns its difficulty. Use evidence from the reading (every structure gets exactly one correct name; two isomers of the same drug had wildly different effects, with one mirror-image form causing birth defects) plus research on naming in pharmacology. Address this counterargument: common names work fine in practice and systematic IUPAC names are rarely used outside textbooks. Explain when precision in naming is genuinely life-or-death and when it is academic habit."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows you understand its meaning in the context of this week's topic.", items: [
+            {id: "s38-0-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["polymer", "organic"]}
+          ]}
         ]
       },
       {
@@ -5049,6 +6861,18 @@ const MM_WEEKS_912 = [
             {id:"s2-k1", text:"I can define an isomer in my own words."},
             {id:"s2-k2", text:"I can explain how IUPAC naming gives each structure one name."},
             {id:"s2-k3", text:"I can describe how polymer structure affects properties."}
+          ]}
+        ,
+          {type: "comprehension", instructions: "Answer each question in 2-3 complete sentences, citing evidence from the reading.", items: [
+            {id: "s38-1-c1", question: "How can butane and methylpropane share the formula C4H10 yet have different boiling points?", answer: "They are isomers: identical molecular formulas with different arrangements of atoms. Butane is a straight chain while methylpropane is branched, and structure determines properties like boiling point."},
+            {id: "s38-1-c2", question: "Why do double bonds change a molecule's shape in ways single bonds do not?", answer: "Single bonds let parts of a molecule rotate freely, while double bonds lock sections rigidly in place. That is why the shape of a protein or a plastic depends on its bonds, not just its atoms."},
+            {id: "s38-1-c3", question: "How does the drug-isomer tragedy in the reading prove that naming is practical rather than academic?", answer: "Two isomers of the same drug had wildly different effects, and one mirror-image form caused birth defects. Precise names let pharmacists, engineers, and researchers speak about exact structures without deadly ambiguity."}
+          ]},
+          {type: "argument", instructions: "Write a thesis-driven argument of two paragraphs. State your claim clearly, support it with evidence from the reading and your research, and address one counterargument.", items: [
+            {id: "s38-1-a1", prompt: "Defend or challenge this thesis: The existence of isomers proves that in chemistry, structure matters more than composition. Write two paragraphs with a clear thesis.", guidance: "Thesis to defend or challenge: arrangement outranks ingredients. Use evidence from the reading (butane versus methylpropane, the drug isomers, polymer properties depending on how monomers connect, polyethylene versus cross-linked rubber) plus research on structure-property relationships. Address this counterargument: composition still determines which structures are possible, so without the right atoms, structure is irrelevant. Explain whether structure or composition deserves the top rank."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows you understand its meaning in the context of this week's topic.", items: [
+            {id: "s38-1-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["polymer", "organic"]}
           ]}
         ]
       }
@@ -5134,6 +6958,18 @@ const MM_WEEKS_912 = [
             {id:"h1-m2", term:"Northern Securities case", answer:"b"},
             {id:"h1-m3", term:"19th Amendment, 1920", answer:"c"}
           ]}
+        ,
+          {type: "comprehension", instructions: "Answer each question in 2-3 complete sentences, citing evidence from the reading.", items: [
+            {id: "h39-0-c1", question: "How did muckrakers convert public outrage into concrete law?", answer: "Upton Sinclair's The Jungle horrified readers with its account of Chicago's meatpacking plants, and Ida Tarbell's history of Standard Oil documented the trust's ruthless tactics. Public outrage forced action: Congress passed the Pure Food and Drug Act and the Meat Inspection Act in 1906, putting federal inspectors into factories for the first time."},
+            {id: "h39-0-c2", question: "What was the Progressives' core argument about government's role, and how did it reverse Gilded Age thinking?", answer: "They argued that only government was strong enough to check concentrated corporate power. Where the Gilded Age had celebrated leaving business alone, Progressives argued that democracy must actively defend itself against private power, an idea that became one of the twentieth century's most lasting legacies."},
+            {id: "h39-0-c3", question: "Why does the reading say Progressivism proved its power and showed its limits in the same breath?", answer: "It proved that organized citizens could tame giant corporations and corrupt machines, through trust-busting, food and drug laws, and constitutional amendments. But it showed that reform for some Americans did not automatically mean justice for all, since most white reformers ignored or accepted segregation and Wilson segregated federal offices."}
+          ]},
+          {type: "argument", instructions: "Write a thesis-driven argument of two paragraphs. State your claim clearly, support it with evidence from the reading and your research, and address one counterargument.", items: [
+            {id: "h39-0-a1", prompt: "Defend or challenge this thesis: Progressivism's achievements prove that confronting concentrated power directly through government action works better than waiting for the market to correct itself. Write two paragraphs with a clear thesis.", guidance: "Thesis to defend or challenge: direct government action beats market patience. Use evidence from the reading (trust-busting, the Pure Food and Drug Act, the Meat Inspection Act, the democratic reforms) plus research on the Washington versus Du Bois debate about strategy. Address this counterargument: Progressivism's blind spot on race shows government action can entrench injustice too, as when Wilson segregated federal offices. Explain whether the racial failure undermines the economic case for government action."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows you understand its meaning in the context of this week's topic.", items: [
+            {id: "h39-0-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["reform", "debate", "muckraker"]}
+          ]}
         ]
       },
       {
@@ -5152,6 +6988,18 @@ const MM_WEEKS_912 = [
             {id:"h2-f1", text:"Washington gave his famous compromise speech in ___ in 1895.", answer:"Atlanta"},
             {id:"h2-f2", text:"___ called for a Talented Tenth of educated Black leaders.", answer:"Du Bois"},
             {id:"h2-f3", text:"The ___ Movement organized Black protest in 1905.", answer:"Niagara"}
+          ]}
+        ,
+          {type: "comprehension", instructions: "Answer each question in 2-3 complete sentences, citing evidence from the reading.", items: [
+            {id: "h39-1-c1", question: "What was the core of Washington's Atlanta bargain, and why did white philanthropists reward it?", answer: "Washington argued Black Southerners should accept segregation for now and build economic power through vocational training, farming, and business: separate as the fingers in social things, one as the hand in mutual progress. White philanthropists and politicians rewarded the message with donations and influence because it promised progress without challenging the racial order."},
+            {id: "h39-1-c2", question: "How did Du Bois's answer differ institutionally as well as philosophically?", answer: "Philosophically he demanded full civil rights, higher education for the Talented Tenth, and relentless protest against lynching and disfranchisement. Institutionally he built protest organizations, the Niagara Movement in 1905 and the NAACP in 1909, rather than Tuskegee-style schools."},
+            {id: "h39-1-c3", question: "Why does the reading say history did not declare a simple winner?", answer: "Because Tuskegee trained generations of skilled Black workers while the NAACP's legal campaigns eventually toppled segregation itself. Each strategy achieved what the other could not, and the debate's deepest question about building power quietly versus confronting the system directly still echoes today."}
+          ]},
+          {type: "argument", instructions: "Write a thesis-driven argument of two paragraphs. State your claim clearly, support it with evidence from the reading and your research, and address one counterargument.", items: [
+            {id: "h39-1-a1", prompt: "Defend or challenge this thesis: Du Bois was right and Washington was wrong: accepting segregation in exchange for economic opportunity surrendered too much and won too little. Write two paragraphs with a clear thesis.", guidance: "Thesis to defend or challenge: confrontation beat accommodation as a strategy. Use evidence from the reading (Du Bois's demands, the Niagara Movement, the NAACP's legal victories, Washington's Atlanta compromise language) plus research on the Washington versus Du Bois debate. Address this counterargument: Washington operated under violent white supremacy where open protest could get people killed, so his strategy fit his moment's constraints. Explain whether a strategy should be judged by its principles or by what its moment allowed."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows you understand its meaning in the context of this week's topic.", items: [
+            {id: "h39-1-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["debate", "reform"]}
           ]}
         ]
       }
@@ -5180,6 +7028,18 @@ const MM_WEEKS_912 = [
             {id:"s1-t1", text:"A car circling a track at steady speed has constant velocity.", answer:"false", note:"Velocity includes direction, which keeps changing on a curve."},
             {id:"s1-t2", text:"A flat line on a position-time graph means the object is at rest.", answer:"true", note:"Zero slope means zero velocity."}
           ]}
+        ,
+          {type: "comprehension", instructions: "Answer each question in 2-3 complete sentences, citing evidence from the reading.", items: [
+            {id: "s39-0-c1", question: "Why does a car circling a track at steady speed have constantly changing velocity?", answer: "Velocity includes direction as well as speed. The car's speed is constant at 60 kilometers per hour, but its direction keeps turning, so its velocity changes continuously."},
+            {id: "s39-0-c2", question: "How does the walking example distinguish distance from displacement?", answer: "Walk 40 meters east and then 30 meters west: the path traveled is the distance, 70 meters, but the straight-line change from start to finish is the displacement, only 10 meters east."},
+            {id: "s39-0-c3", question: "Why is the slope of a position-time graph equal to the velocity?", answer: "Slope is change in position divided by change in time, which is exactly the definition of velocity. A steep slope means fast motion, a flat line means the object is at rest, and a negative slope means motion back toward the origin."}
+          ]},
+          {type: "argument", instructions: "Write a thesis-driven argument of two paragraphs. State your claim clearly, support it with evidence from the reading and your research, and address one counterargument.", items: [
+            {id: "s39-0-a1", prompt: "Defend or challenge this thesis: Learning to read graphs (slope as velocity) matters more than memorizing definitions because graphs turn pictures into measurements. Write two paragraphs with a clear thesis.", guidance: "Thesis to defend or challenge: graphical literacy outranks definitional recall. Use evidence from the reading (learning to read the slope turns a picture into a measurement, the first step toward predicting motion; engineers, traffic planners, and air traffic controllers using these descriptions) plus research on visual learning in physics. Address this counterargument: without definitions, graph reading is pattern matching without understanding. Explain what understanding a graph actually requires."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows you understand its meaning in the context of this week's topic.", items: [
+            {id: "s39-0-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["velocity", "acceleration"]}
+          ]}
         ]
       },
       {
@@ -5200,6 +7060,18 @@ const MM_WEEKS_912 = [
             {id:"s2-f1", text:"On a velocity-time graph, the slope gives the ___.", answer:"acceleration"},
             {id:"s2-f2", text:"On a position-time graph, the slope gives the ___.", answer:"velocity"},
             {id:"s2-f3", text:"The kinematic equations only apply when acceleration is ___.", answer:"constant"}
+          ]}
+        ,
+          {type: "comprehension", instructions: "Answer each question in 2-3 complete sentences, citing evidence from the reading.", items: [
+            {id: "s39-1-c1", question: "Why are the kinematic equations limited to constant acceleration?", answer: "They are derived assuming acceleration does not change. If acceleration varies, the simple relationships between velocity, time, and displacement, such as final velocity equals initial velocity plus acceleration times time, no longer hold."},
+            {id: "s39-1-c2", question: "How does Galileo's ramp experiment connect to the modern claim that prediction is the whole business of physics?", answer: "Galileo rolled balls down ramps and timed them with a water clock to measure how motion changes. That same measurement, how velocity changes over time, lets physicists predict where a moving object will be, from the arc of a thrown basketball to the orbit of a satellite."},
+            {id: "s39-1-c3", question: "Why does the reading treat 9.8 meters per second squared as so powerful, given that it is a single number?", answer: "Because plugging that one measured acceleration into the kinematic equations predicts exactly how long a dropped ball takes to hit the ground from any height. One number plus the equations yields unlimited predictions."}
+          ]},
+          {type: "argument", instructions: "Write a thesis-driven argument of two paragraphs. State your claim clearly, support it with evidence from the reading and your research, and address one counterargument.", items: [
+            {id: "s39-1-a1", prompt: "Defend or challenge this thesis: Galileo's method (measure carefully, find the pattern, predict) is more important than any single equation in the chapter. Write two paragraphs with a clear thesis.", guidance: "Thesis to defend or challenge: method outranks equations. Use evidence from the reading (the water-clock ramps, the pattern of constant acceleration, prediction from basketballs to satellites) plus research on the scientific method in physics. Address this counterargument: without the equations, Galileo's measurements are just data, and the mathematical formulation is the real achievement. Explain whether the method or the mathematics deserves the credit."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows you understand its meaning in the context of this week's topic.", items: [
+            {id: "s39-1-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["acceleration", "velocity"]}
           ]}
         ]
       }
@@ -5279,6 +7151,18 @@ const MM_WEEKS_912 = [
             {id:"h1-o4", event:"The armistice ends the fighting", answer:4},
             {id:"h1-o5", event:"The Treaty of Versailles is signed", answer:5}
           ]}
+        ,
+          {type: "comprehension", instructions: "Answer each question using evidence from this section's reading.", items: [
+            {id: "h40-0-c1", question: "Why did the assassination of Archduke Franz Ferdinand lead to a continental war instead of remaining a regional crisis?", answer: "The murder lit a fuse laid by decades of rivalry: competing empires, a naval arms race between Britain and Germany, and a tangle of military alliances. Germany's Schlieffen Plan then sent armies crashing through neutral Belgium toward Paris while Russia mobilized in the east, turning the crisis into four years of trench warfare."},
+            {id: "h40-0-c2", question: "How did the terms of American entry into the war connect to the later disappointment of Black veterans?", answer: "President Wilson asked Congress for war in 1917 after Germany's unrestricted submarine warfare and the Zimmermann Telegram. America mobilized more than four million men, including nearly 400,000 Black soldiers who served in segregated units under white officers, mostly in labor battalions. Leaders like W.E.B. Du Bois hoped loyal service would earn full citizenship, a hope the reading says would be tested the moment the guns fell silent."},
+            {id: "h40-0-c3", question: "Why was the record of the 369th Infantry Regiment significant beyond its battlefield performance?", answer: "The Harlem Hellfighters spent 191 days in front-line trenches under French command, longer than any other American unit, because the U.S. Army refused to let Black troops fight beside white ones. France awarded the entire regiment the Croix de Guerre, so the record proved Black soldiers' courage under a system that denied them equal standing."}
+          ]},
+          {type: "argument", instructions: "Write two well-organized paragraphs defending your thesis. Support your claims with evidence and address the counterargument.", items: [
+            {id: "h40-0-a1", prompt: "Defend the following thesis in two paragraphs: For Black Americans, the defining war of 1914-1918 was fought at home, not in Europe.", guidance: "Thesis to defend: Black soldiers' service exposed American racism rather than resolving it, making the domestic fight for citizenship the true war. Use evidence from the reading (segregated units, assignment to labor battalions, service under French command, the Hellfighters' 191 days, Du Bois's hope for citizenship) plus your research on the Red Summer. Address this counterargument: the war brought real gains, including French honors, migration opportunities, and organizing experience, that strengthened the later freedom struggle."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", items: [
+            {id: "h40-0-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["mobilize", "armistice"]}
+          ]}
         ]
       },
       {
@@ -5299,6 +7183,18 @@ const MM_WEEKS_912 = [
           ]},
           {type:"shortanswer", instructions:"Write 4-6 sentences, then compare your answer with the model.", items:[
             {id:"h2-s1", prompt:"Argue: the Treaty of Versailles punished Germany so harshly that it made another war more likely, not less. Use details from the reading to defend or challenge this claim.", answer:"The Treaty of Versailles made another war more likely because it humiliated Germany without removing its capacity for resentment. The 'war guilt' clause, territorial losses, and crushing reparations gave extremists a ready story: Germany had been betrayed and robbed by its enemies. A punishment meant to guarantee peace instead created the grievance that radicals would exploit a decade later. On the other hand, some argue that weak enforcement, not harshness, was the real failure, since Germany rebuilt its military anyway. Still, a settlement built on revenge gave millions of Germans a reason to reject the peace. Lasting peace requires justice the defeated can accept, not humiliation they will avenge."}
+          ]}
+        ,
+          {type: "comprehension", instructions: "Answer each question using evidence from this section's reading.", items: [
+            {id: "h40-1-c1", question: "Why did the Treaty of Versailles fail to deliver the peace promised by Wilson's Fourteen Points?", answer: "Instead of open diplomacy and a League of Nations, the treaty punished Germany with the war guilt clause, stripped its colonies and territory, limited its army to 100,000 men, and imposed crushing reparations. Germany signed under protest, the U.S. Senate rejected the League entirely, and the humiliation planted resentment that poisoned European politics for a generation."},
+            {id: "h40-1-c2", question: "How did the Red Summer reveal a contradiction in America's wartime ideals?", answer: "Nearly 400,000 Black men had served and returned expecting the democracy they had defended abroad to include them at home. Instead, in the summer of 1919, white mobs attacked Black neighborhoods in more than two dozen cities, from Chicago to Washington, D.C. to Elaine, Arkansas. Much of the violence targeted veterans in uniform, men whose service made them symbols of a new Black assertiveness."},
+            {id: "h40-1-c3", question: "What does Du Bois's May 1919 editorial in The Crisis reveal about the shift in Black America's posture after the war?", answer: "Writing We return from fighting. We return fighting, Du Bois called on Black Americans to look America squarely in the face and demand the citizenship the war had promised. The editorial shows a move from patient hope to direct confrontation: Black communities fought back, organized, and kept demanding what the war had pledged."}
+          ]},
+          {type: "argument", instructions: "Write two well-organized paragraphs defending your thesis. Support your claims with evidence and address the counterargument.", items: [
+            {id: "h40-1-a1", prompt: "Defend the following thesis in two paragraphs: The Red Summer of 1919 proved that for Black veterans, the war at home mattered more than the war in Europe, because the democracy they had defended abroad was denied to them on American streets.", guidance: "Thesis to defend: wartime promises of democracy did not extend to Black veterans, making the domestic fight for citizenship the true war of 1919. Use evidence from the reading (the Versailles context of broken promises, mob violence in more than two dozen cities, veterans targeted in uniform, the Du Bois quotation) plus your research on the Red Summer. Address this counterargument: the violence itself demonstrated growing Black assertiveness and organized resistance that fed the later civil rights movement."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", items: [
+            {id: "h40-1-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["summer", "mobilize"]}
           ]}
         ]
       }
@@ -5324,6 +7220,18 @@ const MM_WEEKS_912 = [
             {id:"s1-f3", text:"The tendency of an object to resist changes in its motion is called ___.", answer:"inertia"},
             {id:"s1-f4", text:"When the net force is zero, the object is in ___.", answer:"equilibrium"}
           ]}
+        ,
+          {type: "comprehension", instructions: "Answer each question using evidence from this section's reading.", items: [
+            {id: "s40-0-c1", question: "Why does a book resting on a table not accelerate even though gravity is pulling it down?", answer: "The net force on the book is zero, so it is in equilibrium and its motion does not change. Forces cancel completely, just as a 10-newton push east combined with a 10-newton push west cancels out."},
+            {id: "s40-0-c2", question: "Why is inertia, rather than some mysterious push, the correct explanation for lurching forward when a car brakes?", answer: "Inertia is the tendency of an object to keep doing what it is already doing. The body is simply trying to keep moving at its prior speed while the car slows beneath it; nothing is pushing it forward."},
+            {id: "s40-0-c3", question: "How does the relationship between mass and inertia explain the difference between stopping a loaded truck and stopping a bicycle, and how does this connect to weight versus mass?", answer: "The more mass an object has, the more inertia it has, so changing a loaded truck's motion takes far more effort than changing a bicycle's. Weight is the gravitational force Earth exerts on mass, so weight drops to about one-sixth on the Moon while mass, and therefore inertia, stays the same."}
+          ]},
+          {type: "argument", instructions: "Write two well-organized paragraphs defending your thesis. Support your claims with evidence and address the counterargument.", items: [
+            {id: "s40-0-a1", prompt: "Defend the following thesis in two paragraphs: Engineers should design vehicle safety systems around inertia rather than around stopping the vehicle alone.", guidance: "Thesis to defend: because inertia keeps bodies moving even after the vehicle stops, safety design must manage the change of motion (restraints, longer stopping times, controlled deceleration), not merely stopping the vehicle. Use evidence from the reading (inertia, mass, net force, equilibrium) plus your research on a real safety technology such as seatbelts or crumple zones. Address this counterargument: reducing vehicle mass is a better safety strategy; explain why managing inertia matters regardless of mass."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", items: [
+            {id: "s40-0-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["inertia", "friction"]}
+          ]}
         ]
       },
       {
@@ -5342,6 +7250,18 @@ const MM_WEEKS_912 = [
             {id:"s2-m1", term:"A rocket's engines blast exhaust downward and the rocket rises", answer:"c"},
             {id:"s2-m2", term:"Doubling the force on a cart doubles its acceleration", answer:"b"},
             {id:"s2-m3", term:"A hockey puck keeps sliding at steady speed on smooth ice", answer:"a"}
+          ]}
+        ,
+          {type: "comprehension", instructions: "Answer each question using evidence from this section's reading.", items: [
+            {id: "s40-1-c1", question: "Why does doubling the mass halve the acceleration for the same force, and what does this reveal about mass?", answer: "From F = ma, acceleration equals force divided by mass, so a 2-kilogram book pushed with 6 newtons accelerates at 3 meters per second squared, and doubling the mass halves the acceleration. This is why a loaded truck needs a much bigger engine force to speed up like an empty one: mass measures resistance to changes in motion, which is inertia."},
+            {id: "s40-1-c2", question: "Why do the equal-and-opposite forces of Newton's third law never cancel each other out?", answer: "The two forces always act on different objects, so they cannot be summed on a single object. When you push on a wall, the wall pushes back on you; a rocket rises because its engines blast exhaust downward and the gases shove the rocket upward with equal force."},
+            {id: "s40-1-c3", question: "How would you combine all three laws with a free-body diagram to analyze the flight of a baseball?", answer: "Sketch the ball as a dot and draw an arrow for each force, such as gravity and air drag. Add the arrows tip to tail to find the net force, use F = ma to find the acceleration, and use the third law to identify where each force's partner acts, for example the ball pushing on the air as the air pushes on the ball."}
+          ]},
+          {type: "argument", instructions: "Write two well-organized paragraphs defending your thesis. Support your claims with evidence and address the counterargument.", items: [
+            {id: "s40-1-a1", prompt: "Defend the following thesis in two paragraphs: Newton's third law is the most powerful of the three laws for modern technology, because every rocket launch depends on action-reaction pairs.", guidance: "Thesis to defend: action-reaction pairs, not F = ma, are the foundation of spaceflight and propulsion. Use evidence from the reading (the rocket exhaust example, forces acting on different objects) plus your research on how rockets or jet engines use the third law. Address this counterargument: the second law is more fundamental because it predicts all acceleration; explain why prediction alone cannot explain propulsion without the third law."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", items: [
+            {id: "s40-1-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["friction", "inertia"]}
           ]}
         ]
       }
@@ -5414,6 +7334,18 @@ const MM_WEEKS_912 = [
             {id:"h1-m2", term:"installment buying", answer:"b"},
             {id:"h1-m3", term:"Great Migration", answer:"c"}
           ]}
+        ,
+          {type: "comprehension", instructions: "Answer each question using evidence from this section's reading.", items: [
+            {id: "h41-0-c1", question: "Why was the 1920s boom, in the reading's words, narrower and shakier than the headlines admitted?", answer: "Farm prices collapsed after wartime demand ended, leaving rural America in a depression years before the cities felt one. Factory pay barely rose while profits soared, so workers' wages could not buy what factories produced, and credit masked the gap between wages and spending while the market rested on borrowed money."},
+            {id: "h41-0-c2", question: "How did the Great Migration change the economic base of Black culture in the 1920s?", answer: "Hundreds of thousands of Black families moved from Southern farms to Northern and Midwestern factory cities, where wages, though unequal, beat sharecropping. In Harlem, Black-owned banks, insurance companies, newspapers, and theaters created an economic base for a cultural explosion."},
+            {id: "h41-0-c3", question: "Why is Madam C.J. Walker presented as evidence of something larger than personal success?", answer: "Walker built a hair-care empire and became one of the nation's first self-made female millionaires, showing what Black business could achieve. She stands alongside churches, lodges, and block associations that pooled money and built institutions, evidence of collective economic institution-building."}
+          ]},
+          {type: "argument", instructions: "Write two well-organized paragraphs defending your thesis. Support your claims with evidence and address the counterargument.", items: [
+            {id: "h41-0-a1", prompt: "Defend the following thesis in two paragraphs: In the 1920s, Black cultural production was a form of power that achieved things politics could not yet deliver.", guidance: "Thesis to defend: culture as power; the Harlem Renaissance and Black institution-building created pride, visibility, and economic bases that political channels of the 1920s could not provide. Use evidence from the reading (Harlem's Black-owned banks, newspapers, and theaters; Walker's empire; churches and lodges pooling money) plus your research on the New Negro movement. Address this counterargument: culture could not stop violence or win legal rights, so calling it power overstates its effect; explain how cultural power built the confidence and networks later movements drew on."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", items: [
+            {id: "h41-0-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["renaissance", "new"]}
+          ]}
         ]
       },
       {
@@ -5434,6 +7366,18 @@ const MM_WEEKS_912 = [
           ]},
           {type:"shortanswer", instructions:"Write 4-6 sentences, then compare your answer with the model.", items:[
             {id:"h2-s1", prompt:"Argue: the Harlem Renaissance was a response to the hatred of the 1920s, not just a celebration of prosperity. Use details from the reading.", answer:"The Harlem Renaissance grew directly out of the hostility Black Americans faced in the 1920s. While the Klan marched by the millions and Congress wrote racism into immigration law, Harlem's writers and musicians answered by declaring Black life worthy of art on its own terms. Hughes's creed, to create 'without fear or shame,' was a direct rejection of a culture that demanded Black inferiority. Locke's New Negro manifesto told a generation to define itself rather than accept the definitions of white supremacists. Prosperity provided the economic base, but defiance provided the purpose: the Renaissance was resistance made beautiful."}
+          ]}
+        ,
+          {type: "comprehension", instructions: "Answer each question using evidence from this section's reading.", items: [
+            {id: "h41-1-c1", question: "How did white supremacist institutions respond to Black progress in the 1920s, and what does that reveal about the decade's tension?", answer: "The Ku Klux Klan swelled to millions of members and marched openly through Washington, D.C., terrorizing Black communities, Catholics, Jews, and immigrants. Congress passed the Johnson-Reed Act of 1924 with strict quotas designed to preserve a white, Northern European America, showing the hostility ran through law and mass movements, not only fringe groups."},
+            {id: "h41-1-c2", question: "What did Langston Hughes mean by creating art without fear or shame, and why did that stance matter?", answer: "In his 1926 essay The Negro Artist and the Racial Mountain, Hughes declared that young Black artists intended to express their individual dark-skinned selves whether or not white people approved. The stance claimed Black life was worthy of art on its own terms, not as a plea for white approval."},
+            {id: "h41-1-c3", question: "How did jazz demonstrate culture's power to open doors that politics kept shut?", answer: "Musicians like Duke Ellington and Louis Armstrong turned a Black art form into America's music, carrying the message further than print ever could. Alain Locke's 1925 anthology The New Negro gave the movement its name and manifesto, arguing a new generation would define Black identity for itself."}
+          ]},
+          {type: "argument", instructions: "Write two well-organized paragraphs defending your thesis. Support your claims with evidence and address the counterargument.", items: [
+            {id: "h41-1-a1", prompt: "Defend the following thesis in two paragraphs: The Harlem Renaissance was a strategic achievement, because Black self-definition in art and music reshaped American identity in ways legislation of the 1920s did not.", guidance: "Thesis to defend: culture as power; the Renaissance's declaration of artistic independence proved Black identity could be defined from within. Use evidence from the reading (the Hughes quotation, Locke's The New Negro, Ellington and Armstrong carrying the message through jazz) plus your research on the New Negro. Address this counterargument: political power remained blocked by the Klan and quota laws, so cultural victories were hollow; explain that cultural power built the confidence and networks the later civil rights movement needed."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", items: [
+            {id: "h41-1-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["renaissance", "prohibition"]}
           ]}
         ]
       }
@@ -5459,6 +7403,18 @@ const MM_WEEKS_912 = [
             {id:"s1-k2", text:"Compute the momentum of a 70-kg runner at 5 m/s (answer: 350 kg·m/s)."},
             {id:"s1-k3", text:"Explain in one sentence why momentum is conserved when skaters push apart."}
           ]}
+        ,
+          {type: "comprehension", instructions: "Answer each question using evidence from this section's reading.", items: [
+            {id: "s41-0-c1", question: "Why is the slow car harder to stop than the fast sprinter, and what does that reveal about momentum versus speed?", answer: "Momentum equals mass times velocity. The 1,000-kilogram car at 2 meters per second carries 2,000 kilogram-meters per second, while the 50-kilogram student at 8 meters per second carries only 400. Mass matters as much as velocity in determining how hard an object is to stop."},
+            {id: "s41-0-c2", question: "Why can physicists predict the outcome of a sticky collision without tracking every detail of the crash?", answer: "In a closed system the total momentum never changes, so conservation of momentum lets physicists predict outcomes from bookkeeping alone. If two objects collide and stick, their combined mass moves at the total starting momentum divided by the total mass."},
+            {id: "s41-0-c3", question: "How do crumple zones use the impulse-momentum relationship to protect passengers?", answer: "Impulse, force times the time it acts, equals the change in momentum. Crumple zones stretch the collision over more time, and since the same momentum change spread over more time means less force, the passengers survive."}
+          ]},
+          {type: "argument", instructions: "Write two well-organized paragraphs defending your thesis. Support your claims with evidence and address the counterargument.", items: [
+            {id: "s41-0-a1", prompt: "Defend the following thesis in two paragraphs: Conservation laws like momentum are more valuable to engineers than detailed force analysis, because they predict outcomes from bookkeeping alone.", guidance: "Thesis to defend: momentum conservation lets engineers predict crash outcomes and design safety systems without modeling every force in the collision. Use evidence from the reading (cannon recoil, crumple zones, predicting sticky-collision results) plus your research on a real application of momentum conservation in safety engineering. Address this counterargument: conservation fails when outside forces act, so force analysis remains essential; explain that conservation is a check and a shortcut within its proper domain."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", items: [
+            {id: "s41-0-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["momentum"]}
+          ]}
         ]
       },
       {
@@ -5477,6 +7433,18 @@ const MM_WEEKS_912 = [
             {id:"s2-m1", term:"Two billiard balls collide and bounce apart cleanly", answer:"a"},
             {id:"s2-m2", term:"Two train cars couple together on impact", answer:"c"},
             {id:"s2-m3", term:"A car crumples against a barrier", answer:"b"}
+          ]}
+        ,
+          {type: "comprehension", instructions: "Answer each question using evidence from this section's reading.", items: [
+            {id: "s41-1-c1", question: "Why is momentum conserved in both elastic and inelastic collisions while kinetic energy is conserved only in elastic ones?", answer: "No outside force intervenes, so total momentum never changes in either case. In inelastic collisions, however, the objects crumple, stick, or deform, and some kinetic energy turns into heat, sound, and bent metal, so kinetic energy is not conserved."},
+            {id: "s41-1-c2", question: "Why are truly elastic collisions a useful ideal even though they are rare in daily life?", answer: "A moving billiard ball striking a resting one transfers nearly all its energy almost perfectly, and atoms and subatomic particles bounce without losing energy. The ideal therefore models the microscopic world where the books balance nearly perfectly."},
+            {id: "s41-1-c3", question: "How does a boxer rolling with a punch demonstrate the impulse-momentum principle?", answer: "Impulse equals force times the time it acts, which equals the change in momentum. Rolling with the punch stretches the impact over more time, shrinking the force, the same principle behind a football helmet's padding."}
+          ]},
+          {type: "argument", instructions: "Write two well-organized paragraphs defending your thesis. Support your claims with evidence and address the counterargument.", items: [
+            {id: "s41-1-a1", prompt: "Defend the following thesis in two paragraphs: Cars should be designed to sacrifice the vehicle to save the passenger, because controlled inelastic deformation is the correct application of impulse physics.", guidance: "Thesis to defend: crash engineers are right to design cars that crumple in controlled ways, converting kinetic energy into deformation instead of into passengers' bodies. Use evidence from the reading (crumple zones, impulse equals change in momentum, stretching time shrinks force) plus your research on crash testing or crumple-zone design. Address this counterargument: this design philosophy makes cars disposable and expensive to repair; explain why the tradeoff favors human life over sheet metal."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", items: [
+            {id: "s41-1-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["momentum"]}
           ]}
         ]
       }
@@ -5554,6 +7522,18 @@ const MM_WEEKS_912 = [
             {id:"h1-f2", text:"The Smoot-Hawley ___ raised taxes on imported goods to record levels.", answer:"tariff"},
             {id:"h1-f3", text:"With no federal deposit ___, a failed bank meant lost savings.", answer:"insurance"}
           ]}
+        ,
+          {type: "comprehension", instructions: "Answer each question using evidence from this section's reading.", items: [
+            {id: "h42-0-c1", question: "Why does the reading call the stock market crash of 1929 a symptom rather than the disease?", answer: "Beneath the roaring surface, American farms had been in a depression for most of the decade as crop prices collapsed, factories produced more goods than workers' wages could buy, and the banking system was a house of cards. Thousands of small banks had gambled depositors' money on stocks and shaky loans, and when the market fell more than 9,000 banks failed."},
+            {id: "h42-0-c2", question: "How did the absence of federal deposit insurance turn bank failures into destroyed life savings?", answer: "There was no federal deposit insurance, so a lost bank meant lost life savings. Ordinary families who had deposited savings in the failed banks lost everything, and with credit drying up overnight, businesses that depended on borrowed money laid off workers by the millions."},
+            {id: "h42-0-c3", question: "How did government policy make the downturn worse instead of better?", answer: "The Smoot-Hawley Tariff of 1930 raised taxes on imported goods to record levels, and foreign nations answered with tariffs of their own, strangling world trade. The Federal Reserve, fearing inflation, kept money tight when the economy needed it loose."}
+          ]},
+          {type: "argument", instructions: "Write two well-organized paragraphs defending your thesis. Support your claims with evidence and address the counterargument.", items: [
+            {id: "h42-0-a1", prompt: "Defend the following thesis in two paragraphs: The New Deal's limits were set by the structural failures of the 1920s economy, which relief programs alone could not fix.", guidance: "Thesis to defend: the Depression's roots in overproduction, banking collapse, and policy errors were too deep for relief spending alone to cure. Use evidence from the reading (farm depression, wages lagging profits, 9,000 bank failures, Smoot-Hawley, tight Fed policy) plus your research on who was last hired and first fired. Address this counterargument: the crash itself caused the Depression, so preventing speculation would have been enough; explain the decade of imbalance that had soaked the house in gasoline before the match was lit."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", items: [
+            {id: "h42-0-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["depression", "austerity"]}
+          ]}
         ]
       },
       {
@@ -5573,6 +7553,18 @@ const MM_WEEKS_912 = [
           ]},
           {type:"shortanswer", instructions:"Write 4-6 sentences, then compare your answer with the model.", items:[
             {id:"h2-s1", prompt:"Argue: the saying 'last hired, first fired' proves that the Depression was not just an economic crisis but a racial one for Black Americans. Use details from the reading.", answer:"The saying proves the Depression hit Black Americans as a racial crisis because their suffering followed the color line, not just the business cycle. Black unemployment ran two to three times the white rate, and domestic and farm workers, mostly Black Southerners, were shut out of early relief entirely. When white workers began taking jobs once labeled 'Negro work,' Black families were pushed to the back of every breadline by discrimination, not by economics alone. Churches and the NAACP had to fill gaps the government left. The Depression was an economic disaster for all, but for Black America it was an economic disaster layered on top of a racial one."}
+          ]}
+        ,
+          {type: "comprehension", instructions: "Answer each question using evidence from this section's reading.", items: [
+            {id: "h42-1-c1", question: "Why did the Depression hit Black America first and worst?", answer: "In Northern cities Black unemployment ran two to three times the white rate, and domestic servants and farm laborers, the jobs most Black Southerners held, were shut out of many early relief programs. In the cities, white workers took jobs once considered Negro work, and Black farmers already squeezed by falling crop prices lost their land to banks."},
+            {id: "h42-1-c2", question: "How did Black communities respond to being shut out of relief?", answer: "Churches ran soup kitchens, the NAACP's membership grew, and newspapers like the Chicago Defender documented the suffering and demanded action. Families doubled up in crowded apartments while men who had migrated north rode the rails back south or disappeared into Hoovervilles."},
+            {id: "h42-1-c3", question: "What promise did Roosevelt's first inaugural address make that Black Americans would soon test?", answer: "Roosevelt declared that the only thing we have to fear is fear itself, and that this great Nation will endure, will revive, and will prosper. Black Americans listened with desperate hope, and they would soon test whether the promised revival included them."}
+          ]},
+          {type: "argument", instructions: "Write two well-organized paragraphs defending your thesis. Support your claims with evidence and address the counterargument.", items: [
+            {id: "h42-1-a1", prompt: "Defend the following thesis in two paragraphs: The New Deal's limits are best measured by whom it excluded, because programs built on existing racial hierarchies could not deliver an equal recovery.", guidance: "Thesis to defend: relief programs that shut out farm and domestic workers and placed Black families at the back of every breadline could not produce a shared recovery. Use evidence from the reading (exclusion from early relief, 2-to-3-times unemployment rates, white workers taking Negro work) plus your research on the New Deal's limits. Address this counterargument: the New Deal was the largest relief effort in American history and helped millions; explain why scale without equity still counts as a limit."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", items: [
+            {id: "h42-1-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["depression", "hired"]}
           ]}
         ]
       }
@@ -5597,6 +7589,18 @@ const MM_WEEKS_912 = [
             {id:"s1-k2", text:"Compute the work of pushing with 200 N over 5 m (answer: 1,000 J)."},
             {id:"s1-k3", text:"Explain why a roller coaster's first hill must be the tallest."}
           ]}
+        ,
+          {type: "comprehension", instructions: "Answer each question using evidence from this section's reading.", items: [
+            {id: "s42-0-c1", question: "Why does carrying a heavy box across a level room count as zero work in the physics sense?", answer: "Work equals force times distance, but only the force in the direction of motion counts. The lifting force points up while the motion is sideways, so no work is done on the box in the physics sense."},
+            {id: "s42-0-c2", question: "Why is a car moving twice as fast four times as dangerous in a crash?", answer: "Kinetic energy equals one-half the mass times the velocity squared, so doubling the velocity quadruples the kinetic energy. That is why high-speed crashes are so destructive."},
+            {id: "s42-0-c3", question: "How does the work-energy theorem explain a roller coaster's first drop?", answer: "The net work done on an object equals its change in kinetic energy. The climb up the first hill stores potential energy equal to weight times height, and every drop converts it to kinetic energy, minus the tax that friction collects by turning kinetic energy into heat."}
+          ]},
+          {type: "argument", instructions: "Write two well-organized paragraphs defending your thesis. Support your claims with evidence and address the counterargument.", items: [
+            {id: "s42-0-a1", prompt: "Defend the following thesis in two paragraphs: The work-energy theorem is the most useful formulation of mechanics for real-world design, because energy bookkeeping predicts speeds without tracking forces moment by moment.", guidance: "Thesis to defend: following the energy, as roller coaster designers do, predicts motion more efficiently than summing forces at every instant. Use evidence from the reading (the work-energy theorem, potential-to-kinetic conversion, friction as negative work) plus your research on an energy-based engineering application. Address this counterargument: force analysis is still required for structural loads and safety; explain the complementary roles of energy methods and force methods."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", items: [
+            {id: "s42-0-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["kinetic"]}
+          ]}
         ]
       },
       {
@@ -5616,6 +7620,18 @@ const MM_WEEKS_912 = [
           ]},
           {type:"shortanswer", instructions:"Write 4-6 sentences, then compare your answer with the model.", items:[
             {id:"s2-s1", prompt:"Argue: power matters more than total energy when judging an athlete's performance. Explain with an example.", answer:"Power matters more than total energy for athletes because sports reward how fast work gets done, not just how much. A marathoner and a sprinter may burn similar total energy, but the sprinter delivers it in seconds, producing far higher power. Jumping higher or accelerating faster both demand delivering energy quickly, which is exactly what power measures. Two athletes with equal strength differ the moment one applies that strength faster. In competition, the clock decides, and the clock measures power."}
+          ]}
+        ,
+          {type: "comprehension", instructions: "Answer each question using evidence from this section's reading.", items: [
+            {id: "s42-1-c1", question: "Why does the distinction between energy and power matter for comparing a marathon runner with a sprinter?", answer: "The two may burn similar total energy, but the sprinter's power output is far higher because the work happens in seconds instead of hours. Power is the rate of doing work, P = W/t, measured in watts."},
+            {id: "s42-1-c2", question: "Why do utility companies bill customers in kilowatt-hours rather than watts?", answer: "What costs fuel is the total work done, not the rate. A kilowatt-hour is 1,000 watts sustained for one hour, or 3.6 million joules, so it measures energy delivered, which is what the company must generate."},
+            {id: "s42-1-c3", question: "Why does doubling an elevator's lifting speed double its power requirement?", answer: "Power equals work divided by time. Lifting the same load in half the time doubles the rate at which work is done, so the motor must supply twice the power."}
+          ]},
+          {type: "argument", instructions: "Write two well-organized paragraphs defending your thesis. Support your claims with evidence and address the counterargument.", items: [
+            {id: "s42-1-a1", prompt: "Defend the following thesis in two paragraphs: Rating engines by power rather than total energy is the right metric for consumers, because how fast work is delivered decides performance.", guidance: "Thesis to defend: a sports car's engine rating matters more than its total energy because power determines acceleration and capability. Use evidence from the reading (engine ratings, elevator motors, athletes training power rather than just strength) plus your research on how engines or motors are rated for buyers. Address this counterargument: total energy matters more for fuel economy and range; explain that the two metrics serve different buying decisions."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", items: [
+            {id: "s42-1-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["kinetic"]}
           ]}
         ]
       }
@@ -5694,6 +7710,18 @@ const MM_WEEKS_912 = [
             {id:"h1-o3", event:"The Social Security Act becomes law", answer:3},
             {id:"h1-o4", event:"Bethune is named to lead the NYA's Division of Negro Affairs", answer:4}
           ]}
+        ,
+          {type: "comprehension", instructions: "Answer each question using evidence from this section's reading.", items: [
+            {id: "h43-0-c1", question: "How did the three R's divide the New Deal's work, and why did relief come first?", answer: "Relief meant immediate aid through jobs programs like the CCC and WPA; recovery aimed to restart the economy through the TVA and banking laws including deposit insurance; reform sought to prevent another collapse through the SEC and Social Security. With banks collapsing and a quarter of workers jobless, immediate aid had to come first."},
+            {id: "h43-0-c2", question: "Why is the Social Security Act of 1935 both a landmark reform and an example of the New Deal's limits?", answer: "It created pensions for the elderly and aid for the disabled, a landmark reform, but it excluded farm and domestic workers, most of them Black, showing how the landmark stopped short of universal protection."},
+            {id: "h43-0-c3", question: "How did Mary McLeod Bethune show that representation could change policy outcomes?", answer: "In 1936 Roosevelt named Bethune to lead the Division of Negro Affairs in the National Youth Administration, making her the highest-ranking Black official in the federal government. From that post she fought to steer jobs and training funds to Black youth, proving that a seat at the table could redirect the flow of relief."}
+          ]},
+          {type: "argument", instructions: "Write two well-organized paragraphs defending your thesis. Support your claims with evidence and address the counterargument.", items: [
+            {id: "h43-0-a1", prompt: "Defend the following thesis in two paragraphs: The New Deal was a raw deal for Black Americans that only relentless advocacy managed to refine.", guidance: "Thesis to defend: the New Deal was discriminatory by design, and only pressure from Black leaders made it serve Black Americans at all. Use evidence from the reading (exclusions of farm and domestic workers, Bethune's appointment and her fight for Black youth funding) plus your research on the Black Cabinet. Address this counterargument: defenders credit Roosevelt's programs with building the modern welfare state for everyone; explain that the refinement came from pressure, not from the original design."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", items: [
+            {id: "h43-0-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["relief", "cabinet"]}
+          ]}
         ]
       },
       {
@@ -5713,6 +7741,18 @@ const MM_WEEKS_912 = [
           ]},
           {type:"shortanswer", instructions:"Write 4-6 sentences, then compare your answer with the model.", items:[
             {id:"h2-s1", prompt:"Argue: the Black Cabinet shows that representation inside government matters, because Bethune turned a raw deal into real gains for Black youth. Use details from the reading.", answer:"The Black Cabinet proves representation matters because Bethune converted access into outcomes. As head of the NYA's Division of Negro Affairs, she steered training and jobs to hundreds of thousands of Black young people that relief programs might otherwise have ignored. She pressed Roosevelt to appoint Black officials and include Black workers, carrying demands from Black communities directly into the White House. Without her seat at the table, the New Deal's exclusions would have stood unchallenged. A raw deal became less raw because someone inside was fighting to refine it."}
+          ]}
+        ,
+          {type: "comprehension", instructions: "Answer each question using evidence from this section's reading.", items: [
+            {id: "h43-1-c1", question: "How did Agricultural Adjustment Administration payments end up harming the very people they bypassed?", answer: "The AAA paid landowners to plant less, and many white landlords pocketed the payments and evicted their Black sharecroppers. A program meant to help agriculture thus deepened the displacement of Black farmers."},
+            {id: "h43-1-c2", question: "How did Bethune's Last Will and Testament connect her policy work to a larger legacy?", answer: "Writing I leave you love, I leave you hope, and I leave you a thirst for education, Bethune showed her work was about dignity and preparation, not just programs. Her legacy helped move Black voters from the party of Lincoln into Roosevelt's Democratic coalition, a political realignment that reshaped American politics for generations."},
+            {id: "h43-1-c3", question: "Why was the Black Cabinet's informality both a weakness and a strength?", answer: "As an informal council it held no statutory power, a weakness. Yet Bethune had the president's ear and used it relentlessly, so the advisers could strategize and carry Black America's demands directly into the White House, a strength."}
+          ]},
+          {type: "argument", instructions: "Write two well-organized paragraphs defending your thesis. Support your claims with evidence and address the counterargument.", items: [
+            {id: "h43-1-a1", prompt: "Defend the following thesis in two paragraphs: The Black Cabinet proves that marginalized groups must organize both inside and outside centers of power to convert exclusionary programs into tools of progress.", guidance: "Thesis to defend: a raw deal refined; Bethune's council worked because it paired insider access with the outside pressure of a mobilized community. Use evidence from the reading (NYA funding for hundreds of thousands of Black youth, WPA arts employment, CCC segregation, Bethune's access to Roosevelt) plus your research on the Black Cabinet. Address this counterargument: participating in a discriminatory administration legitimized it; explain the tension between working inside and protesting outside."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", items: [
+            {id: "h43-1-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["cabinet", "relief"]}
           ]}
         ]
       }
@@ -5738,6 +7778,18 @@ const MM_WEEKS_912 = [
             {id:"s1-t2", text:"In F = mv^2/r, shrinking the radius increases the required force.", answer:"true", note:"Force is inversely proportional to radius."},
             {id:"s1-t3", text:"On ice, a car turns easily because friction is low.", answer:"false", note:"Low friction means almost no turning force, so turning becomes nearly impossible."}
           ]}
+        ,
+          {type: "comprehension", instructions: "Answer each question using evidence from this section's reading.", items: [
+            {id: "s43-0-c1", question: "Why do passengers in a turning car feel flung outward even though no outward force acts on them?", answer: "That sensation is inertia: their bodies try to continue in a straight line while the car turns beneath them. Circular motion requires a net force pulling toward the center; there is no outward force."},
+            {id: "s43-0-c2", question: "Why does doubling speed require four times the centripetal force, and what does this imply for highway design?", answer: "Centripetal force equals mv squared over r, so speed is squared in the formula. This is why highway curves have speed limits and why race cars need enormous grip: small speed increases demand large force increases."},
+            {id: "s43-0-c3", question: "Why is gravity correctly described as the string holding satellites and the Moon in circular motion?", answer: "Left alone, objects travel in straight lines, so orbit requires a constant inward pull. For a ball on a string the tension supplies it; for satellites, the Moon, and the planets, gravity plays the role of the string."}
+          ]},
+          {type: "argument", instructions: "Write two well-organized paragraphs defending your thesis. Support your claims with evidence and address the counterargument.", items: [
+            {id: "s43-0-a1", prompt: "Defend the following thesis in two paragraphs: Understanding circular motion through inertia is more fundamental than memorizing F = mv^2/r, because the formula only quantifies what inertia explains.", guidance: "Thesis to defend: the straight-line tendency of inertia is the reason circular motion needs a center-seeking force at all; the formula merely measures it. Use evidence from the reading (the released ball flying off tangent, passengers feeling flung outward, gravity as the string) plus your research on a circular-motion application such as banked curves or centrifuges. Address this counterargument: the formula is what engineers actually need for quantitative design; explain that explanation and calculation serve different steps of the same work."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", items: [
+            {id: "s43-0-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["centripetal"]}
+          ]}
         ]
       },
       {
@@ -5756,6 +7808,18 @@ const MM_WEEKS_912 = [
             {id:"s2-m1", term:"Kepler's first law", answer:"a"},
             {id:"s2-m2", term:"Kepler's second law", answer:"b"},
             {id:"s2-m3", term:"Kepler's third law", answer:"c"}
+          ]}
+        ,
+          {type: "comprehension", instructions: "Answer each question using evidence from this section's reading.", items: [
+            {id: "s43-1-c1", question: "How did Newton unite falling apples and wheeling planets in a single idea?", answer: "Newton realized the force pulling an apple to the ground and the force holding the Moon in orbit are the same force: gravity. His law of universal gravitation explained all three of Kepler's laws in one equation, with strength growing with mass and weakening with the square of distance."},
+            {id: "s43-1-c2", question: "Why does a planet move faster when near the Sun, and how does Kepler's third law predict orbital periods?", answer: "Kepler's second law states that a planet sweeps out equal areas in equal times, so it moves faster near the Sun. The third law makes period proportional to distance cubed halved: Mars at about 1.5 astronomical units gives 1.5 cubed, roughly 3.375, whose square root is about 1.88 years, matching Mars's actual year."},
+            {id: "s43-1-c3", question: "Why do astronauts float even though gravity has not vanished in orbit?", answer: "Astronauts float not because gravity vanishes but because they are in continuous free fall around the planet. Their weight is Earth's gravitational pull, which still acts on them."}
+          ]},
+          {type: "argument", instructions: "Write two well-organized paragraphs defending your thesis. Support your claims with evidence and address the counterargument.", items: [
+            {id: "s43-1-a1", prompt: "Defend the following thesis in two paragraphs: Kepler's empirical laws deserve as much credit as Newton's theory, because precise observation made the theory possible.", guidance: "Thesis to defend: Kepler decoded the orbits from decades of precise observations half a century before Newton, and Newton's unification depended on that data. Use evidence from the reading (Kepler's three laws, the Mars calculation, Newton's explanation of all three) plus your research on how Kepler used Tycho Brahe's observations. Address this counterargument: theory explains why, while data only describes what; explain that without Kepler's data the theory would not have existed."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", items: [
+            {id: "s43-1-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["centripetal"]}
           ]}
         ]
       }
@@ -5827,6 +7891,18 @@ const MM_WEEKS_912 = [
             {id:"h1-t2", text:"Executive Order 8802 banned racial discrimination in defense industries.", answer:"true", note:"Roosevelt issued it after Randolph threatened the march."},
             {id:"h1-t3", text:"Women were not permitted to work in war factories during World War II.", answer:"false", note:"Women entered industrial jobs as welders, riveters, and machinists."}
           ]}
+        ,
+          {type: "comprehension", instructions: "Answer each question using evidence from this section's reading.", items: [
+            {id: "h44-0-c1", question: "How did A. Philip Randolph convert the threat of a march into federal policy?", answer: "As defense jobs multiplied, Randolph threatened a march on Washington to demand fair hiring, and Roosevelt responded with Executive Order 8802, banning racial discrimination in defense industries."},
+            {id: "h44-0-c2", question: "Why did the Double V campaign argue that the war against fascism rang hollow at home?", answer: "James G. Thompson's 1942 letter to the Pittsburgh Courier proposed a double victory: over enemies from without and over enemies from within. The paper adopted the slogan, arguing that fighting fascism abroad meant little while segregation and discrimination continued at home."},
+            {id: "h44-0-c3", question: "Why was industrial conversion alone insufficient to win the war?", answer: "Between 1940 and 1944 American industry built roughly 300,000 airplanes and 86,000 tanks, but factories needed workers while millions of men enlisted. Women entered industrial work as welders, riveters, and machinists, and ration coupons for gasoline, rubber, sugar, and meat directed scarce resources to the military."}
+          ]},
+          {type: "argument", instructions: "Write two well-organized paragraphs defending your thesis. Support your claims with evidence and address the counterargument.", items: [
+            {id: "h44-0-a1", prompt: "Defend the following thesis in two paragraphs: Black America's Double V strategy shows that demanding democracy at home was inseparable from the war abroad, not a distraction from it.", guidance: "Thesis to defend: fighting two wars; the demand for victory over enemies within strengthened, rather than weakened, the national war effort. Use evidence from the reading (Randolph's march threat producing Executive Order 8802, Thompson's Double V letter, the Courier's adoption of the slogan) plus your research on the Double V campaign. Address this counterargument: civil rights agitation during wartime divided the nation and distracted from the fight; explain that the pressure produced concrete policy wins like fair hiring in defense industries."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", items: [
+            {id: "h44-0-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["double", "mobilize"]}
+          ]}
         ]
       },
       {
@@ -5853,6 +7929,18 @@ const MM_WEEKS_912 = [
             {id:"h2-o3", event:"Japan attacks Pearl Harbor", answer:3},
             {id:"h2-o4", event:"James Thompson's Double V letter is published", answer:4},
             {id:"h2-o5", event:"Tuskegee Airmen begin combat missions in Europe", answer:5}
+          ]}
+        ,
+          {type: "comprehension", instructions: "Answer each question using evidence from this section's reading.", items: [
+            {id: "h44-1-c1", question: "Why did the service records of segregated units become an argument for civil rights?", answer: "The Tuskegee Airmen flew more than 15,000 missions over Europe, the 761st Tank Battalion fought 183 straight days, and the 92nd Infantry Division served in Italy. Their records argued louder than any editorial that the second V, victory over enemies from within, was still unfinished business."},
+            {id: "h44-1-c2", question: "How did the military's blood-bank policy symbolize the contradiction of fighting fascism with a segregated army?", answer: "The Army maintained separate blood banks for Black and white donors even as blood was desperately needed, a policy that made the racism of the institution visible in its most literal form."},
+            {id: "h44-1-c3", question: "Why did the Selective Training and Service Act of 1940 matter to the scale of mobilization?", answer: "It was the first peacetime draft in American history, passed before the United States entered the war. By 1945 more than 16 million Americans had worn the uniform, including about 400,000 women serving as nurses, WASP pilots, and members of the WACs and WAVES."}
+          ]},
+          {type: "argument", instructions: "Write two well-organized paragraphs defending your thesis. Support your claims with evidence and address the counterargument.", items: [
+            {id: "h44-1-a1", prompt: "Defend the following thesis in two paragraphs: Segregated service in World War II laid the moral and political groundwork for the postwar civil rights movement, because it made the contradiction between American ideals and American practice impossible to ignore.", guidance: "Thesis to defend: fighting two wars; the distinguished records of Black units turned military service into a civil rights argument. Use evidence from the reading (Tuskegee Airmen, 761st Tank Battalion, separate blood banks, the Double V slogan traveling from church bulletins to barracks walls) plus your research on the Double V campaign. Address this counterargument: military segregation persisted into the Korean War, so the service changed little; explain that groundwork can be laid even where victory is delayed."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", items: [
+            {id: "h44-1-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["double", "mobilize"]}
           ]}
         ]
       }
@@ -5885,6 +7973,18 @@ const MM_WEEKS_912 = [
             {id:"s1-k3", text:"I can explain why frequency and wavelength are inversely related in a given medium."},
             {id:"s1-k4", text:"I can compute wave speed from frequency and wavelength."}
           ]}
+        ,
+          {type: "comprehension", instructions: "Answer each question using evidence from this section's reading.", items: [
+            {id: "s44-0-c1", question: "Why does the water in an ocean wave mostly bob up and down while the wave travels forward?", answer: "A wave is a disturbance that carries energy without carrying matter along with it. The water oscillates locally while the energy travels forward, the same principle behind ripples in a pond and light from distant stars."},
+            {id: "s44-0-c2", question: "Why must raising the frequency shorten the wavelength in a given medium?", answer: "The wave equation states that speed equals frequency times wavelength, and the speed of a wave in a given medium is fixed. Raising the frequency must therefore shorten the wavelength, which is why high-pitched sounds have short wavelengths."},
+            {id: "s44-0-c3", question: "How does amplitude connect to a wave's energy, using the reading's guitar-string example?", answer: "Amplitude is the maximum displacement from rest and determines how much energy the wave carries. A guitar string vibrating at 440 hertz with a wavelength of about 0.78 meters gives a wave speed of roughly 343 meters per second, the speed of sound in air."}
+          ]},
+          {type: "argument", instructions: "Write two well-organized paragraphs defending your thesis. Support your claims with evidence and address the counterargument.", items: [
+            {id: "s44-0-a1", prompt: "Defend the following thesis in two paragraphs: Classifying waves by medium, mechanical versus electromagnetic, is the single most important distinction in wave physics, because it determines where waves can travel.", guidance: "Thesis to defend: whether a wave needs a medium decides its entire domain of existence, from sound trapped in air to light crossing empty space. Use evidence from the reading (mechanical waves needing air or water, electromagnetic waves crossing empty space, sound unable to travel through vacuum) plus your research on a wave technology that depends on this distinction. Address this counterargument: the transverse-versus-longitudinal distinction is equally fundamental; explain that the medium determines whether the wave exists at all, while shape determines how it behaves."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", items: [
+            {id: "s44-0-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["amplitude"]}
+          ]}
         ]
       },
       {
@@ -5903,6 +8003,18 @@ const MM_WEEKS_912 = [
             {id:"s2-t1", text:"Sound can travel through the vacuum of space.", answer:"false", note:"Sound is a mechanical wave and needs a medium."},
             {id:"s2-t2", text:"In the Doppler effect, the source's actual frequency stays the same; only the observed frequency changes.", answer:"true", note:"The siren vibrates at the same rate; motion changes what the observer receives."},
             {id:"s2-t3", text:"Astronomers use the Doppler shift of light to tell whether galaxies are moving toward or away from Earth.", answer:"true", note:"The reading lists this as an application."}
+          ]}
+        ,
+          {type: "comprehension", instructions: "Answer each question using evidence from this section's reading.", items: [
+            {id: "s44-1-c1", question: "Why does an approaching ambulance sound higher-pitched than its true siren frequency?", answer: "Each new sound wave is emitted from a position slightly closer than the last, so the waves crowd together and the wavelength shortens. The observed frequency equals the source frequency times the wave speed divided by the wave speed minus the source speed, so a 440-hertz horn approaching at 30 meters per second is heard at about 482 hertz."},
+            {id: "s44-1-c2", question: "Why would movie explosions on distant planets actually be silent?", answer: "Sound is a mechanical, longitudinal wave of compressions and rarefactions in air, and it cannot travel through the vacuum of space because it needs a medium."},
+            {id: "s44-1-c3", question: "How do astronomers use the Doppler effect on light to study distant galaxies?", answer: "They measure the shift of light from distant galaxies to determine whether the galaxies are moving toward or away from Earth. The same principle lets weather radar detect storm winds from radio waves and lets doctors measure blood flow with Doppler ultrasound."}
+          ]},
+          {type: "argument", instructions: "Write two well-organized paragraphs defending your thesis. Support your claims with evidence and address the counterargument.", items: [
+            {id: "s44-1-a1", prompt: "Defend the following thesis in two paragraphs: The Doppler effect is the most valuable applied wave phenomenon, because it turns relative motion into measurable frequency shifts across medicine, weather, and astronomy.", guidance: "Thesis to defend: no other wave property yields such direct measurements in so many fields. Use evidence from the reading (Doppler radar, galactic redshifts, Doppler ultrasound, the quantitative Doppler equation) plus your research on one of these applications. Address this counterargument: interference and diffraction have wider technological applications; explain the difference between breadth of use and direct measurability."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", items: [
+            {id: "s44-1-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["amplitude"]}
           ]}
         ]
       }
@@ -5983,6 +8095,18 @@ const MM_WEEKS_912 = [
             {id:"h1-t2", text:"Churchill attended the entire Potsdam Conference as Britain's leader.", answer:"false", note:"He was replaced mid-conference by Clement Attlee after losing the election."},
             {id:"h1-t3", text:"The division of Germany into occupation zones hardened into the border between two hostile blocs.", answer:"true", note:"The reading describes this outcome."}
           ]}
+        ,
+          {type: "comprehension", instructions: "Answer each question using evidence from this section's reading.", items: [
+            {id: "h45-0-c1", question: "Why did the Yalta promise of free elections in Eastern Europe fail?", answer: "Stalin committed to free elections while Soviet troops already occupied the region. He never permitted them, installing Communist governments across Eastern Europe instead, and Germany's occupation zones hardened into the border between two hostile blocs."},
+            {id: "h45-0-c2", question: "How did the Atlantic Charter's ideals contrast with the summits' outcomes?", answer: "The Charter promised no territorial aggrandizement, no changes against the freely expressed wishes of peoples, and the right of all peoples to choose their governments. By Potsdam, disagreements over Poland and reparations revealed the alliance was fracturing, and the summit promises proved fragile."},
+            {id: "h45-0-c3", question: "Why was Potsdam a turning point from wartime cooperation to Cold War rivalry?", answer: "The cast had changed: Roosevelt had died, Truman represented the United States, and Churchill was replaced mid-conference by Attlee. Truman mentioned America's new atomic weapon to Stalin, and disputes over Poland and reparations showed diplomacy had won the war but might not win the peace."}
+          ]},
+          {type: "argument", instructions: "Write two well-organized paragraphs defending your thesis. Support your claims with evidence and address the counterargument.", items: [
+            {id: "h45-0-a1", prompt: "Defend the following thesis in two paragraphs: Summit diplomacy's failure in Eastern Europe shows that agreements without enforcement are aspirations, not settlements, and this is the week's broken promise.", guidance: "Thesis to defend: the Yalta pledge collapsed because nothing compelled Stalin to honor it. Use evidence from the reading (the free-elections promise made under Soviet occupation, Communist governments installed across Eastern Europe, zones hardening into hostile blocs) plus your research on the GI Bill's broken promise as the domestic parallel. Address this counterargument: the summits still prevented worse outcomes by keeping the alliance together through the war; explain the difference between limited success and the promises actually made."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", items: [
+            {id: "h45-0-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["summit", "promise"]}
+          ]}
         ]
       },
       {
@@ -6009,6 +8133,18 @@ const MM_WEEKS_912 = [
             {id:"h2-o3", event:"Germany surrenders", answer:3},
             {id:"h2-o4", event:"Potsdam Conference", answer:4},
             {id:"h2-o5", event:"Japan surrenders", answer:5}
+          ]}
+        ,
+          {type: "comprehension", instructions: "Answer each question using evidence from this section's reading.", items: [
+            {id: "h45-1-c1", question: "How did a colorblind law produce a racial chasm in wealth?", answer: "The benefits were distributed through a segregated America. Southern universities admitted almost no Black students, historically Black colleges were too few and underfunded to absorb Black veterans, local VA offices denied or delayed Black applications, and banks would not lend in neighborhoods federal policy had marked risky. In Mississippi, only two of more than 3,200 VA home loans went to Black veterans."},
+            {id: "h45-1-c2", question: "Why did the GI Bill matter so much to the creation of the modern middle class?", answer: "Nearly 8 million veterans used the education benefits and more than 4 million bought homes with no-down-payment VA loans, fueling a suburban building boom. Because Black veterans were locked out, the exclusion compounded across generations into a chasm in wealth."},
+            {id: "h45-1-c3", question: "Why does the reading say American freedom was still rationed by race even as the Cold War began?", answer: "Even as the United States claimed to lead the free world, the broken promise of the GI Bill stood as evidence that Black veterans who had fought the same war were locked out of the degrees and home equity white veterans converted their service into."}
+          ]},
+          {type: "argument", instructions: "Write two well-organized paragraphs defending your thesis. Support your claims with evidence and address the counterargument.", items: [
+            {id: "h45-1-a1", prompt: "Defend the following thesis in two paragraphs: The GI Bill proves that formally equal policies administered through unequal institutions reproduce inequality, and this is the week's broken promise.", guidance: "Thesis to defend: colorblind text could not overcome segregated administration, so the law widened the racial wealth gap it might have closed. Use evidence from the reading (the Mississippi loan statistic, VA office discrimination, redlined neighborhoods, underfunded Black colleges) plus your research on the GI Bill's implementation. Address this counterargument: millions of veterans of all races benefited and the law was progressive for its time; explain the difference between intent and outcome."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", items: [
+            {id: "h45-1-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["promise", "summit"]}
           ]}
         ]
       }
@@ -6041,6 +8177,18 @@ const MM_WEEKS_912 = [
             {id:"s1-k3", text:"I can explain why objects appear colored."},
             {id:"s1-k4", text:"I can describe what a focal point and focal length are."}
           ]}
+        ,
+          {type: "comprehension", instructions: "Answer each question using evidence from this section's reading.", items: [
+            {id: "s45-0-c1", question: "Why does a prism spread white sunlight into a rainbow?", answer: "Refraction bends each wavelength by a slightly different amount when light crosses into a new material. Violet light bends more than red, so the beam spreads into a spectrum."},
+            {id: "s45-0-c2", question: "Why does a red apple look red, and why does a black surface look black?", answer: "Objects get colors by subtraction. A red apple absorbs most wavelengths and reflects mainly red, while a black surface absorbs nearly all wavelengths."},
+            {id: "s45-0-c3", question: "Why does a straw in a glass of water look broken at the surface?", answer: "When light crosses from air into water it changes speed and bends, a behavior called refraction. The bend at the boundary makes the straw appear broken."}
+          ]},
+          {type: "argument", instructions: "Write two well-organized paragraphs defending your thesis. Support your claims with evidence and address the counterargument.", items: [
+            {id: "s45-0-a1", prompt: "Defend the following thesis in two paragraphs: The wave model of light is more explanatory than the ray model for a high-school student, because color, rainbows, and refraction all follow from wavelength.", guidance: "Thesis to defend: the wave equation and wavelength unify phenomena the ray model treats as separate rules. Use evidence from the reading (prism dispersion, color by subtraction, refraction at boundaries, the inverse relation of frequency and wavelength) plus your research on a technology explained by light's wave nature. Address this counterargument: ray optics is sufficient for mirrors and lenses; explain that sufficiency for some instruments does not equal explanatory power across phenomena."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", items: [
+            {id: "s45-0-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["reflection"]}
+          ]}
         ]
       },
       {
@@ -6059,6 +8207,18 @@ const MM_WEEKS_912 = [
             {id:"s2-t1", text:"A diverging lens spreads parallel rays outward.", answer:"true", note:"Diverging lenses are thinner in the middle."},
             {id:"s2-t2", text:"A virtual image can be projected onto a screen.", answer:"false", note:"Only real images, formed by converging rays, can be projected."},
             {id:"s2-t3", text:"The thin lens equation relates focal length, object distance, and image distance.", answer:"true", note:"1/f = 1/do + 1/di."}
+          ]}
+        ,
+          {type: "comprehension", instructions: "Answer each question using evidence from this section's reading.", items: [
+            {id: "s45-1-c1", question: "Why can a camera project an image onto a sensor while a magnifying glass cannot?", answer: "When the object sits farther than the focal length of a converging lens, the refracted rays actually converge on the far side and project a real, inverted image that can be caught on a screen, which is how a camera works. When the object is closer than the focal length, the eye traces diverging rays backward to a virtual, magnified image that cannot be projected."},
+            {id: "s45-1-c2", question: "How does the thin lens equation's sign convention tell you about the image?", answer: "One over f equals one over the object distance plus one over the image distance, and the sign conventions reveal whether the image is real or virtual, relating focal length to where the image forms."},
+            {id: "s45-1-c3", question: "How is the human eye a living camera?", answer: "The cornea and lens focus light onto the retina, and the ciliary muscles change the lens shape to adjust focal length for near and distant objects, a process called accommodation. Eyeglasses add a second lens: converging for farsightedness, diverging for nearsightedness."}
+          ]},
+          {type: "argument", instructions: "Write two well-organized paragraphs defending your thesis. Support your claims with evidence and address the counterargument.", items: [
+            {id: "s45-1-a1", prompt: "Defend the following thesis in two paragraphs: Understanding the difference between real and virtual images is the key threshold concept in optics, because it determines whether an image can be captured.", guidance: "Thesis to defend: the camera-versus-magnifying-glass distinction organizes everything else about lenses. Use evidence from the reading (real inverted images projected on sensors, virtual magnified images traced backward by the eye, the focal-length boundary between them) plus your research on an optical instrument that depends on this distinction. Address this counterargument: the thin lens equation is the real threshold because it quantifies image formation; explain that the equation is a tool while the concept is the understanding."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", items: [
+            {id: "s45-1-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["reflection"]}
           ]}
         ]
       }
@@ -6140,6 +8300,18 @@ const MM_WEEKS_912 = [
             {id:"h1-t2", text:"NATO was founded in 1949 as a military partnership of Western allies.", answer:"true", note:"The reading dates NATO's founding to 1949."},
             {id:"h1-t3", text:"The Communists lost China's civil war in 1949.", answer:"false", note:"The Communists won China's civil war in 1949."}
           ]}
+        ,
+          {type: "comprehension", instructions: "Answer each question using evidence from this section's reading.", items: [
+            {id: "h46-0-c1", question: "How did Kennan's Long Telegram become the Truman Doctrine?", answer: "In February 1946 Kennan argued from Moscow that the Soviet Union would spread its system unless met with firm and vigilant containment. In March 1947 Truman declared it American policy to support free peoples resisting subjugation, committing aid to Greece and Turkey and creating the charter for four decades of foreign policy."},
+            {id: "h46-0-c2", question: "Why was the Marshall Plan an economic weapon of containment?", answer: "Proposed in 1947, it sent more than 12 billion dollars to rebuild Western Europe's shattered economies, on the theory that prosperity would inoculate nations against Communist appeals. It was containment by prosperity rather than by arms."},
+            {id: "h46-0-c3", question: "Why did containment's early successes in Europe not settle the debate about Asia?", answer: "The Berlin Airlift of 1948 and NATO in 1949 had stopped Soviet expansion in Europe, but that same year the Communists won China's civil war. The shock convinced many Americans that containment was failing in Asia, raising questions about conflicts America did not understand."}
+          ]},
+          {type: "argument", instructions: "Write two well-organized paragraphs defending your thesis. Support your claims with evidence and address the counterargument.", items: [
+            {id: "h46-0-a1", prompt: "Defend the following thesis in two paragraphs: Containment's language of freedom became a showcase that forced America to confront its own segregation, because the Cold War turned civil rights into a foreign-policy asset.", guidance: "Thesis to defend: freedom's showcase; the Truman Doctrine's promise to support free peoples gave civil rights advocates leverage they had lacked. Use evidence from the reading (the Doctrine's language of free peoples working out their own destinies, the Marshall Plan's freedom framing) plus your research on civil rights diplomacy. Address this counterargument: containment was about power and geopolitics, not freedom; explain that even cynical rhetoric creates standards that activists can invoke."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", items: [
+            {id: "h46-0-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["containment", "diplomacy"]}
+          ]}
         ]
       },
       {
@@ -6166,6 +8338,18 @@ const MM_WEEKS_912 = [
             {id:"h2-o3", event:"Marshall Plan proposed", answer:3},
             {id:"h2-o4", event:"Berlin Airlift begins", answer:4},
             {id:"h2-o5", event:"NATO founded", answer:5}
+          ]}
+        ,
+          {type: "comprehension", instructions: "Answer each question using evidence from this section's reading.", items: [
+            {id: "h46-1-c1", question: "How did Soviet propaganda turn American racism into a Cold War liability?", answer: "Soviet newspapers and radio seized on every lynching, segregated school, and denied ballot as proof that American democracy was a fraud. Foreign audiences in Africa and Asia, many living under colonial rule themselves, listened closely."},
+            {id: "h46-1-c2", question: "How did the federal government respond to the foreign-policy cost of segregation?", answer: "The State Department began filing briefs in civil rights cases, and the Justice Department's brief in Brown v. Board of Education explicitly warned that racial discrimination was hurting American foreign policy. Washington also launched cultural diplomacy, sending jazz musicians like Louis Armstrong and Dizzy Gillespie on world tours as ambassadors of American freedom."},
+            {id: "h46-1-c3", question: "Why did McCarthyism and the civil rights opening happen at the same time?", answer: "The Second Red Scare punished dissent and narrowed public speech while Cold War competition forced Washington to treat segregation as a national security problem. Moral argument alone had not moved doors that security pressure helped pry open, as the Little Rock crisis of 1957 showed when it filled Soviet front pages."}
+          ]},
+          {type: "argument", instructions: "Write two well-organized paragraphs defending your thesis. Support your claims with evidence and address the counterargument.", items: [
+            {id: "h46-1-a1", prompt: "Defend the following thesis in two paragraphs: The Cold War, not moral persuasion alone, forced federal action on civil rights by making segregation a national security problem, and this is freedom's showcase.", guidance: "Thesis to defend: Cold War competition gave the movement a weapon its own organizing could wield against Washington. Use evidence from the reading (Soviet propaganda on lynchings, the Brown brief's foreign-policy warning, Little Rock on Soviet front pages, jazz ambassadors) plus your research on civil rights diplomacy. Address this counterargument: the movement's own organizing was the primary driver of change; explain that Cold War pressure was a lever the movement used, not the movement's cause."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", items: [
+            {id: "h46-1-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["diplomacy", "containment"]}
           ]}
         ]
       }
@@ -6198,6 +8382,18 @@ const MM_WEEKS_912 = [
             {id:"s1-k3", text:"I can explain the difference between series and parallel circuits."},
             {id:"s1-k4", text:"I can explain why home wiring uses parallel circuits."}
           ]}
+        ,
+          {type: "comprehension", instructions: "Answer each question using evidence from this section's reading.", items: [
+            {id: "s46-0-c1", question: "Why is voltage necessary for continuous current, and what role does a circuit play?", answer: "Charges need a complete path, called a circuit, and a source of push, called voltage, which is the electric potential energy per unit of charge from a battery or outlet. One ampere equals one coulomb passing a point each second, and without the push the flow stops."},
+            {id: "s46-0-c2", question: "Why can a 12-volt car battery push a large current through a starter motor but only a trickle through a sensor?", answer: "Ohm's law states that current equals voltage divided by resistance. The starter motor's low resistance admits a large current while the sensor's high resistance admits only a trickle, and the bulb filament's high resistance converts electrical energy into heat and light."},
+            {id: "s46-0-c3", question: "Why does the same current flow through every component in series but split in parallel?", answer: "A series circuit has only one path, so the same current flows through every component and total resistance is the sum of the parts. A parallel circuit splits current across branches, each seeing the full voltage, with total resistance dropping below the smallest branch."}
+          ]},
+          {type: "argument", instructions: "Write two well-organized paragraphs defending your thesis. Support your claims with evidence and address the counterargument.", items: [
+            {id: "s46-0-a1", prompt: "Defend the following thesis in two paragraphs: Home wiring should be parallel rather than series, because independent branches preserve full voltage for every appliance.", guidance: "Thesis to defend: parallel wiring is the correct engineering choice for buildings. Use evidence from the reading (every outlet receiving the full 120 volts, the toaster not dimming the lamps, series Christmas lights failing when one bulb burned out) plus your research on residential wiring standards. Address this counterargument: series wiring is simpler and cheaper; explain why independence and safety outweigh simplicity."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", items: [
+            {id: "s46-0-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["circuit"]}
+          ]}
         ]
       },
       {
@@ -6216,6 +8412,18 @@ const MM_WEEKS_912 = [
             {id:"s2-t1", text:"In a series circuit, the current is the same through every component.", answer:"true", note:"There is only one path for charge."},
             {id:"s2-t2", text:"Adding a branch in parallel increases the total resistance.", answer:"false", note:"Each new branch lowers the total resistance."},
             {id:"s2-t3", text:"Electrical power in watts equals voltage times current.", answer:"true", note:"P = V times I."}
+          ]}
+        ,
+          {type: "comprehension", instructions: "Answer each question using evidence from this section's reading.", items: [
+            {id: "s46-1-c1", question: "Why does adding more bulbs in series make each one dimmer?", answer: "The equivalent resistance of a series combination is the sum of the parts, so adding bulbs raises total resistance and lowers the current. Each bulb therefore claims a smaller share of the voltage."},
+            {id: "s46-1-c2", question: "How does a fuse protect a circuit, and why must it sit in series?", answer: "The fuse sits in series with the whole circuit so the full current passes through it. It melts or trips when the current exceeds a safe value, protecting the wires from overheating."},
+            {id: "s46-1-c3", question: "Why is the equivalent resistance of parallel resistors always smaller than the smallest branch?", answer: "One over the total equals the sum of one over each branch, which always yields a total smaller than the smallest branch, since each new branch opens another road for charge. This is why home wiring is parallel."}
+          ]},
+          {type: "argument", instructions: "Write two well-organized paragraphs defending your thesis. Support your claims with evidence and address the counterargument.", items: [
+            {id: "s46-1-a1", prompt: "Defend the following thesis in two paragraphs: Circuit breakers are a better engineering solution than fuses, because they embody the same series-protection principle without the waste of replacement.", guidance: "Thesis to defend: reusable protection improves on single-use protection while keeping the same safety logic. Use evidence from the reading (fuses and breakers sitting in series, tripping on excess current, protecting wires from overheating) plus your research on how homes moved from fuses to breakers. Address this counterargument: fuses are cheaper and fail-safe in ways breakers are not; explain the tradeoff between cost and reusability."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", items: [
+            {id: "s46-1-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["circuit"]}
           ]}
         ]
       }
@@ -6296,6 +8504,18 @@ const MM_WEEKS_912 = [
             {id:"h1-t2", text:"Levittown developers sold homes to Black and white families equally.", answer:"false", note:"Levitt refused to sell to Black families and wrote racial restrictions into deeds."},
             {id:"h1-t3", text:"Television helped create a shared national culture in the 1950s.", answer:"true", note:"The same programs played in living rooms coast to coast."}
           ]}
+        ,
+          {type: "comprehension", instructions: "Answer each question using evidence from this section's reading.", items: [
+            {id: "h47-0-c1", question: "How did federal housing policy and developers like William Levitt build a segregated suburbia?", answer: "Federal policy drew maps marking Black neighborhoods as too risky for insured mortgages, a practice called redlining. Levitt refused to sell to Black families and wrote racial restrictions into deeds, so Black veterans who had earned GI Bill benefits found the new suburbs' doors closed."},
+            {id: "h47-0-c2", question: "Why was the 1950s consensus an appearance rather than a reality?", answer: "Prosperity seemed to settle America's arguments, but the consensus had cracks along race and gender. Women who had worked in wartime factories were pushed back toward domestic life, and millions of Americans lived a different 1950s, excluded from the shared prosperity."},
+            {id: "h47-0-c3", question: "How did television both unite and mislead the nation?", answer: "Television stitched the nation together culturally as the same comedies, westerns, and news broadcasts played in living rooms coast to coast. Yet the shared culture masked the exclusions beneath the decade's polished surface."}
+          ]},
+          {type: "argument", instructions: "Write two well-organized paragraphs defending your thesis. Support your claims with evidence and address the counterargument.", items: [
+            {id: "h47-0-a1", prompt: "Defend the following thesis in two paragraphs: The 1950s consensus was built on exclusion, so the decade's civil rights breakthroughs were not disruptions of unity but exposures of a false one, and this is how the cracks widened.", guidance: "Thesis to defend: the consensus narrative hid redlining, deed restrictions, and gendered expectations, making the later challenges a correction rather than a rupture. Use evidence from the reading (redlining maps, Levitt's deed restrictions, closed suburban doors for Black veterans, women pushed from factory work) plus your research on the Montgomery boycott. Address this counterargument: defenders cite genuine shared prosperity, strong unions, and bipartisan stability; explain who was actually included in that stability."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", items: [
+            {id: "h47-0-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["consensus", "segregation"]}
+          ]}
         ]
       },
       {
@@ -6322,6 +8542,18 @@ const MM_WEEKS_912 = [
             {id:"h2-o3", event:"Montgomery bus boycott begins", answer:3},
             {id:"h2-o4", event:"Southern Manifesto signed", answer:4},
             {id:"h2-o5", event:"Browder v. Gayle decided", answer:5}
+          ]}
+        ,
+          {type: "comprehension", instructions: "Answer each question using evidence from this section's reading.", items: [
+            {id: "h47-1-c1", question: "Why did Brown v. Board of Education require a mass movement to become real?", answer: "The 1954 ruling declared segregated schools inherently unequal, but white Southern officials answered with massive resistance: over 100 members of Congress signed the Southern Manifesto in 1956, and some counties closed public schools rather than integrate. The law alone did not integrate schools."},
+            {id: "h47-1-c2", question: "How did the Montgomery boycott turn a one-day protest into a 381-day victory?", answer: "On the night of Rosa Parks's arrest, Jo Ann Robinson and the Women's Political Council mimeographed 35,000 leaflets calling for a boycott. Carpool networks and mass meetings under Martin Luther King Jr. sustained discipline until the Supreme Court ruled in Browder v. Gayle that bus segregation was unconstitutional."},
+            {id: "h47-1-c3", question: "Why was Rosa Parks's arrest the spark rather than the cause of the boycott?", answer: "Parks was a seamstress and longtime NAACP activist, and the Women's Political Council had organizing networks ready. The boycott proved that organized, nonviolent mass action could defeat segregation, announcing a new era."}
+          ]},
+          {type: "argument", instructions: "Write two well-organized paragraphs defending your thesis. Support your claims with evidence and address the counterargument.", items: [
+            {id: "h47-1-a1", prompt: "Defend the following thesis in two paragraphs: Montgomery proved that organized mass action, not court rulings alone, converts legal victories into lived change, and this is how the cracks widened into a break.", guidance: "Thesis to defend: Brown supplied the legal framework, but the boycott supplied the power that made desegregation real. Use evidence from the reading (massive resistance to Brown, the 35,000 leaflets, 381 days of discipline, the Browder v. Gayle ruling) plus your research on the Montgomery boycott. Address this counterargument: without Brown's legal precedent the boycott would have lacked a constitutional anchor; explain the partnership between courts and streets."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", items: [
+            {id: "h47-1-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["boycott", "consensus"]}
           ]}
         ]
       }
@@ -6354,6 +8586,18 @@ const MM_WEEKS_912 = [
             {id:"s1-k3", text:"I can describe Earth's magnetic field and one thing it does."},
             {id:"s1-k4", text:"I can explain how an electromagnet is made and switched off."}
           ]}
+        ,
+          {type: "comprehension", instructions: "Answer each question using evidence from this section's reading.", items: [
+            {id: "s47-0-c1", question: "Why does cutting a magnet in half not produce isolated north and south poles?", answer: "Magnetism comes from the motion of electric charges inside the material. Each piece's atomic magnets realign into regions called domains, so each half becomes a new magnet with its own north and south poles."},
+            {id: "s47-0-c2", question: "Why is an unmagnetized iron nail not magnetic even though its atoms are tiny magnets?", answer: "In iron the electrons in each atom act like tiny spinning magnets, but in an unmagnetized nail they point in random directions and cancel out. Stroking the nail aligns the domains until enough point the same way for the nail itself to become magnetic."},
+            {id: "s47-0-c3", question: "How are electricity and magnetism two faces of the same phenomenon?", answer: "Electric current flowing through a coil produces a magnetic field, and wrapping the coil around an iron core concentrates it into a switchable electromagnet, the technology behind junkyard cranes, doorbells, and hard-drive heads. Earth's molten iron core generates the field that deflects the solar wind."}
+          ]},
+          {type: "argument", instructions: "Write two well-organized paragraphs defending your thesis. Support your claims with evidence and address the counterargument.", items: [
+            {id: "s47-0-a1", prompt: "Defend the following thesis in two paragraphs: The domain theory of magnetism is the best explanation of why only some materials can be magnetized, because it links atomic behavior to bulk properties.", guidance: "Thesis to defend: domains bridge the scale between atomic magnets and the nail in your hand. Use evidence from the reading (random atomic magnets canceling, stroking aligning domains, only iron and a few metals behaving this way) plus your research on ferromagnetic materials. Address this counterargument: quantum spin is the deeper explanation; explain that domains are the bridge that makes the quantum behavior visible at human scale."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", items: [
+            {id: "s47-0-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["polarity"]}
+          ]}
         ]
       },
       {
@@ -6372,6 +8616,18 @@ const MM_WEEKS_912 = [
             {id:"s2-t1", text:"A stationary magnet inside a coil induces a steady current.", answer:"false", note:"Only a changing flux induces current."},
             {id:"s2-t2", text:"Transformers change voltage levels using electromagnetic induction.", answer:"true", note:"The turns ratio sets the voltage ratio."},
             {id:"s2-t3", text:"Increasing the number of turns in a coil increases the induced voltage.", answer:"true", note:"EMF = N times the rate of flux change."}
+          ]}
+        ,
+          {type: "comprehension", instructions: "Answer each question using evidence from this section's reading.", items: [
+            {id: "s47-1-c1", question: "Why does a stationary magnet induce no current, and what does that reveal about Faraday's law?", answer: "Faraday's law states that induced voltage equals the number of coil turns times the rate of change of magnetic flux. Only change induces current, so a stationary magnet, producing no change in flux, induces nothing."},
+            {id: "s47-1-c2", question: "How does Lenz's law enforce the conservation of energy?", answer: "The induced current always flows in the direction that opposes the change producing it. Without that opposition, motion could generate current without cost, creating energy from nothing."},
+            {id: "s47-1-c3", question: "Why are transformers possible only with alternating current?", answer: "Induction requires changing magnetic flux. Alternating current in the primary coil creates a changing field that induces a different voltage in the secondary coil, with the voltage ratio matching the turns ratio, allowing efficient long-distance transmission at high voltage."}
+          ]},
+          {type: "argument", instructions: "Write two well-organized paragraphs defending your thesis. Support your claims with evidence and address the counterargument.", items: [
+            {id: "s47-1-a1", prompt: "Defend the following thesis in two paragraphs: Faraday's 1831 discovery of induction is the most consequential physics finding of the 19th century, because nearly all grid electricity is made this way.", guidance: "Thesis to defend: the generator and the transformer built the modern electrical world on this one principle. Use evidence from the reading (generators spun by water, steam, wind, or fuel; transformers changing voltage for transmission) plus your research on Faraday's experiments. Address this counterargument: Maxwell's equations unified the theory and deserve the greater credit; explain that Faraday's experiment made the unification physical before the mathematics existed."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", items: [
+            {id: "s47-1-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["polarity"]}
           ]}
         ]
       }
@@ -6453,6 +8709,18 @@ const MM_WEEKS_912 = [
             {id:"h1-t2", text:"World War II had no effect on the civil rights struggle.", answer:"false", note:"Black veterans returned determined to claim the democracy they had defended."},
             {id:"h1-t3", text:"The SCLC believed nonviolent direct action could force federal intervention.", answer:"true", note:"That philosophy carried King from Montgomery to Birmingham and Selma."}
           ]}
+        ,
+          {type: "comprehension", instructions: "Answer each question using evidence from this section's reading.", items: [
+            {id: "h48-0-c1", question: "Why do historians describe a long movement rather than dating the struggle from 1954 to 1968?", answer: "The struggle was rooted in 1930s and 1940s labor organizing, Black churches, and the NAACP's legal campaign, with Charles Hamilton Houston and Thurgood Marshall winning rulings on teacher pay and graduate-school admission. World War II accelerated it as Black veterans carried the Double V spirit into voter registration drives."},
+            {id: "h48-0-c2", question: "How did the SCLC's strategy differ from the NAACP's, and why did the movement need both?", answer: "After Montgomery, King and other ministers founded the SCLC in 1957 on church-mobilized mass nonviolent protest meant to awaken the nation's conscience and force federal intervention. The NAACP continued courtroom battles and voter registration in the most dangerous counties, where organizers faced beatings and murder."},
+            {id: "h48-0-c3", question: "Why did Ella Baker insist that movements need strong local leaders rather than charismatic figureheads?", answer: "Baker had built NAACP chapters across the South in the 1940s, and women sustained much of the movement's work. Her insistence reflected the truth that the famous marches stood on decades of patient organizing by thousands of ordinary people whose names never made the newspapers."}
+          ]},
+          {type: "argument", instructions: "Write two well-organized paragraphs defending your thesis. Support your claims with evidence and address the counterargument.", items: [
+            {id: "h48-0-a1", prompt: "Defend the following thesis in two paragraphs: The long movement view proves that the famous victories rested on decades of unglamorous organizing, not on a few heroic moments, and this is the movement's soul.", guidance: "Thesis to defend: the soul of the movement was the patient groundwork of lawyers, veterans, churchwomen, and local organizers. Use evidence from the reading (Houston and Marshall's case-by-case campaign, the Double V voter drives, Baker's chapter-building, the SCLC-NAACP division of labor) plus your research on SNCC. Address this counterargument: the mass-action era achieved what decades of lawsuits had not; explain that the groundwork is what made the breakthroughs possible."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", items: [
+            {id: "h48-0-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["long", "direct action"]}
+          ]}
         ]
       },
       {
@@ -6479,6 +8747,18 @@ const MM_WEEKS_912 = [
             {id:"h2-o3", event:"Three Freedom Summer workers murdered in Mississippi", answer:3},
             {id:"h2-o4", event:"Civil Rights Act becomes law", answer:4},
             {id:"h2-o5", event:"Voting Rights Act becomes law", answer:5}
+          ]}
+        ,
+          {type: "comprehension", instructions: "Answer each question using evidence from this section's reading.", items: [
+            {id: "h48-1-c1", question: "How did SNCC's founding statement define the relationship between nonviolence and the movement's goal?", answer: "The 1960 statement affirmed nonviolence as the foundation of our purpose, the presupposition of our faith, and the manner of our action, growing from Judaic-Christian traditions toward a social order of justice permeated by love, with integration as the crucial first step."},
+            {id: "h48-1-c2", question: "Why did Freedom Summer of 1964 draw national attention in a way earlier organizing had not?", answer: "SNCC brought hundreds of Northern volunteers to Mississippi to register voters and teach in Freedom Schools. The campaign drew national attention when three workers, James Chaney, Andrew Goodman, and Michael Schwerner, were murdered by Klansmen."},
+            {id: "h48-1-c3", question: "Why was the Black Power debate a sign of the movement's depth rather than its failure?", answer: "By 1966 Stokely Carmichael argued Black people should build their own political and economic strength rather than appeal to white conscience, while the NAACP and SCLC held to integration and nonviolence. The debate showed a mass movement big enough to contain both strategies, united by direct action that had forced the Civil Rights Act of 1964 and the Voting Rights Act of 1965 into law."}
+          ]},
+          {type: "argument", instructions: "Write two well-organized paragraphs defending your thesis. Support your claims with evidence and address the counterargument.", items: [
+            {id: "h48-1-a1", prompt: "Defend the following thesis in two paragraphs: SNCC embodied the movement's soul, because its young organizers carried direct action into the most dangerous places and forced the nation to confront what nonviolence cost.", guidance: "Thesis to defend: the soul of the movement was the willingness to put bodies on the line. Use evidence from the reading (the founding statement, the Freedom Rides after the firebombing in Alabama, Freedom Summer and the three murdered workers, the Black Power debate) plus your research on SNCC. Address this counterargument: the older organizations achieved the legislative victories; explain that SNCC's pressure is what made those victories unavoidable."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", items: [
+            {id: "h48-1-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["direct action", "disenfranchisement"]}
           ]}
         ]
       }
@@ -6511,6 +8791,18 @@ const MM_WEEKS_912 = [
             {id:"s1-k3", text:"I can state Bohr's rule about electron energy levels."},
             {id:"s1-k4", text:"I can explain why each element has a unique spectral fingerprint."}
           ]}
+        ,
+          {type: "comprehension", instructions: "Answer each question using evidence from this section's reading.", items: [
+            {id: "s48-0-c1", question: "Why did classical physics predict that atoms should collapse, and how did quantum theory resolve the paradox?", answer: "Classical physics predicted orbiting electrons should radiate energy away and spiral into the nucleus. Bohr resolved it in 1913 by proposing electrons occupy only certain allowed energy levels, like rungs on a ladder, absorbing or emitting energy only when jumping between rungs."},
+            {id: "s48-0-c2", question: "Why does each element have its own spectral fingerprint?", answer: "Each jump between fixed energy levels corresponds to a photon whose energy equals the difference between the levels. Because the allowed levels are fixed for each element, the emitted colors form a unique pattern; hydrogen's level n sits at negative 13.6 electron volts divided by n squared."},
+            {id: "s48-0-c3", question: "Why did quantum theory replace certainty with probability, and why should we trust it?", answer: "We cannot say exactly where an electron is, only where it is likely to be. Strange as it sounds, this mathematics predicts the behavior of matter with astonishing precision, which is why physicists accept it."}
+          ]},
+          {type: "argument", instructions: "Write two well-organized paragraphs defending your thesis. Support your claims with evidence and address the counterargument.", items: [
+            {id: "s48-0-a1", prompt: "Defend the following thesis in two paragraphs: The quantum model of the atom is the best example of a theory that succeeded precisely because it abandoned common sense, and students should learn to trust mathematics over intuition.", guidance: "Thesis to defend: Planck's quanta and Bohr's rungs defied everyday logic yet predicted spectra exactly. Use evidence from the reading (Planck 1900, Bohr 1913, spectral fingerprints, the hydrogen energy formula) plus your research on a quantum prediction that was later confirmed. Address this counterargument: intuition still guides hypothesis formation in science; explain the complementary roles of intuition in asking and mathematics in answering."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", items: [
+            {id: "s48-0-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["radioactivity"]}
+          ]}
         ]
       },
       {
@@ -6529,6 +8821,18 @@ const MM_WEEKS_912 = [
             {id:"s2-t1", text:"Electrons in an atom can occupy any energy value between levels.", answer:"false", note:"Only certain allowed levels exist, like rungs on a ladder."},
             {id:"s2-t2", text:"Planck's equation E = hf relates a photon's energy to its frequency.", answer:"true", note:"h is Planck's constant."},
             {id:"s2-t3", text:"Astronomers use spectral lines to identify elements in distant stars.", answer:"true", note:"Each element's lines are a unique barcode."}
+          ]}
+        ,
+          {type: "comprehension", instructions: "Answer each question using evidence from this section's reading.", items: [
+            {id: "s48-1-c1", question: "How do astronomers identify elements in distant stars without visiting them?", answer: "Each element's fixed energy levels produce a unique barcode of emitted and absorbed colors. Astronomers read these spectral lines to identify the elements in stars light-years away."},
+            {id: "s48-1-c2", question: "Why can ultraviolet photons break molecules apart while radio photons pass through the body harmlessly?", answer: "Photon energy follows Planck's equation, E = hf, so higher-frequency light carries more energy per photon. An electron falling from level 3 to level 2 in hydrogen releases about 1.89 electron volts as a red photon, while ultraviolet photons carry enough energy to break molecular bonds."},
+            {id: "s48-1-c3", question: "How do LEDs and lasers apply the quantum ladder?", answer: "In a light-emitting diode, electrons dropping across engineered energy gaps release photons of a chosen color. In a laser, a cascade of identical jumps produces light waves marching in perfect step."}
+          ]},
+          {type: "argument", instructions: "Write two well-organized paragraphs defending your thesis. Support your claims with evidence and address the counterargument.", items: [
+            {id: "s48-1-a1", prompt: "Defend the following thesis in two paragraphs: Spectroscopy is the most powerful application of quantum theory, because it turned atomic structure into a readable barcode used from laboratories to galaxies.", guidance: "Thesis to defend: reading spectral lines lets humanity analyze matter it can never touch. Use evidence from the reading (elemental barcodes, stellar composition from light-years away, the hydrogen red line at 1.89 electron volts) plus your research on a spectroscopic discovery. Address this counterargument: semiconductors like LEDs and lasers have greater economic impact; explain the difference between breadth of knowledge and economic value."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", items: [
+            {id: "s48-1-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["radioactivity"]}
           ]}
         ]
       }
@@ -6609,7 +8913,19 @@ const MM_WEEKS_912 = [
           {id:"h1-f2", text:"By 1968, American troop levels in Vietnam had risen to more than ___.", answer:"500,000"},
           {id:"h1-f3", text:"Johnson's Great Society created ___ health coverage for senior citizens.", answer:"Medicare"}
         ]}
-      ]
+      ,
+          {type: "comprehension", instructions: "Answer each question using evidence from this section's reading.", items: [
+            {id: "h49-0-c1", question: "How did the Gulf of Tonkin Resolution give Johnson war powers without a formal declaration of war?", answer: "After Johnson told Congress in August 1964 that North Vietnamese boats had attacked American ships, an account historians still debate, Congress passed the resolution granting sweeping authority to wage war in Vietnam. Troop levels climbed from under 25,000 in early 1965 to more than 500,000 by 1968."},
+            {id: "h49-0-c2", question: "Why did Vietnam devour the Great Society?", answer: "The escalation consumed the money, attention, and political capital Johnson needed for the War on Poverty, Head Start, Medicare, Medicaid, and federal aid to public schools. The war he hoped would be quick became a grinding conflict that split the nation."},
+            {id: "h49-0-c3", question: "Why is Johnson's presidency presented as a study in contradiction?", answer: "A master of Congress, he passed the most ambitious domestic program since the New Deal, including the Civil Rights Act of 1964 and the Voting Rights Act of 1965. Yet the war he escalated defined his presidency, outlasted his time in office by seven years, and led him not to seek reelection in 1968."}
+          ]},
+          {type: "argument", instructions: "Write two well-organized paragraphs defending your thesis. Support your claims with evidence and address the counterargument.", items: [
+            {id: "h49-0-a1", prompt: "Defend the following thesis in two paragraphs: Vietnam ensured that the 1960s' domestic promises would remain unfinished, by consuming the resources and unity that reform required.", guidance: "Thesis to defend: the unfinished 60s; the war devoured the Great Society's money, attention, and political capital. Use evidence from the reading (the Great Society programs, the Tonkin Resolution, the escalation from 25,000 to 500,000 troops, Johnson's 1968 withdrawal) plus your research on the Voting Rights Act. Address this counterargument: the 1960s produced the most productive reform era since the New Deal, including civil rights and Medicare; explain the difference between what was achieved and what Vietnam cost."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", items: [
+            {id: "h49-0-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["escalation", "rights"]}
+          ]}
+        ]
     },
     {
       title:"Vietnam, the Draft, and the Unfinished Promise",
@@ -6629,7 +8945,19 @@ const MM_WEEKS_912 = [
         {type:"shortanswer", instructions:"Write 4-6 sentences, then compare your answer with the model.", items:[
           {id:"h2-s1", prompt:"King argued that America fought for freedom abroad while denying it at home. Using evidence from the readings, explain whether the civil rights victories of 1964 and 1965 answered his charge.", answer:"The laws of 1964 and 1965 did not fully answer King's charge. The Civil Rights Act and the Voting Rights Act ended legal segregation and protected the ballot, which were enormous victories. Yet Black soldiers were still dying in Vietnam at rates above their share of the population, and poverty programs were being starved by war spending. King was pointing to a gap between American ideals and American practice, and new laws alone could not close it."}
         ]}
-      ]
+      ,
+          {type: "comprehension", instructions: "Answer each question using evidence from this section's reading.", items: [
+            {id: "h49-1-c1", question: "Why did the draft and casualty figures fuel anger specifically in Black neighborhoods?", answer: "Black Americans made up about 11 percent of the population yet accounted for a far larger share of combat troops and casualties in the war's early years. Families asked why their sons were dying for freedoms they could not fully enjoy at home."},
+            {id: "h49-1-c2", question: "How did King's 1967 Riverside Church speech connect the war to poverty?", answer: "King called the war an enemy of the poor and argued that a nation spending billions on bombs could not also rebuild its cities and schools. The speech divided even his allies but named a contradiction many Americans felt."},
+            {id: "h49-1-c3", question: "Why did the violence at Selma produce the Voting Rights Act within months?", answer: "After marchers were beaten on the Edmund Pettus Bridge in March 1965, Johnson addressed a joint session of Congress demanding a voting rights law, declaring that history and fate had met in Selma. Five months later he signed the Act, which banned literacy tests and sent federal registrars South, and Black voter registration surged."}
+          ]},
+          {type: "argument", instructions: "Write two well-organized paragraphs defending your thesis. Support your claims with evidence and address the counterargument.", items: [
+            {id: "h49-1-a1", prompt: "Defend the following thesis in two paragraphs: The Voting Rights Act proved the 1960s could deliver on its promises, while Vietnam showed how quickly those promises could be betrayed by misplaced priorities, and this tension is the unfinished 60s.", guidance: "Thesis to defend: the decade's highest achievement and its deepest failure came from the same presidency. Use evidence from the reading (the Selma-to-signing arc, King's Riverside speech, the draft's unequal burden) plus your research on the Voting Rights Act. Address this counterargument: the Act's success shows the 1960s finished its core work; explain that enforcement battles kept the promise unfinished."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", items: [
+            {id: "h49-1-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["rights", "dissent"]}
+          ]}
+        ]
     }
   ],
   science: [
@@ -6653,7 +8981,19 @@ const MM_WEEKS_912 = [
           {id:"s1-t1", text:"Carbon-14 dating works because the ratio of carbon-14 to carbon-12 in a dead organism decreases at a known rate.", answer:"true", note:"Each isotope decays at a steady rate, so the changing ratio acts as a clock."},
           {id:"s1-t2", text:"Gamma radiation is more easily blocked than alpha radiation.", answer:"false", note:"Gamma rays are the most penetrating and require thick lead or concrete to block."}
         ]}
-      ]
+      ,
+          {type: "comprehension", instructions: "Answer each question using evidence from this section's reading.", items: [
+            {id: "s49-0-c1", question: "Why are some isotopes stable while others decay?", answer: "Atoms of the same element with different neutron counts are isotopes. Some are stable, but unstable ones fall apart on their own, shooting out particles and energy in radioactive decay, first noticed by Becquerel in 1896 when uranium darkened photographic plates."},
+            {id: "s49-0-c2", question: "How do alpha, beta, and gamma emissions differ in penetrating power?", answer: "Alpha particles are heavy and slow, stopped by paper or skin. Beta particles travel farther. Gamma rays are pure energy that can pass through the body and need thick lead or concrete to block."},
+            {id: "s49-0-c3", question: "Why are half-lives useful as clocks?", answer: "Each isotope decays at its own steady rate: after one half-life half the atoms remain, after two one quarter, after three one eighth. Scientists date ancient wood and bone with carbon-14 and use short-lived isotopes to image the body and treat disease."}
+          ]},
+          {type: "argument", instructions: "Write two well-organized paragraphs defending your thesis. Support your claims with evidence and address the counterargument.", items: [
+            {id: "s49-0-a1", prompt: "Defend the following thesis in two paragraphs: The half-life is the most useful concept in nuclear chemistry, because it turns atomic randomness into predictable clocks.", guidance: "Thesis to defend: the steady fractional decay rate makes the unpredictable predictable at scale. Use evidence from the reading (the half-quarter-eighth pattern, carbon-14 dating, medical isotopes) plus your research on a real application of half-life dating or medicine. Address this counterargument: half-lives cannot predict when any individual atom will decay; explain the difference between statistical prediction and individual prediction."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", items: [
+            {id: "s49-0-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["fission"]}
+          ]}
+        ]
     },
     {
       title:"Splitting Atoms, Releasing Energy",
@@ -6674,7 +9014,19 @@ const MM_WEEKS_912 = [
         {type:"shortanswer", instructions:"Write 4-6 sentences, then compare your answer with the model.", items:[
           {id:"s2-s1", prompt:"A town is debating whether to build a nuclear power plant nearby. Write 4-6 sentences arguing for or against the plant, using at least two concepts from this week's science lessons, such as fission, half-life, radiation, or waste.", answer:"A town should approve the plant only with strict safety rules, because the benefits and risks are both serious. Fission provides steady electricity without carbon dioxide, which helps fight climate change while keeping the lights on. However, the used fuel stays radioactive for thousands of years, and the half-life of some waste products means the danger lasts far longer than any human institution has. The Chernobyl accident proved that poor design or careless operation can turn a reactor into a disaster. In the end, nuclear power is worth using if a community commits to honest regulation, safe waste storage, and constant vigilance."}
         ]}
-      ]
+      ,
+          {type: "comprehension", instructions: "Answer each question using evidence from this section's reading.", items: [
+            {id: "s49-1-c1", question: "Why does fission release enormous energy from a small amount of mass?", answer: "In 1938 Hahn and Strassmann discovered that bombarding uranium with neutrons splits its nucleus in two. A small amount of mass converts directly into energy, exactly as Einstein's E = mc squared predicts."},
+            {id: "s49-1-c2", question: "How do nuclear power plants control a chain reaction?", answer: "Fission releases extra neutrons that can split more nuclei, but control rods absorb neutrons to keep the energy release steady. The steady heat makes steam that spins turbines, supplying about one fifth of America's electricity with no carbon dioxide released while running."},
+            {id: "s49-1-c3", question: "Why is the decision about nuclear power a genuine tradeoff rather than a clear choice?", answer: "Reactors provide steady, carbon-free electricity, but used fuel stays radioactive for thousands of years, and the 1986 Chernobyl explosion showed what happens when design or operation fails. The same physics made nuclear weapons possible, which is why uranium and plutonium are guarded so closely."}
+          ]},
+          {type: "argument", instructions: "Write two well-organized paragraphs defending your thesis. Support your claims with evidence and address the counterargument.", items: [
+            {id: "s49-1-a1", prompt: "Defend the following thesis in two paragraphs: Nations should expand nuclear power, because its steady carbon-free output outweighs its risks when weighed against climate change.", guidance: "Thesis to defend: the energy tradeoff favors nuclear once carbon emissions enter the calculation. Use evidence from the reading (no carbon dioxide while running, one fifth of American electricity, controlled chain reactions) plus your research on the nuclear-versus-fossil energy tradeoff. Address this counterargument: waste stays radioactive for thousands of years and accidents like Chernobyl show catastrophic failure modes; explain how risk management and storage address these concerns."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", items: [
+            {id: "s49-1-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["fission"]}
+          ]}
+        ]
     }
   ],
   friday: {
@@ -6738,7 +9090,19 @@ const MM_WEEKS_912 = [
           {id:"h1-f2", text:"Economists called the mix of inflation and unemployment ___.", answer:"stagflation"},
           {id:"h1-f3", text:"Iranian revolutionaries held 52 American hostages for ___ days.", answer:"444"}
         ]}
-      ]
+      ,
+          {type: "comprehension", instructions: "Answer each question using evidence from this section's reading.", items: [
+            {id: "h50-0-c1", question: "Why did stagflation break the economic assumptions of the postwar era?", answer: "Inflation and unemployment rose together, a painful mix economists called stagflation. The 1973 Arab oil embargo cut off shipments to punish American support for Israel, gasoline prices soared, drivers waited in long lines, and factories closed across the industrial Midwest."},
+            {id: "h50-0-c2", question: "How did Watergate and Vietnam together damage American confidence beyond their separate harms?", answer: "In 1974 Watergate forced Nixon to resign, the first president ever to quit, after he covered up a burglary of Democratic headquarters. The next year South Vietnam fell, ending a war that had cost more than 58,000 American lives, and in 1979 Iranian revolutionaries held 52 hostages for 444 days."},
+            {id: "h50-0-c3", question: "What was Carter's diagnosis in the malaise speech, and why did voters reject the messenger?", answer: "Carter warned that Americans worshipped self-indulgence and consumption, that identity was defined by what one owns rather than what one does, and that eroding confidence threatened the social and political fabric. Critics called it the malaise speech, and voters decided he could describe the problem but not solve it."}
+          ]},
+          {type: "argument", instructions: "Write two well-organized paragraphs defending your thesis. Support your claims with evidence and address the counterargument.", items: [
+            {id: "h50-0-a1", prompt: "Defend the following thesis in two paragraphs: The crises of the 1970s proved that national power could no longer rest on presidential authority alone, opening space for new faces of power in cities and communities.", guidance: "Thesis to defend: power's new face; Watergate, stagflation, and the hostage crisis discredited top-down authority and created openings for different kinds of leaders. Use evidence from the reading (Nixon's resignation, the embargo and stagflation, Carter's failed diagnosis) plus your research on Black mayors. Address this counterargument: Reagan's 1980 victory restored traditional presidential power; explain the longer trend toward decentralized, local power."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", items: [
+            {id: "h50-0-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["malaise", "mayor"]}
+          ]}
+        ]
     },
     {
       title:"Black Mayors and the New Urban Politics",
@@ -6758,7 +9122,19 @@ const MM_WEEKS_912 = [
         {type:"shortanswer", instructions:"Write 4-6 sentences, then compare your answer with the model.", items:[
           {id:"h2-s1", prompt:"Argue: power's new face. When Black mayors took office in the 1970s, some said political power would transform Black communities, while others said the real power of jobs and investment was already leaving the cities. Which view is stronger? Take a position and support it with evidence from the reading.", answer:"The view that political power mattered is stronger, though the skeptics had a point. Mayors like Maynard Jackson opened city contracts to Black businesses and diversified police forces, putting real money and jobs into Black communities for the first time. Those were concrete changes that only elected power could deliver. The skeptics were right that mayors inherited shrinking tax bases and could not stop factories from closing. Still, winning office gave Black voters a seat where decisions were made, and that representation changed what cities believed was possible."}
         ]}
-      ]
+      ,
+          {type: "comprehension", instructions: "Answer each question using evidence from this section's reading.", items: [
+            {id: "h50-1-c1", question: "Why did the 1973 mayoral victories matter beyond the symbolism of firsts?", answer: "Stokes had won Cleveland in 1967, and in 1973 Bradley won Los Angeles, Jackson won Atlanta, and Young won Detroit. They moved quickly on substance: Jackson opened city contracts to Black-owned businesses, Bradley diversified the police force, and Young spoke for Detroit's Black majority, proving organized Black voters could win and govern."},
+            {id: "h50-1-c2", question: "Why did the new mayors inherit the title just as the prize was shrinking?", answer: "Factories were closing, middle-class families of all races were moving to the suburbs, and the shrinking tax base left less money for schools, police, and repairs. A mayor could hire more Black firefighters but could not single-handedly stop deindustrialization or reverse white flight."},
+            {id: "h50-1-c3", question: "Why do historians hold both views of the mayors' significance at once?", answer: "Some argue the elections marked the moment Black political power became real and visible. Others answer that jobs and investment were already leaving the cities. Both views hold some truth: the mayors proved representation matters and also proved that winning office is only one step in the longer fight for economic justice."}
+          ]},
+          {type: "argument", instructions: "Write two well-organized paragraphs defending your thesis. Support your claims with evidence and address the counterargument.", items: [
+            {id: "h50-1-a1", prompt: "Defend the following thesis in two paragraphs: The Black mayors of the 1970s redefined political power by proving that representation matters even when economic power is draining away, and this is power's new face.", guidance: "Thesis to defend: governing under constraints is itself a demonstration of power, not a refutation of it. Use evidence from the reading (Jackson's contracting reforms, Bradley's police diversification, the both-views analysis, the inspiration for later candidates) plus your research on Black mayors. Address this counterargument: critics argue the mayors presided over urban decline; explain the difference between governing under constraints and causing decline."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", items: [
+            {id: "h50-1-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["mayor", "malaise"]}
+          ]}
+        ]
     }
   ],
   science: [
@@ -6783,7 +9159,19 @@ const MM_WEEKS_912 = [
           {id:"s1-k3", text:"I can describe what happens during testing."},
           {id:"s1-k4", text:"I can explain why the design process repeats in a loop."}
         ]}
-      ]
+      ,
+          {type: "comprehension", instructions: "Answer each question using evidence from this section's reading.", items: [
+            {id: "s50-0-c1", question: "Why does the process begin with defining the problem rather than brainstorming solutions?", answer: "Engineers must first know who needs help, what the solution must do, and what constraints it must respect, such as cost, materials, safety, and time. Brainstorming comes later because the first idea is rarely the best one."},
+            {id: "s50-0-c2", question: "Why is testing described as where the process earns its reputation?", answer: "Engineers measure how the prototype performs, watch where it fails, and use each failure as data, then improve and test again. The water-filter example shows the loop: testing sand, charcoal, and cloth layers and redesigning until the filter is effective and affordable."},
+            {id: "s50-0-c3", question: "Why must engineers document every step?", answer: "Documentation lets others review the work, repeat the tests, and build on what was learned. What separates engineering from tinkering is this cycle of clear goals, honest testing, and deliberate improvement, made shareable through documentation."}
+          ]},
+          {type: "argument", instructions: "Write two well-organized paragraphs defending your thesis. Support your claims with evidence and address the counterargument.", items: [
+            {id: "s50-0-a1", prompt: "Defend the following thesis in two paragraphs: The engineering design process is a better model than the scientific method for solving everyday problems, because it is built for constraints and iteration.", guidance: "Thesis to defend: defining constraints, prototyping, and testing in loops fits real-world problem solving better than hypothesis-first inquiry. Use evidence from the reading (constraints, the prototype-test-improve loop, the water-filter example) plus your research on design thinking applied outside engineering. Address this counterargument: the scientific method seeks truth while design seeks mere workability; explain that different goals call for different methods."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", items: [
+            {id: "s50-0-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["prototype", "constraint"]}
+          ]}
+        ]
     },
     {
       title:"Tradeoffs and Optimization",
@@ -6805,7 +9193,19 @@ const MM_WEEKS_912 = [
           {id:"s2-f2", text:"___ means finding the best balance among all constraints.", answer:"Optimization"},
           {id:"s2-f3", text:"Cost, safety, and time are examples of design ___.", answer:"constraints"}
         ]}
-      ]
+      ,
+          {type: "comprehension", instructions: "Answer each question using evidence from this section's reading.", items: [
+            {id: "s50-1-c1", question: "Why is optimization about balance rather than perfection in any single category?", answer: "Competing demands, called tradeoffs, pull in different directions: a stronger bridge needs more steel, which raises cost, while a cheaper bridge may need longer construction or heavier maintenance. Optimization finds the design that best balances all constraints at once."},
+            {id: "s50-1-c2", question: "What did the Tacoma Narrows Bridge collapse of 1940 teach engineers?", answer: "The bridge twisted apart in moderate winds just months after opening, teaching engineers to test for aerodynamic forces they had underestimated. Failure, handled honestly, is data: each collapsed model reveals a weakness the next version can fix."},
+            {id: "s50-1-c3", question: "How do decision matrices make tradeoffs visible?", answer: "Engineers score each design on cost, safety, performance, and other criteria to see the tradeoffs clearly. The same thinking applies from phone designers trading battery life against weight to medical engineers trading precision against price."}
+          ]},
+          {type: "argument", instructions: "Write two well-organized paragraphs defending your thesis. Support your claims with evidence and address the counterargument.", items: [
+            {id: "s50-1-a1", prompt: "Defend the following thesis in two paragraphs: Naming constraints explicitly is the most important engineering habit, because hidden constraints cause the worst failures.", guidance: "Thesis to defend: the Tacoma Narrows disaster was a failure to name aerodynamic forces as a constraint. Use evidence from the reading (the 1940 collapse, decision matrices, design reviews justifying every tradeoff with test data) plus your research on an engineering failure caused by an unstated constraint. Address this counterargument: naming constraints too early can kill creativity; explain why the process protects brainstorming by judging ideas only after generating them."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", items: [
+            {id: "s50-1-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["constraint", "prototype"]}
+          ]}
+        ]
     }
   ],
   friday: {
@@ -6872,7 +9272,19 @@ const MM_WEEKS_912 = [
           {id:"h1-f2", text:"The harsh drug laws took a heavy ___ on Black communities.", answer:"toll"},
           {id:"h1-f3", text:"Mikhail ___ introduced glasnost and perestroika in the Soviet Union.", answer:"Gorbachev"}
         ]}
-      ]
+      ,
+          {type: "comprehension", instructions: "Answer each question using evidence from this section's reading.", items: [
+            {id: "h51-0-c1", question: "How did Reagan's three pillars work together as a governing philosophy?", answer: "Reagan argued government was the problem, not the solution: cut taxes to unleash business growth, reduce federal regulation, and rebuild the military to confront the Soviet Union. Congress passed deep tax cuts in 1981, and he rolled back rules on industries from airlines to banking."},
+            {id: "h51-0-c2", question: "Why did the economic recovery come with a tripled national debt?", answer: "Tax cuts and military spending outpaced revenue even as the economy recovered and unemployment fell. The philosophy's growth did not pay for its own costs."},
+            {id: "h51-0-c3", question: "Why did the 1986 Anti-Drug Abuse Act fall hardest on Black Americans?", answer: "The law imposed harsh mandatory sentences with a 100-to-1 disparity between crack and powder cocaine. Because crack was cheaper and more common in Black neighborhoods, the law fell hardest on Black Americans and prison populations began a steep climb."}
+          ]},
+          {type: "argument", instructions: "Write two well-organized paragraphs defending your thesis. Support your claims with evidence and address the counterargument.", items: [
+            {id: "h51-0-a1", prompt: "Defend the following thesis in two paragraphs: Reagan's revolution delivered economic recovery at the price of exploding debt and a racially skewed drug war, so the 1980s verdict must count both ledgers.", guidance: "Thesis to defend: the 80s verdict; triumph and toll must be judged together. Use evidence from the reading (the tripled national debt, the 100-to-1 crack-versus-powder disparity, the reshaped courts) plus your research on the war on drugs. Address this counterargument: supporters credit Reagan with renewed growth and Cold War victory; explain who paid the costs of that victory."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", items: [
+            {id: "h51-0-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["conservatism", "toll"]}
+          ]}
+        ]
     },
     {
       title:"The Cold War Ends, and a War Begins at Home",
@@ -6892,7 +9304,19 @@ const MM_WEEKS_912 = [
         {type:"shortanswer", instructions:"Write 4-6 sentences, then compare your answer with the model.", items:[
           {id:"h2-s1", prompt:"Argue: the 80s verdict. Was the Reagan era a success for America? Take a clear position and support it with evidence from this week's history lessons.", answer:"The Reagan era was a partial success with a heavy hidden cost. Reagan's military buildup and diplomacy helped bring the Cold War to a peaceful end, and the economy recovered from the stagflation of the 1970s. Those are real achievements that shaped the modern world. Yet the war on drugs, launched with the 1986 Anti-Drug Abuse Act, imposed mandatory sentences that fell hardest on Black communities and fueled mass incarceration. The national debt also tripled, passing costs to future generations. The 1980s restored American confidence, but the toll of its drug war shows that confidence came at a price many Americans are still paying."}
         ]}
-      ]
+      ,
+          {type: "comprehension", instructions: "Answer each question using evidence from this section's reading.", items: [
+            {id: "h51-1-c1", question: "Why did Gorbachev's reforms destroy the system they were meant to save?", answer: "Gorbachev's glasnost, or openness, and perestroika, or restructuring, were meant to save the Soviet system. Instead the reforms exposed its failures, independence movements swept Eastern Europe, the Berlin Wall fell in 1989, and the Soviet Union dissolved in 1991."},
+            {id: "h51-1-c2", question: "How did the 100-to-1 sentencing disparity translate into mass incarceration?", answer: "Five grams of crack drew the same prison term as 500 grams of powder cocaine. Police swept through Black neighborhoods, and by the 1990s the United States imprisoned a larger share of its population than any other nation, with Black men locked up at staggering rates."},
+            {id: "h51-1-c3", question: "Why does the reading pair Berlin's celebration with a heavy bill due in American cities?", answer: "The decade ended with freedom celebrated in Berlin while the drug war's toll, lost wages, broken homes, and distrust of the justice system, fell on American cities. Reagan's supporters credit his pressure for the Cold War's end, but the domestic war escalated at the same time."}
+          ]},
+          {type: "argument", instructions: "Write two well-organized paragraphs defending your thesis. Support your claims with evidence and address the counterargument.", items: [
+            {id: "h51-1-a1", prompt: "Defend the following thesis in two paragraphs: The decade that ended the Cold War also built mass incarceration, so its triumph abroad cannot be separated from its toll at home, and this is the 1980s verdict.", guidance: "Thesis to defend: the 80s verdict; foreign-policy success and domestic damage were products of the same governing choices. Use evidence from the reading (the wall falling without a shot, the 100-to-1 disparity, families losing fathers and sons to mandatory sentences) plus your research on the war on drugs. Address this counterargument: supporters credit Reagan's military pressure and diplomacy for the peaceful Cold War end; explain that the domestic costs were a policy choice, not a necessity."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", items: [
+            {id: "h51-1-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["toll", "conservatism"]}
+          ]}
+        ]
     }
   ],
   science: [
@@ -6916,7 +9340,19 @@ const MM_WEEKS_912 = [
         {type:"shortanswer", instructions:"Write 4-6 sentences, then compare your answer with the model.", items:[
           {id:"s1-s1", prompt:"Two students propose investigations. Ana asks, 'Do plants grow better with music?' Ben asks, 'How does light color affect the growth rate of bean plants over 14 days?' Argue which is the stronger research question, using the criteria of testability, measurable variables, and scope.", answer:"Ben's question is the stronger research question. It names a clear independent variable, light color, and a measurable dependent variable, growth rate over 14 days, so it can actually be tested with data. Ana's question is too vague: 'better' is not defined, and 'music' could mean volume, genre, or duration, which makes fair testing impossible. A strong question also has a workable scope, and Ben's two-week bean plant study fits a student's time and materials. Testability, measurable variables, and clear scope are what turn curiosity into science."}
         ]}
-      ]
+      ,
+          {type: "comprehension", instructions: "Answer each question using evidence from this section's reading.", items: [
+            {id: "s51-0-c1", question: "Why is Do plants like music a weak research question, and how would you strengthen it?", answer: "It is too vague to test. Strengthened, it becomes: How does light color affect the growth rate of bean plants over 14 days, which is narrow enough to test and specific enough to measure."},
+            {id: "s51-0-c2", question: "Why must you name independent, dependent, and controlled variables before starting?", answer: "The independent variable is what you change, such as light color; the dependent variable is what you measure, such as plant height; controlled variables are everything kept the same, like water, soil, and temperature. Without naming them you cannot attribute results to your change."},
+            {id: "s51-0-c3", question: "Why plan at least three plants per condition and decide measurement timing in advance?", answer: "Good data needs enough trials to trust, and deciding exactly how and when to measure prevents bias. Writing the procedure step by step before beginning, with materials listed and safety checked, makes the work defensible."}
+          ]},
+          {type: "argument", instructions: "Write two well-organized paragraphs defending your thesis. Support your claims with evidence and address the counterargument.", items: [
+            {id: "s51-0-a1", prompt: "Defend the following thesis in two paragraphs: Writing the full procedure before collecting data is the most important step in an investigation, because it prevents bias and makes the work repeatable.", guidance: "Thesis to defend: planning is half the investigation. Use evidence from the reading (step-by-step procedures, named variables, advance measurement decisions, labeled recording tables) plus your research on preregistration or lab notebooks in real science. Address this counterargument: exploration-first approaches discover unexpected findings that rigid plans miss; explain that planned structure still allows observation of surprises."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", items: [
+            {id: "s51-0-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["hypothesis"]}
+          ]}
+        ]
     },
     {
       title:"Capstone: Analyzing Data and Presenting Findings",
@@ -6936,7 +9372,19 @@ const MM_WEEKS_912 = [
           {id:"s2-f2", text:"___ means one thing actually produces the other.", answer:"causation"},
           {id:"s2-f3", text:"The ___ is the arithmetic average of a data set.", answer:"mean"}
         ]}
-      ]
+      ,
+          {type: "comprehension", instructions: "Answer each question using evidence from this section's reading.", items: [
+            {id: "s51-1-c1", question: "Why might the median be more honest than the mean?", answer: "The median is the middle value when data is ordered, so one extreme value cannot drag it off course the way it drags the average. Summarizing each condition with mean, median, mode, and range guards against misleading averages."},
+            {id: "s51-1-c2", question: "Why is confusing correlation with causation the most common trap in science?", answer: "If ice cream sales and drownings rise together, one does not cause the other; both rise because summer heat drives both. The trap leads investigators to claim causes their data cannot support."},
+            {id: "s51-1-c3", question: "Why is a disproven hypothesis still a successful investigation?", answer: "If the method was sound, honest results advance knowledge even when they contradict the prediction. Naming limitations, such as a small sample or uncontrolled measurements, is part of that honesty, because every real study has them."}
+          ]},
+          {type: "argument", instructions: "Write two well-organized paragraphs defending your thesis. Support your claims with evidence and address the counterargument.", items: [
+            {id: "s51-1-a1", prompt: "Defend the following thesis in two paragraphs: Choosing the right graph is an ethical decision, not just a stylistic one, because a stretched axis misleads readers before they read a single number.", guidance: "Thesis to defend: honest visualization is a scientific responsibility. Use evidence from the reading (bar graphs for groups, line graphs for change over time, labeled axes with units, never stretching or squeezing an axis to exaggerate) plus your research on a misleading graph in public life. Address this counterargument: any graph can mislead, so conventions offer little protection; explain that labeled axes and fair scales are exactly the defense."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", items: [
+            {id: "s51-1-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["hypothesis"]}
+          ]}
+        ]
     }
   ],
   friday: {
@@ -7001,7 +9449,19 @@ const MM_WEEKS_912 = [
           {id:"h1-t1", text:"The September 11 attacks led to the creation of the Department of Homeland Security.", answer:"true", note:"The reading lists the new department among the changes after 9/11."},
           {id:"h1-t2", text:"Hurricane Katrina showed that disaster struck all New Orleans residents equally.", answer:"false", note:"The reading says Katrina exposed how disaster struck Black residents hardest."}
         ]}
-      ]
+      ,
+          {type: "comprehension", instructions: "Answer each question using evidence from this section's reading.", items: [
+            {id: "h52-0-c1", question: "How did September 11 reshape American government and daily life?", answer: "After terrorists killed nearly 3,000 people, the United States invaded Afghanistan, created the Department of Homeland Security, and began passenger screening travelers still experience today. In 2003 President Bush ordered an invasion of Iraq on the claim of weapons of mass destruction; no such weapons were found, and the war dragged on for years."},
+            {id: "h52-0-c2", question: "Why does the reading pair Hurricane Katrina and the 2008 crisis with Obama's election?", answer: "Katrina in 2005 exposed how disaster struck Black residents of New Orleans hardest, and the 2008 housing collapse was the worst financial crisis since the Great Depression. Against that backdrop, Obama's victory felt like proof that the struggle of earlier generations had opened a new chapter."},
+            {id: "h52-0-c3", question: "What did Obama's Grant Park speech claim the election proved?", answer: "Obama told the crowd that tonight is your answer to anyone doubting American possibility: lines stretched around schools and churches in numbers never seen, with people waiting three and four hours, many for the first time, because they believed their voice could be that difference."}
+          ]},
+          {type: "argument", instructions: "Write two well-organized paragraphs defending your thesis. Support your claims with evidence and address the counterargument.", items: [
+            {id: "h52-0-a1", prompt: "Defend the following thesis in two paragraphs: Obama's election was a milestone of the struggle, not its conclusion, because the systems that produced Katrina's racial disparities and the 2008 crisis remained in place.", guidance: "Thesis to defend: the ongoing struggle; symbolism did not dismantle structure. Use evidence from the reading (Katrina's unequal impact, the Iraq war's false premises, the financial collapse, the Grant Park speech's hopes) plus your research on Black Lives Matter. Address this counterargument: the election proved the American system could self-correct; explain the difference between symbolic breakthrough and structural change."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", items: [
+            {id: "h52-0-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["movement", "struggle"]}
+          ]}
+        ]
     },
     {
       title:"The Ongoing Struggle",
@@ -7021,7 +9481,19 @@ const MM_WEEKS_912 = [
         {type:"shortanswer", instructions:"Write 4-6 sentences, then compare your answer with the model.", items:[
           {id:"h2-s1", prompt:"Argue: the ongoing struggle. Has America finished the struggle for racial justice, or is it still ongoing? Take a position and support it with evidence from this week's lessons.", answer:"The struggle is still ongoing. Barack Obama's election proved that a Black American could win the presidency, which would have been unthinkable a generation earlier. Yet in that same era, the killings of Trayvon Martin and Michael Brown showed that Black Americans still faced unequal treatment and deadly force. The rise of Black Lives Matter, founded by three Black women, proved that new generations still had to demand the protections older laws promised. Progress and injustice now exist side by side, which means the work of earlier movements must be defended and continued, not declared finished."}
         ]}
-      ]
+      ,
+          {type: "comprehension", instructions: "Answer each question using evidence from this section's reading.", items: [
+            {id: "h52-1-c1", question: "Why did Trayvon Martin's killing in 2012 and the acquittal spark a national movement?", answer: "The acquittal of the neighborhood watch volunteer who shot the 17-year-old sparked outrage. In response, Alicia Garza, Patrisse Cullors, and Opal Tometi founded Black Lives Matter, insisting Black lives deserved the same protection as any others, and Ferguson in 2014 spread the phrase worldwide."},
+            {id: "h52-1-c2", question: "How did Black Lives Matter connect to the 1960s freedom movements?", answer: "The movement used marches, social media, and voter registration to demand body cameras, independent investigations of shootings, and an end to harsh sentencing laws. Supporters answered critics by calling accountability a form of patriotism in the tradition of the 1960s freedom marches."},
+            {id: "h52-1-c3", question: "Why does the reading say the thread from Selma to Ferguson is unbroken?", answer: "Each generation has had to decide what the promises of earlier victories actually require. Progress in policing reform and reduced prison populations came alongside backlash over voting laws, school funding, and Confederate monuments, showing old conflicts in new forms, and the struggle continues because each victory must be defended."}
+          ]},
+          {type: "argument", instructions: "Write two well-organized paragraphs defending your thesis. Support your claims with evidence and address the counterargument.", items: [
+            {id: "h52-1-a1", prompt: "Defend the following thesis in two paragraphs: Black Lives Matter continues the Selma tradition, because each victory must be defended by people willing to organize, vote, and speak, and this is the ongoing struggle.", guidance: "Thesis to defend: the movement is the latest link in an unbroken thread, not a break from the past. Use evidence from the reading (the three founders, the Ferguson protests, the demands for accountability, the Selma-to-Ferguson thread) plus your research on Black Lives Matter. Address this counterargument: critics argued the movement ignored crime within communities or disrespected police; explain the supporters' answer that demanding accountability is itself a form of patriotism."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", items: [
+            {id: "h52-1-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["struggle", "movement"]}
+          ]}
+        ]
     }
   ],
   science: [
@@ -7047,7 +9519,19 @@ const MM_WEEKS_912 = [
           {id:"s1-k4", text:"Every bar, dot, or line matches a real number in my data table."},
           {id:"s1-k5", text:"Color is not the only way to tell my data apart."}
         ]}
-      ]
+      ,
+          {type: "comprehension", instructions: "Answer each question using evidence from this section's reading.", items: [
+            {id: "s52-0-c1", question: "Why is a stretched axis called the most common lie in graphing?", answer: "If a bar chart starts at 90 instead of zero, a tiny difference looks enormous, and readers are misled before they read a single number. Honest architecture requires evenly spaced intervals and a scale starting at zero when comparing amounts."},
+            {id: "s52-0-c2", question: "How do you choose among bar, line, pie, and scatter plots?", answer: "Bar graphs compare separate groups, such as plant heights under different light colors; line graphs show how one measurement changes over time; pie charts show parts of a whole; scatter plots reveal relationships between two measured variables."},
+            {id: "s52-0-c3", question: "Why must color never be the only way to tell data apart?", answer: "Some readers cannot distinguish certain colors. Every graph needs a clear title, labeled axes with units, and distinctions that do not depend on color alone."}
+          ]},
+          {type: "argument", instructions: "Write two well-organized paragraphs defending your thesis. Support your claims with evidence and address the counterargument.", items: [
+            {id: "s52-0-a1", prompt: "Defend the following thesis in two paragraphs: A graph is an argument made visible, so building an honest graph is an act of scientific integrity, not decoration.", guidance: "Thesis to defend: visual arguments persuade before words do, which makes honesty in graphing an ethical duty. Use evidence from the reading (a graph is an argument made visible, built on evidence the audience can verify; checking every bar against the data table) plus your research on a misleading chart in public life. Address this counterargument: graphs are just summaries of tables; explain that readers absorb the visual claim before checking the numbers."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", items: [
+            {id: "s52-0-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["conclusion"]}
+          ]}
+        ]
     },
     {
       title:"Capstone: Defending Your Conclusions",
@@ -7065,7 +9549,19 @@ const MM_WEEKS_912 = [
         {type:"shortanswer", instructions:"Write 4-6 sentences, then compare your answer with the model.", items:[
           {id:"s2-s1", prompt:"A classmate challenges your capstone conclusion, saying your sample was too small to prove anything. Write 4-6 sentences responding as a scientist: acknowledge the limitation, defend what your data does show, and explain what you would do next.", answer:"You are right that my sample was small, and I list that as a limitation in my presentation. Three plants per condition is enough to spot a pattern, but not enough to prove a general rule about all bean plants. What my data does show is a consistent difference: every plant under red light grew taller than every plant under blue light, which is unlikely to happen by pure chance. That pattern supports my hypothesis without proving it beyond doubt. If I ran the study again, I would use ten plants per condition, control the window light, and repeat the trial in a second two-week run."}
         ]}
-      ]
+      ,
+          {type: "comprehension", instructions: "Answer each question using evidence from this section's reading.", items: [
+            {id: "s52-1-c1", question: "Why do limitations not ruin a study?", answer: "Every real investigation has them, and naming yours, such as a small sample or uncontrolled sunlight through a window, shows scientific maturity rather than hiding weakness. Acknowledging limits strengthens rather than weakens credibility."},
+            {id: "s52-1-c2", question: "How does the claim-evidence-reasoning pattern structure a defense?", answer: "Make the claim, point to the specific data that supports it, and explain why that evidence leads to your conclusion. Then anticipate hard questions, answering in complete thoughts: restate the question, give the evidence, and connect it back to the claim."},
+            {id: "s52-1-c3", question: "Why connect findings to a bigger question at the end?", answer: "A bean-plant result might suggest something about indoor farming or point to what to test next. Science advances when investigators share honest work and survive honest criticism, and the capstone is the student's entry into that tradition."}
+          ]},
+          {type: "argument", instructions: "Write two well-organized paragraphs defending your thesis. Support your claims with evidence and address the counterargument.", items: [
+            {id: "s52-1-a1", prompt: "Defend the following thesis in two paragraphs: Anticipating hard questions is the most important preparation for presenting research, because a claim that survives criticism is stronger than one never tested.", guidance: "Thesis to defend: the defense is where the investigation proves itself. Use evidence from the reading (sample-size challenges, uncontrolled variables, the claim-evidence-reasoning pattern, large readable visuals and calm pace) plus your research on how scientists prepare for peer review. Address this counterargument: over-preparing for hostile questions can make presenters defensive; explain the difference between honest acknowledgment of limits and defensiveness."}
+          ]},
+          {type: "vocabwrite", instructions: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", items: [
+            {id: "s52-1-vw1", prompt: "Use each word in an original sentence that shows its meaning in the context of this week's topic.", words: ["conclusion"]}
+          ]}
+        ]
     }
   ],
   friday: {
