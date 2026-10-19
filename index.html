@@ -1970,9 +1970,30 @@ async function renderBoard(){
     const orderedSubjList = applySubjectOrder(baseSubjList, s.id);
     // Vocabulary topic is per-grade: stamp this student's word onto their copy.
     const gradeWord = c.vocab && c.vocab[grade] && c.vocab[grade].word;
+    // 52-week: each student's History/Science topic comes from their band's lesson
+    let studentLessonTopic = null;
+    let studentLessonName = null;
+    if(mm52IsActive()){
+      try {
+        const weekNum = mm52SelectedWeek || mm52WeekForDate(state.schoolDate);
+        const band = s.band || mm52BandForGrade(s.grade);
+        const isHist = isHistoryDay, isSci = isScienceDay;
+        if(isHist || isSci){
+          const mm52Lesson = mm52LessonForStudent(s, weekNum < 1 ? 1 : weekNum, isHist ? 'History' : 'Science');
+          if(mm52Lesson){
+            studentLessonTopic = mm52Lesson.topic;
+            studentLessonName = isHist ? 'History' : 'Science';
+          }
+        }
+      } catch(e) {}
+    }
     const studentSubjList = orderedSubjList
       .filter(sub => !excluded.includes(sub.name))
-      .map(sub => (sub.id==='vocabulary' && gradeWord) ? Object.assign({}, sub, {topic:gradeWord}) : sub);
+      .map(sub => {
+        if(sub.id==='vocabulary' && gradeWord) return Object.assign({}, sub, {topic:gradeWord});
+        if(sub.id==='weeklesson' && studentLessonTopic) return Object.assign({}, sub, {topic:studentLessonTopic, name:studentLessonName || sub.name});
+        return sub;
+      });
     const studentChecks = state.checks[s.id] || {};
     const studentSeuHTML = (s.showSeu && seuGroups.length) ? seuCardsHTML(seuGroups) : '';
     const studentLessonHTML = buildLessonCardHTML(s.id);
@@ -2000,7 +2021,7 @@ async function renderBoard(){
                   <div class="check ${checked?'checked':''}" data-student="${s.id}" data-subj="${sub.id}">${checked?'✓':''}</div>
                 </div>
               </div>
-              <div class="subj-topic">${esc(sub.topic)||'No topic set'}</div>
+              ${sub.topic ? `<div class="subj-topic">${esc(sub.topic)}</div>` : ''}
             </div>`;
           }).join('') || `<p style="color:var(--ink-soft);font-size:12px;margin-top:4px;">No subjects assigned — add some in \u{1f464} Profiles.</p>`}
           ${studentSeuHTML}
@@ -4346,7 +4367,7 @@ function buildFullDayHTML(dateObj, content, checks, weekWords){
           const checked = !!studentChecks[sub.id];
           return `<div class="subj-card ${checked?'done':''}" style="margin-top:6px;">
             <div class="subj-top"><div class="subj-name">${esc(sub.name)||'Subject'}</div><div class="check ${checked?'checked':''}">${checked?'✓':''}</div></div>
-            <div class="subj-topic">${esc(sub.topic)||'No topic set'}</div>
+            ${sub.topic ? `<div class="subj-topic">${esc(sub.topic)}</div>` : ''}
           </div>`;
         }).join('') || '<p style="color:var(--ink-soft);font-size:12px;">No subjects assigned.</p>'}`;
     return `<div class="student-card">
