@@ -122,6 +122,52 @@ const MM_WEEKS_35 = [
                 "answer": 4
               }
             ]
+          },
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "More than 15,000 years ago, walking from Asia when thick ice joined the continents.",
+                "id": "h1a-c1",
+                "question": "How long ago do most scientists believe the first peoples arrived in the Americas, and where did they come from?"
+              },
+              {
+                "answer": "A fire pit shows where people cooked and gathered, which tells the archaeologist how the first peoples lived their daily lives.",
+                "id": "h1a-c2",
+                "question": "Why would an archaeologist be excited to dig up an ancient fire pit?"
+              },
+              {
+                "answer": "New things that archaeologists learn or find by digging up artifacts.",
+                "id": "h1a-c3",
+                "question": "The reading says, 'Archaeologists keep digging, and every year brings new discoveries about the first Americans.' What does the phrase 'new discoveries' mean in this sentence?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Tell where you found the pot, describe what it looks like, and explain what it might tell you about the people who made it. Use complete sentences.",
+                "id": "h1a-w1",
+                "prompt": "Imagine you are an archaeologist who just found an ancient clay pot. Write a paragraph about your discovery."
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Write one original sentence for each word that shows you know its meaning.",
+            "items": [
+              {
+                "id": "h1a-vw1",
+                "prompt": "Use each word in a sentence about the first peoples.",
+                "words": [
+                  "archaeology",
+                  "artifact"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
           }
         ]
       },
@@ -207,6 +253,52 @@ const MM_WEEKS_35 = [
                 "answer": "d"
               }
             ]
+          },
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "Elders told stories that taught lessons and kept history alive, since nothing was written down.",
+                "id": "h1b-c1",
+                "question": "Who told stories in the evening, and what did the stories do for the village?"
+              },
+              {
+                "answer": "Because the village needed every person to help gather food, carry water, and do daily work so everyone could survive.",
+                "id": "h1b-c2",
+                "question": "Why did everyone in the village, even young children, have a job?"
+              },
+              {
+                "answer": "Given out to everyone so that each person gets some.",
+                "id": "h1b-c3",
+                "question": "The reading says, 'Food is shared so no one goes hungry.' What does the word 'shared' mean in this sentence?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Include what the child does in the morning, how the child helps with work during the day, and what happens in the evening. Use details from the reading, such as gathering berries, stone tools, and stories by the fire.",
+                "id": "h1b-w1",
+                "prompt": "Write a paragraph about a day in the life of a child among the first peoples."
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Write one original sentence for each word that shows you know its meaning.",
+            "items": [
+              {
+                "id": "h1b-vw1",
+                "prompt": "Use each word in a sentence about life in a first peoples' village.",
+                "words": [
+                  "survival",
+                  "shelter"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
           }
         ]
       }
@@ -290,6 +382,52 @@ const MM_WEEKS_35 = [
                 "answer": "Model answer: A bean plant needs sunlight to make its food, water from the soil to carry nutrients, air for its leaves, and space so it is not crowded. Its roots hold it in the soil like an anchor. If any need is missing, the plant will stop growing."
               }
             ]
+          },
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "Food, water, air, shelter, and space to grow.",
+                "id": "s1a-c1",
+                "question": "What are the five basic things that living things need to stay alive?"
+              },
+              {
+                "answer": "It turns pale and weak because it cannot make food without sunlight.",
+                "id": "s1a-c2",
+                "question": "If a plant is covered so it gets no light, what happens to it and why?"
+              },
+              {
+                "answer": "A hole in the ground where an animal hides for safety.",
+                "id": "s1a-c3",
+                "question": "The reading says, 'A rabbit hides in a burrow.' What is a burrow?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Tell where the rabbit finds food, water, air, shelter, and space. Use details from the reading, such as the burrow.",
+                "id": "s1a-w1",
+                "prompt": "Write a paragraph explaining how a rabbit gets everything it needs to survive."
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Write one original sentence for each word that shows you know its meaning.",
+            "items": [
+              {
+                "id": "s1a-vw1",
+                "prompt": "Use each word in a sentence about what a rabbit needs to live.",
+                "words": [
+                  "survival",
+                  "shelter"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
           }
         ]
       },
@@ -393,6 +531,52 @@ const MM_WEEKS_35 = [
                 "answer": "Model paragraph: All living things share five basic needs. They need food for nutrients and energy, water to drink, air to breathe, shelter for protection, and space to live and grow. Without even one of these needs, a living thing cannot survive. Plants, animals, and people all depend on these five needs every day."
               }
             ]
+          },
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "It takes air from the water using gills.",
+                "id": "s1b-c1",
+                "question": "How does a fish get air from water?"
+              },
+              {
+                "answer": "A turtle carries its shell wherever it goes, so its shelter travels with it.",
+                "id": "s1b-c2",
+                "question": "Why does a turtle not need to build a nest the way a bird does?"
+              },
+              {
+                "answer": "To grow strong and do well, not just stay alive.",
+                "id": "s1b-c3",
+                "question": "The reading says people need friendship and learning 'to truly thrive.' What does the word 'thrive' mean in this sentence?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Explain how the plant uses its roots and how the deer travels to a stream. Then tell which way you think is harder and why.",
+                "id": "s1b-w1",
+                "prompt": "Write a paragraph comparing how a plant and a deer each get water."
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Write one original sentence for each word that shows you know its meaning.",
+            "items": [
+              {
+                "id": "s1b-vw1",
+                "prompt": "Use each word in a sentence comparing a plant and an animal.",
+                "words": [
+                  "shelter",
+                  "survival"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
           }
         ]
       }
@@ -619,6 +803,52 @@ const MM_WEEKS_35 = [
                 "answer": "Model answer: In the morning I would see tall pyramids rising over the jungle and hear traders calling in the market. I might watch scribes carve glyphs into stone or priests study the sky. Farmers carry corn and beans into the city. In the evening, families gather while the city glows with torchlight."
               }
             ]
+          },
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "Corn, beans, and squash.",
+                "id": "h2a-c1",
+                "question": "What three crops did Maya farmers grow in their fields?"
+              },
+              {
+                "answer": "Because everyone wanted cacao and agreed it had value, so the beans could be traded for other goods.",
+                "id": "h2a-c2",
+                "question": "Why might traders in a Maya market accept cacao beans as money?"
+              },
+              {
+                "answer": "Was full of busy, noisy activity.",
+                "id": "h2a-c3",
+                "question": "The reading says, 'Markets buzzed with traders selling jade, feathers, and cacao beans.' What does the word 'buzzed' mean in this sentence?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Describe the tall pyramids, the busy market, and one thing you would watch, such as scribes carving glyphs. Use sensory details like sights and sounds.",
+                "id": "h2a-w1",
+                "prompt": "Write a paragraph about a day in a Maya city. What would you see, hear, and do?"
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Write one original sentence for each word that shows you know its meaning.",
+            "items": [
+              {
+                "id": "h2a-vw1",
+                "prompt": "Use each word in a sentence about the Maya.",
+                "words": [
+                  "civilization",
+                  "harvest"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
           }
         ]
       },
@@ -721,6 +951,52 @@ const MM_WEEKS_35 = [
                 "answer": 4
               }
             ]
+          },
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "Bark paper, folded like an accordion.",
+                "id": "h2b-c1",
+                "question": "What did Maya scribes make their books from, and how were the books folded?"
+              },
+              {
+                "answer": "Because then they could read the stone stories like an alphabet and unlock voices from a thousand years ago.",
+                "id": "h2b-c2",
+                "question": "Why was it a breakthrough when scholars realized some glyphs stand for sounds?"
+              },
+              {
+                "answer": "Patterns that repeat over and over.",
+                "id": "h2b-c3",
+                "question": "The reading says, 'Their calendar ran in cycles, like wheels turning inside wheels.' What does the word 'cycles' mean in this sentence?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Describe what the scribe is carving or writing, the tools being used, and why the writing matters. Include one detail about the stars or the calendar.",
+                "id": "h2b-w1",
+                "prompt": "Write a paragraph about a Maya scribe at work."
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Write one original sentence for each word that shows you know its meaning.",
+            "items": [
+              {
+                "id": "h2b-vw1",
+                "prompt": "Use each word in a sentence about Maya writing.",
+                "words": [
+                  "glyph",
+                  "civilization"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
           }
         ]
       }
@@ -803,6 +1079,52 @@ const MM_WEEKS_35 = [
                 "answer": "Model answer: Roots drink water from the soil and hold the plant steady. The stem carries that water up to the leaves and holds them toward the sun. The leaves use sunlight to make food for the whole plant. Each part needs the others to do its job."
               }
             ]
+          },
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "It carries water up from the roots and food down from the leaves, and it holds the plant upright toward the sun.",
+                "id": "s2a-c1",
+                "question": "What are the two jobs of a plant's stem?"
+              },
+              {
+                "answer": "The leaves will suffer because they will not get water from the roots, and without water they cannot make food.",
+                "id": "s2a-c2",
+                "question": "If a plant's roots are damaged, what will happen to its leaves and why?"
+              },
+              {
+                "answer": "That water and food travel through the stem, the way cars travel along a highway.",
+                "id": "s2a-c3",
+                "question": "The reading calls the stem 'the plant's highway and backbone.' What does the author mean by calling the stem a highway?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Give each part its job: roots drink, stem carries, leaves cook, and flowers make seeds. Explain what happens to the team if one part cannot do its job.",
+                "id": "s2a-w1",
+                "prompt": "Write a paragraph explaining how the four plant parts work together like a team."
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Write one original sentence for each word that shows you know its meaning.",
+            "items": [
+              {
+                "id": "s2a-vw1",
+                "prompt": "Use each word in a sentence about plant parts and their jobs.",
+                "words": [
+                  "stem",
+                  "bloom"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
           }
         ]
       },
@@ -906,6 +1228,52 @@ const MM_WEEKS_35 = [
                 "answer": "Model answer: 1. A seed leaves its parent plant by wind, water, animals, or people. 2. It lands in soil where it has space, water, and light. 3. The seed sprouts, and roots grow down while a shoot grows up. 4. The seedling grows leaves, makes food, and becomes an adult plant that can make new seeds."
               }
             ]
+          },
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "Bees, butterflies, and hummingbirds carry it as they sip nectar, and wind can carry it too.",
+                "id": "s2b-c1",
+                "question": "Name two ways pollen can travel from bloom to bloom."
+              },
+              {
+                "answer": "It buries nuts and forgets some of them, so the buried nuts can sprout where they were left.",
+                "id": "s2b-c2",
+                "question": "How does a squirrel accidentally help plant new oak trees?"
+              },
+              {
+                "answer": "Food stored inside the seed that feeds the baby plant until it can grow on its own.",
+                "id": "s2b-c3",
+                "question": "The reading says, 'Each seed is a tiny packed lunch with a baby plant inside.' What does the author mean by 'packed lunch'?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Tell how the seed leaves the flower, how it travels, where it lands, and what happens when spring comes. Use details from the reading.",
+                "id": "s2b-w1",
+                "prompt": "Write a paragraph telling the journey of a seed from a flower to a new plant."
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Write one original sentence for each word that shows you know its meaning.",
+            "items": [
+              {
+                "id": "s2b-vw1",
+                "prompt": "Use each word in a sentence about how plants make new plants.",
+                "words": [
+                  "bloom",
+                  "harvest"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
           }
         ]
       }
@@ -1130,6 +1498,52 @@ const MM_WEEKS_35 = [
                 "answer": "Model answer: The Aztec built their city on a lake island, so farmland was scarce. They created chinampas, floating gardens made of mud and plants, which grew huge harvests of corn and beans. Canoes carried the food to city markets. The chinampas were clever because they turned the lake itself into farmland."
               }
             ]
+          },
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "They built chinampas, floating gardens of mud and plants that grew huge harvests of food.",
+                "id": "h3a-c1",
+                "question": "How did the Aztec feed their giant city on a lake?"
+              },
+              {
+                "answer": "It was a problem because farmland was scarce, but it was smart because the water protected the city and the chinampas turned the lake itself into farmland.",
+                "id": "h3a-c2",
+                "question": "Why was building the capital on a lake island both a problem and a smart choice?"
+              },
+              {
+                "answer": "Filled with many boats close together.",
+                "id": "h3a-c3",
+                "question": "The reading says, 'Canoes crowded the water, carrying food and goods to huge markets.' What does the word 'crowded' mean in this sentence?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Describe the problem of the lake island, explain what chinampas are, and tell why the chinampas were so clever. Use complete sentences.",
+                "id": "h3a-w1",
+                "prompt": "Write a paragraph explaining how the Aztec fed their giant city."
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Write one original sentence for each word that shows you know its meaning.",
+            "items": [
+              {
+                "id": "h3a-vw1",
+                "prompt": "Use each word in a sentence about the Aztec.",
+                "words": [
+                  "empire",
+                  "tribute"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
           }
         ]
       },
@@ -1241,6 +1655,52 @@ const MM_WEEKS_35 = [
                 "answer": "Model paragraph: The Aztec built Tenochtitlan on a lake island for two smart reasons. First, the water protected the city from enemies, since attackers had to cross narrow bridges. Second, the lake gave them fish to eat and water for their floating gardens. A difficult location became their greatest strength."
               }
             ]
+          },
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "Boys learned history, music, and how to be warriors. Girls learned weaving, cooking, and how to run a home.",
+                "id": "h3b-c1",
+                "question": "What did Aztec boys and girls learn in school?"
+              },
+              {
+                "answer": "It tells you they cared about health and cleanliness, which helped keep the great city strong.",
+                "id": "h3b-c2",
+                "question": "What does the fact that everyone bathed daily and the city had clean water in clay pipes tell you about the Aztec?"
+              },
+              {
+                "answer": "Was full of bright, lively sights.",
+                "id": "h3b-c3",
+                "question": "The reading says, 'Markets burst with color: sellers offered chocolate drinks, bright feathers, gold jewelry, and fresh fish.' What does the phrase 'burst with color' mean in this sentence?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Describe what you see, hear, and smell. Include at least two goods sold in the market from the reading, such as chocolate drinks, feathers, jewelry, or fresh fish.",
+                "id": "h3b-w1",
+                "prompt": "Write a paragraph about a day at the market in Tenochtitlan."
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Write one original sentence for each word that shows you know its meaning.",
+            "items": [
+              {
+                "id": "h3b-vw1",
+                "prompt": "Use each word in a sentence about life in Tenochtitlan.",
+                "words": [
+                  "emperor",
+                  "tribute"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
           }
         ]
       }
@@ -1324,6 +1784,52 @@ const MM_WEEKS_35 = [
                 "answer": "Model answer: The three ingredients are sunlight, water, and carbon dioxide from the air. Chlorophyll in the leaves catches the sunlight. The plant mixes the ingredients and cooks up sugar for food, releasing oxygen that we breathe."
               }
             ]
+          },
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "Sunlight, water pulled up from the soil by the roots, and carbon dioxide from the air.",
+                "id": "s3a-c1",
+                "question": "What are the three ingredients a plant needs for photosynthesis?"
+              },
+              {
+                "answer": "Because plants release oxygen during photosynthesis, and oxygen is the air we breathe.",
+                "id": "s3a-c2",
+                "question": "Why does the reading say that every breath you take connects you to a plant's kitchen?"
+              },
+              {
+                "answer": "Able to do a great amount of important work, like feeding the planet and filling the air with oxygen.",
+                "id": "s3a-c3",
+                "question": "The reading says, 'Photosynthesis is slow but powerful.' What does the word 'powerful' mean in this sentence?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Name the three ingredients, tell where each one comes from, and describe the two products the plant makes. Use details from the reading.",
+                "id": "s3a-w1",
+                "prompt": "Write a paragraph explaining the recipe of photosynthesis, as if you are teaching a friend to cook."
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Write one original sentence for each word that shows you know its meaning.",
+            "items": [
+              {
+                "id": "s3a-vw1",
+                "prompt": "Use each word in a sentence about what plants need to make food.",
+                "words": [
+                  "sunlight",
+                  "irrigate"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
           }
         ]
       },
@@ -1423,6 +1929,52 @@ const MM_WEEKS_35 = [
                 "answer": "Model answer: Photosynthesis is how plants make their own food. Leaves take in sunlight, water from the roots, and air through tiny holes. The plant uses this energy to make sugar for food and releases oxygen that we breathe."
               }
             ]
+          },
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "Sunlight becomes sugar in a leaf, a rabbit munches the grass, and a fox eats the rabbit.",
+                "id": "s3b-c1",
+                "question": "According to the reading, what is the path of food energy from a leaf to a fox?"
+              },
+              {
+                "answer": "Because they release so much oxygen, the way lungs move air for the body.",
+                "id": "s3b-c2",
+                "question": "Why are forests called the lungs of the planet?"
+              },
+              {
+                "answer": "To remove some seedlings so the rest have room to grow.",
+                "id": "s3b-c3",
+                "question": "The reading says gardeners 'thin crowded seedlings so each plant has space.' What does the word 'thin' mean in this sentence?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Use facts from the reading about oxygen, food, and clean air. End your paragraph with a strong reason to plant a tree.",
+                "id": "s3b-w1",
+                "prompt": "Write a paragraph persuading someone that planting a tree is a good idea."
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Write one original sentence for each word that shows you know its meaning.",
+            "items": [
+              {
+                "id": "s3b-vw1",
+                "prompt": "Use each word in a sentence about helping a garden grow.",
+                "words": [
+                  "sunlight",
+                  "irrigate"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
           }
         ]
       }
@@ -1643,6 +2195,52 @@ const MM_WEEKS_35 = [
                 "answer": "Model answer: The Andes are steep, so flat farmland was scarce. The Inca carved terraces, flat steps held by stone walls, into the mountainsides. They grew potatoes, corn, and quinoa on the steps. The stone walls held the soil in place. Terraces turned steep mountains into productive farms."
               }
             ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "id": "h4-c1",
+                "question": "Where did the Inca build their empire, and how far did it stretch?",
+                "answer": "High in the Andes Mountains of South America. It stretched longer than the distance from New York to California."
+              },
+              {
+                "id": "h4-c2",
+                "question": "Why did Inca farmers carve terraces into the mountainsides?",
+                "answer": "The mountainsides were too steep for regular farming, so flat steps held by stone walls gave them level land to grow potatoes, corn, and quinoa."
+              },
+              {
+                "id": "h4-c3",
+                "question": "The reading says the empire \"stretched longer than the distance from New York to California.\" What does the word \"stretched\" mean in this sentence?",
+                "answer": "It means the empire spread out across a very great distance."
+              }
+            ]
+          },
+          {
+            "type": "writing",
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "id": "h4-w1",
+                "prompt": "Write a paragraph describing how Inca farmers grew food in the mountains.",
+                "guidance": "Tell WHERE they farmed (steep mountainsides, high above sea level) and HOW they farmed (terraces, stone walls). Name at least two crops they grew. Use details from the reading."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows you know its meaning.",
+            "items": [
+              {
+                "id": "h4-vw1",
+                "words": [
+                  "terrace",
+                  "quipu"
+                ],
+                "prompt": "Use each word in a sentence about this Inca lesson."
+              }
+            ]
           }
         ]
       },
@@ -1745,6 +2343,53 @@ const MM_WEEKS_35 = [
                 "answer": 4
               }
             ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "id": "h4-c4",
+                "question": "How far could chasqui relay runners carry a message in a single day?",
+                "answer": "150 miles."
+              },
+              {
+                "id": "h4-c5",
+                "question": "Why did the Inca build storehouses along their roads?",
+                "answer": "So travelers and armies could get food and clothing during long journeys across the empire."
+              },
+              {
+                "id": "h4-c6",
+                "question": "The reading says Machu Picchu's temples, homes, and terraces \"blend into the mountain like they grew there.\" What does the word \"blend\" mean here?",
+                "answer": "It means they fit in so smoothly that they look like part of the mountain itself."
+              }
+            ]
+          },
+          {
+            "type": "writing",
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "id": "h4-w2",
+                "prompt": "Write a paragraph about Machu Picchu or about the Inca roads.",
+                "guidance": "Choose one. If you choose Machu Picchu, tell where it sits and what it may have been for. If you choose the roads, tell what they crossed and how messages traveled on them. Use details from the reading."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows you know its meaning.",
+            "items": [
+              {
+                "id": "h4-vw2",
+                "words": [
+                  "terrace",
+                  "mountain",
+                  "traveler"
+                ],
+                "prompt": "Use each word in a sentence about this lesson."
+              }
+            ]
           }
         ]
       }
@@ -1825,6 +2470,52 @@ const MM_WEEKS_35 = [
                 "id": "s1-s1",
                 "prompt": "Pick one seed dispersal method and explain how it helps the baby plant survive.",
                 "answer": "Model answer: Maple seeds spin like helicopters in the wind. The wind carries them far from the parent tree. Far away, the baby plant gets its own sunlight and water. It does not have to fight its parent for resources."
+              }
+            ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "id": "s4-c1",
+                "question": "What is seed dispersal?",
+                "answer": "It is how plants send their seeds traveling to new places instead of dropping them straight down."
+              },
+              {
+                "id": "s4-c2",
+                "question": "Why is it better for a plant if its seeds travel far away?",
+                "answer": "If every seed fell straight down, the baby plants would crowd around the parent and fight for light and water."
+              },
+              {
+                "id": "s4-c3",
+                "question": "The reading says a waiting desert seed \"travels through time instead of space.\" What does that mean?",
+                "answer": "It means the seed stays in one place but waits for the right time, like a rare rain, before it starts to grow."
+              }
+            ]
+          },
+          {
+            "type": "writing",
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "id": "s4-w1",
+                "prompt": "Write a paragraph about one way seeds travel.",
+                "guidance": "Choose one method from the reading: flying, hitchhiking, floating, getting eaten, or waiting. Explain how it works and give the example from the reading. End by telling why traveling helps the plant."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows you know its meaning.",
+            "items": [
+              {
+                "id": "s4-vw1",
+                "words": [
+                  "scatter",
+                  "traveler"
+                ],
+                "prompt": "Use each word in a sentence about seed dispersal."
               }
             ]
           }
@@ -1924,6 +2615,52 @@ const MM_WEEKS_35 = [
                 "id": "s2-ela1",
                 "prompt": "Imagine you are a maple seed with wings. Write a short paragraph describing your journey from the tree to the ground. Use descriptive details and complete sentences.",
                 "answer": "Model paragraph: I spin away from my branch on a windy fall day. My wings catch the air and I twirl slowly downward, drifting far from my parent tree. I land softly on damp soil, where rain will soak me. Soon I will sprout roots and begin growing into a new maple tree."
+              }
+            ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "id": "s4-c4",
+                "question": "Name two things that make a seed a good wind traveler.",
+                "answer": "It is light, and it has wings or fluff."
+              },
+              {
+                "id": "s4-c5",
+                "question": "In the experiment, why does the maple seed fall more slowly than the pebble?",
+                "answer": "The maple seed's wings catch the air and slow it down, so it flutters instead of dropping fast."
+              },
+              {
+                "id": "s4-c6",
+                "question": "The reading says water travelers have \"waterproof coats\" so they can float for months. What does \"waterproof\" mean, and why does a water traveler need it?",
+                "answer": "Waterproof means water cannot get in. A water traveler needs it so the seed does not soak up water and sink on its long trip."
+              }
+            ]
+          },
+          {
+            "type": "writing",
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "id": "s4-w2",
+                "prompt": "Write a paragraph explaining how you would sort seeds into travel groups.",
+                "guidance": "Name the four groups from the reading: wind, water, hitchhiker, and eaten. For each group, tell what the seeds look like or how they travel. Use details from the reading."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows you know its meaning.",
+            "items": [
+              {
+                "id": "s4-vw2",
+                "words": [
+                  "scatter",
+                  "traveler"
+                ],
+                "prompt": "Use each word in a sentence about the seed experiments in this lesson."
               }
             ]
           }
@@ -2181,6 +2918,53 @@ const MM_WEEKS_35 = [
                 "answer": "Model answer: In spring, villagers fished and collected maple sap. In summer, they farmed corn, beans, and squash. In fall, they harvested crops and hunted deer. In winter, they stayed in longhouses while elders told stories. Each season brought different work."
               }
             ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "id": "h5-c1",
+                "question": "Why did Eastern Woodlands tribes build their villages near rivers and lakes?",
+                "answer": "The soil there was rich for farming, and fish were plenty to catch."
+              },
+              {
+                "id": "h5-c2",
+                "question": "Why might several related families of one clan want to live together in a longhouse?",
+                "answer": "Related families living together could share work, food, and safety under one roof."
+              },
+              {
+                "id": "h5-c3",
+                "question": "The reading says the league showed that \"different nations could unite under shared laws.\" What does the word \"unite\" mean?",
+                "answer": "It means to come together and act as one group."
+              }
+            ]
+          },
+          {
+            "type": "writing",
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "id": "h5-w1",
+                "prompt": "Write a paragraph describing an Eastern Woodlands village.",
+                "guidance": "Tell where the village was built and why that spot was good. Describe what a longhouse was like and who lived there (a clan, often named for an animal). Use details from the reading."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows you know its meaning.",
+            "items": [
+              {
+                "id": "h5-vw1",
+                "words": [
+                  "longhouse",
+                  "clan",
+                  "village"
+                ],
+                "prompt": "Use each word in a sentence about this lesson."
+              }
+            ]
           }
         ]
       },
@@ -2253,6 +3037,52 @@ const MM_WEEKS_35 = [
                 "answer": 4
               }
             ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "id": "h5-c4",
+                "question": "What are the three sisters, and how does each plant help the others?",
+                "answer": "Corn, beans, and squash. Tall corn stalks give bean vines something to climb. Beans pull nitrogen from the air and feed the soil. Big squash leaves shade the ground, keeping it cool and moist while blocking weeds."
+              },
+              {
+                "id": "h5-c5",
+                "question": "The beans feed the soil with nitrogen, but corn and squash grow in the same soil too. Why does this help all three plants?",
+                "answer": "Because they share the same soil, feeding the soil helps every plant growing in it, not just the beans."
+              },
+              {
+                "id": "h5-c6",
+                "question": "The reading says science \"now proves the old wisdom\" of the Native farmers. What does the word \"wisdom\" mean here?",
+                "answer": "It means knowledge learned from long experience over many years."
+              }
+            ]
+          },
+          {
+            "type": "writing",
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "id": "h5-w2",
+                "prompt": "Write a paragraph about the seasons of Woodlands village life.",
+                "guidance": "Tell WHEN each part of the year happened (planting, growing, harvesting, resting) and WHAT people did in each season. Tell who did the farming and who helped. Use details from the reading."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows you know its meaning.",
+            "items": [
+              {
+                "id": "h5-vw2",
+                "words": [
+                  "cooperate",
+                  "village"
+                ],
+                "prompt": "Use each word in a sentence about this lesson."
+              }
+            ]
           }
         ]
       }
@@ -2322,6 +3152,51 @@ const MM_WEEKS_35 = [
                 "id": "s1-s1",
                 "prompt": "Explain the stages of a flowering plant's life cycle in order.",
                 "answer": "Model answer: First the seed germinates with water and warmth. A root pushes down and a shoot pushes up, becoming a seedling. The seedling grows into an adult plant with leaves and stems. The adult makes flowers, which become fruits holding new seeds, and the cycle repeats."
+              }
+            ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "id": "s5-c1",
+                "question": "Put the stages of a flowering plant's life in order.",
+                "answer": "Seed, sprout, seedling, adult plant, flower, fruit, seed."
+              },
+              {
+                "id": "s5-c2",
+                "question": "A seed does not need light yet because it lives off its packed food. Why is that packed food important?",
+                "answer": "The seed has no leaves yet to make its own food, so the packed food keeps the baby plant alive until it can grow and make food on its own."
+              },
+              {
+                "id": "s5-c3",
+                "question": "The reading says \"timing varies\" but \"the order never changes.\" What does \"varies\" mean?",
+                "answer": "It means it is different for different plants. A bean sprouts in days while an oak acorn may wait months, but the order of stages stays the same."
+              }
+            ]
+          },
+          {
+            "type": "writing",
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "id": "s5-w1",
+                "prompt": "Write a paragraph explaining the life cycle of a flowering plant.",
+                "guidance": "Start with the seed and tell each stage in order. Finish by telling how the cycle starts again. Use details from the reading."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows you know its meaning.",
+            "items": [
+              {
+                "id": "s5-vw1",
+                "words": [
+                  "germinate"
+                ],
+                "prompt": "Use the word in a sentence about the start of a plant's life."
               }
             ]
           }
@@ -2422,6 +3297,51 @@ const MM_WEEKS_35 = [
               {
                 "id": "s2-k2",
                 "text": "Draw the seed each day for five days and label the stage you see."
+              }
+            ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "id": "s5-c4",
+                "question": "What does a seed need to wake up, and what does it NOT need yet?",
+                "answer": "It needs water and warmth. It does not need light yet because it lives off its packed food."
+              },
+              {
+                "id": "s5-c5",
+                "question": "Why would a gardener plant bright blooms near flowering plants?",
+                "answer": "Bright blooms bring in pollinators like bees, which flowering plants need to grow fruits with seeds."
+              },
+              {
+                "id": "s5-c6",
+                "question": "The reading says a good farmer \"reads a field the way you read a story, stage by stage.\" What does this mean?",
+                "answer": "It means the farmer looks at each growth stage in order, the way you follow a story from beginning to end, to know what the plants need at that time."
+              }
+            ]
+          },
+          {
+            "type": "writing",
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "id": "s5-w2",
+                "prompt": "Write a paragraph about what one plant stage needs.",
+                "guidance": "Choose one stage: seed, seedling, growing plant, flowering plant, or fruit. Tell what it needs and why it needs those things. Use details from the reading."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows you know its meaning.",
+            "items": [
+              {
+                "id": "s5-vw2",
+                "words": [
+                  "germinate"
+                ],
+                "prompt": "Use the word in a sentence about what a seed needs to start growing."
               }
             ]
           }
@@ -2707,6 +3627,53 @@ const MM_WEEKS_35 = [
                 "answer": "Model answer: The Plains tribes followed the buffalo because the herds were their main source of food. They used every part: meat for eating, hides for tipis and clothing, bones for tools. Tipis could be packed onto a travois so the village could move with the herds. Horses made hunting faster and changed their whole way of life."
               }
             ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "id": "h6-c1",
+                "question": "How did Plains tribes carry their homes when they moved?",
+                "answer": "They took down their tipis, which were cone-shaped tents of buffalo hide, and packed them onto a travois in minutes."
+              },
+              {
+                "id": "h6-c2",
+                "question": "The Plains tribes were nomads who followed the buffalo herds. Why did they need to keep moving?",
+                "answer": "The buffalo herds moved to find grass, so the tribes moved their villages to stay near the herds they depended on."
+              },
+              {
+                "id": "h6-c3",
+                "question": "The reading says the buffalo \"nearly vanished in the 1800s.\" What does the word \"vanished\" mean?",
+                "answer": "It means they almost completely disappeared. Fewer than a thousand buffalo remained."
+              }
+            ]
+          },
+          {
+            "type": "writing",
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "id": "h6-w1",
+                "prompt": "Write a paragraph about why and how the Plains tribes followed the buffalo.",
+                "guidance": "Tell WHY they followed the herds and HOW they moved their villages (tipis, travois, horses). Tell how they used the buffalo. Use details from the reading."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows you know its meaning.",
+            "items": [
+              {
+                "id": "h6-vw1",
+                "words": [
+                  "nomad",
+                  "travois",
+                  "herd"
+                ],
+                "prompt": "Use each word in a sentence about this lesson."
+              }
+            ]
           }
         ]
       },
@@ -2779,6 +3746,52 @@ const MM_WEEKS_35 = [
                 "answer": 4
               }
             ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "id": "h6-c4",
+                "question": "About how many cowboys were Black? Name one famous Black cowboy from the reading and tell one fact about him.",
+                "answer": "About one in four cowboys was Black. Nat Love, known as Deadwood Dick, was born enslaved in Tennessee, headed west at sixteen, and won a roping contest in Deadwood. Or: Bose Ikard, a respected cowboy so trusted that rancher Charles Goodnight had him carry large sums of money."
+              },
+              {
+                "id": "h6-c5",
+                "question": "Why does the reading mention that Charles Goodnight trusted Bose Ikard to carry large sums of money?",
+                "answer": "It shows how skilled and respected Black cowboys were, and how much trust Ikard had earned."
+              },
+              {
+                "id": "h6-c6",
+                "question": "The reading says movies often show cowboys as only white, but the real West was \"far more mixed.\" What does \"mixed\" mean here?",
+                "answer": "It means the West was made up of people of different races working together, not only white cowboys."
+              }
+            ]
+          },
+          {
+            "type": "writing",
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "id": "h6-w2",
+                "prompt": "Write a paragraph about the Black cowboys of the Plains.",
+                "guidance": "Tell who they were and what skills they had. Give details about one cowboy from the reading, Nat Love or Bose Ikard. Tell why their story matters. Use details from the reading."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows you know its meaning.",
+            "items": [
+              {
+                "id": "h6-vw2",
+                "words": [
+                  "herd",
+                  "prairie"
+                ],
+                "prompt": "Use each word in a sentence about this lesson."
+              }
+            ]
           }
         ]
       }
@@ -2846,6 +3859,51 @@ const MM_WEEKS_35 = [
                 "id": "s1-s1",
                 "prompt": "Explain what an ecosystem is and name its three types of living members.",
                 "answer": "Model answer: An ecosystem is a community of living things plus nonliving things like water and sunlight, all interacting. Producers make their own food, consumers eat other living things, and decomposers break down dead matter. If one part fails, the whole system feels it."
+              }
+            ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "id": "s6-c1",
+                "question": "What are the three kinds of living things in an ecosystem, and what does each do?",
+                "answer": "Producers, like grass and trees, make their own food. Consumers, like rabbits and hawks, eat other living things. Decomposers, like mushrooms and bacteria, break down dead things and return nutrients to the soil."
+              },
+              {
+                "id": "s6-c2",
+                "question": "If all the grass in an area died, what might happen to the rabbits and the hawks? Use the reading to explain.",
+                "answer": "The rabbits would go hungry without grass to eat, and the hawks would have to hunt elsewhere. Removing one piece makes the whole system feel it."
+              },
+              {
+                "id": "s6-c3",
+                "question": "The reading says a crack in the sidewalk can host a \"miniature ecosystem.\" What does the word \"miniature\" mean?",
+                "answer": "It means very small."
+              }
+            ]
+          },
+          {
+            "type": "writing",
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "id": "s6-w1",
+                "prompt": "Write a paragraph explaining what an ecosystem is.",
+                "guidance": "Tell what an ecosystem is. Name producers, consumers, and decomposers and give an example of each. Tell what happens if one piece is removed. Use details from the reading."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows you know its meaning.",
+            "items": [
+              {
+                "id": "s6-vw1",
+                "words": [
+                  "community"
+                ],
+                "prompt": "Use the word in a sentence about this lesson."
               }
             ]
           }
@@ -2946,6 +4004,53 @@ const MM_WEEKS_35 = [
               {
                 "id": "s2-k2",
                 "text": "Label each living thing with its role."
+              }
+            ]
+          },
+          {
+            "type": "comprehension",
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "id": "s6-c4",
+                "question": "How did buffalo shape the Plains ecosystem?",
+                "answer": "As great grazers, they ate the grass and spread seeds in their droppings, which helped new grass grow."
+              },
+              {
+                "id": "s6-c5",
+                "question": "Prairie fires started by lightning sound harmful. Why might they be good for the grassland?",
+                "answer": "They burn old grass so fresh green shoots can grow."
+              },
+              {
+                "id": "s6-c6",
+                "question": "The reading says buffalo \"shaped the whole system.\" What does the word \"shaped\" mean here?",
+                "answer": "It means they changed or formed how the whole system works."
+              }
+            ]
+          },
+          {
+            "type": "writing",
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "id": "s6-w2",
+                "prompt": "Write a paragraph about the Plains as an ecosystem.",
+                "guidance": "Name the producers, consumers, and decomposers of the Plains. Tell how buffalo and fire shaped the system. Tell what the Plains tribes understood about it. Use details from the reading."
+              }
+            ]
+          },
+          {
+            "type": "vocabwrite",
+            "instructions": "Write one original sentence for each word that shows you know its meaning.",
+            "items": [
+              {
+                "id": "s6-vw2",
+                "words": [
+                  "community",
+                  "herd",
+                  "prairie"
+                ],
+                "prompt": "Use each word in a sentence about this lesson."
               }
             ]
           }
@@ -3198,6 +4303,52 @@ const MM_WEEKS_35 = [
                 "answer": "Model answer: Southwest tribes built pueblos of adobe that stayed cool in the heat. They planted corn deep in sand where moisture hid and built dams to catch rare rains. The Hopi dry-farmed with almost no irrigation. They grew corn, beans, squash, and cotton using knowledge passed down for generations."
               }
             ]
+          },
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "The adobe bricks of clay, sand, and straw kept their homes cool by day and warm by night.",
+                "id": "h7-0-c1",
+                "question": "How did adobe homes help the Pueblo people live in the hot desert?"
+              },
+              {
+                "answer": "Moisture hid deep in the sand, so planting deep let the corn reach that water with almost no irrigation.",
+                "id": "h7-0-c2",
+                "question": "Why did Hopi farmers plant corn deep in the sand instead of watering their fields?"
+              },
+              {
+                "answer": "It means water was rare and very valuable, so farmers had to use it carefully.",
+                "id": "h7-0-c3",
+                "question": "In the reading, what does the word precious mean when it says water was precious?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Include how they built their homes, how they saved water, and what crops they grew. Write 4 to 6 sentences.",
+                "id": "h7-0-w1",
+                "prompt": "Describe how the Southwest tribes farmed the desert."
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Write one original sentence for each word that shows you know its meaning.",
+            "items": [
+              {
+                "id": "h7-0-vw1",
+                "prompt": "Use each word in a sentence about this lesson.",
+                "words": [
+                  "pueblo",
+                  "adobe"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
           }
         ]
       },
@@ -3270,6 +4421,52 @@ const MM_WEEKS_35 = [
                 "answer": 4
               }
             ]
+          },
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "Because he had learned the languages of many Native tribes during his long walk across the continent.",
+                "id": "h7-1-c1",
+                "question": "Why did Spanish leaders choose Estevanico as a guide for the Southwest expedition?"
+              },
+              {
+                "answer": "He had traveled ahead and seen the pueblos himself, and he could speak with the Native people who lived there.",
+                "id": "h7-1-c2",
+                "question": "Why might the Spanish leaders have trusted Estevanico's reports about the great pueblos?"
+              },
+              {
+                "answer": "A short note or brief mention, so the sentence means his courage deserves more than a tiny mention in history.",
+                "id": "h7-1-c3",
+                "question": "In the sentence His courage deserves more than a footnote, what does the word footnote mean?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Include where his voyage started, how long he traveled on foot, what skills helped him survive, and what he reported about the Southwest.",
+                "id": "h7-1-w1",
+                "prompt": "Write a paragraph about Estevanico's journey across North America."
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Write one original sentence for each word that shows you know its meaning.",
+            "items": [
+              {
+                "id": "h7-1-vw1",
+                "prompt": "Use each word in a sentence about Estevanico's travels through the Southwest.",
+                "words": [
+                  "pueblo",
+                  "mesa"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
           }
         ]
       }
@@ -3340,6 +4537,52 @@ const MM_WEEKS_35 = [
                 "answer": "Model answer: A food chain shows energy moving from a producer to plant eaters to meat eaters to an apex predator. Arrows point from food to eater. If one link breaks, like the grass dying, every level above it goes hungry and the chain shakes."
               }
             ]
+          },
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "A producer is usually a green plant that makes food from sunlight, and every food chain starts with a producer.",
+                "id": "s7-0-c1",
+                "question": "What is a producer in a food chain, and where does a food chain always start?"
+              },
+              {
+                "answer": "Shorter food chains waste less energy, so more of the plant's energy reaches the person who eats the plant.",
+                "id": "s7-0-c2",
+                "question": "According to the reading, why can eating plants feed more people than eating meat?"
+              },
+              {
+                "answer": "The animal at the top of the food chain, like a hawk, which few other animals hunt.",
+                "id": "s7-0-c3",
+                "question": "In the reading, what does apex predator mean?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Include what a producer, a consumer, and a decomposer do, and explain which way the arrows point.",
+                "id": "s7-0-w1",
+                "prompt": "Explain how a food chain works, using one example from the reading."
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Write one original sentence for each word that shows you know its meaning.",
+            "items": [
+              {
+                "id": "s7-0-vw1",
+                "prompt": "Use each word in a sentence about food chains.",
+                "words": [
+                  "predator",
+                  "prey"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
           }
         ]
       },
@@ -3440,6 +4683,52 @@ const MM_WEEKS_35 = [
                 "text": "Draw arrows from food to eater and label each level."
               }
             ]
+          },
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "Cactus flower, bat, owl, coyote.",
+                "id": "s7-1-c1",
+                "question": "Name the four links of the desert food chain described in the reading, in order from producer to top hunter."
+              },
+              {
+                "answer": "Because deserts have few plants, so there are fewer plant eaters and fewer hunters. Little water means little energy, and short chains mean tough living.",
+                "id": "s7-1-c2",
+                "question": "Why are desert food chains usually short?"
+              },
+              {
+                "answer": "It means they break easily, because water is rare and losing one link can shake the whole chain.",
+                "id": "s7-1-c3",
+                "question": "In the reading, what does fragile mean when it says desert chains are fragile?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Include each link of the chain, how the kangaroo rat saves water, and why short chains mean tough living.",
+                "id": "s7-1-w1",
+                "prompt": "Describe the desert food chain from the reading and explain why it is fragile."
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Write one original sentence for each word that shows you know its meaning.",
+            "items": [
+              {
+                "id": "s7-1-vw1",
+                "prompt": "Use each word in a sentence about the desert food chain.",
+                "words": [
+                  "predator",
+                  "prey"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
           }
         ]
       }
@@ -3690,6 +4979,52 @@ const MM_WEEKS_35 = [
                 "answer": "Model answer: Europeans wanted spices, silk, and gold from Asia, but land routes were slow and dangerous. New caravels and tools like the compass let sailors travel farther. Kings paid for voyages hoping for wealth and new lands. Sailors risked storms and hunger for riches, adventure, or because they were forced to go."
               }
             ]
+          },
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "The land routes were long and dangerous, and a sea route would make traders rich with spices, silk, and gold.",
+                "id": "h8-0-c1",
+                "question": "Why did Europeans want a sea route to Asia in the 1400s?"
+              },
+              {
+                "answer": "They helped sailors navigate far from shore without getting lost. The compass found north and the astrolabe measured the stars.",
+                "id": "h8-0-c2",
+                "question": "Why were new tools like the compass and the astrolabe so important to sailors?"
+              },
+              {
+                "answer": "A new kind of ship that was faster and could sail closer to the wind.",
+                "id": "h8-0-c3",
+                "question": "In the reading, what is a caravel?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Include what Europeans wanted from Asia, what new ships and tools helped them, and what dangers they faced on the voyage.",
+                "id": "h8-0-w1",
+                "prompt": "Explain why sailors risked sailing into the unknown ocean."
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Write one original sentence for each word that shows you know its meaning.",
+            "items": [
+              {
+                "id": "h8-0-vw1",
+                "prompt": "Use each word in a sentence about this lesson.",
+                "words": [
+                  "voyage",
+                  "navigate"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
           }
         ]
       },
@@ -3762,6 +5097,52 @@ const MM_WEEKS_35 = [
                 "answer": 4
               }
             ]
+          },
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "Only four men survived, and Estevanico walked for eight years, from Florida to Mexico.",
+                "id": "h8-1-c1",
+                "question": "How many men survived the Narvaez expedition, and how long did Estevanico walk across North America?"
+              },
+              {
+                "answer": "He learned the languages of many Native tribes along the way and became known as a healer, which helped him travel safely among them.",
+                "id": "h8-1-c2",
+                "question": "Why was Estevanico able to survive eight years of walking across the continent?"
+              },
+              {
+                "answer": "It means the books do not mention him or tell his story, even though his journey was one of the greatest of that age.",
+                "id": "h8-1-c3",
+                "question": "In the reading, what does it mean when it says history books often leave him out?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Include what happened to the Narvaez expedition, how long he traveled, what he learned along the way, and why his story matters.",
+                "id": "h8-1-w1",
+                "prompt": "Describe Estevanico's journey from Florida to Mexico."
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Write one original sentence for each word that shows you know its meaning.",
+            "items": [
+              {
+                "id": "h8-1-vw1",
+                "prompt": "Use each word in a sentence about Estevanico's journey.",
+                "words": [
+                  "voyage",
+                  "sailor"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
           }
         ]
       }
@@ -3832,6 +5213,52 @@ const MM_WEEKS_35 = [
                 "answer": "Model answer: A food chain shows one path of energy, while a food web connects many chains into a map of who eats whom. A web is stronger because each animal has backup foods. If rabbits disappear, a fox can hunt mice. But if too many links break at once, the whole web trembles."
               }
             ]
+          },
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "Many food chains connected together, making a map of who eats whom in an ecosystem.",
+                "id": "s8-0-c1",
+                "question": "What is a food web?"
+              },
+              {
+                "answer": "If one food disappears, an animal can eat something else instead. A fox that loses rabbits can hunt mice, so one broken link does not break the whole system.",
+                "id": "s8-0-c2",
+                "question": "Why is a food web stronger than a single food chain?"
+              },
+              {
+                "answer": "The most connected animals in a food web, like sea otters, that hold the whole web together.",
+                "id": "s8-0-c3",
+                "question": "In the reading, what does keystone species mean?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Give an example of each from the reading and explain why a web is stronger than a single chain.",
+                "id": "s8-0-w1",
+                "prompt": "Explain the difference between a food chain and a food web."
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Write one original sentence for each word that shows you know its meaning.",
+            "items": [
+              {
+                "id": "s8-0-vw1",
+                "prompt": "Use each word in a sentence about food webs.",
+                "words": [
+                  "web",
+                  "predator"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
           }
         ]
       },
@@ -3932,6 +5359,52 @@ const MM_WEEKS_35 = [
                 "text": "Draw arrows from food to eater and count your connections."
               }
             ]
+          },
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "Small fish eat the water fleas, and big fish eat the small fish.",
+                "id": "s8-1-c1",
+                "question": "In the pond food web, what eats the water fleas, and what eats the small fish?"
+              },
+              {
+                "answer": "Because algae are the producers, and nearly every connection in the web depends on them for food.",
+                "id": "s8-1-c2",
+                "question": "Why would the whole pond web collapse if the algae were removed?"
+              },
+              {
+                "answer": "The links showing who eats whom, like the heron linking to frogs, fish, and insects.",
+                "id": "s8-1-c3",
+                "question": "In the reading, what does connections mean when it says Count the connections?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Start with the producers, follow at least two paths of who eats whom, and explain which animals matter most to the web.",
+                "id": "s8-1-w1",
+                "prompt": "Describe the pond food web from the reading."
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Write one original sentence for each word that shows you know its meaning.",
+            "items": [
+              {
+                "id": "s8-1-vw1",
+                "prompt": "Use each word in a sentence about the pond food web.",
+                "words": [
+                  "web",
+                  "prey"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
           }
         ]
       }
@@ -4164,6 +5637,52 @@ const MM_WEEKS_35 = [
                 "answer": "Model answer: From the European view, 1492 was a discovery that opened trade in gold, sugar, and new foods. From the Native view, it brought disease, stolen land, and forced work. The Native view is often missing from old stories. It matters because good historians study every side to find the truth."
               }
             ]
+          },
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "Europeans saw a great discovery that opened trade in gold, sugar, and new foods like potatoes and corn.",
+                "id": "h9-0-c1",
+                "question": "From the European view, what good came from Columbus's 1492 voyage?"
+              },
+              {
+                "answer": "Because Europeans saw discovery and wealth while Native people suffered disease, lost land, and forced work from the very same voyages.",
+                "id": "h9-0-c2",
+                "question": "Why does the reading say the same event can look very different depending on whose eyes you see it through?"
+              },
+              {
+                "answer": "It means their bodies could not fight off the new sicknesses, so millions died.",
+                "id": "h9-0-c3",
+                "question": "In the reading, what does resistance mean when it says Native people had no resistance to the diseases?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Explain the European view and the Native view, and tell which facts each side focuses on.",
+                "id": "h9-0-w1",
+                "prompt": "Describe the two views of 1492 from the reading."
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Write one original sentence for each word that shows you know its meaning.",
+            "items": [
+              {
+                "id": "h9-0-vw1",
+                "prompt": "Use each word in a sentence about 1492.",
+                "words": [
+                  "colony",
+                  "exchange"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
           }
         ]
       },
@@ -4267,6 +5786,52 @@ const MM_WEEKS_35 = [
                 "answer": "Model paragraph: The year 1492 is remembered because Columbus's voyage connected two worlds that had not known each other. After his trip, people, animals, plants, and diseases began moving between the Americas and Europe in the Columbian Exchange. That exchange changed what the whole world eats, speaks, and suffers from, which is why one voyage still matters."
               }
             ]
+          },
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "Europe received foods like potatoes and corn. The Americas received horses, cattle, wheat, and sugar cane.",
+                "id": "h9-1-c1",
+                "question": "Name two foods Europe received in the Columbian Exchange and two things the Americas received."
+              },
+              {
+                "answer": "It brought new foods that changed diets forever, but it also brought deadly diseases and forced enslaved Africans to work sugar plantations.",
+                "id": "h9-1-c2",
+                "question": "Why does the reading say the exchange mixed the world together for better and for worse?"
+              },
+              {
+                "answer": "The trading or moving of plants, animals, and ideas between the Americas and Europe after 1492.",
+                "id": "h9-1-c3",
+                "question": "In the reading, what does exchange mean?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Include what each side received, one harmful effect, and one food on your table that came from the exchange.",
+                "id": "h9-1-w1",
+                "prompt": "Explain the Columbian Exchange and how it still affects your meals today."
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Write one original sentence for each word that shows you know its meaning.",
+            "items": [
+              {
+                "id": "h9-1-vw1",
+                "prompt": "Use each word in a sentence about the Columbian Exchange.",
+                "words": [
+                  "colony",
+                  "exchange"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
           }
         ]
       }
@@ -4348,6 +5913,53 @@ const MM_WEEKS_35 = [
                 "answer": "Model answer: Producers make food from sunlight. Consumers eat producers or other consumers. Decomposers break down dead things and return nutrients to the soil. The nutrients grow new producers, so the three teams form a circle."
               }
             ]
+          },
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "They break down dead plants and animals and return nutrients to the soil, like nature's cleanup crew.",
+                "id": "s9-0-c1",
+                "question": "What do decomposers do in an ecosystem?"
+              },
+              {
+                "answer": "Dead leaves would pile up forever, and the nutrients would never return to the soil for new plants to use.",
+                "id": "s9-0-c2",
+                "question": "Why would plants run out of food without decomposers?"
+              },
+              {
+                "answer": "It means using old, dead material again as nutrients for new living things.",
+                "id": "s9-0-c3",
+                "question": "In the reading, what does recycle mean when it says decomposers recycle everything?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Name each team, give one example from the reading, and explain how the teams connect to each other.",
+                "id": "s9-0-w1",
+                "prompt": "Describe the three teams in an ecosystem and how they form a circle."
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Write one original sentence for each word that shows you know its meaning.",
+            "items": [
+              {
+                "id": "s9-0-vw1",
+                "prompt": "Use each word in a sentence about the three teams in an ecosystem.",
+                "words": [
+                  "producer",
+                  "consumer",
+                  "decomposer"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
           }
         ]
       },
@@ -4443,6 +6055,52 @@ const MM_WEEKS_35 = [
                 "answer": "Model paragraph: Producers, like grass, make their own food using sunlight. Consumers, like rabbits, eat producers or other consumers. Decomposers, like mushrooms, break down dead things and return nutrients to the soil. All three teams work together, and without any one of them the ecosystem would fail."
               }
             ]
+          },
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "Decomposer, because it breaks down dead wood and returns nutrients to the soil.",
+                "id": "s9-1-c1",
+                "question": "Which team does a mushroom growing on a fallen log belong to, and why?"
+              },
+              {
+                "answer": "It is a plant that makes its own food, but it also eats insects, so it is both a producer and a consumer.",
+                "id": "s9-1-c2",
+                "question": "Why is a Venus flytrap tricky to sort into one of the three teams?"
+              },
+              {
+                "answer": "It means they are not noticed or given credit, even though they do very important work.",
+                "id": "s9-1-c3",
+                "question": "In the reading, what does overlooked mean when it says decomposers are the most overlooked team?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Include one clear example for each team and one tricky example that fits more than one team.",
+                "id": "s9-1-w1",
+                "prompt": "Explain how scientists sort living things into the three teams, using examples from the reading."
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Write one original sentence for each word that shows you know its meaning.",
+            "items": [
+              {
+                "id": "s9-1-vw1",
+                "prompt": "Use each word in a sentence about sorting nature's teams.",
+                "words": [
+                  "producer",
+                  "decomposer"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
           }
         ]
       }
@@ -4673,6 +6331,52 @@ const MM_WEEKS_35 = [
                 "answer": "Model answer: The day began before sunrise with prayers led by priests. Native people worked the fields, built walls, and learned crafts like weaving. The mission grew corn and raised cattle. But many were forced to stay and punished for leaving. Disease spread, and some Native people resisted, like the Pueblo revolt of 1680."
               }
             ]
+          },
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "Prayers before sunrise, working the fields, building walls, and learning crafts like weaving and blacksmithing.",
+                "id": "h10-0-c1",
+                "question": "What did a mission day include?"
+              },
+              {
+                "answer": "They left beautiful churches and new crops, but also forced labor, lost freedom, and many deaths from European diseases.",
+                "id": "h10-0-c2",
+                "question": "Why does the reading say the missions left a mixed mark?"
+              },
+              {
+                "answer": "To change one's religion or beliefs, here meaning changing Native people to Christianity.",
+                "id": "h10-0-c3",
+                "question": "In the reading, what does convert mean?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Include who lived and worked there, what they did from morning to evening, and what was hard about mission life.",
+                "id": "h10-0-w1",
+                "prompt": "Describe a day at a Spanish mission."
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Write one original sentence for each word that shows you know its meaning.",
+            "items": [
+              {
+                "id": "h10-0-vw1",
+                "prompt": "Use each word in a sentence about this lesson.",
+                "words": [
+                  "mission",
+                  "convert"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
           }
         ]
       },
@@ -4784,6 +6488,52 @@ const MM_WEEKS_35 = [
                 "answer": "Model paragraph: Since the mission came, our days follow the ringing of its bell. We rise, pray, and work in the fields growing wheat we never planted before. The priests teach new words and a new God, but I miss the old songs. My life is not what it was, and it will never be again."
               }
             ]
+          },
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "Planting wheat seeds he had carried from Spain and growing the first wheat harvest in the Americas.",
+                "id": "h10-1-c1",
+                "question": "What is Juan Garrido remembered for more than his battles?"
+              },
+              {
+                "answer": "Because one man's small planting of seeds grew into wheat fields across two continents, and bread became a daily food.",
+                "id": "h10-1-c2",
+                "question": "Why does the reading say small actions can have enormous harvests?"
+              },
+              {
+                "answer": "One of the first to do something new, here the first person to grow wheat in the Americas.",
+                "id": "h10-1-c3",
+                "question": "In the reading, what does pioneering mean when it calls Garrido a pioneering farmer?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Include where he was born, what he did as a conquistador, what he planted, and why his harvest mattered.",
+                "id": "h10-1-w1",
+                "prompt": "Write a paragraph about Juan Garrido's life."
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Write one original sentence for each word that shows you know its meaning.",
+            "items": [
+              {
+                "id": "h10-1-vw1",
+                "prompt": "Use each word in a sentence about Spain's efforts in the Americas.",
+                "words": [
+                  "mission",
+                  "convert"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
           }
         ]
       }
@@ -4866,6 +6616,52 @@ const MM_WEEKS_35 = [
                 "answer": "Model answer: Algae and plants produce food, small animals eat them, and bigger hunters like herons eat those. Bacteria decompose dead matter and recycle nutrients. The balance is delicate because extra fertilizer can make algae grow wild, use up oxygen, and kill fish."
               }
             ]
+          },
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "Algae grow wild, use up the oxygen, and fish can die.",
+                "id": "s10-0-c1",
+                "question": "What happens to a pond when fertilizer runs into it?"
+              },
+              {
+                "answer": "Because it changes with the seasons: spring brings frog eggs, summer brings dragonflies, fall slows everything, and in winter life sleeps under ice.",
+                "id": "s10-0-c2",
+                "question": "Why does the reading call a pond four ecosystems in one?"
+              },
+              {
+                "answer": "It means the balance is easy to break or upset, like when fertilizer changes the whole pond.",
+                "id": "s10-0-c3",
+                "question": "In the reading, what does delicate mean when it says the pond's balance is delicate?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Include the producers and at least two animals, and explain what happens in spring and in winter.",
+                "id": "s10-0-w1",
+                "prompt": "Describe life in a pond through the seasons."
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Write one original sentence for each word that shows you know its meaning.",
+            "items": [
+              {
+                "id": "s10-0-vw1",
+                "prompt": "Use each word in a sentence about this lesson.",
+                "words": [
+                  "pond",
+                  "tadpole"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
           }
         ]
       },
@@ -4965,6 +6761,52 @@ const MM_WEEKS_35 = [
                 "answer": "Model paragraph: In a pond, algae and lily pads are producers that make food from sunlight. Tadpoles and ducks are consumers that eat the plants or smaller animals. Bacteria and fungi are decomposers that break down dead leaves. The consumers depend on the producers for food, and the decomposers recycle everything back into nutrients."
               }
             ]
+          },
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "Herons and raccoons.",
+                "id": "s10-1-c1",
+                "question": "Name two animals that eat frogs in the pond food web."
+              },
+              {
+                "answer": "If one link breaks, the animals still have other foods to eat and other hunters to feed, so the web holds together.",
+                "id": "s10-1-c2",
+                "question": "Why does having more than one food and more than one hunter make the pond web strong?"
+              },
+              {
+                "answer": "It means the links twist and connect in many directions, with many crossing paths of who eats whom.",
+                "id": "s10-1-c3",
+                "question": "In the reading, what does tangled mean when it says the pond's food web is a tangled map?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Include the producers, follow one path of who eats whom, and explain what breaks the web.",
+                "id": "s10-1-w1",
+                "prompt": "Explain the pond food web from the reading and why clean water matters."
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Write one original sentence for each word that shows you know its meaning.",
+            "items": [
+              {
+                "id": "s10-1-vw1",
+                "prompt": "Use each word in a sentence about the pond food web.",
+                "words": [
+                  "pond",
+                  "tadpole"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
           }
         ]
       }
@@ -5196,7 +7038,53 @@ const MM_WEEKS_35 = [
                 "answer": "Model answer: French voyageurs paddled canoes into Native lands carrying metal tools, cloth, and beads. Native trappers traded piles of beaver pelts for these goods. The trade made traders rich and shaped Canada and the northern US. But it spread disease, sparked wars over hunting grounds, and nearly wiped out beavers in some regions."
               }
             ]
-          }
+          },
+            {
+              "type": "comprehension",
+              "instructions": "Answer each question in your own words using the reading.",
+              "items": [
+                {
+                  "id": "h11-0-c1",
+                  "question": "What did French traders want most of all in the fur trade?",
+                  "answer": "Beaver fur, because beaver hats were the height of fashion in Europe."
+                },
+                {
+                  "id": "h11-0-c2",
+                  "question": "Why did the fur trade finally fade?",
+                  "answer": "Fashions changed when silk hats replaced beaver hats in Europe, and beavers grew scarce from heavy hunting."
+                },
+                {
+                  "id": "h11-0-c3",
+                  "question": "In the sentence 'They traded metal tools, cloth, and beads for piles of soft pelts,' what does the word 'pelts' mean?",
+                  "answer": "Pelts are animal skins with the fur still on them. The traders wanted piles of soft beaver pelts."
+                }
+              ]
+            },
+            {
+              "type": "writing",
+              "instructions": "Write a paragraph of 4 to 6 sentences. Use the guidance to help you.",
+              "items": [
+                {
+                  "id": "h11-0-w1",
+                  "prompt": "Write a paragraph of 4 to 6 sentences about the fur trade. Explain what the French traded, who they traded with, and why the trade finally faded.",
+                  "guidance": "Include: the trade goods (metal tools, cloth, and beads), the beaver pelts they wanted, the Native trappers as skilled partners, and the two reasons the trade ended (changed fashions and fewer beavers)."
+                }
+              ]
+            },
+            {
+              "type": "vocabwrite",
+              "instructions": "Write an original sentence for each word. Show you know what the word means.",
+              "items": [
+                {
+                  "id": "h11-0-vw1",
+                  "prompt": "Use each word in a sentence about the fur trade.",
+                  "words": [
+                    "trade",
+                    "beaver"
+                  ]
+                }
+              ]
+            }
         ]
       },
       {
@@ -5307,7 +7195,53 @@ const MM_WEEKS_35 = [
                 "answer": "Model paragraph: French traders and Native trappers built the fur trade together. The trappers brought beaver pelts, and the French brought metal tools, cloth, and guns. Europeans wanted furs for warm hats, while Native peoples wanted goods that made hunting and cooking easier. Both sides gained something they could not make themselves."
               }
             ]
-          }
+          },
+            {
+              "type": "comprehension",
+              "instructions": "Answer each question in your own words using the reading.",
+              "items": [
+                {
+                  "id": "h11-1-c1",
+                  "question": "Where did Jean Baptiste Point du Sable build his trading post?",
+                  "answer": "He settled where the Chicago River meets Lake Michigan."
+                },
+                {
+                  "id": "h11-1-c2",
+                  "question": "Why was that spot a perfect place for trade?",
+                  "answer": "The river and lake made it easy for Native trappers and travelers to reach him, so he could buy furs and sell goods."
+                },
+                {
+                  "id": "h11-1-c3",
+                  "question": "In the sentence 'When he later sold his property, the records listed a large estate, proof of his success,' what does the word 'estate' mean?",
+                  "answer": "His land, buildings, and belongings. The large estate showed he had done well in trade."
+                }
+              ]
+            },
+            {
+              "type": "writing",
+              "instructions": "Write a paragraph of 4 to 6 sentences. Use the guidance to help you.",
+              "items": [
+                {
+                  "id": "h11-1-w1",
+                  "prompt": "Write a paragraph of 4 to 6 sentences about Jean Baptiste Point du Sable. Tell where he settled, what he built there, who he traded with, and how his trading post grew into the city of Chicago.",
+                  "guidance": "Include: the spot where the Chicago River meets Lake Michigan, his cabin and trading post, the Native trappers he traded with, his wife Catherine, and how Chicago honors him today."
+                }
+              ]
+            },
+            {
+              "type": "vocabwrite",
+              "instructions": "Write an original sentence for each word. Show you know what the word means.",
+              "items": [
+                {
+                  "id": "h11-1-vw1",
+                  "prompt": "Use each word in a sentence about Jean Baptiste Point du Sable.",
+                  "words": [
+                    "merchant",
+                    "trade"
+                  ]
+                }
+              ]
+            }
         ]
       }
     ],
@@ -5389,7 +7323,52 @@ const MM_WEEKS_35 = [
                 "answer": "Model answer: Cacti store water in thick stems with waxy skin that slows evaporation. Kangaroo rats get all their water from seeds and never drink. Many animals hide from daytime heat and come out at night. When rare rains come, wildflowers bloom quickly and the whole ecosystem feasts."
               }
             ]
-          }
+          },
+            {
+              "type": "comprehension",
+              "instructions": "Answer each question in your own words using the reading.",
+              "items": [
+                {
+                  "id": "s11-0-c1",
+                  "question": "How do cacti save water?",
+                  "answer": "They store water in thick stems, and their waxy skin slows evaporation."
+                },
+                {
+                  "id": "s11-0-c2",
+                  "question": "Why do many desert animals hide during the day and come out at night?",
+                  "answer": "The day is too hot and dry, so they stay cool and save water by moving at night."
+                },
+                {
+                  "id": "s11-0-c3",
+                  "question": "In the sentence 'When rare rains come, wildflowers explode into bloom,' what does 'explode into bloom' mean?",
+                  "answer": "It means millions of wildflowers open all at once, very quickly."
+                }
+              ]
+            },
+            {
+              "type": "writing",
+              "instructions": "Write a paragraph of 4 to 6 sentences. Use the guidance to help you.",
+              "items": [
+                {
+                  "id": "s11-0-w1",
+                  "prompt": "Write a paragraph of 4 to 6 sentences about the desert ecosystem. Describe how desert plants and animals save water, and tell what happens when rare rain finally comes.",
+                  "guidance": "Include: one plant trick (a cactus storing water or waxy skin), one animal trick (hunting at night or the kangaroo rat getting water from seeds), and the superbloom that follows rain."
+                }
+              ]
+            },
+            {
+              "type": "vocabwrite",
+              "instructions": "Write an original sentence for each word. Show you know what the word means.",
+              "items": [
+                {
+                  "id": "s11-0-vw1",
+                  "prompt": "Use the word in a sentence about the desert ecosystem.",
+                  "words": [
+                    "cactus"
+                  ]
+                }
+              ]
+            }
         ]
       },
       {
@@ -5488,7 +7467,52 @@ const MM_WEEKS_35 = [
                 "answer": "Model paragraph: Deserts and ponds are alike because both have producers, consumers, and decomposers working together. They differ because ponds have plenty of water while deserts have very little, and pond animals like fish cannot survive in a desert. Both ecosystems depend on water, but they get it in very different amounts."
               }
             ]
-          }
+          },
+            {
+              "type": "comprehension",
+              "instructions": "Answer each question in your own words using the reading.",
+              "items": [
+                {
+                  "id": "s11-1-c1",
+                  "question": "What do producers, consumers, and decomposers do in both deserts and ponds?",
+                  "answer": "Producers make food, consumers eat, and decomposers recycle."
+                },
+                {
+                  "id": "s11-1-c2",
+                  "question": "Why does comparing a desert and a pond help scientists?",
+                  "answer": "Comparing opposites shows what every ecosystem shares, like the flow of energy and the cycling of water and nutrients."
+                },
+                {
+                  "id": "s11-1-c3",
+                  "question": "In the sentence 'Protecting both means guarding water itself,' what does 'guarding water' mean?",
+                  "answer": "It means keeping water clean and safe from pollution, pumping, and development."
+                }
+              ]
+            },
+            {
+              "type": "writing",
+              "instructions": "Write a paragraph of 4 to 6 sentences. Use the guidance to help you.",
+              "items": [
+                {
+                  "id": "s11-1-w1",
+                  "prompt": "Write a paragraph of 4 to 6 sentences comparing a desert and a pond. Tell how they are opposites, then tell what they share.",
+                  "guidance": "Include: the water difference (almost none in a desert, everywhere in a pond), one way plants differ, and the shared truth that every ecosystem runs on clean water."
+                }
+              ]
+            },
+            {
+              "type": "vocabwrite",
+              "instructions": "Write an original sentence for each word. Show you know what the word means.",
+              "items": [
+                {
+                  "id": "s11-1-vw1",
+                  "prompt": "Use the word in a sentence about how deserts and ponds differ.",
+                  "words": [
+                    "cactus"
+                  ]
+                }
+              ]
+            }
         ]
       }
     ],
@@ -5720,7 +7744,53 @@ const MM_WEEKS_35 = [
                 "answer": "Model answer: The settlers were gentlemen unused to hard work and hunted for gold instead of planting food. Swampy land brought disease, and the winter of 1609-1610 became the starving time, when only 60 of 500 survived. Trade with Powhatan's people and arriving supply ships helped. Finally, tobacco farming made the colony rich and saved it."
               }
             ]
-          }
+          },
+            {
+              "type": "comprehension",
+              "instructions": "Answer each question in your own words using the reading.",
+              "items": [
+                {
+                  "id": "h12-0-c1",
+                  "question": "What gave the settlers permission to build Jamestown?",
+                  "answer": "The king's charter gave them permission."
+                },
+                {
+                  "id": "h12-0-c2",
+                  "question": "Why did Jamestown's settlers go hungry during the starving time?",
+                  "answer": "The gentlemen settlers spent their days hunting for gold instead of planting food, so when winter came there was not enough to eat."
+                },
+                {
+                  "id": "h12-0-c3",
+                  "question": "In the sentence 'In the winter of 1609-1610, called the starving time, food ran out,' what does the phrase 'starving time' mean?",
+                  "answer": "It was a terrible winter when food ran out and many settlers starved. Only 60 of 500 settlers survived."
+                }
+              ]
+            },
+            {
+              "type": "writing",
+              "instructions": "Write a paragraph of 4 to 6 sentences. Use the guidance to help you.",
+              "items": [
+                {
+                  "id": "h12-0-w1",
+                  "prompt": "Write a paragraph of 4 to 6 sentences about Jamestown's hard years. Tell why the settlers struggled, what happened in the starving time, and how the colony finally survived.",
+                  "guidance": "Include: the gold hunt instead of planting food, the swampy land and disease, the starving time winter when only 60 of 500 survived, and how tobacco farming saved the colony."
+                }
+              ]
+            },
+            {
+              "type": "vocabwrite",
+              "instructions": "Write an original sentence for each word. Show you know what the word means.",
+              "items": [
+                {
+                  "id": "h12-0-vw1",
+                  "prompt": "Use each word in a sentence about Jamestown's hard years.",
+                  "words": [
+                    "settler",
+                    "starving time"
+                  ]
+                }
+              ]
+            }
         ]
       },
       {
@@ -5831,7 +7901,53 @@ const MM_WEEKS_35 = [
                 "answer": "Model paragraph: Jamestown almost failed for two reasons. First, the settlers spent their time hunting for gold instead of planting food, so hunger struck. Second, disease from the swampy water sickened and killed many colonists. Only strict rules and help from neighbors saved the colony from vanishing."
               }
             ]
-          }
+          },
+            {
+              "type": "comprehension",
+              "instructions": "Answer each question in your own words using the reading.",
+              "items": [
+                {
+                  "id": "h12-1-c1",
+                  "question": "In what written records does Angela's name appear?",
+                  "answer": "Her name appears in the colony records of Jamestown. Hers was one of the first African names written in English America."
+                },
+                {
+                  "id": "h12-1-c2",
+                  "question": "Why could some Africans in early Virginia gain freedom, but not later?",
+                  "answer": "At first Virginia had no laws of lifelong slavery, so some worked for a term of years and then gained freedom. Later, harsh laws turned African labor into lifelong, hereditary slavery."
+                },
+                {
+                  "id": "h12-1-c3",
+                  "question": "In the sentence 'harsh laws that turned African labor into lifelong, hereditary slavery,' what does the word 'hereditary' mean?",
+                  "answer": "It means passed down from parent to child, so the children of enslaved people were enslaved too."
+                }
+              ]
+            },
+            {
+              "type": "writing",
+              "instructions": "Write a paragraph of 4 to 6 sentences. Use the guidance to help you.",
+              "items": [
+                {
+                  "id": "h12-1-w1",
+                  "prompt": "Write a paragraph of 4 to 6 sentences about Angela and the first Africans in Virginia. Tell how she arrived, what her life showed about early Virginia, and why her name still matters.",
+                  "guidance": "Include: her arrival in 1619 from a Portuguese slave ship, the fact that early Virginia had no lifelong slavery laws, the harsh later laws, and that remembering Angela honors all the unnamed people who built America."
+                }
+              ]
+            },
+            {
+              "type": "vocabwrite",
+              "instructions": "Write an original sentence for each word. Show you know what the word means.",
+              "items": [
+                {
+                  "id": "h12-1-vw1",
+                  "prompt": "Use each word in a sentence about early colonial Virginia.",
+                  "words": [
+                    "charter",
+                    "settler"
+                  ]
+                }
+              ]
+            }
         ]
       }
     ],
@@ -5913,7 +8029,53 @@ const MM_WEEKS_35 = [
                 "answer": "Model answer: The emergent layer holds the tallest trees where eagles travel. The canopy is a thick leafy roof where sloths and toucans live. The darker understory is home to jaguars. The dim forest floor is where decomposers break down fallen leaves."
               }
             ]
-          }
+          },
+            {
+              "type": "comprehension",
+              "instructions": "Answer each question in your own words using the reading.",
+              "items": [
+                {
+                  "id": "s12-0-c1",
+                  "question": "Which layer holds the tallest trees, and who travels there?",
+                  "answer": "The emergent layer. Eagles and monkeys travel there."
+                },
+                {
+                  "id": "s12-0-c2",
+                  "question": "Why would cutting down many rainforest trees cause the rain to stop?",
+                  "answer": "Trees release water vapor that forms clouds, which rain back down. Cutting too many trees breaks the cycle."
+                },
+                {
+                  "id": "s12-0-c3",
+                  "question": "In the sentence 'The forest floor is dim and damp,' what does the word 'dim' mean?",
+                  "answer": "Dark, with very little light, because the thick layers of leaves above block the sun."
+                }
+              ]
+            },
+            {
+              "type": "writing",
+              "instructions": "Write a paragraph of 4 to 6 sentences. Use the guidance to help you.",
+              "items": [
+                {
+                  "id": "s12-0-w1",
+                  "prompt": "Write a paragraph of 4 to 6 sentences about the layers of the rainforest. Name the layers from top to bottom and tell what lives in each.",
+                  "guidance": "Include: the emergent layer, canopy, understory, and forest floor, one animal that lives in each layer, and how rain feeds the layers from top to bottom."
+                }
+              ]
+            },
+            {
+              "type": "vocabwrite",
+              "instructions": "Write an original sentence for each word. Show you know what the word means.",
+              "items": [
+                {
+                  "id": "s12-0-vw1",
+                  "prompt": "Use each word in a sentence about the rainforest.",
+                  "words": [
+                    "canopy",
+                    "drought"
+                  ]
+                }
+              ]
+            }
         ]
       },
       {
@@ -6012,7 +8174,52 @@ const MM_WEEKS_35 = [
                 "answer": "Model paragraph: We should protect the rainforest for two important reasons. First, it is home to millions of species found nowhere else on Earth. Second, its trees make oxygen and rain that the whole planet needs. If we let the rainforest disappear, we lose medicines, animals, and clean air forever."
               }
             ]
-          }
+          },
+            {
+              "type": "comprehension",
+              "instructions": "Answer each question in your own words using the reading.",
+              "items": [
+                {
+                  "id": "s12-1-c1",
+                  "question": "How much of Earth's land species do rainforests hold?",
+                  "answer": "About half of all land species, even though rainforests cover only a small part of Earth."
+                },
+                {
+                  "id": "s12-1-c2",
+                  "question": "Why is it hard for scientists to count all the animals in a rainforest?",
+                  "answer": "Many species hide, and new species are still being discovered."
+                },
+                {
+                  "id": "s12-1-c3",
+                  "question": "In the sentence 'The rainforest is a library where most books have never been opened,' what does the author mean?",
+                  "answer": "The author means most rainforest species are still unknown to science, like unread books in a library."
+                }
+              ]
+            },
+            {
+              "type": "writing",
+              "instructions": "Write a paragraph of 4 to 6 sentences. Use the guidance to help you.",
+              "items": [
+                {
+                  "id": "s12-1-w1",
+                  "prompt": "Write a paragraph of 4 to 6 sentences about why rainforests are treasure chests of life. Tell how much life they hold, where scientists find it, and why we should protect them.",
+                  "guidance": "Include: about half of Earth's land species, animals found in different layers like the canopy, new species still being discovered, and why protecting rainforests matters."
+                }
+              ]
+            },
+            {
+              "type": "vocabwrite",
+              "instructions": "Write an original sentence for each word. Show you know what the word means.",
+              "items": [
+                {
+                  "id": "s12-1-vw1",
+                  "prompt": "Use the word in a sentence about counting rainforest life.",
+                  "words": [
+                    "canopy"
+                  ]
+                }
+              ]
+            }
         ]
       }
     ],
@@ -6262,7 +8469,53 @@ const MM_WEEKS_35 = [
                 "answer": "Model answer: After a brutal first winter that killed half the Pilgrims, the Wampanoag taught them to plant corn and fish. The next fall brought a good harvest. Pilgrims and Wampanoag shared a feast of thanks that lasted days. It celebrated survival, friendship, and the harvest that would carry them through winter."
               }
             ]
-          }
+          },
+            {
+              "type": "comprehension",
+              "instructions": "Answer each question in your own words using the reading.",
+              "items": [
+                {
+                  "id": "h13-0-c1",
+                  "question": "What did the Pilgrims sign before leaving the Mayflower?",
+                  "answer": "The Mayflower Compact, an agreement to make fair laws and work together."
+                },
+                {
+                  "id": "h13-0-c2",
+                  "question": "Why did half of the Pilgrims die in their first winter?",
+                  "answer": "Cold, hunger, and disease struck, and they did not yet know how to live off the new land."
+                },
+                {
+                  "id": "h13-0-c3",
+                  "question": "In the sentence 'They wanted religious freedom, a place to worship as they chose,' what does 'religious freedom' mean?",
+                  "answer": "It means the right to practice their religion in their own way without being stopped."
+                }
+              ]
+            },
+            {
+              "type": "writing",
+              "instructions": "Write a paragraph of 4 to 6 sentences. Use the guidance to help you.",
+              "items": [
+                {
+                  "id": "h13-0-w1",
+                  "prompt": "Write a paragraph of 4 to 6 sentences about the first Thanksgiving. Tell why the Pilgrims came to America, what happened in their first winter, and who helped them survive to celebrate.",
+                  "guidance": "Include: the Mayflower voyage and the search for religious freedom, the brutal first winter that killed half of them, Squanto and the Wampanoag teaching them to plant corn, and the 1621 harvest feast."
+                }
+              ]
+            },
+            {
+              "type": "vocabwrite",
+              "instructions": "Write an original sentence for each word. Show you know what the word means.",
+              "items": [
+                {
+                  "id": "h13-0-vw1",
+                  "prompt": "Use each word in a sentence about the Pilgrims at Plymouth.",
+                  "words": [
+                    "compact",
+                    "harvest"
+                  ]
+                }
+              ]
+            }
         ]
       },
       {
@@ -6334,7 +8587,53 @@ const MM_WEEKS_35 = [
                 "answer": 4
               }
             ]
-          }
+          },
+            {
+              "type": "comprehension",
+              "instructions": "Answer each question in your own words using the reading.",
+              "items": [
+                {
+                  "id": "h13-1-c1",
+                  "question": "Who showed the Pilgrims how to plant corn with fish as fertilizer?",
+                  "answer": "Squanto."
+                },
+                {
+                  "id": "h13-1-c2",
+                  "question": "Why did the Pilgrims bury their dead at night?",
+                  "answer": "So Native watchers would not know how few of them were left."
+                },
+                {
+                  "id": "h13-1-c3",
+                  "question": "In the sentence 'The Pilgrims' first winter tested everything they had,' what does 'tested everything they had' mean?",
+                  "answer": "It means the winter pushed them to their limits, using all their strength and courage."
+                }
+              ]
+            },
+            {
+              "type": "writing",
+              "instructions": "Write a paragraph of 4 to 6 sentences. Use the guidance to help you.",
+              "items": [
+                {
+                  "id": "h13-1-w1",
+                  "prompt": "Write a paragraph of 4 to 6 sentences about how the Pilgrims survived their first winter. Tell what went wrong, what Squanto taught them, and why learning the land mattered more than strength.",
+                  "guidance": "Include: the leaking ship, the lost food, and the sickness; burying the dead at night; Squanto's lessons on corn, eels, and trade; and peace with Massasoit, the Wampanoag leader."
+                }
+              ]
+            },
+            {
+              "type": "vocabwrite",
+              "instructions": "Write an original sentence for each word. Show you know what the word means.",
+              "items": [
+                {
+                  "id": "h13-1-vw1",
+                  "prompt": "Use each word in a sentence about the Pilgrims' first winter.",
+                  "words": [
+                    "persevere",
+                    "harvest"
+                  ]
+                }
+              ]
+            }
         ]
       }
     ],
@@ -6404,7 +8703,53 @@ const MM_WEEKS_35 = [
                 "answer": "Model answer: An adaptation is a body part or behavior that helps a living thing survive. A polar bear's thick fur keeps it warm in the cold. A cactus's waxy skin holds water in the desert. Helpful traits spread as survivors have babies."
               }
             ]
-          }
+          },
+            {
+              "type": "comprehension",
+              "instructions": "Answer each question in your own words using the reading.",
+              "items": [
+                {
+                  "id": "s13-0-c1",
+                  "question": "What is an adaptation?",
+                  "answer": "A body part or behavior that helps a living thing survive."
+                },
+                {
+                  "id": "s13-0-c2",
+                  "question": "How do penguins stay warm without thick fur like a polar bear?",
+                  "answer": "They huddle together to share warmth. Huddling is a behavior adaptation."
+                },
+                {
+                  "id": "s13-0-c3",
+                  "question": "In the sentence 'Every strange beak, foot, and feather tells a story of a problem nature solved,' what does the author mean?",
+                  "answer": "The author means each odd body part helped solve a survival problem, like getting food or staying warm."
+                }
+              ]
+            },
+            {
+              "type": "writing",
+              "instructions": "Write a paragraph of 4 to 6 sentences. Use the guidance to help you.",
+              "items": [
+                {
+                  "id": "s13-0-w1",
+                  "prompt": "Write a paragraph of 4 to 6 sentences about adaptations. Tell what an adaptation is and give three examples of animals whose body parts or behaviors solve a survival problem.",
+                  "guidance": "Include: the definition of adaptation, one body-part example (like the polar bear's thick fur or the cactus's waxy skin), one behavior example (like penguins huddling or opossums playing dead), and one extreme example (like the bombardier beetle or the arctic ground squirrel)."
+                }
+              ]
+            },
+            {
+              "type": "vocabwrite",
+              "instructions": "Write an original sentence for each word. Show you know what the word means.",
+              "items": [
+                {
+                  "id": "s13-0-vw1",
+                  "prompt": "Use each word in a sentence about adaptations.",
+                  "words": [
+                    "adapt",
+                    "feather"
+                  ]
+                }
+              ]
+            }
         ]
       },
       {
@@ -6500,7 +8845,52 @@ const MM_WEEKS_35 = [
                 "text": "Draw one animal and label its adaptations by purpose."
               }
             ]
-          }
+          },
+            {
+              "type": "comprehension",
+              "instructions": "Answer each question in your own words using the reading.",
+              "items": [
+                {
+                  "id": "s13-1-c1",
+                  "question": "What are the three purposes scientists use to sort adaptations?",
+                  "answer": "Get food, stay safe, and handle weather."
+                },
+                {
+                  "id": "s13-1-c2",
+                  "question": "A giraffe's long neck reaches high leaves and spots danger far away. What does this tell you about its purpose?",
+                  "answer": "It does double duty. The long neck helps the giraffe get food and stay safe at the same time."
+                },
+                {
+                  "id": "s13-1-c3",
+                  "question": "In the sentence 'Some adaptations do double duty,' what does the phrase 'double duty' mean?",
+                  "answer": "It means the adaptation does two jobs at once."
+                }
+              ]
+            },
+            {
+              "type": "writing",
+              "instructions": "Write a paragraph of 4 to 6 sentences. Use the guidance to help you.",
+              "items": [
+                {
+                  "id": "s13-1-w1",
+                  "prompt": "Write a paragraph of 4 to 6 sentences about sorting adaptations by purpose. Give one example each for getting food, staying safe, and handling weather, plus one adaptation that does double duty.",
+                  "guidance": "Include: one food example (a hawk's sharp talons or an anteater's long tongue), one safety example (a turtle's shell or a skunk's spray), one weather example (a fox's thick coat or a camel's hump), and the giraffe's long neck as double duty."
+                }
+              ]
+            },
+            {
+              "type": "vocabwrite",
+              "instructions": "Write an original sentence for each word. Show you know what the word means.",
+              "items": [
+                {
+                  "id": "s13-1-vw1",
+                  "prompt": "Use the word in a sentence about sorting adaptations by purpose.",
+                  "words": [
+                    "adapt"
+                  ]
+                }
+              ]
+            }
         ]
       }
     ],
@@ -6748,7 +9138,53 @@ const MM_WEEKS_35 = [
                 "answer": "Model answer: New England had rocky soil and cold winters, so people fished and built ships. The Southern Colonies had warm weather and long seasons, so they grew tobacco and rice on plantations. The land decided the work, and the work shaped daily life. Two English colonies could feel like different worlds."
               }
             ]
-          }
+          },
+            {
+              "type": "comprehension",
+              "instructions": "Answer each question in your own words using the reading.",
+              "items": [
+                {
+                  "id": "h14-0-c1",
+                  "question": "What were the Middle Colonies called, and why?",
+                  "answer": "They were called the breadbasket because they grew so much wheat."
+                },
+                {
+                  "id": "h14-0-c2",
+                  "question": "Why did New Englanders become fishers, shipbuilders, and traders instead of farmers?",
+                  "answer": "New England had rocky soil and cold winters, so farming was hard there."
+                },
+                {
+                  "id": "h14-0-c3",
+                  "question": "In the sentence 'Though all were English colonies, daily life in Massachusetts felt very different,' what does the word 'colonies' mean?",
+                  "answer": "Settlements ruled by England. The thirteen colonies were communities along the Atlantic coast."
+                }
+              ]
+            },
+            {
+              "type": "writing",
+              "instructions": "Write a paragraph of 4 to 6 sentences. Use the guidance to help you.",
+              "items": [
+                {
+                  "id": "h14-0-w1",
+                  "prompt": "Write a paragraph of 4 to 6 sentences comparing two colonial regions. Tell how the land and weather shaped each region's way of life.",
+                  "guidance": "Include: which two regions you chose, what the land and weather were like in each, and what work people did there. For example, New England had rocky soil so people fished and built ships, while the Southern Colonies grew tobacco and rice."
+                }
+              ]
+            },
+            {
+              "type": "vocabwrite",
+              "instructions": "Write an original sentence for each word. Show you know what the word means.",
+              "items": [
+                {
+                  "id": "h14-0-vw1",
+                  "prompt": "Use each word in a sentence about the thirteen colonies.",
+                  "words": [
+                    "colony",
+                    "region"
+                  ]
+                }
+              ]
+            }
         ]
       },
       {
@@ -6820,7 +9256,53 @@ const MM_WEEKS_35 = [
                 "answer": 4
               }
             ]
-          }
+          },
+            {
+              "type": "comprehension",
+              "instructions": "Answer each question in your own words using the reading.",
+              "items": [
+                {
+                  "id": "h14-1-c1",
+                  "question": "Who built the grand homes and churches of the colonial South?",
+                  "answer": "Enslaved Black craftspeople. Black carpenters framed the houses, bricklayers laid the walls, and blacksmiths forged the hinges and tools."
+                },
+                {
+                  "id": "h14-1-c2",
+                  "question": "Why do we not know the names of most of these builders?",
+                  "answer": "Their names were rarely recorded in history books, even though their work still stands."
+                },
+                {
+                  "id": "h14-1-c3",
+                  "question": "In the sentence 'Their names rarely appear in history books, but their work still stands,' what does 'their work still stands' mean?",
+                  "answer": "It means the buildings they made are still standing today in places like Williamsburg and Charleston."
+                }
+              ]
+            },
+            {
+              "type": "writing",
+              "instructions": "Write a paragraph of 4 to 6 sentences. Use the guidance to help you.",
+              "items": [
+                {
+                  "id": "h14-1-w1",
+                  "prompt": "Write a paragraph of 4 to 6 sentences about the enslaved Black builders of the colonial South. Tell what skills they had, what they built, and why their story matters.",
+                  "guidance": "Include: the trades they practiced (carpentry, bricklaying, blacksmithing), how masters rented them out for profit, and the fact that their buildings still stand even though their names were never recorded."
+                }
+              ]
+            },
+            {
+              "type": "vocabwrite",
+              "instructions": "Write an original sentence for each word. Show you know what the word means.",
+              "items": [
+                {
+                  "id": "h14-1-vw1",
+                  "prompt": "Use each word in a sentence about colonial builders.",
+                  "words": [
+                    "craftsman",
+                    "colony"
+                  ]
+                }
+              ]
+            }
         ]
       }
     ],
@@ -6890,7 +9372,52 @@ const MM_WEEKS_35 = [
                 "answer": "Model answer: Camouflage blends an animal into its surroundings. A hunter like a flatfish matches the sandy bottom to sneak up on prey. Prey like the stick insect looks like a twig so predators walk past. Both survive better when they cannot be seen."
               }
             ]
-          }
+          },
+            {
+              "type": "comprehension",
+              "instructions": "Answer each question in your own words using the reading.",
+              "items": [
+                {
+                  "id": "s14-0-c1",
+                  "question": "How does the Arctic fox's fur change with the seasons?",
+                  "answer": "It is brown in summer and white in winter."
+                },
+                {
+                  "id": "s14-0-c2",
+                  "question": "Why would a stick insect survive better than a bright green beetle on a brown twig?",
+                  "answer": "The stick insect looks exactly like a twig, so predators cannot see it. The bright beetle stands out."
+                },
+                {
+                  "id": "s14-0-c3",
+                  "question": "In the sentence 'A stick insect looks exactly like a twig,' what does the word 'camouflage' mean?",
+                  "answer": "Camouflage means blending into your surroundings so you are hard to see."
+                }
+              ]
+            },
+            {
+              "type": "writing",
+              "instructions": "Write a paragraph of 4 to 6 sentences. Use the guidance to help you.",
+              "items": [
+                {
+                  "id": "s14-0-w1",
+                  "prompt": "Write a paragraph of 4 to 6 sentences about camouflage. Tell what camouflage is, give three examples of animals that use it, and explain why the best hiders are the ones you never see.",
+                  "guidance": "Include: the definition (blending into surroundings), the polar bear, the stick insect, and the Arctic fox or chameleon as examples, and the idea that camouflage helps both hunters and prey."
+                }
+              ]
+            },
+            {
+              "type": "vocabwrite",
+              "instructions": "Write an original sentence for each word. Show you know what the word means.",
+              "items": [
+                {
+                  "id": "s14-0-vw1",
+                  "prompt": "Use the word in a sentence about camouflage.",
+                  "words": [
+                    "disguise"
+                  ]
+                }
+              ]
+            }
         ]
       },
       {
@@ -6990,7 +9517,52 @@ const MM_WEEKS_35 = [
                 "text": "Have someone find them and count how many of each type were found."
               }
             ]
-          }
+          },
+            {
+              "type": "comprehension",
+              "instructions": "Answer each question in your own words using the reading.",
+              "items": [
+                {
+                  "id": "s14-1-c1",
+                  "question": "Why do predators leave the harmless king snake alone?",
+                  "answer": "It copies the deadly coral snake's red, yellow, and black bands, so predators think it is dangerous."
+                },
+                {
+                  "id": "s14-1-c2",
+                  "question": "Why does the viceroy butterfly copy the monarch?",
+                  "answer": "The monarch tastes terrible to birds, so birds avoid the viceroy too."
+                },
+                {
+                  "id": "s14-1-c3",
+                  "question": "In the sentence 'The mimic octopus can copy a lionfish, a sea snake, or a jellyfish,' what does the word 'copy' mean?",
+                  "answer": "It means the octopus changes its shape and looks to resemble a dangerous animal so predators stay away."
+                }
+              ]
+            },
+            {
+              "type": "writing",
+              "instructions": "Write a paragraph of 4 to 6 sentences. Use the guidance to help you.",
+              "items": [
+                {
+                  "id": "s14-1-w1",
+                  "prompt": "Write a paragraph of 4 to 6 sentences about mimicry. Tell how mimicry differs from camouflage and give three examples of mimics and what they copy.",
+                  "guidance": "Include: that camouflage blends in while mimicry copies something else, the king snake copying the coral snake, the viceroy copying the monarch, and one more example (the owl-eye moth spots, the walking stick, or the mimic octopus)."
+                }
+              ]
+            },
+            {
+              "type": "vocabwrite",
+              "instructions": "Write an original sentence for each word. Show you know what the word means.",
+              "items": [
+                {
+                  "id": "s14-1-vw1",
+                  "prompt": "Use the word in a sentence about mimicry.",
+                  "words": [
+                    "disguise"
+                  ]
+                }
+              ]
+            }
         ]
       }
     ],
@@ -7240,7 +9812,53 @@ const MM_WEEKS_35 = [
                 "answer": "Model answer: Young children might attend a dame school in a woman's home, learning letters and numbers. Older boys could be apprenticed to a master to learn a trade. Girls learned cooking, sewing, and spinning at home. There were no long summer breaks, and work filled the day. School was shorter but work was longer than today."
               }
             ]
-          }
+          },
+            {
+              "type": "comprehension",
+              "instructions": "Answer each question in your own words using the reading.",
+              "items": [
+                {
+                  "id": "h15-0-c1",
+                  "question": "At what age might a colonial boy become an apprentice?",
+                  "answer": "Around age twelve."
+                },
+                {
+                  "id": "h15-0-c2",
+                  "question": "Why did colonial children have to work so hard?",
+                  "answer": "Families depended on every member. There were no weekends off, and work began at sunrise and ended at sunset."
+                },
+                {
+                  "id": "h15-0-c3",
+                  "question": "In the sentence 'He would work for years without pay, learning to be a blacksmith, printer, or carpenter,' what does the word 'apprentice' mean?",
+                  "answer": "A young person who moves in with a master craftsman and works without pay to learn a trade."
+                }
+              ]
+            },
+            {
+              "type": "writing",
+              "instructions": "Write a paragraph of 4 to 6 sentences. Use the guidance to help you.",
+              "items": [
+                {
+                  "id": "h15-0-w1",
+                  "prompt": "Write a paragraph of 4 to 6 sentences about a school day for a colonial child. Describe where the child learns, what skills are taught, and how the day feels.",
+                  "guidance": "Include: where the child learns (a dame school, at home, or in a master's shop as an apprentice), the skills taught (reading, cooking, sewing, spinning, or a trade like blacksmithing), and how the long workday compares to your school day today."
+                }
+              ]
+            },
+            {
+              "type": "vocabwrite",
+              "instructions": "Write an original sentence for each word. Show you know what the word means.",
+              "items": [
+                {
+                  "id": "h15-0-vw1",
+                  "prompt": "Use each word in a sentence about colonial childhood.",
+                  "words": [
+                    "apprentice",
+                    "dame school"
+                  ]
+                }
+              ]
+            }
         ]
       },
       {
@@ -7312,7 +9930,52 @@ const MM_WEEKS_35 = [
                 "answer": 4
               }
             ]
-          }
+          },
+            {
+              "type": "comprehension",
+              "instructions": "Answer each question in your own words using the reading.",
+              "items": [
+                {
+                  "id": "h15-1-c1",
+                  "question": "What did Phillis Wheatley publish in 1773?",
+                  "answer": "Her book of poems in London, making her the first African American woman to publish a book."
+                },
+                {
+                  "id": "h15-1-c2",
+                  "question": "Why was it remarkable that Wheatley wrote about freedom and the promise of America?",
+                  "answer": "Because she herself was enslaved when she wrote it."
+                },
+                {
+                  "id": "h15-1-c3",
+                  "question": "In the sentence 'Her poetry proved that genius has no color,' what does the author mean?",
+                  "answer": "The author means brilliance belongs to all people, no matter their race. An enslaved Black girl could be a great writer."
+                }
+              ]
+            },
+            {
+              "type": "writing",
+              "instructions": "Write a paragraph of 4 to 6 sentences. Use the guidance to help you.",
+              "items": [
+                {
+                  "id": "h15-1-w1",
+                  "prompt": "Write a paragraph of 4 to 6 sentences about Phillis Wheatley. Tell how she learned to read and write, what she wrote about, and why she belongs among America's first great writers.",
+                  "guidance": "Include: that she was brought to Boston as an enslaved girl, that the Wheatley family taught her and she learned English, Latin, and Greek, what her poems were about (freedom and faith), and that leaders like George Washington admired her work."
+                }
+              ]
+            },
+            {
+              "type": "vocabwrite",
+              "instructions": "Write an original sentence for each word. Show you know what the word means.",
+              "items": [
+                {
+                  "id": "h15-1-vw1",
+                  "prompt": "Use the word in a sentence about Phillis Wheatley's life.",
+                  "words": [
+                    "journey"
+                  ]
+                }
+              ]
+            }
         ]
       }
     ],
@@ -7382,7 +10045,52 @@ const MM_WEEKS_35 = [
                 "answer": "Model answer: Animals migrate to find food, escape cold, or reach safe places for babies. Monarchs fly 3,000 miles to Mexico. Dangers include storms, predators, and hunger. The destination offers what home cannot in that season."
               }
             ]
-          }
+          },
+            {
+              "type": "comprehension",
+              "instructions": "Answer each question in your own words using the reading.",
+              "items": [
+                {
+                  "id": "s15-0-c1",
+                  "question": "Which animal makes the longest migration on Earth?",
+                  "answer": "The Arctic tern, which flies from the Arctic to Antarctica and back each year."
+                },
+                {
+                  "id": "s15-0-c2",
+                  "question": "Why do animals migrate even though the journey is dangerous?",
+                  "answer": "Because the destination offers what home cannot in that season: food, warmer weather, or safe places to have babies."
+                },
+                {
+                  "id": "s15-0-c3",
+                  "question": "In the sentence 'They navigate by the sun, the stars, Earth's magnetic field, and even smell,' what does the word 'navigate' mean?",
+                  "answer": "It means to find their way over long distances."
+                }
+              ]
+            },
+            {
+              "type": "writing",
+              "instructions": "Write a paragraph of 4 to 6 sentences. Use the guidance to help you.",
+              "items": [
+                {
+                  "id": "s15-0-w1",
+                  "prompt": "Write a paragraph of 4 to 6 sentences about migration. Tell what migration is, give three examples of migrating animals, and explain why the dangerous journey is worth it.",
+                  "guidance": "Include: the definition (seasonal movement from one place to another), the monarch butterflies, Arctic terns, and wildebeest as examples, how animals find their way (the sun, stars, magnetic field, and smell), and why they go (food, warmth, and safe places for babies)."
+                }
+              ]
+            },
+            {
+              "type": "vocabwrite",
+              "instructions": "Write an original sentence for each word. Show you know what the word means.",
+              "items": [
+                {
+                  "id": "s15-0-vw1",
+                  "prompt": "Use the word in a sentence about animal migration.",
+                  "words": [
+                    "journey"
+                  ]
+                }
+              ]
+            }
         ]
       },
       {
@@ -7482,7 +10190,52 @@ const MM_WEEKS_35 = [
                 "text": "Draw the monarch route and the tern route, then label which is longer."
               }
             ]
-          }
+          },
+            {
+              "type": "comprehension",
+              "instructions": "Answer each question in your own words using the reading.",
+              "items": [
+                {
+                  "id": "s15-1-c1",
+                  "question": "How does a hibernating bear survive months without eating?",
+                  "answer": "Its heartbeat slows, its temperature drops, and it lives off stored body fat."
+                },
+                {
+                  "id": "s15-1-c2",
+                  "question": "Why might doctors study hibernating bears?",
+                  "answer": "Scientists wonder if slowing the human body could help trauma patients or astronauts on long space trips."
+                },
+                {
+                  "id": "s15-1-c3",
+                  "question": "In the sentence 'Hibernation is one of nature's cleverest energy-saving plans,' what does the phrase 'energy-saving' mean?",
+                  "answer": "It means the animal uses very little energy, so it can survive winter without eating."
+                }
+              ]
+            },
+            {
+              "type": "writing",
+              "instructions": "Write a paragraph of 4 to 6 sentences. Use the guidance to help you.",
+              "items": [
+                {
+                  "id": "s15-1-w1",
+                  "prompt": "Write a paragraph of 4 to 6 sentences about hibernation. Tell what happens inside a hibernating animal's body, and tell how hibernation research might help people one day.",
+                  "guidance": "Include: what happens to the heartbeat, temperature, and food (stored body fat), one animal that truly hibernates (a bear or ground squirrel), one that only naps (a raccoon or skunk), and how studying bears might help trauma patients or astronauts."
+                }
+              ]
+            },
+            {
+              "type": "vocabwrite",
+              "instructions": "Write an original sentence for each word. Show you know what the word means.",
+              "items": [
+                {
+                  "id": "s15-1-vw1",
+                  "prompt": "Use the word in a sentence about how animals survive winter.",
+                  "words": [
+                    "journey"
+                  ]
+                }
+              ]
+            }
         ]
       }
     ],
@@ -7732,7 +10485,53 @@ const MM_WEEKS_35 = [
                 "answer": "Model answer: France and Britain both claimed the Ohio River valley with its forests and furs. France had strong Native alliances but few settlers. Britain had many colonists. They fought across the frontier for control of North America. Britain won, then taxed colonists to pay war debts, planting seeds of revolution."
               }
             ]
-          }
+          },
+            {
+              "type": "comprehension",
+              "instructions": "Answer these questions about the reading.",
+              "items": [
+                {
+                  "id": "h16-0-c1",
+                  "question": "Which two countries both claimed the Ohio River valley in the 1750s?",
+                  "answer": "France and Britain both claimed the Ohio River valley, a rich land of forests and furs."
+                },
+                {
+                  "id": "h16-0-c2",
+                  "question": "Why do you think France made strong alliances with Native nations like the Huron and Algonquin?",
+                  "answer": "France had fewer settlers than Britain, so it needed Native partners for help in the war and the fur trade."
+                },
+                {
+                  "id": "h16-0-c3",
+                  "question": "The reading says, 'Fighting raged across the frontier, the wild edge of settlement.' What does frontier mean in this sentence?",
+                  "answer": "The frontier was the wild edge of settlement, the land where few colonists lived yet."
+                }
+              ]
+            },
+            {
+              "type": "writing",
+              "instructions": "Write a paragraph of 4 to 6 sentences.",
+              "items": [
+                {
+                  "id": "h16-0-w1",
+                  "prompt": "Why did the French and Indian War start? Write a paragraph of 4 to 6 sentences explaining your answer.",
+                  "guidance": "Tell who wanted the Ohio River valley and why the land was valuable. Explain who helped France and who helped Britain. Tell how the war ended and what Britain did to pay for it. Use complete sentences."
+                }
+              ]
+            },
+            {
+              "type": "vocabwrite",
+              "instructions": "Write one original sentence for each word that shows you know its meaning.",
+              "items": [
+                {
+                  "id": "h16-0-vw1",
+                  "prompt": "Use each word in a sentence about the French and Indian War.",
+                  "words": [
+                    "alliance",
+                    "frontier"
+                  ]
+                }
+              ]
+            }
         ]
       },
       {
@@ -7804,7 +10603,53 @@ const MM_WEEKS_35 = [
                 "answer": 4
               }
             ]
-          }
+          },
+            {
+              "type": "comprehension",
+              "instructions": "Answer these questions about the reading.",
+              "items": [
+                {
+                  "id": "h16-1-c1",
+                  "question": "Who served in the colonial militias during the French and Indian War?",
+                  "answer": "Free Black men served, and some enslaved men were sent by their masters to fight in their place."
+                },
+                {
+                  "id": "h16-1-c2",
+                  "question": "Why did many Black veterans use their military service to claim freedom?",
+                  "answer": "They had fought for America, so they believed America's promises of liberty should apply to them too."
+                },
+                {
+                  "id": "h16-1-c3",
+                  "question": "The reading says, 'The war ended French power in North America, but the fight for liberty was just beginning.' What does liberty mean in this sentence?",
+                  "answer": "Liberty means freedom, the right to live free and make your own choices."
+                }
+              ]
+            },
+            {
+              "type": "writing",
+              "instructions": "Write a paragraph of 4 to 6 sentences.",
+              "items": [
+                {
+                  "id": "h16-1-w1",
+                  "prompt": "Write a paragraph of 4 to 6 sentences about Black soldiers in the French and Indian War.",
+                  "guidance": "Tell who these soldiers were and what jobs they did in the war. Explain what some of them gained from their service. Tell what their service shows about the fight for liberty in America. Use complete sentences."
+                }
+              ]
+            },
+            {
+              "type": "vocabwrite",
+              "instructions": "Write one original sentence for each word that shows you know its meaning.",
+              "items": [
+                {
+                  "id": "h16-1-vw1",
+                  "prompt": "Use each word in a sentence about Black soldiers in colonial militias.",
+                  "words": [
+                    "treaty",
+                    "enemy"
+                  ]
+                }
+              ]
+            }
         ]
       }
     ],
@@ -7874,7 +10719,53 @@ const MM_WEEKS_35 = [
                 "answer": "Model answer: The skull protects the brain like a helmet. The ribs guard the heart and lungs like a cage. The spine lets you bend and twist. Bones also make blood cells in their marrow and work with joints to help you move."
               }
             ]
-          }
+          },
+            {
+              "type": "comprehension",
+              "instructions": "Answer these questions about the reading.",
+              "items": [
+                {
+                  "id": "s16-0-c1",
+                  "question": "How many bones does your skeleton have?",
+                  "answer": "Your skeleton has 206 bones."
+                },
+                {
+                  "id": "s16-0-c2",
+                  "question": "How can your skeleton be strong enough to hold you up but still let you bend and twist?",
+                  "answer": "Bones are strong, and joints connect them so they can move. Your spine is a stack of small bones that bend and twist."
+                },
+                {
+                  "id": "s16-0-c3",
+                  "question": "The reading says, 'Your skeleton is a diary written in calcium.' What does this comparison mean?",
+                  "answer": "It means bones record what happened in a person's life, like age, diet, and injuries, the way a diary records events."
+                }
+              ]
+            },
+            {
+              "type": "writing",
+              "instructions": "Write a paragraph of 4 to 6 sentences.",
+              "items": [
+                {
+                  "id": "s16-0-w1",
+                  "prompt": "Write a paragraph of 4 to 6 sentences about your amazing skeleton.",
+                  "guidance": "Tell what your skeleton does for your body. Name two bones and explain what each one protects or does. Tell how joints help your bones move. Use complete sentences."
+                }
+              ]
+            },
+            {
+              "type": "vocabwrite",
+              "instructions": "Write one original sentence for each word that shows you know its meaning.",
+              "items": [
+                {
+                  "id": "s16-0-vw1",
+                  "prompt": "Use each word in a sentence about your skeleton.",
+                  "words": [
+                    "joint",
+                    "alliance"
+                  ]
+                }
+              ]
+            }
         ]
       },
       {
@@ -7974,7 +10865,53 @@ const MM_WEEKS_35 = [
                 "text": "Write how many tens of bones you can name places for."
               }
             ]
-          }
+          },
+            {
+              "type": "comprehension",
+              "instructions": "Answer these questions about the reading.",
+              "items": [
+                {
+                  "id": "s16-1-c1",
+                  "question": "How many bones are in each hand and each foot?",
+                  "answer": "There are 27 bones in each hand and 26 in each foot."
+                },
+                {
+                  "id": "s16-1-c2",
+                  "question": "Why do you think scientists group the 206 bones instead of counting them one by one?",
+                  "answer": "Grouping makes a big number easier to count and remember, like counting by tens."
+                },
+                {
+                  "id": "s16-1-c3",
+                  "question": "The reading says, 'Children who play and run bank bone strength for life.' What does bank mean in this sentence?",
+                  "answer": "Bank means to save up, the way you save money in a bank. Playing and running saves bone strength for later in life."
+                }
+              ]
+            },
+            {
+              "type": "writing",
+              "instructions": "Write a paragraph of 4 to 6 sentences.",
+              "items": [
+                {
+                  "id": "s16-1-w1",
+                  "prompt": "Write a paragraph of 4 to 6 sentences about counting the bones in your body.",
+                  "guidance": "Tell where most of your bones are found. Give the numbers for the hands, feet, skull, spine, and ribs. Explain why exercise matters for bone strength. Use complete sentences."
+                }
+              ]
+            },
+            {
+              "type": "vocabwrite",
+              "instructions": "Write one original sentence for each word that shows you know its meaning.",
+              "items": [
+                {
+                  "id": "s16-1-vw1",
+                  "prompt": "Use each word in a sentence about keeping your bones strong.",
+                  "words": [
+                    "joint",
+                    "enemy"
+                  ]
+                }
+              ]
+            }
         ]
       }
     ],
@@ -8206,7 +11143,53 @@ const MM_WEEKS_35 = [
                 "answer": "Model answer: My poster shows a giant stamp crushing a newspaper, with the words NO TAXATION WITHOUT REPRESENTATION in bold letters. Below it reads: BOYCOTT BRITISH GOODS. The crushed newspaper shows the tax hurts free speech. The bold words remind people of the unfair principle. It would persuade because the picture makes the harm clear at a glance."
               }
             ]
-          }
+          },
+            {
+              "type": "comprehension",
+              "instructions": "Answer these questions about the reading.",
+              "items": [
+                {
+                  "id": "h17-0-c1",
+                  "question": "What did the Stamp Act tax?",
+                  "answer": "The Stamp Act taxed every piece of paper, from newspapers to playing cards."
+                },
+                {
+                  "id": "h17-0-c2",
+                  "question": "Why were the colonists angry about the taxes even more than about the money itself?",
+                  "answer": "They had no representatives in Parliament, so they believed the taxes were unfair. Their cry was no taxation without representation."
+                },
+                {
+                  "id": "h17-0-c3",
+                  "question": "The reading says, 'Under pressure, Parliament agreed to repeal the Stamp Act.' What does repeal mean in this sentence?",
+                  "answer": "Repeal means to cancel or take back a law."
+                }
+              ]
+            },
+            {
+              "type": "writing",
+              "instructions": "Write a paragraph of 4 to 6 sentences.",
+              "items": [
+                {
+                  "id": "h17-0-w1",
+                  "prompt": "Imagine you are a colonist making a protest poster against British taxes. Write a paragraph of 4 to 6 sentences explaining what your poster says and why.",
+                  "guidance": "Tell which tax your poster protests and why it is unfair. Use the colonists' cry of no taxation without representation. Tell what action you want other colonists to take, like a boycott. Use complete sentences."
+                }
+              ]
+            },
+            {
+              "type": "vocabwrite",
+              "instructions": "Write one original sentence for each word that shows you know its meaning.",
+              "items": [
+                {
+                  "id": "h17-0-vw1",
+                  "prompt": "Use each word in a sentence about taxes and protests.",
+                  "words": [
+                    "boycott",
+                    "repeal"
+                  ]
+                }
+              ]
+            }
         ]
       },
       {
@@ -8317,7 +11300,53 @@ const MM_WEEKS_35 = [
                 "answer": "Model paragraph: The colonists thought British taxes were unfair for two reasons. First, they had no representatives in Parliament voting on the taxes, so they called it taxation without representation. Second, the taxes made everyday goods like tea and paper cost more. They believed free people should not be taxed by a government they did not choose."
               }
             ]
-          }
+          },
+            {
+              "type": "comprehension",
+              "instructions": "Answer these questions about the reading.",
+              "items": [
+                {
+                  "id": "h17-1-c1",
+                  "question": "Who was the first colonist to fall at the Boston Massacre?",
+                  "answer": "Crispus Attucks, a Black sailor of African and Native ancestry who had escaped slavery."
+                },
+                {
+                  "id": "h17-1-c2",
+                  "question": "Why did the patriots call the event the Boston Massacre instead of just a fight?",
+                  "answer": "They wanted to stir anger against Britain, and the name made the shooting sound like a cruel attack on colonists."
+                },
+                {
+                  "id": "h17-1-c3",
+                  "question": "The reading says, 'He ran from slavery toward freedom and found immortality in the cause of liberty.' What does immortality mean in this sentence?",
+                  "answer": "It means he will be remembered forever. His name lives on in monuments and history."
+                }
+              ]
+            },
+            {
+              "type": "writing",
+              "instructions": "Write a paragraph of 4 to 6 sentences.",
+              "items": [
+                {
+                  "id": "h17-1-w1",
+                  "prompt": "Write a paragraph of 4 to 6 sentences about Crispus Attucks.",
+                  "guidance": "Tell who Attucks was and what happened to him on the night of the Boston Massacre. Explain why the patriots made him a symbol of liberty. Tell how he is honored today. Use complete sentences."
+                }
+              ]
+            },
+            {
+              "type": "vocabwrite",
+              "instructions": "Write one original sentence for each word that shows you know its meaning.",
+              "items": [
+                {
+                  "id": "h17-1-vw1",
+                  "prompt": "Use each word in a sentence about Crispus Attucks and the Boston Massacre.",
+                  "words": [
+                    "protest",
+                    "freedom"
+                  ]
+                }
+              ]
+            }
         ]
       }
     ],
@@ -8399,7 +11428,53 @@ const MM_WEEKS_35 = [
                 "answer": "Model answer: Skeletal muscles pull bones to move them, and they work in pairs. When you bend your arm, the biceps tightens and bulges while the triceps relaxes. When you straighten your arm, they switch jobs. This teamwork lets you move smoothly."
               }
             ]
-          }
+          },
+            {
+              "type": "comprehension",
+              "instructions": "Answer these questions about the reading.",
+              "items": [
+                {
+                  "id": "s17-0-c1",
+                  "question": "How do skeletal muscles work in pairs to move your arm?",
+                  "answer": "When one muscle tightens, the other relaxes. Bending your arm bulges the biceps while the triceps stretches."
+                },
+                {
+                  "id": "s17-0-c2",
+                  "question": "Why do muscles need exercise, food, and rest to stay strong?",
+                  "answer": "Exercise makes muscle fibers thicker and stronger, food gives them energy to work, and rest lets them recover."
+                },
+                {
+                  "id": "s17-0-c3",
+                  "question": "The reading says, 'Muscles work in pairs: when one tightens, the other relaxes.' What does relax mean in this sentence?",
+                  "answer": "Relax means to loosen or let go. The muscle stretches out instead of pulling tight."
+                }
+              ]
+            },
+            {
+              "type": "writing",
+              "instructions": "Write a paragraph of 4 to 6 sentences.",
+              "items": [
+                {
+                  "id": "s17-0-w1",
+                  "prompt": "Write a paragraph of 4 to 6 sentences about your muscles.",
+                  "guidance": "Tell what skeletal muscles do and how they work in pairs. Name another kind of muscle in your body and what it does. Explain what muscles need to stay strong. Use complete sentences."
+                }
+              ]
+            },
+            {
+              "type": "vocabwrite",
+              "instructions": "Write one original sentence for each word that shows you know its meaning.",
+              "items": [
+                {
+                  "id": "s17-0-vw1",
+                  "prompt": "Use each word in a sentence about your muscles.",
+                  "words": [
+                    "flex",
+                    "freedom"
+                  ]
+                }
+              ]
+            }
         ]
       },
       {
@@ -8499,7 +11574,53 @@ const MM_WEEKS_35 = [
                 "text": "Do 10 jumping jacks and name two muscle groups you felt working."
               }
             ]
-          }
+          },
+            {
+              "type": "comprehension",
+              "instructions": "Answer these questions about the reading.",
+              "items": [
+                {
+                  "id": "s17-1-c1",
+                  "question": "What does it mean when a muscle contracts?",
+                  "answer": "The muscle gets shorter and thicker, which pulls the bone."
+                },
+                {
+                  "id": "s17-1-c2",
+                  "question": "Why do runners need to strengthen both the front and back of their legs?",
+                  "answer": "Muscles work in pairs, so training only one side can cause injury. Balanced pairs keep the body working smoothly."
+                },
+                {
+                  "id": "s17-1-c3",
+                  "question": "The reading says, 'Stretching keeps muscles flexible so they do not get injured.' What does flexible mean in this sentence?",
+                  "answer": "Flexible means able to bend and stretch easily without tearing or hurting."
+                }
+              ]
+            },
+            {
+              "type": "writing",
+              "instructions": "Write a paragraph of 4 to 6 sentences.",
+              "items": [
+                {
+                  "id": "s17-1-w1",
+                  "prompt": "Write a paragraph of 4 to 6 sentences about how your muscles work in pairs.",
+                  "guidance": "Explain what happens when a muscle contracts. Tell why muscles cannot push, only pull. Give an example of a pair working together, like runners training the front and back of their legs. Use complete sentences."
+                }
+              ]
+            },
+            {
+              "type": "vocabwrite",
+              "instructions": "Write one original sentence for each word that shows you know its meaning.",
+              "items": [
+                {
+                  "id": "s17-1-vw1",
+                  "prompt": "Use each word in a sentence about how muscle pairs work.",
+                  "words": [
+                    "flex",
+                    "freedom"
+                  ]
+                }
+              ]
+            }
         ]
       }
     ],
@@ -8731,7 +11852,53 @@ const MM_WEEKS_35 = [
                 "answer": "Model answer: A Son of Liberty would say the tea dump was brave defiance against unfair taxes, since colonists had no vote in Parliament. A British official would call it criminal destruction of property. I side with the colonists because taxation without representation was unfair. But I see why Britain felt its laws were broken."
               }
             ]
-          }
+          },
+            {
+              "type": "comprehension",
+              "instructions": "Answer these questions about the reading.",
+              "items": [
+                {
+                  "id": "h18-0-c1",
+                  "question": "What did the Sons of Liberty do on the night of December 16, 1773?",
+                  "answer": "They boarded three ships in Boston Harbor and dumped 342 chests of tea into the water."
+                },
+                {
+                  "id": "h18-0-c2",
+                  "question": "Why did Britain's punishment of Boston unite the colonies instead of scaring them?",
+                  "answer": "The harsh laws angered colonists everywhere, so other colonies sent food and support to Boston, and leaders began meeting together."
+                },
+                {
+                  "id": "h18-0-c3",
+                  "question": "The reading says, 'It was an act of bold defiance that destroyed a fortune in tea.' What does defiance mean in this sentence?",
+                  "answer": "Defiance means openly refusing to obey. The colonists refused to accept the unfair tea tax."
+                }
+              ]
+            },
+            {
+              "type": "writing",
+              "instructions": "Write a paragraph of 4 to 6 sentences.",
+              "items": [
+                {
+                  "id": "h18-0-w1",
+                  "prompt": "Write a paragraph of 4 to 6 sentences about the Boston Tea Party, telling both sides of the story.",
+                  "guidance": "Tell why the Sons of Liberty dumped the tea and how they saw their protest. Tell how British leaders saw the same event. Explain what Britain did next and how the colonies reacted. Use complete sentences."
+                }
+              ]
+            },
+            {
+              "type": "vocabwrite",
+              "instructions": "Write one original sentence for each word that shows you know its meaning.",
+              "items": [
+                {
+                  "id": "h18-0-vw1",
+                  "prompt": "Use each word in a sentence about the Boston Tea Party.",
+                  "words": [
+                    "defiance",
+                    "harbor"
+                  ]
+                }
+              ]
+            }
         ]
       },
       {
@@ -8842,7 +12009,53 @@ const MM_WEEKS_35 = [
                 "answer": "Model paragraph: The Boston Tea Party was a protest, not just a crime, for two reasons. First, the colonists were making a clear point about unfair taxes, not stealing for profit. Second, they cleaned up afterward and paid for the one lock they broke, showing respect for property. Destroying the tea was wrong, but its purpose was political speech, not theft."
               }
             ]
-          }
+          },
+            {
+              "type": "comprehension",
+              "instructions": "Answer these questions about the reading.",
+              "items": [
+                {
+                  "id": "h18-1-c1",
+                  "question": "What did the Coercive Acts do to Boston?",
+                  "answer": "They closed Boston Harbor until the tea was paid for and limited town meetings."
+                },
+                {
+                  "id": "h18-1-c2",
+                  "question": "How did punishment meant to isolate Boston end up uniting the colonies?",
+                  "answer": "Other colonies sent food and support, and leaders from twelve colonies met in Philadelphia to form the First Continental Congress."
+                },
+                {
+                  "id": "h18-1-c3",
+                  "question": "The reading says, 'The Coercive Acts backfired completely.' What does backfired mean in this sentence?",
+                  "answer": "Backfired means the plan had the opposite result. The punishment united the colonies instead of dividing them."
+                }
+              ]
+            },
+            {
+              "type": "writing",
+              "instructions": "Write a paragraph of 4 to 6 sentences.",
+              "items": [
+                {
+                  "id": "h18-1-w1",
+                  "prompt": "Write a paragraph of 4 to 6 sentences comparing the two sides of the Boston Tea Party.",
+                  "guidance": "Tell how the Sons of Liberty saw the Tea Party and what they did carefully, like harming no one and cleaning the ships. Tell how British leaders saw it and why they passed the Coercive Acts. Explain which side's plan worked better and why. Use complete sentences."
+                }
+              ]
+            },
+            {
+              "type": "vocabwrite",
+              "instructions": "Write one original sentence for each word that shows you know its meaning.",
+              "items": [
+                {
+                  "id": "h18-1-vw1",
+                  "prompt": "Use each word in a sentence about the two sides of the Boston Tea Party.",
+                  "words": [
+                    "rebel",
+                    "tax"
+                  ]
+                }
+              ]
+            }
         ]
       }
     ],
@@ -8924,7 +12137,53 @@ const MM_WEEKS_35 = [
                 "answer": "Model answer: Teeth chop the apple in my mouth while saliva softens it. It slides down the esophagus to the stomach, which churns it. The small intestine soaks nutrients into my blood. The large intestine absorbs water, and the rest leaves as waste."
               }
             ]
-          }
+          },
+            {
+              "type": "comprehension",
+              "instructions": "Answer these questions about the reading.",
+              "items": [
+                {
+                  "id": "s18-0-c1",
+                  "question": "What happens to food in the small intestine?",
+                  "answer": "The small intestine, a tube over twenty feet long, soaks up nutrients from food into your blood."
+                },
+                {
+                  "id": "s18-0-c2",
+                  "question": "Why does your body need helpful organs like the liver and pancreas during digestion?",
+                  "answer": "The liver makes bile and the pancreas makes juices that break food down, so the intestines can soak up nutrients."
+                },
+                {
+                  "id": "s18-0-c3",
+                  "question": "The reading says, 'Your stomach, a stretchy bag that churns food like a washing machine.' What does churn mean in this sentence?",
+                  "answer": "Churn means to mix and stir around. The stomach mixes food the way a washing machine mixes clothes."
+                }
+              ]
+            },
+            {
+              "type": "writing",
+              "instructions": "Write a paragraph of 4 to 6 sentences.",
+              "items": [
+                {
+                  "id": "s18-0-w1",
+                  "prompt": "Write a paragraph of 4 to 6 sentences about your digestive system.",
+                  "guidance": "Tell where digestion starts and name the organs food passes through in order. Explain what the small intestine and large intestine each do. Tell what the liver and pancreas add to digestion. Use complete sentences."
+                }
+              ]
+            },
+            {
+              "type": "vocabwrite",
+              "instructions": "Write one original sentence for each word that shows you know its meaning.",
+              "items": [
+                {
+                  "id": "s18-0-vw1",
+                  "prompt": "Use each word in a sentence about your digestive system.",
+                  "words": [
+                    "nutrient",
+                    "harbor"
+                  ]
+                }
+              ]
+            }
         ]
       },
       {
@@ -9024,7 +12283,53 @@ const MM_WEEKS_35 = [
                 "text": "Label each organ with its job in your own words."
               }
             ]
-          }
+          },
+            {
+              "type": "comprehension",
+              "instructions": "Answer these questions about the reading.",
+              "items": [
+                {
+                  "id": "s18-1-c1",
+                  "question": "List the digestive organs in the order food passes through them.",
+                  "answer": "Mouth, esophagus, stomach, small intestine, large intestine."
+                },
+                {
+                  "id": "s18-1-c2",
+                  "question": "Why does knowing the order of the digestive organs help doctors?",
+                  "answer": "Doctors can follow food's path to find the problem. A stomachache's location tells them which organ to check first."
+                },
+                {
+                  "id": "s18-1-c3",
+                  "question": "The reading says, 'Knowing the order of organs turns symptoms into a map for healing.' What does symptoms mean in this sentence?",
+                  "answer": "Symptoms are signs of illness, like a stomachache. They point the doctor toward the sick organ."
+                }
+              ]
+            },
+            {
+              "type": "writing",
+              "instructions": "Write a paragraph of 4 to 6 sentences.",
+              "items": [
+                {
+                  "id": "s18-1-w1",
+                  "prompt": "Write a paragraph of 4 to 6 sentences about the order of your digestive organs.",
+                  "guidance": "List the organs in order and tell what job each one does. Explain how the order is like an assembly line. Tell how a doctor uses the order to find illness. Use complete sentences."
+                }
+              ]
+            },
+            {
+              "type": "vocabwrite",
+              "instructions": "Write one original sentence for each word that shows you know its meaning.",
+              "items": [
+                {
+                  "id": "s18-1-vw1",
+                  "prompt": "Use each word in a sentence about the order of your digestive organs.",
+                  "words": [
+                    "nutrient",
+                    "harbor"
+                  ]
+                }
+              ]
+            }
         ]
       }
     ],
@@ -9261,7 +12566,53 @@ const MM_WEEKS_35 = [
                 "answer": "Model answer: The Declaration announced independence from Britain and said all men are created equal with rights to life, liberty, and the pursuit of happiness. It listed grievances against the king. But enslaved people, women, and Native peoples were left out. The fight to make the promises real for everyone took centuries."
               }
             ]
-          }
+          },
+            {
+              "type": "comprehension",
+              "instructions": "Answer these questions about the reading.",
+              "items": [
+                {
+                  "id": "h19-0-c1",
+                  "question": "What are the famous words in the Declaration about what all men are created?",
+                  "answer": "The Declaration says all men are created equal, with the right to life, liberty, and the pursuit of happiness."
+                },
+                {
+                  "id": "h19-0-c2",
+                  "question": "Why did the Declaration promise more than the new nation delivered at first?",
+                  "answer": "Enslaved people, women, and Native peoples were left out of its promises, and including them would take centuries of struggle."
+                },
+                {
+                  "id": "h19-0-c3",
+                  "question": "The reading says, 'The Declaration also listed grievances, complaints about the king's unfair taxes and laws.' What does grievances mean in this sentence?",
+                  "answer": "Grievances are complaints about unfair treatment. The colonists listed how the king had treated them unfairly."
+                }
+              ]
+            },
+            {
+              "type": "writing",
+              "instructions": "Write a paragraph of 4 to 6 sentences.",
+              "items": [
+                {
+                  "id": "h19-0-w1",
+                  "prompt": "Write a paragraph of 4 to 6 sentences about the big ideas in the Declaration of Independence.",
+                  "guidance": "Tell the famous promise about equality, life, liberty, and the pursuit of happiness. Explain what grievances the Declaration listed. Tell who was left out of the promises and why the fight to include them took centuries. Use complete sentences."
+                }
+              ]
+            },
+            {
+              "type": "vocabwrite",
+              "instructions": "Write one original sentence for each word that shows you know its meaning.",
+              "items": [
+                {
+                  "id": "h19-0-vw1",
+                  "prompt": "Use each word in a sentence about the Declaration of Independence.",
+                  "words": [
+                    "independence",
+                    "announce"
+                  ]
+                }
+              ]
+            }
         ]
       },
       {
@@ -9372,7 +12723,53 @@ const MM_WEEKS_35 = [
                 "answer": "Model answer: The Declaration says that all people are created equal and have rights to life, liberty, and happiness. It says governments get their power from the people, and people may change a government that hurts them. Finally, it declares that the colonies are free and independent states, no longer ruled by Britain."
               }
             ]
-          }
+          },
+            {
+              "type": "comprehension",
+              "instructions": "Answer these questions about the reading.",
+              "items": [
+                {
+                  "id": "h19-1-c1",
+                  "question": "Who was Lemuel Haynes, and what did he do after the war?",
+                  "answer": "Haynes was a Black minuteman who fought the British. After the war he became a minister, one of the first Black ordained ministers in America."
+                },
+                {
+                  "id": "h19-1-c2",
+                  "question": "Why did Haynes preach against slavery?",
+                  "answer": "He believed the liberty Americans had fought for should belong to everyone, not just some people."
+                },
+                {
+                  "id": "h19-1-c3",
+                  "question": "The reading says, 'Haynes lived the contradiction of his age.' What does contradiction mean in this sentence?",
+                  "answer": "A contradiction is when two things do not match. He fought for freedom in a nation that still held people in bondage."
+                }
+              ]
+            },
+            {
+              "type": "writing",
+              "instructions": "Write a paragraph of 4 to 6 sentences.",
+              "items": [
+                {
+                  "id": "h19-1-w1",
+                  "prompt": "Write a paragraph of 4 to 6 sentences about Lemuel Haynes.",
+                  "guidance": "Tell who Haynes was and how he served as a minuteman. Explain what he did as a minister after the war. Tell what contradiction he lived and how he faced it. Use complete sentences."
+                }
+              ]
+            },
+            {
+              "type": "vocabwrite",
+              "instructions": "Write one original sentence for each word that shows you know its meaning.",
+              "items": [
+                {
+                  "id": "h19-1-vw1",
+                  "prompt": "Use each word in a sentence about Lemuel Haynes.",
+                  "words": [
+                    "equality",
+                    "grievance"
+                  ]
+                }
+              ]
+            }
         ]
       }
     ],
@@ -9454,7 +12851,53 @@ const MM_WEEKS_35 = [
                 "answer": "Model answer: The heart is a muscle with four chambers that pumps blood nonstop. One side sends blood to the lungs to pick up oxygen. The other side pumps oxygen-rich blood to the body. Valves keep blood flowing the right way, and each beat can be felt as a pulse."
               }
             ]
-          }
+          },
+            {
+              "type": "comprehension",
+              "instructions": "Answer these questions about the reading.",
+              "items": [
+                {
+                  "id": "s19-0-c1",
+                  "question": "How many chambers does your heart have, and what do they do?",
+                  "answer": "The heart has four chambers. The two on top receive blood, and the two on the bottom pump it out."
+                },
+                {
+                  "id": "s19-0-c2",
+                  "question": "Why can you feel your pulse in your wrist?",
+                  "answer": "Each beat of your heart pushes blood through your body, and you can feel that push in the vessels at your wrist."
+                },
+                {
+                  "id": "s19-0-c3",
+                  "question": "The reading says, 'Valves keep the blood flowing the right way, like one-way doors.' What does valves mean in this sentence?",
+                  "answer": "Valves are flaps inside the heart that open to let blood through and close to stop it from flowing backward."
+                }
+              ]
+            },
+            {
+              "type": "writing",
+              "instructions": "Write a paragraph of 4 to 6 sentences.",
+              "items": [
+                {
+                  "id": "s19-0-w1",
+                  "prompt": "Write a paragraph of 4 to 6 sentences about your heart.",
+                  "guidance": "Tell how many times your heart beats each day and how far your blood vessels would stretch. Explain what the four chambers do. Tell how blood picks up oxygen and delivers it to the body. Use complete sentences."
+                }
+              ]
+            },
+            {
+              "type": "vocabwrite",
+              "instructions": "Write one original sentence for each word that shows you know its meaning.",
+              "items": [
+                {
+                  "id": "s19-0-vw1",
+                  "prompt": "Use each word in a sentence about your heart.",
+                  "words": [
+                    "pulse",
+                    "independence"
+                  ]
+                }
+              ]
+            }
         ]
       },
       {
@@ -9554,7 +12997,53 @@ const MM_WEEKS_35 = [
                 "text": "Do 30 jumping jacks, measure again, and chart both numbers."
               }
             ]
-          }
+          },
+            {
+              "type": "comprehension",
+              "instructions": "Answer these questions about the reading.",
+              "items": [
+                {
+                  "id": "s19-1-c1",
+                  "question": "How do you measure your pulse at your wrist?",
+                  "answer": "Press two fingers on your wrist and count the beats for 15 seconds, then multiply by four."
+                },
+                {
+                  "id": "s19-1-c2",
+                  "question": "Why does your pulse speed up after exercise?",
+                  "answer": "Your working muscles need more oxygen, so your heart beats faster to deliver it."
+                },
+                {
+                  "id": "s19-1-c3",
+                  "question": "The reading says, 'Athletes often have slower resting pulses because their strong hearts pump more blood per beat.' What does resting mean in this sentence?",
+                  "answer": "Resting means at rest, when the body is calm and not exercising."
+                }
+              ]
+            },
+            {
+              "type": "writing",
+              "instructions": "Write a paragraph of 4 to 6 sentences.",
+              "items": [
+                {
+                  "id": "s19-1-w1",
+                  "prompt": "Write a paragraph of 4 to 6 sentences about measuring your pulse.",
+                  "guidance": "Tell how to find your pulse and count it. Explain what a child's normal resting pulse is and what happens after running. Tell why athletes have slower resting pulses. Use complete sentences."
+                }
+              ]
+            },
+            {
+              "type": "vocabwrite",
+              "instructions": "Write one original sentence for each word that shows you know its meaning.",
+              "items": [
+                {
+                  "id": "s19-1-vw1",
+                  "prompt": "Use each word in a sentence about measuring your pulse.",
+                  "words": [
+                    "pulse",
+                    "announce"
+                  ]
+                }
+              ]
+            }
         ]
       }
     ],
@@ -9786,7 +13275,53 @@ const MM_WEEKS_35 = [
                 "answer": "Model answer: British soldiers marched to Concord to seize weapons. Riders spread the alarm and minutemen gathered at Lexington, where the first shot was fired. At Concord the weapons were hidden, and on the march back, militia fired from cover. The British took heavy losses. The war had begun, and Boston was soon under siege."
               }
             ]
-          }
+          },
+            {
+              "type": "comprehension",
+              "instructions": "Answer these questions about the reading.",
+              "items": [
+                {
+                  "id": "h20-0-c1",
+                  "question": "What happened at Lexington Green in April 1775?",
+                  "answer": "British soldiers marched toward Concord, minutemen gathered, and a shot rang out, though no one knows who fired first."
+                },
+                {
+                  "id": "h20-0-c2",
+                  "question": "Why did the British suffer heavy losses on their march back to Boston?",
+                  "answer": "Colonial militia fired at them from behind trees and stone walls along the road."
+                },
+                {
+                  "id": "h20-0-c3",
+                  "question": "The reading says, 'It was the shot heard round the world.' What does this famous phrase mean?",
+                  "answer": "It means the first shot at Lexington started a war whose effects spread around the whole world."
+                }
+              ]
+            },
+            {
+              "type": "writing",
+              "instructions": "Write a paragraph of 4 to 6 sentences.",
+              "items": [
+                {
+                  "id": "h20-0-w1",
+                  "prompt": "Write a paragraph of 4 to 6 sentences about Lexington and Concord.",
+                  "guidance": "Tell why the British marched to Concord and who spread the alarm. Describe what happened at Lexington Green and on the march back to Boston. Explain why this day mattered for the start of the war. Use complete sentences."
+                }
+              ]
+            },
+            {
+              "type": "vocabwrite",
+              "instructions": "Write one original sentence for each word that shows you know its meaning.",
+              "items": [
+                {
+                  "id": "h20-0-vw1",
+                  "prompt": "Use each word in a sentence about Lexington and Concord.",
+                  "words": [
+                    "militia",
+                    "retreat"
+                  ]
+                }
+              ]
+            }
         ]
       },
       {
@@ -9897,7 +13432,53 @@ const MM_WEEKS_35 = [
                 "answer": "Model paragraph: Ordinary people fought at Lexington and Concord for two reasons. First, they believed their rights as Englishmen were being taken away by unfair laws. Second, when British soldiers marched to seize their weapons, they felt they had to defend their homes and families. They were farmers and shopkeepers who became soldiers in a single morning."
               }
             ]
-          }
+          },
+            {
+              "type": "comprehension",
+              "instructions": "Answer these questions about the reading.",
+              "items": [
+                {
+                  "id": "h20-1-c1",
+                  "question": "What brave act did Peter Salem do at the Battle of Bunker Hill?",
+                  "answer": "He aimed his musket at a British officer rallying his men and stopped him, breaking the spirit of the attack."
+                },
+                {
+                  "id": "h20-1-c2",
+                  "question": "Why was it remarkable that Salem appeared in John Trumbull's famous painting of the battle?",
+                  "answer": "He was born enslaved, yet his courage earned him a place in America's founding art."
+                },
+                {
+                  "id": "h20-1-c3",
+                  "question": "The reading says, 'His courage at Bunker Hill made him a hero of the Revolution.' What does hero mean in this sentence?",
+                  "answer": "A hero is someone admired for brave acts. Salem is admired for risking his life for liberty."
+                }
+              ]
+            },
+            {
+              "type": "writing",
+              "instructions": "Write a paragraph of 4 to 6 sentences.",
+              "items": [
+                {
+                  "id": "h20-1-w1",
+                  "prompt": "Write a paragraph of 4 to 6 sentences about Peter Salem.",
+                  "guidance": "Tell who Salem was and how he won his freedom to enlist. Describe his brave act at Bunker Hill. Explain why he is remembered as a hero of the Revolution. Use complete sentences."
+                }
+              ]
+            },
+            {
+              "type": "vocabwrite",
+              "instructions": "Write one original sentence for each word that shows you know its meaning.",
+              "items": [
+                {
+                  "id": "h20-1-vw1",
+                  "prompt": "Use each word in a sentence about Peter Salem.",
+                  "words": [
+                    "siege",
+                    "alert"
+                  ]
+                }
+              ]
+            }
         ]
       }
     ],
@@ -9979,7 +13560,53 @@ const MM_WEEKS_35 = [
                 "answer": "Model answer: Air enters through the nose and mouth, travels down the windpipe, and splits into tubes to the lungs. In tiny air sacs called alveoli, oxygen passes into the blood and carbon dioxide is collected. The diaphragm pulls down to draw air in. The heart then delivers the oxygen-rich blood."
               }
             ]
-          }
+          },
+            {
+              "type": "comprehension",
+              "instructions": "Answer these questions about the reading.",
+              "items": [
+                {
+                  "id": "s20-0-c1",
+                  "question": "What path does air take to reach your lungs?",
+                  "answer": "Air enters through your nose and mouth, travels down your windpipe, and splits into two tubes leading to your lungs."
+                },
+                {
+                  "id": "s20-0-c2",
+                  "question": "Why do you breathe faster when you exercise?",
+                  "answer": "Your working muscles need more oxygen, so your lungs take in air faster."
+                },
+                {
+                  "id": "s20-0-c3",
+                  "question": "The reading says, 'Inside, tiny air sacs called alveoli pass oxygen into your blood and collect carbon dioxide to breathe out.' What does alveoli mean in this sentence?",
+                  "answer": "Alveoli are the tiny air sacs in your lungs where oxygen enters the blood and waste gas leaves it."
+                }
+              ]
+            },
+            {
+              "type": "writing",
+              "instructions": "Write a paragraph of 4 to 6 sentences.",
+              "items": [
+                {
+                  "id": "s20-0-w1",
+                  "prompt": "Write a paragraph of 4 to 6 sentences about your lungs and breathing.",
+                  "guidance": "Tell the path air takes from your nose to your lungs. Explain what the alveoli and diaphragm do. Tell how your lungs and heart work together as partners. Use complete sentences."
+                }
+              ]
+            },
+            {
+              "type": "vocabwrite",
+              "instructions": "Write one original sentence for each word that shows you know its meaning.",
+              "items": [
+                {
+                  "id": "s20-0-vw1",
+                  "prompt": "Use each word in a sentence about breathing.",
+                  "words": [
+                    "inhale",
+                    "retreat"
+                  ]
+                }
+              ]
+            }
         ]
       },
       {
@@ -10079,7 +13706,53 @@ const MM_WEEKS_35 = [
                 "text": "Measure around the widest part three times and average the results."
               }
             ]
-          }
+          },
+            {
+              "type": "comprehension",
+              "instructions": "Answer these questions about the reading.",
+              "items": [
+                {
+                  "id": "s20-1-c1",
+                  "question": "How can you estimate your lung capacity with a balloon?",
+                  "answer": "Take a deep breath, blow once into the balloon, and measure around its widest part."
+                },
+                {
+                  "id": "s20-1-c2",
+                  "question": "Why does exercise increase lung capacity over time?",
+                  "answer": "The body adapts to needing more oxygen, so the lungs learn to hold more air."
+                },
+                {
+                  "id": "s20-1-c3",
+                  "question": "The reading says, 'Smokers damage their alveoli and shrink their capacity.' What does capacity mean in this sentence?",
+                  "answer": "Capacity is how much air your lungs can hold. Smoking makes that amount smaller."
+                }
+              ]
+            },
+            {
+              "type": "writing",
+              "instructions": "Write a paragraph of 4 to 6 sentences.",
+              "items": [
+                {
+                  "id": "s20-1-w1",
+                  "prompt": "Write a paragraph of 4 to 6 sentences about lung capacity.",
+                  "guidance": "Tell what lung capacity is and how to measure it with a balloon. Explain why bigger lungs help athletes and singers. Tell two things that damage lungs and two things that keep them strong. Use complete sentences."
+                }
+              ]
+            },
+            {
+              "type": "vocabwrite",
+              "instructions": "Write one original sentence for each word that shows you know its meaning.",
+              "items": [
+                {
+                  "id": "s20-1-vw1",
+                  "prompt": "Use each word in a sentence about lung capacity.",
+                  "words": [
+                    "inhale",
+                    "alert"
+                  ]
+                }
+              ]
+            }
         ]
       }
     ],
@@ -10330,7 +14003,53 @@ const MM_WEEKS_35 = [
               }
             ]
           }
-        ]
+        ,
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "In small boats, on Christmas night in 1776, through sleet and snow.",
+                "id": "h21-0-c1",
+                "question": "How did Washington's troops cross the icy Delaware River?"
+              },
+              {
+                "answer": "Americans started to believe they could win, and new soldiers joined the army.",
+                "id": "h21-0-c2",
+                "question": "Why did the small victories at Trenton and Princeton change everything?"
+              },
+              {
+                "answer": "How hopeful and confident the soldiers felt. Their spirits were down because they had lost battle after battle.",
+                "id": "h21-0-c3",
+                "question": "The reading says morale was low before the crossing. What does morale mean here?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Start with how hopeless things looked in December 1776. Describe the crossing and the surprise attack at Trenton. End with why the victories mattered. Use complete sentences.",
+                "id": "h21-0-w1",
+                "prompt": "Write a paragraph about the crossing of the Delaware. Why was it such a daring plan?"
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Use this week's words in your own sentences.",
+            "items": [
+              {
+                "id": "h21-0-vw1",
+                "prompt": "Write one sentence for each word. Use the word the right way.",
+                "words": [
+                  "morale",
+                  "brave"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
+          }]
       },
       {
         "title": "Prince Whipple Crosses Too",
@@ -10402,7 +14121,53 @@ const MM_WEEKS_35 = [
               }
             ]
           }
-        ]
+        ,
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "Prince Whipple, an African-born man who served with Washington as a soldier and a bodyguard.",
+                "id": "h21-1-c1",
+                "question": "Who do many believe is the Black soldier pulling at an oar in the famous painting of the crossing?"
+              },
+              {
+                "answer": "It reminds us that Black Americans fought in the Revolution from its darkest days, crossing the same icy water and believing in the same promise of liberty.",
+                "id": "h21-1-c2",
+                "question": "Why does Whipple's presence in the painting matter?"
+              },
+              {
+                "answer": "He crossed the icy river on Christmas night, served as a soldier and bodyguard, and faced the same dangers as the other soldiers.",
+                "id": "h21-1-c3",
+                "question": "The reading calls Whipple brave and a man of character. What in the reading shows he was brave?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Tell who Whipple was and what he did on Christmas night. Tell what he did after gaining his freedom. End with why his story matters. Use complete sentences.",
+                "id": "h21-1-w1",
+                "prompt": "Write a paragraph about Prince Whipple and the crossing. How did he help, and why should we remember him?"
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Use this week's words in your own sentences.",
+            "items": [
+              {
+                "id": "h21-1-vw1",
+                "prompt": "Write one sentence for each word. Use the word the right way.",
+                "words": [
+                  "surprise",
+                  "river"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
+          }]
       }
     ],
     "science": [
@@ -10472,7 +14237,53 @@ const MM_WEEKS_35 = [
               }
             ]
           }
-        ]
+        ,
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "By their color, hardness, and how they break. Talc is so soft you can scratch it with a fingernail.",
+                "id": "s21-0-c1",
+                "question": "How can you identify minerals, and which mineral can you scratch with your fingernail?"
+              },
+              {
+                "answer": "Because rocks record Earth's history. Sedimentary layers hold fossils and igneous rocks can be dated, like pages in a very long book.",
+                "id": "s21-0-c2",
+                "question": "Why does the reading call every cliff face a library of deep time?"
+              },
+              {
+                "answer": "How well a mineral resists being scratched. Diamond has high hardness and talc has low hardness.",
+                "id": "s21-0-c3",
+                "question": "The reading says diamond is so hard it scratches everything. What does hardness mean when scientists talk about minerals?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Name at least two clues, such as color, hardness, or how it breaks. Give an example from the reading, like talc or diamond. Use complete sentences.",
+                "id": "s21-0-w1",
+                "prompt": "Write a paragraph explaining how a geologist acts like a detective. What clues do they use to identify a mineral?"
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Use this week's words in your own sentences.",
+            "items": [
+              {
+                "id": "s21-0-vw1",
+                "prompt": "Write one sentence for each word. Use the word the right way.",
+                "words": [
+                  "hardness",
+                  "surprise"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
+          }]
       },
       {
         "title": "The Hardness Scale",
@@ -10572,7 +14383,53 @@ const MM_WEEKS_35 = [
               }
             ]
           }
-        ]
+        ,
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "Talc is 1, the softest. Diamond is 10, the hardest. If your rock scratches glass, it is at least as hard as quartz.",
+                "id": "s21-1-c1",
+                "question": "On the hardness scale, which mineral is 1 and which is 10? How can you test a rock at home?"
+              },
+              {
+                "answer": "Soft rock crumbles under heavy buildings, while hard granite holds firm.",
+                "id": "s21-1-c2",
+                "question": "Why do engineers test rock hardness before building a skyscraper?"
+              },
+              {
+                "answer": "Hardness tells how well rock resists being scratched or broken. Hard rock can hold up a skyscraper, but soft rock would crumble.",
+                "id": "s21-1-c3",
+                "question": "Engineers test rock hardness before they trust it with a building. Why does hardness matter to them?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Tell what the scale runs from, give two examples like talc and diamond, and tell how you could test a rock at home. Use complete sentences.",
+                "id": "s21-1-w1",
+                "prompt": "Write a paragraph about how scientists test mineral hardness. Explain the scale and give an example."
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Use this week's words in your own sentences.",
+            "items": [
+              {
+                "id": "s21-1-vw1",
+                "prompt": "Write one sentence for each word. Use the word the right way.",
+                "words": [
+                  "hardness",
+                  "brave"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
+          }]
       }
     ],
     "friday": {
@@ -10822,7 +14679,53 @@ const MM_WEEKS_35 = [
               }
             ]
           }
-        ]
+        ,
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "French warships blocked the harbor while American and French armies surrounded the town by land, and cannons pounded the British lines for weeks.",
+                "id": "h22-0-c1",
+                "question": "How did the Americans and French trap Cornwallis at Yorktown?"
+              },
+              {
+                "answer": "Nearly 8,000 British soldiers surrendered with no food, no help, and no way out, so Britain lost its main army in America.",
+                "id": "h22-0-c2",
+                "question": "Why did the victory at Yorktown end the fighting and make independence certain?"
+              },
+              {
+                "answer": "Surrounding an enemy's position and cutting off food, help, and escape until they give up.",
+                "id": "h22-0-c3",
+                "question": "The reading calls Yorktown a perfect siege. What is a siege, based on what happened there?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Describe the trap by land and sea, Cornwallis's failed escape across the river, and the surrender. End with why it made independence certain. Use complete sentences.",
+                "id": "h22-0-w1",
+                "prompt": "Write a paragraph explaining why the victory at Yorktown ended the war. What made the trap impossible to escape?"
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Use this week's words in your own sentences.",
+            "items": [
+              {
+                "id": "h22-0-vw1",
+                "prompt": "Write one sentence for each word. Use the word the right way.",
+                "words": [
+                  "siege",
+                  "surrender"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
+          }]
       },
       {
         "title": "James Armistead Lafayette: The Spy",
@@ -10894,7 +14797,53 @@ const MM_WEEKS_35 = [
               }
             ]
           }
-        ]
+        ,
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "He posed as a runaway slave, joined the British camp, gained the officers' trust, and carried their plans to Lafayette.",
+                "id": "h22-1-c1",
+                "question": "How did James Armistead get British secrets to the Americans?"
+              },
+              {
+                "answer": "Armistead's reports revealed that Cornwallis was moving to Yorktown, letting the Americans spring the trap. His courage helped win independence.",
+                "id": "h22-1-c2",
+                "question": "Why did Lafayette help Armistead win his freedom after the war?"
+              },
+              {
+                "answer": "Someone who secretly gathers information about the enemy and carries it to their own side.",
+                "id": "h22-1-c3",
+                "question": "The reading says Armistead volunteered to spy for the Americans. What does it mean to be a spy, based on what Armistead did?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Tell how he fooled the British officers, what his reports revealed, and what happened after the war. End with what his story teaches. Use complete sentences.",
+                "id": "h22-1-w1",
+                "prompt": "Write a paragraph about James Armistead Lafayette. Why was his work as a spy so important?"
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Use this week's words in your own sentences.",
+            "items": [
+              {
+                "id": "h22-1-vw1",
+                "prompt": "Write one sentence for each word. Use the word the right way.",
+                "words": [
+                  "spy",
+                  "victory"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
+          }]
       }
     ],
     "science": [
@@ -10964,7 +14913,53 @@ const MM_WEEKS_35 = [
               }
             ]
           }
-        ]
+        ,
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "Magma cools into igneous rock. Wind and water break it into sediment. Sediment presses into sedimentary rock. Heat and pressure transform it into metamorphic rock. Melting turns it back into magma.",
+                "id": "s22-0-c1",
+                "question": "What are the steps of the rock cycle, starting with magma?"
+              },
+              {
+                "answer": "Rivers carry sediment today that will become tomorrow's sandstone, and volcanoes erupt new igneous rock now. The cycle never stops.",
+                "id": "s22-0-c2",
+                "question": "Why does the reading say the rock cycle is happening under your feet right now?"
+              },
+              {
+                "answer": "To break apart into small pieces or crumbs.",
+                "id": "s22-0-c3",
+                "question": "The reading says hard rock can crumble into sediment. What does crumble mean?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Start with magma, follow the cycle through igneous, sedimentary, and metamorphic rock, and end where it starts again. Use complete sentences.",
+                "id": "s22-0-w1",
+                "prompt": "Write a paragraph explaining the rock cycle to a friend. Describe how a rock can change from one type to another."
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Use this week's words in your own sentences.",
+            "items": [
+              {
+                "id": "s22-0-vw1",
+                "prompt": "Write one sentence for each word. Use the word the right way.",
+                "words": [
+                  "crumble",
+                  "victory"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
+          }]
       },
       {
         "title": "Rocks Around You",
@@ -11060,7 +15055,53 @@ const MM_WEEKS_35 = [
               }
             ]
           }
-        ]
+        ,
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "Igneous: granite countertops or statues. Sedimentary: sandstone buildings or limestone. Metamorphic: marble floors or slate roofs.",
+                "id": "s22-1-c1",
+                "question": "Name one example of each rock type you might see in town."
+              },
+              {
+                "answer": "Quarries can cut stone in days that took nature eons to form, and no machine can make fossils or marble overnight.",
+                "id": "s22-1-c2",
+                "question": "Why does the reading say nature's pace humbles our hurry?"
+              },
+              {
+                "answer": "The rock cycle. The pebbles were once magma, then rock, then broken into sediment.",
+                "id": "s22-1-c3",
+                "question": "The reading says sidewalk concrete holds pebbles that traveled the whole cycle. What cycle does that mean?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Pick two or three examples like a granite statue, a sandstone building, or a marble floor. Tell which rock type each is and how it formed. Use complete sentences.",
+                "id": "s22-1-w1",
+                "prompt": "Write a paragraph describing the rocks you could find in your own town. What type is each, and what journey did it take?"
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Use this week's words in your own sentences.",
+            "items": [
+              {
+                "id": "s22-1-vw1",
+                "prompt": "Write one sentence for each word. Use the word the right way.",
+                "words": [
+                  "victory",
+                  "crumble"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
+          }]
       }
     ],
     "friday": {
@@ -11309,7 +15350,53 @@ const MM_WEEKS_35 = [
               }
             ]
           }
-        ]
+        ,
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "It could declare war and make treaties, but it could not tax the states or force them to obey laws.",
+                "id": "h23-0-c1",
+                "question": "What powers did Congress have under the Articles of Confederation, and what could it not do?"
+              },
+              {
+                "answer": "Each state kept most of its power, printed its own money, and argued with other states, so the government was too weak to pay soldiers, protect trade, or fix problems.",
+                "id": "h23-0-c2",
+                "question": "Why does the reading compare the Articles' government to a team where every player is the captain and nobody follows the coach?"
+              },
+              {
+                "answer": "A loose union where each state keeps most of its power.",
+                "id": "h23-0-c3",
+                "question": "The reading says the Articles created a confederation. What is a confederation, based on the reading?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Name what Congress could not do, like tax or enforce laws. Explain what problems that caused. End with what the founders learned. Use complete sentences.",
+                "id": "h23-0-w1",
+                "prompt": "Write a paragraph explaining why the Articles of Confederation failed. What was missing?"
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Use this week's words in your own sentences.",
+            "items": [
+              {
+                "id": "h23-0-vw1",
+                "prompt": "Write one sentence for each word. Use the word the right way.",
+                "words": [
+                  "confederation",
+                  "weak"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
+          }]
       },
       {
         "title": "Petitions for Freedom",
@@ -11381,7 +15468,53 @@ const MM_WEEKS_35 = [
               }
             ]
           }
-        ]
+        ,
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "They sent petitions asking for freedom and the right to vote, organized to end slavery, and sued in courts for their freedom, sometimes winning.",
+                "id": "h23-1-c1",
+                "question": "What did Prince Hall and other free Black people do to demand their rights?"
+              },
+              {
+                "answer": "The revolution had been fought for liberty, so they argued that slavery broke the law of the land and that they deserved a place in the new nation.",
+                "id": "h23-1-c2",
+                "question": "Why did Black Americans quote the revolution's promises in their petitions?"
+              },
+              {
+                "answer": "A written request asking the government to change something, like freedom or the right to vote.",
+                "id": "h23-1-c3",
+                "question": "The reading says Black men sent petitions asking for freedom. What is a petition, based on what they did?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Tell what the petitions asked for, who organized them, and what ideas they used. End with what his persistence achieved. Use complete sentences.",
+                "id": "h23-1-w1",
+                "prompt": "Write a paragraph about Prince Hall and the petitions for freedom. Why were the petitions powerful?"
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Use this week's words in your own sentences.",
+            "items": [
+              {
+                "id": "h23-1-vw1",
+                "prompt": "Write one sentence for each word. Use the word the right way.",
+                "words": [
+                  "petition",
+                  "power"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
+          }]
       }
     ],
     "science": [
@@ -11451,7 +15584,53 @@ const MM_WEEKS_35 = [
               }
             ]
           }
-        ]
+        ,
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "Topsoil, subsoil, parent material, and bedrock.",
+                "id": "s23-0-c1",
+                "question": "What are the four soil horizons, from top to bottom?"
+              },
+              {
+                "answer": "It takes about five hundred years to make one inch of topsoil, yet erosion can strip it in a single storm.",
+                "id": "s23-0-c2",
+                "question": "Why does the reading say protecting topsoil protects the work of millennia?"
+              },
+              {
+                "answer": "Soil has layers called horizons, like a layer cake: topsoil, subsoil, parent material, and bedrock at the bottom.",
+                "id": "s23-0-c3",
+                "question": "The reading says soil is not just dirt. What is soil, based on the reading?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Name the four horizons from top to bottom and tell what each one holds, like roots in the topsoil. Use complete sentences.",
+                "id": "s23-0-w1",
+                "prompt": "Write a paragraph describing the layers of soil like a layer cake. What is in each layer?"
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Use this week's words in your own sentences.",
+            "items": [
+              {
+                "id": "s23-0-vw1",
+                "prompt": "Write one sentence for each word. Use the word the right way.",
+                "words": [
+                  "soil",
+                  "power"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
+          }]
       },
       {
         "title": "Measuring Soil Layers",
@@ -11551,7 +15730,53 @@ const MM_WEEKS_35 = [
               }
             ]
           }
-        ]
+        ,
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "They dig a pit, measure each horizon with a ruler, and note the color, feel the texture, and test how water soaks through.",
+                "id": "s23-1-c1",
+                "question": "How do scientists measure soil layers, and what do they record?"
+              },
+              {
+                "answer": "Sandy soil drains too fast, clay holds water too tight, and loam is a mix of both.",
+                "id": "s23-1-c2",
+                "question": "Why is loam the best soil for gardens?"
+              },
+              {
+                "answer": "They can tell whether soil is healthy. Good soil holds its shape, then crumbles like cake.",
+                "id": "s23-1-c3",
+                "question": "The reading says your fingers can grade soil. What power do your hands have, based on the squeeze test?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Tell how to dig a pit, what to measure, and how the squeeze test works. Explain what dark, crumbly soil means. Use complete sentences.",
+                "id": "s23-1-w1",
+                "prompt": "Write a paragraph explaining how to read soil like a book. What does healthy soil look and feel like?"
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Use this week's words in your own sentences.",
+            "items": [
+              {
+                "id": "s23-1-vw1",
+                "prompt": "Write one sentence for each word. Use the word the right way.",
+                "words": [
+                  "soil",
+                  "weak"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
+          }]
       }
     ],
     "friday": {
@@ -11801,7 +16026,53 @@ const MM_WEEKS_35 = [
               }
             ]
           }
-        ]
+        ,
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "Roger Sherman proposed it. It created a Congress with two parts: the House of Representatives based on population and the Senate giving each state two votes.",
+                "id": "h24-0-c1",
+                "question": "Who proposed the Great Compromise, and what did it create?"
+              },
+              {
+                "answer": "Both big states and small states gave up something and gained something, ending the heated argument over representation.",
+                "id": "h24-0-c2",
+                "question": "Why did the Great Compromise save the convention?"
+              },
+              {
+                "answer": "An agreement where each side gives up something to settle an argument.",
+                "id": "h24-0-c3",
+                "question": "The reading says both sides gave up something and both gained something. What is a compromise?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Tell what each side wanted, what Sherman proposed, and what the Constitution created. End with why it mattered. Use complete sentences.",
+                "id": "h24-0-w1",
+                "prompt": "Write a paragraph about the Great Compromise. How did it solve the argument between big and small states?"
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Use this week's words in your own sentences.",
+            "items": [
+              {
+                "id": "h24-0-vw1",
+                "prompt": "Write one sentence for each word. Use the word the right way.",
+                "words": [
+                  "compromise",
+                  "delegate"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
+          }]
       },
       {
         "title": "The Three-Fifths Compromise",
@@ -11873,7 +16144,53 @@ const MM_WEEKS_35 = [
               }
             ]
           }
-        ]
+        ,
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "Each enslaved person would count as three-fifths of a person for representation and taxes. Southern states wanted them counted to gain more representatives.",
+                "id": "h24-1-c1",
+                "question": "What did the Three-Fifths Compromise decide, and who wanted enslaved people counted?"
+              },
+              {
+                "answer": "It counted enslaved people who could not vote as fractions of people, giving slaveholding states extra power in Congress for decades.",
+                "id": "h24-1-c2",
+                "question": "Why does the reading call it a shameful bargain?"
+              },
+              {
+                "answer": "A heated argument where each side explains why its view is right, like the North and South arguing over representation.",
+                "id": "h24-1-c3",
+                "question": "The reading says the delegates held a bitter debate over counting enslaved people. What is a debate, based on the reading?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Tell what the South wanted, what the North objected to, and what the compromise decided. End with how it shaped America until the Civil War. Use complete sentences.",
+                "id": "h24-1-w1",
+                "prompt": "Write a paragraph about the Three-Fifths Compromise. What was the argument, and what did it cause?"
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Use this week's words in your own sentences.",
+            "items": [
+              {
+                "id": "h24-1-vw1",
+                "prompt": "Write one sentence for each word. Use the word the right way.",
+                "words": [
+                  "debate",
+                  "vote"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
+          }]
       }
     ],
     "science": [
@@ -11943,7 +16260,53 @@ const MM_WEEKS_35 = [
               }
             ]
           }
-        ]
+        ,
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "Weathering breaks rock apart, and erosion carries the pieces away.",
+                "id": "s24-0-c1",
+                "question": "What is the difference between weathering and erosion?"
+              },
+              {
+                "answer": "Weathering breaks rock into minerals that plants need to grow, and every farm sits on weathered rock.",
+                "id": "s24-0-c2",
+                "question": "Why does the reading say mountains crumble slowly so that fields can flourish?"
+              },
+              {
+                "answer": "To wear away or carry pieces of rock away slowly, like water carving the Grand Canyon.",
+                "id": "s24-0-c3",
+                "question": "The reading says water and wind erode rock over time. What does erode mean, based on the reading?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Tell the difference between weathering and erosion, name two forces that do the work, and give one example like the Grand Canyon. Use complete sentences.",
+                "id": "s24-0-w1",
+                "prompt": "Write a paragraph explaining how weathering and erosion reshape Earth's surface. Give examples."
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Use this week's words in your own sentences.",
+            "items": [
+              {
+                "id": "s24-0-vw1",
+                "prompt": "Write one sentence for each word. Use the word the right way.",
+                "words": [
+                  "erode",
+                  "compromise"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
+          }]
       },
       {
         "title": "Testing Erosion",
@@ -12043,7 +16406,53 @@ const MM_WEEKS_35 = [
               }
             ]
           }
-        ]
+        ,
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "Water rushes down, carving channels and carrying soil with it. This is why hillsides erode faster than flat land.",
+                "id": "s24-1-c1",
+                "question": "In the tray experiment, what happens when you tilt the tray and pour water?"
+              },
+              {
+                "answer": "To keep their soil from washing away. Plant roots hold soil in place, and terraces slow the water.",
+                "id": "s24-1-c2",
+                "question": "Why do farmers plant cover crops and build terraces?"
+              },
+              {
+                "answer": "Rain would wear the soil away and carry it downhill, carving channels.",
+                "id": "s24-1-c3",
+                "question": "The reading says forests protect mountainsides because roots hold soil in place. How does the word erode describe what would happen without the roots?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Describe pouring water on flat soil versus tilted soil, explain why hillsides erode faster, and tell how plants and farmers fight erosion. Use complete sentences.",
+                "id": "s24-1-w1",
+                "prompt": "Write a paragraph about the soil tray experiment. What does it teach about erosion?"
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Use this week's words in your own sentences.",
+            "items": [
+              {
+                "id": "s24-1-vw1",
+                "prompt": "Write one sentence for each word. Use the word the right way.",
+                "words": [
+                  "erode",
+                  "vote"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
+          }]
       }
     ],
     "friday": {
@@ -12289,7 +16698,53 @@ const MM_WEEKS_35 = [
               }
             ]
           }
-        ]
+        ,
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "The First Amendment.",
+                "id": "h25-0-c1",
+                "question": "Which amendment protects speech, religion, and the press?"
+              },
+              {
+                "answer": "They worried the Constitution gave the government too much power, so they wanted a list of freedoms the government could never take away.",
+                "id": "h25-0-c2",
+                "question": "Why did Americans demand a Bill of Rights?"
+              },
+              {
+                "answer": "A change or addition to the Constitution, like the ten that form the Bill of Rights.",
+                "id": "h25-0-c3",
+                "question": "The reading says the first ten amendments were added in 1791. What is an amendment?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Name your chosen right, such as free speech or a fair trial, and explain why it matters in your life. Give an example. Use complete sentences.",
+                "id": "h25-0-w1",
+                "prompt": "Write a paragraph about the Bill of Rights. Which right is most important to you, and why?"
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Use this week's words in your own sentences.",
+            "items": [
+              {
+                "id": "h25-0-vw1",
+                "prompt": "Write one sentence for each word. Use the word the right way.",
+                "words": [
+                  "amendment",
+                  "right"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
+          }]
       },
       {
         "title": "Using Rights to Demand Freedom",
@@ -12374,7 +16829,53 @@ const MM_WEEKS_35 = [
               }
             ]
           }
-        ]
+        ,
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "Free Black writers quoted the Declaration and the amendments in petitions, arguing that if all men have rights, slavery breaks the law of the land. Enslaved people also sued for freedom in courts.",
+                "id": "h25-1-c1",
+                "question": "How did Black Americans use the Bill of Rights to fight slavery?"
+              },
+              {
+                "answer": "He believed its promises of rights gave freedom fighters powerful words to attack slavery and push America closer to its promises.",
+                "id": "h25-1-c2",
+                "question": "Why did Frederick Douglass call the Constitution a glorious liberty document?"
+              },
+              {
+                "answer": "The reading says enslaved people sued for freedom in courts, and a fair trial gives them a real chance to win.",
+                "id": "h25-1-c3",
+                "question": "The Bill of Rights promises fair trials. Why would a fair trial matter to someone suing for freedom?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Tell how Black Americans used rights language in petitions and courts. Then choose a right and explain how you would use it. Use complete sentences.",
+                "id": "h25-1-w1",
+                "prompt": "Write a paragraph about how freedom fighters used the Bill of Rights. Which right would you use to fight an injustice, and why?"
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Use this week's words in your own sentences.",
+            "items": [
+              {
+                "id": "h25-1-vw1",
+                "prompt": "Write one sentence for each word. Use the word the right way.",
+                "words": [
+                  "speech",
+                  "fair"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
+          }]
       }
     ],
     "science": [
@@ -12456,7 +16957,53 @@ const MM_WEEKS_35 = [
               }
             ]
           }
-        ]
+        ,
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "The focus is the spot underground where the quake starts. The epicenter is the point on the surface above it.",
+                "id": "s25-0-c1",
+                "question": "What is the difference between the focus and the epicenter of an earthquake?"
+              },
+              {
+                "answer": "Earth's outer shell is cracked into tectonic plates that push against each other, and pressure builds along those cracks until the rock snaps.",
+                "id": "s25-0-c2",
+                "question": "Why do most earthquakes happen along plate edges like California's San Andreas Fault?"
+              },
+              {
+                "answer": "A small shaking of the earth, like the tiny daily quakes that people barely feel.",
+                "id": "s25-0-c3",
+                "question": "The reading says small quakes happen daily but big ones can topple buildings. What does the word tremor describe?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Tell what tectonic plates are, how pressure builds along faults, and what happens when the rock snaps. Mention the focus and the epicenter. Use complete sentences.",
+                "id": "s25-0-w1",
+                "prompt": "Write a paragraph explaining what causes an earthquake. Describe what happens underground."
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Use this week's words in your own sentences.",
+            "items": [
+              {
+                "id": "s25-0-vw1",
+                "prompt": "Write one sentence for each word. Use the word the right way.",
+                "words": [
+                  "tremor",
+                  "right"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
+          }]
       },
       {
         "title": "Measuring Quakes: Magnitude",
@@ -12555,7 +17102,53 @@ const MM_WEEKS_35 = [
               }
             ]
           }
-        ]
+        ,
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "About 32 times more energy. The largest ever recorded was magnitude 9.5 in Chile in 1960.",
+                "id": "s25-1-c1",
+                "question": "How much more energy does a magnitude 6 quake release than a magnitude 5 quake? What was the largest quake ever recorded?"
+              },
+              {
+                "answer": "So buildings slide gently or bend without breaking instead of cracking, which saves thousands of lives.",
+                "id": "s25-1-c2",
+                "question": "Why do engineers design buildings with base isolators and flexible frames in quake zones?"
+              },
+              {
+                "answer": "A tremor so small that people cannot feel it. Only machines can detect it.",
+                "id": "s25-1-c3",
+                "question": "The reading says a magnitude 2 quake is tiny, felt only by instruments. How would you describe that as a tremor?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Explain what magnitude measures, give the 32 times fact, and compare two magnitudes like 5 and 7. Use complete sentences.",
+                "id": "s25-1-w1",
+                "prompt": "Write a paragraph about the magnitude scale. Why does each whole number matter so much?"
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Use this week's words in your own sentences.",
+            "items": [
+              {
+                "id": "s25-1-vw1",
+                "prompt": "Write one sentence for each word. Use the word the right way.",
+                "words": [
+                  "tremor",
+                  "fair"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
+          }]
       }
     ],
     "friday": {
@@ -12787,7 +17380,53 @@ const MM_WEEKS_35 = [
               }
             ]
           }
-        ]
+        ,
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "Stepping down after two terms. Many wanted him to be king, but he went home to his farm, setting the example that presidents serve and then leave.",
+                "id": "h26-0-c1",
+                "question": "What was Washington's hardest choice, according to the reading, and why did it matter?"
+              },
+              {
+                "answer": "Most rulers hold on to power, but Washington gave it up voluntarily. The reading calls it his most radical act and one of America's most important traditions.",
+                "id": "h26-0-c2",
+                "question": "Why does the reading say kings cling but Washington walked away?"
+              },
+              {
+                "answer": "An example or tradition that future leaders follow, like presidents serving two terms and then leaving.",
+                "id": "h26-0-c3",
+                "question": "The reading says every move Washington made set a precedent. What is a precedent, based on the reading?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Tell what many people wanted him to do, what he chose instead, and what tradition it started. End with why it still matters. Use complete sentences.",
+                "id": "h26-0-w1",
+                "prompt": "Write a paragraph about Washington's hardest choice. What did he decide, and why was it so important?"
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Use this week's words in your own sentences.",
+            "items": [
+              {
+                "id": "h26-0-vw1",
+                "prompt": "Write one sentence for each word. Use the word the right way.",
+                "words": [
+                  "precedent",
+                  "leader"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
+          }]
       },
       {
         "title": "Ona Judge Chooses Freedom",
@@ -12898,7 +17537,53 @@ const MM_WEEKS_35 = [
               }
             ]
           }
-        ]
+        ,
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "She had learned she might be given away as a gift, so she fled to New Hampshire, where she married and raised a family.",
+                "id": "h26-1-c1",
+                "question": "Why did Ona Judge escape from Philadelphia in 1796?"
+              },
+              {
+                "answer": "She gave up a comfortable life in the president's household to live free, and she never looked back even when Washington tried to recapture her.",
+                "id": "h26-1-c2",
+                "question": "Why does the reading say she chose an uncertain freedom over a comfortable cage?"
+              },
+              {
+                "answer": "A leader who promised liberty but kept her enslaved, and who sent agents and wrote letters trying to recapture her after she escaped.",
+                "id": "h26-1-c3",
+                "question": "Washington was the nation's leader. What kind of leader was he to Ona Judge, based on the reading?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Tell why she fled, how Washington tried to bring her back, and how she lived the rest of her life. End with why her story matters. Use complete sentences.",
+                "id": "h26-1-w1",
+                "prompt": "Write a paragraph about Ona Judge's choice. What did she risk, and what did she gain?"
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Use this week's words in your own sentences.",
+            "items": [
+              {
+                "id": "h26-1-vw1",
+                "prompt": "Write one sentence for each word. Use the word the right way.",
+                "words": [
+                  "oath",
+                  "cabinet"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
+          }]
       }
     ],
     "science": [
@@ -12980,7 +17665,53 @@ const MM_WEEKS_35 = [
               }
             ]
           }
-        ]
+        ,
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "Magma is hot melted rock underground. Lava is the same rock once it reaches the surface.",
+                "id": "s26-0-c1",
+                "question": "What is the difference between magma and lava?"
+              },
+              {
+                "answer": "Pressure builds in the magma chamber until it forces its way up through a vent, releasing the pressure.",
+                "id": "s26-0-c2",
+                "question": "Why are volcanoes called Earth's pressure valves?"
+              },
+              {
+                "answer": "To burst or force its way out, like magma shooting up through a volcano's vent.",
+                "id": "s26-0-c3",
+                "question": "The reading says some eruptions explode violently while others ooze slowly. What does the word erupt mean?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Start with pressure in the magma chamber, tell what happens at the vent, and explain how a mountain grows over many eruptions. Use complete sentences.",
+                "id": "s26-0-w1",
+                "prompt": "Write a paragraph explaining how a volcano forms and erupts. What happens step by step?"
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Use this week's words in your own sentences.",
+            "items": [
+              {
+                "id": "s26-0-vw1",
+                "prompt": "Write one sentence for each word. Use the word the right way.",
+                "words": [
+                  "erupt",
+                  "precedent"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
+          }]
       },
       {
         "title": "Three Types of Volcanoes",
@@ -13079,7 +17810,53 @@ const MM_WEEKS_35 = [
               }
             ]
           }
-        ]
+        ,
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "Shield, cinder cone, and composite, also called stratovolcanoes. Composite volcanoes erupt most violently.",
+                "id": "s26-1-c1",
+                "question": "What are the three types of volcanoes, and which one erupts most violently?"
+              },
+              {
+                "answer": "Shape predicts how a volcano will behave, so scientists can warn people in volcanic regions.",
+                "id": "s26-1-c2",
+                "question": "Why does sorting volcanoes by shape save lives?"
+              },
+              {
+                "answer": "It blasts layers of lava and ash violently into the sky from its tall, steep cone.",
+                "id": "s26-1-c3",
+                "question": "Mount St. Helens is a composite volcano. Based on the reading, what happens when it erupts?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Describe each type's shape and lava, name an example of each, and explain your choice. Use complete sentences.",
+                "id": "s26-1-w1",
+                "prompt": "Write a paragraph comparing the three types of volcanoes. Which would you least want to live near, and why?"
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Use this week's words in your own sentences.",
+            "items": [
+              {
+                "id": "s26-1-vw1",
+                "prompt": "Write one sentence for each word. Use the word the right way.",
+                "words": [
+                  "erupt",
+                  "leader"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
+          }]
       }
     ],
     "friday": {
@@ -13311,7 +18088,53 @@ const MM_WEEKS_35 = [
               }
             ]
           }
-        ]
+        ,
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "A huge territory from the Mississippi River to the Rocky Mountains, doubling the country's size, for 15 million dollars, about four cents an acre.",
+                "id": "h27-0-c1",
+                "question": "What did the United States get in the Louisiana Purchase, and what did it cost?"
+              },
+              {
+                "answer": "The Constitution never mentioned buying land, and even Jefferson had doubts. The Native peoples who lived there were never asked at all.",
+                "id": "h27-0-c2",
+                "question": "Why did critics say the purchase might not be legal, and who was never asked?"
+              },
+              {
+                "answer": "Something bought for a very good, low price, like land at four cents an acre.",
+                "id": "h27-0-c3",
+                "question": "The reading calls the purchase one of the greatest land deals in history and a bargain. What is a bargain?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "State your opinion clearly. Give at least two reasons from the reading, such as the price, the river for trade, or the people who were never asked. Use complete sentences.",
+                "id": "h27-0-w1",
+                "prompt": "Write a paragraph arguing whether the Louisiana Purchase was a good deal. Take a side and defend it."
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Use this week's words in your own sentences.",
+            "items": [
+              {
+                "id": "h27-0-vw1",
+                "prompt": "Write one sentence for each word. Use the word the right way.",
+                "words": [
+                  "territory",
+                  "bargain"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
+          }]
       },
       {
         "title": "Haiti Forces the Sale",
@@ -13422,7 +18245,53 @@ const MM_WEEKS_35 = [
               }
             ]
           }
-        ]
+        ,
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "His plans for a North American empire collapsed when enslaved people in Haiti, led by Toussaint Louverture, defeated the French armies. With his Caribbean dreams ruined and money needed for wars in Europe, he sold Louisiana.",
+                "id": "h27-1-c1",
+                "question": "Why did Napoleon decide to sell Louisiana?"
+              },
+              {
+                "answer": "Their revolution destroyed Napoleon's reason for keeping Louisiana, forcing him to sell.",
+                "id": "h27-1-c2",
+                "question": "Why does the reading say that without the courage of Haitian freedom fighters, there might never have been a Louisiana Purchase?"
+              },
+              {
+                "answer": "Louisiana, the land he no longer wanted after his Caribbean dreams were ruined in Haiti.",
+                "id": "h27-1-c3",
+                "question": "Napoleon sold a huge territory to America. What territory was it, based on the reading?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Tell who led the revolt, what happened to the French armies, and why Napoleon sold Louisiana. End with what Haiti became in 1804. Use complete sentences.",
+                "id": "h27-1-w1",
+                "prompt": "Write a paragraph about how Haiti changed the map of North America. Why did their victory matter to America?"
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Use this week's words in your own sentences.",
+            "items": [
+              {
+                "id": "h27-1-vw1",
+                "prompt": "Write one sentence for each word. Use the word the right way.",
+                "words": [
+                  "negotiate",
+                  "double"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
+          }]
       }
     ],
     "science": [
@@ -13504,7 +18373,53 @@ const MM_WEEKS_35 = [
               }
             ]
           }
-        ]
+        ,
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "An animal or plant is buried quickly in mud or sand, and over millions of years minerals seep into bones or wood and turn them to stone.",
+                "id": "s27-0-c1",
+                "question": "How do most fossils form?"
+              },
+              {
+                "answer": "They are a window into the Ice Age, with mammoth and saber-toothed cat bones still pulled from the tar, and a warning because the tar still traps animals today.",
+                "id": "s27-0-c2",
+                "question": "Why are the La Brea Tar Pits called both a window and a warning?"
+              },
+              {
+                "answer": "No longer alive anywhere on Earth. The whole species has died out.",
+                "id": "s27-0-c3",
+                "question": "The reading says dinosaurs ruled for 165 million years but are now extinct. What does extinct mean?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Describe how a fossil forms step by step, then tell what fossils reveal about the past. Mention the tar pits or another example. Use complete sentences.",
+                "id": "s27-0-w1",
+                "prompt": "Write a paragraph explaining how fossils form and what they tell us. Use an example from the reading."
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Use this week's words in your own sentences.",
+            "items": [
+              {
+                "id": "s27-0-vw1",
+                "prompt": "Write one sentence for each word. Use the word the right way.",
+                "words": [
+                  "extinct",
+                  "bargain"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
+          }]
       },
       {
         "title": "Ordering Fossils by Age",
@@ -13603,7 +18518,53 @@ const MM_WEEKS_35 = [
               }
             ]
           }
-        ]
+        ,
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "The deeper layers are older. It is called relative dating.",
+                "id": "s27-1-c1",
+                "question": "In undisturbed rock, which layers are older, and what is this method called?"
+              },
+              {
+                "answer": "Location reveals age, and a fossil without its location loses half its story.",
+                "id": "s27-1-c2",
+                "question": "Why must fossil hunters record exactly where each fossil lay before they dig?"
+              },
+              {
+                "answer": "Dinosaurs died out completely long ago. Mammals survived and still live today.",
+                "id": "s27-1-c3",
+                "question": "The reading says ordering fossils shows dinosaurs came before mammals ruled. What does it mean that dinosaurs are extinct but mammals are not?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Explain relative dating with rock layers and absolute dating with radioactive clocks. Give the trilobite and mammoth example. Use complete sentences.",
+                "id": "s27-1-w1",
+                "prompt": "Write a paragraph explaining how scientists order fossils from oldest to newest. Describe both dating methods."
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Use this week's words in your own sentences.",
+            "items": [
+              {
+                "id": "s27-1-vw1",
+                "prompt": "Write one sentence for each word. Use the word the right way.",
+                "words": [
+                  "extinct",
+                  "territory"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
+          }]
       }
     ],
     "friday": {
@@ -13835,7 +18796,53 @@ const MM_WEEKS_35 = [
               }
             ]
           }
-        ]
+        ,
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "To explore the new Louisiana territory and find a water route to the Pacific. They set out from St. Louis in 1804.",
+                "id": "h28-0-c1",
+                "question": "What did Jefferson ask Lewis and Clark to do, and where did they start?"
+              },
+              {
+                "answer": "She found food, calmed tense meetings, carried her baby the whole way, and her presence signaled peace to the tribes they met.",
+                "id": "h28-0-c2",
+                "question": "Why was Sacagawea essential to the expedition?"
+              },
+              {
+                "answer": "Finding or learning something new, like the hundreds of plants and animals they recorded that were new to science.",
+                "id": "h28-0-c3",
+                "question": "The reading calls Lewis and Clark's group the Corps of Discovery. What is a discovery, based on what they did?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Lewis wrote in his journal every night, even when exhausted. Describe where you are, what you saw, and how you feel. Write in first person. Use complete sentences.",
+                "id": "h28-0-w1",
+                "prompt": "Write a journal entry as if you are Lewis or Clark on the expedition. Describe one day on the journey."
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Use this week's words in your own sentences.",
+            "items": [
+              {
+                "id": "h28-0-vw1",
+                "prompt": "Write one sentence for each word. Use the word the right way.",
+                "words": [
+                  "expedition",
+                  "journal"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
+          }]
       },
       {
         "title": "York: Essential Guide and Hunter",
@@ -13946,7 +18953,53 @@ const MM_WEEKS_35 = [
               }
             ]
           }
-        ]
+        ,
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "He hunted skillfully, keeping the group fed on the hardest parts of the journey, and his strength impressed the Native nations they met.",
+                "id": "h28-1-c1",
+                "question": "What important jobs did York do on the expedition?"
+              },
+              {
+                "answer": "York was enslaved, yet his vote about where to winter was counted the same as the white men's votes.",
+                "id": "h28-1-c2",
+                "question": "Why was York's vote at the Pacific a moment of equality rare in 1805 America?"
+              },
+              {
+                "answer": "He hunted skillfully and kept the group fed on the hardest parts of the journey, so the expedition depended on him.",
+                "id": "h28-1-c3",
+                "question": "The reading calls York an essential guide and hunter. What made him essential?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Imagine his pride at his vote counting the same as everyone else's, and his thoughts about freedom. Write in first person. Use complete sentences.",
+                "id": "h28-1-w1",
+                "prompt": "Write a journal entry as York on the night of the vote at the Pacific. How would he feel?"
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Use this week's words in your own sentences.",
+            "items": [
+              {
+                "id": "h28-1-vw1",
+                "prompt": "Write one sentence for each word. Use the word the right way.",
+                "words": [
+                  "guide",
+                  "discovery"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
+          }]
       }
     ],
     "science": [
@@ -14028,7 +19081,53 @@ const MM_WEEKS_35 = [
               }
             ]
           }
-        ]
+        ,
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "Water evaporates from oceans and lakes, rises as vapor, cools and condenses into clouds, falls as rain or snow, then flows in rivers back to the sea.",
+                "id": "s28-0-c1",
+                "question": "What are the steps of the water cycle?"
+              },
+              {
+                "answer": "Water never leaves Earth. Every drop is recycled endlessly through the cycle.",
+                "id": "s28-0-c2",
+                "question": "Why does the reading say the water in your glass may once have been drunk by a dinosaur?"
+              },
+              {
+                "answer": "Something that goes around and around with no end, like water evaporating, raining, and flowing back to the sea.",
+                "id": "s28-0-c3",
+                "question": "The reading describes the water cycle. What is a cycle, based on the reading?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Start with the drop in the ocean, follow it through evaporation, clouds, and rain, and end back at the sea. Use complete sentences.",
+                "id": "s28-0-w1",
+                "prompt": "Write a paragraph explaining the water cycle to a younger student. Follow one drop of water on its journey."
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Use this week's words in your own sentences.",
+            "items": [
+              {
+                "id": "s28-0-vw1",
+                "prompt": "Write one sentence for each word. Use the word the right way.",
+                "words": [
+                  "cycle",
+                  "expedition"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
+          }]
       },
       {
         "title": "Water's Percentages",
@@ -14127,7 +19226,53 @@ const MM_WEEKS_35 = [
               }
             ]
           }
-        ]
+        ,
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "About 97 percent is salty ocean water, about 2 percent is frozen in ice caps and glaciers, and less than 1 percent is fresh water.",
+                "id": "s28-1-c1",
+                "question": "How much of Earth's water is salty ocean water, frozen, and fresh?"
+              },
+              {
+                "answer": "Turning ocean water drinkable through desalination costs enormous energy, so conserving the tiny fresh slice saves money and effort.",
+                "id": "s28-1-c2",
+                "question": "Why does the reading say saving water is cheaper than making it?"
+              },
+              {
+                "answer": "A repeating circle. Rain fills rivers, rivers feed cities, and water returns to the cycle endlessly.",
+                "id": "s28-1-c3",
+                "question": "The reading says fresh water moves through a cycle. What does cycle mean in the water cycle?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Tell the percentages of salty, frozen, and fresh water. Explain why the fresh slice is so small and why saving water matters. Use complete sentences.",
+                "id": "s28-1-w1",
+                "prompt": "Write a paragraph about Earth's water. Why should we save every drop?"
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Use this week's words in your own sentences.",
+            "items": [
+              {
+                "id": "s28-1-vw1",
+                "prompt": "Write one sentence for each word. Use the word the right way.",
+                "words": [
+                  "cycle",
+                  "journal"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
+          }]
       }
     ],
     "friday": {
@@ -14377,7 +19522,53 @@ const MM_WEEKS_35 = [
               }
             ]
           }
-        ]
+        ,
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "He saw that the American flag still waved over the fort.",
+                "id": "h29-0-c1",
+                "question": "What did Francis Scott Key see at dawn after the British bombed Fort McHenry all night?"
+              },
+              {
+                "answer": "The sight of the flag still waving moved him deeply, and he wanted to share that proud feeling with all Americans so they could feel it too.",
+                "id": "h29-0-c2",
+                "question": "Why do you think Francis Scott Key wrote a poem right after the battle instead of just telling his friends what happened?"
+              },
+              {
+                "answer": "Impressment means forcing sailors to serve in another country's navy against their will.",
+                "id": "h29-0-c3",
+                "question": "The reading says Britain was 'forcing sailors into its navy, a practice called impressment.' What does impressment mean in this sentence?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Start with what happened at Fort McHenry in 1814. Tell who wrote the song and why the sight of the flag mattered. End with why Americans still sing the song today. Use complete sentences.",
+                "id": "h29-0-w1",
+                "prompt": "Write a paragraph of 4 to 6 sentences about the Star-Spangled Banner. Tell what the song is and why it was written."
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Use this week's words in your own sentences.",
+            "items": [
+              {
+                "id": "h29-0-vw1",
+                "prompt": "Write one sentence for each word. Use the word the right way.",
+                "words": [
+                  "anthem",
+                  "battle"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
+          }]
       },
       {
         "title": "Black Defenders of Baltimore and New Orleans",
@@ -14449,7 +19640,53 @@ const MM_WEEKS_35 = [
               }
             ]
           }
-        ]
+        ,
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "At Baltimore, serving on ships and in the fort's defenses, and at New Orleans in General Andrew Jackson's army.",
+                "id": "h29-1-c1",
+                "question": "Where did Black soldiers fight in the War of 1812, according to the reading?"
+              },
+              {
+                "answer": "It shows they believed in America's promise and wanted to prove their patriotism, even though the country did not treat them fairly.",
+                "id": "h29-1-c2",
+                "question": "Black soldiers defended a nation that still enslaved their brothers and sisters. What does this tell you about how they felt about America?"
+              },
+              {
+                "answer": "A battle is a fight between two armies during a war.",
+                "id": "h29-1-c3",
+                "question": "The reading says free Black soldiers 'fought in the battle that made Jackson a hero.' What does the word battle mean in this sentence?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Tell what happened during the famous bombardment of Fort McHenry, name who helped defend Baltimore, and explain why the song mattered to all Americans, including Black soldiers. Use complete sentences.",
+                "id": "h29-1-w1",
+                "prompt": "Write a paragraph of 4 to 6 sentences about the Star-Spangled Banner. Tell what the song is and why it was written."
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Use this week's words in your own sentences.",
+            "items": [
+              {
+                "id": "h29-1-vw1",
+                "prompt": "Write one sentence for each word. Use the word the right way.",
+                "words": [
+                  "anthem",
+                  "impressment"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
+          }]
       }
     ],
     "science": [
@@ -14519,7 +19756,53 @@ const MM_WEEKS_35 = [
               }
             ]
           }
-        ]
+        ,
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "Cirrus clouds are thin and wispy, high up where it is cold. Cumulus clouds are puffy and white, the classic cartoon clouds. Stratus clouds are flat gray blankets. Cumulonimbus clouds are towering and bring thunderstorms.",
+                "id": "s29-0-c1",
+                "question": "Name the four main types of clouds and tell what each one looks like."
+              },
+              {
+                "answer": "Rain or a storm is likely. Wispy cirrus often means change is coming, and dark cumulonimbus clouds mean storms are near.",
+                "id": "s29-0-c2",
+                "question": "You see thin, wispy clouds in the morning and dark, towering clouds in the afternoon. What weather would you predict, and why?"
+              },
+              {
+                "answer": "Cloudy means the sky is covered with clouds.",
+                "id": "s29-0-c3",
+                "question": "The reading says stratus clouds are 'flat gray blankets that cover the sky.' What does the week word cloudy mean?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Name two cloud types from the reading, tell what they look like, and explain what weather each one predicts. End with why cloud watching is useful. Use complete sentences.",
+                "id": "s29-0-w1",
+                "prompt": "Write a paragraph of 4 to 6 sentences explaining how to read the sky. Describe at least two kinds of clouds and what weather each one warns about."
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Use this week's words in your own sentences.",
+            "items": [
+              {
+                "id": "s29-0-vw1",
+                "prompt": "Write one sentence for each word. Use the word the right way.",
+                "words": [
+                  "storm",
+                  "cloudy"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
+          }]
       },
       {
         "title": "A Week of Sky Watching",
@@ -14619,7 +19902,53 @@ const MM_WEEKS_35 = [
               }
             ]
           }
-        ]
+        ,
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "The type of clouds, how much sky they cover, and the weather that follows.",
+                "id": "s29-1-c1",
+                "question": "What three things should you write down each morning when you watch the sky?"
+              },
+              {
+                "answer": "Because technology extends sky watching but does not replace it. Real weather prediction started with people watching the sky and writing down what happened next, and careful daily notes still reveal patterns.",
+                "id": "s29-1-c2",
+                "question": "Why do scientists still value people watching the sky, even though weather satellites watch from space?"
+              },
+              {
+                "answer": "A storm is dangerous weather with strong wind and heavy rain, such as a thunderstorm.",
+                "id": "s29-1-c3",
+                "question": "The reading says satellites 'warn of storms days ahead.' In this sentence, what is a storm?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Tell what you would look at each morning, what you would write down, and what pattern you might notice by the end of the week. Use complete sentences.",
+                "id": "s29-1-w1",
+                "prompt": "Write a paragraph of 4 to 6 sentences about keeping a sky-watching journal for one week. Tell what you would record each day and what patterns you hope to find."
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Use this week's words in your own sentences.",
+            "items": [
+              {
+                "id": "s29-1-vw1",
+                "prompt": "Write one sentence for each word. Use the word the right way.",
+                "words": [
+                  "anthem",
+                  "storm"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
+          }]
       }
     ],
     "friday": {
@@ -14869,7 +20198,53 @@ const MM_WEEKS_35 = [
               }
             ]
           }
-        ]
+        ,
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "A power loom is a machine that weaves cloth, and it could do the work of many hand weavers.",
+                "id": "h30-0-c1",
+                "question": "What is a power loom, and what could it do?"
+              },
+              {
+                "answer": "Progress: goods became cheaper and more plentiful, and mill girls earned their own money for the first time. Problem: factory work meant long hours, loud noise, and dangerous machines.",
+                "id": "h30-0-c2",
+                "question": "The reading says 'The Industrial Revolution brought progress and problems together.' Name one progress and one problem from the reading."
+              },
+              {
+                "answer": "A loom is a machine that weaves thread into cloth.",
+                "id": "h30-0-c3",
+                "question": "The reading says the power loom 'could do the work of many hand weavers.' What does the week word loom mean?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Describe her long workday at the factory, tell how she spent her free time writing for the Lowell Offering, and tell what she hoped for her future. Use complete sentences.",
+                "id": "h30-0-w1",
+                "prompt": "Write a paragraph of 4 to 6 sentences about a day in the life of a mill girl. Tell what she did and how she felt about her work."
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Use this week's words in your own sentences.",
+            "items": [
+              {
+                "id": "h30-0-vw1",
+                "prompt": "Write one sentence for each word. Use the word the right way.",
+                "words": [
+                  "factory",
+                  "loom"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
+          }]
       },
       {
         "title": "Jan Matzeliger: Shoemaking Genius",
@@ -14941,7 +20316,53 @@ const MM_WEEKS_35 = [
               }
             ]
           }
-        ]
+        ,
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "Machines could make every part of a shoe except attaching the top to the sole, which slow handwork did. His lasting machine did that job perfectly.",
+                "id": "h30-1-c1",
+                "question": "What problem did Matzeliger's lasting machine solve?"
+              },
+              {
+                "answer": "Because his invention changed the whole shoe industry, made shoes affordable for everyone, and his machine design is still used today. Inventions outlive their inventors.",
+                "id": "h30-1-c2",
+                "question": "Matzeliger died young and poor before seeing his full success. Why can his story still be called a success?"
+              },
+              {
+                "answer": "An inventor is a person who creates something new, like Matzeliger's lasting machine.",
+                "id": "h30-1-c3",
+                "question": "The reading calls Matzeliger an inventor. What does the week word inventor mean in this sentence?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Tell what a mill girl's long day in the factory was like, and tell how new machines like Matzeliger's lasting machine changed work for everyone. Use complete sentences.",
+                "id": "h30-1-w1",
+                "prompt": "Write a paragraph of 4 to 6 sentences about a day in the life of a mill girl. Tell what she did and how she felt about her work."
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Use this week's words in your own sentences.",
+            "items": [
+              {
+                "id": "h30-1-vw1",
+                "prompt": "Write one sentence for each word. Use the word the right way.",
+                "words": [
+                  "inventor",
+                  "steam"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
+          }]
       }
     ],
     "science": [
@@ -15011,7 +20432,53 @@ const MM_WEEKS_35 = [
               }
             ]
           }
-        ]
+        ,
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "The eye is the calm center of the hurricane, while around it winds can top 150 miles per hour.",
+                "id": "s30-0-c1",
+                "question": "What is the eye of a hurricane, and what is it like there?"
+              },
+              {
+                "answer": "Hurricanes are powered by warm ocean water, and over land their warm water fuel runs out.",
+                "id": "s30-0-c2",
+                "question": "Why do hurricanes weaken over land?"
+              },
+              {
+                "answer": "A hurricane is a giant spinning storm that forms over warm ocean water.",
+                "id": "s30-0-c3",
+                "question": "The reading says hurricanes bring 'wind, heavy rain, and storm surge.' Based on the reading, what is a hurricane?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Tell where hurricanes form, what powers them, and name two dangers they bring to shore. End with why early warnings save lives. Use complete sentences.",
+                "id": "s30-0-w1",
+                "prompt": "Write a paragraph of 4 to 6 sentences explaining how a hurricane forms and what dangers it brings."
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Use this week's words in your own sentences.",
+            "items": [
+              {
+                "id": "s30-0-vw1",
+                "prompt": "Write one sentence for each word. Use the word the right way.",
+                "words": [
+                  "steam",
+                  "hurricane"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
+          }]
       },
       {
         "title": "Tornadoes: Nature's Spinning Tops",
@@ -15111,7 +20578,53 @@ const MM_WEEKS_35 = [
               }
             ]
           }
-        ]
+        ,
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "Any two: dark green skies, large hail, and a roaring sound like a freight train.",
+                "id": "s30-1-c1",
+                "question": "Name two warning signs that a tornado may be coming."
+              },
+              {
+                "answer": "Tornado winds can exceed 300 miles per hour, the fastest on Earth, and a light mobile home cannot stand up to that force the way a basement or a small inner room can.",
+                "id": "s30-1-c2",
+                "question": "Why is a mobile home an especially dangerous place to be during a tornado?"
+              },
+              {
+                "answer": "A hurricane is a giant spinning storm that forms over warm ocean water, with winds up to 150 miles per hour.",
+                "id": "s30-1-c3",
+                "question": "The reading says tornadoes are 'smaller than hurricanes but can be more violent.' Based on this week's readings, what is a hurricane?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Tell where the safest place in your home is, what warning signs to watch for, and what to do when the siren sounds. Use complete sentences.",
+                "id": "s30-1-w1",
+                "prompt": "Write a paragraph of 4 to 6 sentences about a tornado safety plan for your family. Tell where you would go and what you would do."
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Use this week's words in your own sentences.",
+            "items": [
+              {
+                "id": "s30-1-vw1",
+                "prompt": "Write one sentence for each word. Use the word the right way.",
+                "words": [
+                  "inventor",
+                  "hurricane"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
+          }]
       }
     ],
     "friday": {
@@ -15361,7 +20874,53 @@ const MM_WEEKS_35 = [
               }
             ]
           }
-        ]
+        ,
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "It linked the Great Lakes to the Atlantic Ocean and was 363 miles long.",
+                "id": "h31-0-c1",
+                "question": "What did the Erie Canal connect, and how long was it?"
+              },
+              {
+                "answer": "Because it was an enormous and expensive project, and no one had ever built anything like it before, so they doubted it could work.",
+                "id": "h31-0-c2",
+                "question": "Why do you think critics called the canal 'Clinton's Ditch' and said it would fail?"
+              },
+              {
+                "answer": "A canal is a man-made waterway dug so boats can travel through it.",
+                "id": "h31-0-c3",
+                "question": "The reading calls the Erie Canal a 'man-made waterway.' What does the week word canal mean?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Tell how the canal changed the speed and cost of moving goods, name a city that grew because of it, and explain why the canal made New York the nation's trading capital. Use complete sentences.",
+                "id": "h31-0-w1",
+                "prompt": "Write a paragraph of 4 to 6 sentences about how the Erie Canal changed America. Tell what changed and why it mattered."
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Use this week's words in your own sentences.",
+            "items": [
+              {
+                "id": "h31-0-vw1",
+                "prompt": "Write one sentence for each word. Use the word the right way.",
+                "words": [
+                  "canal",
+                  "dig"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
+          }]
       },
       {
         "title": "The Hands That Dug and Fired",
@@ -15433,7 +20992,53 @@ const MM_WEEKS_35 = [
               }
             ]
           }
-        ]
+        ,
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "Black laborers dug the channels through mud and rock, working in brutal conditions for low pay.",
+                "id": "h31-1-c1",
+                "question": "Who dug the canal channels, and what were their working conditions like?"
+              },
+              {
+                "answer": "Because history often celebrated the planners and owners instead of the workers. The reading says their labor made the transportation revolution possible, yet they were left out of the story.",
+                "id": "h31-1-c2",
+                "question": "Why do you think the names of the Black workers are missing from most celebrations of the canal age?"
+              },
+              {
+                "answer": "Dig means to break up and move earth to make a hole or channel.",
+                "id": "h31-1-c3",
+                "question": "The reading says Black laborers 'dug canal channels through mud and rock.' What does the week word dig mean?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Tell what the canal changed, name the workers whose hands built it, and explain why we should remember them. Use complete sentences.",
+                "id": "h31-1-w1",
+                "prompt": "Write a paragraph of 4 to 6 sentences about how the Erie Canal changed America. Tell what changed and why it mattered."
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Use this week's words in your own sentences.",
+            "items": [
+              {
+                "id": "h31-1-vw1",
+                "prompt": "Write one sentence for each word. Use the word the right way.",
+                "words": [
+                  "lock",
+                  "steamboat"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
+          }]
       }
     ],
     "science": [
@@ -15503,7 +21108,53 @@ const MM_WEEKS_35 = [
               }
             ]
           }
-        ]
+        ,
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "The sunlight zone, the twilight zone, the midnight zone, the abyss, and the trenches.",
+                "id": "s31-0-c1",
+                "question": "Name the ocean zones in order from the surface down."
+              },
+              {
+                "answer": "Because the twilight zone is dim and cold with very little light, so big eyes help the animal see in the darkness.",
+                "id": "s31-0-c2",
+                "question": "Why would an animal in the twilight zone need big eyes?"
+              },
+              {
+                "answer": "Depth describes how far down something goes below the surface.",
+                "id": "s31-0-c3",
+                "question": "The Mariana Trench is nearly seven miles down. What does the week word depth describe?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Start at the sunlight zone and go deeper, telling what the light and animals are like in at least three zones. End with the trench. Use complete sentences.",
+                "id": "s31-0-w1",
+                "prompt": "Write a paragraph of 4 to 6 sentences describing a dive from the ocean surface to the Mariana Trench. Tell what you would see in each zone."
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Use this week's words in your own sentences.",
+            "items": [
+              {
+                "id": "s31-0-vw1",
+                "prompt": "Write one sentence for each word. Use the word the right way.",
+                "words": [
+                  "depth",
+                  "steamboat"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
+          }]
       },
       {
         "title": "Ordering the Deep",
@@ -15603,7 +21254,53 @@ const MM_WEEKS_35 = [
               }
             ]
           }
-        ]
+        ,
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "It is over 1,000 times the pressure at the surface.",
+                "id": "s31-1-c1",
+                "question": "How much stronger is the pressure at the bottom of the trenches than at the surface?"
+              },
+              {
+                "answer": "Because the pressure is crushing, it is pitch black and near freezing, and it lies miles below the surface, which makes it dangerous for people and submarines.",
+                "id": "s31-1-c2",
+                "question": "The reading says the deep ocean is Earth's largest habitat, yet we have explored less of it than the moon. Why is exploring the deep ocean so hard?"
+              },
+              {
+                "answer": "Depth means how far below the ocean surface a zone lies.",
+                "id": "s31-1-c3",
+                "question": "Your week words include depth. In your own words, what does depth mean when scientists order the ocean zones?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Name two dangers of the deep, such as pressure, darkness, or cold, tell what tools scientists use, and end with why exploring matters. Use complete sentences.",
+                "id": "s31-1-w1",
+                "prompt": "Write a paragraph of 4 to 6 sentences explaining why the deep ocean is hard to explore. Tell what stops us and what we still hope to learn."
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Use this week's words in your own sentences.",
+            "items": [
+              {
+                "id": "s31-1-vw1",
+                "prompt": "Write one sentence for each word. Use the word the right way.",
+                "words": [
+                  "depth",
+                  "dig"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
+          }]
       }
     ],
     "friday": {
@@ -15858,7 +21555,53 @@ const MM_WEEKS_35 = [
               }
             ]
           }
-        ]
+        ,
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "About 4,000 died from disease, exposure, and sorrow.",
+                "id": "h32-0-c1",
+                "question": "About how many Cherokee died on the Trail of Tears, and what caused their deaths?"
+              },
+              {
+                "answer": "The court ruled for the Cherokee, but because Jackson refused to enforce the ruling, the law could not protect them, and thousands lost their homes anyway.",
+                "id": "h32-0-c2",
+                "question": "The reading says, 'Justice without enforcement is only words.' What does this mean about President Jackson ignoring the Supreme Court?"
+              },
+              {
+                "answer": "Removal means being forced to leave your home and land.",
+                "id": "h32-0-c3",
+                "question": "The reading says soldiers 'forced about 16,000 Cherokee from their homes.' What does the week word removal mean in this sentence?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Tell who the Cherokee were, what the Indian Removal Act did, and what happened on the Trail of Tears. End with why this story still matters. Use complete sentences.",
+                "id": "h32-0-w1",
+                "prompt": "Write a paragraph of 4 to 6 sentences telling the Cherokee story. Tell what happened and why it happened."
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Use this week's words in your own sentences.",
+            "items": [
+              {
+                "id": "h32-0-vw1",
+                "prompt": "Write one sentence for each word. Use the word the right way.",
+                "words": [
+                  "removal",
+                  "sorrow"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
+          }]
       },
       {
         "title": "Black Cherokee on the Trail",
@@ -15930,7 +21673,53 @@ const MM_WEEKS_35 = [
               }
             ]
           }
-        ]
+        ,
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "Black people who had been enslaved by Cherokee owners, were forced west on the Trail of Tears, and became citizens of the Cherokee Nation after the Civil War.",
+                "id": "h32-1-c1",
+                "question": "Who were the Cherokee Freedmen?"
+              },
+              {
+                "answer": "It means the wrongs of the Trail of Tears were never fully fixed, so descendants still fight in courts today for their tribal citizenship rights.",
+                "id": "h32-1-c2",
+                "question": "The reading says, 'History's debts are still being paid.' What does this mean about the Freedmen's fight today?"
+              },
+              {
+                "answer": "A march is a long, hard journey on foot, like the 1,000-mile Trail of Tears.",
+                "id": "h32-1-c3",
+                "question": "The reading says the enslaved 'suffered the same cold, hunger, and sorrow on the march.' What does the week word march mean here?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Tell what the Trail of Tears was, tell who else suffered on it besides the Cherokee, and explain why their descendants still fight for their rights. Use complete sentences.",
+                "id": "h32-1-w1",
+                "prompt": "Write a paragraph of 4 to 6 sentences telling the Cherokee story. Tell what happened and why it happened."
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Use this week's words in your own sentences.",
+            "items": [
+              {
+                "id": "h32-1-vw1",
+                "prompt": "Write one sentence for each word. Use the word the right way.",
+                "words": [
+                  "justice",
+                  "march"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
+          }]
       }
     ],
     "science": [
@@ -16000,7 +21789,53 @@ const MM_WEEKS_35 = [
               }
             ]
           }
-        ]
+        ,
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "Tides are caused mostly by the moon's gravity pulling on Earth's water. Most coasts have two high tides and two low tides each day.",
+                "id": "s32-0-c1",
+                "question": "What causes tides, and how many high tides do most coasts have each day?"
+              },
+              {
+                "answer": "The shape of the coast decides. The same moon pulls on every shore, but each coast answers differently.",
+                "id": "s32-0-c2",
+                "question": "In the Mediterranean the tide barely rises a foot, but in Canada's Bay of Fundy it rises fifty feet. Why is there such a big difference?"
+              },
+              {
+                "answer": "Ocean water flows like a river through the sea.",
+                "id": "s32-0-c3",
+                "question": "Your week word current means a steady flow of water. Based on this week's readings, what flows in an ocean current?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Tell what causes tides, tell how often they happen, and give one example of how tides shape the shore, such as tidal pools or the Bay of Fundy. Use complete sentences.",
+                "id": "s32-0-w1",
+                "prompt": "Write a paragraph of 4 to 6 sentences explaining what tides are and why they matter to shore life."
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Use this week's words in your own sentences.",
+            "items": [
+              {
+                "id": "s32-0-vw1",
+                "prompt": "Write one sentence for each word. Use the word the right way.",
+                "words": [
+                  "current",
+                  "march"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
+          }]
       },
       {
         "title": "Currents: Rivers in the Sea",
@@ -16100,7 +21935,53 @@ const MM_WEEKS_35 = [
               }
             ]
           }
-        ]
+        ,
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "Surface currents are driven by wind. Deep currents are driven by differences in temperature and saltiness.",
+                "id": "s32-1-c1",
+                "question": "What drives surface currents, and what drives deep currents?"
+              },
+              {
+                "answer": "It carries warm water from the Gulf of Mexico up past Europe, keeping Europe milder than it should be.",
+                "id": "s32-1-c2",
+                "question": "How does the Gulf Stream change the weather in Europe?"
+              },
+              {
+                "answer": "A current is a steady flow of water moving through the ocean, like a river in the sea.",
+                "id": "s32-1-c3",
+                "question": "The reading says 'Ocean currents are like rivers flowing through the sea.' What does the week word current mean in this sentence?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Tell what drives surface and deep currents, name one current, and tell two things currents carry or change. Use complete sentences.",
+                "id": "s32-1-w1",
+                "prompt": "Write a paragraph of 4 to 6 sentences about how ocean currents shape the world. Tell what moves them and what they carry."
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Use this week's words in your own sentences.",
+            "items": [
+              {
+                "id": "s32-1-vw1",
+                "prompt": "Write one sentence for each word. Use the word the right way.",
+                "words": [
+                  "current",
+                  "justice"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
+          }]
       }
     ],
     "friday": {
@@ -16332,7 +22213,53 @@ const MM_WEEKS_35 = [
               }
             ]
           }
-        ]
+        ,
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "They held it for thirteen days against thousands of Mexican soldiers. Then the Mexicans stormed the fort and killed nearly all the defenders.",
+                "id": "h33-0-c1",
+                "question": "How long did the Texan defenders hold the Alamo, and what happened in the end?"
+              },
+              {
+                "answer": "Either answer works with support. Heroic: about 200 defenders held off thousands for thirteen days, and 'Remember the Alamo' led to victory at San Jacinto. Needless: nearly all the defenders died, and Texas won independence weeks later anyway.",
+                "id": "h33-0-c2",
+                "question": "Was the Alamo a heroic last stand or a needless sacrifice? Use facts from the reading to support your opinion."
+              },
+              {
+                "answer": "A revolt is a fight against the government in charge, like the Texans fighting Mexico for independence.",
+                "id": "h33-0-c3",
+                "question": "The reading says Texans clashed with Mexico and then fought for independence. What does the week word revolt mean?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Pick a side and give at least two reasons from the reading. Tell why the battle still matters to Texas today. Use complete sentences.",
+                "id": "h33-0-w1",
+                "prompt": "Write a paragraph of 4 to 6 sentences arguing your side of the Alamo debate. Was it a heroic last stand or a needless sacrifice? Tell why you think so."
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Use this week's words in your own sentences.",
+            "items": [
+              {
+                "id": "h33-0-vw1",
+                "prompt": "Write one sentence for each word. Use the word the right way.",
+                "words": [
+                  "republic",
+                  "revolt"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
+          }]
       },
       {
         "title": "Hendrick Arnold: Black Scout",
@@ -16443,7 +22370,53 @@ const MM_WEEKS_35 = [
               }
             ]
           }
-        ]
+        ,
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "He served as a scout and guide, moving ahead of troops to gather information about Mexican positions.",
+                "id": "h33-1-c1",
+                "question": "What job did Hendrick Arnold do for the Texan army?"
+              },
+              {
+                "answer": "He helped Texas win independence, but the new republic still allowed slavery, so as a Black man he did not get the full liberty he fought for.",
+                "id": "h33-1-c2",
+                "question": "The reading says Arnold's 'scouting helped win a freedom he could not fully share.' What does this mean?"
+              },
+              {
+                "answer": "Courage means being brave in the face of danger, like Arnold scouting ahead of the army even though the republic he served did not treat him fairly.",
+                "id": "h33-1-c3",
+                "question": "The reading says 'Courage and contradiction walked together.' What does the week word courage mean in this sentence?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Pick a side, give reasons from the reading, and include what Black Texans like Hendrick Arnold gave to the fight. Use complete sentences.",
+                "id": "h33-1-w1",
+                "prompt": "Write a paragraph of 4 to 6 sentences arguing your side of the Alamo debate. Was it a heroic last stand or a needless sacrifice? Tell why you think so."
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Use this week's words in your own sentences.",
+            "items": [
+              {
+                "id": "h33-1-vw1",
+                "prompt": "Write one sentence for each word. Use the word the right way.",
+                "words": [
+                  "courage",
+                  "republic"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
+          }]
       }
     ],
     "science": [
@@ -16525,7 +22498,53 @@ const MM_WEEKS_35 = [
               }
             ]
           }
-        ]
+        ,
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "Jupiter is the largest, bigger than all other planets combined. Mercury is the smallest.",
+                "id": "s33-0-c1",
+                "question": "Which planet is the largest, and which is the smallest?"
+              },
+              {
+                "answer": "Scientists found thousands of similar icy worlds beyond Neptune, and Pluto is smaller than Earth's moon, so the new evidence changed its label. Science changes its mind when new evidence arrives.",
+                "id": "s33-0-c2",
+                "question": "Why do you think Pluto was changed from a planet to a dwarf planet?"
+              },
+              {
+                "answer": "Orbit means to travel around something in space, like the planets traveling around the sun.",
+                "id": "s33-0-c3",
+                "question": "The reading says the eight planets are 'orbiting the sun.' What does the week word orbit mean?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Pick two planets from the reading, tell one way they are alike and two ways they are different. Use complete sentences.",
+                "id": "s33-0-w1",
+                "prompt": "Write a paragraph of 4 to 6 sentences comparing two planets. Tell how they are alike and different."
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Use this week's words in your own sentences.",
+            "items": [
+              {
+                "id": "s33-0-vw1",
+                "prompt": "Write one sentence for each word. Use the word the right way.",
+                "words": [
+                  "orbit",
+                  "courage"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
+          }]
       },
       {
         "title": "Neighbors in Space",
@@ -16624,7 +22643,53 @@ const MM_WEEKS_35 = [
               }
             ]
           }
-        ]
+        ,
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "Light takes 8 minutes to reach Earth and over 4 hours to reach Neptune.",
+                "id": "s33-1-c1",
+                "question": "How long does light take to reach Earth from the sun, and how long to reach Neptune?"
+              },
+              {
+                "answer": "Neptune is extremely far from the sun, so far that sunlight is faint by the time it arrives. Space is vast.",
+                "id": "s33-1-c2",
+                "question": "From Neptune, the sun looks nine hundred times dimmer than from Earth. What does this tell you about how far Neptune is?"
+              },
+              {
+                "answer": "Orbit means to move around the sun in a path, which Earth does once a year.",
+                "id": "s33-1-c3",
+                "question": "The reading says 'Different constellations appear in different seasons as Earth orbits the sun.' What does the week word orbit mean in this sentence?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Tell the difference between inner and outer planets, give one example of each, and tell why distance from the sun matters. Use complete sentences.",
+                "id": "s33-1-w1",
+                "prompt": "Write a paragraph of 4 to 6 sentences explaining why each planet is a different world even though they are neighbors."
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Use this week's words in your own sentences.",
+            "items": [
+              {
+                "id": "s33-1-vw1",
+                "prompt": "Write one sentence for each word. Use the word the right way.",
+                "words": [
+                  "orbit",
+                  "republic"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
+          }]
       }
     ],
     "friday": {
@@ -16876,7 +22941,53 @@ const MM_WEEKS_35 = [
               }
             ]
           }
-        ]
+        ,
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "A worker named James Marshall spotted shiny flakes in a California river in 1848.",
+                "id": "h34-0-c1",
+                "question": "Who spotted the gold that started the Gold Rush, and in what year?"
+              },
+              {
+                "answer": "Thousands of miners needed food, tools, and supplies, so merchants could charge wild prices to everyone, while only a few miners struck it rich.",
+                "id": "h34-0-c2",
+                "question": "The reading says 'The real winners were merchants who sold supplies at wild prices.' Why did merchants get rich when most miners did not?"
+              },
+              {
+                "answer": "Rush means to hurry to a place quickly and eagerly, like the miners racing to California.",
+                "id": "h34-0-c3",
+                "question": "The reading says about 80,000 forty-niners 'rushed to California.' What does the week word rush mean here?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Tell how you got to California, describe the mining camp, and tell whether you are finding gold. Sign your letter with a miner's name. Use complete sentences.",
+                "id": "h34-0-w1",
+                "prompt": "Write a paragraph of 4 to 6 sentences as a letter from a forty-niner to family back home. Tell who you are and what life in the mining camp is like."
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Use this week's words in your own sentences.",
+            "items": [
+              {
+                "id": "h34-0-vw1",
+                "prompt": "Write one sentence for each word. Use the word the right way.",
+                "words": [
+                  "forty-niner",
+                  "rush"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
+          }]
       },
       {
         "title": "Alvin Coffey Buys Freedom",
@@ -16987,7 +23098,53 @@ const MM_WEEKS_35 = [
               }
             ]
           }
-        ]
+        ,
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "He saved gold dust from mining claims in his spare hours, bought his own freedom, then kept working to buy freedom for his family too.",
+                "id": "h34-1-c1",
+                "question": "How did Alvin Coffey use the gold he found?"
+              },
+              {
+                "answer": "In California, a person's gold mattered more than their skin color, so Black miners had a chance at freedom that slavery had denied them.",
+                "id": "h34-1-c2",
+                "question": "The reading says, 'In a place where gold mattered more than color, some found a path to freedom.' What does this tell you about California during the Gold Rush?"
+              },
+              {
+                "answer": "A claim is a piece of land a miner marks as theirs to dig for gold.",
+                "id": "h34-1-c3",
+                "question": "The reading says miners worked 'mining claims.' What does the week word claim mean in this sentence?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Write as Alvin Coffey or another Black miner, telling what you hope to do with the gold you find. Use complete sentences.",
+                "id": "h34-1-w1",
+                "prompt": "Write a paragraph of 4 to 6 sentences as a letter from a forty-niner to family back home. Tell who you are and what life in the mining camp is like."
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Use this week's words in your own sentences.",
+            "items": [
+              {
+                "id": "h34-1-vw1",
+                "prompt": "Write one sentence for each word. Use the word the right way.",
+                "words": [
+                  "claim",
+                  "eager"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
+          }]
       }
     ],
     "science": [
@@ -17069,7 +23226,53 @@ const MM_WEEKS_35 = [
               }
             ]
           }
-        ]
+        ,
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "No, the moon is always a round ball. What changes is how much of its sunlit side we can see from Earth.",
+                "id": "s34-0-c1",
+                "question": "Does the moon change shape? Explain what really happens."
+              },
+              {
+                "answer": "Because it reflects the sun's light. At full moon we see the whole sunlit side.",
+                "id": "s34-0-c2",
+                "question": "Why does the full moon look bright if the moon does not make its own light?"
+              },
+              {
+                "answer": "A crescent is the thin curved sliver shape the moon has when only a small part is lit.",
+                "id": "s34-0-c3",
+                "question": "The reading says 'Then a crescent grows.' What does the week word crescent mean?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Tell that the moon reflects sunlight, name at least four phases in order, and tell how long a full cycle takes. Use complete sentences.",
+                "id": "s34-0-w1",
+                "prompt": "Write a paragraph of 4 to 6 sentences explaining the moon's phases to a younger student. Tell what causes them and name the main phases in order."
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Use this week's words in your own sentences.",
+            "items": [
+              {
+                "id": "s34-0-vw1",
+                "prompt": "Write one sentence for each word. Use the word the right way.",
+                "words": [
+                  "crescent",
+                  "eager"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
+          }]
       },
       {
         "title": "Ordering the Eight Phases",
@@ -17168,7 +23371,53 @@ const MM_WEEKS_35 = [
               }
             ]
           }
-        ]
+        ,
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "New moon, waxing crescent, first quarter, waxing gibbous, full moon, waning gibbous, last quarter, and waning crescent.",
+                "id": "s34-1-c1",
+                "question": "List the eight phases of the moon in order."
+              },
+              {
+                "answer": "Because the moon is a clock in the sky, ticking once a month, so its regular cycle helped them track time and seasons.",
+                "id": "s34-1-c2",
+                "question": "Why do you think ancient people used moon phases to plan planting and hunting?"
+              },
+              {
+                "answer": "The waxing crescent and the waning crescent.",
+                "id": "s34-1-c3",
+                "question": "The reading says 'Waxing means growing, waning means shrinking.' Which two phases in the list are crescents?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Tell how you would draw the moon each night, what pattern you would see, and what the moon can teach us about time. Use complete sentences.",
+                "id": "s34-1-w1",
+                "prompt": "Write a paragraph of 4 to 6 sentences about tracking the moon for one month. Tell what you would do each night and what you would learn."
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Use this week's words in your own sentences.",
+            "items": [
+              {
+                "id": "s34-1-vw1",
+                "prompt": "Write one sentence for each word. Use the word the right way.",
+                "words": [
+                  "crescent",
+                  "rush"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
+          }]
       }
     ],
     "friday": {
@@ -17420,7 +23669,53 @@ const MM_WEEKS_35 = [
               }
             ]
           }
-        ]
+        ,
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "It was not a real railroad. It was a secret network of safe houses, helpers, and hidden routes that guided enslaved people to freedom.",
+                "id": "h35-0-c1",
+                "question": "What was the Underground Railroad, and what was it not?"
+              },
+              {
+                "answer": "Because the journey was dangerous. Slave catchers hunted them, and being caught meant terrible punishment, so night travel and codes kept them hidden.",
+                "id": "h35-0-c2",
+                "question": "Why did conductors travel by night and use coded songs?"
+              },
+              {
+                "answer": "A station was a safe house where escapees could rest and hide on their journey to freedom.",
+                "id": "h35-0-c3",
+                "question": "The reading says conductors 'led escapees from station to station.' What does the week word station mean here?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Tell what a conductor's job was, name two dangers they faced, and explain why they helped strangers reach freedom. Use complete sentences.",
+                "id": "h35-0-w1",
+                "prompt": "Write a paragraph of 4 to 6 sentences about a conductor's courage on the Underground Railroad. Tell what conductors did and why they risked so much."
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Use this week's words in your own sentences.",
+            "items": [
+              {
+                "id": "h35-0-vw1",
+                "prompt": "Write one sentence for each word. Use the word the right way.",
+                "words": [
+                  "conductor",
+                  "station"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
+          }]
       },
       {
         "title": "Harriet Tubman: Never Lost a Passenger",
@@ -17531,7 +23826,53 @@ const MM_WEEKS_35 = [
               }
             ]
           }
-        ]
+        ,
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "She guided about 70 enslaved people to freedom, and she never lost a passenger.",
+                "id": "h35-1-c1",
+                "question": "How many people did Harriet Tubman guide to freedom, and what was her record?"
+              },
+              {
+                "answer": "She meant that some enslaved people did not believe freedom was possible or were too afraid to try, so fear kept them from escaping with her.",
+                "id": "h35-1-c2",
+                "question": "Tubman said she would have freed more 'if only they had known they were slaves.' What do you think she meant?"
+              },
+              {
+                "answer": "A conductor was a person who led enslaved people along the secret routes to freedom.",
+                "id": "h35-1-c3",
+                "question": "The reading calls Tubman a 'conductor on the Underground Railroad.' What does the week word conductor mean?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Write about Harriet Tubman, telling what she did, what tools she used, such as disguises and the North Star, and why she kept going back. Use complete sentences.",
+                "id": "h35-1-w1",
+                "prompt": "Write a paragraph of 4 to 6 sentences about a conductor's courage on the Underground Railroad. Tell what conductors did and why they risked so much."
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Use this week's words in your own sentences.",
+            "items": [
+              {
+                "id": "h35-1-vw1",
+                "prompt": "Write one sentence for each word. Use the word the right way.",
+                "words": [
+                  "freedom",
+                  "hide"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
+          }]
       }
     ],
     "science": [
@@ -17613,7 +23954,53 @@ const MM_WEEKS_35 = [
               }
             ]
           }
-        ]
+        ,
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "A constellation is a picture ancient people saw by connecting stars. Two examples are the Big Dipper and Orion the hunter.",
+                "id": "s35-0-c1",
+                "question": "What is a constellation? Name two examples from the reading."
+              },
+              {
+                "answer": "Its two end stars point to Polaris, the North Star, so the Big Dipper was a map to freedom written in the sky.",
+                "id": "s35-0-c2",
+                "question": "Why did the Big Dipper matter so much to enslaved people escaping north?"
+              },
+              {
+                "answer": "Twinkle describes how stars shine with a flickering, sparkling light in the night sky.",
+                "id": "s35-0-c3",
+                "question": "The reading says stars 'make their own light.' What does the week word twinkle describe about how stars look?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Tell what the Big Dipper points to, name one other constellation, and explain how escaping slaves used the stars. Use complete sentences.",
+                "id": "s35-0-w1",
+                "prompt": "Write a paragraph of 4 to 6 sentences about the night sky as a map. Tell how people used stars to find their way."
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Use this week's words in your own sentences.",
+            "items": [
+              {
+                "id": "s35-0-vw1",
+                "prompt": "Write one sentence for each word. Use the word the right way.",
+                "words": [
+                  "twinkle",
+                  "hide"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
+          }]
       },
       {
         "title": "Counting Stars, Connecting Dots",
@@ -17712,7 +24099,53 @@ const MM_WEEKS_35 = [
               }
             ]
           }
-        ]
+        ,
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "Seven main stars, forming the shape of a ladle.",
+                "id": "s35-1-c1",
+                "question": "How many main stars does the Big Dipper have, and what shape do they make?"
+              },
+              {
+                "answer": "Because of light pollution. City lights hide the stars, and only the brightest shine through.",
+                "id": "s35-1-c2",
+                "question": "Why can most people in cities not see the Milky Way from home?"
+              },
+              {
+                "answer": "Hide means to keep out of sight. City lights make the stars impossible to see.",
+                "id": "s35-1-c3",
+                "question": "The reading says 'Light pollution hides the stars for most people today.' What does the week word hide mean here?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Tell which constellation you would find first, how you would draw it, and what you would need, such as a dark sky away from city lights. Use complete sentences.",
+                "id": "s35-1-w1",
+                "prompt": "Write a paragraph of 4 to 6 sentences about mapping constellations on a clear night. Tell what you would find and draw."
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Use this week's words in your own sentences.",
+            "items": [
+              {
+                "id": "s35-1-vw1",
+                "prompt": "Write one sentence for each word. Use the word the right way.",
+                "words": [
+                  "twinkle",
+                  "conductor"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
+          }]
       }
     ],
     "friday": {
@@ -17944,7 +24377,53 @@ const MM_WEEKS_35 = [
               }
             ]
           }
-        ]
+        ,
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "The North had factories, growing cities, and few enslaved people. The South had plantations growing cotton with enslaved labor, and its whole economy depended on slavery.",
+                "id": "h36-0-c1",
+                "question": "How were the North and South different in the 1850s?"
+              },
+              {
+                "answer": "It means the country was split into two sides that could not agree. In Kansas, pro-slavery and anti-slavery settlers fought with real shooting, so the argument had become a war in miniature.",
+                "id": "h36-0-c2",
+                "question": "The reading says the nation was 'like a house divided.' What does this mean, and why was Bleeding Kansas proof of it?"
+              },
+              {
+                "answer": "Divide means to split into opposing sides, like the North and South splitting over slavery.",
+                "id": "h36-0-c3",
+                "question": "The reading says the two sides 'argued bitterly' and the divide grew deeper. What does the week word divide mean?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Tell one way the North and South were alike and two ways they were different, and explain why slavery was the issue they could not solve. Use complete sentences.",
+                "id": "h36-0-w1",
+                "prompt": "Write a paragraph of 4 to 6 sentences comparing the two Americas of the 1850s. Tell how the North and South were different and why they could not agree."
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Use this week's words in your own sentences.",
+            "items": [
+              {
+                "id": "h36-0-vw1",
+                "prompt": "Write one sentence for each word. Use the word the right way.",
+                "words": [
+                  "divide",
+                  "abolition"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
+          }]
       },
       {
         "title": "Frederick Douglass Speaks Out",
@@ -18055,7 +24534,53 @@ const MM_WEEKS_35 = [
               }
             ]
           }
-        ]
+        ,
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "He secretly taught himself to read, and at age twenty he escaped to freedom disguised as a sailor.",
+                "id": "h36-1-c1",
+                "question": "How did Frederick Douglass learn to read, and how did he escape?"
+              },
+              {
+                "answer": "Because he had been enslaved himself, taught himself to read, and became a great writer and speaker, proving that enslaved people were thinkers and leaders, not silent victims.",
+                "id": "h36-1-c2",
+                "question": "Douglass argued that America could not call itself free while holding millions in bondage. Why was his own life the strongest proof of his argument?"
+              },
+              {
+                "answer": "Abolition means ending slavery completely.",
+                "id": "h36-1-c3",
+                "question": "The reading calls Douglass 'the most powerful voice of abolition.' What does the week word abolition mean?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Include how voices like Frederick Douglass's speeches pushed the North against slavery, and tell why the South held on to it. Use complete sentences.",
+                "id": "h36-1-w1",
+                "prompt": "Write a paragraph of 4 to 6 sentences comparing the two Americas of the 1850s. Tell how the North and South were different and why they could not agree."
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Use this week's words in your own sentences.",
+            "items": [
+              {
+                "id": "h36-1-vw1",
+                "prompt": "Write one sentence for each word. Use the word the right way.",
+                "words": [
+                  "speech",
+                  "equality"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
+          }]
       }
     ],
     "science": [
@@ -18137,7 +24662,53 @@ const MM_WEEKS_35 = [
               }
             ]
           }
-        ]
+        ,
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "Earth's rotation. Earth spins once every 24 hours, so when your side faces the sun it is daytime, and when it turns away it is night.",
+                "id": "s36-0-c1",
+                "question": "What causes day and night?"
+              },
+              {
+                "answer": "Because in summer your hemisphere tilts toward the sun, giving longer days and more direct warmth.",
+                "id": "s36-0-c2",
+                "question": "Why does your hemisphere have longer, warmer days in summer?"
+              },
+              {
+                "answer": "Rotate means to spin around, like Earth spinning to cause day and night.",
+                "id": "s36-0-c3",
+                "question": "The reading says 'Earth spins like a top, turning once every 24 hours.' What does the week word rotate mean?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Tell that Earth rotates and the sun does not move across the sky, tell how long one turn takes, and tell what causes the seasons. Use complete sentences.",
+                "id": "s36-0-w1",
+                "prompt": "Write a paragraph of 4 to 6 sentences explaining day and night to a younger student. Tell what moves and what stays still."
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Use this week's words in your own sentences.",
+            "items": [
+              {
+                "id": "s36-0-vw1",
+                "prompt": "Write one sentence for each word. Use the word the right way.",
+                "words": [
+                  "rotate",
+                  "speech"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
+          }]
       },
       {
         "title": "A 24-Hour Timeline",
@@ -18236,7 +24807,53 @@ const MM_WEEKS_35 = [
               }
             ]
           }
-        ]
+        ,
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "Midnight at the start, sunrise around 6 AM, noon at the top, sunset around 6 PM, and midnight again at the end.",
+                "id": "s36-1-c1",
+                "question": "What times would you mark on a 24-hour timeline?"
+              },
+              {
+                "answer": "Because before calendars and clocks, the sun's position told them the time of day and the season, which told them when to plant.",
+                "id": "s36-1-c2",
+                "question": "Why did farmers plant by the sun's position for thousands of years?"
+              },
+              {
+                "answer": "Earth rotates, spinning once every 24 hours to make day and night.",
+                "id": "s36-1-c3",
+                "question": "The week word rotate means to spin. What rotates to make the day on your timeline?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Tell what times you would mark, how you would shade night and day, and what your timeline shows about your daily pattern. Use complete sentences.",
+                "id": "s36-1-w1",
+                "prompt": "Write a paragraph of 4 to 6 sentences about making a 24-hour timeline of your own day. Tell what you would mark and shade."
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Use this week's words in your own sentences.",
+            "items": [
+              {
+                "id": "s36-1-vw1",
+                "prompt": "Write one sentence for each word. Use the word the right way.",
+                "words": [
+                  "rotate",
+                  "equality"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
+          }]
       }
     ],
     "friday": {
@@ -18485,7 +25102,53 @@ const MM_WEEKS_35 = [
               }
             ]
           }
-        ]
+        ,
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "They feared he would end slavery entirely, even though he had only promised to stop its spread.",
+                "id": "h37-0-c1",
+                "question": "Why did Southern states vote to secede after Abraham Lincoln won the presidency in 1860?"
+              },
+              {
+                "answer": "The Southern states seceded to protect slavery, so removing slavery removed the reason for the split.",
+                "id": "h37-0-c2",
+                "question": "The reading says the war became a fight not just to save the Union, but to end slavery forever. Why would saving the Union require ending slavery?"
+              },
+              {
+                "answer": "To leave or break away from a group, here leaving the United States.",
+                "id": "h37-0-c3",
+                "question": "The reading says the Southern states voted to secede, to leave the United States. What does secede mean in this sentence?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Start with Lincoln's 1860 win and his promise to stop the spread of slavery. Explain why Southern states feared he would end slavery entirely. Tell what they did: formed the Confederacy and chose Jefferson Davis as president. End with how the war began when Confederate guns fired on Fort Sumter in April 1861. Use complete sentences.",
+                "id": "h37-0-w1",
+                "prompt": "Why did the Southern states secede? Write a paragraph of 4 to 6 sentences explaining their reasons."
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Use this week's words in your own sentences.",
+            "items": [
+              {
+                "id": "h37-0-vw1",
+                "prompt": "Write one sentence for each word. Use the word the right way.",
+                "words": [
+                  "secede",
+                  "conflict"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
+          }]
       },
       {
         "title": "The 54th Massachusetts",
@@ -18557,7 +25220,53 @@ const MM_WEEKS_35 = [
               }
             ]
           }
-        ]
+        ,
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "They led a brave assault against impossible odds. Robert Gould Shaw was killed and many soldiers fell.",
+                "id": "h37-1-c1",
+                "question": "What happened to the 54th Massachusetts at Fort Wagner?"
+              },
+              {
+                "answer": "It proved Black soldiers fought as bravely as any, which destroyed the idea that they could not or would not fight for the Union.",
+                "id": "h37-1-c2",
+                "question": "Why did the courage of the 54th shame the nation into accepting Black troops?"
+              },
+              {
+                "answer": "Giving up something precious for a cause, here risking and losing their lives.",
+                "id": "h37-1-c3",
+                "question": "The reading says their sacrifice shamed the nation into accepting Black troops. What does sacrifice mean here?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Explain that the Union army first refused Black volunteers, and that leaders like Frederick Douglass argued Black men should fight for their own freedom. Describe the regiment formed in 1863 and its assault at Fort Wagner under Robert Gould Shaw. Tell what their courage proved, and how 180,000 Black men served the Union cause. End with how the Boston monument honors them. Use complete sentences.",
+                "id": "h37-1-w1",
+                "prompt": "Write a paragraph of 4 to 6 sentences about why the 54th Massachusetts fought so bravely."
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Use this week's words in your own sentences.",
+            "items": [
+              {
+                "id": "h37-1-vw1",
+                "prompt": "Write one sentence for each word. Use the word the right way.",
+                "words": [
+                  "sacrifice",
+                  "Union"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
+          }]
       }
     ],
     "science": [
@@ -18627,7 +25336,53 @@ const MM_WEEKS_35 = [
               }
             ]
           }
-        ]
+        ,
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "A solid has a fixed shape and volume because its particles are packed tight and barely move, while a gas has no fixed shape or volume because its particles race around and fill any space.",
+                "id": "s37-0-c1",
+                "question": "What makes a solid different from a gas, according to the reading?"
+              },
+              {
+                "answer": "Earth is much cooler than stars, since plasma is gas so hot its atoms break apart.",
+                "id": "s37-0-c2",
+                "question": "The reading says most of the universe is plasma, though it is rare on Earth. What does that tell you about conditions on Earth compared to stars?"
+              },
+              {
+                "answer": "A state of matter that keeps its own shape and volume, like ice and rock.",
+                "id": "s37-0-c3",
+                "question": "Solids, like ice and rock, have a fixed shape and volume because their particles are packed tight. What does the word solid describe here?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Describe what solids, liquids, and gases do with shape and volume, using examples like ice, water, and air. Explain how heat changes states, such as ice melting to water and water boiling to steam. You may add plasma as a fourth state found in stars and lightning. Use complete sentences.",
+                "id": "s37-0-w1",
+                "prompt": "Explain the three states of matter in a paragraph of 4 to 6 sentences."
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Use this week's words in your own sentences.",
+            "items": [
+              {
+                "id": "s37-0-vw1",
+                "prompt": "Write one sentence for each word. Use the word the right way.",
+                "words": [
+                  "solid",
+                  "conflict"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
+          }]
       },
       {
         "title": "Sorting Matter",
@@ -18723,7 +25478,53 @@ const MM_WEEKS_35 = [
               }
             ]
           }
-        ]
+        ,
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "Does it keep its shape, and does it keep its volume?",
+                "id": "s37-1-c1",
+                "question": "What two questions do you ask to sort matter into a solid, liquid, or gas?"
+              },
+              {
+                "answer": "The pile of sand can change shape because the tiny solid grains slide past each other, but each single grain keeps its own shape and volume.",
+                "id": "s37-1-c2",
+                "question": "Sand pours like a liquid, but the reading says each grain is a solid. How can both be true?"
+              },
+              {
+                "answer": "Hard or firm, keeping its shape instead of flowing, like a solid.",
+                "id": "s37-1-c3",
+                "question": "The reading says oobleck acts liquid when poured and solid when punched. What does solid mean in this sentence?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Start with the two questions to ask: does it keep its shape, and does it keep its volume? Give examples like a book, milk, and the air in a balloon. Include a tricky one, such as sand or oobleck, and explain why it is tricky. End with why water is special, since it is found naturally as all three states on Earth. Use complete sentences.",
+                "id": "s37-1-w1",
+                "prompt": "Write a paragraph of 4 to 6 sentences explaining how to sort matter into solids, liquids, and gases."
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Use this week's words in your own sentences.",
+            "items": [
+              {
+                "id": "s37-1-vw1",
+                "prompt": "Write one sentence for each word. Use the word the right way.",
+                "words": [
+                  "solid",
+                  "Union"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
+          }]
       }
     ],
     "friday": {
@@ -18953,7 +25754,53 @@ const MM_WEEKS_35 = [
               }
             ]
           }
-        ]
+        ,
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "That all enslaved people in the rebelling states were free.",
+                "id": "h38-0-c1",
+                "question": "What did the Emancipation Proclamation declare on January 1, 1863?"
+              },
+              {
+                "answer": "It left slavery untouched in the loyal border states, and the Confederacy ignored it, so enslaved people still had to flee to Union lines or wait for the 13th Amendment.",
+                "id": "h38-0-c2",
+                "question": "Why did the Emancipation Proclamation not free everyone at once?"
+              },
+              {
+                "answer": "To announce something important in an official, public way.",
+                "id": "h38-0-c3",
+                "question": "President Lincoln issued the Emancipation Proclamation. What does proclaim mean here?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Name the Emancipation Proclamation and what it declared. Explain what it did not do: it left slavery in the loyal border states, and the Confederacy ignored it. Tell how it changed the war's meaning and let Black men join the Union army. Explain how enslaved people freed themselves by fleeing to Union lines. Use complete sentences.",
+                "id": "h38-0-w1",
+                "prompt": "Write a paragraph of 4 to 6 sentences about what changed on January 1, 1863."
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Use this week's words in your own sentences.",
+            "items": [
+              {
+                "id": "h38-0-vw1",
+                "prompt": "Write one sentence for each word. Use the word the right way.",
+                "words": [
+                  "proclaim",
+                  "decree"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
+          }]
       },
       {
         "title": "Juneteenth: Freedom Reaches Texas",
@@ -19064,7 +25911,53 @@ const MM_WEEKS_35 = [
               }
             ]
           }
-        ]
+        ,
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "June 19, 1865.",
+                "id": "h38-1-c1",
+                "question": "On what date did General Gordon Granger bring the news of freedom to Galveston, Texas?"
+              },
+              {
+                "answer": "News traveled slowly in 1865, and the order announcing freedom was not read in Galveston until General Granger arrived on June 19.",
+                "id": "h38-1-c2",
+                "question": "Why did enslaved people in Texas not know they were free until 1865?"
+              },
+              {
+                "answer": "To honor and enjoy a special event with others, here with feasts, reunions, and services of thanks.",
+                "id": "h38-1-c3",
+                "question": "The celebration that followed became known as Juneteenth. What does celebrate mean here?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Explain why enslaved people in Texas did not know they were free until June 19, 1865. Tell how General Gordon Granger brought the news to Galveston. Describe the celebration, with reunions, church services of thanks, and feasts. Tell how Black Texans carried the tradition across the country until it became a national holiday. Use complete sentences.",
+                "id": "h38-1-w1",
+                "prompt": "Write a paragraph of 4 to 6 sentences about Juneteenth."
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Use this week's words in your own sentences.",
+            "items": [
+              {
+                "id": "h38-1-vw1",
+                "prompt": "Write one sentence for each word. Use the word the right way.",
+                "words": [
+                  "celebrate",
+                  "free"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
+          }]
       }
     ],
     "science": [
@@ -19134,7 +26027,53 @@ const MM_WEEKS_35 = [
               }
             ]
           }
-        ]
+        ,
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "The bowling ball has far more mass than the beach ball.",
+                "id": "s38-0-c1",
+                "question": "A bowling ball and a beach ball are about the same volume. How do they differ?"
+              },
+              {
+                "answer": "Weight depends on gravity, which is weaker on the moon, while mass is how much matter something holds and stays the same everywhere.",
+                "id": "s38-0-c2",
+                "question": "Why would your weight change on the moon, but your mass would not?"
+              },
+              {
+                "answer": "To find out how much of something there is, here how much matter, using a tool like a scale.",
+                "id": "s38-0-c3",
+                "question": "Mass is measured in grams or kilograms, often with a balance scale. What does measure mean in this sentence?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Define mass as how much matter something holds and volume as how much space it takes up. Use the bowling ball and beach ball example to show the difference. Tell the units used for each and the tools that measure them, such as a balance scale and a measuring cup. Explain why your mass would stay the same on the moon but your weight would change. Use complete sentences.",
+                "id": "s38-0-w1",
+                "prompt": "Explain the difference between mass and volume in a paragraph of 4 to 6 sentences."
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Use this week's words in your own sentences.",
+            "items": [
+              {
+                "id": "s38-0-vw1",
+                "prompt": "Write one sentence for each word. Use the word the right way.",
+                "words": [
+                  "measure",
+                  "celebrate"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
+          }]
       },
       {
         "title": "Measuring Mass vs. Volume",
@@ -19234,7 +26173,53 @@ const MM_WEEKS_35 = [
               }
             ]
           }
-        ]
+        ,
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "The sand has much more mass because sand is denser.",
+                "id": "s38-1-c1",
+                "question": "A cup of water and a cup of sand have the same volume. How do their masses compare?"
+              },
+              {
+                "answer": "Their density, which tells you which material is denser and helps identify mystery materials.",
+                "id": "s38-1-c2",
+                "question": "If a cup of water and a cup of rice have the same volume but different masses, what can you find by dividing mass by volume?"
+              },
+              {
+                "answer": "Finding out the amount of something with a tool or unit, here mass and volume.",
+                "id": "s38-1-c3",
+                "question": "By measuring both, you can find density. What does measuring mean here?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Explain that you would measure the mass and the volume of each material. Tell how to find density by dividing mass by volume. Use the cup of water and the cup of sand as your example. Predict which would sink and which would float, and explain how jewelers use density to catch fake gold. Use complete sentences.",
+                "id": "s38-1-w1",
+                "prompt": "Write a paragraph of 4 to 6 sentences describing how you would compare two mystery materials using mass and volume."
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Use this week's words in your own sentences.",
+            "items": [
+              {
+                "id": "s38-1-vw1",
+                "prompt": "Write one sentence for each word. Use the word the right way.",
+                "words": [
+                  "measure",
+                  "decree"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
+          }]
       }
     ],
     "friday": {
@@ -19484,7 +26469,53 @@ const MM_WEEKS_35 = [
               }
             ]
           }
-        ]
+        ,
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "After Gettysburg, the Confederacy was always retreating, because the South lost so many men it could never fully recover.",
+                "id": "h39-0-c1",
+                "question": "Why was Gettysburg called the turning point of the war?"
+              },
+              {
+                "answer": "Its short, powerful words about freedom and equality said more than the two-hour speech of the main speaker that day, proving that saying less can mean more.",
+                "id": "h39-0-c2",
+                "question": "Why do you think the Gettysburg Address became so famous even though it was only 272 words long?"
+              },
+              {
+                "answer": "The moment when things change direction, here when the war started going the Union's way for good.",
+                "id": "h39-0-c3",
+                "question": "Gettysburg was the turning point of the war. What does turning point mean here?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Set the scene: three days of battle at Gettysburg in July 1863, the largest battle ever fought in North America, ending with Pickett's Charge. Explain why the battle was the turning point of the war. Tell how Lincoln dedicated the cemetery months later with a two-minute, 272-word speech about freedom and equality. Explain why saying less, as Lincoln proved, can mean more. Use complete sentences.",
+                "id": "h39-0-w1",
+                "prompt": "Write a paragraph of 4 to 6 sentences about the Gettysburg Address."
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Use this week's words in your own sentences.",
+            "items": [
+              {
+                "id": "h39-0-vw1",
+                "prompt": "Write one sentence for each word. Use the word the right way.",
+                "words": [
+                  "turning point",
+                  "address"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
+          }]
       },
       {
         "title": "Valor at Milliken's Bend and Port Hudson",
@@ -19556,7 +26587,53 @@ const MM_WEEKS_35 = [
               }
             ]
           }
-        ]
+        ,
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "Black regiments charged fortifications repeatedly under heavy fire, and their courage convinced Northerners they deserved equal pay, which Congress eventually granted.",
+                "id": "h39-1-c1",
+                "question": "What happened at Port Hudson that changed laws in Washington?"
+              },
+              {
+                "answer": "The soldiers' sacrifice proved Black men had earned both freedom and citizenship, so lawmakers could no longer argue they did not deserve equal pay.",
+                "id": "h39-1-c2",
+                "question": "Why would bravery on the battlefield change what Congress was willing to do?"
+              },
+              {
+                "answer": "Great courage in battle, here the bravery of the Black soldiers.",
+                "id": "h39-1-c3",
+                "question": "Black soldiers fought with extraordinary bravery. Their valor helped convince the nation. What does valor mean here?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Describe the battles: hand-to-hand combat at Milliken's Bend and repeated charges under heavy fire at Port Hudson. Tell what their bravery proved about Black soldiers. Explain how their sacrifice convinced Northerners and changed laws, including equal pay from Congress. End with how sacrifice spoke louder than speeches. Use complete sentences.",
+                "id": "h39-1-w1",
+                "prompt": "Write a paragraph of 4 to 6 sentences about the valor of Black soldiers at Milliken's Bend and Port Hudson."
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Use this week's words in your own sentences.",
+            "items": [
+              {
+                "id": "h39-1-vw1",
+                "prompt": "Write one sentence for each word. Use the word the right way.",
+                "words": [
+                  "valor",
+                  "honor"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
+          }]
       }
     ],
     "science": [
@@ -19626,7 +26703,53 @@ const MM_WEEKS_35 = [
               }
             ]
           }
-        ]
+        ,
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "A mixture is two or more materials stirred together but not joined, and you can still see the parts. In a solution, one material dissolves completely into another so you cannot see it.",
+                "id": "s39-0-c1",
+                "question": "What is the difference between a mixture and a solution?"
+              },
+              {
+                "answer": "The solute, like sugar, is dissolved so completely that it is invisible, but it is still there because you can taste it.",
+                "id": "s39-0-c2",
+                "question": "The reading says every sweet drink is a solution you can taste but not see. What does that tell you about the solute?"
+              },
+              {
+                "answer": "Breaks apart and mixes evenly into the liquid so it can no longer be seen.",
+                "id": "s39-0-c3",
+                "question": "One material dissolves completely into another, like sugar in tea. What does dissolves mean here?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Define a mixture and give an example like trail mix. Define a solution and give an example like sugar in tea. Name the solute and the solvent in a solution. Explain saturation, using hot tea and iced tea to show how heat raises the limit. End with how the air you breathe is a solution of gases. Use complete sentences.",
+                "id": "s39-0-w1",
+                "prompt": "Explain mixtures and solutions in a paragraph of 4 to 6 sentences."
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Use this week's words in your own sentences.",
+            "items": [
+              {
+                "id": "s39-0-vw1",
+                "prompt": "Write one sentence for each word. Use the word the right way.",
+                "words": [
+                  "dissolve",
+                  "honor"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
+          }]
       },
       {
         "title": "Testing Mixtures vs. Solutions",
@@ -19726,7 +26849,53 @@ const MM_WEEKS_35 = [
               }
             ]
           }
-        ]
+        ,
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "Stir them: sand stays visible and settles, so it is a mixture, while sugar vanishes, so it is a solution. Shine a light through: mixtures look cloudy and solutions look clear.",
+                "id": "s39-1-c1",
+                "question": "How can you test whether sand in water is a mixture and sugar in water is a solution?"
+              },
+              {
+                "answer": "Solutions carry oxygen and nutrients everywhere in blood and dissolve food into pieces small enough to absorb, which would not work if the parts stayed separate like in a mixture.",
+                "id": "s39-1-c2",
+                "question": "Why do you think your body runs on solutions instead of mixtures?"
+              },
+              {
+                "answer": "Break food down into tiny pieces that mix into a liquid, so the body can absorb it.",
+                "id": "s39-1-c3",
+                "question": "Digestive juices dissolve food into absorbable bits. What does dissolve mean in this sentence?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Describe stirring sand into water and stirring sugar into water, and what you would see. Tell how shining a light through helps: mixtures look cloudy and solutions look clear. Explain how heat can dissolve more solute, like hot tea holding more sugar. End with one example from your body, such as blood, digestive juices, or tears. Use complete sentences.",
+                "id": "s39-1-w1",
+                "prompt": "Write a paragraph of 4 to 6 sentences describing a test to tell a mixture from a solution."
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Use this week's words in your own sentences.",
+            "items": [
+              {
+                "id": "s39-1-vw1",
+                "prompt": "Write one sentence for each word. Use the word the right way.",
+                "words": [
+                  "dissolve",
+                  "turning point"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
+          }]
       }
     ],
     "friday": {
@@ -19975,7 +27144,53 @@ const MM_WEEKS_35 = [
               }
             ]
           }
-        ]
+        ,
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "The 13th ended slavery, the 14th made Black people citizens, and the 15th protected Black men's right to vote.",
+                "id": "h40-0-c1",
+                "question": "What did the 13th, 14th, and 15th Amendments do?"
+              },
+              {
+                "answer": "Violent groups worked to destroy it, and sharecropping trapped many families in debt for generations, turning freedom into a new kind of bondage.",
+                "id": "h40-0-c2",
+                "question": "Why was Reconstruction's promise called fragile?"
+              },
+              {
+                "answer": "To change it officially by adding an amendment, like the ones that ended slavery and protected voting rights.",
+                "id": "h40-0-c3",
+                "question": "Congress passed the 13th Amendment ending slavery. What does it mean to amend the Constitution?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Tell what Reconstruction was and the big question it faced: how to rebuild the South and bring freed people into American life. Name the 13th, 14th, and 15th Amendments and what each did. Describe the hope: freedmen's schools opened, and Black men voted and held office for the first time. Explain why the promise was fragile, including violent groups and sharecropping debt. Use complete sentences.",
+                "id": "h40-0-w1",
+                "prompt": "Write a paragraph of 4 to 6 sentences about Reconstruction's promise."
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Use this week's words in your own sentences.",
+            "items": [
+              {
+                "id": "h40-0-vw1",
+                "prompt": "Write one sentence for each word. Use the word the right way.",
+                "words": [
+                  "amend",
+                  "freedom"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
+          }]
       },
       {
         "title": "Hiram Revels: First Black Senator",
@@ -20047,7 +27262,53 @@ const MM_WEEKS_35 = [
               }
             ]
           }
-        ]
+        ,
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "He was a minister and former chaplain for Black troops who became the first Black man to serve in the United States Senate.",
+                "id": "h40-1-c1",
+                "question": "Who was Hiram Revels, and what did he do in 1870?"
+              },
+              {
+                "answer": "A Black man was legislating in the Capitol, which would have been impossible before the war, showing American democracy had grown more equal than ever before.",
+                "id": "h40-1-c2",
+                "question": "Why did seating Hiram Revels show how far Reconstruction had come?"
+              },
+              {
+                "answer": "That freedom meant full citizenship, including the right to vote and hold office, not just being free from slavery.",
+                "id": "h40-1-c3",
+                "question": "In 1870, Hiram Revels became the first Black man to serve in the United States Senate. What does this tell you freedom made possible?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Tell who he was: born free in North Carolina, a minister, and a chaplain for Black troops during the war. Explain how Mississippi's legislature chose him and how he became the first Black senator in 1870. Tell why his victory was a landmark of what democracy can do. You may mention the Black colleges founded during Reconstruction, such as Howard and Fisk, built by people who valued learning above comfort. Use complete sentences.",
+                "id": "h40-1-w1",
+                "prompt": "Write a paragraph of 4 to 6 sentences about Hiram Revels."
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Use this week's words in your own sentences.",
+            "items": [
+              {
+                "id": "h40-1-vw1",
+                "prompt": "Write one sentence for each word. Use the word the right way.",
+                "words": [
+                  "freedom",
+                  "amend"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
+          }]
       }
     ],
     "science": [
@@ -20117,7 +27378,53 @@ const MM_WEEKS_35 = [
               }
             ]
           }
-        ]
+        ,
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "Conduction, heat moving through touch, like a metal spoon in hot soup. Convection, heat moving through flowing liquids or gases, like warm air rising. Radiation, heat traveling as waves, like sunlight warming your skin.",
+                "id": "s40-0-c1",
+                "question": "Name the three ways heat moves and give an example of each."
+              },
+              {
+                "answer": "Because of convection: warm air rises and cool air sinks, so the warm air gathers upstairs.",
+                "id": "s40-0-c2",
+                "question": "Why is the upstairs of a house often warmer than the downstairs?"
+              },
+              {
+                "answer": "To carry or move heat through a material, like the metal spoon carrying heat from the soup.",
+                "id": "s40-0-c3",
+                "question": "Conduction is heat moving through touch. What does conduct mean in this science sentence?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Name conduction, convection, and radiation. Give an example of each: a metal spoon in hot soup, warm air rising in a house, and sunlight warming your skin. Tell how convection drives weather and even moves continents. End with why understanding heat movement helps engineers design everything from ovens to winter coats. Use complete sentences.",
+                "id": "s40-0-w1",
+                "prompt": "Explain how heat moves in a paragraph of 4 to 6 sentences."
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Use this week's words in your own sentences.",
+            "items": [
+              {
+                "id": "s40-0-vw1",
+                "prompt": "Write one sentence for each word. Use the word the right way.",
+                "words": [
+                  "conduct",
+                  "insulate"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
+          }]
       },
       {
         "title": "Testing Heat Movement",
@@ -20213,7 +27520,53 @@ const MM_WEEKS_35 = [
               }
             ]
           }
-        ]
+        ,
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "The metal conducts heat away from your hand faster than wood does.",
+                "id": "s40-1-c1",
+                "question": "Why does a metal spoon left in a room feel colder than a wooden spoon in the same room?"
+              },
+              {
+                "answer": "So convection carries the warm air upward through the room.",
+                "id": "s40-1-c2",
+                "question": "Why do homes place heating vents low?"
+              },
+              {
+                "answer": "To block or slow down the movement of heat, like a thermos keeping a drink hot for hours.",
+                "id": "s40-1-c3",
+                "question": "Insulation slows all three kinds of heat transfer. What does insulate mean here?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Describe touching a metal spoon and a wooden spoon left in the same room, and what you would feel. Describe watching steam rise over a pot for convection. Explain how engineers use these ideas: metal pot bottoms for conduction and low heating vents for convection. End with how a thermos blocks all three kinds of heat transfer. Use complete sentences.",
+                "id": "s40-1-w1",
+                "prompt": "Write a paragraph of 4 to 6 sentences describing a test of heat movement you could do at home."
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Use this week's words in your own sentences.",
+            "items": [
+              {
+                "id": "s40-1-vw1",
+                "prompt": "Write one sentence for each word. Use the word the right way.",
+                "words": [
+                  "insulate",
+                  "conduct"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
+          }]
       }
     ],
     "friday": {
@@ -20445,7 +27798,53 @@ const MM_WEEKS_35 = [
               }
             ]
           }
-        ]
+        ,
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "The Union Pacific and Central Pacific rail lines met, and a golden spike was driven to unite the rails, linking the nation coast to coast.",
+                "id": "h41-0-c1",
+                "question": "What happened at Promontory, Utah, on May 10, 1869?"
+              },
+              {
+                "answer": "One gain: a trip that took months now took days, and America was linked coast to coast. One cost: it cut through Native lands and buffalo herds were nearly wiped out.",
+                "id": "h41-0-c2",
+                "question": "Was the transcontinental railroad worth its cost? Give one gain and one cost from the reading."
+              },
+              {
+                "answer": "To join together into one, here joining the two rail lines into one coast-to-coast railroad.",
+                "id": "h41-0-c3",
+                "question": "A golden spike was driven to unite the rails. What does unite mean here?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Start with the gain: the Union Pacific and Central Pacific met at Promontory, Utah, in 1869, and trips that took months now took days. Tell the costs: it cut through Native lands, brought settlers who took more territory, and buffalo herds were nearly wiped out. Give your opinion with a reason from the reading. Use complete sentences.",
+                "id": "h41-0-w1",
+                "prompt": "The transcontinental railroad united America and wounded it at the same time. Write a paragraph of 4 to 6 sentences arguing whether it was worth the cost."
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Use this week's words in your own sentences.",
+            "items": [
+              {
+                "id": "h41-0-vw1",
+                "prompt": "Write one sentence for each word. Use the word the right way.",
+                "words": [
+                  "spike",
+                  "unite"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
+          }]
       },
       {
         "title": "Pullman Porters Organize",
@@ -20556,7 +27955,53 @@ const MM_WEEKS_35 = [
               }
             ]
           }
-        ]
+        ,
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "A. Philip Randolph led them to form the Brotherhood of Sleeping Car Porters, the first Black labor union to win recognition from a major company.",
+                "id": "h41-1-c1",
+                "question": "Who led the Pullman porters, and what did they form in 1925?"
+              },
+              {
+                "answer": "Their fight for fair pay and dignity showed that workers, united, could move even the mighty railroads, giving others a model for organizing.",
+                "id": "h41-1-c2",
+                "question": "Why did the porters' fight help power the civil rights movement?"
+              },
+              {
+                "answer": "Joined together as one group with a shared goal, like the porters joining their union.",
+                "id": "h41-1-c3",
+                "question": "The porters showed that workers, united, could move even the mighty railroads. What does united mean here?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Explain who the porters were: Black workers serving passengers in sleeping cars, working long hours for low pay. Tell how A. Philip Randolph led them to form the Brotherhood of Sleeping Car Porters in 1925. Explain what they won: recognition, fair pay, and dignity. Tell how their fight helped power the civil rights movement. Use complete sentences.",
+                "id": "h41-1-w1",
+                "prompt": "Write a paragraph of 4 to 6 sentences about why the Pullman porters' union mattered."
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Use this week's words in your own sentences.",
+            "items": [
+              {
+                "id": "h41-1-vw1",
+                "prompt": "Write one sentence for each word. Use the word the right way.",
+                "words": [
+                  "unite",
+                  "track"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
+          }]
       }
     ],
     "science": [
@@ -20638,7 +28083,53 @@ const MM_WEEKS_35 = [
               }
             ]
           }
-        ]
+        ,
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "The angle it hits equals the angle it bounces away.",
+                "id": "s41-0-c1",
+                "question": "What rule does light follow when it reflects?"
+              },
+              {
+                "answer": "Paper is rough and scatters light in all directions, while a mirror reflects almost all light in one direction, following the angle rule.",
+                "id": "s41-0-c2",
+                "question": "Why does paper look the same from every side, but a mirror only shows you when angled just right?"
+              },
+              {
+                "answer": "Bounces light off its surface so you can see the image, like the sky in the water.",
+                "id": "s41-0-c3",
+                "question": "Still water reflects the sky like glass. What does reflects mean here?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Define reflection as light bouncing off a surface. Give examples: a mirror and still water reflecting the sky. State the angle rule: the angle light hits equals the angle it bounces away. Explain why rough surfaces like paper look the same from every side. End with how reflection lets us see everything. Use complete sentences.",
+                "id": "s41-0-w1",
+                "prompt": "Explain reflection in a paragraph of 4 to 6 sentences."
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Use this week's words in your own sentences.",
+            "items": [
+              {
+                "id": "s41-0-vw1",
+                "prompt": "Write one sentence for each word. Use the word the right way.",
+                "words": [
+                  "reflect",
+                  "bend"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
+          }]
       },
       {
         "title": "Refraction: Light Bends",
@@ -20729,7 +28220,53 @@ const MM_WEEKS_35 = [
               }
             ]
           }
-        ]
+        ,
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "Because of refraction: light bends as it moves from water to air at the water's surface.",
+                "id": "s41-1-c1",
+                "question": "Why does a straw in a glass of water look broken?"
+              },
+              {
+                "answer": "Refraction makes the fish appear in a different spot than it really is, so the fisherman would miss.",
+                "id": "s41-1-c2",
+                "question": "How could refraction trick a fisherman trying to spear a fish?"
+              },
+              {
+                "answer": "To change direction, here light changing direction as it moves between materials.",
+                "id": "s41-1-c3",
+                "question": "Refraction is light bending as it moves from one material to another. What does bend mean here?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Define refraction as light bending as it moves from one material to another. Give examples: a straw in water looking broken, eyeglasses bending light to fix vision, and a prism bending white light into a rainbow. Tell how it makes pools look shallower and fish appear in a different spot. End with one way bending light changed the world, such as telescopes or cameras. Use complete sentences.",
+                "id": "s41-1-w1",
+                "prompt": "Explain refraction in a paragraph of 4 to 6 sentences."
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Use this week's words in your own sentences.",
+            "items": [
+              {
+                "id": "s41-1-vw1",
+                "prompt": "Write one sentence for each word. Use the word the right way.",
+                "words": [
+                  "bend",
+                  "reflect"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
+          }]
       }
     ],
     "friday": {
@@ -20961,7 +28498,53 @@ const MM_WEEKS_35 = [
               }
             ]
           }
-        ]
+        ,
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "About three months. Stampedes, river crossings, and storms made the work dangerous.",
+                "id": "h42-0-c1",
+                "question": "How long did a cattle drive take, and what made it dangerous?"
+              },
+              {
+                "answer": "Barbed wire fenced the open range, and railroads reached Texas, so herds no longer needed long walks.",
+                "id": "h42-0-c2",
+                "question": "How did the cattle drive system come to an end?"
+              },
+              {
+                "answer": "To move animals along a path on foot, guiding the herd north on the trail.",
+                "id": "h42-0-c3",
+                "question": "Cowboys gathered herds and drove them hundreds of miles north. What does drive mean here?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Explain why drives started: Texas had millions of wild cattle and the North paid good money for beef. Tell what the journey was like: about three months on trails like the Chisholm, riding all day, eating dust, and sleeping in shifts to guard the herd. Name the cook called cookie and the chuck wagon. Name the dangers and end with how barbed wire and railroads ended the cowboy era. Use complete sentences.",
+                "id": "h42-0-w1",
+                "prompt": "Write a paragraph of 4 to 6 sentences describing a cattle drive."
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Use this week's words in your own sentences.",
+            "items": [
+              {
+                "id": "h42-0-vw1",
+                "prompt": "Write one sentence for each word. Use the word the right way.",
+                "words": [
+                  "drive",
+                  "corral"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
+          }]
       },
       {
         "title": "Black Cowboys: Nat Love and Bose Ikard",
@@ -21072,7 +28655,53 @@ const MM_WEEKS_35 = [
               }
             ]
           }
-        ]
+        ,
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "Nat Love was born enslaved in Tennessee, headed west at sixteen, and became a legendary cowboy and bronc rider known as Deadwood Dick. Bose Ikard was a trusted cowboy on the Goodnight-Loving Trail whom rancher Charles Goodnight trusted with large sums of money and named in his will.",
+                "id": "h42-1-c1",
+                "question": "Who were Nat Love and Bose Ikard?"
+              },
+              {
+                "answer": "About one in four cowboys was Black, and Black cowboys invented rodeo events like bulldogging, though movies rarely showed it.",
+                "id": "h42-1-c2",
+                "question": "What does the reading say about how diverse the real West was?"
+              },
+              {
+                "answer": "A months-long journey where cowboys moved herds of cattle hundreds of miles north to sell them.",
+                "id": "h42-1-c3",
+                "question": "The reading calls the long journey north a cattle drive. Based on the reading, what is a cattle drive?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Start with the fact that about one in four cowboys was Black, though movies rarely show it. Tell Nat Love's story: born enslaved, headed west at sixteen, became Deadwood Dick and won a roping contest in Deadwood. Tell Bose Ikard's story: a trusted rider on the Goodnight-Loving Trail, trusted with money and named in a will. End with how the real West was more diverse than legend says. Use complete sentences.",
+                "id": "h42-1-w1",
+                "prompt": "Write a paragraph of 4 to 6 sentences about Black cowboys like Nat Love and Bose Ikard."
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Use this week's words in your own sentences.",
+            "items": [
+              {
+                "id": "h42-1-vw1",
+                "prompt": "Write one sentence for each word. Use the word the right way.",
+                "words": [
+                  "drive",
+                  "lasso"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
+          }]
       }
     ],
     "science": [
@@ -21154,7 +28783,53 @@ const MM_WEEKS_35 = [
               }
             ]
           }
-        ]
+        ,
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "Sound is vibration traveling through air, water, or solids. It needs a material to travel through.",
+                "id": "s42-0-c1",
+                "question": "What is sound, and what does it need to travel?"
+              },
+              {
+                "answer": "Space has no air, and sound needs a material like air to travel through, so there would be nothing to carry the vibration.",
+                "id": "s42-0-c2",
+                "question": "Why would a real space battle be silent even though movies show explosions with sound?"
+              },
+              {
+                "answer": "To shake back and forth quickly, like the plucked string shaking hundreds of times per second.",
+                "id": "s42-0-c3",
+                "question": "Pluck a guitar string and it shakes back and forth hundreds of times per second. Based on this example, what does vibrate mean?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Define sound as vibration traveling through air, water, or solids. Trace the path: a plucked guitar string shakes, pushes air into waves, your eardrum vibrates, tiny ear bones pass the motion along, and your brain hears music. Explain why there is no sound in space. End with how everything you hear, from whispers to thunder, is vibration on the move. Use complete sentences.",
+                "id": "s42-0-w1",
+                "prompt": "Explain how sound travels in a paragraph of 4 to 6 sentences."
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Use this week's words in your own sentences.",
+            "items": [
+              {
+                "id": "s42-0-vw1",
+                "prompt": "Write one sentence for each word. Use the word the right way.",
+                "words": [
+                  "vibrate",
+                  "echo"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
+          }]
       },
       {
         "title": "Pitch: High and Low",
@@ -21253,7 +28928,53 @@ const MM_WEEKS_35 = [
               }
             ]
           }
-        ]
+        ,
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "How fast something vibrates: fast vibrations make high pitch and slow vibrations make low pitch.",
+                "id": "s42-1-c1",
+                "question": "What decides whether a sound has high or low pitch?"
+              },
+              {
+                "answer": "A dog whistle vibrates so fast that its pitch is above the range human ears can hear, but dogs can hear pitches far above human range.",
+                "id": "s42-1-c2",
+                "question": "Why can a dog hear a dog whistle that humans cannot hear?"
+              },
+              {
+                "answer": "Because bats detect pitches far above human range, so the echoes of those high sounds are part of their world but not ours.",
+                "id": "s42-1-c3",
+                "question": "An echo is sound bouncing back to you. The reading says bats navigate by sounds humans cannot detect. Why would a bat hear echoes that you cannot?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Define pitch as how high or low a sound seems, decided by how fast something vibrates. Compare a small flute and a big tuba, and tell what happens when you tighten a guitar string. Tell what hertz means: shakes per second. Explain why dogs can hear a dog whistle that humans cannot. End with how every instrument's pitch comes from the speed of its shake. Use complete sentences.",
+                "id": "s42-1-w1",
+                "prompt": "Explain pitch in a paragraph of 4 to 6 sentences."
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Use this week's words in your own sentences.",
+            "items": [
+              {
+                "id": "s42-1-vw1",
+                "prompt": "Write one sentence for each word. Use the word the right way.",
+                "words": [
+                  "vibrate",
+                  "drive"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
+          }]
       }
     ],
     "friday": {
@@ -21490,7 +29211,53 @@ const MM_WEEKS_35 = [
               }
             ]
           }
-        ]
+        ,
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "Edison's workshop produced the practical light bulb, the phonograph, and hundreds of patents. Bell invented the telephone in 1876. Ford's moving assembly line made cars cheap enough for ordinary families.",
+                "id": "h43-0-c1",
+                "question": "What did each of the three inventors contribute: Edison, Bell, and Ford?"
+              },
+              {
+                "answer": "It was the first research factory, where teams tested thousands of ideas systematically, making trial and error the engine of progress.",
+                "id": "h43-0-c2",
+                "question": "Why did Edison's Menlo Park lab matter even beyond the light bulb?"
+              },
+              {
+                "answer": "An official right that protects an inventor's new idea or invention.",
+                "id": "h43-0-c3",
+                "question": "Edison's workshop produced hundreds of patents. What is a patent?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Name your invention and tell what problem it solves. Explain how it changes daily life, the way light, voice, and wheels changed life. Tell why ordinary families would want it. End with what makes your invention new and useful. Use complete sentences.",
+                "id": "h43-0-w1",
+                "prompt": "Pretend you are an inventor like Edison, Bell, or Ford. Write a paragraph of 4 to 6 sentences pitching your invention."
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Use this week's words in your own sentences.",
+            "items": [
+              {
+                "id": "h43-0-vw1",
+                "prompt": "Write one sentence for each word. Use the word the right way.",
+                "words": [
+                  "patent",
+                  "invent"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
+          }]
       },
       {
         "title": "Black Inventors of the Age",
@@ -21601,7 +29368,53 @@ const MM_WEEKS_35 = [
               }
             ]
           }
-        ]
+        ,
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "Latimer improved Edison's light bulb with a longer-lasting carbon filament. Woods invented devices for railroads and telephones. McCoy invented an automatic lubricator for steam engines.",
+                "id": "h43-1-c1",
+                "question": "What did Lewis Latimer, Granville Woods, and Elijah McCoy invent?"
+              },
+              {
+                "answer": "To avoid cheap copies, because McCoy's lubricator was the trusted original.",
+                "id": "h43-1-c2",
+                "question": "Why did buyers ask for the real McCoy?"
+              },
+              {
+                "answer": "They created new devices and ideas, like the longer-lasting light bulb filament and the steam engine lubricator.",
+                "id": "h43-1-c3",
+                "question": "These men patented brilliance in an age that tried to deny their genius. What does it mean that these men were inventors?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Choose Lewis Latimer, Granville Woods, or Elijah McCoy and tell what he invented. Explain how the invention helped railroads, telephones, light bulbs, or steam engines. Add one extra detail, like Woods defending his patents in court or buyers asking for the real McCoy. End with why their brilliance mattered in an age that tried to deny their genius. Use complete sentences.",
+                "id": "h43-1-w1",
+                "prompt": "Write a paragraph of 4 to 6 sentences about the Black inventors of the industrial age."
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Use this week's words in your own sentences.",
+            "items": [
+              {
+                "id": "h43-1-vw1",
+                "prompt": "Write one sentence for each word. Use the word the right way.",
+                "words": [
+                  "patent",
+                  "bright"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
+          }]
       }
     ],
     "science": [
@@ -21683,7 +29496,53 @@ const MM_WEEKS_35 = [
               }
             ]
           }
-        ]
+        ,
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "Static electricity is a buildup of electric charge on a surface. Rub a balloon on your hair and the rubbing moves tiny charges onto the balloon, so it sticks to the wall.",
+                "id": "s43-0-c1",
+                "question": "What is static electricity, and how can you make it with a balloon?"
+              },
+              {
+                "answer": "Like a balloon building charge from rubbing, clouds build charge until it zaps to the ground. It is the same idea, only city-sized.",
+                "id": "s43-0-c2",
+                "question": "Why is lightning described as static electricity on a giant scale?"
+              },
+              {
+                "answer": "Tiny bits of electricity that gather on a surface and can attract or repel things.",
+                "id": "s43-0-c3",
+                "question": "Static electricity is a buildup of electric charge on a surface. What does charge mean here?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Define static electricity as a buildup of electric charge on a surface. Describe the balloon on hair example and why hair stands up, with each strand pushing away from the others. Explain that opposite charges attract and like charges repel. Tell how lightning is static electricity on a giant scale. End with the comb and paper bits test. Use complete sentences.",
+                "id": "s43-0-w1",
+                "prompt": "Explain static electricity in a paragraph of 4 to 6 sentences."
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Use this week's words in your own sentences.",
+            "items": [
+              {
+                "id": "s43-0-vw1",
+                "prompt": "Write one sentence for each word. Use the word the right way.",
+                "words": [
+                  "charge",
+                  "current"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
+          }]
       },
       {
         "title": "Testing Static",
@@ -21782,7 +29641,53 @@ const MM_WEEKS_35 = [
               }
             ]
           }
-        ]
+        ,
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "Charge a plastic comb by rubbing it on wool, then hold it near tiny paper pieces and watch them jump up and stick.",
+                "id": "s43-1-c1",
+                "question": "Describe one static test from the reading."
+              },
+              {
+                "answer": "So they can tell which change caused the result, like whether dry air or humid air works better for static.",
+                "id": "s43-1-c2",
+                "question": "Why do scientists change only one thing at a time when they test?"
+              },
+              {
+                "answer": "To safely remove the charge buildup so a tiny spark does not kill a computer chip.",
+                "id": "s43-1-c3",
+                "question": "A tiny static spark can destroy a computer chip. Why do electronics workers wear grounding straps?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Start with your plan: charge a comb on wool and hold it near tiny paper pieces. Tell what you would change one thing at a time, such as balloon versus comb or dry air versus humid air. Explain how you would tally results as attract or not. End with why factories control humidity to tame static. Use complete sentences.",
+                "id": "s43-1-w1",
+                "prompt": "Write a paragraph of 4 to 6 sentences describing a static test you would run."
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Use this week's words in your own sentences.",
+            "items": [
+              {
+                "id": "s43-1-vw1",
+                "prompt": "Write one sentence for each word. Use the word the right way.",
+                "words": [
+                  "charge",
+                  "bright"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
+          }]
       }
     ],
     "friday": {
@@ -22014,7 +29919,53 @@ const MM_WEEKS_35 = [
               }
             ]
           }
-        ]
+        ,
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "More than 12 million.",
+                "id": "h44-0-c1",
+                "question": "How many immigrants passed through Ellis Island between 1892 and 1954?"
+              },
+              {
+                "answer": "Doctors inspected each person for illness, marking coats with chalk for further checks. Most passed in a day, but some waited weeks.",
+                "id": "h44-0-c2",
+                "question": "What happened to newcomers when they reached the great hall at Ellis Island?"
+              },
+              {
+                "answer": "The island in New York Harbor where more than 12 million immigrants were inspected before entering America.",
+                "id": "h44-0-c3",
+                "question": "Ellis Island was the doorway of hope for millions. What was Ellis Island?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Tell where you sailed from and who you are traveling with. Describe climbing to the great hall with its high, echoing ceiling. Tell what happens at the inspection: doctors checking for illness and chalk marks on coats. End with walking down the stairs into America and how you feel. Use complete sentences.",
+                "id": "h44-0-w1",
+                "prompt": "Imagine you are arriving at Ellis Island. Write a paragraph of 4 to 6 sentences about your arrival in America."
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Use this week's words in your own sentences.",
+            "items": [
+              {
+                "id": "h44-0-vw1",
+                "prompt": "Write one sentence for each word. Use the word the right way.",
+                "words": [
+                  "Ellis",
+                  "inspect"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
+          }]
       },
       {
         "title": "Caribbean Newcomers in Harlem",
@@ -22125,7 +30076,53 @@ const MM_WEEKS_35 = [
               }
             ]
           }
-        ]
+        ,
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "They settled in Harlem. Marcus Garvey was a Jamaican immigrant who built a huge movement celebrating Black pride.",
+                "id": "h44-1-c1",
+                "question": "Where did the Caribbean newcomers settle, and who was Marcus Garvey?"
+              },
+              {
+                "answer": "Caribbean food, music, and ideas, plus new lives as workers, business owners, and artists.",
+                "id": "h44-1-c2",
+                "question": "What did Caribbean newcomers add to Harlem's culture?"
+              },
+              {
+                "answer": "Black immigrants from the Caribbean, from Jamaica, Barbados, and Trinidad, who arrived in New York and settled in Harlem.",
+                "id": "h44-1-c3",
+                "question": "These newcomers proved that the immigrant story belongs to Black families too. Who were the newcomers in this sentence?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Tell who the newcomers were: Black immigrants from Jamaica, Barbados, and Trinidad. Describe settling in Harlem alongside Black Americans from the South. Tell what they built: new lives as workers, business owners, and artists. Include Marcus Garvey's movement and Caribbean food, music, and ideas blending into Harlem's culture. Use complete sentences.",
+                "id": "h44-1-w1",
+                "prompt": "Write a paragraph of 4 to 6 sentences about who came to Harlem and what they built."
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Use this week's words in your own sentences.",
+            "items": [
+              {
+                "id": "h44-1-vw1",
+                "prompt": "Write one sentence for each word. Use the word the right way.",
+                "words": [
+                  "newcomer",
+                  "inspect"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
+          }]
       }
     ],
     "science": [
@@ -22207,7 +30204,53 @@ const MM_WEEKS_35 = [
               }
             ]
           }
-        ]
+        ,
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "You get two smaller magnets, each with its own north and south poles.",
+                "id": "s44-0-c1",
+                "question": "What happens when you cut a magnet in half?"
+              },
+              {
+                "answer": "The needle is a small magnet, and Earth's magnetic field pulls one end of it toward the north.",
+                "id": "s44-0-c2",
+                "question": "Why would a magnetized compass needle always point north?"
+              },
+              {
+                "answer": "One of the two ends of a magnet where it is strongest. Opposite poles attract and like poles repel.",
+                "id": "s44-0-c3",
+                "question": "Every magnet has two poles: north and south. What is a pole?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Tell that magnets pull certain metals without touching them. Name the two poles, north and south, and the rules: opposites attract and likes repel. Explain how a magnetized needle makes a compass that always points north. Tell what happens if you cut a magnet in half. End with how Earth's magnetic field protects us from the solar wind. Use complete sentences.",
+                "id": "s44-0-w1",
+                "prompt": "Explain how magnets work in a paragraph of 4 to 6 sentences."
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Use this week's words in your own sentences.",
+            "items": [
+              {
+                "id": "s44-0-vw1",
+                "prompt": "Write one sentence for each word. Use the word the right way.",
+                "words": [
+                  "pole",
+                  "attract"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
+          }]
       },
       {
         "title": "Electromagnets",
@@ -22306,7 +30349,53 @@ const MM_WEEKS_35 = [
               }
             ]
           }
-        ]
+        ,
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "Wrap wire around an iron nail and connect a battery. Disconnect the battery and the magnetism fades.",
+                "id": "s44-1-c1",
+                "question": "How do you make an electromagnet, and how do you turn it off?"
+              },
+              {
+                "answer": "Unlike permanent magnets, they switch on and off, so they can lift cars in junkyards or float maglev trains, obeying a flipped switch.",
+                "id": "s44-1-c2",
+                "question": "Why are electromagnets called the muscles of modern machines?"
+              },
+              {
+                "answer": "To pull toward, like opposite poles of magnets pulling each other, or the electromagnet pulling up cars.",
+                "id": "s44-1-c3",
+                "question": "Junkyards use giant electromagnets to lift cars. What does attract mean, using what you learned about magnets?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Tell how to build it: wrap wire around an iron nail and connect a battery. Explain how to turn it off by disconnecting the battery. Tell how to make it stronger with more coils. Describe testing strength by counting how many paperclips it holds. End with one real use, such as junkyard cranes or maglev trains. Use complete sentences.",
+                "id": "s44-1-w1",
+                "prompt": "Explain how to build and test an electromagnet in a paragraph of 4 to 6 sentences."
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Use this week's words in your own sentences.",
+            "items": [
+              {
+                "id": "s44-1-vw1",
+                "prompt": "Write one sentence for each word. Use the word the right way.",
+                "words": [
+                  "attract",
+                  "inspect"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
+          }]
       }
     ],
     "friday": {
@@ -22556,7 +30645,53 @@ const MM_WEEKS_35 = [
               }
             ]
           }
-        ]
+        ,
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "Children working long hours, unsafe food, and crowded, dirty cities.",
+                "id": "h45-0-c1",
+                "question": "What three problems did Progressive reformers try to fix in the early 1900s?"
+              },
+              {
+                "answer": "Their writing exposed the truth about terrible conditions, which made the public demand change and forced powerful reforms.",
+                "id": "h45-0-c2",
+                "question": "Why do you think brave writers were so important to the reform movement?"
+              },
+              {
+                "answer": "A change made to fix something that is broken or unfair.",
+                "id": "h45-0-c3",
+                "question": "In the sentence \"Progressive reforms still shape your life,\" what does the word \"reform\" mean?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Explain what problem the reformer saw, why it needed fixing, and what the reformer did about it. Use complete sentences.",
+                "id": "h45-0-w1",
+                "prompt": "Choose a reformer from the Progressive Era, such as Upton Sinclair or Jane Addams. Write a paragraph about his or her cause."
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Use this week's words in your own sentences.",
+            "items": [
+              {
+                "id": "h45-0-vw1",
+                "prompt": "Write one sentence for each word. Use the word the right way.",
+                "words": [
+                  "reform",
+                  "muckraker"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
+          }]
       },
       {
         "title": "Ida B. Wells: Crusader Against Lynching",
@@ -22628,7 +30763,53 @@ const MM_WEEKS_35 = [
               }
             ]
           }
-        ]
+        ,
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "Most victims were innocent of any crime, which destroyed the lies used to justify murder.",
+                "id": "h45-1-c1",
+                "question": "What did Ida B. Wells's reporting prove about lynchings in the South?"
+              },
+              {
+                "answer": "She believed truth was the bravest weapon, and she would not stop reporting facts at great personal risk.",
+                "id": "h45-1-c2",
+                "question": "Why do you think Wells kept writing even after a mob destroyed her newspaper office?"
+              },
+              {
+                "answer": "A long, determined fight for a cause.",
+                "id": "h45-1-c3",
+                "question": "The reading calls Wells a \"crusader\" against lynching. What does the word \"crusade\" mean in this context?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Tell what she fought against, why she chose writing as her weapon, and what her reporting accomplished. Use complete sentences.",
+                "id": "h45-1-w1",
+                "prompt": "Write a paragraph about Ida B. Wells's cause."
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Use this week's words in your own sentences.",
+            "items": [
+              {
+                "id": "h45-1-vw1",
+                "prompt": "Write one sentence for each word. Use the word the right way.",
+                "words": [
+                  "crusade",
+                  "effort"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
+          }]
       }
     ],
     "science": [
@@ -22698,7 +30879,53 @@ const MM_WEEKS_35 = [
               }
             ]
           }
-        ]
+        ,
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "The fixed point that the bar of a lever turns on.",
+                "id": "s45-0-c1",
+                "question": "What is a fulcrum?"
+              },
+              {
+                "answer": "So that a small effort can lift a heavy weight. Levers trade distance for force.",
+                "id": "s45-0-c2",
+                "question": "Why would you move the fulcrum close to the load?"
+              },
+              {
+                "answer": "The push or force you apply to the lever.",
+                "id": "s45-0-c3",
+                "question": "\"Put it close to the load and a small effort lifts a heavy weight.\" What does the word \"effort\" mean in this sentence?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Name the parts (bar, fulcrum, load, effort), give an example like a seesaw or crowbar, and explain the trade between force and distance. Use complete sentences.",
+                "id": "s45-0-w1",
+                "prompt": "Explain how a lever works, as if you are teaching a younger student."
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Use this week's words in your own sentences.",
+            "items": [
+              {
+                "id": "s45-0-vw1",
+                "prompt": "Write one sentence for each word. Use the word the right way.",
+                "words": [
+                  "fulcrum",
+                  "effort"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
+          }]
       },
       {
         "title": "Testing Levers",
@@ -22798,7 +31025,53 @@ const MM_WEEKS_35 = [
               }
             ]
           }
-        ]
+        ,
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "Effort times its distance equals load times its distance.",
+                "id": "s45-1-c1",
+                "question": "What simple rule did scientists find about levers?"
+              },
+              {
+                "answer": "The longer effort side gives more leverage, so less force is needed, though the effort side must move farther.",
+                "id": "s45-1-c2",
+                "question": "Why did the effort shrink when the fulcrum moved closer to the load?"
+              },
+              {
+                "answer": "It is the fixed point that the ruler, acting as the lever bar, turns on.",
+                "id": "s45-1-c3",
+                "question": "In the experiment, the pencil acts as the \"fulcrum.\" What makes it the fulcrum?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Explain your setup, what you would measure, and what you expect to happen when you move the fulcrum. Use complete sentences.",
+                "id": "s45-1-w1",
+                "prompt": "Describe a lever test you would run with a ruler, a pencil, and coins."
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Use this week's words in your own sentences.",
+            "items": [
+              {
+                "id": "s45-1-vw1",
+                "prompt": "Write one sentence for each word. Use the word the right way.",
+                "words": [
+                  "effort",
+                  "fulcrum"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
+          }]
       }
     ],
     "friday": {
@@ -23048,7 +31321,53 @@ const MM_WEEKS_35 = [
               }
             ]
           }
-        ]
+        ,
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "An armistice at the eleventh hour on November 11, 1918.",
+                "id": "h46-0-c1",
+                "question": "What ended World War I, and on what date?"
+              },
+              {
+                "answer": "Cold, muddy, and scared, since they lived in mud under constant fire from machine guns and poison gas.",
+                "id": "h46-0-c2",
+                "question": "How do you think soldiers felt living in the trenches?"
+              },
+              {
+                "answer": "A long ditch in the ground, stretching for miles, where soldiers sheltered and fought from.",
+                "id": "h46-0-c3",
+                "question": "The reading says soldiers dug \"trenches.\" What is a trench?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Describe what you see and hear, how daily life feels, and what you hope for. Write as if you were there. Use complete sentences.",
+                "id": "h46-0-w1",
+                "prompt": "Write a paragraph as a soldier in the trenches writing a letter home in 1918."
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Use this week's words in your own sentences.",
+            "items": [
+              {
+                "id": "h46-0-vw1",
+                "prompt": "Write one sentence for each word. Use the word the right way.",
+                "words": [
+                  "trench",
+                  "armistice"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
+          }]
       },
       {
         "title": "The Harlem Hellfighters",
@@ -23120,7 +31439,53 @@ const MM_WEEKS_35 = [
               }
             ]
           }
-        ]
+        ,
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "They spent 191 days in combat, longer than any other American unit, serving with the French army.",
+                "id": "h46-1-c1",
+                "question": "How many days did the Hellfighters spend in combat, and whose army did they serve with?"
+              },
+              {
+                "answer": "They risked their lives for freedom abroad, which made it impossible to ignore that America still denied them equal rights at home.",
+                "id": "h46-1-c2",
+                "question": "How did the Hellfighters' courage in France help the fight for justice at home?"
+              },
+              {
+                "answer": "A person who has served in the military.",
+                "id": "h46-1-c3",
+                "question": "The soldiers who came home from the war are called \"veterans.\" What does \"veteran\" mean?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Tell what makes your unit special, how the French army treated you, and what you want for America when you return. Write as if you were there. Use complete sentences.",
+                "id": "h46-1-w1",
+                "prompt": "Write a paragraph as a Hellfighter writing a letter home about serving in France."
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Use this week's words in your own sentences.",
+            "items": [
+              {
+                "id": "h46-1-vw1",
+                "prompt": "Write one sentence for each word. Use the word the right way.",
+                "words": [
+                  "veteran",
+                  "trench"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
+          }]
       }
     ],
     "science": [
@@ -23190,7 +31555,53 @@ const MM_WEEKS_35 = [
               }
             ]
           }
-        ]
+        ,
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "An inclined plane is a slanted surface, like a ramp. Pushing a heavy box up a gentle ramp takes less force than lifting it straight up.",
+                "id": "s46-0-c1",
+                "question": "What is an inclined plane, and how does it help move a heavy box?"
+              },
+              {
+                "answer": "A pulley changes direction, so pulling down lets the sailor use body weight and gravity to help lift the sail up.",
+                "id": "s46-0-c2",
+                "question": "Why would a sailor rather pull down on a rope than lift a sail straight up?"
+              },
+              {
+                "answer": "To lift something up, often with a rope or pulley.",
+                "id": "s46-0-c3",
+                "question": "The reading says pulleys help \"hoist\" a load. What does \"hoist\" mean?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Describe how each machine works, give one real example from the reading, and explain the trade between distance and force. Use complete sentences.",
+                "id": "s46-0-w1",
+                "prompt": "Explain how pulleys and ramps help people do heavy work."
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Use this week's words in your own sentences.",
+            "items": [
+              {
+                "id": "s46-0-vw1",
+                "prompt": "Write one sentence for each word. Use the word the right way.",
+                "words": [
+                  "hoist",
+                  "slope"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
+          }]
       },
       {
         "title": "Counting Ropes",
@@ -23290,7 +31701,53 @@ const MM_WEEKS_35 = [
               }
             ]
           }
-        ]
+        ,
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "Count the rope segments holding the load. That number is your mechanical advantage.",
+                "id": "s46-1-c1",
+                "question": "How do you find a pulley system's mechanical advantage?"
+              },
+              {
+                "answer": "You pull with one quarter the force, but you must pull the rope four times as far.",
+                "id": "s46-1-c2",
+                "question": "How does the trade in a pulley system with four ropes work?"
+              },
+              {
+                "answer": "A surface that tilts upward or downward, like a hill or a ramp.",
+                "id": "s46-1-c3",
+                "question": "Mountain roads zigzag up a gentle \"slope.\" What is a slope?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Connect the zigzag to slopes, force, and distance, and tell what trade the engineers are making. Use complete sentences.",
+                "id": "s46-1-w1",
+                "prompt": "Explain why mountain roads zigzag instead of going straight up the mountain."
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Use this week's words in your own sentences.",
+            "items": [
+              {
+                "id": "s46-1-vw1",
+                "prompt": "Write one sentence for each word. Use the word the right way.",
+                "words": [
+                  "hoist",
+                  "slope"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
+          }]
       }
     ],
     "friday": {
@@ -23522,7 +31979,53 @@ const MM_WEEKS_35 = [
               }
             ]
           }
-        ]
+        ,
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "Langston Hughes, Zora Neale Hurston, and Duke Ellington.",
+                "id": "h47-0-c1",
+                "question": "Name three artists of the Harlem Renaissance from the reading."
+              },
+              {
+                "answer": "It proved that Black culture was American culture, reached wide American audiences for the first time, and shaped music and writing for generations.",
+                "id": "h47-0-c2",
+                "question": "Why do you think the Harlem Renaissance mattered beyond entertainment?"
+              },
+              {
+                "answer": "It grew quickly and strongly.",
+                "id": "h47-0-c3",
+                "question": "\"The economy boomed.\" What does \"boom\" mean in this sentence?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Explain what it was, name some of the artists, and tell why it was important to America. Use complete sentences.",
+                "id": "h47-0-w1",
+                "prompt": "Write a paragraph about the Harlem Renaissance."
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Use this week's words in your own sentences.",
+            "items": [
+              {
+                "id": "h47-0-vw1",
+                "prompt": "Write one sentence for each word. Use the word the right way.",
+                "words": [
+                  "jazz",
+                  "celebrate"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
+          }]
       },
       {
         "title": "Boom Times and New Ways",
@@ -23633,7 +32136,53 @@ const MM_WEEKS_35 = [
               }
             ]
           }
-        ]
+        ,
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "The right to vote in 1920, and new social freedoms such as bobbing their hair and defying old rules.",
+                "id": "h47-1-c1",
+                "question": "What new rights and freedoms did women gain in the 1920s?"
+              },
+              {
+                "answer": "The prosperity did not reach everyone. Farmers struggled, and Black Americans faced violence even while their culture thrived.",
+                "id": "h47-1-c2",
+                "question": "Why do you think the \"boom\" had shadows for farmers and Black Americans?"
+              },
+              {
+                "answer": "To honor or enjoy something with joy, such as with music and gatherings.",
+                "id": "h47-1-c3",
+                "question": "People \"celebrate\" the music of the Roaring Twenties. What does \"celebrate\" mean?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Tell what the Renaissance was, who created it, and why this decade mattered to America. Use complete sentences.",
+                "id": "h47-1-w1",
+                "prompt": "Write a paragraph about the Harlem Renaissance and the new freedoms of the 1920s."
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Use this week's words in your own sentences.",
+            "items": [
+              {
+                "id": "h47-1-vw1",
+                "prompt": "Write one sentence for each word. Use the word the right way.",
+                "words": [
+                  "boom",
+                  "jazz"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
+          }]
       }
     ],
     "science": [
@@ -23703,7 +32252,53 @@ const MM_WEEKS_35 = [
               }
             ]
           }
-        ]
+        ,
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "The moon's gravity is weaker than Earth's, so it pulls them down less strongly.",
+                "id": "s47-0-c1",
+                "question": "Why do astronauts bounce on the moon?"
+              },
+              {
+                "answer": "They would drift off into space instead of circling the sun, since gravity holds the solar system together.",
+                "id": "s47-0-c2",
+                "question": "What would happen to the planets if gravity suddenly stopped working?"
+              },
+              {
+                "answer": "The invisible force that pulls objects toward Earth and toward each other.",
+                "id": "s47-0-c3",
+                "question": "In your own words, what is gravity?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Describe how gravity affects you each day, how it affects the moon and planets, and what would happen without it. Use complete sentences.",
+                "id": "s47-0-w1",
+                "prompt": "Explain what gravity does for us and for the universe."
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Use this week's words in your own sentences.",
+            "items": [
+              {
+                "id": "s47-0-vw1",
+                "prompt": "Write one sentence for each word. Use the word the right way.",
+                "words": [
+                  "gravity",
+                  "friction"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
+          }]
       },
       {
         "title": "Friction: The Helpful Drag",
@@ -23803,7 +32398,53 @@ const MM_WEEKS_35 = [
               }
             ]
           }
-        ]
+        ,
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "It lets shoes grip the floor, lets car brakes stop the car, and lets a pencil grip the paper when you write.",
+                "id": "s47-1-c1",
+                "question": "What are two helpful things friction does, according to the reading?"
+              },
+              {
+                "answer": "Because different surfaces have different friction, so engineers must get the grip right for each surface to keep machines safe and working.",
+                "id": "s47-1-c2",
+                "question": "Why do engineers design tires and brakes around the rules of friction?"
+              },
+              {
+                "answer": "The force that resists sliding when two surfaces rub together.",
+                "id": "s47-1-c3",
+                "question": "The reading says engineers \"tune friction like an instrument.\" What does the word \"friction\" mean?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Give one example of each from the reading, and tell how engineers work with friction. Use complete sentences.",
+                "id": "s47-1-w1",
+                "prompt": "Explain how friction can be both helpful and harmful."
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Use this week's words in your own sentences.",
+            "items": [
+              {
+                "id": "s47-1-vw1",
+                "prompt": "Write one sentence for each word. Use the word the right way.",
+                "words": [
+                  "friction",
+                  "gravity"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
+          }]
       }
     ],
     "friday": {
@@ -24053,7 +32694,53 @@ const MM_WEEKS_35 = [
               }
             ]
           }
-        ]
+        ,
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "Drought in the Plains turned farmland to dust, and storms of dirt buried homes and forced families to flee west.",
+                "id": "h48-0-c1",
+                "question": "What was the dust bowl?"
+              },
+              {
+                "answer": "Hungry and scared, but perhaps hopeful too, since people helped their neighbors and hoped for better days.",
+                "id": "h48-0-c2",
+                "question": "How do you think a child felt standing in a breadline in 1932?"
+              },
+              {
+                "answer": "A line of hungry people waiting to receive free food.",
+                "id": "h48-0-c3",
+                "question": "\"Breadlines of hungry people stretched around city blocks.\" What is a \"breadline\"?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Describe what you see around you, how your family is coping, and what gives you hope. Write as \"I.\" Use complete sentences.",
+                "id": "h48-0-w1",
+                "prompt": "Write a paragraph as a diary entry from a child living through the Great Depression."
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Use this week's words in your own sentences.",
+            "items": [
+              {
+                "id": "h48-0-vw1",
+                "prompt": "Write one sentence for each word. Use the word the right way.",
+                "words": [
+                  "breadline",
+                  "jobless"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
+          }]
       },
       {
         "title": "Mary McLeod Bethune Advises the President",
@@ -24125,7 +32812,53 @@ const MM_WEEKS_35 = [
               }
             ]
           }
-        ]
+        ,
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "The Black Cabinet, a group of Black advisers fighting to make sure New Deal programs helped Black families too.",
+                "id": "h48-1-c1",
+                "question": "What group did Mary McLeod Bethune lead, and what did it do?"
+              },
+              {
+                "answer": "It gave Black girls education and opportunity, which Bethune believed was the path to equality, even in hard times.",
+                "id": "h48-1-c2",
+                "question": "How do you think Bethune's school in Florida helped families during the Depression?"
+              },
+              {
+                "answer": "Without a job. Unemployed.",
+                "id": "h48-1-c3",
+                "question": "The Depression left many workers \"jobless.\" What does \"jobless\" mean?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Tell what you asked the president for, why it mattered to Black families during the Depression, and how you felt afterward. Write as \"I.\" Use complete sentences.",
+                "id": "h48-1-w1",
+                "prompt": "Write a diary entry as Mary McLeod Bethune after a meeting with President Roosevelt."
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Use this week's words in your own sentences.",
+            "items": [
+              {
+                "id": "h48-1-vw1",
+                "prompt": "Write one sentence for each word. Use the word the right way.",
+                "words": [
+                  "jobless",
+                  "dust bowl"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
+          }]
       }
     ],
     "science": [
@@ -24195,7 +32928,53 @@ const MM_WEEKS_35 = [
               }
             ]
           }
-        ]
+        ,
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "Kinetic energy, the energy of motion, like a rolling ball. Potential energy, stored energy waiting to happen, like a stretched rubber band.",
+                "id": "s48-0-c1",
+                "question": "What are the two main forms of energy? Give one example of each."
+              },
+              {
+                "answer": "The height stores potential energy that becomes kinetic energy for the rest of the ride. The first drop decides the whole ride.",
+                "id": "s48-0-c2",
+                "question": "Why is a roller coaster's first hill so tall?"
+              },
+              {
+                "answer": "To keep energy saved up until it is used, like a ball held high or water behind a dam.",
+                "id": "s48-0-c3",
+                "question": "Potential energy is \"stored\" energy waiting to happen. What does \"store\" mean here?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Define each type, give one playground example of each, and describe how they trade back and forth on a swing. Use complete sentences.",
+                "id": "s48-0-w1",
+                "prompt": "Explain kinetic and potential energy to a friend using examples from a playground."
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Use this week's words in your own sentences.",
+            "items": [
+              {
+                "id": "s48-0-vw1",
+                "prompt": "Write one sentence for each word. Use the word the right way.",
+                "words": [
+                  "kinetic",
+                  "store"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
+          }]
       },
       {
         "title": "Sorting Energy",
@@ -24287,7 +33066,53 @@ const MM_WEEKS_35 = [
               }
             ]
           }
-        ]
+        ,
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "Flying arrow: kinetic. Drawn bow: potential. Spinning top: kinetic. Wound-up toy: potential.",
+                "id": "s48-1-c1",
+                "question": "Sort these into kinetic or potential: a flying arrow, a drawn bow, a spinning top, a wound-up toy."
+              },
+              {
+                "answer": "It keeps trading potential energy at the top for kinetic energy at the bottom, over and over.",
+                "id": "s48-1-c2",
+                "question": "Why does a swinging pendulum keep moving without anyone pushing it?"
+              },
+              {
+                "answer": "Having to do with movement. Kinetic energy is the energy of motion.",
+                "id": "s48-1-c3",
+                "question": "\"Kinetic energy is the energy of motion.\" What does \"kinetic\" mean?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Name two kinetic and two potential examples, explain why each one fits, and tell which one switches between both. Use complete sentences.",
+                "id": "s48-1-w1",
+                "prompt": "Write a paragraph sorting examples of kinetic and potential energy you see at home."
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Use this week's words in your own sentences.",
+            "items": [
+              {
+                "id": "s48-1-vw1",
+                "prompt": "Write one sentence for each word. Use the word the right way.",
+                "words": [
+                  "kinetic",
+                  "store"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
+          }]
       }
     ],
     "friday": {
@@ -24518,7 +33343,53 @@ const MM_WEEKS_35 = [
               }
             ]
           }
-        ]
+        ,
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "Sugar, meat, and gasoline, so soldiers would have enough.",
+                "id": "h49-0-c1",
+                "question": "What did American families have to ration during World War II, and why?"
+              },
+              {
+                "answer": "Because ordinary Americans powering the war through factories, rationing, war bonds, and victory gardens were essential to winning, just like soldiers.",
+                "id": "h49-0-c2",
+                "question": "Why was the home front called a \"third front\" of the war?"
+              },
+              {
+                "answer": "To limit how much each person can use so there is enough for everyone.",
+                "id": "h49-0-c3",
+                "question": "\"Families had to ration sugar, meat, and gasoline.\" What does \"ration\" mean?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Tell what ordinary Americans did, why their work mattered to the war, and what it shows about teamwork. Use complete sentences.",
+                "id": "h49-0-w1",
+                "prompt": "Write a paragraph about the home front."
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Use this week's words in your own sentences.",
+            "items": [
+              {
+                "id": "h49-0-vw1",
+                "prompt": "Write one sentence for each word. Use the word the right way.",
+                "words": [
+                  "ration",
+                  "home front"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
+          }]
       },
       {
         "title": "The Tuskegee Airmen",
@@ -24629,7 +33500,53 @@ const MM_WEEKS_35 = [
               }
             ]
           }
-        ]
+        ,
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "They escorted bombers over Europe and never lost a single bomber to enemy fighters.",
+                "id": "h49-1-c1",
+                "question": "What was the Tuskegee Airmen's unmatched record in World War II?"
+              },
+              {
+                "answer": "It destroyed the lie that Black men could not fly or fight, proving that courage and skill have no color.",
+                "id": "h49-1-c2",
+                "question": "Why do you think the Airmen's skill helped desegregate the military?"
+              },
+              {
+                "answer": "Bravery. Doing hard or dangerous things even when afraid.",
+                "id": "h49-1-c3",
+                "question": "The reading says the Airmen showed \"courage.\" What does \"courage\" mean?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Describe what they did in the war, what they faced at home, and why their story still matters. Use complete sentences.",
+                "id": "h49-1-w1",
+                "prompt": "Write a paragraph about what the Tuskegee Airmen proved."
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Use this week's words in your own sentences.",
+            "items": [
+              {
+                "id": "h49-1-vw1",
+                "prompt": "Write one sentence for each word. Use the word the right way.",
+                "words": [
+                  "courage",
+                  "ration"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
+          }]
       }
     ],
     "science": [
@@ -24711,7 +33628,53 @@ const MM_WEEKS_35 = [
               }
             ]
           }
-        ]
+        ,
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "Renewable: sunlight and wind. Nonrenewable: coal and oil.",
+                "id": "s49-0-c1",
+                "question": "Name two renewable and two nonrenewable energy sources from the reading."
+              },
+              {
+                "answer": "Its volcanoes and rivers give it geothermal and hydro power. Geography gave Iceland a head start.",
+                "id": "s49-0-c2",
+                "question": "Why does Iceland run almost entirely on renewable energy?"
+              },
+              {
+                "answer": "Having to do with the sun.",
+                "id": "s49-0-c3",
+                "question": "\"Solar panels turn sunlight into electricity.\" What does \"solar\" mean?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Tell what renewable and nonrenewable sources are, give one example of each, and explain one reason to switch. Use complete sentences.",
+                "id": "s49-0-w1",
+                "prompt": "Explain why switching to renewable energy matters."
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Use this week's words in your own sentences.",
+            "items": [
+              {
+                "id": "s49-0-vw1",
+                "prompt": "Write one sentence for each word. Use the word the right way.",
+                "words": [
+                  "solar",
+                  "conserve"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
+          }]
       },
       {
         "title": "Sorting Energy Sources",
@@ -24802,7 +33765,53 @@ const MM_WEEKS_35 = [
               }
             ]
           }
-        ]
+        ,
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "Renewable: solar and wind. Nonrenewable: coal and natural gas.",
+                "id": "s49-1-c1",
+                "question": "Which of these are renewable: solar, coal, wind, natural gas?"
+              },
+              {
+                "answer": "Each source has trade-offs: solar needs sunshine, wind needs breeze, and dams change rivers, so they use each where it works best.",
+                "id": "s49-1-c2",
+                "question": "Why do many countries mix energy sources instead of using just one?"
+              },
+              {
+                "answer": "To save energy by using less, such as switching to LED bulbs or adding insulation.",
+                "id": "s49-1-c3",
+                "question": "The reading says, \"The cheapest energy is the energy you never use.\" What does it mean to \"conserve\" energy?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Name two ways from the reading, explain how each one saves energy, and tell why saving energy is the cheapest energy. Use complete sentences.",
+                "id": "s49-1-w1",
+                "prompt": "Write a paragraph about how your school could conserve energy."
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Use this week's words in your own sentences.",
+            "items": [
+              {
+                "id": "s49-1-vw1",
+                "prompt": "Write one sentence for each word. Use the word the right way.",
+                "words": [
+                  "conserve",
+                  "solar"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
+          }]
       }
     ],
     "friday": {
@@ -25033,7 +34042,53 @@ const MM_WEEKS_35 = [
               }
             ]
           }
-        ]
+        ,
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "In 1957 the Soviets launched Sputnik, the first satellite. In 1969 Apollo 11 landed a man on the moon.",
+                "id": "h50-0-c1",
+                "question": "What happened in 1957 and in 1969?"
+              },
+              {
+                "answer": "It proved the Soviet Union was ahead in space, which frightened Americans during the Cold War rivalry and pushed them to catch up.",
+                "id": "h50-0-c2",
+                "question": "Why do you think Sputnik shocked America so much?"
+              },
+              {
+                "answer": "A competition between the United States and the Soviet Union to explore space first.",
+                "id": "h50-0-c3",
+                "question": "The two countries competed in the \"space race.\" What does \"space race\" mean?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Tell what it was, who was racing, what the big moments were, and why it mattered. Use complete sentences.",
+                "id": "h50-0-w1",
+                "prompt": "Write a paragraph about the space race."
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Use this week's words in your own sentences.",
+            "items": [
+              {
+                "id": "h50-0-vw1",
+                "prompt": "Write one sentence for each word. Use the word the right way.",
+                "words": [
+                  "space race",
+                  "arms race"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
+          }]
       },
       {
         "title": "Ralph Bunche: Peacemaker",
@@ -25144,7 +34199,53 @@ const MM_WEEKS_35 = [
               }
             ]
           }
-        ]
+        ,
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "The Nobel Peace Prize, for negotiating peace between Arabs and Israelis. He was the first Black person to win it.",
+                "id": "h50-1-c1",
+                "question": "What did Ralph Bunche win in 1950, and for what?"
+              },
+              {
+                "answer": "Because lasting peace is impossible when people are treated unfairly, something he understood from facing injustice at home.",
+                "id": "h50-1-c2",
+                "question": "Why do you think Bunche believed that justice and peace must go together?"
+              },
+              {
+                "answer": "A competition to build more and more weapons.",
+                "id": "h50-1-c3",
+                "question": "During the Cold War, nations also competed in the \"arms race.\" What does \"arms race\" mean?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Tell what Bunche worked for around the world, why his Nobel Prize mattered, and what his life showed about human dignity. Use complete sentences.",
+                "id": "h50-1-w1",
+                "prompt": "Write a paragraph about Ralph Bunche's race for peace during the Cold War."
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Use this week's words in your own sentences.",
+            "items": [
+              {
+                "id": "h50-1-vw1",
+                "prompt": "Write one sentence for each word. Use the word the right way.",
+                "words": [
+                  "arms race",
+                  "orbit"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
+          }]
       }
     ],
     "science": [
@@ -25226,7 +34327,53 @@ const MM_WEEKS_35 = [
               }
             ]
           }
-        ]
+        ,
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "Ask what the problem is, imagine many solutions, plan the best one, create a prototype, test it, and improve the design.",
+                "id": "s50-0-c1",
+                "question": "What are the steps of the engineering design process, in order?"
+              },
+              {
+                "answer": "Real engineers almost never succeed on the first try. Each failure teaches how to improve the next version.",
+                "id": "s50-0-c2",
+                "question": "Why do engineers test and improve instead of expecting the first version to work?"
+              },
+              {
+                "answer": "A first version of something, made to be tested.",
+                "id": "s50-0-c3",
+                "question": "\"Next, they create a prototype, a first version to test.\" What is a \"prototype\"?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Pick a problem, walk through each step, and tell what a prototype lets you do. Use complete sentences.",
+                "id": "s50-0-w1",
+                "prompt": "Explain the engineering design process using an example you invent."
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Use this week's words in your own sentences.",
+            "items": [
+              {
+                "id": "s50-0-vw1",
+                "prompt": "Write one sentence for each word. Use the word the right way.",
+                "words": [
+                  "design",
+                  "prototype"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
+          }]
       },
       {
         "title": "Build and Test a Paper Tower",
@@ -25325,7 +34472,53 @@ const MM_WEEKS_35 = [
               }
             ]
           }
-        ]
+        ,
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "Only paper and tape.",
+                "id": "s50-1-c1",
+                "question": "What materials may you use to build the paper tower?"
+              },
+              {
+                "answer": "Because constraints breed creativity. Limited materials force clever solutions, and the best designs do the most with the least.",
+                "id": "s50-1-c2",
+                "question": "Why do you think the challenge limits you to paper and tape?"
+              },
+              {
+                "answer": "The plan for how something is built and how it works.",
+                "id": "s50-1-c3",
+                "question": "Engineers plan how a tower will be built. What does \"design\" mean in engineering?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Tell what your first design was, what failed in testing, and what you changed. Use complete sentences.",
+                "id": "s50-1-w1",
+                "prompt": "Write a paragraph describing your paper tower design and how you improved it."
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Use this week's words in your own sentences.",
+            "items": [
+              {
+                "id": "s50-1-vw1",
+                "prompt": "Write one sentence for each word. Use the word the right way.",
+                "words": [
+                  "prototype",
+                  "design"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
+          }]
       }
     ],
     "friday": {
@@ -25557,7 +34750,53 @@ const MM_WEEKS_35 = [
               }
             ]
           }
-        ]
+        ,
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "It lasted 381 days and ended when the Supreme Court ruled bus segregation illegal.",
+                "id": "h51-0-c1",
+                "question": "How long did the Montgomery bus boycott last, and how did it end?"
+              },
+              {
+                "answer": "Because the Black community organized, walked miles to work, shared carpools, and held firm together with discipline and unity.",
+                "id": "h51-0-c2",
+                "question": "Why do you think the boycott succeeded even though it was so hard?"
+              },
+              {
+                "answer": "Refusing to buy or use something as a peaceful protest.",
+                "id": "h51-0-c3",
+                "question": "\"The Black community responded with a boycott of the city buses.\" What is a \"boycott\"?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Tell what started it, what people did during the 381 days, and what it proved. Use complete sentences.",
+                "id": "h51-0-w1",
+                "prompt": "Write a paragraph about the Montgomery bus boycott."
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Use this week's words in your own sentences.",
+            "items": [
+              {
+                "id": "h51-0-vw1",
+                "prompt": "Write one sentence for each word. Use the word the right way.",
+                "words": [
+                  "boycott",
+                  "march"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
+          }]
       },
       {
         "title": "Leaders of the Movement",
@@ -25668,7 +34907,53 @@ const MM_WEEKS_35 = [
               }
             ]
           }
-        ]
+        ,
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "He served in Congress for over thirty years, calling his work getting into \"good trouble.\"",
+                "id": "h51-1-c1",
+                "question": "What did John Lewis do after marching in Selma?"
+              },
+              {
+                "answer": "Because the movement won when ordinary people, students, maids, and ministers, all acted together, not just one leader alone.",
+                "id": "h51-1-c2",
+                "question": "Why do you think the reading says \"courage, multiplied by thousands, can change a nation\"?"
+              },
+              {
+                "answer": "Being treated the same and fairly, with the same rights as everyone else.",
+                "id": "h51-1-c3",
+                "question": "\"Together they ended legal segregation and won voting rights.\" What does \"equality\" mean?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Name one or two leaders from the reading, tell what each one did, and explain why ordinary people mattered too. Use complete sentences.",
+                "id": "h51-1-w1",
+                "prompt": "Write a paragraph about the leaders who grew out of the Montgomery bus boycott era."
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Use this week's words in your own sentences.",
+            "items": [
+              {
+                "id": "h51-1-vw1",
+                "prompt": "Write one sentence for each word. Use the word the right way.",
+                "words": [
+                  "march",
+                  "equality"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
+          }]
       }
     ],
     "science": [
@@ -25750,7 +35035,53 @@ const MM_WEEKS_35 = [
               }
             ]
           }
-        ]
+        ,
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "Beam, arch, suspension, and truss bridges.",
+                "id": "s51-0-c1",
+                "question": "What are the four kinds of bridges named in the reading?"
+              },
+              {
+                "answer": "Suspension bridges hang the road from strong cables and can span huge distances, while beam bridges are only good for short spans.",
+                "id": "s51-0-c2",
+                "question": "Why would engineers build a suspension bridge instead of a beam bridge across a wide bay?"
+              },
+              {
+                "answer": "The distance a bridge stretches across, from one support to the other.",
+                "id": "s51-0-c3",
+                "question": "Beam bridges are \"good for short spans.\" What does \"span\" mean?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Tell how each one carries its load, when engineers would choose it, and which one you would pick to cross a wide river. Use complete sentences.",
+                "id": "s51-0-w1",
+                "prompt": "Compare two kinds of bridges from the reading."
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Use this week's words in your own sentences.",
+            "items": [
+              {
+                "id": "s51-0-vw1",
+                "prompt": "Write one sentence for each word. Use the word the right way.",
+                "words": [
+                  "span",
+                  "support"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
+          }]
       },
       {
         "title": "The Bridge Challenge",
@@ -25849,7 +35180,53 @@ const MM_WEEKS_35 = [
               }
             ]
           }
-        ]
+        ,
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "Span a 30-centimeter gap using only paper and tape and hold as many coins as possible. The coin count decides.",
+                "id": "s51-1-c1",
+                "question": "What is the bridge challenge, and how is the winner decided?"
+              },
+              {
+                "answer": "To learn the limits of the design. Knowing how things fail teaches how to make them safe.",
+                "id": "s51-1-c2",
+                "question": "Why do engineers test bridges to failure on purpose?"
+              },
+              {
+                "answer": "The gap the bridge stretches across, here 30 centimeters.",
+                "id": "s51-1-c3",
+                "question": "\"Measure the span your bridge held.\" In this sentence, what does \"span\" mean?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Tell which shape you would try first, why you chose it, and how you would improve it after it sags. Use complete sentences.",
+                "id": "s51-1-w1",
+                "prompt": "Write a paragraph about your bridge design for the challenge."
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Use this week's words in your own sentences.",
+            "items": [
+              {
+                "id": "s51-1-vw1",
+                "prompt": "Write one sentence for each word. Use the word the right way.",
+                "words": [
+                  "support",
+                  "span"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
+          }]
       }
     ],
     "friday": {
@@ -26071,7 +35448,53 @@ const MM_WEEKS_35 = [
               }
             ]
           }
-        ]
+        ,
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "Vote, speak, serve, and build. A citizen has rights to protect and duties to perform.",
+                "id": "h52-0-c1",
+                "question": "What does the reading say a citizen can do?"
+              },
+              {
+                "answer": "Because history shows people making choices that shaped the world, and learning from those choices prepares you to make good ones.",
+                "id": "h52-0-c2",
+                "question": "Why does the reading say studying the past is \"practice for shaping the future\"?"
+              },
+              {
+                "answer": "A member of a country who has rights and responsibilities.",
+                "id": "h52-0-c3",
+                "question": "\"As a citizen, you have rights to protect and duties to perform.\" What is a \"citizen\"?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Tell what chapter you want to write, what choices you might make, and why your voice matters. Use complete sentences.",
+                "id": "h52-0-w1",
+                "prompt": "Write a paragraph about your place in the story of America."
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Use this week's words in your own sentences.",
+            "items": [
+              {
+                "id": "h52-0-vw1",
+                "prompt": "Write one sentence for each word. Use the word the right way.",
+                "words": [
+                  "citizen",
+                  "future"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
+          }]
       },
       {
         "title": "Barack Obama: A New Chapter",
@@ -26182,7 +35605,53 @@ const MM_WEEKS_35 = [
               }
             ]
           }
-        ]
+        ,
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "He worked as a community organizer in Chicago, helping neighborhoods in need, then became a senator.",
+                "id": "h52-1-c1",
+                "question": "What work did Barack Obama do before becoming president?"
+              },
+              {
+                "answer": "Because the movement fought for the idea that a Black American could lead the nation, and his election made that idea real.",
+                "id": "h52-1-c2",
+                "question": "Why do you think Obama's election \"fulfilled a dream that began with the civil rights movement\"?"
+              },
+              {
+                "answer": "A chance to do something or to become something.",
+                "id": "h52-1-c3",
+                "question": "His election gave many young people new \"opportunity.\" What does \"opportunity\" mean?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Tell what he did before the presidency, what his election showed, and what chapter you hope to write. Use complete sentences.",
+                "id": "h52-1-w1",
+                "prompt": "Write a paragraph about how Barack Obama's story connects to your own future."
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Use this week's words in your own sentences.",
+            "items": [
+              {
+                "id": "h52-1-vw1",
+                "prompt": "Write one sentence for each word. Use the word the right way.",
+                "words": [
+                  "future",
+                  "opportunity"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
+          }]
       }
     ],
     "science": [
@@ -26264,7 +35733,53 @@ const MM_WEEKS_35 = [
               }
             ]
           }
-        ]
+        ,
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "Ask a clear question, run your test three times, record the results, and make a graph.",
+                "id": "s52-0-c1",
+                "question": "What are the steps of the science investigation described in the reading?"
+              },
+              {
+                "answer": "So your results are reliable. One test could be a fluke, but three tests show a pattern.",
+                "id": "s52-0-c2",
+                "question": "Why should you run your test three times instead of once?"
+              },
+              {
+                "answer": "An educated guess about what will happen, which you then test.",
+                "id": "s52-0-c3",
+                "question": "Before testing, a scientist makes a \"hypothesis.\" What is a hypothesis?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "State your question and hypothesis, tell how you would test it, and explain how you would show your results. Use complete sentences.",
+                "id": "s52-0-w1",
+                "prompt": "Write a paragraph describing a science investigation you would like to run."
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Use this week's words in your own sentences.",
+            "items": [
+              {
+                "id": "s52-0-vw1",
+                "prompt": "Write one sentence for each word. Use the word the right way.",
+                "words": [
+                  "hypothesis",
+                  "conclude"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
+          }]
       },
       {
         "title": "Graph Your Findings",
@@ -26363,7 +35878,53 @@ const MM_WEEKS_35 = [
               }
             ]
           }
-        ]
+        ,
+          {
+            "instructions": "Answer these questions about the reading.",
+            "items": [
+              {
+                "answer": "Use a bar graph for counts, where taller bars mean bigger numbers. Use a line graph for changes over time, where the line's climb shows the story.",
+                "id": "s52-1-c1",
+                "question": "When should you use a bar graph, and when should you use a line graph?"
+              },
+              {
+                "answer": "So a stranger can understand the graph and trust it. A great display tells the investigation's story truthfully.",
+                "id": "s52-1-c2",
+                "question": "Why does the reading say honest scales and labels matter on a graph?"
+              },
+              {
+                "answer": "To decide what your results show. To reach an answer based on evidence.",
+                "id": "s52-1-c3",
+                "question": "After your tests, you \"conclude\" what you found. What does \"conclude\" mean?"
+              }
+            ],
+            "type": "comprehension"
+          },
+          {
+            "instructions": "Write a paragraph of 4 to 6 sentences.",
+            "items": [
+              {
+                "guidance": "Tell what kind of graph you would use, what your title and labels would be, and what story your graph tells. Use complete sentences.",
+                "id": "s52-1-w1",
+                "prompt": "Write a paragraph explaining how you would turn your investigation results into a graph."
+              }
+            ],
+            "type": "writing"
+          },
+          {
+            "instructions": "Use this week's words in your own sentences.",
+            "items": [
+              {
+                "id": "s52-1-vw1",
+                "prompt": "Write one sentence for each word. Use the word the right way.",
+                "words": [
+                  "conclude",
+                  "hypothesis"
+                ]
+              }
+            ],
+            "type": "vocabwrite"
+          }]
       }
     ],
     "friday": {
