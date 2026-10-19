@@ -975,6 +975,12 @@ function showLoginScreen(msg){
         <input id="authPass" type="password" autocomplete="current-password" style="width:100%;padding:11px 12px;border:1.5px solid #E2E8F0;border-radius:8px;font-size:15px;box-sizing:border-box;" />
       </div>
       <p id="authErr" style="display:none;color:#B45309;font-size:13px;margin:0 0 12px;"></p>
+      <div style="max-width:300px;margin:0 auto 14px;text-align:left;">
+        <label style="display:flex;gap:8px;align-items:center;font-size:13.5px;cursor:pointer;">
+          <input type="checkbox" id="keepLoggedIn" checked style="transform:scale(1.2);">
+          <span>Keep me logged in</span>
+        </label>
+      </div>
       <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
         <button type="button" class="btn-warmup" id="signInBtn">Sign in</button>
         <button type="button" class="btn-warmup" id="signUpBtn" style="background:#fff;color:#1B2A4E;border:1.5px solid #1B2A4E;">Create account</button>
@@ -992,6 +998,8 @@ function showLoginScreen(msg){
   }
   document.getElementById('signInBtn').addEventListener('click', async ()=>{
     errEl.style.display = 'none';
+    const keepLoggedIn = document.getElementById('keepLoggedIn').checked;
+    try { localStorage.setItem('ll_keepLoggedIn', keepLoggedIn ? '1' : '0'); } catch(e){}
     const {error} = await sb.auth.signInWithPassword({email: emailEl.value.trim(), password: passEl.value});
     if(error){ showErr(friendlyAuthError(error)); return; }
     await afterAuth();
@@ -5439,6 +5447,14 @@ if(SUPABASE_CONFIGURED && typeof supabase !== 'undefined' && sb){
     let session = null;
     try{ session = (await sb.auth.getSession()).data.session; }catch(e){ console.error('auth session check failed', e); }
     if(!session){ showLoginScreen(); return; }
+    // If user did not opt into "keep me logged in", clear the session
+    let keepLoggedIn = true;
+    try { keepLoggedIn = localStorage.getItem('ll_keepLoggedIn') !== '0'; } catch(e){}
+    if(!keepLoggedIn){
+      try { await sb.auth.signOut(); } catch(e){}
+      showLoginScreen();
+      return;
+    }
     await loadPins();
     if(isUnlocked()){ bootApp(); } else { showLockScreen(); }
   })();
