@@ -1588,79 +1588,6 @@ function mm52WeekDateRange(weekNum){
   const fmt = d => d.toLocaleDateString('en-US',{month:'short',day:'numeric'});
   return fmt(start) + ' - ' + fmt(end);
 }
-function mm52RenderContent(weekNum){
-  const container = document.getElementById('mm52Content');
-  const rangeEl = document.getElementById('mm52DateRange');
-  if(!container) return;
-  if(rangeEl) rangeEl.textContent = mm52WeekDateRange(weekNum);
-
-  const byBand = {'35':[], '68':[], '912':[]};
-  for(const s of state.students){
-    const band = mm52BandForGrade(s.grade);
-    if(byBand[band]) byBand[band].push(s);
-  }
-  const bandLabels = {'35':'Grades 3-5', '68':'Grades 6-8', '912':'Grades 9-12'};
-  let html = '';
-  for(const band of ['35','68','912']){
-    const students = byBand[band];
-    if(!students.length) continue;
-    const week = mm52GetWeek(weekNum, band);
-    if(!week){
-      html += `<p style="color:var(--ink-soft);">Week ${weekNum} not loaded for ${bandLabels[band]}.</p>`;
-      continue;
-    }
-    const names = students.map(s=>esc(firstName(s.name))).join(', ');
-    const vocabHTML = (week.vocab||[]).map(v=>
-      `<div style="margin-bottom:6px;"><strong>${esc(v.word)}</strong> <span style="color:var(--ink-soft);font-size:13px;">— ${esc(v.def)}</span></div>`
-    ).join('');
-    const secHTML = (sections, subject) => (sections||[]).map((sec,si)=>`
-      <div style="border:1px solid var(--line-light);border-radius:8px;padding:10px 12px;margin-bottom:8px;background:#fff;">
-        <div style="font-weight:700;font-size:14px;">${esc(sec.title)}</div>
-        <button type="button" class="btn btn-primary" data-mm52ws data-band="${band}" data-week="${weekNum}" data-subject="${subject}" data-section="${si}" style="margin-top:8px;font-size:13px;padding:6px 14px;">📝 Open Worksheet</button>
-      </div>`).join('');
-    html += `<div style="margin-bottom:16px;">
-      <div style="font-weight:700;font-size:15px;margin-bottom:2px;">${bandLabels[band]} <span style="font-weight:400;font-size:13px;color:var(--ink-soft);">(${names})</span></div>
-      <div style="font-size:13px;color:var(--ink-soft);margin-bottom:8px;">History: ${esc(week.historyTopic||'')} · Science: ${esc(week.scienceTopic||'')}</div>
-      <details style="margin-bottom:8px;"><summary style="cursor:pointer;font-weight:600;font-size:13.5px;">📚 This Week's Words (${(week.vocab||[]).length})</summary><div style="margin-top:8px;">${vocabHTML}</div></details>
-      <details style="margin-bottom:8px;"><summary style="cursor:pointer;font-weight:600;font-size:13.5px;">🏛️ History (${(week.history||[]).length} sections)</summary><div style="margin-top:8px;">${secHTML(week.history,'history')}</div></details>
-      <details><summary style="cursor:pointer;font-weight:600;font-size:13.5px;">🔬 Science (${(week.science||[]).length} sections)</summary><div style="margin-top:8px;">${secHTML(week.science,'science')}</div></details>
-    </div>`;
-  }
-  container.innerHTML = html || '<p style="color:var(--ink-soft);">No students assigned to grade bands.</p>';
-  container.querySelectorAll('[data-mm52ws]').forEach(btn=>{
-    btn.addEventListener('click', ()=>{
-      open52WeekWorksheet(btn.dataset.band, parseInt(btn.dataset.week,10), btn.dataset.subject, parseInt(btn.dataset.section,10));
-    });
-  });
-}
-function mm52WireSelector(){
-  const sel = document.getElementById('mm52WeekSelect');
-  if(!sel) return;
-  sel.addEventListener('change', ()=>{ mm52SelectedWeek = parseInt(sel.value,10); mm52RenderContent(mm52SelectedWeek); });
-  document.getElementById('mm52Prev')?.addEventListener('click', ()=>{
-    const w = mm52CurrentWeek();
-    if(w > 1){ mm52SelectedWeek = w-1; sel.value = mm52SelectedWeek; mm52RenderContent(mm52SelectedWeek); }
-  });
-  document.getElementById('mm52Next')?.addEventListener('click', ()=>{
-    const w = mm52CurrentWeek();
-    if(w < 52){ mm52SelectedWeek = w+1; sel.value = mm52SelectedWeek; mm52RenderContent(mm52SelectedWeek); }
-  });
-  mm52RenderContent(mm52CurrentWeek());
-}
-async function open52WeekWorksheet(band, weekNum, subject, sectionIdx){
-  const week = mm52GetWeek(weekNum, band);
-  if(!week) return;
-  const sections = subject==='history' ? (week.history||[]) : (week.science||[]);
-  const section = sections[sectionIdx];
-  if(!section || !(section.groups||[]).length){ showToast('No worksheet for this section yet.'); return; }
-  const lesson = {
-    topic: section.title || (subject==='history'?week.historyTopic:week.scienceTopic),
-    worksheetStudentIds: state.students.filter(s=>(s.band||mm52BandForGrade(s.grade))===band).map(s=>s.id),
-    day1: { title: section.title, reading: section.reading||'', vocab: week.vocab||[], worksheet: { groups: section.groups } }
-  };
-  await openWorksheetModal(subject, lesson, null, 1, null);
-}
-
 /* Adapter: convert 52-week content to dashboard lesson format.
    Returns a lesson object for the given student band, week, and subject. */
 function mm52LessonForStudent(student, weekNum, subject){
@@ -1763,8 +1690,6 @@ async function renderBoard(){
       ${mondayPreview || '<p style="color:var(--ink-soft);">52-week content starts Oct 19, 2026.</p>'}
       <p style="margin-top:16px;font-size:13px;color:var(--ink-soft);">The command center runs Monday–Friday. Enjoy the weekend! 🏀</p>
     </div>`;
-    // Wire up the 52-week section if present
-    try{ mm52WireSelector(); }catch(e){}
     return;
   }
 
@@ -2174,21 +2099,6 @@ async function renderBoard(){
       `}
     </section>
 
-    <section class="qtr" id="q52">
-      <div class="qtr-head"><div class="qtr-tag">📚</div><h2 class="qtr-title">52-Week Curriculum</h2><div class="qtr-hint">Micro Mastery topics by week</div></div>
-      <div class="card">
-        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:12px;">
-          <select id="mm52WeekSelect" style="font-size:15px;font-weight:700;padding:8px 12px;border:2px solid var(--orange);border-radius:8px;background:#fff;cursor:pointer;">
-            ${Array.from({length:52},(_,i)=>`<option value="${i+1}" ${i+1===mm52CurrentWeek()?'selected':''}>Week ${i+1}</option>`).join('')}
-          </select>
-          <button type="button" class="btn btn-ghost" id="mm52Prev" style="padding:8px 14px;">◀ Prev</button>
-          <button type="button" class="btn btn-ghost" id="mm52Next" style="padding:8px 14px;">Next ▶</button>
-          <span style="font-size:13px;color:var(--ink-soft);margin-left:auto;" id="mm52DateRange"></span>
-        </div>
-        <div id="mm52Content"></div>
-      </div>
-    </section>
-
     <footer class="buzzer-strip" style="flex-wrap:wrap;gap:10px;">
       <div class="msg">Final buzzer <b>${formatBuzzerTime()}</b> — afternoon activities begin</div>
       <button class="link-btn" id="openTodayFooter">Edit today's plan</button>
@@ -2391,8 +2301,6 @@ async function renderBoard(){
   if(footerBtn) footerBtn.addEventListener('click', ()=> requireEditAccess(openTodayModal));
   const previewBtn = document.getElementById('previewUpcomingBtn');
   if(previewBtn) previewBtn.addEventListener('click', ()=> requireEditAccess(openPreviewModal));
-  // 52-week curriculum section wiring
-  try{ mm52WireSelector(); }catch(e){ console.warn('52-week init:', e); }
 }
 
 /* Preview upcoming days (PIN-gated) — lets parent see future dashboard content */
