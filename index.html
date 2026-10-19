@@ -396,7 +396,6 @@
     <div class="modal-tabs" id="settingsTabs" role="tablist" aria-label="Settings sections">
       <div class="modal-tab active" role="tab" tabindex="0" aria-selected="true" data-settingstab="day">Day Settings</div>
       <div class="modal-tab" role="tab" tabindex="0" aria-selected="false" data-settingstab="students">Students</div>
-      <div class="modal-tab" role="tab" tabindex="0" aria-selected="false" data-settingstab="curriculum">Curriculum</div>
       <div class="modal-tab" role="tab" tabindex="0" aria-selected="false" data-settingstab="mm52">52-Week Plan</div>
       <div class="modal-tab" role="tab" tabindex="0" aria-selected="false" data-settingstab="grading">Grading</div>
       <div class="modal-tab" role="tab" tabindex="0" aria-selected="false" data-settingstab="pins">PINs</div>
@@ -1766,12 +1765,10 @@ async function renderBoard(){
   }
   const fl = state.fieldLabels;
   const aw = actualWeekForDate(state.schoolDate);
-  // Rotating weeks: odd actual weeks = History (Mon-Thu), even = Science (Mon-Thu).
-  // One subject owns the whole week so each unit gets 4 sequential days.
+  // 52-week: Mon/Tue = History days, Wed/Thu = Science days, Fri = Test day
   const isLessonDay = wd>=1 && wd<=4;
-  const weekSubject = (aw % 2 === 1) ? 'history' : 'science';
-  const isHistoryDay = isLessonDay && weekSubject==='history';
-  const isScienceDay = isLessonDay && weekSubject==='science';
+  const isHistoryDay = wd===1 || wd===2;
+  const isScienceDay = wd===3 || wd===4;
   const unitTest = isUnitTestWeek(aw);
 
   // ---- History / Science lesson (one subject per week, Mon-Thu) ----
@@ -2449,8 +2446,8 @@ function openUpcomingDayPreview(dateObj, targetContainer){
     const band = student.band || mm52BandForGrade(student.grade);
     const week = mm52GetWeek(weekNum, band);
     if(!week) continue;
-    const isHistDay = [1,3].includes(wd);
-    const isSciDay = [2,4].includes(wd);
+    const isHistDay = wd===1 || wd===2;
+    const isSciDay = wd===3 || wd===4;
     let lessonHTML = '';
     if(wd === 5){
       lessonHTML = `<div style="margin-top:6px;">📝 Friday Review: ${esc(week.friday?.title || 'Weekly review')}</div>`;
@@ -4709,7 +4706,7 @@ async function loadUpcomingTab(){
           if(!week) return null;
           if(wd===5) return `${MM52_BAND_LABELS[band]}: ${week.friday?.title||'Review'}`;
           // Mon-Thu: alternate History/Science by day (Mon/Wed=History, Tue/Thu=Science)
-          const isHist = [1,3].includes(wd);
+          const isHist = wd===1 || wd===2;
           const topic = isHist ? week.historyTopic : week.scienceTopic;
           return `${MM52_BAND_LABELS[band]}: ${isHist?'🏛️':'🔬'} ${topic}`;
         }).filter(Boolean);
