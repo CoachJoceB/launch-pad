@@ -393,6 +393,7 @@
       <div class="modal-tab active" role="tab" tabindex="0" aria-selected="true" data-settingstab="day">Day Settings</div>
       <div class="modal-tab" role="tab" tabindex="0" aria-selected="false" data-settingstab="students">Students</div>
       <div class="modal-tab" role="tab" tabindex="0" aria-selected="false" data-settingstab="curriculum">Curriculum</div>
+      <div class="modal-tab" role="tab" tabindex="0" aria-selected="false" data-settingstab="mm52">52-Week Plan</div>
       <div class="modal-tab" role="tab" tabindex="0" aria-selected="false" data-settingstab="grading">Grading</div>
       <div class="modal-tab" role="tab" tabindex="0" aria-selected="false" data-settingstab="plan">4-Week Plan</div>
       <div class="modal-tab" role="tab" tabindex="0" aria-selected="false" data-settingstab="pins">PINs</div>
@@ -1630,10 +1631,39 @@ async function open52WeekWorksheet(band, weekNum, subject, sectionIdx){
   if(!section || !(section.groups||[]).length){ showToast('No worksheet for this section yet.'); return; }
   const lesson = {
     topic: section.title || (subject==='history'?week.historyTopic:week.scienceTopic),
-    worksheetStudentIds: state.students.filter(s=>mm52BandForGrade(s.grade)===band).map(s=>s.id),
+    worksheetStudentIds: state.students.filter(s=>(s.band||mm52BandForGrade(s.grade))===band).map(s=>s.id),
     day1: { title: section.title, reading: section.reading||'', vocab: week.vocab||[], worksheet: { groups: section.groups } }
   };
   await openWorksheetModal(subject, lesson, null, 1, null);
+}
+
+/* Adapter: convert 52-week content to dashboard lesson format.
+   Returns a lesson object for the given student band, week, and subject. */
+function mm52LessonForStudent(student, weekNum, subject){
+  const band = student.band || mm52BandForGrade(student.grade);
+  const week = mm52GetWeek(weekNum, band);
+  if(!week) return null;
+  const isHistory = subject === 'History';
+  const sections = isHistory ? (week.history||[]) : (week.science||[]);
+  const topic = isHistory ? week.historyTopic : week.scienceTopic;
+  const dayParts = {};
+  const days = ['day1','day2','day3','day4'];
+  sections.forEach((sec, idx) => {
+    const dayKey = days[idx % 4];
+    if(!dayParts[dayKey]){
+      dayParts[dayKey] = { title: sec.title, reading: sec.reading||'', vocab: week.vocab||[], worksheet: { groups: sec.groups||[] } };
+    } else {
+      dayParts[dayKey].worksheet.groups = (dayParts[dayKey].worksheet.groups||[]).concat(sec.groups||[]);
+    }
+  });
+  return { topic: topic, band: band, weekNum: weekNum, ...dayParts };
+}
+
+/* Check if 52-week curriculum should be active (Oct 19, 2026 onward) */
+function mm52IsActive(){
+  const today = new Date(); today.setHours(0,0,0,0);
+  const start = new Date(MM52_START); start.setHours(0,0,0,0);
+  return today >= start;
 }
 
 async function renderBoard(){
@@ -1684,7 +1714,19 @@ async function renderBoard(){
   const sharedDayPart = getLessonDayPart(sharedLesson, state.weekdayNum, state.dateStr);
   function buildLessonCardHTML(studentId){
     if(isTestDay) return '';
-    const lesson = sharedLesson, lessonType = sharedLessonType, dayPart = sharedDayPart;
+    // 52-week curriculum: each student gets their band's lesson (active Oct 19, 2026+)
+    let lesson = sharedLesson, lessonType = sharedLessonType, dayPart = sharedDayPart;
+    const student = state.students.find(s=>s.id===studentId);
+    if(mm52IsActive() && student && (isHistoryDay || isScienceDay)){
+      const weekNum = mm52SelectedWeek || mm52WeekForDate(new Date(state.schoolDate + 'T12:00:00'));
+      const band = student.band || mm52BandForGrade(student.grade);
+      const mm52Lesson = mm52LessonForStudent(student, weekNum < 1 ? 1 : weekNum, isHistoryDay ? 'History' : 'Science');
+      if(mm52Lesson){
+        lesson = mm52Lesson;
+        lessonType = isHistoryDay ? 'History' : 'Science';
+        dayPart = getLessonDayPart(lesson, state.weekdayNum, state.dateStr);
+      }
+    }
     if(!lesson){
       return `<div class="card"><div class="word-badge">${esc(lessonType)} Lesson · Week ${aw}</div><p style="color:var(--ink-soft);font-size:13.5px;margin-top:8px;">Not uploaded yet — use the 📚 icon to add this week's ${esc(lessonType)} PDF.</p></div>`;
     }
@@ -2081,9 +2123,20 @@ async function renderBoard(){
   });
   board.querySelectorAll('[data-openworksheet]').forEach(btn=>{
     btn.addEventListener('click', ()=>{
+      const studentId = btn.dataset.student;
+      const student = state.students.find(s=>s.id===studentId);
+      // 52-week mode: build per-student lesson from their band
+      if(mm52IsActive() && student && (isHistoryDay || isScienceDay)){
+        const weekNum = mm52SelectedWeek || mm52WeekForDate(new Date(state.schoolDate + 'T12:00:00'));
+        const mm52Lesson = mm52LessonForStudent(student, weekNum < 1 ? 1 : weekNum, isHistoryDay ? 'History' : 'Science');
+        if(mm52Lesson){
+          openWorksheetModal(isHistoryDay ? 'history' : 'science', mm52Lesson, studentId, state.weekdayNum);
+          return;
+        }
+      }
       const wsData = window.__pendingWorksheet;
       if(!wsData) return;
-      openWorksheetModal(wsData.subject, wsData.lesson, btn.dataset.student, wsData.weekdayNum);
+      openWorksheetModal(wsData.subject, wsData.lesson, studentId, wsData.weekdayNum);
     });
   });
   board.querySelectorAll('[data-selftest]').forEach(btn=>{
@@ -4043,6 +4096,11 @@ function openStudentsModal(){
       <div class="field-grid">
         <div><label>Full Name</label><input type="text" id="p-${s.id}-name" value="${escAttr(s.name)}"></div>
         <div><label>Grade</label><input type="text" id="p-${s.id}-grade" value="${escAttr(s.grade)}"></div>
+        <div><label>Grade Band (52-week curriculum)</label><select id="p-${s.id}-band" style="font-size:14px;padding:8px;border:1.5px solid var(--line);border-radius:8px;background:#fff;">
+          <option value="35" ${(s.band||mm52BandForGrade(s.grade))==='35'?'selected':''}>Grades 3-5</option>
+          <option value="68" ${(s.band||mm52BandForGrade(s.grade))==='68'?'selected':''}>Grades 6-8</option>
+          <option value="912" ${(s.band||mm52BandForGrade(s.grade))==='912'?'selected':''}>Grades 9-12</option>
+        </select><div class="sub" style="font-size:11.5px;margin-top:2px;">Which 52-week content this student sees</div></div>
       </div>
       <div class="mini-lbl" style="margin-top:14px" id="p-${s.id}-addr1-lbl">${esc(fl.addr1)}</div>
       <input type="text" id="p-${s.id}-addr-a1" value="${escAttr(s.addr.a1)}">
@@ -4134,6 +4192,7 @@ function collectStudentsForm(){
     const lessonSize = lessonSizeEl ? lessonSizeEl.value : 'full';
     return {
       id:s.id, name:document.getElementById(`p-${s.id}-name`).value, grade:document.getElementById(`p-${s.id}-grade`).value,
+      band:document.getElementById(`p-${s.id}-band`)?.value || mm52BandForGrade(document.getElementById(`p-${s.id}-grade`).value),
       addr:{ a1:document.getElementById(`p-${s.id}-addr-a1`).value, a2:document.getElementById(`p-${s.id}-addr-a2`).value, a3:document.getElementById(`p-${s.id}-addr-a3`).value },
       phone:{ p1:document.getElementById(`p-${s.id}-phone-p1`).value, p2:document.getElementById(`p-${s.id}-phone-p2`).value,
         p3:document.getElementById(`p-${s.id}-phone-p3`).value, p4:document.getElementById(`p-${s.id}-phone-p4`).value },
@@ -4499,6 +4558,7 @@ function openSettingsTab(tab){
   if(tab==='day') openBuzzerModal();
   else if(tab==='students') openStudentsModal();
   else if(tab==='curriculum') openCurriculumModal();
+  else if(tab==='mm52') openMM52Modal();
   else if(tab==='grading') openGradingModal();
   else if(tab==='plan') openTemplateModal();
   else if(tab==='pins') openPinsModal();
@@ -4631,6 +4691,66 @@ document.getElementById('aiSaveMaterial').addEventListener('click', async ()=>{
   pendingAiMaterial=null;
   showToast('AI lesson and digital worksheet saved');
 });
+
+function openMM52Modal(){
+  showSettingsPanel('mm52');
+  const panel = document.querySelector('[data-settingspanel="mm52"]');
+  if(!panel){
+    // Create the panel if it doesn't exist
+    const tabsContainer = document.getElementById('settingsTabs');
+    const newPanel = document.createElement('div');
+    newPanel.className = 'settings-panel';
+    newPanel.dataset.settingspanel = 'mm52';
+    newPanel.innerHTML = `
+      <h3>52-Week Curriculum (Micro Mastery)</h3>
+      <div class="sub">Browse the 52-week curriculum by week and grade band. Week 1 starts Oct 19, 2026. Each student's grade band (set in Students tab) determines which content they see on the dashboard.</div>
+      <div style="display:flex;gap:10px;align-items:center;margin:12px 0;flex-wrap:wrap;">
+        <select id="mm52SettingsWeek" style="font-size:14px;font-weight:700;padding:8px 12px;border:2px solid var(--orange);border-radius:8px;">
+          ${Array.from({length:52},(_,i)=>`<option value="${i+1}" ${i+1===mm52CurrentWeek()?'selected':''}>Week ${i+1} (${mm52WeekDateRange(i+1)})</option>`).join('')}
+        </select>
+        <select id="mm52SettingsBand" style="font-size:14px;padding:8px 12px;border:1.5px solid var(--line);border-radius:8px;">
+          <option value="35">Grades 3-5</option>
+          <option value="68">Grades 6-8</option>
+          <option value="912">Grades 9-12</option>
+        </select>
+      </div>
+      <div id="mm52SettingsContent" style="max-height:50vh;overflow-y:auto;border:1px solid var(--line-light);border-radius:8px;padding:12px;"></div>
+    `;
+    tabsContainer.parentNode.insertBefore(newPanel, tabsContainer.nextSibling);
+    document.getElementById('mm52SettingsWeek').addEventListener('change', renderMM52Settings);
+    document.getElementById('mm52SettingsBand').addEventListener('change', renderMM52Settings);
+  }
+  renderMM52Settings();
+}
+
+function renderMM52Settings(){
+  const weekNum = parseInt(document.getElementById('mm52SettingsWeek')?.value || mm52CurrentWeek(), 10);
+  const band = document.getElementById('mm52SettingsBand')?.value || '35';
+  const container = document.getElementById('mm52SettingsContent');
+  if(!container) return;
+  const week = mm52GetWeek(weekNum, band);
+  if(!week){
+    container.innerHTML = '<p style="color:var(--ink-soft);">Week not loaded.</p>';
+    return;
+  }
+  const bandLabels = {'35':'Grades 3-5', '68':'Grades 6-8', '912':'Grades 9-12'};
+  const vocabHTML = (week.vocab||[]).map(v=>`<li><strong>${esc(v.word)}</strong> — ${esc(v.def)} <span style="color:var(--ink-soft);font-size:12px;">(Use: ${esc(v.use||'')})</span></li>`).join('');
+  const secHTML = (sections) => (sections||[]).map(s=>`
+    <div style="margin-bottom:10px;padding:8px;border-left:3px solid var(--orange);background:#fff;">
+      <div style="font-weight:700;">${esc(s.title)}</div>
+      <div style="font-size:12.5px;color:var(--ink-soft);margin-top:4px;">${esc((s.reading||'').substring(0,150))}...</div>
+      <div style="font-size:12px;margin-top:4px;">${(s.groups||[]).length} worksheet groups</div>
+    </div>`).join('');
+  container.innerHTML = `
+    <div style="margin-bottom:12px;">
+      <div style="font-weight:700;font-size:15px;">Week ${weekNum}: ${esc(week.historyTopic||'')} / ${esc(week.scienceTopic||'')}</div>
+      <div style="font-size:13px;color:var(--ink-soft);">${bandLabels[band]} · ${mm52WeekDateRange(weekNum)}</div>
+    </div>
+    <details open style="margin-bottom:10px;"><summary style="cursor:pointer;font-weight:600;">📚 Vocabulary (${(week.vocab||[]).length})</summary><ul style="margin:8px 0;padding-left:20px;">${vocabHTML}</ul></details>
+    <details style="margin-bottom:10px;"><summary style="cursor:pointer;font-weight:600;">🏛️ History (${(week.history||[]).length} sections)</summary><div style="margin-top:8px;">${secHTML(week.history)}</div></details>
+    <details><summary style="cursor:pointer;font-weight:600;">🔬 Science (${(week.science||[]).length} sections)</summary><div style="margin-top:8px;">${secHTML(week.science)}</div></details>
+  `;
+}
 
 function openCurriculumModal(){
   const aw = actualWeekForDate(state.schoolDate);
