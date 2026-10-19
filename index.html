@@ -1669,6 +1669,14 @@ function mm52States(weekNum){
   if(typeof MM_STATES_52 === 'undefined') return null;
   return MM_STATES_52.find(w => w.w === weekNum) || null;
 }
+/* 52-week: get day's fact about the state (Mon-Thu) */
+function mm52StateFact(weekNum, weekdayNum){
+  const st = mm52States(weekNum);
+  if(!st || !st.facts) return st ? st.funFact : null;
+  const dayNames = {1:'Monday',2:'Tuesday',3:'Wednesday',4:'Thursday'};
+  const dayFact = (st.facts||[]).find(f => f.day === dayNames[weekdayNum]);
+  return dayFact ? dayFact.fact : st.funFact;
+}
 /* 52-week real world scenarios: get day's scenario (Mon-Thu) */
 function mm52Scenario(weekNum, weekdayNum){
   if(typeof MM_SCENARIOS_52 === 'undefined') return null;
@@ -1910,7 +1918,8 @@ async function renderBoard(){
       const st52 = mm52States(weekNum);
       if(st52 && !st52.review){
         statesCapitalsData = [{state: st52.state, capital: st52.capital}];
-        statesFunFact = st52.funFact || '';
+        // Daily fact (Mon-Thu different each day)
+        statesFunFact = mm52StateFact(weekNum, wd) || st52.funFact || '';
         statesNickname = st52.nickname || '';
       } else if(st52 && st52.review){
         statesCapitalsData = (st52.states||[]).map((s,i)=>({state: s, capital: (st52.capitals||[])[i] || ''}));
@@ -2478,7 +2487,7 @@ function openUpcomingDayPreview(dateObj, targetContainer){
       ${lessonHTML}
       ${vWord ? `<div style="margin-top:6px;font-size:13px;">📚 Vocab: <strong>${esc(vWord.word)}</strong> — ${esc(vWord.def)}</div>` : ''}
       ${fin && fin.activity ? `<div style="margin-top:6px;font-size:13px;">💰 ${esc(fin.concept)}: ${esc(fin.activity.title)}</div>` : ''}
-      ${st && !st.review ? `<div style="margin-top:6px;font-size:13px;">🗺️ ${esc(st.state)} — ${esc(st.capital)}</div>` : ''}
+      ${st && !st.review ? `<div style="margin-top:6px;font-size:13px;">🗺️ ${esc(st.state)} — ${esc(st.capital)}<br><span style="font-size:12px;color:var(--ink-soft);">${esc(mm52StateFact(weekNum, wd)||'')}</span></div>` : ''}
       ${sc ? `<div style="margin-top:6px;font-size:13px;">🌍 Scenario: ${esc(sc.title)}</div>` : ''}
     </div>`;
   }
