@@ -68,10 +68,11 @@
   .write-line{border-bottom:1px solid var(--line);min-height:26px;}
   .write-lines .write-line{margin-bottom:2px;}
   .write-box{
-    border:1.5px solid var(--line);border-radius:4px;min-height:64px;padding:6px;
+    /* 1.5-spaced ruled lines, no box border */
+    border:none;border-radius:0;min-height:64px;padding:0 0 6px 0;
     background:
-      repeating-linear-gradient(transparent, transparent 25px, var(--line-light) 25px, var(--line-light) 26px);
-    line-height:26px;
+      repeating-linear-gradient(transparent, transparent 38px, var(--line-light) 38px, var(--line-light) 39px);
+    line-height:39px;
   }
   .write-box.tall{min-height:90px;}
   .two-col{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
@@ -96,11 +97,14 @@
   }
   /* ---------- print ---------- */
   @media print{
-    body{background:#fff;padding:0;}
+    @page{margin:0.5in 0.6in;}
+    body{background:#fff;padding:0;margin:0;}
     .no-print-note{display:none;}
-    .page{box-shadow:none;border-radius:0;margin:0;max-width:none;padding:0.6in 0.65in;page-break-after:always;}
+    .page{box-shadow:none;border-radius:0;margin:0;max-width:none;padding:0.4in 0.5in;page-break-after:always;page-break-inside:avoid;}
     .page:last-child{page-break-after:auto;}
     .section-head{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+    .field{margin-bottom:7px;}
+    .sub-head{margin:10px 0 6px;}
   }
 </style>
 </head>
@@ -136,26 +140,26 @@
       <div class="field"><div class="flabel">Word</div><div class="write-line"></div></div>
       <div class="field"><div class="flabel">Part of speech</div><div class="write-line"></div></div>
     </div>
-    <div class="field"><div class="flabel">Definition (in your own words)</div><div class="write-box" style="min-height:130px;"></div></div>
+    <div class="field"><div class="flabel">Definition (in your own words)</div><div class="write-box" style="min-height:195px;"></div></div>
     <div class="two-col">
       <div class="field"><div class="flabel">Synonym</div><div class="write-line"></div></div>
       <div class="field"><div class="flabel">Antonym</div><div class="write-line"></div></div>
     </div>
-    <div class="field"><div class="flabel">Use it in a sentence</div><div class="write-box" style="min-height:130px;"></div></div>
+    <div class="field"><div class="flabel">Use it in a sentence</div><div class="write-box" style="min-height:195px;"></div></div>
 
     <div class="sub-head">Scripture</div>
     <div class="two-col">
       <div class="field"><div class="flabel">Reference (book chapter:verse)</div><div class="write-line"></div></div>
       <div class="field"><div class="flabel">Key phrase I remember</div><div class="write-line"></div></div>
     </div>
-    <div class="field"><div class="flabel">Write the scripture</div><div class="write-box" style="min-height:130px;"></div></div>
+    <div class="field"><div class="flabel">Write the scripture</div><div class="write-box" style="min-height:195px;"></div></div>
 
     <div class="sub-head">Reflection</div>
     <div class="field"><div class="flabel">Reflection question</div><div class="write-line"></div></div>
-    <div class="field"><div class="flabel">My response (5 lines)</div><div class="write-box" style="min-height:130px;"></div></div>
+    <div class="field"><div class="flabel">My response (5 lines)</div><div class="write-box" style="min-height:195px;"></div></div>
 
     <div class="sub-head">Prayer &amp; Intention</div>
-    <div class="field"><div class="flabel">My prayer today</div><div class="write-box" style="min-height:130px;"></div></div>
+    <div class="field"><div class="flabel">My prayer today</div><div class="write-box" style="min-height:195px;"></div></div>
     <div class="field"><div class="flabel">Today's intention (one thing I will do on purpose today)</div><div class="write-line"></div></div>
   </div>
 
@@ -185,18 +189,18 @@
     <div class="sub-head">Financial Literacy</div>
     <div class="field"><div class="flabel">Today's concept</div><div class="write-line"></div></div>
     <div class="field"><div class="flabel">Today's activity</div><div class="write-line"></div></div>
-    <div class="field"><div class="flabel">My work / answer</div><div class="write-box" style="min-height:130px;"></div></div>
+    <div class="field"><div class="flabel">My work / answer</div><div class="write-box" style="min-height:195px;"></div></div>
 
     <div class="sub-head">States &amp; Capitals</div>
     <div class="two-col">
       <div class="field"><div class="flabel">State</div><div class="write-line"></div></div>
       <div class="field"><div class="flabel">Capital</div><div class="write-line"></div></div>
     </div>
-    <div class="field"><div class="flabel">Fun fact about this state (in my own words)</div><div class="write-box" style="min-height:130px;"></div></div>
+    <div class="field"><div class="flabel">Fun fact about this state (in my own words)</div><div class="write-box" style="min-height:195px;"></div></div>
 
     <div class="sub-head">Real World Scenario</div>
     <div class="field"><div class="flabel">Scenario title</div><div class="write-line"></div></div>
-    <div class="field"><div class="flabel">What would I do, and why?</div><div class="write-box" style="min-height:130px;"></div></div>
+    <div class="field"><div class="flabel">What would I do, and why?</div><div class="write-box" style="min-height:195px;"></div></div>
   </div>
 
   <div class="check-row"><span class="check-box"></span> I completed every section above on my own, without being reminded.</div>
@@ -245,7 +249,7 @@
     <div class="field"><div class="flabel">Emergency contact (name + number)</div><div class="write-line"></div></div>
 
     <div class="sub-head">Safety Check</div>
-    <div class="field"><div class="flabel">If I am lost, what do I do first?</div><div class="write-box" style="min-height:130px;"></div></div>
+    <div class="field"><div class="flabel">If I am lost, what do I do first?</div><div class="write-box" style="min-height:195px;"></div></div>
     <div class="field"><div class="flabel">The emergency number is:</div><div class="write-line" style="max-width:220px;"></div></div>
   </div>
 
