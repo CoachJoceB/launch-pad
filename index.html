@@ -1721,7 +1721,7 @@ function mm52DevoWord(weekNum, weekdayNum){
   return (week.words||[]).find(d => d.day === dayNames[weekdayNum]) || null;
 }
 
-async function renderBoard(){
+async function renderBoardInner(){
   const board = document.getElementById('board');
   const wd = state.weekdayNum;
   window.__pendingLessonPdf = null;
@@ -2433,6 +2433,22 @@ async function renderBoard(){
   const previewBtn = document.getElementById('previewUpcomingBtn');
   if(previewBtn) previewBtn.addEventListener('click', ()=> requireEditAccess(openPreviewModal));
 }
+
+/* Scroll-preserving wrapper: rebuilding the board resets both the page
+   scroll and the mobile student-card horizontal scroll. Save both before
+   the render and put them back after, so checking an item off (or any
+   other re-render) never snaps the view to the top / start. */
+async function renderBoard(){
+  const savedY = window.scrollY || window.pageYOffset || 0;
+  const savedGridLefts = Array.from(document.querySelectorAll('.students-grid')).map(g=>g.scrollLeft);
+  await renderBoardInner();
+  if(savedY > 0) window.scrollTo(0, savedY);
+  const grids = document.querySelectorAll('.students-grid');
+  savedGridLefts.forEach((left, idx)=>{
+    if(grids[idx] && left > 0) grids[idx].scrollLeft = left;
+  });
+}
+
 
 /* Preview upcoming days (PIN-gated) - shows full dashboard for selected day */
 function openPreviewModal(){
