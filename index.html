@@ -5383,9 +5383,15 @@ document.getElementById('saveStudents').addEventListener('click', async ()=>{
 
 /* ========================= INIT + LIVE REFRESH ========================= */
 async function loadAndRender(){
+  // Preserve the reader's scroll position across re-renders (the 90-second
+  // sync poll replaces the board, which otherwise snaps the page to the top).
+  const savedScrollY = window.scrollY || window.pageYOffset || 0;
   await loadAll();
   renderHeader();
   await renderBoard();
+  if(savedScrollY > 0){
+    window.scrollTo(0, savedScrollY);
+  }
 }
 
 if(!SUPABASE_CONFIGURED){
