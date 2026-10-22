@@ -133,6 +133,8 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
   .collapse-body.lesson-reading{max-height:5000px;}
   /* Original-work guard: the lesson reading cannot be selected or copied. */
   #worksheetReading, .lesson-reading{user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;}
+  /* Worksheet gate video player: fills its half-size wrapper. */
+  #gatePlayerWrap iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:0;}
   .collapse-body{overflow:hidden;max-height:600px;transition:max-height .2s ease;}
   .collapse-body.collapsed{max-height:0;}
   .info-line{display:flex;justify-content:space-between;font-size:13.5px;padding:4px 0;border-bottom:1px dashed var(--line-light);}
@@ -606,6 +608,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
         <div id="wsUtilPlan"></div>
       </div>
     </div>
+    <div id="worksheetGate" style="display:none;"></div>
     <div class="ws-cols">
       <div id="worksheetReading" class="card" style="display:none;"></div>
       <div id="worksheetFormArea"></div>
@@ -1876,12 +1879,13 @@ async function renderBoardInner(){
         if(video && video.youtubeId){
           videoHTML = `<div style="margin:8px 0;">
             <div style="font-size:13px;font-weight:600;margin-bottom:6px;">🎬 Watch: ${esc(video.title)}</div>
-            <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:8px;background:#000;">
-              <iframe src="https://www.youtube.com/embed/${escAttr(video.youtubeId)}" 
+            <div style="position:relative;max-width:430px;padding-bottom:min(56.25%,242px);height:0;overflow:hidden;border-radius:8px;background:#000;">
+              <iframe src="https://www.youtube.com/embed/${escAttr(video.youtubeId)}?rel=0&modestbranding=1&playsinline=1" 
                 style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;" 
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                allowfullscreen
                 title="${escAttr(video.title)}"></iframe>
+              <div aria-hidden="true" style="position:absolute;top:0;left:0;right:0;height:52px;z-index:2;"></div>
+              <div aria-hidden="true" style="position:absolute;right:0;bottom:0;width:110px;height:48px;z-index:2;"></div>
             </div>
             <div style="font-size:11.5px;color:var(--ink-soft);margin-top:4px;">${esc(video.channel)} · ${esc(video.duration)}</div>
           </div>`;
@@ -2878,6 +2882,7 @@ function lessonDaysInWeek(lesson, dateStr){
 function currentEventResponseKey(dateStr, studentId){ return 'current-event-response:'+dateStr+':'+studentId; }
 
 function worksheetAnswersKey(dateStr, studentId, subject){ return 'worksheet-answers:'+dateStr+':'+subject+':'+studentId; }
+function wsGateKey(dateStr, studentId, subject){ return 'worksheet-gate:'+dateStr+':'+subject+':'+studentId; }
 function worksheetGradesKey(dateStr, studentId, subject){ return 'worksheet-grades:'+dateStr+':'+subject+':'+studentId; }
 
 function defaultWorksheetAnswers(worksheet){
@@ -4105,11 +4110,13 @@ async function openWorksheetModal(subject, lesson, preferredStudentId, weekdayNu
 
   worksheetCache = {};
   wsChecksCache = {};
+  wsGateCache = {};
   const wsBhm = dayPart.bhm || lesson.blackHistoryMoment || null;
   for(const s of worksheetStudents){
     const saved = (await storageGet(worksheetAnswersKey(state.dateStr, s.id, subject))) || defaultWorksheetAnswers(worksheet);
     worksheetCache[s.id] = { worksheet: worksheet, answers: saved, bhm: wsBhm, studentId: s.id };
     wsChecksCache[s.id] = (await storageGet(wsCheckKey(state.dateStr, s.id, subject))) || {};
+    wsGateCache[s.id] = (await storageGet(wsGateKey(state.dateStr, s.id, subject))) || {};
   }
 
   function showStudent(id){
@@ -4129,6 +4136,7 @@ async function openWorksheetModal(subject, lesson, preferredStudentId, weekdayNu
     // stay connected to the same handlers.
     wireWorksheetFormInputs(document.querySelector('#worksheetOverlay .modal'), id);
     wsSyncStickyOffsets();
+    applyWorksheetGate(id, subject, wd, forceDayNum);
   }
   tabsWrap.querySelectorAll('.modal-tab').forEach(t=>{ t.addEventListener('click', ()=> showStudent(t.dataset.wstab)); });
   showStudent(defaultId);
@@ -4858,7 +4866,7 @@ function switchModalTab(overlay, tabId){
   overlay.querySelectorAll('.modal-tab').forEach(t=>t.classList.toggle('active', t.dataset.tab===tabId));
   overlay.querySelectorAll('.tab-panel').forEach(p=>p.classList.toggle('active', p.id===tabId));
 }
-function closeAllModals(){ document.querySelectorAll('.modal-overlay').forEach(o=>o.classList.remove('open')); }
+function closeAllModals(){ stopGateTracking(); document.querySelectorAll('.modal-overlay').forEach(o=>o.classList.remove('open')); }
 function showToast(msg){
   const t = document.getElementById('toast');
   t.textContent = msg; t.classList.add('show');
@@ -4986,6 +4994,157 @@ document.addEventListener('input', (e)=>{
     sendLiveField({ cid: LIVE_CID, kind: 'ce', studentId: el.dataset.student, dateStr: state.dateStr, field: el.dataset.cefield, value: el.value });
   }
 }, true);
+
+/* ========================= WORKSHEET GATE =========================
+   Before a worksheet starts, the student must (1) read the original-work
+   caution and tap "I understand", and (2) watch the lesson video (52-week
+   history/science days) in a half-size, contained player. Gate state is
+   saved per student + subject + day, so it is done once per worksheet.
+   Playback is tracked second by second and only continuous playing time
+   counts, so dragging to the end does not unlock the worksheet. */
+let wsGateCache = {}; // studentId -> {caution:bool, watched:bool}
+let gatePlayer = null, gateTicker = null, gateAcc = 0, gateLast = -1, gateDone = false;
+
+function gateVideoFor(student, subject, wd){
+  try {
+    if(typeof mm52IsActive === 'undefined' || !mm52IsActive()) return null;
+    if(subject !== 'history' && subject !== 'science') return null;
+    if(subject === 'history' && !(wd === 1 || wd === 2)) return null;
+    if(subject === 'science' && !(wd === 3 || wd === 4)) return null;
+    const weekNum = mm52SelectedWeek || mm52WeekForDate(state.schoolDate);
+    const band = student.band || mm52BandForGrade(student.grade);
+    const v = mm52Video(weekNum < 1 ? 1 : weekNum, band, subject);
+    return (v && v.youtubeId) ? v : null;
+  } catch(e){ return null; }
+}
+async function saveWsGate(studentId, subject){
+  try { await storageSet(wsGateKey(state.dateStr, studentId, subject), wsGateCache[studentId] || {}); } catch(e){}
+}
+function stopGateTracking(){
+  if(gateTicker){ clearInterval(gateTicker); gateTicker = null; }
+  if(gatePlayer && gatePlayer.destroy){ try { gatePlayer.destroy(); } catch(e){} }
+  gatePlayer = null; gateAcc = 0; gateLast = -1; gateDone = false;
+}
+let ytApiPromise = null;
+function loadYouTubeAPI(){
+  if(window.YT && YT.Player) return Promise.resolve();
+  if(ytApiPromise) return ytApiPromise;
+  ytApiPromise = new Promise(res=>{
+    const prev = window.onYouTubeIframeAPIReady;
+    window.onYouTubeIframeAPIReady = ()=>{ if(prev) prev(); res(); };
+    const tag = document.createElement('script');
+    tag.src = 'https://www.youtube.com/iframe_api';
+    document.head.appendChild(tag);
+  });
+  return ytApiPromise;
+}
+function applyWorksheetGate(studentId, subject, wd, forceDayNum){
+  const gateEl = document.getElementById('worksheetGate');
+  const cols = document.querySelector('#worksheetOverlay .ws-cols');
+  const util = document.getElementById('wsUtilBar');
+  if(!gateEl) return;
+  const st = state.students.find(s=>s.id===studentId);
+  const gate = wsGateCache[studentId] || (wsGateCache[studentId] = {});
+  const video = (!forceDayNum && st) ? gateVideoFor(st, subject, wd) : null;
+  const needCaution = !gate.caution;
+  const needVideo = !!video && !gate.watched;
+  stopGateTracking();
+  if(!needCaution && !needVideo){
+    gateEl.style.display = 'none'; gateEl.innerHTML = '';
+    if(cols) cols.style.display = '';
+    if(util) util.style.display = 'block';
+    return;
+  }
+  if(cols) cols.style.display = 'none';
+  if(util) util.style.display = 'none';
+  gateEl.style.display = 'block';
+  if(needCaution){
+    gateEl.innerHTML = `<div class="card" style="max-width:560px;margin:8px auto;padding:20px;">
+      <div style="font-size:26px;text-align:center;" aria-hidden="true">⚠️</div>
+      <h3 style="text-align:center;margin:6px 0 10px;">Before you start, read this</h3>
+      <div style="font-size:14.5px;line-height:1.6;">
+        <p style="margin:0 0 8px;">Cut, copy, and paste are <strong>turned off</strong> in this worksheet.</p>
+        <p style="margin:0 0 8px;">Anything you type <strong>cannot be copy and pasted</strong> from the reading, a website, or anywhere else. If words did not come from your own typing, you will have to delete them and <strong>retype them in your own words</strong>.</p>
+        <p style="margin:0;">Your answers must be your own original work.</p>
+      </div>
+      <div style="text-align:center;margin-top:16px;">
+        <button type="button" class="btn-warmup" id="gateUnderstandBtn">I understand</button>
+      </div>
+    </div>`;
+    document.getElementById('gateUnderstandBtn').addEventListener('click', async ()=>{
+      gate.caution = true;
+      await saveWsGate(studentId, subject);
+      applyWorksheetGate(studentId, subject, wd, forceDayNum);
+    });
+    return;
+  }
+  // Video gate
+  gateEl.innerHTML = `<div style="max-width:560px;margin:8px auto;">
+    <div class="card" style="padding:16px;">
+      <div style="font-size:15px;font-weight:700;margin-bottom:4px;">🎬 Watch the lesson video first</div>
+      <p style="font-size:13px;color:var(--ink-soft);margin:0 0 10px;">Your worksheet unlocks after you watch the video. Dragging to the end does not count.</p>
+      <div style="font-size:13.5px;font-weight:600;margin-bottom:6px;">${esc(video.title)}</div>
+      <div id="gatePlayerWrap" style="position:relative;max-width:430px;margin:0 auto;padding-bottom:min(56.25%,242px);height:0;overflow:hidden;border-radius:8px;background:#000;">
+        <div id="gatePlayerEl" style="position:absolute;top:0;left:0;width:100%;height:100%;"></div>
+        <div aria-hidden="true" style="position:absolute;top:0;left:0;right:0;height:52px;z-index:2;"></div>
+        <div aria-hidden="true" style="position:absolute;right:0;bottom:0;width:110px;height:48px;z-index:2;"></div>
+        <div id="gateEndCover" style="display:none;position:absolute;inset:0;z-index:3;background:rgba(27,42,78,.92);color:#fff;align-items:center;justify-content:center;font-size:16px;font-weight:700;text-align:center;padding:12px;">✓ You finished the video</div>
+      </div>
+      <div style="font-size:11.5px;color:var(--ink-soft);margin-top:4px;text-align:center;">${esc(video.channel)} · ${esc(video.duration)}</div>
+      <p id="gateProgress" style="font-size:13px;font-weight:600;margin:10px 0 0;text-align:center;">Watched: 0%</p>
+      <div style="text-align:center;margin-top:10px;">
+        <button type="button" class="btn-warmup" id="gateStartBtn" style="display:none;">Start my worksheet</button>
+      </div>
+    </div>
+  </div>`;
+  initGatePlayer(video, async ()=>{
+    gate.watched = true;
+    await saveWsGate(studentId, subject);
+    applyWorksheetGate(studentId, subject, wd, forceDayNum);
+  });
+}
+function initGatePlayer(video, onComplete){
+  loadYouTubeAPI().then(()=>{
+    if(!document.getElementById('gatePlayerEl')) return;
+    gateAcc = 0; gateLast = -1; gateDone = false;
+    gatePlayer = new YT.Player('gatePlayerEl', {
+      videoId: video.youtubeId,
+      playerVars: { rel: 0, modestbranding: 1, playsinline: 1, fs: 0 },
+      events: {
+        onStateChange: (ev)=>{ if(ev.data === YT.PlayerState.ENDED) finishGateVideo(onComplete); }
+      }
+    });
+    gateTicker = setInterval(()=>{
+      if(!gatePlayer || !gatePlayer.getCurrentTime) return;
+      const ps = gatePlayer.getPlayerState ? gatePlayer.getPlayerState() : -1;
+      if(ps === 1){
+        const t = gatePlayer.getCurrentTime();
+        const dur = gatePlayer.getDuration() || 0;
+        if(gateLast >= 0){
+          const delta = t - gateLast;
+          if(delta > 0 && delta <= 1.2) gateAcc += delta;
+        }
+        gateLast = t;
+        const pctEl = document.getElementById('gateProgress');
+        if(pctEl && dur > 0) pctEl.textContent = 'Watched: ' + Math.min(99, Math.floor((gateAcc/dur)*100)) + '%';
+        if(dur > 0 && gateAcc/dur >= 0.85) finishGateVideo(onComplete);
+      } else {
+        gateLast = -1;
+      }
+    }, 500);
+  });
+}
+function finishGateVideo(onComplete){
+  if(gateDone) return;
+  gateDone = true;
+  if(gateTicker){ clearInterval(gateTicker); gateTicker = null; }
+  const cover = document.getElementById('gateEndCover');
+  if(cover) cover.style.display = 'flex';
+  const pctEl = document.getElementById('gateProgress');
+  if(pctEl) pctEl.textContent = 'Video finished. Great work!';
+  const btn = document.getElementById('gateStartBtn');
+  if(btn){ btn.style.display = ''; btn.addEventListener('click', ()=>{ onComplete(); }); }
+}
 
 /* ========================= WIRE UP ========================= */
 document.querySelectorAll('[data-close]').forEach(b=>b.addEventListener('click', closeAllModals));
