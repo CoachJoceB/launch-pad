@@ -583,8 +583,11 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
       <div>
         <h3 id="lightboxTitle">Day Detail</h3>
         <div class="sub" id="lightboxSub"></div>
+        <div class="sub" id="lbNavPos" style="margin-top:2px;"></div>
       </div>
       <div style="display:flex;gap:8px;">
+        <button class="btn btn-ghost" id="lbPrevDay" title="Previous archived day" style="padding:8px 12px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true" style="display:block;"><path d="M15 6l-6 6 6 6"/></svg></button>
+        <button class="btn btn-ghost" id="lbNextDay" title="Next archived day" style="padding:8px 12px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true" style="display:block;"><path d="M9 6l6 6-6 6"/></svg></button>
         <button class="btn btn-primary" id="downloadDayImg">⬇ Download Image</button>
         <button class="btn btn-ghost" data-close>Close</button>
       </div>
@@ -1088,7 +1091,7 @@ async function getMaterialWeek(subject,w){
   return await storageGet(customMaterialWeekKey(subject,w));
 }
 function materialSubjectLabel(subject){
-  return ({history:'History',science:'Science',math:'Math','language arts':'Language Arts',bible:'Bible',other:'Other'})[subject] || subject;
+  return ({history:'History',science:'Science',friday:'Friday',math:'Math','language arts':'Language Arts',bible:'Bible',other:'Other'})[subject] || subject;
 }
 
 // ---- Worksheet helpers: turn the actual PDF exercises into fillable data ----
@@ -1488,6 +1491,14 @@ async function getScienceWeek(actualWeek){
 }
 
 async function computeWeekWordsFor(mon){
+  // 52-week era: Friday's test words are the week's 4 devotional theme
+  // words (the same words on Friday's Warm-Up review card), all grades.
+  const eraW = (typeof mm52WeekForDate === 'function') ? mm52WeekForDate(mon) : 0;
+  if(eraW >= 1 && typeof MM_DEVOTIONAL_52 !== 'undefined'){
+    const wk = MM_DEVOTIONAL_52.find(x=>x.w===eraW);
+    const words = (wk && wk.words) ? wk.words.map(x=>x.word) : [];
+    return { '5th': words.slice(), '8th': words.slice(), '10th': words.slice() };
+  }
   const grades = ['5th','8th','10th'];
   const result = {'5th':[], '8th':[], '10th':[]};
   const cw = legacyContentWeekForDate(mon);
@@ -2027,7 +2038,26 @@ async function renderBoardInner(){
   // 4 lesson days before Friday), its day4 self test hasn't had a day yet —
   // offer it here so the unit still closes out properly.
   let selfTestCardHTML = '';
-  if(isTestDay){
+  if(isTestDay && typeof mm52IsActive === 'function' && mm52IsActive()){
+    // 52-week Friday: each band's week carries its own "Show What You
+    // Know" review test built from that week's history + science lessons.
+    try {
+      const weekNum = contentWeekForDate(state.schoolDate);
+      const first = state.students[0];
+      const firstWk = first ? mm52GetWeek(weekNum, first.band || mm52BandForGrade(first.grade)) : null;
+      if(firstWk && firstWk.friday){
+        selfTestCardHTML = `
+      <div class="card" style="margin-bottom:16px;">
+        <div class="mini-lbl" style="margin-top:0;">Show What You Know \u00b7 Week ${weekNum}</div>
+        <p style="font-size:13.5px;margin:4px 0 8px;">${esc(firstWk.friday.title)} \u2014 the Friday review test built from this week's history and science lessons. Answer in your own words and see your score right away.</p>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;">
+          ${state.students.map(s=>`<button type="button" class="btn btn-primary" data-fridaytest="${s.id}">\u{1F4DD} ${esc(s.name)}: Take the Friday Test</button>`).join('')}
+        </div>
+      </div>`;
+      }
+    } catch(e) {}
+  }
+  if(isTestDay && !selfTestCardHTML){
     const wSubj = (aw % 2 === 1) ? 'history' : 'science';
     const wkLesson = wSubj==='history' ? await getHistoryWeek(aw) : await getScienceWeek(aw);
     if(wkLesson && wkLesson.day4 && lessonDaysInWeek(wkLesson, state.dateStr) < 4){
@@ -2383,6 +2413,18 @@ async function renderBoardInner(){
       openWorksheetModal(stData.subject, stData.lesson, btn.dataset.student, 5, 4);
     });
   });
+  board.querySelectorAll('[data-fridaytest]').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      const s = state.students.find(x=>x.id===btn.dataset.fridaytest);
+      if(!s) return;
+      const weekNum = contentWeekForDate(state.schoolDate);
+      const wk = mm52GetWeek(weekNum, s.band || mm52BandForGrade(s.grade));
+      if(!wk || !wk.friday){ showToast('No Friday test for this week yet.'); return; }
+      const fr = wk.friday;
+      const lesson = { topic: fr.title, day4: { title: fr.title, reading: fr.reading || '', worksheet: { groups: fr.groups || [] } } };
+      openWorksheetModal('friday', lesson, s.id, 5, 4);
+    });
+  });
 
   board.querySelectorAll('.check').forEach(el=>{
     el.setAttribute('role','checkbox');
@@ -2667,6 +2709,38 @@ function normAnswer(s){ return (s||'').trim().toLowerCase().replace(/\s+/g,' ');
 function autoGrade(given, expected){ return normAnswer(given) === normAnswer(expected) && normAnswer(given)!==''; }
 
 async function buildWeeklyTest(studentGrade, mon, studentId){
+  // 52-week era: every section comes from THIS week's 52-week material —
+  // the same content the students saw Mon-Thu — not the legacy cycle.
+  const eraW = (typeof mm52WeekForDate === 'function') ? mm52WeekForDate(mon) : 0;
+  if(eraW >= 1 && typeof mm52GetWeek === 'function'){
+    const band = (typeof mm52BandForGrade === 'function') ? mm52BandForGrade(studentGrade) : null;
+    const wk = band ? mm52GetWeek(eraW, band) : null;
+    const devoWk = (typeof MM_DEVOTIONAL_52 !== 'undefined') ? MM_DEVOTIONAL_52.find(x=>x.w===eraW) : null;
+    const vocab = (devoWk && devoWk.words) ? devoWk.words.map(x=>({ word: x.word })) : [];
+    const fin52 = (typeof mm52Financial === 'function') ? mm52Financial(eraW, 1) : null;
+    const financialLit = (fin52 && fin52.concept) ? [{ concept: fin52.concept, blank: fin52.explanation, answer: '' }] : [];
+    const st52 = (typeof mm52States === 'function') ? mm52States(eraW) : null;
+    let statesCapitals = [];
+    if(st52 && !st52.review) statesCapitals = [{ state: st52.state, answer: st52.capital }];
+    else if(st52 && st52.review) statesCapitals = (st52.states||[]).map((sn,i)=>({ state: sn, answer: (st52.capitals||[])[i] || '' }));
+    const sc52 = (typeof mm52Scenario === 'function') ? mm52Scenario(eraW, 1) : null;
+    const scenario = sc52 ? ((sc52.title ? sc52.title + ' \u2014 ' : '') + sc52.scenario) : '';
+    const currentEventLogs = [];
+    if(studentId){
+      for(let d=0; d<4; d++){
+        const dt = new Date(mon); dt.setDate(dt.getDate()+d);
+        const resp = await storageGet(currentEventResponseKey(toDateStr(dt), studentId));
+        if(resp && resp.headline) currentEventLogs.push({ day: ['Mon','Tue','Wed','Thu'][d], headline: resp.headline, summary: resp.summary });
+      }
+    }
+    return {
+      vocab, financialLit, statesCapitals, currentEventLogs,
+      currentEventQuestion: 'Which NewsForKids.net story from this week stuck with you most? Give the headline and tell me what it was about.',
+      historyTopic: wk ? wk.historyTopic : '',
+      scienceTopic: wk ? wk.scienceTopic : '',
+      scenario
+    };
+  }
   const cw = legacyContentWeekForDate(mon);
   const aw = actualWeekForDate(mon);
   // Rotating weeks: only the week's own subject has a lesson to test.
@@ -4877,6 +4951,107 @@ function dayRowHTML(dateObj, wordOfDay, isTest, rowId){
   </div>`;
 }
 
+/* ---- Archived day loader + prev/next browsing ---- */
+let archiveDateList = [];   // sorted 'YYYY-MM-DD' strings that have a saved snapshot
+let archiveNavIdx = -1;      // position of the day currently open in the lightbox
+
+async function openArchivedDay(dstr){
+  if(!dstr) return;
+  const parts = dstr.split('-').map(Number);
+  const dateObj = new Date(parts[0], parts[1]-1, parts[2], 12);
+  const content = await storageGet(dayKey(dstr));
+  if(!content) return;
+  const checks = (await storageGet(checksKey(dstr))) || {};
+  archiveNavIdx = archiveDateList.indexOf(dstr);
+  let weekWords = null;
+  if(dateObj.getDay()===5){
+    const eWeek2 = (typeof mm52WeekForDate === 'function') ? mm52WeekForDate(dateObj) : 0;
+    if(eWeek2 >= 1 && typeof MM_DEVOTIONAL_52 !== 'undefined'){
+      // 52-week Friday: the test words are the week's 4 theme words,
+      // the same list for every grade band.
+      const wk = MM_DEVOTIONAL_52.find(x=>x.w===eWeek2);
+      const words = (wk && wk.words) ? wk.words.map(x=>x.word) : [];
+      weekWords = {};
+      (content.students || state.students || []).forEach(s=>{ weekWords[s.grade] = words; });
+    } else {
+      weekWords = await computeWeekWordsFor(mondayOfWeek(dateObj));
+    }
+  }
+  // Worksheet responses for that day: load each student's saved answers
+  // and rebuild the matching worksheet (questions) for the subject that
+  // day used, so the archive shows what they wrote.
+  let wsResponses = {};
+  try {
+    const dw2 = dateObj.getDay();
+    const subjects2 = (dw2 === 1 || dw2 === 2) ? ['history'] : (dw2 === 3 || dw2 === 4) ? ['science'] : [];
+    const eW3 = (typeof mm52WeekForDate === 'function') ? mm52WeekForDate(dateObj) : 0;
+    for(const s of (content.students || state.students || [])){
+      for(const subj of subjects2){
+        const answers = await storageGet(worksheetAnswersKey(dstr, s.id, subj));
+        if(!answers) continue;
+        let lesson = null;
+        if(eW3 >= 1 && typeof mm52LessonForStudent === 'function') lesson = mm52LessonForStudent(s, eW3, subj === 'history' ? 'History' : 'Science');
+        if(!lesson) lesson = content.lesson;
+        if(!lesson) continue;
+        const dp = getLessonDayPart(lesson, dw2, dstr);
+        const ws = dp && dp.worksheet;
+        if(!ws) continue;
+        // Match the worksheet modal's vocab copy-down checklist item.
+        (ws.groups || []).forEach(g=>{
+          if(g.type === 'checklist' && /today's plan/i.test(g.instructions || '')){
+            g.items = g.items || [];
+            if(!g.items.some(it=>it.id === '__vocabcopy')) g.items.push({id:'__vocabcopy', text:'Copy the NEW WORDS — each vocabulary word with its definition — into your notebook.'});
+          }
+        });
+        const wsChecks = (await storageGet(wsCheckKey(dstr, s.id, subj))) || {};
+        (wsResponses[s.id] = wsResponses[s.id] || {})[subj] = { worksheet: ws, answers, checks: wsChecks };
+      }
+    }
+  } catch(e) {}
+  // Current-event responses (each student's own headline + summary).
+  let ceResponses = {};
+  try {
+    for(const s of (content.students || state.students || [])){
+      const r = await storageGet(currentEventResponseKey(dstr, s.id));
+      if(r && (r.headline || r.summary)) ceResponses[s.id] = r;
+    }
+  } catch(e) {}
+  openDayLightbox(dateObj, content, checks, weekWords, false, wsResponses, ceResponses);
+}
+
+function stepArchivedDay(dir){
+  if(archiveNavIdx < 0 || !archiveDateList.length) return;
+  const next = archiveNavIdx + dir;
+  if(next < 0 || next >= archiveDateList.length) return;
+  openArchivedDay(archiveDateList[next]);
+}
+
+(function wireArchiveNav(){
+  const prevB = document.getElementById('lbPrevDay');
+  const nextB = document.getElementById('lbNextDay');
+  if(prevB) prevB.addEventListener('click', ()=> stepArchivedDay(-1));
+  if(nextB) nextB.addEventListener('click', ()=> stepArchivedDay(1));
+  document.addEventListener('keydown', (e)=>{
+    const ov = document.getElementById('dayLightboxOverlay');
+    if(!ov || !ov.classList.contains('open')) return;
+    if(e.target && e.target.closest && e.target.closest('input, textarea, select, [contenteditable="true"]')) return;
+    if(e.key === 'ArrowLeft'){ e.preventDefault(); stepArchivedDay(-1); }
+    else if(e.key === 'ArrowRight'){ e.preventDefault(); stepArchivedDay(1); }
+  });
+  const ov = document.getElementById('dayLightboxOverlay');
+  if(ov){
+    let sx = 0, sy = 0;
+    ov.addEventListener('touchstart', (e)=>{ if(e.touches.length === 1){ sx = e.touches[0].clientX; sy = e.touches[0].clientY; } }, {passive:true});
+    ov.addEventListener('touchend', (e)=>{
+      if(!sx) return;
+      const t = e.changedTouches[0];
+      const dx = t.clientX - sx, dy = t.clientY - sy;
+      sx = 0;
+      if(Math.abs(dx) > 60 && Math.abs(dy) < 80) stepArchivedDay(dx > 0 ? -1 : 1);
+    }, {passive:true});
+  }
+})();
+
 /* ---- Archive (past, saved) tab ---- */
 async function loadArchiveTab(){
   const weeksEl = document.getElementById('archiveWeeks');
@@ -4888,6 +5063,7 @@ async function loadArchiveTab(){
   if(!keys.length){ daysEl.innerHTML = `<div class="archive-empty">No archived days yet. Days save automatically as you view them.</div>`; return; }
 
   const dates = keys.map(k=>k.replace('day-override:','')).filter(dd=>/^\d{4}-\d{2}-\d{2}$/.test(dd)).sort();
+  archiveDateList = dates.slice();
   const weekMap = {};
   dates.forEach(ds=>{
     const [y,m,dn] = ds.split('-').map(Number);
@@ -4922,7 +5098,7 @@ async function loadArchiveTab(){
       const dateObj = new Date(y,mo-1,da,12);
       const checks = (await storageGet(checksKey(dstr))) || {};
       const rowId = 'arch-'+dstr;
-      dayData[rowId] = {dateObj, content, checks};
+      dayData[rowId] = {dateObj, content, checks, dstr};
       // 52-week era: the row word is that date's devotional theme word,
       // not the frozen legacy word stored in the snapshot.
       let rowWord = content.devotional?.wordOfDay||'';
@@ -4940,65 +5116,7 @@ async function loadArchiveTab(){
     daysEl.innerHTML = rows.join('') || `<div class="archive-empty">No saved content for this week.</div>`;
 
     daysEl.querySelectorAll('[data-rowid]').forEach(row=>{
-      row.addEventListener('click', async ()=>{
-        const {dateObj, content, checks} = dayData[row.dataset.rowid];
-        let weekWords = null;
-        if(dateObj.getDay()===5){
-          const eWeek2 = (typeof mm52WeekForDate === 'function') ? mm52WeekForDate(dateObj) : 0;
-          if(eWeek2 >= 1 && typeof MM_DEVOTIONAL_52 !== 'undefined'){
-            // 52-week Friday: the test words are the week's 4 theme words,
-            // the same list for every grade band.
-            const wk = MM_DEVOTIONAL_52.find(x=>x.w===eWeek2);
-            const words = (wk && wk.words) ? wk.words.map(x=>x.word) : [];
-            weekWords = {};
-            (content.students || state.students || []).forEach(s=>{ weekWords[s.grade] = words; });
-          } else {
-            weekWords = await computeWeekWordsFor(mondayOfWeek(dateObj));
-          }
-        }
-        // Worksheet responses for that day: load each student's saved
-        // answers and rebuild the matching worksheet (questions) for the
-        // subject that day used, so the archive shows what they wrote.
-        let wsResponses = {};
-        try {
-          const dstr2 = toDateStr(dateObj);
-          const dw2 = dateObj.getDay();
-          const subjects2 = (dw2 === 1 || dw2 === 2) ? ['history'] : (dw2 === 3 || dw2 === 4) ? ['science'] : [];
-          const eW3 = (typeof mm52WeekForDate === 'function') ? mm52WeekForDate(dateObj) : 0;
-          for(const s of (content.students || state.students || [])){
-            for(const subj of subjects2){
-              const answers = await storageGet(worksheetAnswersKey(dstr2, s.id, subj));
-              if(!answers) continue;
-              let lesson = null;
-              if(eW3 >= 1 && typeof mm52LessonForStudent === 'function') lesson = mm52LessonForStudent(s, eW3, subj === 'history' ? 'History' : 'Science');
-              if(!lesson) lesson = content.lesson;
-              if(!lesson) continue;
-              const dp = getLessonDayPart(lesson, dw2, dstr2);
-              const ws = dp && dp.worksheet;
-              if(!ws) continue;
-              // Match the worksheet modal's vocab copy-down checklist item.
-              (ws.groups || []).forEach(g=>{
-                if(g.type === 'checklist' && /today's plan/i.test(g.instructions || '')){
-                  g.items = g.items || [];
-                  if(!g.items.some(it=>it.id === '__vocabcopy')) g.items.push({id:'__vocabcopy', text:'Copy the NEW WORDS — each vocabulary word with its definition — into your notebook.'});
-                }
-              });
-              const wsChecks = (await storageGet(wsCheckKey(dstr2, s.id, subj))) || {};
-              (wsResponses[s.id] = wsResponses[s.id] || {})[subj] = { worksheet: ws, answers, checks: wsChecks };
-            }
-          }
-        } catch(e) {}
-        // Current-event responses (each student's own headline + summary).
-        let ceResponses = {};
-        try {
-          const dstr3 = toDateStr(dateObj);
-          for(const s of (content.students || state.students || [])){
-            const r = await storageGet(currentEventResponseKey(dstr3, s.id));
-            if(r && (r.headline || r.summary)) ceResponses[s.id] = r;
-          }
-        } catch(e) {}
-        openDayLightbox(dateObj, content, checks, weekWords, false, wsResponses, ceResponses);
-      });
+      row.addEventListener('click', ()=>{ openArchivedDay(dayData[row.dataset.rowid].dstr); });
     });
   }
 
@@ -5092,6 +5210,20 @@ function openDayLightbox(dateObj, content, checks, weekWords, isUpcoming, wsResp
   document.getElementById('lightboxSub').textContent = isUpcoming
     ? 'Preview — this hasn\u2019t happened yet, so nothing is checked off.'
     : 'Archived exactly as it appeared that day.';
+  // Prev/next browsing through the archived dates
+  const prevB = document.getElementById('lbPrevDay');
+  const nextB = document.getElementById('lbNextDay');
+  const posEl = document.getElementById('lbNavPos');
+  const hasNav = !isUpcoming && archiveNavIdx >= 0 && archiveDateList.length > 0;
+  if(prevB && nextB){
+    prevB.style.display = hasNav ? '' : 'none';
+    nextB.style.display = hasNav ? '' : 'none';
+    prevB.disabled = archiveNavIdx <= 0;
+    nextB.disabled = archiveNavIdx >= archiveDateList.length - 1;
+    prevB.style.opacity = prevB.disabled ? '.35' : '';
+    nextB.style.opacity = nextB.disabled ? '.35' : '';
+  }
+  if(posEl) posEl.textContent = hasNav ? ('Archived day ' + (archiveNavIdx+1) + ' of ' + archiveDateList.length + ' \u00b7 arrows or swipe to browse') : '';
   const contentEl = document.getElementById('lightboxContent');
   contentEl.innerHTML = buildFullDayHTML(dateObj, content, checks, weekWords, wsResponses, ceResponses);
   // Accordion: one student open at a time; tap a header to switch.
