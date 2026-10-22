@@ -400,9 +400,9 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
       <div class="label">Final Buzzer</div>
       <div class="time" id="buzzerTime">2:30:00 PM</div>
     </div>
-    <button class="icon-btn labeled" id="openArchive" title="Archive & upcoming weeks" aria-label="Archive and upcoming weeks">📅 <span class="lbl">Archive</span></button>
+    <button class="icon-btn labeled" id="openArchive" title="Planner" aria-label="Planner">📅 <span class="lbl">Planner</span></button>
+    <button class="icon-btn labeled" id="previewUpcomingBtn" title="Preview upcoming days" aria-label="Preview upcoming days">🔮 <span class="lbl">Preview</span></button>
     <a class="icon-btn labeled" href="courses.html" title="College coursework (SEU dual enrollment)" aria-label="College coursework, SEU dual enrollment" style="text-decoration:none;">🎓 <span class="lbl">Courses</span></a>
-    <button class="icon-btn labeled" id="openToday" title="Edit today" aria-label="Edit today">✏️ <span class="lbl">Edit Day</span></button>
     <button class="icon-btn labeled" id="openSettings" title="Settings — day settings, students, grading, weekly plan" aria-label="Settings">⚙️ <span class="lbl">Settings</span></button>
   </div>
 </header>
@@ -437,6 +437,10 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
     </div>
 
     <div class="settings-panel" data-settingspanel="day">
+      <h3 style="font-size:20px;">Edit Today</h3>
+      <div class="sub">Make changes that apply only to today's date. The weekly plan underneath stays untouched.</div>
+      <button type="button" class="btn btn-primary" id="editTodayFromSettings">✏️ Edit Today's Plan</button>
+      <hr class="divider">
       <div class="sub">Controls when the school day ends and which timezone the whole plan runs on.</div>
       <label>End-of-day (final buzzer) time</label>
       <input type="time" id="buzzerTimeInput" style="font-family:'Oswald',sans-serif;font-size:18px;padding:10px;">
@@ -2303,8 +2307,6 @@ async function renderBoardInner(){
 
     <footer class="buzzer-strip" style="flex-wrap:wrap;gap:10px;">
       <div class="msg">Final buzzer <b>${formatBuzzerTime()}</b> — afternoon activities begin</div>
-      <button class="link-btn" id="openTodayFooter">Edit today's plan</button>
-      <button type="button" id="previewUpcomingBtn" style="background:var(--orange);color:#fff;border:none;border-radius:9px;padding:10px 18px;font-family:'Oswald',sans-serif;font-size:13px;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;margin-left:8px;">🔮 Preview Upcoming Days</button>
     </footer>
   `;
 
@@ -2501,10 +2503,6 @@ async function renderBoardInner(){
       await moveSubject(btn.dataset.subjname, +btn.dataset.move, btn.dataset.student);
     });
   });
-  const footerBtn = document.getElementById('openTodayFooter');
-  if(footerBtn) footerBtn.addEventListener('click', ()=> requireEditAccess(openTodayModal));
-  const previewBtn = document.getElementById('previewUpcomingBtn');
-  if(previewBtn) previewBtn.addEventListener('click', ()=> requireEditAccess(openPreviewModal));
 }
 
 /* Scroll-preserving wrapper: rebuilding the board resets both the page
@@ -5757,7 +5755,11 @@ document.querySelectorAll('[data-cal-tab]').forEach(t=>{
   });
 });
 
-document.getElementById('openToday').addEventListener('click', ()=> requireEditAccess(openTodayModal));
+document.getElementById('previewUpcomingBtn').addEventListener('click', ()=> requireEditAccess(openPreviewModal));
+document.getElementById('editTodayFromSettings').addEventListener('click', ()=>{
+  document.getElementById('settingsOverlay').classList.remove('open');
+  requireEditAccess(openTodayModal);
+});
 document.getElementById('applyTodayHistory').addEventListener('click', ()=> applyLessonToToday('history'));
 document.getElementById('applyTodayScience').addEventListener('click', ()=> applyLessonToToday('science'));
 document.getElementById('applyTodayOther').addEventListener('click', ()=> applyLessonToToday('other'));
