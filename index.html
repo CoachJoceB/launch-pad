@@ -275,6 +275,14 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
   .archive-day-line{font-size:12.5px;margin:3px 0;color:var(--ink-soft);}
   .archive-day-line b{color:var(--ink);}
   .archive-empty{color:var(--ink-soft);font-size:14px;text-align:center;padding:60px 20px;}
+  /* Archive day view: student cards stack in one column and collapse
+     accordion-style, so one student can be reviewed at a time. */
+  .archive-students{display:flex;flex-direction:column;gap:12px;}
+  .archive-student .student-head{cursor:pointer;}
+  .archive-student .student-body{display:none;}
+  .archive-student.open .student-body{display:block;}
+  .archive-student .arch-chevron{font-size:14px;color:var(--chalk);opacity:.75;transition:transform .2s;margin-left:10px;}
+  .archive-student.open .arch-chevron{transform:rotate(180deg);}
   @media (max-width:700px){.archive-layout{flex-direction:column;}.archive-weeks{width:100%;flex-direction:row;flex-wrap:wrap;max-height:none;}}
 
   /* ===== COMPACT MODE — tablets/TVs/desktops (anything not phone-sized)
@@ -4665,7 +4673,7 @@ function buildFullDayHTML(dateObj, content, checks, weekWords, wsResponses){
   const students = content.students || state.students;
 
   const baseSubjList = allSubjects(content);
-  const studentsHTML = students.map(s=>{
+  const studentsHTML = students.map((s, sIdx)=>{
     const grade = s.grade;
     let vocabHTML = '';
     if(isTestDay){
@@ -4732,8 +4740,8 @@ function buildFullDayHTML(dateObj, content, checks, weekWords, wsResponses){
             ${sub.topic ? `<div class="subj-topic">${esc(sub.topic)}</div>` : ''}
           </div>`;
         }).join('') || '<p style="color:var(--ink-soft);font-size:12px;">No subjects assigned.</p>'}`;
-    return `<div class="student-card">
-      <div class="student-head"><h3 class="student-name">${esc(firstName(s.name))}</h3><div class="grade-badge">${esc(s.grade)} GRADE</div></div>
+    return `<div class="student-card archive-student${sIdx===0?' open':''}">
+      <div class="student-head" data-arch-toggle role="button" tabindex="0"><h3 class="student-name">${esc(firstName(s.name))}</h3><span style="display:flex;align-items:center;"><span class="grade-badge">${esc(s.grade)} GRADE</span><span class="arch-chevron"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true" style="display:block;"><path d="M6 9l6 6 6-6"/></svg></span></span></div>
       <div class="student-body">
         <div class="mini-lbl">Personal Info</div>
         <div class="info-line"><span>Full name</span><span>${esc(s.name)}</span></div>
@@ -4794,7 +4802,7 @@ function buildFullDayHTML(dateObj, content, checks, weekWords, wsResponses){
         : (currentEventHTML || financialLitHTML) ? `<div style="margin-bottom:16px;">${currentEventHTML || financialLitHTML}</div>` : ''}
       ${rwsHTML ? `<div style="margin-bottom:16px;">${rwsHTML}</div>` : ''}
       ${statesHTML ? `<div style="margin-bottom:16px;">${statesHTML}</div>` : ''}
-      <div class="students-grid">${studentsHTML}</div>
+      <div class="archive-students">${studentsHTML}</div>
     </section>
 
   `;
@@ -5025,6 +5033,15 @@ function openDayLightbox(dateObj, content, checks, weekWords, isUpcoming, wsResp
     : 'Archived exactly as it appeared that day.';
   const contentEl = document.getElementById('lightboxContent');
   contentEl.innerHTML = buildFullDayHTML(dateObj, content, checks, weekWords, wsResponses);
+  // Accordion: one student open at a time; tap a header to switch.
+  contentEl.querySelectorAll('[data-arch-toggle]').forEach(head=>{
+    head.addEventListener('click', ()=>{
+      const card = head.closest('.archive-student');
+      const wasOpen = card.classList.contains('open');
+      contentEl.querySelectorAll('.archive-student.open').forEach(c=>c.classList.remove('open'));
+      if(!wasOpen) card.classList.add('open');
+    });
+  });
   document.getElementById('dayLightboxOverlay').classList.add('open');
 
   const dlBtn = document.getElementById('downloadDayImg');
