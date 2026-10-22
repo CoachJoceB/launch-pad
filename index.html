@@ -4587,7 +4587,49 @@ function collectStudentsForm(){
 }
 
 /* ========================= ARCHIVE MODAL — full page snapshots ========================= */
-function buildFullDayHTML(dateObj, content, checks, weekWords){
+/* Read-only rendering of a student's saved worksheet responses for the
+   Plan Calendar archive view: each answered question with the answer the
+   student typed, grouped the same way the worksheet presented them. */
+function wsResponsesHTML(worksheet, answers, checks){
+  if(!worksheet || !answers) return '';
+  checks = checks || {};
+  const parts = [];
+  let answered = 0, total = 0;
+  (worksheet.groups || []).forEach((g, gi)=>{
+    if(g.type === 'reveal') return; // tap-to-reveal cards hold no typed response
+    const rows = [];
+    (g.items || []).forEach(it=>{
+      const field = 'ws-g' + gi + '-' + it.id;
+      const raw = answers[field];
+      if(g.type === 'checklist'){
+        if(raw || checks[it.id]) rows.push(`<div style="font-size:13px;margin:3px 0;">✓ ${esc(it.text || '')}</div>`);
+        return;
+      }
+      total++;
+      if(raw === undefined || raw === null || String(raw).trim() === '') return;
+      answered++;
+      let ans = String(raw);
+      if(g.type === 'truefalse') ans = (ans === 'true') ? 'True' : 'False';
+      else if(g.type === 'matching') ans = 'Letter ' + ans.toUpperCase();
+      else if(g.type === 'order') ans = 'Position ' + ans;
+      const prompt = it.prompt || it.question || it.text || it.statement || it.sentence || it.event || it.left || it.term || it.label || '';
+      rows.push(`<div style="margin:8px 0;">
+        ${prompt ? `<div style="font-size:13px;font-weight:600;">${esc(prompt)}</div>` : ''}
+        <div style="font-size:13.5px;white-space:pre-wrap;background:#fbf9f4;border:1px solid var(--line-light);border-radius:8px;padding:7px 9px;margin-top:3px;">${esc(ans)}</div>
+      </div>`);
+    });
+    if(rows.length){
+      parts.push(`<div style="margin-top:8px;">
+        <div style="font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-soft);">${esc(g.title || g.instructions || ('Part ' + (gi + 1)))}</div>
+        ${rows.join('')}
+      </div>`);
+    }
+  });
+  if(!parts.length) return '';
+  return parts.join('') + (total ? `<div style="font-size:11.5px;color:var(--ink-soft);margin-top:4px;">${answered} of ${total} questions answered</div>` : '');
+}
+
+function buildFullDayHTML(dateObj, content, checks, weekWords, wsResponses){
   let devo = content.devotional || {};
   const wd = dateObj.getDay();
   const isTestDay = wd===5;
@@ -4670,8 +4712,18 @@ function buildFullDayHTML(dateObj, content, checks, weekWords){
       ${dayPart && dayPart.reading ? `<div style="font-size:13px;line-height:1.5;margin-top:8px;white-space:pre-wrap;">${esc(stripKeyInfo(dayPart.reading))}</div>` : ''}
       ${lesson.blackHistoryMoment ? `<div class="vocab-box" style="margin-top:10px;"><div class="word-badge" style="margin-bottom:4px;">Black History Connection</div><div style="font-size:13px;">${esc(lesson.blackHistoryMoment)}</div></div>` : ''}
     </div>` : '';
+    const respForStudent = (wsResponses && wsResponses[s.id]) || null;
+    const respHTML = respForStudent ? Object.keys(respForStudent).map(subj=>{
+      const entry = respForStudent[subj];
+      const body = wsResponsesHTML(entry.worksheet, entry.answers, entry.checks);
+      return `<div style="margin-top:12px;">
+        <div class="mini-lbl">${subj === 'history' ? 'History' : 'Science'} Worksheet Responses</div>
+        ${body || '<div style="font-size:12.5px;color:var(--ink-soft);margin-top:4px;">No answers written yet.</div>'}
+      </div>`;
+    }).join('') : '';
     const academicsHTML = isTestDay ? '' : `
         ${studentLessonHTML}
+        ${respHTML}
         <div class="mini-lbl" style="margin-top:12px;">Academics</div>
         ${studentSubjList.map(sub=>{
           const checked = !!studentChecks[sub.id];
@@ -4844,7 +4896,39 @@ async function loadArchiveTab(){
             weekWords = await computeWeekWordsFor(mondayOfWeek(dateObj));
           }
         }
-        openDayLightbox(dateObj, content, checks, weekWords, false);
+        // Worksheet responses for that day: load each student's saved
+        // answers and rebuild the matching worksheet (questions) for the
+        // subject that day used, so the archive shows what they wrote.
+        let wsResponses = {};
+        try {
+          const dstr2 = toDateStr(dateObj);
+          const dw2 = dateObj.getDay();
+          const subjects2 = (dw2 === 1 || dw2 === 2) ? ['history'] : (dw2 === 3 || dw2 === 4) ? ['science'] : [];
+          const eW3 = (typeof mm52WeekForDate === 'function') ? mm52WeekForDate(dateObj) : 0;
+          for(const s of (content.students || state.students || [])){
+            for(const subj of subjects2){
+              const answers = await storageGet(worksheetAnswersKey(dstr2, s.id, subj));
+              if(!answers) continue;
+              let lesson = null;
+              if(eW3 >= 1 && typeof mm52LessonForStudent === 'function') lesson = mm52LessonForStudent(s, eW3, subj === 'history' ? 'History' : 'Science');
+              if(!lesson) lesson = content.lesson;
+              if(!lesson) continue;
+              const dp = getLessonDayPart(lesson, dw2, dstr2);
+              const ws = dp && dp.worksheet;
+              if(!ws) continue;
+              // Match the worksheet modal's vocab copy-down checklist item.
+              (ws.groups || []).forEach(g=>{
+                if(g.type === 'checklist' && /today's plan/i.test(g.instructions || '')){
+                  g.items = g.items || [];
+                  if(!g.items.some(it=>it.id === '__vocabcopy')) g.items.push({id:'__vocabcopy', text:'Copy the NEW WORDS — each vocabulary word with its definition — into your notebook.'});
+                }
+              });
+              const wsChecks = (await storageGet(wsCheckKey(dstr2, s.id, subj))) || {};
+              (wsResponses[s.id] = wsResponses[s.id] || {})[subj] = { worksheet: ws, answers, checks: wsChecks };
+            }
+          }
+        } catch(e) {}
+        openDayLightbox(dateObj, content, checks, weekWords, false, wsResponses);
       });
     });
   }
@@ -4933,14 +5017,14 @@ async function loadUpcomingTab(){
 }
 
 /* ---- Day detail lightbox + image download ---- */
-function openDayLightbox(dateObj, content, checks, weekWords, isUpcoming){
+function openDayLightbox(dateObj, content, checks, weekWords, isUpcoming, wsResponses){
   const title = dateObj.toLocaleDateString('en-US',{weekday:'long', month:'long', day:'numeric'});
   document.getElementById('lightboxTitle').textContent = title;
   document.getElementById('lightboxSub').textContent = isUpcoming
     ? 'Preview — this hasn\u2019t happened yet, so nothing is checked off.'
     : 'Archived exactly as it appeared that day.';
   const contentEl = document.getElementById('lightboxContent');
-  contentEl.innerHTML = buildFullDayHTML(dateObj, content, checks, weekWords);
+  contentEl.innerHTML = buildFullDayHTML(dateObj, content, checks, weekWords, wsResponses);
   document.getElementById('dayLightboxOverlay').classList.add('open');
 
   const dlBtn = document.getElementById('downloadDayImg');
