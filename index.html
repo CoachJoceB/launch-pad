@@ -135,6 +135,8 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
   #worksheetReading, .lesson-reading{user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;}
   /* Worksheet gate video player: fills its half-size wrapper. */
   #gatePlayerWrap iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:0;}
+  /* Board video facade player: fills the thumbnail box. */
+  .vidbox iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:0;}
   .collapse-body{overflow:hidden;max-height:600px;transition:max-height .2s ease;}
   .collapse-body.collapsed{max-height:0;}
   .info-line{display:flex;justify-content:space-between;font-size:13.5px;padding:4px 0;border-bottom:1px dashed var(--line-light);}
@@ -1879,20 +1881,18 @@ async function renderBoardInner(){
         if(video && video.youtubeId){
           videoHTML = `<div style="margin:8px 0;">
             <div style="font-size:13px;font-weight:600;margin-bottom:6px;">🎬 Watch: ${esc(video.title)}</div>
-            <div style="position:relative;max-width:430px;padding-bottom:min(56.25%,242px);height:0;overflow:hidden;border-radius:8px;background:#000;">
-              <iframe src="https://www.youtube.com/embed/${escAttr(video.youtubeId)}?rel=0&modestbranding=1&playsinline=1" 
-                style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;" 
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                title="${escAttr(video.title)}"></iframe>
-              <div aria-hidden="true" style="position:absolute;top:0;left:0;right:0;height:52px;z-index:2;"></div>
-              <div aria-hidden="true" style="position:absolute;right:0;bottom:0;width:110px;height:48px;z-index:2;"></div>
+            <div class="vidbox" data-vid="${escAttr(video.youtubeId)}" role="button" tabindex="0" aria-label="Play video" style="position:relative;max-width:430px;aspect-ratio:16/9;border-radius:8px;overflow:hidden;background:#000;cursor:pointer;">
+              <img src="https://i.ytimg.com/vi/${escAttr(video.youtubeId)}/hqdefault.jpg" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
+              <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;">
+                <div style="width:64px;height:64px;border-radius:50%;background:rgba(200,40,30,.92);color:#fff;display:flex;align-items:center;justify-content:center;font-size:26px;box-shadow:0 4px 14px rgba(0,0,0,.35);padding-left:4px;">▶</div>
+              </div>
             </div>
             <div style="font-size:11.5px;color:var(--ink-soft);margin-top:4px;">${esc(video.channel)} · ${esc(video.duration)}</div>
           </div>`;
         }
       } catch(e) {}
     }
-    return `<div class="card">
+    return `<div class="card" style="max-width:560px;">
       <div class="word-badge">${esc(lessonType)} Lesson · Week ${aw}</div>
       <div style="font-size:15px;font-weight:600;line-height:1.4;margin:6px 0;">${esc(lesson.topic)}</div>
       ${bhmTitleHTML}
@@ -2448,6 +2448,10 @@ async function renderBoardInner(){
 async function renderBoard(){
   const savedY = window.scrollY || window.pageYOffset || 0;
   const savedGridLefts = Array.from(document.querySelectorAll('.students-grid')).map(g=>g.scrollLeft);
+  // Board videos are live YouTube players; destroying them before a real
+  // re-render keeps orphaned audio from playing on. Preview renders borrow
+  // the board element, so they skip this (the real board stays untouched).
+  if(!document.getElementById('board-real')) destroyBoardPlayers();
   await renderBoardInner();
   if(savedY > 0) window.scrollTo(0, savedY);
   const grids = document.querySelectorAll('.students-grid');
@@ -5082,12 +5086,17 @@ function applyWorksheetGate(studentId, subject, wd, forceDayNum){
   gateEl.innerHTML = `<div style="max-width:560px;margin:8px auto;">
     <div class="card" style="padding:16px;">
       <div style="font-size:15px;font-weight:700;margin-bottom:4px;">🎬 Watch the lesson video first</div>
-      <p style="font-size:13px;color:var(--ink-soft);margin:0 0 10px;">Your worksheet unlocks after you watch the video. Dragging to the end does not count.</p>
+      <p style="font-size:13px;color:var(--ink-soft);margin:0 0 10px;">Your worksheet unlocks after you watch the whole video.</p>
       <div style="font-size:13.5px;font-weight:600;margin-bottom:6px;">${esc(video.title)}</div>
-      <div id="gatePlayerWrap" style="position:relative;max-width:430px;margin:0 auto;padding-bottom:min(56.25%,242px);height:0;overflow:hidden;border-radius:8px;background:#000;">
-        <div id="gatePlayerEl" style="position:absolute;top:0;left:0;width:100%;height:100%;"></div>
-        <div aria-hidden="true" style="position:absolute;top:0;left:0;right:0;height:52px;z-index:2;"></div>
-        <div aria-hidden="true" style="position:absolute;right:0;bottom:0;width:110px;height:48px;z-index:2;"></div>
+      <div id="gatePlayerWrap" style="position:relative;max-width:430px;margin:0 auto;aspect-ratio:16/9;border-radius:8px;overflow:hidden;background:#000;">
+        <div id="gateFacade" role="button" tabindex="0" aria-label="Play video" style="position:absolute;inset:0;cursor:pointer;z-index:1;">
+          <img src="https://i.ytimg.com/vi/${escAttr(video.youtubeId)}/hqdefault.jpg" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
+          <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;">
+            <div style="width:64px;height:64px;border-radius:50%;background:rgba(200,40,30,.92);color:#fff;display:flex;align-items:center;justify-content:center;font-size:26px;box-shadow:0 4px 14px rgba(0,0,0,.35);padding-left:4px;">▶</div>
+          </div>
+        </div>
+        <div id="gatePlayerEl" style="position:absolute;inset:0;display:none;"></div>
+        <div id="gateShield" style="display:none;position:absolute;inset:0;z-index:2;cursor:pointer;"></div>
         <div id="gateEndCover" style="display:none;position:absolute;inset:0;z-index:3;background:rgba(27,42,78,.92);color:#fff;align-items:center;justify-content:center;font-size:16px;font-weight:700;text-align:center;padding:12px;">✓ You finished the video</div>
       </div>
       <div style="font-size:11.5px;color:var(--ink-soft);margin-top:4px;text-align:center;">${esc(video.channel)} · ${esc(video.duration)}</div>
@@ -5104,35 +5113,52 @@ function applyWorksheetGate(studentId, subject, wd, forceDayNum){
   });
 }
 function initGatePlayer(video, onComplete){
-  loadYouTubeAPI().then(()=>{
-    if(!document.getElementById('gatePlayerEl')) return;
-    gateAcc = 0; gateLast = -1; gateDone = false;
-    gatePlayer = new YT.Player('gatePlayerEl', {
-      videoId: video.youtubeId,
-      playerVars: { rel: 0, modestbranding: 1, playsinline: 1, fs: 0 },
-      events: {
-        onStateChange: (ev)=>{ if(ev.data === YT.PlayerState.ENDED) finishGateVideo(onComplete); }
-      }
-    });
-    gateTicker = setInterval(()=>{
-      if(!gatePlayer || !gatePlayer.getCurrentTime) return;
-      const ps = gatePlayer.getPlayerState ? gatePlayer.getPlayerState() : -1;
-      if(ps === 1){
-        const t = gatePlayer.getCurrentTime();
-        const dur = gatePlayer.getDuration() || 0;
-        if(gateLast >= 0){
-          const delta = t - gateLast;
-          if(delta > 0 && delta <= 1.2) gateAcc += delta;
+  const facade = document.getElementById('gateFacade');
+  if(!facade) return;
+  const start = ()=>{
+    facade.style.display = 'none';
+    const playerEl = document.getElementById('gatePlayerEl');
+    if(playerEl) playerEl.style.display = 'block';
+    const shield = document.getElementById('gateShield');
+    if(shield) shield.style.display = 'block';
+    loadYouTubeAPI().then(()=>{
+      if(!document.getElementById('gatePlayerEl')) return;
+      gateAcc = 0; gateLast = -1; gateDone = false;
+      gatePlayer = new YT.Player('gatePlayerEl', {
+        videoId: video.youtubeId,
+        playerVars: { autoplay: 1, controls: 0, rel: 0, modestbranding: 1, playsinline: 1, fs: 0, disablekb: 1 },
+        events: {
+          onReady: (ev)=>{ try { ev.target.playVideo(); } catch(e){} },
+          onStateChange: (ev)=>{ if(ev.data === YT.PlayerState.ENDED) finishGateVideo(onComplete); }
         }
-        gateLast = t;
-        const pctEl = document.getElementById('gateProgress');
-        if(pctEl && dur > 0) pctEl.textContent = 'Watched: ' + Math.min(99, Math.floor((gateAcc/dur)*100)) + '%';
-        if(dur > 0 && gateAcc/dur >= 0.85) finishGateVideo(onComplete);
-      } else {
-        gateLast = -1;
-      }
-    }, 500);
-  });
+      });
+      if(shield) shield.addEventListener('click', ()=>{
+        try {
+          if(gatePlayer && gatePlayer.getPlayerState() === 1) gatePlayer.pauseVideo(); else if(gatePlayer) gatePlayer.playVideo();
+        } catch(e){}
+      });
+      gateTicker = setInterval(()=>{
+        if(!gatePlayer || !gatePlayer.getCurrentTime) return;
+        const ps = gatePlayer.getPlayerState ? gatePlayer.getPlayerState() : -1;
+        if(ps === 1){
+          const t = gatePlayer.getCurrentTime();
+          const dur = gatePlayer.getDuration() || 0;
+          if(gateLast >= 0){
+            const delta = t - gateLast;
+            if(delta > 0 && delta <= 1.2) gateAcc += delta;
+          }
+          gateLast = t;
+          const pctEl = document.getElementById('gateProgress');
+          if(pctEl && dur > 0) pctEl.textContent = 'Watched: ' + Math.min(99, Math.floor((gateAcc/dur)*100)) + '%';
+          if(dur > 0 && gateAcc/dur >= 0.85) finishGateVideo(onComplete);
+        } else {
+          gateLast = -1;
+        }
+      }, 500);
+    });
+  };
+  facade.addEventListener('click', start);
+  facade.addEventListener('keydown', (e)=>{ if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); start(); } });
 }
 function finishGateVideo(onComplete){
   if(gateDone) return;
@@ -5144,6 +5170,65 @@ function finishGateVideo(onComplete){
   if(pctEl) pctEl.textContent = 'Video finished. Great work!';
   const btn = document.getElementById('gateStartBtn');
   if(btn){ btn.style.display = ''; btn.addEventListener('click', ()=>{ onComplete(); }); }
+}
+
+/* ========================= CONTAINED BOARD VIDEOS =========================
+   Board videos start as a clean thumbnail cover (no YouTube UI at all).
+   Tapping it loads a player with every YouTube control and link switched
+   off (controls=0, no fullscreen, no related videos), and a transparent
+   shield over the whole player catches every tap (play/pause only), so
+   nothing inside the video can be clicked to reach YouTube. When the
+   video ends, the thumbnail cover comes back with a Watch again button. */
+const vidPlayers = {}; // player element id -> YT player
+let vidPlayerSeq = 0;
+function destroyBoardPlayers(){
+  Object.keys(vidPlayers).forEach(k=>{ try { vidPlayers[k].destroy(); } catch(e){} delete vidPlayers[k]; });
+}
+function vidFacadeHTML(box, again){
+  const vid = box.dataset.vid;
+  return `<img src="https://i.ytimg.com/vi/${vid}/hqdefault.jpg" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
+    <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;">
+      <div style="width:64px;height:64px;border-radius:50%;background:rgba(200,40,30,.92);color:#fff;display:flex;align-items:center;justify-content:center;font-size:26px;box-shadow:0 4px 14px rgba(0,0,0,.35);padding-left:${again?'0':'4px'};">${again?'↻':'▶'}</div>
+      ${again ? '<div style="color:#fff;font-size:13px;font-weight:700;text-shadow:0 1px 4px rgba(0,0,0,.7);">Watch again</div>' : ''}
+    </div>`;
+}
+document.addEventListener('click', (e)=>{
+  const box = e.target.closest ? e.target.closest('.vidbox') : null;
+  if(!box || box.dataset.active) return;
+  activateVidBox(box);
+});
+function activateVidBox(box){
+  box.dataset.active = '1';
+  box.style.cursor = 'default';
+  const vid = box.dataset.vid;
+  const pid = 'vidp-' + (++vidPlayerSeq);
+  box.dataset.pid = pid;
+  box.innerHTML = `<div style="position:absolute;inset:0;"><div id="${pid}" style="position:absolute;inset:0;"></div><div class="vid-shield" style="position:absolute;inset:0;z-index:2;cursor:pointer;"></div></div>`;
+  loadYouTubeAPI().then(()=>{
+    if(!document.getElementById(pid)) return;
+    const player = new YT.Player(pid, {
+      videoId: vid,
+      playerVars: { autoplay: 1, controls: 0, rel: 0, modestbranding: 1, playsinline: 1, fs: 0, disablekb: 1 },
+      events: {
+        onReady: (ev)=>{ try { ev.target.playVideo(); } catch(e){} },
+        onStateChange: (ev)=>{ if(ev.data === YT.PlayerState.ENDED) restoreVidFacade(box); }
+      }
+    });
+    vidPlayers[pid] = player;
+    const shield = box.querySelector('.vid-shield');
+    if(shield) shield.addEventListener('click', ()=>{
+      try {
+        if(player.getPlayerState() === 1) player.pauseVideo(); else player.playVideo();
+      } catch(e){}
+    });
+  });
+}
+function restoreVidFacade(box){
+  const pid = box.dataset.pid;
+  if(pid && vidPlayers[pid]){ try { vidPlayers[pid].destroy(); } catch(e){} delete vidPlayers[pid]; }
+  delete box.dataset.active;
+  box.style.cursor = 'pointer';
+  box.innerHTML = vidFacadeHTML(box, true);
 }
 
 /* ========================= WIRE UP ========================= */
