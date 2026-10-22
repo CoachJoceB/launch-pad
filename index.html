@@ -1852,7 +1852,7 @@ async function renderBoardInner(){
       }
     }
     if(!lesson){
-      return `<div class="card"><div class="word-badge">${esc(lessonType)} Lesson · Week ${aw}</div><p style="color:var(--ink-soft);font-size:13.5px;margin-top:8px;">Not uploaded yet — use the 📚 icon to add this week's ${esc(lessonType)} PDF.</p></div>`;
+      return `<div class="card" style="max-width:478px;padding:12px 14px;"><div class="word-badge">${esc(lessonType)} Lesson · Week ${aw}</div><p style="color:var(--ink-soft);font-size:13.5px;margin-top:8px;">Not uploaded yet — use the 📚 icon to add this week's ${esc(lessonType)} PDF.</p></div>`;
     }
     const pdfBtn = lesson.pdfDataUrl
       ? `<button type="button" class="btn btn-ghost" data-openlessonpdf style="margin-top:10px;">📄 Open ${esc(lesson.pdfFilename||'Lesson PDF')}</button>`
@@ -1892,7 +1892,7 @@ async function renderBoardInner(){
         }
       } catch(e) {}
     }
-    return `<div class="card" style="max-width:560px;">
+    return `<div class="card" style="max-width:478px;padding:12px 14px;">
       <div class="word-badge">${esc(lessonType)} Lesson · Week ${aw}</div>
       <div style="font-size:15px;font-weight:600;line-height:1.4;margin:6px 0;">${esc(lesson.topic)}</div>
       ${bhmTitleHTML}
@@ -5006,8 +5006,10 @@ document.addEventListener('input', (e)=>{
    saved per student + subject + day, so it is done once per worksheet.
    Playback is tracked second by second and only continuous playing time
    counts, so dragging to the end does not unlock the worksheet. */
-let wsGateCache = {}; // studentId -> {caution:bool, watched:bool}
+let wsGateCache = {}; // studentId -> {caution:bool, watched:bool, acc:sec, pos:sec, dur:sec}
 let gatePlayer = null, gateTicker = null, gateAcc = 0, gateLast = -1, gateDone = false;
+let gateCtx = null; // {studentId, subject} of the video gate currently on screen
+let gatePos = 0, gateLastSaveAcc = 0;
 
 function gateVideoFor(student, subject, wd){
   try {
@@ -5024,10 +5026,22 @@ function gateVideoFor(student, subject, wd){
 async function saveWsGate(studentId, subject){
   try { await storageSet(wsGateKey(state.dateStr, studentId, subject), wsGateCache[studentId] || {}); } catch(e){}
 }
+function saveGateProgress(){
+  if(!gateCtx) return;
+  const gate = wsGateCache[gateCtx.studentId] || (wsGateCache[gateCtx.studentId] = {});
+  gate.acc = Math.floor(gateAcc);
+  gate.pos = Math.floor(gatePos);
+  if(gatePlayer && gatePlayer.getDuration){ const d = gatePlayer.getDuration(); if(d) gate.dur = Math.floor(d); }
+  gateLastSaveAcc = gateAcc;
+  saveWsGate(gateCtx.studentId, gateCtx.subject);
+}
 function stopGateTracking(){
+  // Persist watch progress before tearing down, so it follows the student
+  // to any device (the gate record lives in the cloud plan).
+  if(gateCtx && !gateDone && gateAcc > 0) saveGateProgress();
   if(gateTicker){ clearInterval(gateTicker); gateTicker = null; }
   if(gatePlayer && gatePlayer.destroy){ try { gatePlayer.destroy(); } catch(e){} }
-  gatePlayer = null; gateAcc = 0; gateLast = -1; gateDone = false;
+  gatePlayer = null; gateAcc = 0; gateLast = -1; gateDone = false; gatePos = 0; gateCtx = null;
 }
 let ytApiPromise = null;
 function loadYouTubeAPI(){
@@ -5082,11 +5096,17 @@ function applyWorksheetGate(studentId, subject, wd, forceDayNum){
     });
     return;
   }
-  // Video gate
+  // Video gate: seed watch progress from the saved record so it follows
+  // the student across devices.
+  gateCtx = { studentId, subject };
+  gateAcc = gate.acc || 0;
+  gatePos = gate.pos || 0;
+  gateLastSaveAcc = gateAcc;
+  const resumePct = (gate.dur && gateAcc > 0) ? Math.min(99, Math.floor((gateAcc/gate.dur)*100)) : 0;
   gateEl.innerHTML = `<div style="max-width:560px;margin:8px auto;">
     <div class="card" style="padding:16px;">
       <div style="font-size:15px;font-weight:700;margin-bottom:4px;">🎬 Watch the lesson video first</div>
-      <p style="font-size:13px;color:var(--ink-soft);margin:0 0 10px;">Your worksheet unlocks after you watch the whole video.</p>
+      <p style="font-size:13px;color:var(--ink-soft);margin:0 0 10px;">Your worksheet unlocks after you watch the whole video.${resumePct ? ' You already watched part of it — press play and it picks up where you stopped, on any device.' : ''}</p>
       <div style="font-size:13.5px;font-weight:600;margin-bottom:6px;">${esc(video.title)}</div>
       <div id="gatePlayerWrap" style="position:relative;max-width:430px;margin:0 auto;aspect-ratio:16/9;border-radius:8px;overflow:hidden;background:#000;">
         <div id="gateFacade" role="button" tabindex="0" aria-label="Play video" style="position:absolute;inset:0;cursor:pointer;z-index:1;">
@@ -5100,7 +5120,7 @@ function applyWorksheetGate(studentId, subject, wd, forceDayNum){
         <div id="gateEndCover" style="display:none;position:absolute;inset:0;z-index:3;background:rgba(27,42,78,.92);color:#fff;align-items:center;justify-content:center;font-size:16px;font-weight:700;text-align:center;padding:12px;">✓ You finished the video</div>
       </div>
       <div style="font-size:11.5px;color:var(--ink-soft);margin-top:4px;text-align:center;">${esc(video.channel)} · ${esc(video.duration)}</div>
-      <p id="gateProgress" style="font-size:13px;font-weight:600;margin:10px 0 0;text-align:center;">Watched: 0%</p>
+      <p id="gateProgress" style="font-size:13px;font-weight:600;margin:10px 0 0;text-align:center;">Watched: ${resumePct}%</p>
       <div style="text-align:center;margin-top:10px;">
         <button type="button" class="btn-warmup" id="gateStartBtn" style="display:none;">Start my worksheet</button>
       </div>
@@ -5110,9 +5130,9 @@ function applyWorksheetGate(studentId, subject, wd, forceDayNum){
     gate.watched = true;
     await saveWsGate(studentId, subject);
     applyWorksheetGate(studentId, subject, wd, forceDayNum);
-  });
+  }, { acc: gateAcc, pos: gatePos });
 }
-function initGatePlayer(video, onComplete){
+function initGatePlayer(video, onComplete, resume){
   const facade = document.getElementById('gateFacade');
   if(!facade) return;
   const start = ()=>{
@@ -5123,12 +5143,19 @@ function initGatePlayer(video, onComplete){
     if(shield) shield.style.display = 'block';
     loadYouTubeAPI().then(()=>{
       if(!document.getElementById('gatePlayerEl')) return;
-      gateAcc = 0; gateLast = -1; gateDone = false;
+      // gateAcc / gatePos were seeded from the saved record by
+      // applyWorksheetGate, so progress resumes instead of restarting.
+      gateLast = -1; gateDone = false;
       gatePlayer = new YT.Player('gatePlayerEl', {
         videoId: video.youtubeId,
         playerVars: { autoplay: 1, controls: 0, rel: 0, modestbranding: 1, playsinline: 1, fs: 0, disablekb: 1 },
         events: {
-          onReady: (ev)=>{ try { ev.target.playVideo(); } catch(e){} },
+          onReady: (ev)=>{
+            try {
+              if(resume && resume.pos > 2) ev.target.seekTo(resume.pos, true);
+              ev.target.playVideo();
+            } catch(e){}
+          },
           onStateChange: (ev)=>{ if(ev.data === YT.PlayerState.ENDED) finishGateVideo(onComplete); }
         }
       });
@@ -5148,8 +5175,12 @@ function initGatePlayer(video, onComplete){
             if(delta > 0 && delta <= 1.2) gateAcc += delta;
           }
           gateLast = t;
+          if(t > gatePos) gatePos = t;
           const pctEl = document.getElementById('gateProgress');
           if(pctEl && dur > 0) pctEl.textContent = 'Watched: ' + Math.min(99, Math.floor((gateAcc/dur)*100)) + '%';
+          // Sync progress to the cloud every ~5 watched seconds so it
+          // follows the student across devices.
+          if(gateAcc - gateLastSaveAcc >= 5) saveGateProgress();
           if(dur > 0 && gateAcc/dur >= 0.85) finishGateVideo(onComplete);
         } else {
           gateLast = -1;
@@ -5164,6 +5195,7 @@ function finishGateVideo(onComplete){
   if(gateDone) return;
   gateDone = true;
   if(gateTicker){ clearInterval(gateTicker); gateTicker = null; }
+  saveGateProgress();
   const cover = document.getElementById('gateEndCover');
   if(cover) cover.style.display = 'flex';
   const pctEl = document.getElementById('gateProgress');
