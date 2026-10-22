@@ -1857,7 +1857,7 @@ async function renderBoardInner(){
       }
     }
     if(!lesson){
-      return `<div class="card" style="width:fit-content;max-width:100%;padding:12px 14px;"><div class="word-badge">${esc(lessonType)} Lesson · Week ${aw}</div><p style="color:var(--ink-soft);font-size:13.5px;margin-top:8px;">Not uploaded yet — use the 📚 icon to add this week's ${esc(lessonType)} PDF.</p></div>`;
+      return `<div class="card" style="padding:12px 14px;"><div class="word-badge">${esc(lessonType)} Lesson · Week ${aw}</div><p style="color:var(--ink-soft);font-size:13.5px;margin-top:8px;">Not uploaded yet — use the 📚 icon to add this week's ${esc(lessonType)} PDF.</p></div>`;
     }
     const pdfBtn = lesson.pdfDataUrl
       ? `<button type="button" class="btn btn-ghost" data-openlessonpdf style="margin-top:10px;">📄 Open ${esc(lesson.pdfFilename||'Lesson PDF')}</button>`
@@ -1886,7 +1886,7 @@ async function renderBoardInner(){
         if(video && video.youtubeId){
           videoHTML = `<div style="margin:8px 0;">
             <div style="font-size:13px;font-weight:600;margin-bottom:6px;">🎬 Watch: ${esc(video.title)}</div>
-            <div class="vidbox" data-vid="${escAttr(video.youtubeId)}" data-student="${escAttr(student.id)}" data-subject="${isHistoryDay ? 'history' : 'science'}" role="button" tabindex="0" aria-label="Play video" style="position:relative;max-width:430px;aspect-ratio:16/9;border-radius:8px;overflow:hidden;background:#000;cursor:pointer;">
+            <div class="vidbox" data-vid="${escAttr(video.youtubeId)}" data-student="${escAttr(student.id)}" data-subject="${isHistoryDay ? 'history' : 'science'}" role="button" tabindex="0" aria-label="Play video" style="position:relative;width:100%;aspect-ratio:16/9;border-radius:8px;overflow:hidden;background:#000;cursor:pointer;">
               <img src="https://i.ytimg.com/vi/${escAttr(video.youtubeId)}/hqdefault.jpg" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
               <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;">
                 <div style="width:64px;height:64px;border-radius:50%;background:rgba(200,40,30,.92);color:#fff;display:flex;align-items:center;justify-content:center;font-size:26px;box-shadow:0 4px 14px rgba(0,0,0,.35);padding-left:4px;">▶</div>
@@ -1898,7 +1898,7 @@ async function renderBoardInner(){
         }
       } catch(e) {}
     }
-    return `<div class="card" style="width:fit-content;max-width:100%;padding:12px 14px;">
+    return `<div class="card" style="padding:12px 14px;">
       <div class="word-badge">${esc(lessonType)} Lesson · Week ${aw}</div>
       <div style="font-size:15px;font-weight:600;line-height:1.4;margin:6px 0;">${esc(lesson.topic)}</div>
       ${bhmTitleHTML}
