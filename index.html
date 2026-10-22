@@ -2527,7 +2527,7 @@ async function renderBoard(){
 
 /* Preview upcoming days (PIN-gated) - shows full dashboard for selected day */
 function openPreviewModal(){
-  const today = state.schoolDate;
+  const today = (state.schoolDate && !isNaN(state.schoolDate.getTime())) ? state.schoolDate : getSchoolDate(new Date());
   const container = document.getElementById('previewContent');
   let html = '<div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px;">';
   for(let i=1;i<=14;i++){
@@ -5127,7 +5127,11 @@ async function loadUpcomingTab(){
   const weeksEl = document.getElementById('upcomingWeeks');
   const daysEl = document.getElementById('upcomingDays');
 
-  const thisMonday = mondayOfWeek(state.schoolDate);
+  // If the Planner is opened before the first load finishes, the school
+  // date is not set yet — fall back to the real today instead of letting
+  // a null date collapse to the 1969 epoch (weeks starting "Dec 29").
+  const baseDate = (state.schoolDate && !isNaN(state.schoolDate.getTime())) ? state.schoolDate : getSchoolDate(new Date());
+  const thisMonday = mondayOfWeek(baseDate);
   const upcomingMondays = [];
   for(let i=0;i<6;i++){ // this week + next 5
     const m = new Date(thisMonday); m.setDate(thisMonday.getDate() + i*7);
