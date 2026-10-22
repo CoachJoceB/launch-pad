@@ -4743,17 +4743,7 @@ function buildFullDayHTML(dateObj, content, checks, weekWords, wsResponses){
     return `<div class="student-card archive-student${sIdx===0?' open':''}">
       <div class="student-head" data-arch-toggle role="button" tabindex="0"><h3 class="student-name">${esc(firstName(s.name))}</h3><span style="display:flex;align-items:center;"><span class="grade-badge">${esc(s.grade)} GRADE</span><span class="arch-chevron"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true" style="display:block;"><path d="M6 9l6 6 6-6"/></svg></span></span></div>
       <div class="student-body">
-        <div class="mini-lbl">Personal Info</div>
-        <div class="info-line"><span>Full name</span><span>${esc(s.name)}</span></div>
-        <div class="info-line"><span>${esc(fl.addr1)}</span><span>${esc(s.addr.a1)||'—'}</span></div>
-        <div class="info-line"><span>${esc(fl.addr2)}</span><span>${esc(s.addr.a2)||'—'}</span></div>
-        <div class="info-line"><span>${esc(fl.addr3)}</span><span>${esc(s.addr.a3)||'—'}</span></div>
-        <div class="mini-lbl" style="margin-top:12px;">Phone Numbers</div>
-        <div class="info-line"><span>${esc(fl.phone1)}</span><span>${esc(s.phone.p1)||'—'}</span></div>
-        <div class="info-line"><span>${esc(fl.phone2)}</span><span>${esc(s.phone.p2)||'—'}</span></div>
-        <div class="info-line"><span>${esc(fl.phone3)}</span><span>${esc(s.phone.p3)||'—'}</span></div>
-        <div class="info-line"><span>${esc(fl.phone4)}</span><span>${esc(s.phone.p4)||'—'}</span></div>
-        <div class="mini-lbl" style="margin-top:12px;">Vocabulary ${isTestDay ? '— Test' : '('+grade+' grade)'}</div>
+        <div class="mini-lbl">Vocabulary ${isTestDay ? '— Test' : '('+grade+' grade)'}</div>
         ${vocabHTML}
         ${academicsHTML}
       </div>
