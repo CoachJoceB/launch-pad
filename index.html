@@ -617,6 +617,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
 </div>
 
 <div class="save-toast" id="toast">All changes saved</div>
+<div id="liveBadge" style="display:none;position:fixed;left:16px;bottom:16px;z-index:9999;background:#1B2A4E;color:#fff;font-size:13px;font-weight:600;padding:8px 14px;border-radius:999px;box-shadow:0 4px 14px rgba(0,0,0,.25);pointer-events:none;"></div>
 
 
 <!-- PIN DIALOG -->
@@ -4902,6 +4903,90 @@ function showToast(msg){
   }, true);
 })();
 
+/* ========================= LIVE TYPING =========================
+   Google-Docs-style live view: while a student types in a worksheet (or a
+   current-event box on the board), the text streams over a Supabase
+   Realtime broadcast channel to every other open dashboard, where it
+   appears in the same field instantly. The sender's own autosave still
+   persists the work; this only mirrors it live. A small badge shows who
+   is typing right now. Payloads carry the student id only, never a name. */
+const LIVE_CID = Math.random().toString(36).slice(2) + Date.now().toString(36);
+let liveChannel = null;
+let liveBadgeTimer = null;
+
+function liveStudentName(studentId){
+  const s = (state.students||[]).find(x=>x.id===studentId);
+  return s ? firstName(s.name) : 'A student';
+}
+function showLiveBadge(studentId){
+  const badge = document.getElementById('liveBadge');
+  if(!badge) return;
+  badge.textContent = '● LIVE — ' + liveStudentName(studentId) + ' is typing';
+  badge.style.display = 'block';
+  clearTimeout(liveBadgeTimer);
+  liveBadgeTimer = setTimeout(()=>{ badge.style.display = 'none'; }, 3500);
+}
+function startLiveTyping(){
+  if(liveChannel || typeof sb === 'undefined' || !sb) return;
+  try {
+    liveChannel = sb.channel('live-typing', { config: { broadcast: { self: false } } });
+    liveChannel.on('broadcast', { event: 'field' }, (msg)=>{ applyLiveField(msg.payload||{}); });
+    liveChannel.subscribe();
+  } catch(e){ console.warn('live typing unavailable', e); }
+}
+function applyLiveField(p){
+  if(!p || p.cid === LIVE_CID) return;
+  if(p.dateStr && state.dateStr && p.dateStr !== state.dateStr) return;
+  showLiveBadge(p.studentId);
+  if(p.kind === 'ws'){
+    const overlay = document.getElementById('worksheetOverlay');
+    if(!overlay || !overlay.classList.contains('open')) return;
+    if(typeof wsActiveStudent === 'undefined' || wsActiveStudent !== p.studentId) return;
+    if(typeof currentWorksheetCtx !== 'undefined' && currentWorksheetCtx && p.subject && currentWorksheetCtx.subject !== p.subject) return;
+    const el = document.querySelector('#worksheetFormArea [data-wsfield="' + CSS.escape(p.field) + '"]');
+    if(el && document.activeElement !== el) el.value = p.value;
+    const entry = worksheetCache[p.studentId];
+    if(entry) entry.answers[p.field] = p.value;
+  } else if(p.kind === 'ce'){
+    const el = document.querySelector('[data-cefield="' + CSS.escape(p.field) + '"][data-student="' + CSS.escape(p.studentId) + '"]');
+    if(el && document.activeElement !== el) el.value = p.value;
+  }
+}
+const liveSendState = {};
+function sendLiveField(payload){
+  if(!liveChannel) return;
+  const key = payload.kind + '|' + payload.studentId + '|' + payload.field;
+  const st = liveSendState[key] || (liveSendState[key] = { last: 0, timer: null, pending: null });
+  st.pending = payload;
+  const now = Date.now();
+  if(now - st.last >= 200){
+    st.last = now; st.pending = null;
+    try { liveChannel.send({ type: 'broadcast', event: 'field', payload: payload }); } catch(e){}
+  } else if(!st.timer){
+    st.timer = setTimeout(()=>{
+      st.timer = null;
+      if(st.pending){
+        st.last = Date.now();
+        const pp = st.pending; st.pending = null;
+        try { liveChannel.send({ type: 'broadcast', event: 'field', payload: pp }); } catch(e){}
+      }
+    }, 210);
+  }
+}
+document.addEventListener('input', (e)=>{
+  const el = e.target;
+  if(!el || !el.dataset) return;
+  if(el.dataset.wsfield && el.closest && el.closest('#worksheetOverlay') && el.type !== 'checkbox'){
+    if(typeof wsActiveStudent === 'undefined') return;
+    sendLiveField({ cid: LIVE_CID, kind: 'ws', studentId: wsActiveStudent,
+      subject: (typeof currentWorksheetCtx !== 'undefined' && currentWorksheetCtx) ? currentWorksheetCtx.subject : '',
+      dateStr: (typeof currentWorksheetCtx !== 'undefined' && currentWorksheetCtx) ? currentWorksheetCtx.dateStr : state.dateStr,
+      field: el.dataset.wsfield, value: el.value });
+  } else if(el.dataset.cefield){
+    sendLiveField({ cid: LIVE_CID, kind: 'ce', studentId: el.dataset.student, dateStr: state.dateStr, field: el.dataset.cefield, value: el.value });
+  }
+}, true);
+
 /* ========================= WIRE UP ========================= */
 document.querySelectorAll('[data-close]').forEach(b=>b.addEventListener('click', closeAllModals));
 document.querySelectorAll('.modal-overlay').forEach(o=>{ o.addEventListener('click', (e)=>{ if(e.target===o) closeAllModals(); }); });
@@ -5462,6 +5547,7 @@ if(!SUPABASE_CONFIGURED){
    names, grades, schedules, lessons, or written work ever render
    (or save) for a locked visitor. */
 function bootApp(){
+  startLiveTyping();
   document.getElementById('board').innerHTML = `<div class="weekend-card"><h2>Loading Plan…</h2><p>Connecting to the cloud plan.</p></div>`;
   // Never strand on the loader: if the cloud fetch hangs or fails, show an
   // error card with a retry instead of "Loading Plan…" forever.
