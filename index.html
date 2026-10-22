@@ -307,8 +307,6 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
     .intention-card{padding:12px;border-radius:10px;}
     .intention-tag{font-size:9.5px;margin-bottom:4px;}
     .intention-text{font-size:clamp(14px,1.4vw,18px);line-height:1.2;}
-    .students-grid{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;gap:12px;padding-bottom:8px;}
-    .students-grid > *{flex:0 0 85%;max-width:85%;scroll-snap-align:start;}
     .student-head{padding:7px 10px;}
     .student-name{font-size:13px;}
     .grade-badge{font-size:9px;padding:2px 6px;}
@@ -328,6 +326,13 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
     .check,.check-mini,.move-btn{width:16px;height:16px;}
     footer.buzzer-strip{margin:6px auto 0;padding:10px 14px;border-radius:10px;}
     .buzzer-strip .msg{font-size:12px;}
+  }
+  /* Small screens only: student cards become a swipe row (85% wide each)
+     instead of stacking. This must never apply on desktop widths, where
+     the base grid shows the students side by side. */
+  @media (max-width:700px){
+    .students-grid{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;gap:12px;padding-bottom:8px;}
+    .students-grid > *{flex:0 0 85%;max-width:85%;scroll-snap-align:start;}
   }
   /* ===== Fix pack: accessibility, labels, progress ===== */
   .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
