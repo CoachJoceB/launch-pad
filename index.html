@@ -1406,12 +1406,18 @@ async function loadAll(){
       resolved.students = JSON.parse(JSON.stringify(state.students));
       resolved.fieldLabels = JSON.parse(JSON.stringify(state.fieldLabels));
       // Freeze that day's History/Science lesson into the permanent snapshot too.
-      // Whole-subject weeks: odd actual weeks = History, even = Science (Mon-Thu).
-      const aw = actualWeekForDate(state.schoolDate);
-      const snapSubj = (aw % 2 === 1) ? 'history' : 'science';
-      if(state.weekdayNum>=1 && state.weekdayNum<=4){
-        resolved.lesson = snapSubj==='history' ? await getHistoryWeek(aw) : await getScienceWeek(aw);
-        resolved.lessonType = snapSubj==='history' ? 'History' : 'Science';
+      // LEGACY era only: whole-subject weeks (odd actual weeks = History, even
+      // = Science, Mon-Thu). On 52-week days there is no single shared lesson
+      // (each band has its own), and the archive view rebuilds each student's
+      // card from the 52-week data for that date, so freezing a legacy lesson
+      // here would only store the wrong card.
+      if(!mm52IsActive()){
+        const aw = actualWeekForDate(state.schoolDate);
+        const snapSubj = (aw % 2 === 1) ? 'history' : 'science';
+        if(state.weekdayNum>=1 && state.weekdayNum<=4){
+          resolved.lesson = snapSubj==='history' ? await getHistoryWeek(aw) : await getScienceWeek(aw);
+          resolved.lessonType = snapSubj==='history' ? 'History' : 'Science';
+        }
       }
       stampSnap(resolved);
       state.todayOverride = resolved;
@@ -2518,6 +2524,9 @@ async function openUpcomingDayPreview(dateObj, targetContainer){
   const realDate = state.schoolDate;
   const realWeekday = state.weekdayNum;
   const realDateStr = state.dateStr;
+  const realOverride = state.todayOverride;
+  const realChecks = state.checks;
+  const realWeekWords = state.weekWords;
 
   // Create a temp board element for the render
   const tempBoard = document.createElement('div');
@@ -2531,7 +2540,14 @@ async function openUpcomingDayPreview(dateObj, targetContainer){
     d.setHours(12,0,0,0);
     state.schoolDate = d;
     state.weekdayNum = d.getDay();
-    state.dateStr = d.toISOString().slice(0,10);
+    state.dateStr = toDateStr(d);
+    // The preview day must render its OWN plan: never today's frozen
+    // snapshot, today's checkmarks, or this week's Friday test words.
+    state.todayOverride = await storageGet(dayKey(state.dateStr));
+    state.checks = (await storageGet(checksKey(state.dateStr))) || {};
+    if(d.getDay() === 5){
+      try { state.weekWords = await computeWeekWordsFor(mondayOfWeek(d)); } catch(e){}
+    }
 
     await renderBoard();
 
@@ -2547,6 +2563,9 @@ async function openUpcomingDayPreview(dateObj, targetContainer){
     state.schoolDate = realDate;
     state.weekdayNum = realWeekday;
     state.dateStr = realDateStr;
+    state.todayOverride = realOverride;
+    state.checks = realChecks;
+    state.weekWords = realWeekWords;
   }
 }
 let allSectionsCollapsed = false;
@@ -4569,9 +4588,37 @@ function collectStudentsForm(){
 
 /* ========================= ARCHIVE MODAL — full page snapshots ========================= */
 function buildFullDayHTML(dateObj, content, checks, weekWords){
-  const devo = content.devotional || {};
+  let devo = content.devotional || {};
   const wd = dateObj.getDay();
   const isTestDay = wd===5;
+  // 52-week era days: the snapshot's frozen devotional is the legacy one.
+  // Rebuild the warm-up from the 52-week devotional for THIS date, exactly
+  // as the live board showed it.
+  const eraWeek = (typeof mm52WeekForDate === 'function') ? mm52WeekForDate(dateObj) : 0;
+  if(eraWeek >= 1 && typeof mm52Devotional === 'function'){
+    try {
+      devo = JSON.parse(JSON.stringify(devo));
+      const devoWord = mm52DevoWord(eraWeek, wd);
+      if(devoWord && wd >= 1 && wd <= 4){
+        devo.wordOfDay = devoWord.word;
+        devo.wordDef = devoWord.def;
+        devo.wordSyn = devoWord.syn;
+        devo.wordAnt = devoWord.ant;
+      } else if(wd === 5){
+        const week = (typeof MM_DEVOTIONAL_52 !== 'undefined') ? MM_DEVOTIONAL_52.find(w => w.w === eraWeek) : null;
+        if(week && week.words) devo.wordOfDay = 'Review: ' + week.words.map(w=>w.word).join(', ');
+      }
+      const devDay = mm52Devotional(eraWeek, wd);
+      if(devDay){
+        devo.scripture = devDay.scripture + (devDay.scriptureText ? ' — "' + devDay.scriptureText + '"' : '');
+        devo.reflection = devDay.reflection;
+        devo.prayer = devDay.prayer;
+        devo.intention = devDay.intention;
+      }
+      // Subject topics (e.g. Warm Up) read the devotional from content too.
+      content = Object.assign({}, content, { devotional: devo });
+    } catch(e) {}
+  }
   const fl = content.fieldLabels || state.fieldLabels;
   const students = content.students || state.students;
 
@@ -4584,7 +4631,13 @@ function buildFullDayHTML(dateObj, content, checks, weekWords){
       vocabHTML = `<div class="vocab-box"><span class="test-badge">Test Day</span>
         <ul class="test-list">${words.map(w=>`<li>${esc(w)}</li>`).join('') || '<li style="text-transform:none;font-family:Oswald;font-size:13px;color:var(--ink-soft)">No words logged this week</li>'}</ul></div>`;
     } else {
-      const word = content.vocab && content.vocab[grade];
+      let word = content.vocab && content.vocab[grade];
+      if(eraWeek >= 1 && typeof mm52GetWeek === 'function'){
+        // 52-week: the day's word comes from the student's band week words.
+        const wk = mm52GetWeek(eraWeek, s.band || mm52BandForGrade(grade));
+        const wv = wk && wk.vocab && wk.vocab[wd-1];
+        if(wv) word = { word: wv.word, def: wv.def, sent: wv.use, syn: wv.syn, ant: wv.ant };
+      }
       if(word){
         vocabHTML = `<div class="vocab-box">
           <div class="vocab-word">${esc(word.word)}</div>
@@ -4597,10 +4650,22 @@ function buildFullDayHTML(dateObj, content, checks, weekWords){
     const excluded = s.excludedSubjects || [];
     const studentSubjList = applySubjectOrder(baseSubjList, s.id).filter(sub => !excluded.includes(sub.name));
     const studentChecks = (checks && checks[s.id]) || {};
-    const lesson = content.lesson;
+    // 52-week era Mon-Thu: each student's card is their band's lesson for
+    // THIS date (the frozen snapshot lesson is a single legacy lesson and
+    // is not what the students actually had).
+    let lesson = content.lesson;
+    let lessonBadge = esc(content.lessonType||'Lesson');
+    if(eraWeek >= 1 && !isTestDay && wd >= 1 && wd <= 4 && typeof mm52LessonForStudent === 'function'){
+      const subj = (wd === 1 || wd === 2) ? 'History' : 'Science';
+      const mmLesson = mm52LessonForStudent(s, eraWeek, subj);
+      if(mmLesson){
+        lesson = mmLesson;
+        lessonBadge = esc(subj) + ' Lesson · Week ' + eraWeek;
+      }
+    }
     const dayPart = getLessonDayPart(lesson, dateObj.getDay(), toDateStr(dateObj));
     const studentLessonHTML = (!isTestDay && lesson) ? `<div class="card" style="margin-top:12px;">
-      <div class="word-badge">${esc(content.lessonType||'Lesson')}</div>
+      <div class="word-badge">${lessonBadge}</div>
       <div style="font-size:14px;font-weight:600;margin-top:6px;">${esc(lesson.topic)}</div>
       ${dayPart && dayPart.reading ? `<div style="font-size:13px;line-height:1.5;margin-top:8px;white-space:pre-wrap;">${esc(stripKeyInfo(dayPart.reading))}</div>` : ''}
       ${lesson.blackHistoryMoment ? `<div class="vocab-box" style="margin-top:10px;"><div class="word-badge" style="margin-bottom:4px;">Black History Connection</div><div style="font-size:13px;">${esc(lesson.blackHistoryMoment)}</div></div>` : ''}
@@ -4746,14 +4811,39 @@ async function loadArchiveTab(){
       const checks = (await storageGet(checksKey(dstr))) || {};
       const rowId = 'arch-'+dstr;
       dayData[rowId] = {dateObj, content, checks};
-      rows.push(dayRowHTML(dateObj, content.devotional?.wordOfDay||'', dateObj.getDay()===5, rowId));
+      // 52-week era: the row word is that date's devotional theme word,
+      // not the frozen legacy word stored in the snapshot.
+      let rowWord = content.devotional?.wordOfDay||'';
+      const eWeek = (typeof mm52WeekForDate === 'function') ? mm52WeekForDate(dateObj) : 0;
+      if(eWeek >= 1 && typeof mm52DevoWord === 'function'){
+        const dw = dateObj.getDay();
+        if(dw >= 1 && dw <= 4){ const w = mm52DevoWord(eWeek, dw); if(w) rowWord = w.word; }
+        else if(dw === 5){
+          const wk = (typeof MM_DEVOTIONAL_52 !== 'undefined') ? MM_DEVOTIONAL_52.find(x=>x.w===eWeek) : null;
+          if(wk && wk.words) rowWord = 'Review: ' + wk.words.map(x=>x.word).join(', ');
+        }
+      }
+      rows.push(dayRowHTML(dateObj, rowWord, dateObj.getDay()===5, rowId));
     }
     daysEl.innerHTML = rows.join('') || `<div class="archive-empty">No saved content for this week.</div>`;
 
     daysEl.querySelectorAll('[data-rowid]').forEach(row=>{
       row.addEventListener('click', async ()=>{
         const {dateObj, content, checks} = dayData[row.dataset.rowid];
-        const weekWords = dateObj.getDay()===5 ? await computeWeekWordsFor(mondayOfWeek(dateObj)) : null;
+        let weekWords = null;
+        if(dateObj.getDay()===5){
+          const eWeek2 = (typeof mm52WeekForDate === 'function') ? mm52WeekForDate(dateObj) : 0;
+          if(eWeek2 >= 1 && typeof MM_DEVOTIONAL_52 !== 'undefined'){
+            // 52-week Friday: the test words are the week's 4 theme words,
+            // the same list for every grade band.
+            const wk = MM_DEVOTIONAL_52.find(x=>x.w===eWeek2);
+            const words = (wk && wk.words) ? wk.words.map(x=>x.word) : [];
+            weekWords = {};
+            (content.students || state.students || []).forEach(s=>{ weekWords[s.grade] = words; });
+          } else {
+            weekWords = await computeWeekWordsFor(mondayOfWeek(dateObj));
+          }
+        }
         openDayLightbox(dateObj, content, checks, weekWords, false);
       });
     });
@@ -4800,7 +4890,9 @@ async function loadUpcomingTab(){
       const wd = i+1;
       const override = await storageGet(dayKey(toDateStr(dateObj)));
       const legacyCw = legacyContentWeekForDate(mon);
-      const content = override || JSON.parse(JSON.stringify(state.contentWeeks[legacyCw][wd]));
+      // Guarded: a missing legacy week/day entry must not kill the whole
+      // Upcoming tab (the 52-week topics below are what the rows show).
+      const content = override || JSON.parse(JSON.stringify((state.contentWeeks[legacyCw] && state.contentWeeks[legacyCw][wd]) || {}));
       if(!override){
         // 52-week curriculum: show topics by band
         const bands = ['35','68','912'];
