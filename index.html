@@ -131,6 +131,8 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
   .chevron{font-size:11px;color:var(--ink-soft);transition:transform .15s;}
   .chevron.collapsed{transform:rotate(-90deg);}
   .collapse-body.lesson-reading{max-height:5000px;}
+  /* Original-work guard: the lesson reading cannot be selected or copied. */
+  #worksheetReading, .lesson-reading{user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;}
   .collapse-body{overflow:hidden;max-height:600px;transition:max-height .2s ease;}
   .collapse-body.collapsed{max-height:0;}
   .info-line{display:flex;justify-content:space-between;font-size:13.5px;padding:4px 0;border-bottom:1px dashed var(--line-light);}
@@ -4065,7 +4067,7 @@ async function openWorksheetModal(subject, lesson, preferredStudentId, weekdayNu
   });
   currentWorksheetCtx = { subject, lesson, dateStr: state.dateStr };
   document.getElementById('worksheetTitle').textContent = materialSubjectLabel(subject) + (forceDayNum ? ' Self Test' : ' Worksheet');
-  document.getElementById('worksheetSub').textContent = (forceDayNum && dayPart.title ? dayPart.title + ' · ' : '') + lesson.topic;
+  document.getElementById('worksheetSub').textContent = (forceDayNum && dayPart.title ? dayPart.title + ' · ' : '') + lesson.topic + ' · Your own words only, pasting is off.';
 
   const readingEl = document.getElementById('worksheetReading');
   // The reading card is per-student: Light students get readingLight when the
@@ -4861,6 +4863,44 @@ function showToast(msg){
   t.textContent = msg; t.classList.add('show');
   setTimeout(()=>t.classList.remove('show'), 1800);
 }
+
+/* ========================= ORIGINAL WORK GUARD =========================
+   Kids' answers must be their own typing: pasting and drag-and-drop are
+   blocked in the worksheet and the board's current-event fields, and the
+   lesson reading cannot be copied. Parent, settings, and edit fields are
+   not affected. Events are delegated at the document level so re-rendered
+   content is covered too. */
+(function(){
+  const inStudentWork = (el)=>{
+    if(!el || !el.closest) return false;
+    return !!(el.closest('#worksheetOverlay') || el.closest('[data-cefield]'));
+  };
+  const inReading = (el)=>{
+    if(!el || !el.closest) return false;
+    return !!(el.closest('#worksheetReading') || el.closest('.lesson-reading'));
+  };
+  document.addEventListener('paste', (e)=>{
+    if(inStudentWork(e.target)){
+      e.preventDefault();
+      showToast('Pasting is off. Type your answer in your own words.');
+    }
+  }, true);
+  document.addEventListener('dragover', (e)=>{
+    if(inStudentWork(e.target)) e.preventDefault();
+  }, true);
+  document.addEventListener('drop', (e)=>{
+    if(inStudentWork(e.target)) e.preventDefault();
+  }, true);
+  document.addEventListener('copy', (e)=>{
+    if(inReading(e.target)){
+      e.preventDefault();
+      showToast("You can't copy the reading. Read it, then write in your own words.");
+    }
+  }, true);
+  document.addEventListener('cut', (e)=>{
+    if(inReading(e.target)) e.preventDefault();
+  }, true);
+})();
 
 /* ========================= WIRE UP ========================= */
 document.querySelectorAll('[data-close]').forEach(b=>b.addEventListener('click', closeAllModals));
