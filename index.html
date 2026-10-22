@@ -1852,7 +1852,7 @@ async function renderBoardInner(){
       }
     }
     if(!lesson){
-      return `<div class="card" style="max-width:478px;padding:12px 14px;"><div class="word-badge">${esc(lessonType)} Lesson · Week ${aw}</div><p style="color:var(--ink-soft);font-size:13.5px;margin-top:8px;">Not uploaded yet — use the 📚 icon to add this week's ${esc(lessonType)} PDF.</p></div>`;
+      return `<div class="card" style="width:fit-content;max-width:100%;padding:12px 14px;"><div class="word-badge">${esc(lessonType)} Lesson · Week ${aw}</div><p style="color:var(--ink-soft);font-size:13.5px;margin-top:8px;">Not uploaded yet — use the 📚 icon to add this week's ${esc(lessonType)} PDF.</p></div>`;
     }
     const pdfBtn = lesson.pdfDataUrl
       ? `<button type="button" class="btn btn-ghost" data-openlessonpdf style="margin-top:10px;">📄 Open ${esc(lesson.pdfFilename||'Lesson PDF')}</button>`
@@ -1881,18 +1881,19 @@ async function renderBoardInner(){
         if(video && video.youtubeId){
           videoHTML = `<div style="margin:8px 0;">
             <div style="font-size:13px;font-weight:600;margin-bottom:6px;">🎬 Watch: ${esc(video.title)}</div>
-            <div class="vidbox" data-vid="${escAttr(video.youtubeId)}" role="button" tabindex="0" aria-label="Play video" style="position:relative;max-width:430px;aspect-ratio:16/9;border-radius:8px;overflow:hidden;background:#000;cursor:pointer;">
+            <div class="vidbox" data-vid="${escAttr(video.youtubeId)}" data-student="${escAttr(student.id)}" data-subject="${isHistoryDay ? 'history' : 'science'}" role="button" tabindex="0" aria-label="Play video" style="position:relative;max-width:430px;aspect-ratio:16/9;border-radius:8px;overflow:hidden;background:#000;cursor:pointer;">
               <img src="https://i.ytimg.com/vi/${escAttr(video.youtubeId)}/hqdefault.jpg" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
               <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;">
                 <div style="width:64px;height:64px;border-radius:50%;background:rgba(200,40,30,.92);color:#fff;display:flex;align-items:center;justify-content:center;font-size:26px;box-shadow:0 4px 14px rgba(0,0,0,.35);padding-left:4px;">▶</div>
               </div>
+              ${gatePillHTML(student.id, isHistoryDay ? 'history' : 'science')}
             </div>
             <div style="font-size:11.5px;color:var(--ink-soft);margin-top:4px;">${esc(video.channel)} · ${esc(video.duration)}</div>
           </div>`;
         }
       } catch(e) {}
     }
-    return `<div class="card" style="max-width:478px;padding:12px 14px;">
+    return `<div class="card" style="width:fit-content;max-width:100%;padding:12px 14px;">
       <div class="word-badge">${esc(lessonType)} Lesson · Week ${aw}</div>
       <div style="font-size:15px;font-weight:600;line-height:1.4;margin:6px 0;">${esc(lesson.topic)}</div>
       ${bhmTitleHTML}
@@ -4999,6 +5000,31 @@ document.addEventListener('input', (e)=>{
   }
 }, true);
 
+/* Board-side view of the worksheet gate records, so the lesson card can
+   show "✓ Watched" / "Watched X%" and the board video player feeds the
+   SAME record the worksheet gate reads. Watching in either place counts.
+   Refreshed on each full load (loadAndRender) and kept in step on writes. */
+let gatePeekCache = {}; // "dateStr|subject|studentId" -> gate record
+async function preloadGatePeek(){
+  gatePeekCache = {};
+  try {
+    if(typeof mm52IsActive === 'undefined' || !mm52IsActive()) return;
+    const wd = state.weekdayNum;
+    const subj = (wd === 1 || wd === 2) ? 'history' : (wd === 3 || wd === 4) ? 'science' : null;
+    if(!subj) return;
+    await Promise.all((state.students || []).map(async (s)=>{
+      const rec = await storageGet(wsGateKey(state.dateStr, s.id, subj));
+      gatePeekCache[state.dateStr + '|' + subj + '|' + s.id] = rec || {};
+    }));
+  } catch(e){}
+}
+function gatePillHTML(studentId, subject){
+  const rec = gatePeekCache[state.dateStr + '|' + subject + '|' + studentId] || {};
+  if(rec.watched) return '<div style="position:absolute;left:8px;bottom:8px;z-index:2;background:rgba(34,120,60,.93);color:#fff;font-size:12px;font-weight:700;padding:4px 10px;border-radius:999px;">✓ Watched</div>';
+  if(rec.acc > 0 && rec.dur) return '<div style="position:absolute;left:8px;bottom:8px;z-index:2;background:rgba(27,42,78,.85);color:#fff;font-size:12px;font-weight:700;padding:4px 10px;border-radius:999px;">Watched ' + Math.min(99, Math.floor((rec.acc/rec.dur)*100)) + '%</div>';
+  return '';
+}
+
 /* ========================= WORKSHEET GATE =========================
    Before a worksheet starts, the student must (1) read the original-work
    caution and tap "I understand", and (2) watch the lesson video (52-week
@@ -5025,6 +5051,8 @@ function gateVideoFor(student, subject, wd){
 }
 async function saveWsGate(studentId, subject){
   try { await storageSet(wsGateKey(state.dateStr, studentId, subject), wsGateCache[studentId] || {}); } catch(e){}
+  // Keep the board's peek cache in step so the lesson card pill is current.
+  gatePeekCache[state.dateStr + '|' + subject + '|' + studentId] = wsGateCache[studentId] || {};
 }
 function saveGateProgress(){
   if(!gateCtx) return;
@@ -5210,19 +5238,41 @@ function finishGateVideo(onComplete){
    off (controls=0, no fullscreen, no related videos), and a transparent
    shield over the whole player catches every tap (play/pause only), so
    nothing inside the video can be clicked to reach YouTube. When the
-   video ends, the thumbnail cover comes back with a Watch again button. */
-const vidPlayers = {}; // player element id -> YT player
+   video ends, the thumbnail cover comes back with a Watch again button.
+   Watching here feeds the SAME gate record the worksheet reads (shared
+   per student + subject + day), so watching in either place satisfies
+   the worksheet requirement, and progress resumes across devices. */
+const vidPlayers = {}; // player element id -> tracking state
 let vidPlayerSeq = 0;
 function destroyBoardPlayers(){
-  Object.keys(vidPlayers).forEach(k=>{ try { vidPlayers[k].destroy(); } catch(e){} delete vidPlayers[k]; });
+  Object.keys(vidPlayers).forEach(k=>{
+    const st = vidPlayers[k];
+    if(st.ticker) clearInterval(st.ticker);
+    if(!st.done && st.acc > 0) saveBoardGateProgress(st);
+    try { st.player.destroy(); } catch(e){}
+    delete vidPlayers[k];
+  });
+}
+function saveBoardGateProgress(st){
+  if(!st || !st.studentId || !st.subject) return;
+  const key = state.dateStr + '|' + st.subject + '|' + st.studentId;
+  const rec = gatePeekCache[key] || (gatePeekCache[key] = {});
+  rec.acc = Math.floor(st.acc);
+  rec.pos = Math.floor(st.pos);
+  if(st.dur) rec.dur = Math.floor(st.dur);
+  if(st.done) rec.watched = true;
+  st.lastSaveAcc = st.acc;
+  storageSet(wsGateKey(state.dateStr, st.studentId, st.subject), rec);
 }
 function vidFacadeHTML(box, again){
   const vid = box.dataset.vid;
+  const pill = (box.dataset.student && box.dataset.subject) ? gatePillHTML(box.dataset.student, box.dataset.subject) : '';
   return `<img src="https://i.ytimg.com/vi/${vid}/hqdefault.jpg" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
     <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;">
       <div style="width:64px;height:64px;border-radius:50%;background:rgba(200,40,30,.92);color:#fff;display:flex;align-items:center;justify-content:center;font-size:26px;box-shadow:0 4px 14px rgba(0,0,0,.35);padding-left:${again?'0':'4px'};">${again?'↻':'▶'}</div>
       ${again ? '<div style="color:#fff;font-size:13px;font-weight:700;text-shadow:0 1px 4px rgba(0,0,0,.7);">Watch again</div>' : ''}
-    </div>`;
+    </div>
+    ${pill}`;
 }
 document.addEventListener('click', (e)=>{
   const box = e.target.closest ? e.target.closest('.vidbox') : null;
@@ -5235,6 +5285,11 @@ function activateVidBox(box){
   const vid = box.dataset.vid;
   const pid = 'vidp-' + (++vidPlayerSeq);
   box.dataset.pid = pid;
+  const studentId = box.dataset.student || '';
+  const subject = box.dataset.subject || '';
+  const rec = (studentId && subject) ? (gatePeekCache[state.dateStr + '|' + subject + '|' + studentId] || {}) : {};
+  const st = { player: null, ticker: null, studentId, subject, acc: rec.acc || 0, pos: rec.pos || 0, dur: rec.dur || 0, lastT: -1, lastSaveAcc: rec.acc || 0, done: false };
+  vidPlayers[pid] = st;
   box.innerHTML = `<div style="position:absolute;inset:0;"><div id="${pid}" style="position:absolute;inset:0;"></div><div class="vid-shield" style="position:absolute;inset:0;z-index:2;cursor:pointer;"></div></div>`;
   loadYouTubeAPI().then(()=>{
     if(!document.getElementById(pid)) return;
@@ -5242,22 +5297,58 @@ function activateVidBox(box){
       videoId: vid,
       playerVars: { autoplay: 1, controls: 0, rel: 0, modestbranding: 1, playsinline: 1, fs: 0, disablekb: 1 },
       events: {
-        onReady: (ev)=>{ try { ev.target.playVideo(); } catch(e){} },
-        onStateChange: (ev)=>{ if(ev.data === YT.PlayerState.ENDED) restoreVidFacade(box); }
+        onReady: (ev)=>{
+          try {
+            if(st.pos > 2) ev.target.seekTo(st.pos, true);
+            ev.target.playVideo();
+          } catch(e){}
+        },
+        onStateChange: (ev)=>{ if(ev.data === YT.PlayerState.ENDED) finishBoardVideo(box, st); }
       }
     });
-    vidPlayers[pid] = player;
+    st.player = player;
     const shield = box.querySelector('.vid-shield');
     if(shield) shield.addEventListener('click', ()=>{
       try {
         if(player.getPlayerState() === 1) player.pauseVideo(); else player.playVideo();
       } catch(e){}
     });
+    st.ticker = setInterval(()=>{
+      if(!player || !player.getCurrentTime) return;
+      const ps = player.getPlayerState ? player.getPlayerState() : -1;
+      if(ps === 1){
+        const t = player.getCurrentTime();
+        const dur = player.getDuration() || 0;
+        if(dur) st.dur = dur;
+        if(st.lastT >= 0){
+          const delta = t - st.lastT;
+          if(delta > 0 && delta <= 1.2) st.acc += delta;
+        }
+        st.lastT = t;
+        if(t > st.pos) st.pos = t;
+        if(st.acc - st.lastSaveAcc >= 5) saveBoardGateProgress(st);
+        if(dur > 0 && st.acc/dur >= 0.85) finishBoardVideo(box, st);
+      } else {
+        st.lastT = -1;
+      }
+    }, 500);
   });
+}
+function finishBoardVideo(box, st){
+  if(st.done) return;
+  st.done = true;
+  if(st.ticker){ clearInterval(st.ticker); st.ticker = null; }
+  saveBoardGateProgress(st);
+  restoreVidFacade(box);
 }
 function restoreVidFacade(box){
   const pid = box.dataset.pid;
-  if(pid && vidPlayers[pid]){ try { vidPlayers[pid].destroy(); } catch(e){} delete vidPlayers[pid]; }
+  if(pid && vidPlayers[pid]){
+    const st = vidPlayers[pid];
+    if(st.ticker) clearInterval(st.ticker);
+    try { st.player.destroy(); } catch(e){}
+    delete vidPlayers[pid];
+  }
   delete box.dataset.active;
   box.style.cursor = 'pointer';
   box.innerHTML = vidFacadeHTML(box, true);
@@ -5804,6 +5895,7 @@ async function loadAndRender(){
   // sync poll replaces the board, which otherwise snaps the page to the top).
   const savedScrollY = window.scrollY || window.pageYOffset || 0;
   await loadAll();
+  await preloadGatePeek();
   renderHeader();
   await renderBoard();
   if(savedScrollY > 0){
