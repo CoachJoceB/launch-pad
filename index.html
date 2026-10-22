@@ -1513,24 +1513,28 @@ function todayContent(){
 function allSubjects(c, opts){
   opts = opts || {};
   const subj = c.subjects || {};
+  // 52-week overrides are computed for the date being rendered, which is
+  // not always today (the Plan Calendar archive renders past dates).
+  const effDate = opts.forDate || state.schoolDate;
+  const effWd = effDate ? effDate.getDay() : state.weekdayNum;
   // 52-week: states & capitals from MM_STATES_52
   let scNames = (c.statesCapitals||[]).map(x=>x.state).filter(Boolean).join(' & ');
   let finConcept = (c.financialLit && c.financialLit.concept) || 'Money lesson';
   if(mm52IsActive()){
     try {
-      const weekNum = contentWeekForDate(state.schoolDate);
+      const weekNum = contentWeekForDate(effDate);
       const st52 = mm52States(weekNum);
       if(st52 && !st52.review) scNames = st52.state;
       else if(st52 && st52.review) scNames = 'Review: ' + (st52.states||[]).join(', ');
-      const fin52 = mm52Financial(weekNum, state.weekdayNum);
+      const fin52 = mm52Financial(weekNum, effWd);
       if(fin52 && fin52.concept) finConcept = fin52.concept;
     } catch(e) {}
   }
   let rws = c.realWorldScenario || '';
   if(mm52IsActive()){
     try {
-      const weekNum = contentWeekForDate(state.schoolDate);
-      const sc52 = mm52Scenario(weekNum, state.weekdayNum);
+      const weekNum = contentWeekForDate(effDate);
+      const sc52 = mm52Scenario(weekNum, effWd);
       if(sc52 && sc52.title) rws = sc52.title;
     } catch(e) {}
   }
@@ -4637,7 +4641,7 @@ function wsResponsesHTML(worksheet, answers, checks){
   return parts.join('') + (total ? `<div style="font-size:11.5px;color:var(--ink-soft);margin-top:4px;">${answered} of ${total} questions answered</div>` : '');
 }
 
-function buildFullDayHTML(dateObj, content, checks, weekWords, wsResponses){
+function buildFullDayHTML(dateObj, content, checks, weekWords, wsResponses, ceResponses){
   let devo = content.devotional || {};
   const wd = dateObj.getDay();
   const isTestDay = wd===5;
@@ -4672,7 +4676,7 @@ function buildFullDayHTML(dateObj, content, checks, weekWords, wsResponses){
   const fl = content.fieldLabels || state.fieldLabels;
   const students = content.students || state.students;
 
-  const baseSubjList = allSubjects(content);
+  const baseSubjList = allSubjects(content, { forDate: dateObj });
   const studentsHTML = students.map((s, sIdx)=>{
     const grade = s.grade;
     let vocabHTML = '';
@@ -4750,25 +4754,83 @@ function buildFullDayHTML(dateObj, content, checks, weekWords, wsResponses){
     </div>`;
   }).join('');
 
-  const currentEventHTML = isTestDay ? '' : `<div class="card">
+  // Q2 — Life Skills & Drills. On 52-week era days these come from the
+  // 52-week data for THIS date (the snapshot's fields are the legacy ones),
+  // mirroring how the live board builds them. Current-event responses are
+  // the students' own saved headline + summary for the day.
+  let currentEventHTML = '';
+  if(!isTestDay){
+    const ceList = (content.students || students).map(s=>{
+      const r = ceResponses && ceResponses[s.id];
+      if(!r || (!r.headline && !r.summary)) return '';
+      return `<div style="margin-top:8px;">
+        <div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--ink-soft);">${esc(firstName(s.name))}</div>
+        ${r.headline ? `<div style="font-size:14px;font-weight:600;margin-top:2px;">${esc(r.headline)}</div>` : ''}
+        ${r.summary ? `<div style="font-size:13.5px;line-height:1.5;white-space:pre-wrap;margin-top:2px;">${esc(r.summary)}</div>` : ''}
+      </div>`;
+    }).filter(Boolean).join('');
+    currentEventHTML = `<div class="card">
     <div class="word-badge">Current Event</div>
-    <p style="font-size:13px;color:var(--ink-soft);margin-top:6px;">Each student's NewsForKids.net headline & summary is saved on their own card that day — open that date on the live board to see their answers.</p>
+    ${ceList || '<p style="font-size:13px;color:var(--ink-soft);margin-top:6px;">No current event responses saved for this day.</p>'}
   </div>`;
-  const flData = content.financialLit;
-  const financialLitHTML = (flData && flData.concept) ? `<div class="card">
+  }
+  let financialLitHTML = '';
+  let rwsHTML = '';
+  let statesHTML = '';
+  if(eraWeek >= 1 && !isTestDay && typeof mm52Financial === 'function'){
+    try {
+      const fin52 = mm52Financial(eraWeek, wd);
+      if(fin52 && fin52.concept){
+        const blank = fin52.explanation + (fin52.activity ? '\n\nToday: ' + fin52.activity.title + ' — ' + fin52.activity.activity : '');
+        financialLitHTML = `<div class="card">
+    <div class="word-badge">Financial Lit</div>
+    <div style="font-size:15px;font-weight:600;margin:6px 0 8px;">${esc(fin52.concept)}</div>
+    <p style="font-size:14px;line-height:1.5;white-space:pre-line;">${esc(blank)}</p>
+  </div>`;
+      }
+      const sc52 = mm52Scenario(eraWeek, wd);
+      if(sc52 && sc52.scenario){
+        rwsHTML = `<div class="card">
+    <div class="word-badge">Real World Scenario</div>
+    ${sc52.title ? `<div style="font-size:15px;font-weight:600;margin:6px 0 8px;">${esc(sc52.title)}</div>` : ''}
+    <p style="font-size:14px;line-height:1.5;margin-top:8px;">${esc(sc52.scenario)}</p>
+    ${sc52.discuss ? `<p style="font-size:13px;line-height:1.5;margin-top:8px;color:var(--ink-soft);"><em>Discuss:</em> ${esc(sc52.discuss)}</p>` : ''}
+  </div>`;
+      }
+      const st52 = mm52States(eraWeek);
+      if(st52 && !st52.review){
+        const fact = mm52StateFact(eraWeek, wd) || st52.funFact || '';
+        statesHTML = `<div class="card">
+    <div class="word-badge">States & Capitals</div>
+    <div class="info-line"><span>${esc(st52.state)}</span><span>${esc(st52.capital)}</span></div>
+    ${st52.nickname ? `<div style="font-size:12.5px;color:var(--ink-soft);margin-top:4px;">Nickname: ${esc(st52.nickname)}</div>` : ''}
+    ${fact ? `<div style="font-size:13px;line-height:1.5;margin-top:6px;">${esc(fact)}</div>` : ''}
+  </div>`;
+      } else if(st52 && st52.review){
+        statesHTML = `<div class="card">
+    <div class="word-badge">States & Capitals</div>
+    ${(st52.states || []).map((sn, i)=>`<div class="info-line"><span>${esc(sn)}</span><span>${esc((st52.capitals || [])[i] || '')}</span></div>`).join('')}
+  </div>`;
+      }
+    } catch(e) {}
+  }
+  if(!financialLitHTML){
+    const flData = content.financialLit;
+    if(flData && flData.concept) financialLitHTML = `<div class="card">
     <div class="word-badge">Financial Lit</div>
     <div style="font-size:15px;font-weight:600;margin:6px 0 8px;">${esc(flData.concept)}</div>
     <p style="font-size:14px;">${esc(flData.blank)}</p>
     <p style="font-size:13px;font-weight:700;color:var(--green);margin-top:6px;">Answer: ${esc(flData.answer)}</p>
-  </div>` : '';
-  const rwsHTML = content.realWorldScenario ? `<div class="card">
+  </div>`;
+  }
+  if(!rwsHTML && content.realWorldScenario) rwsHTML = `<div class="card">
     <div class="word-badge">Real World Scenario</div>
     <p style="font-size:14px;margin-top:8px;">${esc(content.realWorldScenario)}</p>
-  </div>` : '';
-  const statesHTML = (content.statesCapitals && content.statesCapitals.length) ? `<div class="card">
+  </div>`;
+  if(!statesHTML && content.statesCapitals && content.statesCapitals.length) statesHTML = `<div class="card">
     <div class="word-badge">States & Capitals</div>
     ${content.statesCapitals.map(sc=>`<div class="info-line"><span>${esc(sc.state)}</span><span>${esc(sc.capital)}</span></div>`).join('')}
-  </div>` : '';
+  </div>`;
 
   return `
     <section class="qtr" style="margin-bottom:20px;">
@@ -4926,7 +4988,16 @@ async function loadArchiveTab(){
             }
           }
         } catch(e) {}
-        openDayLightbox(dateObj, content, checks, weekWords, false, wsResponses);
+        // Current-event responses (each student's own headline + summary).
+        let ceResponses = {};
+        try {
+          const dstr3 = toDateStr(dateObj);
+          for(const s of (content.students || state.students || [])){
+            const r = await storageGet(currentEventResponseKey(dstr3, s.id));
+            if(r && (r.headline || r.summary)) ceResponses[s.id] = r;
+          }
+        } catch(e) {}
+        openDayLightbox(dateObj, content, checks, weekWords, false, wsResponses, ceResponses);
       });
     });
   }
@@ -5015,14 +5086,14 @@ async function loadUpcomingTab(){
 }
 
 /* ---- Day detail lightbox + image download ---- */
-function openDayLightbox(dateObj, content, checks, weekWords, isUpcoming, wsResponses){
+function openDayLightbox(dateObj, content, checks, weekWords, isUpcoming, wsResponses, ceResponses){
   const title = dateObj.toLocaleDateString('en-US',{weekday:'long', month:'long', day:'numeric'});
   document.getElementById('lightboxTitle').textContent = title;
   document.getElementById('lightboxSub').textContent = isUpcoming
     ? 'Preview — this hasn\u2019t happened yet, so nothing is checked off.'
     : 'Archived exactly as it appeared that day.';
   const contentEl = document.getElementById('lightboxContent');
-  contentEl.innerHTML = buildFullDayHTML(dateObj, content, checks, weekWords, wsResponses);
+  contentEl.innerHTML = buildFullDayHTML(dateObj, content, checks, weekWords, wsResponses, ceResponses);
   // Accordion: one student open at a time; tap a header to switch.
   contentEl.querySelectorAll('[data-arch-toggle]').forEach(head=>{
     head.addEventListener('click', ()=>{
