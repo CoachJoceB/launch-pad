@@ -565,6 +565,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
     <div class="modal-tabs">
       <div class="modal-tab active" data-cal-tab="archive-view">Archive</div>
       <div class="modal-tab" data-cal-tab="upcoming-view">Upcoming</div>
+      <div class="modal-tab" data-cal-tab="gradebook-view">📊 Gradebook</div>
     </div>
     <div class="archive-layout" id="archive-view">
       <div class="archive-weeks" id="archiveWeeks"></div>
@@ -573,6 +574,9 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
     <div class="archive-layout" id="upcoming-view" style="display:none;">
       <div class="archive-weeks" id="upcomingWeeks"></div>
       <div class="archive-days" id="upcomingDays"><div class="archive-empty">Loading…</div></div>
+    </div>
+    <div class="archive-layout" id="gradebook-view" style="display:none;">
+      <div class="archive-days" id="gradebookDays" style="flex:1;"><div class="archive-empty">Loading…</div></div>
     </div>
     <div class="modal-actions">
       <button class="btn btn-ghost" data-close>Close</button>
@@ -5210,10 +5214,36 @@ function buildFullDayHTML(dateObj, content, checks, weekWords, wsResponses, ceRe
   `;
 }
 
+// Gradebook tab in the Planner: every student's subject averages, GPA,
+// and most recent grades, all computed live from the gradebook records.
+function renderGradebookTab(){
+  const host = document.getElementById('gradebookDays');
+  if(!host) return;
+  const fmtDate = (dstr)=>{
+    const parts = (dstr || '').split('-').map(Number);
+    if(parts.length !== 3) return dstr || '';
+    return new Date(parts[0], parts[1]-1, parts[2], 12).toLocaleDateString('en-US', { month:'short', day:'numeric' });
+  };
+  host.innerHTML = (state.students || []).map(s=>{
+    const gb = (state.gradebook || {})[s.id];
+    const entries = gb && gb.entries ? Object.values(gb.entries).sort((a,b)=> (b.date||'').localeCompare(a.date||'') || ((b.ts||0)-(a.ts||0))) : [];
+    const recent = entries.slice(0, 8).map(en=>'<div class="info-line"><span>' + fmtDate(en.date) + ' \u00B7 ' + esc(GRADE_SUBJECT_LABELS[en.subject]||en.subject) + (en.label ? ' \u00B7 ' + esc(en.label) : '') + '</span><span><strong>' + en.pct + '%</strong></span></div>').join('');
+    return '<div class="card" style="margin-bottom:12px;">'
+      + '<div style="display:flex;justify-content:space-between;align-items:center;">'
+      + '<div style="font-family:\'Oswald\',sans-serif;font-size:17px;font-weight:700;">' + esc(firstName(s.name)) + '</div>'
+      + '<div class="grade-badge">' + esc(s.grade) + ' GRADE</div></div>'
+      + '<div style="margin-top:8px;">' + gradesSectionHTML(s) + '</div>'
+      + (recent ? '<div class="mini-lbl" style="margin-top:10px;">Recent grades</div>' + recent : '')
+      + '</div>';
+  }).join('') || '<div class="archive-empty">No students yet.</div>';
+}
+
 async function openArchiveModal(){
   document.getElementById('archiveOverlay').classList.add('open');
   await loadArchiveTab();
   await loadUpcomingTab();
+  const activeTab = document.querySelector('[data-cal-tab].active');
+  if(activeTab && activeTab.dataset.calTab === 'gradebook-view') renderGradebookTab();
 }
 
 function dayRowHTML(dateObj, wordOfDay, isTest, rowId){
@@ -6062,6 +6092,8 @@ document.querySelectorAll('[data-cal-tab]').forEach(t=>{
     t.classList.add('active');
     document.getElementById('archive-view').style.display = t.dataset.calTab==='archive-view' ? 'flex' : 'none';
     document.getElementById('upcoming-view').style.display = t.dataset.calTab==='upcoming-view' ? 'flex' : 'none';
+    document.getElementById('gradebook-view').style.display = t.dataset.calTab==='gradebook-view' ? 'flex' : 'none';
+    if(t.dataset.calTab==='gradebook-view') renderGradebookTab();
   });
 });
 
