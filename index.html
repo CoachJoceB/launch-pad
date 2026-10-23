@@ -4449,9 +4449,10 @@ function worksheetReadingHTML(dayPart, useLight, forceDayNum){
   return html;
 }
 
-async function openWorksheetModal(subject, lesson, preferredStudentId, weekdayNum, forceDayNum){
+async function openWorksheetModal(subject, lesson, preferredStudentId, weekdayNum, forceDayNum, forDateStr){
   const wd = weekdayNum !== undefined ? weekdayNum : state.weekdayNum;
-  const dayPart = forceDayNum ? lesson['day'+forceDayNum] : getLessonDayPart(lesson, wd, state.dateStr);
+  const effDateStr = forDateStr || state.dateStr;
+  const dayPart = forceDayNum ? lesson['day'+forceDayNum] : getLessonDayPart(lesson, wd, effDateStr);
   const worksheet = dayPart && dayPart.worksheet;
   if(!worksheet){ showToast('No worksheet questions for this day yet.'); return; }
   // "Today's plan" checklists get a vocab copy-down item so kids mark it
@@ -4466,9 +4467,14 @@ async function openWorksheetModal(subject, lesson, preferredStudentId, weekdayNu
       }
     }
   });
-  currentWorksheetCtx = { subject, lesson, dateStr: state.dateStr };
+  currentWorksheetCtx = { subject, lesson, dateStr: effDateStr };
   document.getElementById('worksheetTitle').textContent = materialSubjectLabel(subject) + (forceDayNum ? ' Self Test' : ' Worksheet');
-  document.getElementById('worksheetSub').textContent = (forceDayNum && dayPart.title ? dayPart.title + ' · ' : '') + lesson.topic + ' · Your own words only, pasting is off.';
+  let datePrefix = '';
+  if(effDateStr !== state.dateStr){
+    const dp = effDateStr.split('-').map(Number);
+    datePrefix = 'Editing ' + new Date(dp[0], dp[1]-1, dp[2], 12).toLocaleDateString('en-US', { weekday:'short', month:'short', day:'numeric' }) + ' \u00B7 ';
+  }
+  document.getElementById('worksheetSub').textContent = datePrefix + (forceDayNum && dayPart.title ? dayPart.title + ' · ' : '') + lesson.topic + ' · Your own words only, pasting is off.';
 
   const readingEl = document.getElementById('worksheetReading');
   // The reading card is per-student: Light students get readingLight when the
@@ -4508,10 +4514,10 @@ async function openWorksheetModal(subject, lesson, preferredStudentId, weekdayNu
   wsGateCache = {};
   const wsBhm = dayPart.bhm || lesson.blackHistoryMoment || null;
   for(const s of worksheetStudents){
-    const saved = (await storageGet(worksheetAnswersKey(state.dateStr, s.id, subject))) || defaultWorksheetAnswers(worksheet);
+    const saved = (await storageGet(worksheetAnswersKey(effDateStr, s.id, subject))) || defaultWorksheetAnswers(worksheet);
     worksheetCache[s.id] = { worksheet: worksheet, answers: saved, bhm: wsBhm, studentId: s.id };
-    wsChecksCache[s.id] = (await storageGet(wsCheckKey(state.dateStr, s.id, subject))) || {};
-    wsGateCache[s.id] = (await storageGet(wsGateKey(state.dateStr, s.id, subject))) || {};
+    wsChecksCache[s.id] = (await storageGet(wsCheckKey(effDateStr, s.id, subject))) || {};
+    wsGateCache[s.id] = (await storageGet(wsGateKey(effDateStr, s.id, subject))) || {};
   }
 
   function showStudent(id){
@@ -5087,6 +5093,9 @@ function buildFullDayHTML(dateObj, content, checks, weekWords, wsResponses, ceRe
         ${body || '<div style="font-size:12.5px;color:var(--ink-soft);margin-top:4px;">No answers written yet.</div>'}
       </div>`;
     }).join('') : '';
+    const editWsBtnHTML = isTestDay
+      ? `<button type="button" class="btn btn-ghost" data-editws="${s.id}" data-subject="friday" data-date="${toDateStr(dateObj)}" style="font-size:12.5px;padding:7px 14px;margin-top:10px;">✏️ Edit Friday review test</button>`
+      : (wd>=1 && wd<=4 ? `<button type="button" class="btn btn-ghost" data-editws="${s.id}" data-subject="${(wd===1||wd===2)?'history':'science'}" data-date="${toDateStr(dateObj)}" style="font-size:12.5px;padding:7px 14px;margin-top:10px;">✏️ Edit ${(wd===1||wd===2)?'History':'Science'} worksheet</button>` : '');
     const academicsHTML = isTestDay ? '' : `
         ${studentLessonHTML}
         ${respHTML}
@@ -5104,6 +5113,7 @@ function buildFullDayHTML(dateObj, content, checks, weekWords, wsResponses, ceRe
         <div class="mini-lbl">Vocabulary ${isTestDay ? '— Test' : '('+grade+' grade)'}</div>
         ${vocabHTML}
         ${academicsHTML}
+        ${editWsBtnHTML}
       </div>
     </div>`;
   }).join('');
@@ -5260,6 +5270,39 @@ function dayRowHTML(dateObj, wordOfDay, isTest, rowId){
 /* ---- Archived day loader + prev/next browsing ---- */
 let archiveDateList = [];   // sorted 'YYYY-MM-DD' strings that have a saved snapshot
 let archiveNavIdx = -1;      // position of the day currently open in the lightbox
+
+/* Open a PREVIOUS day's worksheet in the editor (from the Planner's day
+   view) so missed or unfinished work can be completed and its score
+   recorded for that date. Loads that day's saved answers and checks;
+   saving and grade recording key off the worksheet context date. */
+async function openPastWorksheet(dateStr, studentId, subject){
+  const student = state.students.find(s=>s.id===studentId);
+  if(!student) return;
+  const parts = dateStr.split('-').map(Number);
+  const dateObj = new Date(parts[0], parts[1]-1, parts[2], 12);
+  const wd = dateObj.getDay();
+  document.getElementById('dayLightboxOverlay').classList.remove('open');
+  if(subject === 'friday'){
+    const wkNum = (typeof mm52WeekForDate === 'function') ? mm52WeekForDate(dateObj) : 0;
+    const wk = wkNum >= 1 ? mm52GetWeek(wkNum, student.band || mm52BandForGrade(student.grade)) : null;
+    if(!wk || !wk.friday){ showToast('No Friday test found for that week.'); return; }
+    const fr = wk.friday;
+    const lesson = { topic: fr.title, day4: { title: fr.title, reading: fr.reading || '', worksheet: { groups: fr.groups || [] } } };
+    await openWorksheetModal('friday', lesson, studentId, 5, 4, dateStr);
+    return;
+  }
+  let lesson = null;
+  const wkNum = (typeof mm52WeekForDate === 'function') ? mm52WeekForDate(dateObj) : 0;
+  if(wkNum >= 1 && typeof mm52LessonForStudent === 'function'){
+    lesson = mm52LessonForStudent(student, wkNum, subject === 'history' ? 'History' : 'Science');
+  }
+  if(!lesson){
+    const aw = actualWeekForDate(dateObj);
+    lesson = subject === 'history' ? await getHistoryWeek(aw) : await getScienceWeek(aw);
+  }
+  if(!lesson){ showToast('No lesson found for that day.'); return; }
+  await openWorksheetModal(subject, lesson, studentId, wd, undefined, dateStr);
+}
 
 async function openArchivedDay(dstr){
   if(!dstr) return;
@@ -5545,6 +5588,9 @@ function openDayLightbox(dateObj, content, checks, weekWords, isUpcoming, wsResp
       if(!wasOpen) card.classList.add('open');
     });
   });
+  contentEl.querySelectorAll('[data-editws]').forEach(btn=>{
+    btn.addEventListener('click', ()=> openPastWorksheet(btn.dataset.date, btn.dataset.editws, btn.dataset.subject));
+  });
   document.getElementById('dayLightboxOverlay').classList.add('open');
 
   const dlBtn = document.getElementById('downloadDayImg');
@@ -5818,6 +5864,15 @@ function applyWorksheetGate(studentId, subject, wd, forceDayNum){
   const cols = document.querySelector('#worksheetOverlay .ws-cols');
   const util = document.getElementById('wsUtilBar');
   if(!gateEl) return;
+  // Editing a previous day (from the Planner): no caution/video gate —
+  // the work is being completed or fixed after the fact.
+  if(typeof currentWorksheetCtx !== 'undefined' && currentWorksheetCtx && currentWorksheetCtx.dateStr && currentWorksheetCtx.dateStr !== state.dateStr){
+    stopGateTracking();
+    gateEl.style.display = 'none'; gateEl.innerHTML = '';
+    if(cols) cols.style.display = '';
+    if(util) util.style.display = 'block';
+    return;
+  }
   const st = state.students.find(s=>s.id===studentId);
   const gate = wsGateCache[studentId] || (wsGateCache[studentId] = {});
   const video = (!forceDayNum && st) ? gateVideoFor(st, subject, wd) : null;
