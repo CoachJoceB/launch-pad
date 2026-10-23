@@ -867,19 +867,39 @@ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
 const SUPABASE_CONFIGURED = !SUPABASE_URL.includes('YOUR_SUPABASE_URL') && !SUPABASE_ANON_KEY.includes('YOUR_SUPABASE_ANON_KEY');
 const sb = (SUPABASE_CONFIGURED && typeof supabase !== 'undefined') ? supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
 
+// Race a cloud call against a timeout. On a flaky phone connection a
+// single request can stall forever; without this, one stalled read hangs
+// the entire load and the family just sees the error card.
+function withCallTimeout(promise, ms, label){
+  let timer;
+  const timeout = new Promise((_, reject)=>{ timer = setTimeout(()=>reject(new Error('storage timeout: ' + label)), ms); });
+  return Promise.race([promise, timeout]).finally(()=> clearTimeout(timer));
+}
+async function storageGetOnce(key){
+  const {data, error} = await withCallTimeout(
+    sb.from('command_center').select('value').eq('key',key).maybeSingle(), 9000, 'get ' + key);
+  if(error) throw error;
+  return data ? data.value : null;
+}
 async function storageGet(key){
   if(!sb) return null;
   try{
-    const {data, error} = await sb.from('command_center').select('value').eq('key',key).maybeSingle();
-    if(error) throw error;
-    return data ? data.value : null;
-  }catch(e){ console.error('storage get failed', e); return null; }
+    return await storageGetOnce(key);
+  }catch(e){
+    // One retry on a fresh attempt — a transient stall or dropped
+    // connection usually succeeds the second time.
+    console.warn('storage get retrying', key, e && e.message);
+    await new Promise(r=> setTimeout(r, 700));
+    try{ return await storageGetOnce(key); }
+    catch(e2){ console.error('storage get failed', e2); return null; }
+  }
 }
 async function storageSet(key,value){
   if(!isUnlocked()){ console.warn('storage write blocked: board is locked'); return false; }
   if(!sb) return false;
   try{
-    const {error} = await sb.from('command_center').upsert({ key, value, updated_at: new Date().toISOString() });
+    const {error} = await withCallTimeout(
+      sb.from('command_center').upsert({ key, value, updated_at: new Date().toISOString() }), 12000, 'set ' + key);
     if(error) throw error;
     return true;
   }catch(e){ console.error('storage set failed', e); return false; }
@@ -887,12 +907,13 @@ async function storageSet(key,value){
 async function storageDelete(key){
   if(!isUnlocked()){ console.warn('storage delete blocked: board is locked'); return; }
   if(!sb) return;
-  try{ await sb.from('command_center').delete().eq('key',key); }catch(e){ console.error('storage delete failed', e); }
+  try{ await withCallTimeout(sb.from('command_center').delete().eq('key',key), 12000, 'delete ' + key); }catch(e){ console.error('storage delete failed', e); }
 }
 async function storageList(prefix){
   if(!sb) return [];
   try{
-    const {data, error} = await sb.from('command_center').select('key').like('key', prefix+'%');
+    const {data, error} = await withCallTimeout(
+      sb.from('command_center').select('key').like('key', prefix+'%'), 12000, 'list ' + prefix);
     if(error) throw error;
     return (data||[]).map(r=>r.key);
   }catch(e){ console.error('storage list failed', e); return []; }
@@ -1339,9 +1360,15 @@ let state = {
 let collapseState = {}; // in-memory only, per session
 
 async function loadAll(){
-  state.timezone = (await storageGet(TIMEZONE_KEY)) || defaultTimezone();
-  state.contentWeeks = (await storageGet(CONTENT_WEEKS_KEY)) || defaultContentWeeks();
-  const rawStudents = (await storageGet(STUDENTS_KEY)) || defaultStudents();
+  // Independent reads run together — the sequential version made a slow
+  // connection do a dozen round trips before anything could render.
+  const [tzVal, cwVal, rawStudentsVal, labelsVal, buzzerVal, maxTriesVal] = await Promise.all([
+    storageGet(TIMEZONE_KEY), storageGet(CONTENT_WEEKS_KEY), storageGet(STUDENTS_KEY),
+    storageGet(LABELS_KEY), storageGet(BUZZER_KEY), storageGet(MAX_TRIES_KEY)
+  ]);
+  state.timezone = tzVal || defaultTimezone();
+  state.contentWeeks = cwVal || defaultContentWeeks();
+  const rawStudents = rawStudentsVal || defaultStudents();
   state.students = rawStudents.map(normalizeStudent);
   // Personal Info / Phone Numbers sections default to collapsed to save
   // screen space; only set the default once per session so a manual expand
@@ -1350,14 +1377,14 @@ async function loadAll(){
     if(!(s.id+'-info' in collapseState)) collapseState[s.id+'-info'] = true;
     if(!(s.id+'-phone' in collapseState)) collapseState[s.id+'-phone'] = true;
   });
-  state.fieldLabels = (await storageGet(LABELS_KEY)) || defaultFieldLabels();
-  state.buzzerTime = (await storageGet(BUZZER_KEY)) || defaultBuzzerTime();
-  state.maxTries = (await storageGet(MAX_TRIES_KEY)) || defaultMaxTries();
+  state.fieldLabels = labelsVal || defaultFieldLabels();
+  state.buzzerTime = buzzerVal || defaultBuzzerTime();
+  state.maxTries = maxTriesVal || defaultMaxTries();
   // Each student's subject order is independent, keyed by student id.
   state.subjectOrders = {};
-  for(const s of state.students){
+  await Promise.all(state.students.map(async (s)=>{
     state.subjectOrders[s.id] = (await storageGet(subjectOrderKey(s.id))) || [];
-  }
+  }));
 
   const now = new Date();
   state.schoolDate = getSchoolDate(now);
@@ -1399,10 +1426,11 @@ async function loadAll(){
   }
   state.cycleStartMonday = cycleStart;
 
-  state.todayOverride = await storageGet(dayKey(dstr));
+  const [overrideVal, checksVal] = await Promise.all([ storageGet(dayKey(dstr)), storageGet(checksKey(dstr)) ]);
+  state.todayOverride = overrideVal;
   // checks is keyed by studentId -> {subjectId: bool}, so each kid has
   // independent completion tracking for their own academics.
-  state.checks = (await storageGet(checksKey(dstr))) || {};
+  state.checks = checksVal || {};
   state.students.forEach(s=>{ if(!state.checks[s.id]) state.checks[s.id] = {}; });
 
   // AUTO-SAVE: the first time a school day is viewed, snapshot the ENTIRE
@@ -6317,7 +6345,7 @@ function bootApp(){
   // Never strand on the loader: if the cloud fetch hangs or fails, show an
   // error card with a retry instead of "Loading Plan…" forever.
   (async function initialLoad(){
-    const timeout = new Promise((_, reject)=> setTimeout(()=>reject(new Error('load timeout')), 25000));
+    const timeout = new Promise((_, reject)=> setTimeout(()=>reject(new Error('load timeout')), 45000));
     try{
       await Promise.race([loadAndRender(), timeout]);
     }catch(e){
