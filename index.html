@@ -5397,8 +5397,9 @@ function showToast(msg){
 })();
 
 /* ========================= LIVE TYPING =========================
-   Google-Docs-style live view: while a student types in a worksheet (or a
-   current-event box on the board), the text streams over a Supabase
+   Google-Docs-style live view: while a student types in a worksheet, a
+   current-event box on the board, or the Friday test form, the text
+   streams over a Supabase
    Realtime broadcast channel to every other open dashboard, where it
    appears in the same field instantly. The sender's own autosave still
    persists the work; this only mirrors it live. A small badge shows who
@@ -5443,6 +5444,28 @@ function applyLiveField(p){
   } else if(p.kind === 'ce'){
     const el = document.querySelector('[data-cefield="' + CSS.escape(p.field) + '"][data-student="' + CSS.escape(p.studentId) + '"]');
     if(el && document.activeElement !== el) el.value = p.value;
+  } else if(p.kind === 'test'){
+    // Friday test form: only the on-screen student's form can be mirrored
+    // into (the form shows one student at a time).
+    if(typeof activeTestStudentId === 'undefined' || activeTestStudentId !== p.studentId) return;
+    const el = document.querySelector('#testFormArea [data-testfield="' + CSS.escape(p.field) + '"]');
+    if(el && document.activeElement !== el){ el.value = p.value; if(typeof autoGrow === 'function') autoGrow(el); }
+    const entry = testCache[p.studentId];
+    if(entry && entry.answers){
+      const parts = (p.field || '').split('-');
+      const idxMaybe = parts[parts.length-1];
+      const isIndexed = /^\d+$/.test(idxMaybe);
+      const field = isIndexed ? parts[parts.length-2] : parts[parts.length-1];
+      const idx = isIndexed ? +idxMaybe : null;
+      if(field==='vocab') entry.answers.vocab[idx] = p.value;
+      else if(field==='fl') entry.answers.financialLit[idx] = p.value;
+      else if(field==='sc') entry.answers.statesCapitals[idx] = p.value;
+      else if(field==='funFact') entry.answers.funFact = p.value;
+      else if(field==='currentEvent') entry.answers.currentEvent = p.value;
+      else if(field==='history') entry.answers.history = p.value;
+      else if(field==='science') entry.answers.science = p.value;
+      else if(field==='scenario') entry.answers.scenario = p.value;
+    }
   }
 }
 const liveSendState = {};
@@ -5477,6 +5500,11 @@ document.addEventListener('input', (e)=>{
       field: el.dataset.wsfield, value: el.value });
   } else if(el.dataset.cefield){
     sendLiveField({ cid: LIVE_CID, kind: 'ce', studentId: el.dataset.student, dateStr: state.dateStr, field: el.dataset.cefield, value: el.value });
+  } else if(el.dataset.testfield && el.closest && el.closest('#testFormArea')){
+    // Friday test form (shows one student at a time: the active tab).
+    if(typeof activeTestStudentId !== 'undefined' && activeTestStudentId){
+      sendLiveField({ cid: LIVE_CID, kind: 'test', studentId: activeTestStudentId, dateStr: state.dateStr, field: el.dataset.testfield, value: el.value });
+    }
   }
 }, true);
 
