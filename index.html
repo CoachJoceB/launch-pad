@@ -1376,6 +1376,7 @@ async function loadAll(){
   state.students.forEach(s=>{
     if(!(s.id+'-info' in collapseState)) collapseState[s.id+'-info'] = true;
     if(!(s.id+'-phone' in collapseState)) collapseState[s.id+'-phone'] = true;
+    if(!(s.id+'-grades' in collapseState)) collapseState[s.id+'-grades'] = true;
   });
   state.fieldLabels = labelsVal || defaultFieldLabels();
   state.buzzerTime = buzzerVal || defaultBuzzerTime();
@@ -2182,6 +2183,7 @@ async function renderBoardInner(){
 
     const infoCollapsed = collapseState[s.id+'-info'] ? 'collapsed' : '';
     const phoneCollapsed = collapseState[s.id+'-phone'] ? 'collapsed' : '';
+    const gradesCollapsed = collapseState[s.id+'-grades'] ? 'collapsed' : '';
     // Hide the Personal Info / Phone sections entirely when nothing is filled in,
     // so the card never renders rows of empty "—" placeholders.
     const hasInfo = !!((s.addr && (s.addr.a1 || s.addr.a2 || s.addr.a3)));
@@ -2293,6 +2295,12 @@ async function renderBoardInner(){
         ${vocabHTML}
         ${currentEventFieldsHTML}
         ${academicsHTML}
+        <div class="collapse-head" data-collapse="${s.id}-grades">
+          <div class="mini-lbl">My Grades</div><div class="chevron ${gradesCollapsed}">▾</div>
+        </div>
+        <div class="collapse-body ${gradesCollapsed}" data-collapsebody="${s.id}-grades">
+          ${gradesSectionHTML(s)}
+        </div>
       </div>
     </div>`;
   }).join('');
@@ -2471,7 +2479,15 @@ async function renderBoardInner(){
         const studentId = el.dataset.student;
         const key = el.dataset.subj;
         if(!state.checks[studentId]) state.checks[studentId] = {};
-        state.checks[studentId][key] = !state.checks[studentId][key];
+        const turningOn = !state.checks[studentId][key];
+        if(key === 'math' && turningOn){
+          const res = await promptMathScore(studentId);
+          if(res === null) return; // cancelled: leave the check as it was
+          if(res && typeof res.pct === 'number'){
+            await recordGrade(studentId, { date: state.dateStr, subject: 'math', label: 'Math (external site)', pct: res.pct, source: 'math-manual' });
+          }
+        }
+        state.checks[studentId][key] = turningOn;
         await storageSet(checksKey(state.dateStr), state.checks);
       }
       await renderBoard();
@@ -2625,6 +2641,10 @@ async function openUpcomingDayPreview(dateObj, targetContainer){
     // snapshot, today's checkmarks, or this week's Friday test words.
     state.todayOverride = await storageGet(dayKey(state.dateStr));
     state.checks = (await storageGet(checksKey(state.dateStr))) || {};
+  state.gradebook = {};
+  await Promise.all(state.students.map(async (s)=>{
+    state.gradebook[s.id] = (await storageGet(gradebookKey(s.id))) || { entries: {} };
+  }));
     if(d.getDay() === 5){
       try { state.weekWords = await computeWeekWordsFor(mondayOfWeek(d)); } catch(e){}
     }
@@ -2912,6 +2932,7 @@ function renderTestFormHTML(student, entry){
           <span>${esc(s.state)}</span>
           <input type="text" data-testfield="${p}-sc-${i}" value="${escAttr(answers.statesCapitals[i]||'')}" placeholder="Capital" style="width:160px;padding:6px 8px;border:1.5px solid var(--line-light);border-radius:6px;font-family:'Oswald',sans-serif;">
         </div>`).join('') || '<p style="color:var(--ink-soft);font-size:13px;">Nothing logged this week yet.</p>'}
+      ${test.statesCapitals.length && test.statesCapitals.every((_,i)=> (answers.statesCapitals[i]||'').trim()) ? `<div style="font-size:12.5px;margin-top:6px;font-weight:700;color:var(--ink-soft);">Score: ${test.statesCapitals.reduce((n,sc2,i)=> n + (autoGrade(answers.statesCapitals[i], sc2.answer) ? 1 : 0), 0)} of ${test.statesCapitals.length} correct \u00B7 saved to your grades</div>` : ''}
       <label style="margin-top:10px;">Bonus: one fun fact about any state above</label>
       <textarea data-testfield="${p}-funFact" style="width:100%;min-height:44px;padding:8px;border:1.5px solid var(--line-light);border-radius:8px;font-family:'Oswald',sans-serif;font-size:13.5px;">${esc(answers.funFact||'')}</textarea>
     </div>
@@ -2935,6 +2956,25 @@ function renderTestFormHTML(student, entry){
   `;
 }
 
+// The Friday test form's auto-graded sections (states & capitals, and
+// financial lit when the item carries an answer key): once every item in
+// a section is answered, its score is recorded in the gradebook.
+function maybeRecordTestObjectiveScores(studentId){
+  const entry = testCache[studentId];
+  if(!entry || !entry.test || !entry.answers) return;
+  const t = entry.test, a = entry.answers;
+  if(t.statesCapitals && t.statesCapitals.length && t.statesCapitals.every((_,i)=> (a.statesCapitals[i]||'').trim())){
+    const c = t.statesCapitals.reduce((n,s2,i)=> n + (autoGrade(a.statesCapitals[i], s2.answer) ? 1 : 0), 0);
+    recordGrade(studentId, { date: state.dateStr, subject: 'states', label: 'Friday test', pct: Math.round(c/t.statesCapitals.length*100), source: 'friday-form' });
+  }
+  const keyedIdx = [];
+  (t.financialLit||[]).forEach((f,i)=>{ if((f.answer||'').trim()) keyedIdx.push(i); });
+  if(keyedIdx.length && keyedIdx.every(i=> (a.financialLit[i]||'').trim())){
+    const c = keyedIdx.reduce((n,i)=> n + (autoGrade(a.financialLit[i], t.financialLit[i].answer) ? 1 : 0), 0);
+    recordGrade(studentId, { date: state.dateStr, subject: 'financiallit', label: 'Friday test', pct: Math.round(c/keyedIdx.length*100), source: 'friday-form' });
+  }
+}
+
 function wireTestFormInputs(container, studentId){
   container.querySelectorAll('[data-testfield]').forEach(el=>{
     el.addEventListener('input', ()=>{
@@ -2955,6 +2995,7 @@ function wireTestFormInputs(container, studentId){
       else if(field==='scenario') entry.answers.scenario = el.value;
       clearTimeout(testInputSaveTimers[studentId]);
       testInputSaveTimers[studentId] = setTimeout(()=> saveTestAnswers(studentId), 600);
+      maybeRecordTestObjectiveScores(studentId);
     });
     el.addEventListener('change', async ()=>{
       const key = el.dataset.testfield; // e.g. test-<id>-vocab-0 / test-<id>-currentEvent
@@ -2975,6 +3016,7 @@ function wireTestFormInputs(container, studentId){
       else if(field==='science') entry.answers.science = el.value;
       else if(field==='scenario') entry.answers.scenario = el.value;
       await saveTestAnswers(studentId);
+      maybeRecordTestObjectiveScores(studentId);
       if(field==='fl'){
         // live re-grade indicator without a full re-render
         const f = entry.test.financialLit[idx];
@@ -2987,6 +3029,7 @@ function wireTestFormInputs(container, studentId){
       }
     });
   });
+  maybeRecordTestObjectiveScores(studentId);
 }
 
 async function renderTestSection(){
@@ -3085,6 +3128,136 @@ function worksheetAnswersKey(dateStr, studentId, subject){ return 'worksheet-ans
 function wsGateKey(dateStr, studentId, subject){ return 'worksheet-gate:'+dateStr+':'+subject+':'+studentId; }
 function worksheetGradesKey(dateStr, studentId, subject){ return 'worksheet-grades:'+dateStr+':'+subject+':'+studentId; }
 
+/* Math happens on an external site, so when a student checks Math off
+   for the day they type in the score they earned there. Resolves with
+   {pct} on save, 'skip' to complete without a score, or null to cancel
+   (the check is left as it was). */
+function promptMathScore(studentId){
+  return new Promise((resolve)=>{
+    const s = (state.students||[]).find(x=>x.id===studentId);
+    const name = s ? firstName(s.name) : 'Student';
+    const gb = (state.gradebook || {})[studentId];
+    let existing = '';
+    if(gb && gb.entries){
+      const e = gb.entries[state.dateStr + '|math|math-manual'];
+      if(e) existing = e.pct;
+    }
+    const overlay = document.createElement('div');
+    overlay.className = 'modal-overlay open';
+    overlay.innerHTML = '<div class="modal" style="max-width:420px;">'
+      + '<h3 style="margin-top:0;">Math score</h3>'
+      + '<p style="font-size:13.5px;color:var(--ink-soft);">Enter ' + esc(name) + '\u2019s math score for today from the math site, then Math will be marked complete.</p>'
+      + '<label>Score (percent)</label>'
+      + '<input type="number" id="mathScoreInput" min="0" max="100" step="1" inputmode="numeric" value="' + existing + '" placeholder="0\u2013100" style="width:100%;padding:10px;border:1.5px solid var(--line-light);border-radius:8px;font-family:\'Oswald\',sans-serif;font-size:16px;">'
+      + '<div style="display:flex;gap:8px;margin-top:14px;flex-wrap:wrap;">'
+      + '<button type="button" class="btn btn-primary" id="mathScoreSave">Save score &amp; complete</button>'
+      + '<button type="button" class="btn btn-ghost" id="mathScoreSkip">Skip score</button>'
+      + '<button type="button" class="btn btn-ghost" id="mathScoreCancel">Cancel</button>'
+      + '</div></div>';
+    document.body.appendChild(overlay);
+    const done = (val)=>{ overlay.remove(); resolve(val); };
+    overlay.querySelector('#mathScoreSave').addEventListener('click', ()=>{
+      const v = parseFloat(overlay.querySelector('#mathScoreInput').value);
+      if(isNaN(v)){ done('skip'); return; }
+      done({ pct: Math.max(0, Math.min(100, Math.round(v))) });
+    });
+    overlay.querySelector('#mathScoreSkip').addEventListener('click', ()=> done('skip'));
+    overlay.querySelector('#mathScoreCancel').addEventListener('click', ()=> done(null));
+    const inp = overlay.querySelector('#mathScoreInput');
+    if(inp){
+      inp.focus();
+      inp.addEventListener('keydown', (e)=>{ if(e.key==='Enter'){ e.preventDefault(); overlay.querySelector('#mathScoreSave').click(); } });
+    }
+  });
+}
+
+/* ========================= GRADEBOOK =========================
+   One record per student holding every scored entry: {date, subject,
+   label, pct, source}. Sources: daily worksheets (auto + self-marked),
+   the Friday review test, the Friday test form's auto-graded sections,
+   and math scores typed in when Math is checked off (math happens on an
+   external site). Subject averages and the GPA are computed from the
+   entries, never stored, so corrections just work. */
+function gradebookKey(studentId){ return 'gradebook:' + studentId; }
+const GRADE_SUBJECT_LABELS = { math:'Math', history:'History', science:'Science', states:'States & Capitals', financiallit:'Financial Lit', vocabulary:'Vocabulary', reading:'Reading' };
+function gradeLetter(pct){ return pct>=90?'A':pct>=80?'B':pct>=70?'C':pct>=60?'D':'F'; }
+function gradePoints(pct){ return pct>=90?4:pct>=80?3:pct>=70?2:pct>=60?1:0; }
+async function loadGradebook(studentId){
+  state.gradebook = state.gradebook || {};
+  if(!state.gradebook[studentId]){
+    // Claim the slot synchronously so two recordGrade calls in the same
+    // tick share ONE object instead of racing separate copies.
+    const fresh = { entries: {} };
+    state.gradebook[studentId] = fresh;
+    const stored = await storageGet(gradebookKey(studentId));
+    if(stored && stored.entries) fresh.entries = stored.entries;
+  }
+  if(!state.gradebook[studentId].entries) state.gradebook[studentId].entries = {};
+  return state.gradebook[studentId];
+}
+async function recordGrade(studentId, entry){
+  try {
+    const gb = await loadGradebook(studentId);
+    const key = entry.date + '|' + entry.subject + '|' + entry.source;
+    const pct = Math.max(0, Math.min(100, Math.round(entry.pct)));
+    const prev = gb.entries[key];
+    if(prev && prev.pct === pct) return; // unchanged: skip the write
+    gb.entries[key] = { date: entry.date, subject: entry.subject, label: entry.label || '', pct: pct, source: entry.source, ts: Date.now() };
+    await storageSet(gradebookKey(studentId), gb);
+  } catch(e){ console.warn('recordGrade failed', e); }
+}
+function subjectAverages(studentId){
+  const gb = (state.gradebook || {})[studentId];
+  const bySubj = {};
+  if(gb && gb.entries){
+    Object.keys(gb.entries).forEach(k=>{
+      const en = gb.entries[k];
+      const b = bySubj[en.subject] || (bySubj[en.subject] = { sum: 0, count: 0, lastPct: null, lastDate: '' });
+      b.sum += en.pct; b.count++;
+      if(en.date >= b.lastDate){ b.lastDate = en.date; b.lastPct = en.pct; }
+    });
+  }
+  Object.keys(bySubj).forEach(k=>{ bySubj[k].avg = Math.round(bySubj[k].sum / bySubj[k].count); });
+  return bySubj;
+}
+function gpaSummary(studentId){
+  const avgs = subjectAverages(studentId);
+  const subjects = Object.keys(avgs);
+  if(!subjects.length) return null;
+  const overall = Math.round(subjects.reduce((a,k)=>a+avgs[k].avg,0) / subjects.length);
+  const gpa = subjects.reduce((a,k)=>a+gradePoints(avgs[k].avg),0) / subjects.length;
+  return { subjects: subjects.length, overall: overall, gpa: (Math.round(gpa*100)/100).toFixed(2) };
+}
+function gradesSectionHTML(s){
+  const avgs = subjectAverages(s.id);
+  const sum = gpaSummary(s.id);
+  if(!sum){
+    return '<p style="font-size:12.5px;color:var(--ink-soft);margin:2px 0;">No grades recorded yet. Finish a worksheet or a Friday test and your scores will show up here.</p>';
+  }
+  const order = ['math','history','science','vocabulary','financiallit','states','reading'];
+  const keys = Object.keys(avgs).sort((a,b)=>{
+    const ia = order.indexOf(a), ib = order.indexOf(b);
+    return (ia<0?99:ia) - (ib<0?99:ib);
+  });
+  return keys.map(k=>'<div class="info-line"><span>' + esc(GRADE_SUBJECT_LABELS[k]||k) + '</span><span><strong>' + avgs[k].avg + '% (' + gradeLetter(avgs[k].avg) + ')</strong> <span style="color:var(--ink-soft);font-size:11.5px;">\u00B7 ' + avgs[k].count + ' grade' + (avgs[k].count===1?'':'s') + ' \u00B7 last ' + avgs[k].lastPct + '%</span></span></div>').join('')
+    + '<div class="info-line" style="border-top:2px solid var(--line-light);margin-top:4px;padding-top:6px;"><span><strong>GPA</strong></span><span><strong>' + sum.gpa + '</strong> <span style="color:var(--ink-soft);font-size:11.5px;">\u00B7 overall average ' + sum.overall + '%</span></span></div>';
+}
+
+// Worksheet score from the student's check state: auto-graded items carry
+// the engine's marks, written items carry the student's honest self-marks.
+// Checklist and tap-to-reveal parts are practice, not graded.
+function wsWorksheetScore(entry, checks){
+  const groups = entry._requiredGroups || (entry.worksheet && entry.worksheet.groups) || [];
+  let ok = 0, bad = 0;
+  groups.forEach(g=>{
+    if(g.type==='checklist' || g.type==='reveal') return;
+    const items = (entry._isLight && g.itemsLight) ? g.itemsLight : (g.items||[]);
+    items.forEach(it=>{ if(checks[it.id]==='ok') ok++; else if(checks[it.id]==='bad') bad++; });
+  });
+  if(ok + bad === 0) return null;
+  return { pct: Math.round(ok/(ok+bad)*100), ok: ok, total: ok + bad };
+}
+
 function defaultWorksheetAnswers(worksheet){
   const answers = {};
   (worksheet.groups||[]).forEach((g,gi)=>{ (g.items||[]).forEach(it=>{ answers['ws-g'+gi+'-'+it.id] = ''; }); });
@@ -3163,6 +3336,9 @@ function wsCorrectText(group, item){
 }
 
 const WS_AUTO_TYPES = ['fillblank','matching','truefalse','choice','order','interactive'];
+// Written-response sections: not auto-graded. Check reveals the model
+// answer and the student self-marks — no try limit, never locked.
+const WS_SELF_MARK_TYPES = ['shortanswer','comprehension','writing','essay','argument','vocabwrite'];
 
 function wsItemValue(group, item, container, entry){
   const field = group._fieldPrefix + item.id;
@@ -3208,6 +3384,21 @@ function wsUpdateProgress(container, worksheet, entry, checks){
   const bEl = container.querySelector('[data-wsbar]');
   if(pEl) pEl.textContent = done + ' of ' + total + ' parts done' + (done===total && total ? ' 🎉' : '');
   if(bEl) bEl.style.width = pct + '%';
+  // Fully done: record the worksheet's score in the student's gradebook.
+  // The Friday review test counts for both History and Science.
+  if(done === total && total > 0 && entry.studentId && typeof currentWorksheetCtx !== 'undefined' && currentWorksheetCtx){
+    const sc = wsWorksheetScore(entry, checks);
+    if(sc){
+      const subj = currentWorksheetCtx.subject;
+      const dstr = currentWorksheetCtx.dateStr || state.dateStr;
+      if(subj === 'friday'){
+        recordGrade(entry.studentId, { date: dstr, subject: 'history', label: 'Friday review test', pct: sc.pct, source: 'friday-review' });
+        recordGrade(entry.studentId, { date: dstr, subject: 'science', label: 'Friday review test', pct: sc.pct, source: 'friday-review' });
+      } else if(subj === 'history' || subj === 'science'){
+        recordGrade(entry.studentId, { date: dstr, subject: subj, label: (currentWorksheetCtx.lesson && currentWorksheetCtx.lesson.topic) || '', pct: sc.pct, source: 'worksheet' });
+      }
+    }
+  }
 }
 
 function renderWorksheetFormHTML(entry, checks){
@@ -3958,7 +4149,7 @@ function wsRunGroupCheck(container, studentId, gi){
   const g = worksheet.groups[gi];
   const groupEl = container.querySelector('[data-wsgroup="'+gi+'"]');
   const attemptsKey = '__attempts_'+gi;
-  const isShort = g.type==='shortanswer';
+  const isShort = WS_SELF_MARK_TYPES.indexOf(g.type) !== -1;
   // Try limit on auto-graded parts (short answer is self-marked, no limit).
   const maxTries = wsMaxTries();
   let attemptsUsed = checks[attemptsKey] || 0;
@@ -3971,7 +4162,7 @@ function wsRunGroupCheck(container, studentId, gi){
   let okCount = 0, badCount = 0, skipCount = 0;
   (g.items||[]).forEach(it=>{
     wsCheckSeq[it.id] = ++wsSeq;
-    if(g.type==='shortanswer'){
+    if(WS_SELF_MARK_TYPES.indexOf(g.type) !== -1){
       const model = container.querySelector('[data-wsmodel="'+it.id+'"]');
       if(model) model.style.display = 'block';
       const v = wsItemValue(g, it, container, entry);
@@ -4018,7 +4209,7 @@ function wsRunGroupCheck(container, studentId, gi){
   const total = (g.items||[]).length;
   const resEl = groupEl ? groupEl.querySelector('[data-wsresult="'+gi+'"]') : null;
   if(resEl){
-    if(g.type==='shortanswer'){
+    if(isShort){
       resEl.innerHTML = '<span style="color:var(--ink-soft);">Model answers are showing — mark each one honestly.</span>';
     } else if(skipCount===total){
       // A fully-blank check still counts as a try, but let the kid answer
