@@ -2734,6 +2734,23 @@ function testGradesKey(dateStr, studentId){ return 'test-grades:'+dateStr+':'+st
 function normAnswer(s){ return (s||'').trim().toLowerCase().replace(/\s+/g,' '); }
 function autoGrade(given, expected){ return normAnswer(given) === normAnswer(expected) && normAnswer(given)!==''; }
 
+// A real Friday question for the week's money concept, generated from the
+// concept itself: compare for "X vs Y", answer for question-shaped
+// concepts, explain-and-example for the rest.
+function finQuestionFor(concept){
+  const c = (concept || '').trim();
+  if(/^celebration/i.test(c)) return 'Look back at your money year: what is the most important money lesson you learned, and what is one money goal you have for next year?';
+  const vs = c.match(/^(.*?)\s+vs\.?\s+(.*)$/i);
+  if(vs){
+    let a = vs[1].trim(), b = vs[2].trim().toLowerCase();
+    const colon = a.lastIndexOf(': ');
+    if(colon > 0) return 'What is the difference between ' + a.slice(colon + 2).toLowerCase() + ' and ' + b + ' ' + a.slice(0, colon).toLowerCase() + '? Give an example of each from your own life.';
+    return 'What is the difference between ' + a.toLowerCase() + ' and ' + b + '? Give an example of each from your own life.';
+  }
+  if(/\?$/.test(c)) return 'In your own words: ' + c + ' Give an example from your own life.';
+  return 'Explain ' + c.toLowerCase() + ' in your own words, and give one example from your own life.';
+}
+
 async function buildWeeklyTest(studentGrade, mon, studentId){
   // 52-week era: every section comes from THIS week's 52-week material —
   // the same content the students saw Mon-Thu — not the legacy cycle.
@@ -2744,7 +2761,7 @@ async function buildWeeklyTest(studentGrade, mon, studentId){
     const devoWk = (typeof MM_DEVOTIONAL_52 !== 'undefined') ? MM_DEVOTIONAL_52.find(x=>x.w===eraW) : null;
     const vocab = (devoWk && devoWk.words) ? devoWk.words.map(x=>({ word: x.word })) : [];
     const fin52 = (typeof mm52Financial === 'function') ? mm52Financial(eraW, 1) : null;
-    const financialLit = (fin52 && fin52.concept) ? [{ concept: fin52.concept, blank: fin52.explanation, answer: '' }] : [];
+    const financialLit = (fin52 && fin52.concept) ? [{ concept: fin52.concept, blank: fin52.explanation, question: finQuestionFor(fin52.concept), answer: '' }] : [];
     const st52 = (typeof mm52States === 'function') ? mm52States(eraW) : null;
     let statesCapitals = [];
     if(st52 && !st52.review) statesCapitals = [{ state: st52.state, answer: st52.capital }];
@@ -2812,6 +2829,8 @@ function defaultTestAnswers(){
 }
 
 let testCache = {}; // studentId -> {test, answers} while the Friday board is open
+let activeTestStudentId = null; // Friday test tab currently open — survives re-renders
+const testInputSaveTimers = {}; // debounced autosave while typing in the test form
 
 async function loadTestForStudent(student){
   const mon = mondayOfWeek(state.schoolDate);
@@ -2820,7 +2839,15 @@ async function loadTestForStudent(student){
   while(saved.vocab.length < test.vocab.length) saved.vocab.push('');
   while(saved.financialLit.length < test.financialLit.length) saved.financialLit.push('');
   while(saved.statesCapitals.length < test.statesCapitals.length) saved.statesCapitals.push('');
-  testCache[student.id] = { test, answers: saved };
+  // A board re-render (sync poll, another device) reloads answers from
+  // storage; merge in this session's in-memory answers for the same day
+  // so typing that has not been saved yet is never lost.
+  const prev = testCache[student.id];
+  if(prev && prev.dateStr === state.dateStr && prev.answers){
+    ['vocab','financialLit','statesCapitals'].forEach(k=>{ (prev.answers[k]||[]).forEach((v,i)=>{ if(v) saved[k][i] = v; }); });
+    ['funFact','currentEvent','history','science','scenario'].forEach(k=>{ if(prev.answers[k]) saved[k] = prev.answers[k]; });
+  }
+  testCache[student.id] = { test, answers: saved, dateStr: state.dateStr };
   return testCache[student.id];
 }
 
@@ -2858,9 +2885,17 @@ function renderTestFormHTML(student, entry){
       <textarea class="autogrow" data-testfield="${p}-currentEvent" style="min-height:50px;padding:8px;border:1.5px solid var(--line-light);border-radius:8px;font-family:'Oswald',sans-serif;font-size:13.5px;">${esc(answers.currentEvent||'')}</textarea>
     </div>
     <div class="card" style="margin-bottom:12px;">
-      <div class="mini-lbl" style="margin-top:0;">Financial Lit — fill in the blank</div>
+      <div class="mini-lbl" style="margin-top:0;">${test.financialLit.some(f=>f.question) ? 'Financial Lit' : 'Financial Lit — fill in the blank'}</div>
       ${test.financialLit.map((f,i)=>{
         const given = answers.financialLit[i]||'';
+        if(f.question){
+          return `<div style="margin-bottom:10px;padding-bottom:8px;border-bottom:1px dashed var(--line-light);">
+          <div style="font-size:13px;color:var(--ink-soft);font-weight:700;">${esc(f.concept)}</div>
+          <p style="font-size:13.5px;margin:4px 0 6px;">${esc(f.blank)}</p>
+          <p style="font-size:13.5px;margin:4px 0 6px;font-weight:600;">${esc(f.question)}</p>
+          <textarea class="autogrow" data-testfield="${p}-fl-${i}" placeholder="Your answer" style="width:100%;min-height:50px;padding:8px;border:1.5px solid var(--line-light);border-radius:8px;font-family:'Oswald',sans-serif;font-size:13.5px;">${esc(given)}</textarea>
+        </div>`;
+        }
         const graded = given ? (autoGrade(given,f.answer) ? '✓ correct' : '') : '';
         return `<div style="margin-bottom:10px;padding-bottom:8px;border-bottom:1px dashed var(--line-light);">
           <div style="font-size:13px;color:var(--ink-soft);font-weight:700;">${esc(f.concept)}</div>
@@ -2902,6 +2937,25 @@ function renderTestFormHTML(student, entry){
 
 function wireTestFormInputs(container, studentId){
   container.querySelectorAll('[data-testfield]').forEach(el=>{
+    el.addEventListener('input', ()=>{
+      const entry = testCache[studentId];
+      if(!entry) return;
+      const parts = el.dataset.testfield.split('-');
+      const idxMaybe = parts[parts.length-1];
+      const isIndexed = /^\d+$/.test(idxMaybe);
+      const field = isIndexed ? parts[parts.length-2] : parts[parts.length-1];
+      const idx = isIndexed ? +idxMaybe : null;
+      if(field==='vocab') entry.answers.vocab[idx] = el.value;
+      else if(field==='fl') entry.answers.financialLit[idx] = el.value;
+      else if(field==='sc') entry.answers.statesCapitals[idx] = el.value;
+      else if(field==='funFact') entry.answers.funFact = el.value;
+      else if(field==='currentEvent') entry.answers.currentEvent = el.value;
+      else if(field==='history') entry.answers.history = el.value;
+      else if(field==='science') entry.answers.science = el.value;
+      else if(field==='scenario') entry.answers.scenario = el.value;
+      clearTimeout(testInputSaveTimers[studentId]);
+      testInputSaveTimers[studentId] = setTimeout(()=> saveTestAnswers(studentId), 600);
+    });
     el.addEventListener('change', async ()=>{
       const key = el.dataset.testfield; // e.g. test-<id>-vocab-0 / test-<id>-currentEvent
       const entry = testCache[studentId];
@@ -2949,6 +3003,7 @@ function afterTestSectionRender(){
   const formArea = document.getElementById('testFormArea');
   if(!tabsWrap || !formArea) return;
   function showStudent(id){
+    activeTestStudentId = id;
     tabsWrap.querySelectorAll('.modal-tab').forEach(t=>t.classList.toggle('active', t.dataset.testtab===id));
     const student = state.students.find(s=>s.id===id);
     const entry = testCache[id];
@@ -2960,7 +3015,11 @@ function afterTestSectionRender(){
   tabsWrap.querySelectorAll('.modal-tab').forEach(t=>{
     t.addEventListener('click', ()=> showStudent(t.dataset.testtab));
   });
-  if(state.students[0]) showStudent(state.students[0].id);
+  // Reopen on the student who was being tested, not always the first —
+  // the periodic sync re-render must not yank the test back to tab one.
+  const initialTestStudent = (activeTestStudentId && state.students.some(s=>s.id===activeTestStudentId))
+    ? activeTestStudentId : (state.students[0] && state.students[0].id);
+  if(initialTestStudent) showStudent(initialTestStudent);
 }
 
 /* ========================= LESSON WORKSHEET (fillable, per student) =========================
