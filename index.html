@@ -4162,6 +4162,9 @@ function wsRunGroupCheck(container, studentId, gi){
   const worksheet = entry.worksheet;
   const g = worksheet.groups[gi];
   const groupEl = container.querySelector('[data-wsgroup="'+gi+'"]');
+  // Tapping Check scans the section's writing boxes too, so flags show up
+  // even when the typing debounce has not fired yet.
+  if(groupEl) groupEl.querySelectorAll('textarea[data-wsfield]').forEach(wsRunGrammarCheck);
   const attemptsKey = '__attempts_'+gi;
   const isShort = WS_SELF_MARK_TYPES.indexOf(g.type) !== -1;
   // Try limit on auto-graded parts (short answer is self-marked, no limit).
@@ -4369,6 +4372,9 @@ function wireWorksheetFormInputs(container, studentId){
   // Writing check: grammar/capitalization/punctuation suggestions on every
   // writing box, as the student types.
   container.querySelectorAll('textarea[data-wsfield]').forEach(wsWireGrammarCheck);
+  // Scan boxes that already have saved text: a reopened worksheet flags
+  // yesterday's writing immediately instead of waiting for new typing.
+  container.querySelectorAll('textarea[data-wsfield]').forEach(el=>{ if((el.value||'').trim()) wsRunGrammarCheck(el); });
 }
 
 /* Split a lesson reading into { text, vocab[] }: the source readings end with
@@ -5809,6 +5815,11 @@ function wsWireGrammarCheck(el){
   el.addEventListener('input', ()=>{
     clearTimeout(wsGrammarTimers[el.dataset.wsfield]);
     wsGrammarTimers[el.dataset.wsfield] = setTimeout(()=> wsRunGrammarCheck(el), 900);
+  });
+  // Leaving a box scans it right away: no waiting on the typing debounce.
+  el.addEventListener('blur', ()=>{
+    clearTimeout(wsGrammarTimers[el.dataset.wsfield]);
+    wsRunGrammarCheck(el);
   });
 }
 
