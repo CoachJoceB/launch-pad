@@ -198,14 +198,24 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
   .modal-overlay.open{display:flex;}
   .modal{background:var(--chalk);border-radius:16px;max-width:780px;width:100%;padding:26px 26px 22px;margin:auto;}
   .modal.wide{max-width:1120px;}
-  /* Worksheet modal: side-by-side reading + questions on wide screens,
-     stacked on narrow. */
-  .ws-cols{display:block;}
-  #worksheetReading{margin-bottom:12px;}
+  /* Worksheet modal: the reading stays put while ONLY the questions scroll.
+     Wide screens: reading on the left, questions on the right. Narrow
+     screens: reading in a fixed band on top, questions scrolling below it. */
+  #worksheetOverlay .modal{display:flex;flex-direction:column;height:calc(100vh - 60px);max-height:860px;overflow:hidden;}
+  #worksheetOverlay .modal-actions{flex:none;}
+  .ws-cols{display:flex;flex-direction:column;flex:1;min-height:0;gap:12px;}
+  #worksheetReading{flex:none;max-height:40vh;overflow-y:auto;margin-bottom:0;}
+  #worksheetFormArea{flex:1;min-height:0;overflow-y:auto;padding-right:2px;}
   @media (min-width:900px){
-    .ws-cols{display:grid;grid-template-columns:minmax(280px,5fr) minmax(0,7fr);gap:14px;align-items:start;}
-    #worksheetReading{position:sticky;top:0;max-height:72vh;overflow-y:auto;margin-bottom:0;}
+    .ws-cols{display:grid;grid-template-columns:minmax(280px,5fr) minmax(0,7fr);gap:14px;}
+    #worksheetReading{max-height:none;min-height:0;overflow-y:auto;}
+    #worksheetFormArea{min-height:0;overflow-y:auto;}
   }
+  /* Writing-check suggestion chips under a worksheet text box. */
+  .ws-grammar{margin-top:6px;display:flex;flex-direction:column;gap:6px;}
+  .ws-g-issue{display:flex;gap:8px;align-items:flex-start;flex-wrap:wrap;font-size:12.5px;line-height:1.45;padding:8px 10px;border:1.5px solid var(--amber);border-left:4px solid var(--amber);border-radius:8px;background:#fff8ec;}
+  .ws-g-issue .ws-g-text{flex:1;min-width:180px;}
+  .ws-g-issue .btn{font-size:12px;padding:5px 10px;}
   /* Worksheet utility bar: new words + progress + today's plan, moved to the
      top of the modal and sticky while scrolling. In-flow (never a fixed
      overlay) so it can never cover readable text. */
@@ -4356,6 +4366,9 @@ function wireWorksheetFormInputs(container, studentId){
   container.querySelectorAll('[data-wsgroup]').forEach(wsRefreshWordBank);
   // Interactive activities: wire tap-to-place (restores saved placements).
   container.querySelectorAll('[data-wsact]').forEach(actEl=>wsWireActivity(actEl));
+  // Writing check: grammar/capitalization/punctuation suggestions on every
+  // writing box, as the student types.
+  container.querySelectorAll('textarea[data-wsfield]').forEach(wsWireGrammarCheck);
 }
 
 /* Split a lesson reading into { text, vocab[] }: the source readings end with
@@ -4467,6 +4480,7 @@ async function openWorksheetModal(subject, lesson, preferredStudentId, weekdayNu
       }
     }
   });
+  wsCloseWarned = false;
   currentWorksheetCtx = { subject, lesson, dateStr: effDateStr };
   document.getElementById('worksheetTitle').textContent = materialSubjectLabel(subject) + (forceDayNum ? ' Self Test' : ' Worksheet');
   let datePrefix = '';
@@ -5619,6 +5633,17 @@ function switchModalTab(overlay, tabId){
   overlay.querySelectorAll('.tab-panel').forEach(p=>p.classList.toggle('active', p.id===tabId));
 }
 function closeAllModals(){ stopGateTracking(); document.querySelectorAll('.modal-overlay').forEach(o=>o.classList.remove('open')); }
+// Worksheet close guard: closing an unfinished worksheet asks first,
+// because grades only calculate once every part is marked done.
+const _origCloseAllModals = closeAllModals;
+closeAllModals = function(){
+  const ov = document.getElementById('worksheetOverlay');
+  if(ov && ov.classList.contains('open') && !wsCloseWarned){
+    const prog = wsCurrentProgress();
+    if(prog && prog.total > 0 && prog.done < prog.total){ wsShowClosePrompt(prog); return; }
+  }
+  _origCloseAllModals();
+};
 function showToast(msg){
   const t = document.getElementById('toast');
   t.textContent = msg; t.classList.add('show');
@@ -5662,6 +5687,130 @@ function showToast(msg){
     if(inReading(e.target)) e.preventDefault();
   }, true);
 })();
+
+/* ========================= WORKSHEET CLOSE GUARD =========================
+   Grades only calculate once every part of a worksheet is marked done, so
+   closing an unfinished worksheet asks first: keep working, or close anyway. */
+let wsCloseWarned = false;
+function wsCurrentProgress(){
+  if(typeof wsActiveStudent === 'undefined' || !worksheetCache[wsActiveStudent]) return null;
+  const entry = worksheetCache[wsActiveStudent];
+  const checks = wsChecksCache[wsActiveStudent] || {};
+  const groups = entry._requiredGroups || entry.worksheet.groups || [];
+  const done = groups.filter(g=>wsGroupDone(g, entry, checks)).length;
+  return { done: done, total: groups.length };
+}
+function wsShowClosePrompt(prog){
+  const overlay = document.createElement('div');
+  overlay.className = 'modal-overlay open';
+  overlay.innerHTML = '<div class="modal" style="max-width:440px;">'
+    + '<h3 style="margin-top:0;">Not quite done yet</h3>'
+    + '<p style="font-size:14px;line-height:1.55;">' + prog.done + ' of ' + prog.total + ' parts are marked done. Grades only calculate when every part is checked, so finish the rest first if you want this lesson to count.</p>'
+    + '<div style="display:flex;gap:8px;margin-top:14px;flex-wrap:wrap;">'
+    + '<button type="button" class="btn btn-primary" id="wsCloseKeep">Keep working</button>'
+    + '<button type="button" class="btn btn-ghost" id="wsCloseAnyway">Close anyway</button>'
+    + '</div></div>';
+  document.body.appendChild(overlay);
+  overlay.querySelector('#wsCloseKeep').addEventListener('click', ()=> overlay.remove());
+  overlay.querySelector('#wsCloseAnyway').addEventListener('click', ()=>{ overlay.remove(); wsCloseWarned = true; closeAllModals(); });
+}
+
+/* ========================= WRITING CHECK =========================
+   Private, on-device grammar/capitalization/punctuation check for the
+   worksheet's writing boxes. No text ever leaves the device (no external
+   API, no cost, works offline). Mechanical rules only — it flags what it
+   can see and never guesses at meaning — and every suggestion is approve
+   or reject, so a wrong flag costs one tap. */
+function wsGrammarIssues(text){
+  const issues = [];
+  const push = (start, len, message, replacement, original)=>{
+    issues.push({ start: start, len: len, message: message, replacement: replacement, original: original });
+  };
+  let m;
+  // Sentence-start capitalization (start of text or after . ! ?)
+  const capRe = /(^|[.!?]\s+)([a-z])/g;
+  while((m = capRe.exec(text)) !== null){
+    push(m.index + m[1].length, 1, 'Capitalization: sentences start with a capital letter.', m[2].toUpperCase(), m[2]);
+  }
+  // Standalone "i" -> "I" (also catches "i'm" -> "I'm")
+  const iRe = /\bi\b/g;
+  while((m = iRe.exec(text)) !== null){ push(m.index, 1, 'Capitalization: the word "I" is always capitalized.', 'I', 'i'); }
+  // Repeated word
+  const dblRe = /\b([A-Za-z]+) \1\b/gi;
+  while((m = dblRe.exec(text)) !== null){ push(m.index, m[0].length, 'Repeated word: "' + m[1] + '" appears twice in a row.', m[1], m[0]); }
+  // Space before punctuation
+  const spRe = /(\w) ([,.!?;:])/g;
+  while((m = spRe.exec(text)) !== null){ push(m.index, m[0].length, 'Punctuation: no space before "' + m[2] + '".', m[1] + m[2], m[0]); }
+  // Missing space after punctuation (letters only, so decimals like 3.5 are safe)
+  const msRe = /([,;:])([A-Za-z])|([.!?])([A-Z])/g;
+  while((m = msRe.exec(text)) !== null){
+    const punct = m[1] || m[3], next = m[2] || m[4];
+    push(m.index, 2, 'Punctuation: put a space after "' + punct + '".', punct + ' ' + next, punct + next);
+  }
+  // Double spaces
+  const dsRe = / {2,}/g;
+  while((m = dsRe.exec(text)) !== null){ push(m.index, m[0].length, 'Spacing: extra spaces here.', ' ', m[0]); }
+  // Missing end punctuation on a sentence-length entry
+  const trimmed = text.trim();
+  if(trimmed.length >= 20 && /[A-Za-z]/.test(trimmed) && !/[.!?]["')\]]?\s*$/.test(trimmed)){
+    push(text.length, 0, 'Punctuation: this looks like a finished sentence — end it with a period?', '.', '');
+  }
+  // Same span flagged twice (e.g. a sentence-starting "i" is both a
+  // capitalization and a standalone-"I" flag): keep the first only.
+  const seen = new Set();
+  const deduped = issues.filter(is=>{
+    const k = is.start + ':' + is.len;
+    if(seen.has(k)) return false;
+    seen.add(k);
+    return true;
+  });
+  deduped.sort((a,b)=> a.start - b.start);
+  return deduped.slice(0, 3);
+}
+function wsGrammarPreview(text, is){
+  if(is.len === 0) return 'Add "' + is.replacement + '" at the end.';
+  const start = Math.max(0, is.start - 14), end = Math.min(text.length, is.start + is.len + 14);
+  const before = text.slice(start, is.start), after = text.slice(is.start + is.len, end);
+  return '\u201C' + (start > 0 ? '\u2026' : '') + before + is.original + after + (end < text.length ? '\u2026' : '') + '\u201D \u2192 \u201C' + before + is.replacement + after + '\u201D';
+}
+const wsGrammarTimers = {};
+const wsGrammarDismissed = {}; // field -> Set of "start|original"
+function wsRunGrammarCheck(el){
+  if(!el || el.tagName !== 'TEXTAREA') return;
+  const field = el.dataset.wsfield || '';
+  const next = el.nextElementSibling;
+  const box = (next && next.classList && next.classList.contains('ws-grammar')) ? next : null;
+  const text = el.value || '';
+  const dismissed = wsGrammarDismissed[field] || new Set();
+  const shown = (text.length >= 3 ? wsGrammarIssues(text) : []).filter(is=> !dismissed.has(is.start + '|' + is.original));
+  if(!shown.length){ if(box) box.remove(); return; }
+  let host = box;
+  if(!host){ host = document.createElement('div'); host.className = 'ws-grammar'; el.after(host); }
+  host.innerHTML = shown.map((is, idx)=> '<div class="ws-g-issue"><span class="ws-g-text">\u270F\uFE0F ' + esc(is.message) + ' Suggestion: <strong>' + esc(wsGrammarPreview(text, is)) + '</strong></span>'
+    + '<button type="button" class="btn btn-primary" data-gaccept="' + idx + '">\u2713 Use it</button>'
+    + '<button type="button" class="btn btn-ghost" data-gdismiss="' + idx + '">\u2717 Dismiss</button></div>').join('');
+  host.querySelectorAll('[data-gaccept]').forEach(btn=> btn.addEventListener('click', ()=>{
+    const is = shown[+btn.dataset.gaccept];
+    const cur = el.value || '';
+    if(is.len === 0){ el.value = cur + is.replacement; }
+    else if(cur.slice(is.start, is.start + is.len) === is.original){ el.value = cur.slice(0, is.start) + is.replacement + cur.slice(is.start + is.len); }
+    else { wsRunGrammarCheck(el); return; }
+    el.dispatchEvent(new Event('input', { bubbles: true }));
+    setTimeout(()=> wsRunGrammarCheck(el), 60);
+  }));
+  host.querySelectorAll('[data-gdismiss]').forEach(btn=> btn.addEventListener('click', ()=>{
+    const is = shown[+btn.dataset.gdismiss];
+    (wsGrammarDismissed[field] || (wsGrammarDismissed[field] = new Set())).add(is.start + '|' + is.original);
+    wsRunGrammarCheck(el);
+  }));
+}
+function wsWireGrammarCheck(el){
+  if(!el || el.tagName !== 'TEXTAREA') return;
+  el.addEventListener('input', ()=>{
+    clearTimeout(wsGrammarTimers[el.dataset.wsfield]);
+    wsGrammarTimers[el.dataset.wsfield] = setTimeout(()=> wsRunGrammarCheck(el), 900);
+  });
+}
 
 /* ========================= LIVE TYPING =========================
    Google-Docs-style live view: while a student types in a worksheet, a
