@@ -233,6 +233,14 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
   .live-img{width:100%;border-radius:8px;display:block;margin-top:8px;}
   .live-shot-time{font-size:11.5px;color:var(--ink-soft);margin-top:4px;}
   .live-progress{font-size:13px;margin-top:8px;line-height:1.5;}
+  .live-card{cursor:pointer;}
+  .live-card.live-expanded{grid-column:1/-1;border-color:var(--ink-soft);}
+  .live-grid:has(.live-card.live-expanded) .live-card:not(.live-expanded){display:none;}
+  /* Worksheet progress sits beside the camera feed while monitored. */
+  .ws-monitor-row{display:flex;gap:10px;align-items:flex-start;flex-wrap:wrap;margin-bottom:10px;}
+  .ws-monitor-row .ws-monitor-box{flex:none;margin-bottom:0;}
+  .ws-monitor-row #wsUtilProgress{flex:1;min-width:220px;margin-bottom:0;}
+  .ws-monitor-row.collapsed #wsUtilProgress{display:none;}
   /* Worksheet utility bar: new words + progress + today's plan, moved to the
      top of the modal and sticky while scrolling. In-flow (never a fixed
      overlay) so it can never cover readable text. */
@@ -680,9 +688,10 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
 <div class="modal-overlay" id="liveViewOverlay">
   <div class="modal wide">
     <h3>📺 Parent Live View</h3>
-    <div class="sub">Live cameras, worksheet snapshots, and progress while the kids work. Feeds appear as each student opens a monitored worksheet or test. Nothing is recorded.</div>
+    <div class="sub">Live cameras, worksheet snapshots, and progress while the kids work. Feeds appear as each student opens a monitored worksheet or test. Tap a card to enlarge it, tap again to shrink it. Nothing is recorded.</div>
     <div id="liveViewContent"></div>
     <div class="modal-actions">
+      <button class="btn btn-ghost" id="liveViewReloadBtn" type="button">↻ Reload view</button>
       <button class="btn btn-ghost" data-close>Close</button>
     </div>
   </div>
@@ -4248,6 +4257,8 @@ function wsSetUtilCollapsed(collapsed){
   const btn = document.getElementById('wsUtilToggle');
   if(!body || !btn) return;
   body.classList.toggle('collapsed', !!collapsed);
+  const row = document.getElementById('wsMonitorRow');
+  if(row) row.classList.toggle('collapsed', !!collapsed);
   btn.innerHTML = collapsed ? '&#9660; Show' : '&#9650; Hide';
   btn.setAttribute('aria-expanded', collapsed ? 'false' : 'true');
   wsSyncStickyOffsets();
@@ -5808,9 +5819,9 @@ function closeAllModals(){ stopGateTracking(); liveViewClose(); document.querySe
 // Worksheet close guard: closing an unfinished worksheet asks first,
 // because grades only calculate once every part is marked done.
 const _origCloseAllModals = closeAllModals;
-closeAllModals = function(){
+closeAllModals = function(force){
   const ov = document.getElementById('worksheetOverlay');
-  if(ov && ov.classList.contains('open') && !wsCloseWarned){
+  if(!force && ov && ov.classList.contains('open') && !wsCloseWarned){
     const prog = wsCurrentProgress();
     if(prog && prog.total > 0 && prog.done < prog.total){ wsShowClosePrompt(prog); return; }
   }
@@ -6203,6 +6214,7 @@ async function wsRequestCamera(){
 function wsStopCamera(){
   if(wsCameraStream){ try{ wsCameraStream.getTracks().forEach(t=>t.stop()); }catch(e){} wsCameraStream = null; }
   document.querySelectorAll('.ws-monitor-box').forEach(b=>b.remove());
+  wsRestoreUtilProgress();
 }
 // Closing a worksheet must not kill a Friday test session that is still on
 // the board: if the test monitor box is live, the camera keeps running and
@@ -6210,6 +6222,7 @@ function wsStopCamera(){
 function wsStopWorksheetCamera(){
   if(document.querySelector('[data-monitor-loc="test"]') && wsCameraStream){
     document.querySelectorAll('[data-monitor-loc="worksheet"]').forEach(b=>b.remove());
+    wsRestoreUtilProgress();
     if(typeof activeTestStudentId !== 'undefined' && activeTestStudentId) wsLiveStartSession(activeTestStudentId, 'test', 'test');
     return;
   }
@@ -6232,7 +6245,40 @@ function wsShowMonitorBox(loc, container){
     box.innerHTML = '<video class="ws-monitor-video" autoplay muted playsinline></video><div class="ws-monitor-text"><span class="ws-monitor-dot"></span>Session monitored</div>';
     container.prepend(box);
   }
+  if(loc === 'worksheet') wsMoveProgressBesideFeed();
   wsAttachMonitorVideos();
+}
+/* Worksheet progress beside the camera feed: while the worksheet monitor
+   box is up, the progress bar moves out of the collapsible util body
+   into a flex row with the feed, so the two sit side by side. The Hide
+   toggle still hides the progress (row.collapsed) but never the feed.
+   Restoring puts progress back between vocab and plan. */
+function wsMoveProgressBesideFeed(){
+  const bar = document.getElementById('wsUtilBar');
+  const prog = document.getElementById('wsUtilProgress');
+  if(!bar || !prog) return;
+  let row = document.getElementById('wsMonitorRow');
+  if(!row){
+    row = document.createElement('div');
+    row.id = 'wsMonitorRow';
+    row.className = 'ws-monitor-row';
+    bar.prepend(row);
+  }
+  const box = bar.querySelector('[data-monitor-loc="worksheet"]');
+  if(box) row.appendChild(box);
+  row.appendChild(prog);
+  const body = document.getElementById('wsUtilBody');
+  if(body) row.classList.toggle('collapsed', body.classList.contains('collapsed'));
+}
+function wsRestoreUtilProgress(){
+  const prog = document.getElementById('wsUtilProgress');
+  const body = document.getElementById('wsUtilBody');
+  const row = document.getElementById('wsMonitorRow');
+  if(prog && body && row && prog.parentElement === row){
+    const plan = document.getElementById('wsUtilPlan');
+    if(plan) body.insertBefore(prog, plan); else body.appendChild(prog);
+  }
+  if(row) row.remove();
 }
 function wsCameraLockedHTML(retryId, withClose){
   return `<div class="card" style="max-width:560px;margin:8px auto;padding:20px;text-align:center;">
@@ -6506,7 +6552,7 @@ async function idleLock(){
   const overlay = document.getElementById('idleOverlay');
   if(overlay) overlay.classList.remove('open');
   idleClear();
-  try{ closeAllModals(); }catch(e){}
+  try{ closeAllModals(true); }catch(e){}
   try{ wsStopCamera(); }catch(e){}
   try{ wsLiveEndSession(); }catch(e){}
   const lb = document.getElementById('liveBadge');
@@ -7178,6 +7224,7 @@ function finishBoardVideo(box, st){
   if(st.done) return;
   st.done = true;
   wsLiveVideoEnd(st.studentId);
+  if(!wsLiveSession) wsStopCamera();
   if(st.ticker){ clearInterval(st.ticker); st.ticker = null; }
   saveBoardGateProgress(st);
   restoreVidFacade(box);
@@ -7211,6 +7258,18 @@ document.querySelectorAll('[data-cal-tab]').forEach(t=>{
 
 document.getElementById('previewUpcomingBtn').addEventListener('click', ()=> requireEditAccess(openPreviewModal));
 document.getElementById('openLiveViewBtn').addEventListener('click', ()=> requireEditAccess(openLiveViewModal));
+// Reload just the Live view in place: tear the view down and rebuild it
+// without reloading the page, so no PIN or name pick is needed again.
+document.getElementById('liveViewReloadBtn').addEventListener('click', ()=>{ liveViewClose(); openLiveViewModal(); });
+// Tap a student card to enlarge it (focus mode: the other cards hide);
+// tap it again to shrink it back.
+document.getElementById('liveViewContent').addEventListener('click', (e)=>{
+  const card = e.target.closest ? e.target.closest('.live-card') : null;
+  if(!card) return;
+  const was = card.classList.contains('live-expanded');
+  document.querySelectorAll('#liveViewContent .live-card.live-expanded').forEach(c=>c.classList.remove('live-expanded'));
+  if(!was) card.classList.add('live-expanded');
+});
 document.getElementById('editTodayFromSettings').addEventListener('click', ()=>{
   document.getElementById('settingsOverlay').classList.remove('open');
   requireEditAccess(openTodayModal);
@@ -7766,7 +7825,7 @@ if(!SUPABASE_CONFIGURED){
    answers and checks autosave continuously, so after reload the student
    just reopens the worksheet. DEPLOY ORDER MATTERS: push index.html first,
    verify Pages rebuilt, THEN push version.json (see AGENTS.md). */
-const APP_VERSION = '20261028g';
+const APP_VERSION = '20261028h';
 let wsUpdatePromptShown = false;
 async function wsCheckAppVersion(){
   if(wsUpdatePromptShown) return;
