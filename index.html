@@ -688,6 +688,24 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
   </div>
 </div>
 
+<div class="modal-overlay" id="namePickerOverlay">
+  <div class="modal" style="max-width:420px;text-align:center;">
+    <h3 style="margin-top:0;">Who's starting today?</h3>
+    <p style="font-size:14.5px;line-height:1.6;">Pick a name to start the day. This stamps the start time for that student.</p>
+    <div id="namePickerButtons" style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center;"></div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="idleOverlay" style="z-index:200;">
+  <div class="modal" style="max-width:420px;text-align:center;">
+    <h3 style="margin-top:0;">Are you still working?</h3>
+    <p style="font-size:14.5px;line-height:1.6;">The page will lock in <span id="idleCountdown">60s</span> if you don't answer.</p>
+    <div class="modal-actions" style="justify-content:center;">
+      <button class="btn btn-primary" id="idleStayBtn">Yes, I'm still working</button>
+    </div>
+  </div>
+</div>
+
 <!-- PIN DIALOG -->
 <div class="modal-overlay" id="pinOverlay">
   <div class="modal" style="max-width:340px;text-align:center;">
@@ -1035,11 +1053,7 @@ function showLockScreen(){
       <button type="button" class="btn-warmup" id="unlockBtn">Enter PIN</button>
     </div>`;
   document.getElementById('unlockBtn').addEventListener('click', ()=>{
-    requireFamilyAccess(()=>{
-      try{ sessionStorage.setItem(LOCK_KEY,'1'); }catch(e){}
-      document.body.classList.remove('locked');
-      bootApp();
-    });
+    requireFamilyAccess(()=>{ showNamePicker(); });
   });
   // Let keyboards/assistive tech reach the button immediately.
   document.getElementById('unlockBtn').focus();
@@ -2516,8 +2530,16 @@ async function renderBoardInner(){
       if(e.key===' '||e.key==='Enter'){ e.preventDefault(); el.click(); }
     });
     el.addEventListener('click', async ()=>{
+      const preCard = el.closest ? el.closest('.student-card') : null;
+      const preIdx = preCard ? [...document.querySelectorAll('#board .student-card')].indexOf(preCard) : -1;
+      let evalSid = null;
       if(el.dataset.seutask){
-        await toggleSeuTask(el.dataset.seucourse, el.dataset.seutask);
+        const seuRes = await toggleSeuTask(el.dataset.seucourse, el.dataset.seutask);
+        if(seuRes && seuRes.done){
+          playChaChing();
+          evalSid = studentIdForBoardIdx(preIdx);
+          if(evalSid) recordCheckDone(evalSid, 'seu:'+el.dataset.seucourse+':'+el.dataset.seutask, seuRes.title || 'SEU task');
+        }
       } else if(el.dataset.student){
         const studentId = el.dataset.student;
         const key = el.dataset.subj;
@@ -2539,8 +2561,15 @@ async function renderBoardInner(){
         }
         state.checks[studentId][key] = turningOn;
         await storageSet(checksKey(state.dateStr), state.checks);
+        if(turningOn){
+          playChaChing();
+          const lbl = materialSubjectLabel(key);
+          recordCheckDone(studentId, key, lbl.charAt(0).toUpperCase() + lbl.slice(1));
+          evalSid = studentId;
+        }
       }
       await renderBoard();
+      if(evalSid) maybeNotifyAllDone(evalSid, preIdx);
     });
   });
   board.querySelectorAll('.info-line[data-seutask]').forEach(el=>{
@@ -2550,8 +2579,17 @@ async function renderBoardInner(){
       if(e.key===' '||e.key==='Enter'){ e.preventDefault(); el.click(); }
     });
     el.addEventListener('click', async ()=>{
-      await toggleSeuTask(el.dataset.seucourse, el.dataset.seutask);
+      const preCard = el.closest ? el.closest('.student-card') : null;
+      const preIdx = preCard ? [...document.querySelectorAll('#board .student-card')].indexOf(preCard) : -1;
+      const seuRes = await toggleSeuTask(el.dataset.seucourse, el.dataset.seutask);
+      if(seuRes && seuRes.done){
+        playChaChing();
+        const sid = studentIdForBoardIdx(preIdx);
+        if(sid) recordCheckDone(sid, 'seu:'+el.dataset.seucourse+':'+el.dataset.seutask, seuRes.title || 'SEU task');
+      }
       await renderBoard();
+      const sid = studentIdForBoardIdx(preIdx);
+      if(sid) maybeNotifyAllDone(sid, preIdx);
     });
   });
   // Collapse-all helper shared by double-click and the visible button.
@@ -2793,9 +2831,10 @@ async function loadSeuToday(){
 async function toggleSeuTask(courseId, taskId){
   const tasks = (await seuGet('tasks:'+courseId)) || [];
   const t = tasks.find(x=>x.id===taskId);
-  if(!t) return;
+  if(!t) return null;
   t.done = !t.done;
   await seuSet('tasks:'+courseId, tasks);
+  return { done: t.done, title: t.title };
 }
 
 /* ========================= WEEKLY FILLABLE TEST =========================
@@ -6251,6 +6290,283 @@ async function wsGateTestCamera(formArea, studentId){
     formArea.style.visibility = '';
   }
 }
+/* ================= ACTIVITY, SOUNDS & SESSION =================
+   Timestamps, sounds, name-pick login, idle lock, and parent
+   notifications. Board checks are the "done" markers: marking one
+   stamps the time (check-times:{date}:{student}), plays a cha-ching,
+   and logs the event. Worksheet Check buttons are grades (ok/bad),
+   not done marks, so they get neither sound nor timestamp. Day
+   start stamps once per student per day on first name-pick login;
+   later entries the same day count as log-backs. Notifications go
+   to the parent's phone via ntfy (free, no account): the topic is a
+   long random string kept in cloud settings (ntfy-topic), never in
+   page source, and messages carry first names only. Events are also
+   kept in activity-log:{date} and shown in the parent live view, so
+   nothing is lost before the parent subscribes. Sounds are plain
+   WebAudio (no files, no network) and only ever play right after a
+   tap, so iOS allows them. */
+let actAudioCtx = null;
+function actAudio(){
+  try{
+    if(!actAudioCtx) actAudioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    if(actAudioCtx.state === 'suspended') actAudioCtx.resume();
+    return actAudioCtx;
+  }catch(e){ return null; }
+}
+function actTone(ctx, freq, start, dur, type, vol){
+  const o = ctx.createOscillator(), g = ctx.createGain();
+  const t0 = ctx.currentTime + start;
+  o.type = type || 'sine'; o.frequency.value = freq;
+  g.gain.setValueAtTime(0.0001, t0);
+  g.gain.exponentialRampToValueAtTime(vol || 0.25, t0 + 0.02);
+  g.gain.exponentialRampToValueAtTime(0.0001, t0 + dur);
+  o.connect(g); g.connect(ctx.destination);
+  o.start(t0); o.stop(t0 + dur + 0.05);
+}
+function playChaChing(){
+  try{
+    const ctx = actAudio(); if(!ctx) return;
+    actTone(ctx, 1568, 0, 0.12, 'triangle', 0.22);
+    actTone(ctx, 2093, 0.09, 0.30, 'triangle', 0.22);
+    actTone(ctx, 2637, 0.09, 0.20, 'sine', 0.10);
+  }catch(e){}
+}
+function playDoorbell(){
+  try{
+    const ctx = actAudio(); if(!ctx) return;
+    actTone(ctx, 880, 0, 0.45, 'sine', 0.28);
+    actTone(ctx, 659.25, 0.45, 0.70, 'sine', 0.28);
+  }catch(e){}
+}
+function checkTimesKey(dateStr, studentId){ return 'check-times:'+dateStr+':'+studentId; }
+function dayStartKey(dateStr, studentId){ return 'day-start:'+dateStr+':'+studentId; }
+function allDoneKey(dateStr, studentId){ return 'all-done-notified:'+dateStr+':'+studentId; }
+function activityKey(dateStr){ return 'activity-log:'+dateStr; }
+async function actLog(dateStr, studentId, event, label){
+  try{
+    const log = (await storageGet(activityKey(dateStr))) || [];
+    log.push({ ts: Date.now(), studentId: studentId, event: event, label: label || '' });
+    await storageSet(activityKey(dateStr), log.slice(-200));
+  }catch(e){}
+}
+async function ensureNtfyTopic(){
+  try{
+    let topic = await storageGet('ntfy-topic');
+    if(!topic){
+      topic = 'll-' + Math.random().toString(36).slice(2,10) + Math.random().toString(36).slice(2,10) + Date.now().toString(36);
+      await storageSet('ntfy-topic', topic);
+    }
+    return topic;
+  }catch(e){ return null; }
+}
+async function notifyParent(message){
+  try{
+    const topic = await ensureNtfyTopic();
+    if(!topic) return;
+    await fetch('https://ntfy.sh/' + topic, { method: 'POST', headers: { 'Title': 'Legacy Lab', 'Tags': 'bell' }, body: message });
+  }catch(e){}
+}
+async function recordCheckDone(studentId, key, label){
+  try{
+    const dstr = state.dateStr;
+    const map = (await storageGet(checkTimesKey(dstr, studentId))) || {};
+    map[key] = Date.now();
+    await storageSet(checkTimesKey(dstr, studentId), map);
+    await actLog(dstr, studentId, 'check', label);
+  }catch(e){}
+}
+function studentIdForBoardIdx(idx){
+  try{
+    const cards = [...document.querySelectorAll('#board .student-card')];
+    if(idx >= 0 && cards[idx] && state.students[idx]) return state.students[idx].id;
+  }catch(e){}
+  return null;
+}
+function boardCardForStudent(studentId, fallbackIdx){
+  try{
+    const direct = document.querySelector('#board .check[data-student="'+studentId+'"]');
+    if(direct) return direct.closest('.student-card');
+    const cards = [...document.querySelectorAll('#board .student-card')];
+    if(typeof fallbackIdx === 'number' && fallbackIdx >= 0 && cards[fallbackIdx]) return cards[fallbackIdx];
+  }catch(e){}
+  return null;
+}
+async function maybeNotifyAllDone(studentId, fallbackIdx){
+  try{
+    if(!studentId) return;
+    if(state.dateStr !== toDateStr(getSchoolDate(new Date()))) return;
+    const card = boardCardForStudent(studentId, fallbackIdx);
+    if(!card) return;
+    const total = card.querySelectorAll('.check[data-subj], .check[data-seutask], .check-mini').length;
+    const done = card.querySelectorAll('.check[data-subj].checked, .check[data-seutask].checked, .check-mini.checked').length;
+    if(!total || done !== total) return;
+    if(await storageGet(allDoneKey(state.dateStr, studentId))) return;
+    await storageSet(allDoneKey(state.dateStr, studentId), Date.now());
+    await actLog(state.dateStr, studentId, 'all-done', '');
+    await notifyParent(liveStudentName(studentId) + ' finished all work for today');
+  }catch(e){}
+}
+async function maybeNotifyLiveFeed(studentId){
+  try{
+    const now = Date.now();
+    const last = await storageGet('live-feed-notified:'+studentId);
+    if(last && now - last < 30*60*1000) return;
+    await storageSet('live-feed-notified:'+studentId, now);
+    await actLog(toDateStr(getSchoolDate(new Date())), studentId, 'live-feed', '');
+    await notifyParent(liveStudentName(studentId) + ' started a live feed');
+  }catch(e){}
+}
+let sessionStudentId = null;
+function unlockWithStudent(studentId, first){
+  try{ sessionStorage.setItem(LOCK_KEY,'1'); }catch(e){}
+  document.body.classList.remove('locked');
+  sessionStudentId = studentId;
+  playDoorbell();
+  (async ()=>{
+    try{
+      const dstr = toDateStr(getSchoolDate(new Date()));
+      const existing = await storageGet(dayStartKey(dstr, studentId));
+      if(!existing){
+        await storageSet(dayStartKey(dstr, studentId), Date.now());
+        await actLog(dstr, studentId, 'login', '');
+        await notifyParent(first + ' logged in');
+      } else {
+        await actLog(dstr, studentId, 'login-back', '');
+        await notifyParent(first + ' logged back in');
+      }
+    }catch(e){}
+  })();
+  bootApp();
+}
+function unlockAsParent(){
+  try{ sessionStorage.setItem(LOCK_KEY,'1'); }catch(e){}
+  document.body.classList.remove('locked');
+  sessionStudentId = null;
+  bootApp();
+}
+async function showNamePicker(){
+  const overlay = document.getElementById('namePickerOverlay');
+  const btns = document.getElementById('namePickerButtons');
+  let students = [];
+  try{
+    const raw = await storageGet(STUDENTS_KEY);
+    students = (raw || defaultStudents()).map(normalizeStudent);
+  }catch(e){ students = defaultStudents().map(normalizeStudent); }
+  btns.innerHTML = students.map(s=> '<button type="button" class="btn btn-primary" data-pick-student="'+s.id+'">'+esc(firstName(s.name))+'</button>').join('')
+    + '<button type="button" class="btn btn-ghost" id="namePickParent">Parent</button>';
+  overlay.classList.add('open');
+  btns.querySelectorAll('[data-pick-student]').forEach(b=>{
+    b.addEventListener('click', ()=>{
+      overlay.classList.remove('open');
+      const s = students.find(x=>x.id===b.dataset.pickStudent);
+      unlockWithStudent(b.dataset.pickStudent, s ? firstName(s.name) : 'A student');
+    });
+  });
+  document.getElementById('namePickParent').addEventListener('click', ()=>{
+    requirePinAccess(PARENT_PIN, ()=>{
+      overlay.classList.remove('open');
+      unlockAsParent();
+    });
+  });
+}
+let idleTimer = null, idleWarnTimer = null, idleDeadline = 0;
+let idleMs = 5*60*1000, idleWarnMs = 60*1000;
+function idleClear(){
+  if(idleTimer){ clearTimeout(idleTimer); idleTimer = null; }
+  if(idleWarnTimer){ clearInterval(idleWarnTimer); idleWarnTimer = null; }
+}
+function idleReset(){
+  idleClear();
+  try{ if(!isUnlocked()) return; }catch(e){ return; }
+  const lv = document.getElementById('liveViewOverlay');
+  if(lv && lv.classList.contains('open')) return;
+  idleTimer = setTimeout(idleWarn, idleMs);
+}
+function idleWarn(){
+  const overlay = document.getElementById('idleOverlay');
+  const cd = document.getElementById('idleCountdown');
+  if(!overlay) return;
+  overlay.classList.add('open');
+  idleDeadline = Date.now() + idleWarnMs;
+  const tick = ()=>{
+    const remain = Math.max(0, Math.ceil((idleDeadline - Date.now())/1000));
+    if(cd) cd.textContent = remain + 's';
+    if(Date.now() >= idleDeadline) idleLock();
+  };
+  tick();
+  idleWarnTimer = setInterval(tick, 1000);
+}
+function idleStay(){
+  const overlay = document.getElementById('idleOverlay');
+  if(overlay) overlay.classList.remove('open');
+  idleClear();
+  idleReset();
+}
+async function idleLock(){
+  const overlay = document.getElementById('idleOverlay');
+  if(overlay) overlay.classList.remove('open');
+  idleClear();
+  try{ closeAllModals(); }catch(e){}
+  try{ wsStopCamera(); }catch(e){}
+  try{ wsLiveEndSession(); }catch(e){}
+  const lb = document.getElementById('liveBadge');
+  if(lb) lb.style.display = 'none';
+  const sid = sessionStudentId;
+  try{ sessionStorage.removeItem(LOCK_KEY); }catch(e){}
+  if(sid){
+    try{
+      const dstr = toDateStr(getSchoolDate(new Date()));
+      await actLog(dstr, sid, 'timeout', '');
+      await notifyParent(liveStudentName(sid) + ' timed out');
+    }catch(e){}
+  }
+  showLockScreen();
+}
+['pointerdown','keydown','touchstart','wheel'].forEach(ev=>{
+  window.addEventListener(ev, ()=>{
+    const io = document.getElementById('idleOverlay');
+    if(io && io.classList.contains('open')) return;
+    idleReset();
+  }, { passive: true });
+});
+document.getElementById('idleStayBtn').addEventListener('click', idleStay);
+function liveActivityText(e){
+  const name = liveStudentName(e.studentId);
+  if(e.event === 'check') return name + ' marked ' + (e.label || 'work') + ' done';
+  if(e.event === 'all-done') return name + ' finished all work';
+  if(e.event === 'login') return name + ' started the day';
+  if(e.event === 'login-back') return name + ' logged back in';
+  if(e.event === 'timeout') return name + ' timed out';
+  if(e.event === 'live-feed') return name + ' started a live feed';
+  return name + ' ' + (e.label || e.event);
+}
+async function liveViewNotifBox(){
+  try{
+    const content = document.getElementById('liveViewContent');
+    if(!content) return;
+    const topic = await ensureNtfyTopic();
+    if(!topic) return;
+    const box = document.createElement('div');
+    box.className = 'card';
+    box.style.marginBottom = '14px';
+    box.innerHTML = '<strong>Phone notifications</strong><div style="font-size:13px;line-height:1.6;">Install the <a href="https://ntfy.sh" target="_blank" rel="noopener">ntfy app</a> and subscribe to this topic to get a buzz when a student logs in, times out, logs back in, finishes all work, or starts a live feed. Topic: <code>'+topic+'</code> · <a href="https://ntfy.sh/'+topic+'" target="_blank" rel="noopener">Open topic</a></div><div id="liveActivityFeed" style="font-size:13px;line-height:1.6;margin-top:8px;"></div>';
+    content.prepend(box);
+    liveViewRenderActivity();
+  }catch(e){}
+}
+async function liveViewRenderActivity(){
+  const feed = document.getElementById('liveActivityFeed');
+  if(!feed) return;
+  try{
+    const dstr = toDateStr(getSchoolDate(new Date()));
+    const log = (await storageGet(activityKey(dstr))) || [];
+    const last = log.slice(-15).reverse();
+    feed.innerHTML = '<strong>Today\u2019s activity</strong><br>' + (last.length ? last.map(e=>{
+      const t = new Date(e.ts).toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
+      return esc(t + '  ' + liveActivityText(e));
+    }).join('<br>') : 'Nothing yet today.');
+  }catch(e){}
+}
 /* ================= PARENT LIVE VIEW =================
    PIN-gated parent view (header Live button): live camera feeds from the
    kids' devices via WebRTC, periodic worksheet snapshots, and answer/check
@@ -6299,6 +6615,7 @@ async function wsLiveStartSession(studentId, kind, subject){
   if(wsLiveSession !== sess) return; // ended or replaced while joining: stay quiet
   if(!ok){ wsLiveStartSnapshots(); return; }
   wsLiveSend({ type: 'session', from: wsLiveDeviceId, studentId, kind, subject, dateStr: wsLiveSession.dateStr });
+  maybeNotifyLiveFeed(studentId);
   Object.keys(wsLiveParents).forEach(pid=>{ if(Date.now() - wsLiveParents[pid] < 20000) wsLiveOfferTo(pid); });
   wsLiveStartSnapshots();
 }
@@ -6406,6 +6723,7 @@ async function openLiveViewModal(){
   const content = document.getElementById('liveViewContent');
   if(content) content.innerHTML = '<div class="live-grid">' + (state.students || []).map(s=> liveViewSkeletonHTML(s)).join('') + '</div>';
   document.getElementById('liveViewOverlay').classList.add('open');
+  liveViewNotifBox();
   liveViewParentId = 'p-' + Math.random().toString(36).slice(2, 10);
   try{
     if(typeof sb !== 'undefined' && sb){
@@ -6517,6 +6835,7 @@ async function liveViewOnOffer(p){
 }
 function liveViewPollAll(){
   Object.keys(liveViewSessions).forEach(id=> liveViewPollStudent(id, liveViewSessions[id]));
+  liveViewRenderActivity();
 }
 async function liveViewPollStudent(studentId, sess){
   const card = document.querySelector('[data-live-student="' + studentId + '"]');
@@ -7410,7 +7729,7 @@ if(!SUPABASE_CONFIGURED){
    answers and checks autosave continuously, so after reload the student
    just reopens the worksheet. DEPLOY ORDER MATTERS: push index.html first,
    verify Pages rebuilt, THEN push version.json (see AGENTS.md). */
-const APP_VERSION = '20261028e';
+const APP_VERSION = '20261028f';
 let wsUpdatePromptShown = false;
 async function wsCheckAppVersion(){
   if(wsUpdatePromptShown) return;
@@ -7461,6 +7780,7 @@ function wsStartVersionPolling(){
 function bootApp(){
   startLiveTyping();
   wsStartVersionPolling();
+  idleReset();
   document.getElementById('board').innerHTML = `<div class="weekend-card"><h2>Loading Plan…</h2><p>Connecting to the cloud plan.</p></div>`;
   // Never strand on the loader: if the cloud fetch hangs or fails, show an
   // error card with a retry instead of "Loading Plan…" forever.
