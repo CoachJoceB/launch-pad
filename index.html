@@ -106,7 +106,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
   .devo-row .val{font-size:15px;margin-top:2px;}
   .intention-card{
     background:var(--ink);color:var(--chalk);border-radius:14px;padding:22px;display:flex;flex-direction:column;
-    justify-content:center;position:relative;overflow:hidden;
+    justify-content:center;align-items:center;text-align:center;position:relative;overflow:hidden;
   }
   .intention-card::before{
     content:"";position:absolute;right:-30px;top:-30px;width:140px;height:140px;border-radius:50%;
@@ -7410,7 +7410,7 @@ if(!SUPABASE_CONFIGURED){
    answers and checks autosave continuously, so after reload the student
    just reopens the worksheet. DEPLOY ORDER MATTERS: push index.html first,
    verify Pages rebuilt, THEN push version.json (see AGENTS.md). */
-const APP_VERSION = '20261028c';
+const APP_VERSION = '20261028d';
 let wsUpdatePromptShown = false;
 async function wsCheckAppVersion(){
   if(wsUpdatePromptShown) return;
