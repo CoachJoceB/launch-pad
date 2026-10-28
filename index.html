@@ -6135,6 +6135,7 @@ function sendLiveField(payload){
 document.addEventListener('input', (e)=>{
   const el = e.target;
   if(!el || !el.dataset) return;
+  if(wsParentSession) return;
   if(el.dataset.wsfield && el.closest && el.closest('#worksheetOverlay') && el.type !== 'checkbox'){
     if(typeof wsActiveStudent === 'undefined') return;
     sendLiveField({ cid: LIVE_CID, kind: 'ws', studentId: wsActiveStudent,
@@ -6156,16 +6157,30 @@ document.addEventListener('input', (e)=>{
    SAME record the worksheet gate reads. Watching in either place counts.
    Refreshed on each full load (loadAndRender) and kept in step on writes. */
 let gatePeekCache = {}; // "dateStr|subject|studentId" -> gate record
+/* Gate progress only ever moves forward: merging keeps the best of the
+   in-memory record and the cloud record, so a sync poll can never drag
+   a student's video back to an older position (or to zero). */
+function wsMergeGatePeek(key, rec){
+  const cur = gatePeekCache[key] || {};
+  const merged = {
+    acc: Math.max(cur.acc || 0, rec.acc || 0),
+    pos: Math.max(cur.pos || 0, rec.pos || 0),
+    dur: Math.max(cur.dur || 0, rec.dur || 0),
+    watched: !!(cur.watched || rec.watched),
+  };
+  if(cur.caution || rec.caution) merged.caution = true;
+  gatePeekCache[key] = merged;
+  return merged;
+}
 async function preloadGatePeek(){
-  gatePeekCache = {};
   try {
     if(typeof mm52IsActive === 'undefined' || !mm52IsActive()) return;
     const wd = state.weekdayNum;
     const subj = (wd === 1 || wd === 2) ? 'history' : (wd === 3 || wd === 4) ? 'science' : null;
     if(!subj) return;
     await Promise.all((state.students || []).map(async (s)=>{
-      const rec = await storageGet(wsGateKey(state.dateStr, s.id, subj));
-      gatePeekCache[state.dateStr + '|' + subj + '|' + s.id] = rec || {};
+      const rec = await storageGet(wsGateKey(state.dateStr, s.id, subj)) || {};
+      wsMergeGatePeek(state.dateStr + '|' + subj + '|' + s.id, rec);
     }));
   } catch(e){}
 }
@@ -6203,7 +6218,7 @@ function gateVideoFor(student, subject, wd){
 async function saveWsGate(studentId, subject){
   try { await storageSet(wsGateKey(state.dateStr, studentId, subject), wsGateCache[studentId] || {}); } catch(e){}
   // Keep the board's peek cache in step so the lesson card pill is current.
-  gatePeekCache[state.dateStr + '|' + subject + '|' + studentId] = wsGateCache[studentId] || {};
+  wsMergeGatePeek(state.dateStr + '|' + subject + '|' + studentId, wsGateCache[studentId] || {});
 }
 function saveGateProgress(){
   if(!gateCtx) return;
@@ -6212,7 +6227,7 @@ function saveGateProgress(){
   gate.pos = Math.floor(gatePos);
   if(gatePlayer && gatePlayer.getDuration){ const d = gatePlayer.getDuration(); if(d) gate.dur = Math.floor(d); }
   gateLastSaveAcc = gateAcc;
-  saveWsGate(gateCtx.studentId, gateCtx.subject);
+  return saveWsGate(gateCtx.studentId, gateCtx.subject);
 }
 function stopGateTracking(){
   // Persist watch progress before tearing down, so it follows the student
@@ -6242,15 +6257,25 @@ function loadYouTubeAPI(){
    only, and the camera stops the moment the worksheet closes. */
 let wsCameraStream = null;
 async function wsRequestCamera(){
-  if(wsCameraStream) return true;
+  if(wsParentSession) return false;
+  if(wsCameraStream){
+    const t = wsCameraStream.getVideoTracks()[0];
+    if(t && t.readyState === 'live' && !t.muted) return true;
+    wsStopCamera();
+  }
   try{
     if(!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) return false;
     wsCameraStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: false });
+    wsCameraWatchStart();
     return true;
   }catch(e){ wsCameraStream = null; return false; }
 }
 function wsStopCamera(){
-  if(wsCameraStream){ try{ wsCameraStream.getTracks().forEach(t=>t.stop()); }catch(e){} wsCameraStream = null; }
+  const s = wsCameraStream;
+  wsCameraStream = null;
+  wsCameraWatchStop();
+  wsHideCameraLockOverlay();
+  if(s){ try{ s.getTracks().forEach(t=>t.stop()); }catch(e){} }
   document.querySelectorAll('.ws-monitor-box').forEach(b=>b.remove());
   wsRestoreUtilProgress();
 }
@@ -6285,6 +6310,145 @@ function wsShowMonitorBox(loc, container){
   }
   if(loc === 'worksheet') wsMoveProgressBesideFeed();
   wsAttachMonitorVideos();
+}
+/* ================= CAMERA-LOSS LOCK =================
+   If the camera dies mid-session, the sheet locks until it is restored.
+   Death is detected three ways: the video track ends, the track mutes
+   for more than 3 seconds (device busy or revoked), or the preview
+   frames go black for ~9 seconds (lens covered). The lock only blocks
+   interaction; it never clears work, and answers already saved stay
+   saved. A parent preview never arms any of this (no camera at all). */
+let wsCameraHealthTimer = null;
+let wsCameraMuteTimer = null;
+let wsDarkCanvas = null;
+let wsDarkCount = 0;
+let wsCameraLostSessions = null;
+let wsCameraLostAt = 0;
+function wsCameraWatchStart(){
+  wsCameraWatchStop();
+  if(!wsCameraStream) return;
+  const stream = wsCameraStream;
+  const tr = stream.getVideoTracks()[0];
+  if(tr){
+    tr.addEventListener('ended', ()=>{ if(wsCameraStream === stream) wsCameraLost(); });
+    tr.addEventListener('mute', ()=>{ if(wsCameraStream === stream) wsCameraMuteStart(); });
+    tr.addEventListener('unmute', ()=>{ if(wsCameraStream === stream){ wsCameraMuteClear(); wsDarkCount = 0; } });
+  }
+  wsDarkCount = 0;
+  wsCameraHealthTimer = setInterval(wsCameraHealthTick, 3000);
+}
+function wsCameraWatchStop(){
+  if(wsCameraHealthTimer){ clearInterval(wsCameraHealthTimer); wsCameraHealthTimer = null; }
+  if(wsCameraMuteTimer){ clearTimeout(wsCameraMuteTimer); wsCameraMuteTimer = null; }
+  wsDarkCount = 0;
+}
+function wsCameraMuteStart(){
+  if(wsCameraMuteTimer) return;
+  wsCameraMuteTimer = setTimeout(()=>{ wsCameraMuteTimer = null; wsCameraLost(); }, 3000);
+}
+function wsCameraMuteClear(){
+  if(wsCameraMuteTimer){ clearTimeout(wsCameraMuteTimer); wsCameraMuteTimer = null; }
+}
+function wsCameraFrameDark(){
+  try{
+    const v = document.querySelector('.ws-monitor-video');
+    if(!v || v.readyState < 2 || !v.videoWidth) return false;
+    const c = wsDarkCanvas || (wsDarkCanvas = document.createElement('canvas'));
+    c.width = 16; c.height = 16;
+    const x = c.getContext('2d', { willReadFrequently: true });
+    x.drawImage(v, 0, 0, 16, 16);
+    const d = x.getImageData(0, 0, 16, 16).data;
+    let sum = 0;
+    for(let i = 0; i < d.length; i += 4) sum += (d[i] + d[i + 1] + d[i + 2]) / 3;
+    return (sum / 256) < 10;
+  }catch(e){ return false; }
+}
+function wsCameraHealthTick(){
+  try{
+    if(!wsCameraStream || wsCameraLostAt) return;
+    const tr = wsCameraStream.getVideoTracks()[0];
+    if(!tr) return;
+    if(tr.readyState === 'ended'){ wsCameraLost(); return; }
+    if(tr.muted){ wsCameraMuteStart(); return; }
+    wsCameraMuteClear();
+    if(wsCameraFrameDark()){
+      if(++wsDarkCount >= 3) wsCameraLost();
+    } else wsDarkCount = 0;
+  }catch(e){}
+}
+function wsCameraLost(){
+  if(wsCameraLostAt) return;
+  const lost = [];
+  const ov = document.getElementById('worksheetOverlay');
+  if(ov && ov.classList.contains('open') && wsActiveStudent && worksheetCache[wsActiveStudent]){
+    lost.push({ kind: 'worksheet', subject: (typeof currentWorksheetCtx !== 'undefined' && currentWorksheetCtx) ? currentWorksheetCtx.subject : '', studentId: wsActiveStudent });
+  }
+  if(typeof activeTestStudentId !== 'undefined' && activeTestStudentId && testCache[activeTestStudentId]){
+    lost.push({ kind: 'test', subject: 'test', studentId: activeTestStudentId });
+  }
+  wsLiveEndSession('camera-lost');
+  wsStopCamera();
+  if(!lost.length) return;
+  wsCameraLostSessions = lost;
+  wsCameraLostAt = Date.now();
+  wsShowCameraLockOverlay();
+}
+function wsShowCameraLockOverlay(){
+  const old = document.getElementById('cameraLockOverlay');
+  if(old) old.remove();
+  const lost = wsCameraLostSessions || [];
+  const names = lost.map(s=> s.kind === 'test' ? 'Friday test' : 'worksheet').join(' and ');
+  const div = document.createElement('div');
+  div.id = 'cameraLockOverlay';
+  div.style.cssText = 'position:fixed;inset:0;z-index:9999;background:rgba(20,28,46,.92);display:flex;align-items:center;justify-content:center;padding:20px;';
+  div.innerHTML = '<div style="max-width:420px;background:#fff;border-radius:12px;padding:24px;text-align:center;">'
+    + '<div style="font-size:40px;">📷</div>'
+    + '<h3 style="margin:8px 0;">Camera blocked</h3>'
+    + '<p style="font-size:14.5px;line-height:1.6;">Your ' + esc(names) + ' is paused because the camera stopped or is covered. Uncover the camera, then tap Restore camera to keep working. Nothing you already did is lost.</p>'
+    + '<button type="button" class="btn-warmup" id="cameraLockRestoreBtn" style="margin-top:8px;">Restore camera</button>'
+    + '<div style="margin-top:10px;"><button type="button" class="btn btn-ghost" id="cameraLockCloseBtn">Close sheet</button></div>'
+    + '<p id="cameraLockMsg" style="font-size:13px;color:var(--ink-soft);min-height:18px;margin:12px 0 0;"></p>'
+    + '</div>';
+  document.body.appendChild(div);
+  document.getElementById('cameraLockRestoreBtn').addEventListener('click', wsCameraLockRestore);
+  document.getElementById('cameraLockCloseBtn').addEventListener('click', ()=>{
+    wsHideCameraLockOverlay();
+    try{ closeAllModals(true); }catch(e){}
+  });
+}
+function wsHideCameraLockOverlay(){
+  const d = document.getElementById('cameraLockOverlay');
+  if(d) d.remove();
+  wsCameraLostSessions = null;
+  wsCameraLostAt = 0;
+}
+async function wsCameraLockRestore(){
+  const btn = document.getElementById('cameraLockRestoreBtn');
+  const msg = document.getElementById('cameraLockMsg');
+  if(btn){ btn.disabled = true; btn.textContent = 'Checking camera…'; }
+  if(msg) msg.textContent = '';
+  const ok = await wsRequestCamera();
+  if(!ok){
+    if(btn){ btn.disabled = false; btn.textContent = 'Restore camera'; }
+    if(msg) msg.textContent = 'Camera is still blocked. Uncover it and try again.';
+    return;
+  }
+  const lost = wsCameraLostSessions || [];
+  const util = document.getElementById('wsUtilBar');
+  if(lost.some(s=>s.kind === 'worksheet') && util) wsShowMonitorBox('worksheet', util);
+  const tf = document.getElementById('testFormArea');
+  if(lost.some(s=>s.kind === 'test') && tf) wsShowMonitorBox('test', tf);
+  wsAttachMonitorVideos();
+  await new Promise(r=>setTimeout(r, 800));
+  if(wsCameraFrameDark()){
+    wsCameraWatchStop();
+    if(btn){ btn.disabled = false; btn.textContent = 'Restore camera'; }
+    if(msg) msg.textContent = 'The camera is on but the picture is still black. Uncover the lens and try again.';
+    return;
+  }
+  wsHideCameraLockOverlay();
+  lost.forEach(s=>{ wsLiveStartSession(s.studentId, s.kind, s.subject); });
+  wsCameraWatchStart();
 }
 /* Worksheet progress beside the camera feed: while the worksheet monitor
    box is up, the progress bar moves out of the collapsible util body
@@ -6354,6 +6518,7 @@ function wsShowCameraLocked(studentId, subject, wd, forceDayNum){
 // re-renders the form from the saved test entry.
 async function wsGateTestCamera(formArea, studentId){
   try{
+    if(wsParentSession) return;
     if(wsCameraStream){ wsShowMonitorBox('test', formArea); return; }
     const ok = await wsRequestCamera();
     if(ok){ wsShowMonitorBox('test', formArea); return; }
@@ -6501,10 +6666,12 @@ async function maybeNotifyLiveFeed(studentId){
   }catch(e){}
 }
 let sessionStudentId = null;
+let wsParentSession = false; // parent preview session: never uses a camera
 function unlockWithStudent(studentId, first){
   try{ sessionStorage.setItem(LOCK_KEY,'1'); }catch(e){}
   document.body.classList.remove('locked');
   sessionStudentId = studentId;
+  wsParentSession = false;
   playDoorbell();
   (async ()=>{
     try{
@@ -6526,6 +6693,8 @@ function unlockAsParent(){
   try{ sessionStorage.setItem(LOCK_KEY,'1'); }catch(e){}
   document.body.classList.remove('locked');
   sessionStudentId = null;
+  wsParentSession = true;
+  wsStopCamera();
   bootApp();
 }
 async function showNamePicker(){
@@ -6592,6 +6761,7 @@ async function idleLock(){
   idleClear();
   await wsFlushWorksheetSaves();
   await wsFlushTestSaves();
+  destroyBoardPlayers();
   try{ closeAllModals(true); }catch(e){}
   try{ wsStopCamera(); }catch(e){}
   try{ wsLiveEndSession(); }catch(e){}
@@ -6635,8 +6805,20 @@ async function liveViewNotifBox(){
     const box = document.createElement('div');
     box.className = 'card';
     box.style.marginBottom = '14px';
-    box.innerHTML = '<strong>Phone notifications</strong><div style="font-size:13px;line-height:1.6;">Install the <a href="https://ntfy.sh" target="_blank" rel="noopener">ntfy app</a> and subscribe to this topic to get a buzz when a student logs in, times out, logs back in, finishes all work, or starts a live feed. Topic: <code>'+topic+'</code> · <a href="https://ntfy.sh/'+topic+'" target="_blank" rel="noopener">Open topic</a></div><div id="liveActivityFeed" style="font-size:13px;line-height:1.6;margin-top:8px;"></div>';
+    box.innerHTML = '<div style="display:flex;justify-content:space-between;align-items:center;gap:8px;"><strong>🔔 Notifications</strong><button type="button" class="btn btn-ghost" id="liveNotifToggle">▸ Show</button></div>'
+      + '<div id="liveNotifBody" style="display:none;margin-top:8px;">'
+      + '<div style="font-size:13px;line-height:1.6;">Install the <a href="https://ntfy.sh" target="_blank" rel="noopener">ntfy app</a> and subscribe to this topic to get a buzz when a student logs in, times out, logs back in, finishes all work, or starts a live feed. Topic: <code>'+topic+'</code> · <a href="https://ntfy.sh/'+topic+'" target="_blank" rel="noopener">Open topic</a></div>'
+      + '<div id="liveActivityFeed" style="font-size:13px;line-height:1.6;margin-top:8px;"></div>'
+      + '</div>';
     content.prepend(box);
+    document.getElementById('liveNotifToggle').addEventListener('click', ()=>{
+      const body = document.getElementById('liveNotifBody');
+      const btn = document.getElementById('liveNotifToggle');
+      const show = body.style.display === 'none';
+      body.style.display = show ? 'block' : 'none';
+      btn.textContent = show ? '▾ Hide' : '▸ Show';
+      if(show) liveViewRenderActivity();
+    });
     liveViewRenderActivity();
   }catch(e){}
 }
@@ -6647,10 +6829,23 @@ async function liveViewRenderActivity(){
     const dstr = toDateStr(getSchoolDate(new Date()));
     const log = (await storageGet(activityKey(dstr))) || [];
     const last = log.slice(-15).reverse();
-    feed.innerHTML = '<strong>Today\u2019s activity</strong><br>' + (last.length ? last.map(e=>{
-      const t = new Date(e.ts).toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
-      return esc(t + '  ' + liveActivityText(e));
-    }).join('<br>') : 'Nothing yet today.');
+    if(!last.length){ feed.innerHTML = '<strong>Today\u2019s activity</strong><br>Nothing yet today.'; return; }
+    const groups = [];
+    last.forEach(e=>{
+      const key = e.studentId || 'parent';
+      let g = groups.find(x=>x.key === key);
+      if(!g){ g = { key: key, items: [] }; groups.push(g); }
+      g.items.push(e);
+    });
+    feed.innerHTML = '<strong>Today\u2019s activity</strong>' + groups.map(g=>{
+      const name = g.key === 'parent' ? 'Parent' : liveStudentName(g.key);
+      return '<div style="margin-top:6px;"><strong>' + esc(name) + '</strong><br>' + g.items.map(e=>{
+        const t = new Date(e.ts).toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
+        const full = liveActivityText(e);
+        const line = full.startsWith(name) ? full.slice(name.length).trim() : full;
+        return esc(t + '  ' + line);
+      }).join('<br>') + '</div>';
+    }).join('');
   }catch(e){}
 }
 /* ================= PARENT LIVE VIEW =================
@@ -6694,6 +6889,7 @@ function wsLiveParentFresh(){
   return Object.keys(wsLiveParents).some(pid=> now - wsLiveParents[pid] < 20000);
 }
 async function wsLiveStartSession(studentId, kind, subject){
+  if(wsParentSession) return;
   const sess = { studentId, kind, subject,
     dateStr: (typeof currentWorksheetCtx !== 'undefined' && currentWorksheetCtx) ? currentWorksheetCtx.dateStr : state.dateStr };
   wsLiveSession = sess;
@@ -6717,6 +6913,7 @@ async function wsLiveStartSession(studentId, kind, subject){
 let wsLiveVideoStarting = null;
 async function wsLiveVideoStart(studentId, subject, container){
   if(!studentId) return false;
+  if(wsParentSession) return true;
   if(wsLiveSession) return true;
   if(wsLiveVideoStarting === studentId) return null;
   wsLiveVideoStarting = studentId;
@@ -6735,8 +6932,8 @@ async function wsLiveVideoStart(studentId, subject, container){
 function wsLiveVideoEnd(studentId){
   if(wsLiveSession && wsLiveSession.kind === 'video' && wsLiveSession.studentId === studentId) wsLiveEndSession();
 }
-function wsLiveEndSession(){
-  if(wsLiveSession) wsLiveSend({ type: 'session-end', from: wsLiveDeviceId, studentId: wsLiveSession.studentId });
+function wsLiveEndSession(reason){
+  if(wsLiveSession) wsLiveSend({ type: 'session-end', from: wsLiveDeviceId, studentId: wsLiveSession.studentId, reason: reason || '' });
   wsLiveSession = null;
   wsLiveStopSnapshots();
   Object.values(wsLivePCs).forEach(pc=>{ try{ pc.close(); }catch(e){} });
@@ -6804,8 +7001,9 @@ async function wsLiveSendSnapshot(){
   const el = wsLiveSnapshotElement();
   if(!el) return;
   try{
-    const canvas = await html2canvas(el, { scale: 0.5, backgroundColor: '#ffffff', logging: false });
-    let url = canvas.toDataURL('image/jpeg', 0.5);
+    const canvas = await html2canvas(el, { scale: 0.75, backgroundColor: '#ffffff', logging: false });
+    let url = canvas.toDataURL('image/jpeg', 0.7);
+    if(url.length > 300000) url = canvas.toDataURL('image/jpeg', 0.5);
     if(url.length > 300000) url = canvas.toDataURL('image/jpeg', 0.3);
     if(url.length > 300000) return;
     wsLiveSend({ type: 'snapshot', from: wsLiveDeviceId, studentId: wsLiveSession.studentId, kind: wsLiveSession.kind, subject: wsLiveSession.subject, ts: Date.now(), img: url });
@@ -6815,6 +7013,8 @@ async function wsLiveSendSnapshot(){
 /* ---- Parent viewer side (runs only while the Live overlay is open) ---- */
 let liveViewChannel = null;
 let liveViewParentId = null;
+let liveViewTypingChannel = null;
+let liveViewTyping = {}; // studentId -> {text, ts}
 let liveViewHeartbeat = null;
 let liveViewPollTimer = null;
 let liveViewSessions = {}; // studentId -> {kind, subject, dateStr, deviceId}
@@ -6831,7 +7031,8 @@ function liveViewClose(){
     if(liveViewPollTimer) clearInterval(liveViewPollTimer);
     Object.values(liveViewPCs).forEach(r=>{ try{ r.pc.close(); }catch(e){} });
     if(liveViewChannel){ try{ liveViewChannel.unsubscribe(); }catch(e){} }
-    liveViewChannel = null; liveViewHeartbeat = null; liveViewPollTimer = null;
+    if(liveViewTypingChannel){ try{ liveViewTypingChannel.unsubscribe(); }catch(e){} }
+    liveViewChannel = null; liveViewTypingChannel = null; liveViewTyping = {}; liveViewHeartbeat = null; liveViewPollTimer = null;
     liveViewPCs = {}; liveViewSessions = {};
   }catch(e){}
 }
@@ -6854,6 +7055,11 @@ async function openLiveViewModal(){
       liveViewChannel.subscribe();
       liveViewSend({ type: 'parent-alive', parentId: liveViewParentId });
       liveViewHeartbeat = setInterval(()=> liveViewSend({ type: 'parent-alive', parentId: liveViewParentId }), 10000);
+      try{
+        liveViewTypingChannel = sb.channel('live-typing', { config: { broadcast: { self: false } } });
+        liveViewTypingChannel.on('broadcast', { event: 'field' }, (msg)=>{ liveViewOnTyping(msg.payload || {}); });
+        liveViewTypingChannel.subscribe();
+      }catch(e){}
     }
   }catch(e){}
   liveViewPollTimer = setInterval(liveViewPollAll, 5000);
@@ -6890,6 +7096,33 @@ function liveViewSetStatus(studentId, text){
   const st = document.querySelector('[data-live-student="' + studentId + '"] .live-status');
   if(st) st.textContent = text;
 }
+/* Live typing on the parent card: as a student types, their card shows
+   the words themselves (not just a snapshot every ~25s), so the parent
+   watches the work happen instead of a blurry still. */
+function liveViewOnTyping(p){
+  if(!p || !p.studentId || p.cid === LIVE_CID) return;
+  const text = (p.value || '').toString().trim();
+  liveViewTyping[p.studentId] = { text: text, ts: Date.now() };
+  const card = document.querySelector('[data-live-student="' + p.studentId + '"]');
+  if(card) liveViewRenderTypingLine(card, p.studentId);
+}
+function liveViewRenderTypingLine(card, studentId){
+  const t = liveViewTyping[studentId];
+  let line = card.querySelector('.live-typing');
+  if(!t || Date.now() - t.ts > 8000){
+    if(line) line.remove();
+    return;
+  }
+  if(!line){
+    line = document.createElement('div');
+    line.className = 'live-typing';
+    line.style.cssText = 'font-size:13px;margin-top:6px;line-height:1.5;color:var(--ink-soft);';
+    const prog = card.querySelector('.live-progress');
+    if(prog) prog.after(line); else card.appendChild(line);
+  }
+  const preview = t.text ? 'Typing: \u201C' + t.text.slice(0, 90) + (t.text.length > 90 ? '\u2026' : '') + '\u201D' : 'Typing\u2026';
+  line.textContent = '✏️ ' + preview;
+}
 async function liveViewOnMessage(p){
   if(!p || p.from === liveViewParentId) return;
   if(p.type === 'session'){
@@ -6904,10 +7137,13 @@ async function liveViewOnMessage(p){
     if(card){
       const v = card.querySelector('.live-video');
       if(v){ try{ v.srcObject = null; }catch(e){} }
-      liveViewSetStatus(p.studentId, 'Session ended');
+      liveViewSetStatus(p.studentId, p.reason === 'camera-lost' ? 'Camera blocked — sheet paused' : 'Session ended');
       const prog = card.querySelector('.live-progress');
       if(prog) prog.textContent = '';
+      const tl = card.querySelector('.live-typing');
+      if(tl) tl.remove();
     }
+    delete liveViewTyping[p.studentId];
   } else if(p.type === 'snapshot'){
     const card = liveViewEnsureCard(p.studentId);
     if(!card) return;
@@ -6978,12 +7214,22 @@ async function liveViewPollStudent(studentId, sess){
       prog.textContent = label + ' worksheet · ' + aCount + ' answers written · ' + cCount + ' checks marked done';
     }
   }catch(e){}
+  if(card) liveViewRenderTypingLine(card, studentId);
 }
 async function applyWorksheetGate(studentId, subject, wd, forceDayNum){
   const gateEl = document.getElementById('worksheetGate');
   const cols = document.querySelector('#worksheetOverlay .ws-cols');
   const util = document.getElementById('wsUtilBar');
   if(!gateEl) return;
+  // A parent previewing a worksheet never triggers the camera: the sheet
+  // opens straight away, with no monitor box and no live session.
+  if(wsParentSession){
+    stopGateTracking();
+    gateEl.style.display = 'none'; gateEl.innerHTML = '';
+    if(cols) cols.style.display = '';
+    if(util) util.style.display = 'block';
+    return;
+  }
   // Editing a previous day (from the Planner): no caution/video gate —
   // the work is being completed or fixed after the fact.
   if(typeof currentWorksheetCtx !== 'undefined' && currentWorksheetCtx && currentWorksheetCtx.dateStr && currentWorksheetCtx.dateStr !== state.dateStr){
@@ -7120,6 +7366,7 @@ function initGatePlayer(video, onComplete, resume){
         if(!gatePlayer || !gatePlayer.getCurrentTime) return;
         const ps = gatePlayer.getPlayerState ? gatePlayer.getPlayerState() : -1;
         if(ps === 1){
+          idleStay();
           if(!gateLiveDenied && gateCtx) wsLiveVideoStart(gateCtx.studentId, gateCtx.subject, document.getElementById('worksheetGate')).then(r=>{ if(r === false) gateLiveDenied = true; });
           const t = gatePlayer.getCurrentTime();
           const dur = gatePlayer.getDuration() || 0;
@@ -7169,15 +7416,45 @@ function finishGateVideo(onComplete){
    the worksheet requirement, and progress resumes across devices. */
 const vidPlayers = {}; // player element id -> tracking state
 let vidPlayerSeq = 0;
+function wsSyncBoardVideoState(st){
+  try{
+    if(!st.player || !st.player.getCurrentTime) return;
+    const t = st.player.getCurrentTime();
+    if(st.lastT >= 0){
+      const delta = t - st.lastT;
+      if(delta > 0 && delta <= 1.2) st.acc += delta;
+    }
+    if(t > st.pos) st.pos = t;
+  }catch(e){}
+}
 function destroyBoardPlayers(){
   Object.keys(vidPlayers).forEach(k=>{
     const st = vidPlayers[k];
     if(st.ticker) clearInterval(st.ticker);
+    wsSyncBoardVideoState(st);
     if(!st.done && st.acc > 0) saveBoardGateProgress(st);
-    try { st.player.destroy(); } catch(e){}
+    try { if(st.player && st.player.destroy) st.player.destroy(); } catch(e){}
     delete vidPlayers[k];
   });
 }
+/* Awaited video flush for the update reload: board videos (synced from
+   their players) plus the gate video, so a reload never loses a second
+   of watch time. */
+async function wsFlushVideoProgress(){
+  const jobs = [];
+  Object.values(vidPlayers).forEach(st=>{
+    try{
+      wsSyncBoardVideoState(st);
+      const p = saveBoardGateProgress(st);
+      if(p) jobs.push(p);
+    }catch(e){}
+  });
+  if(typeof gateCtx !== 'undefined' && gateCtx){
+    try{ const p = saveGateProgress(); if(p) jobs.push(p); }catch(e){}
+  }
+  await Promise.all(jobs);
+}
+window.addEventListener('pagehide', ()=>{ try{ destroyBoardPlayers(); }catch(e){} });
 function saveBoardGateProgress(st){
   if(!st || !st.studentId || !st.subject) return;
   const key = state.dateStr + '|' + st.subject + '|' + st.studentId;
@@ -7187,7 +7464,7 @@ function saveBoardGateProgress(st){
   if(st.dur) rec.dur = Math.floor(st.dur);
   if(st.done) rec.watched = true;
   st.lastSaveAcc = st.acc;
-  storageSet(wsGateKey(state.dateStr, st.studentId, st.subject), rec);
+  return storageSet(wsGateKey(state.dateStr, st.studentId, st.subject), rec);
 }
 function vidFacadeHTML(box, again){
   const vid = box.dataset.vid;
@@ -7242,6 +7519,7 @@ function activateVidBox(box){
       if(!player || !player.getCurrentTime) return;
       const ps = player.getPlayerState ? player.getPlayerState() : -1;
       if(ps === 1){
+        idleStay();
         if(!st.liveDenied && st.studentId) wsLiveVideoStart(st.studentId, st.subject, box.closest('.student-card')).then(r=>{ if(r === false) st.liveDenied = true; });
         const t = player.getCurrentTime();
         const dur = player.getDuration() || 0;
@@ -7865,7 +8143,7 @@ if(!SUPABASE_CONFIGURED){
    answers and checks autosave continuously, so after reload the student
    just reopens the worksheet. DEPLOY ORDER MATTERS: push index.html first,
    verify Pages rebuilt, THEN push version.json (see AGENTS.md). */
-const APP_VERSION = '20261028i';
+const APP_VERSION = '20261028j';
 let wsUpdatePromptShown = false;
 async function wsCheckAppVersion(){
   if(wsUpdatePromptShown) return;
@@ -7900,7 +8178,7 @@ function wsShowUpdatePrompt(newVer){
     const remain = Math.max(0, Math.ceil((target - Date.now()) / 1000));
     const el = document.getElementById('updateCountdown');
     if(el) el.textContent = remain;
-    if(Date.now() >= target){ (async ()=>{ await wsFlushWorksheetSaves(); await wsFlushTestSaves(); wsReloadForUpdate(newVer); })(); }
+    if(Date.now() >= target){ (async ()=>{ await wsFlushWorksheetSaves(); await wsFlushTestSaves(); await wsFlushVideoProgress(); wsReloadForUpdate(newVer); })(); }
     else setTimeout(tick, 200);
   };
   tick();
@@ -7944,6 +8222,7 @@ function bootApp(){
   setInterval(async ()=>{
     const ae = document.activeElement;
     if(ae && /^(TEXTAREA|INPUT)$/.test(ae.tagName) && document.getElementById('board').contains(ae)) return; // don't rebuild the board mid-typing
+    if(Object.values(vidPlayers).some(st=>{ try{ return !!(st.player && st.player.getPlayerState && st.player.getPlayerState() === 1); }catch(e){ return false; } })) return; // don't rebuild mid-video
     await loadAndRender();
   }, 90000);
 }
