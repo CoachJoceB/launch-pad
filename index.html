@@ -3456,6 +3456,7 @@ let wsActiveStudent = null;
 // Each edit/check bumps wsSeq; a change only clears marks from a check that
 // ran before that edit, never feedback created after it.
 let wsSeq = 0;
+let wsTextSaveTimer = null;
 const wsCheckSeq = {};    // itemId -> seq of its most recent check
 
 // Loose normalization for kid-typed answers: ignore case, punctuation,
@@ -4415,6 +4416,34 @@ function wsRunGroupCheck(container, studentId, gi){
   wsScrollReadingToGroup(container, g);
 }
 
+/* Flush open work to the cloud now, so a reload or lock can never lose
+   text typed but not yet blurred (or a test answer inside its debounce).
+   Called before the update reload, before the idle lock, and on every
+   worksheet close. Safe to call when nothing is open (no-op). */
+async function wsFlushWorksheetSaves(){
+  try{
+    const ov = document.getElementById('worksheetOverlay');
+    const ctx = (typeof currentWorksheetCtx !== 'undefined') ? currentWorksheetCtx : null;
+    const sid = (typeof wsActiveStudent !== 'undefined') ? wsActiveStudent : null;
+    if(!ov || !ov.classList.contains('open') || !ctx || !sid) return;
+    const entry = worksheetCache[sid];
+    if(!entry) return;
+    ov.querySelectorAll('[data-wsfield]').forEach(el=>{
+      if(el.type === 'checkbox') entry.answers[el.dataset.wsfield] = el.checked ? 'x' : '';
+      else entry.answers[el.dataset.wsfield] = el.value;
+    });
+    await storageSet(worksheetAnswersKey(ctx.dateStr, sid, ctx.subject), entry.answers);
+  }catch(e){}
+}
+async function wsFlushTestSaves(){
+  try{
+    for(const sid of Object.keys(testInputSaveTimers)){
+      clearTimeout(testInputSaveTimers[sid]);
+      delete testInputSaveTimers[sid];
+      await saveTestAnswers(sid);
+    }
+  }catch(e){}
+}
 function wireWorksheetFormInputs(container, studentId){
   const entry = worksheetCache[studentId];
   const worksheet = entry.worksheet;
@@ -4456,8 +4485,16 @@ function wireWorksheetFormInputs(container, studentId){
       if(el.hasAttribute('data-wsmatchletter')) wsRefreshMatchBanks(container);
       const ge = el.closest('[data-wsgroup]');
       if(ge) wsRefreshWordBank(ge);
+      // Save as they type (500ms debounce), not only on blur: a reload,
+      // lock, or close must never lose a paragraph typed but never blurred.
+      entry.answers[el.dataset.wsfield] = el.value;
+      const saveKey = worksheetAnswersKey(currentWorksheetCtx.dateStr, studentId, currentWorksheetCtx.subject);
+      const saveAnswers = entry.answers;
+      clearTimeout(wsTextSaveTimer);
+      wsTextSaveTimer = setTimeout(()=>{ storageSet(saveKey, saveAnswers); }, 500);
     });
     el.addEventListener('change', async ()=>{
+      clearTimeout(wsTextSaveTimer);
       const editSeq = ++wsSeq;
       const itemId = el.dataset.wsitem;
       entry.answers[el.dataset.wsfield] = el.value;
@@ -5825,6 +5862,7 @@ closeAllModals = function(force){
     const prog = wsCurrentProgress();
     if(prog && prog.total > 0 && prog.done < prog.total){ wsShowClosePrompt(prog); return; }
   }
+  wsFlushWorksheetSaves();
   wsStopWorksheetCamera();
   _origCloseAllModals();
 };
@@ -6552,6 +6590,8 @@ async function idleLock(){
   const overlay = document.getElementById('idleOverlay');
   if(overlay) overlay.classList.remove('open');
   idleClear();
+  await wsFlushWorksheetSaves();
+  await wsFlushTestSaves();
   try{ closeAllModals(true); }catch(e){}
   try{ wsStopCamera(); }catch(e){}
   try{ wsLiveEndSession(); }catch(e){}
@@ -7825,7 +7865,7 @@ if(!SUPABASE_CONFIGURED){
    answers and checks autosave continuously, so after reload the student
    just reopens the worksheet. DEPLOY ORDER MATTERS: push index.html first,
    verify Pages rebuilt, THEN push version.json (see AGENTS.md). */
-const APP_VERSION = '20261028h';
+const APP_VERSION = '20261028i';
 let wsUpdatePromptShown = false;
 async function wsCheckAppVersion(){
   if(wsUpdatePromptShown) return;
@@ -7860,7 +7900,7 @@ function wsShowUpdatePrompt(newVer){
     const remain = Math.max(0, Math.ceil((target - Date.now()) / 1000));
     const el = document.getElementById('updateCountdown');
     if(el) el.textContent = remain;
-    if(Date.now() >= target){ wsReloadForUpdate(newVer); }
+    if(Date.now() >= target){ (async ()=>{ await wsFlushWorksheetSaves(); await wsFlushTestSaves(); wsReloadForUpdate(newVer); })(); }
     else setTimeout(tick, 200);
   };
   tick();
