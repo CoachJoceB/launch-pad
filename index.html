@@ -223,6 +223,16 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
   .ws-monitor-text{font-size:13.5px;font-weight:700;color:#8b1a1a;display:flex;align-items:center;gap:7px;}
   .ws-monitor-dot{width:10px;height:10px;border-radius:50%;background:#d32f2f;flex:none;animation:wsMonitorBlink 1.2s infinite;}
   @keyframes wsMonitorBlink{0%,100%{opacity:1}50%{opacity:.35}}
+  /* Parent live view: one card per student with camera, snapshot, progress. */
+  .live-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;}
+  .live-card{border:1.5px solid var(--line-light);border-radius:10px;padding:12px;background:#fff;}
+  .live-card-head{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:8px;}
+  .live-status{font-size:12px;font-weight:700;color:var(--ink-soft);}
+  .live-empty{font-size:13px;color:var(--ink-soft);line-height:1.5;}
+  .live-video{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:8px;background:#000;display:block;}
+  .live-img{width:100%;border-radius:8px;display:block;margin-top:8px;}
+  .live-shot-time{font-size:11.5px;color:var(--ink-soft);margin-top:4px;}
+  .live-progress{font-size:13px;margin-top:8px;line-height:1.5;}
   /* Worksheet utility bar: new words + progress + today's plan, moved to the
      top of the modal and sticky while scrolling. In-flow (never a fixed
      overlay) so it can never cover readable text. */
@@ -419,6 +429,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
     </div>
     <button class="icon-btn labeled" id="openArchive" title="Planner" aria-label="Planner">📅 <span class="lbl">Planner</span></button>
     <button class="icon-btn labeled" id="previewUpcomingBtn" title="Preview upcoming days" aria-label="Preview upcoming days">🔮 <span class="lbl">Preview</span></button>
+    <button class="icon-btn labeled" id="openLiveViewBtn" title="Parent live view" aria-label="Parent live view">📺 <span class="lbl">Live</span></button>
     <a class="icon-btn labeled" href="courses.html" title="College coursework (SEU dual enrollment)" aria-label="College coursework, SEU dual enrollment" style="text-decoration:none;">🎓 <span class="lbl">Courses</span></a>
     <button class="icon-btn labeled" id="openSettings" title="Settings — day settings, students, grading, weekly plan" aria-label="Settings">⚙️ <span class="lbl">Settings</span></button>
   </div>
@@ -665,6 +676,17 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
 <div class="save-toast" id="toast">All changes saved</div>
 <div id="liveBadge" style="display:none;position:fixed;left:16px;bottom:16px;z-index:9999;background:#1B2A4E;color:#fff;font-size:13px;font-weight:600;padding:8px 14px;border-radius:999px;box-shadow:0 4px 14px rgba(0,0,0,.25);pointer-events:none;"></div>
 
+
+<div class="modal-overlay" id="liveViewOverlay">
+  <div class="modal wide">
+    <h3>📺 Parent Live View</h3>
+    <div class="sub">Live cameras, worksheet snapshots, and progress while the kids work. Feeds appear as each student opens a monitored worksheet or test. Nothing is recorded.</div>
+    <div id="liveViewContent"></div>
+    <div class="modal-actions">
+      <button class="btn btn-ghost" data-close>Close</button>
+    </div>
+  </div>
+</div>
 
 <!-- PIN DIALOG -->
 <div class="modal-overlay" id="pinOverlay">
@@ -2594,7 +2616,7 @@ async function renderBoard(){
   // (A pending camera check still shows the form fields, so it counts as live.)
   const testLive = !!document.querySelector('#testFormArea [data-testfield]');
   const wsOpen = !!document.getElementById('worksheetOverlay') && document.getElementById('worksheetOverlay').classList.contains('open');
-  if(!testLive && !wsOpen) wsStopCamera();
+  if(!testLive && !wsOpen){ wsStopCamera(); wsLiveEndSession(); }
   if(savedY > 0) window.scrollTo(0, savedY);
   const grids = document.querySelectorAll('.students-grid');
   savedGridLefts.forEach((left, idx)=>{
@@ -3093,6 +3115,7 @@ function afterTestSectionRender(){
     // auto-grow measurements above still work.)
     formArea.style.visibility = 'hidden';
     await wsGateTestCamera(formArea, id);
+    if(wsCameraStream) wsLiveStartSession(id, 'test', 'test');
   }
   tabsWrap.querySelectorAll('.modal-tab').forEach(t=>{
     t.addEventListener('click', ()=> showStudent(t.dataset.testtab));
@@ -5742,7 +5765,7 @@ function switchModalTab(overlay, tabId){
   overlay.querySelectorAll('.modal-tab').forEach(t=>t.classList.toggle('active', t.dataset.tab===tabId));
   overlay.querySelectorAll('.tab-panel').forEach(p=>p.classList.toggle('active', p.id===tabId));
 }
-function closeAllModals(){ stopGateTracking(); document.querySelectorAll('.modal-overlay').forEach(o=>o.classList.remove('open')); }
+function closeAllModals(){ stopGateTracking(); liveViewClose(); document.querySelectorAll('.modal-overlay').forEach(o=>o.classList.remove('open')); }
 // Worksheet close guard: closing an unfinished worksheet asks first,
 // because grades only calculate once every part is marked done.
 const _origCloseAllModals = closeAllModals;
@@ -6148,9 +6171,11 @@ function wsStopCamera(){
 function wsStopWorksheetCamera(){
   if(document.querySelector('[data-monitor-loc="test"]') && wsCameraStream){
     document.querySelectorAll('[data-monitor-loc="worksheet"]').forEach(b=>b.remove());
+    if(typeof activeTestStudentId !== 'undefined' && activeTestStudentId) wsLiveStartSession(activeTestStudentId, 'test', 'test');
     return;
   }
   wsStopCamera();
+  wsLiveEndSession();
 }
 function wsAttachMonitorVideos(){
   if(!wsCameraStream) return;
@@ -6220,10 +6245,300 @@ async function wsGateTestCamera(formArea, studentId){
       wireTestFormInputs(formArea, studentId);
       wireAutoGrow(formArea);
       wsShowMonitorBox('test', formArea);
+      wsLiveStartSession(studentId, 'test', 'test');
     });
   } finally {
     formArea.style.visibility = '';
   }
+}
+/* ================= PARENT LIVE VIEW =================
+   PIN-gated parent view (header Live button): live camera feeds from the
+   kids' devices via WebRTC, periodic worksheet snapshots, and answer/check
+   progress polled from cloud storage. Live only: nothing is recorded or
+   stored. Signaling + snapshots travel on a Supabase Realtime broadcast
+   channel named with a family key stored in cloud settings (live-view-key,
+   created when the parent view first opens); a device only publishes while
+   a monitored session is active and a parent view is open. WebRTC media is
+   encrypted in transit by the protocol; snapshots travel over the same TLS
+   channel as the rest of the dashboard. Kid devices publish, the parent
+   view subscribes; both sides share this page's code but run on different
+   devices. */
+const wsLiveDeviceId = 'd-' + Math.random().toString(36).slice(2, 10);
+let wsLiveChannel = null;
+let wsLiveKey = null;
+let wsLiveSession = null; // {studentId, kind, subject, dateStr}
+let wsLiveParents = {}; // parentId -> lastSeen ms
+let wsLivePCs = {}; // parentId -> RTCPeerConnection
+let wsLiveSnapTimer = null;
+
+function wsLiveSend(payload){
+  if(!wsLiveChannel) return;
+  try{ wsLiveChannel.send({ type: 'broadcast', event: 'live', payload }); }catch(e){}
+}
+async function wsLiveEnsureChannel(){
+  if(wsLiveChannel) return true;
+  try{
+    if(typeof sb === 'undefined' || !sb) return false;
+    if(!wsLiveKey){ try{ wsLiveKey = await storageGet('live-view-key'); }catch(e){ wsLiveKey = null; } }
+    if(!wsLiveKey) return false;
+    wsLiveChannel = sb.channel('live-parent-' + wsLiveKey, { config: { broadcast: { self: false } } });
+    wsLiveChannel.on('broadcast', { event: 'live' }, (msg)=>{ wsLiveOnMessage(msg.payload || {}); });
+    wsLiveChannel.subscribe();
+    return true;
+  }catch(e){ return false; }
+}
+function wsLiveParentFresh(){
+  const now = Date.now();
+  return Object.keys(wsLiveParents).some(pid=> now - wsLiveParents[pid] < 20000);
+}
+async function wsLiveStartSession(studentId, kind, subject){
+  const sess = { studentId, kind, subject,
+    dateStr: (typeof currentWorksheetCtx !== 'undefined' && currentWorksheetCtx) ? currentWorksheetCtx.dateStr : state.dateStr };
+  wsLiveSession = sess;
+  const ok = await wsLiveEnsureChannel();
+  if(wsLiveSession !== sess) return; // ended or replaced while joining: stay quiet
+  if(!ok){ wsLiveStartSnapshots(); return; }
+  wsLiveSend({ type: 'session', from: wsLiveDeviceId, studentId, kind, subject, dateStr: wsLiveSession.dateStr });
+  Object.keys(wsLiveParents).forEach(pid=>{ if(Date.now() - wsLiveParents[pid] < 20000) wsLiveOfferTo(pid); });
+  wsLiveStartSnapshots();
+}
+function wsLiveEndSession(){
+  if(wsLiveSession) wsLiveSend({ type: 'session-end', from: wsLiveDeviceId, studentId: wsLiveSession.studentId });
+  wsLiveSession = null;
+  wsLiveStopSnapshots();
+  Object.values(wsLivePCs).forEach(pc=>{ try{ pc.close(); }catch(e){} });
+  wsLivePCs = {};
+}
+async function wsLiveOfferTo(parentId){
+  if(!wsLiveSession || !wsCameraStream || wsLivePCs[parentId]) return;
+  try{
+    const pc = new RTCPeerConnection({ iceServers: [{ urls: 'stun:stun.l.google.com:19302' }] });
+    wsLivePCs[parentId] = pc;
+    wsCameraStream.getVideoTracks().forEach(t=>{ try{ pc.addTrack(t, wsCameraStream); }catch(e){} });
+    pc.onicecandidate = (e)=>{ if(e.candidate) wsLiveSend({ type: 'ice', to: parentId, from: wsLiveDeviceId, candidate: e.candidate.toJSON() }); };
+    pc.onconnectionstatechange = ()=>{ if(pc.connectionState === 'failed' || pc.connectionState === 'closed'){ try{ pc.close(); }catch(e){} if(wsLivePCs[parentId] === pc) delete wsLivePCs[parentId]; } };
+    const offer = await pc.createOffer();
+    await pc.setLocalDescription(offer);
+    wsLiveSend({ type: 'offer', to: parentId, from: wsLiveDeviceId, studentId: wsLiveSession.studentId, sdp: pc.localDescription });
+  }catch(e){}
+}
+function wsLiveOnMessage(p){
+  if(!p || p.from === wsLiveDeviceId) return;
+  if(p.type === 'parent-alive' && p.parentId){
+    wsLiveParents[p.parentId] = Date.now();
+    if(wsLiveSession && wsCameraStream) wsLiveOfferTo(p.parentId);
+  } else if(p.type === 'parent-bye' && p.parentId){
+    delete wsLiveParents[p.parentId];
+    const pc = wsLivePCs[p.parentId];
+    if(pc){ try{ pc.close(); }catch(e){} }
+    delete wsLivePCs[p.parentId];
+  } else if(p.type === 'answer' && p.to === wsLiveDeviceId){
+    const pc = wsLivePCs[p.from];
+    if(pc && p.sdp){ try{ pc.setRemoteDescription(new RTCSessionDescription(p.sdp)); }catch(e){} }
+  } else if(p.type === 'ice' && p.to === wsLiveDeviceId){
+    const pc = wsLivePCs[p.from];
+    if(pc && p.candidate){ try{ pc.addIceCandidate(new RTCIceCandidate(p.candidate)); }catch(e){} }
+  }
+}
+function wsLiveStartSnapshots(){
+  if(wsLiveSnapTimer) return;
+  wsLiveSnapTimer = setInterval(wsLiveSendSnapshot, 25000);
+  setTimeout(wsLiveSendSnapshot, 1500);
+}
+function wsLiveStopSnapshots(){
+  if(wsLiveSnapTimer){ clearInterval(wsLiveSnapTimer); wsLiveSnapTimer = null; }
+}
+function wsLiveSnapshotElement(){
+  const ov = document.getElementById('worksheetOverlay');
+  if(ov && ov.classList.contains('open')){
+    const cols = document.querySelector('#worksheetOverlay .ws-cols');
+    if(cols && cols.offsetWidth > 0) return cols;
+    return null;
+  }
+  const tf = document.getElementById('testFormArea');
+  if(tf && tf.offsetWidth > 0 && tf.querySelector('[data-testfield]')) return tf;
+  return null;
+}
+async function wsLiveSendSnapshot(){
+  if(!wsLiveSession) return;
+  if(!wsLiveChannel){
+    const ok = await wsLiveEnsureChannel();
+    if(ok && wsLiveSession) wsLiveSend({ type: 'session', from: wsLiveDeviceId, studentId: wsLiveSession.studentId, kind: wsLiveSession.kind, subject: wsLiveSession.subject, dateStr: wsLiveSession.dateStr });
+    else return;
+  }
+  if(!wsLiveParentFresh()) return;
+  if(typeof html2canvas === 'undefined') return;
+  const el = wsLiveSnapshotElement();
+  if(!el) return;
+  try{
+    const canvas = await html2canvas(el, { scale: 0.5, backgroundColor: '#ffffff', logging: false });
+    let url = canvas.toDataURL('image/jpeg', 0.5);
+    if(url.length > 300000) url = canvas.toDataURL('image/jpeg', 0.3);
+    if(url.length > 300000) return;
+    wsLiveSend({ type: 'snapshot', from: wsLiveDeviceId, studentId: wsLiveSession.studentId, kind: wsLiveSession.kind, subject: wsLiveSession.subject, ts: Date.now(), img: url });
+  }catch(e){}
+}
+
+/* ---- Parent viewer side (runs only while the Live overlay is open) ---- */
+let liveViewChannel = null;
+let liveViewParentId = null;
+let liveViewHeartbeat = null;
+let liveViewPollTimer = null;
+let liveViewSessions = {}; // studentId -> {kind, subject, dateStr, deviceId}
+let liveViewPCs = {}; // deviceId -> {pc, studentId}
+
+function liveViewSend(payload){
+  if(!liveViewChannel) return;
+  try{ liveViewChannel.send({ type: 'broadcast', event: 'live', payload }); }catch(e){}
+}
+function liveViewClose(){
+  try{
+    if(liveViewChannel) liveViewSend({ type: 'parent-bye', parentId: liveViewParentId });
+    if(liveViewHeartbeat) clearInterval(liveViewHeartbeat);
+    if(liveViewPollTimer) clearInterval(liveViewPollTimer);
+    Object.values(liveViewPCs).forEach(r=>{ try{ r.pc.close(); }catch(e){} });
+    if(liveViewChannel){ try{ liveViewChannel.unsubscribe(); }catch(e){} }
+    liveViewChannel = null; liveViewHeartbeat = null; liveViewPollTimer = null;
+    liveViewPCs = {}; liveViewSessions = {};
+  }catch(e){}
+}
+async function openLiveViewModal(){
+  const content = document.getElementById('liveViewContent');
+  if(content) content.innerHTML = '<div class="live-grid">' + (state.students || []).map(s=> liveViewSkeletonHTML(s)).join('') + '</div>';
+  document.getElementById('liveViewOverlay').classList.add('open');
+  liveViewParentId = 'p-' + Math.random().toString(36).slice(2, 10);
+  try{
+    if(typeof sb !== 'undefined' && sb){
+      let key = null;
+      try{ key = await storageGet('live-view-key'); }catch(e){}
+      if(!key){
+        key = 'lv-' + Math.random().toString(36).slice(2, 10) + Date.now().toString(36);
+        try{ await storageSet('live-view-key', key); }catch(e){}
+      }
+      liveViewChannel = sb.channel('live-parent-' + key, { config: { broadcast: { self: false } } });
+      liveViewChannel.on('broadcast', { event: 'live' }, (msg)=>{ liveViewOnMessage(msg.payload || {}); });
+      liveViewChannel.subscribe();
+      liveViewSend({ type: 'parent-alive', parentId: liveViewParentId });
+      liveViewHeartbeat = setInterval(()=> liveViewSend({ type: 'parent-alive', parentId: liveViewParentId }), 10000);
+    }
+  }catch(e){}
+  liveViewPollTimer = setInterval(liveViewPollAll, 5000);
+  liveViewPollAll();
+}
+function liveViewSkeletonHTML(s){
+  return '<div class="live-card" data-live-student="' + s.id + '">'
+    + '<div class="live-card-head"><strong>' + esc(liveStudentName(s.id)) + '</strong> <span class="live-status">No session</span></div>'
+    + '<div class="live-empty">No session yet. A feed appears when this student opens a monitored worksheet or test.</div>'
+    + '</div>';
+}
+function liveViewFullCardHTML(s){
+  return '<div class="live-card" data-live-student="' + s.id + '">'
+    + '<div class="live-card-head"><strong>' + esc(liveStudentName(s.id)) + '</strong> <span class="live-status">Live</span></div>'
+    + '<video class="live-video" autoplay muted playsinline></video>'
+    + '<img class="live-img" style="display:none;">'
+    + '<div class="live-shot-time"></div>'
+    + '<div class="live-progress"></div>'
+    + '</div>';
+}
+function liveViewEnsureCard(studentId){
+  let card = document.querySelector('[data-live-student="' + studentId + '"]');
+  if(card && card.querySelector('.live-video')) return card;
+  const s = (state.students || []).find(x=> x.id === studentId);
+  const html = liveViewFullCardHTML(s || { id: studentId, name: 'Student' });
+  if(card){ card.outerHTML = html; }
+  else {
+    const grid = document.querySelector('#liveViewContent .live-grid');
+    if(grid) grid.insertAdjacentHTML('beforeend', html);
+  }
+  return document.querySelector('[data-live-student="' + studentId + '"]');
+}
+function liveViewSetStatus(studentId, text){
+  const st = document.querySelector('[data-live-student="' + studentId + '"] .live-status');
+  if(st) st.textContent = text;
+}
+async function liveViewOnMessage(p){
+  if(!p || p.from === liveViewParentId) return;
+  if(p.type === 'session'){
+    liveViewSessions[p.studentId] = { kind: p.kind, subject: p.subject, dateStr: p.dateStr, deviceId: p.from };
+    liveViewEnsureCard(p.studentId);
+    liveViewSetStatus(p.studentId, 'Live: ' + (p.kind === 'test' ? 'Friday test' : (typeof materialSubjectLabel === 'function' ? materialSubjectLabel(p.subject) : p.subject) + ' worksheet'));
+    liveViewPollStudent(p.studentId, liveViewSessions[p.studentId]);
+  } else if(p.type === 'session-end'){
+    delete liveViewSessions[p.studentId];
+    const card = document.querySelector('[data-live-student="' + p.studentId + '"]');
+    if(card){
+      const v = card.querySelector('.live-video');
+      if(v){ try{ v.srcObject = null; }catch(e){} }
+      liveViewSetStatus(p.studentId, 'Session ended');
+      const prog = card.querySelector('.live-progress');
+      if(prog) prog.textContent = '';
+    }
+  } else if(p.type === 'snapshot'){
+    const card = liveViewEnsureCard(p.studentId);
+    if(!card) return;
+    const img = card.querySelector('.live-img');
+    if(img){ img.src = p.img; img.style.display = 'block'; }
+    const t = card.querySelector('.live-shot-time');
+    if(t) t.textContent = 'Worksheet snapshot ' + new Date(p.ts).toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', second: '2-digit' });
+  } else if(p.type === 'offer' && p.to === liveViewParentId){
+    liveViewOnOffer(p);
+  } else if(p.type === 'ice' && p.to === liveViewParentId){
+    const rec = liveViewPCs[p.from];
+    if(rec && p.candidate){ try{ rec.pc.addIceCandidate(new RTCIceCandidate(p.candidate)); }catch(e){} }
+  }
+}
+async function liveViewOnOffer(p){
+  const old = liveViewPCs[p.from];
+  if(old){ try{ old.pc.close(); }catch(e){} }
+  const card = liveViewEnsureCard(p.studentId);
+  liveViewSetStatus(p.studentId, 'Connecting camera…');
+  try{
+    const pc = new RTCPeerConnection({ iceServers: [{ urls: 'stun:stun.l.google.com:19302' }] });
+    liveViewPCs[p.from] = { pc, studentId: p.studentId };
+    pc.onicecandidate = (e)=>{ if(e.candidate) liveViewSend({ type: 'ice', to: p.from, from: liveViewParentId, candidate: e.candidate.toJSON() }); };
+    pc.onconnectionstatechange = ()=>{
+      if(pc.connectionState === 'failed' || pc.connectionState === 'closed'){
+        const st = document.querySelector('[data-live-student="' + p.studentId + '"] .live-status');
+        if(st && st.textContent !== 'Session ended') st.textContent = 'Camera unavailable';
+      }
+    };
+    pc.ontrack = (e)=>{
+      const v = document.querySelector('[data-live-student="' + p.studentId + '"] .live-video');
+      if(v && e.streams[0]){ try{ v.srcObject = e.streams[0]; v.play().catch(()=>{}); }catch(err){} }
+      liveViewSetStatus(p.studentId, 'Camera live');
+    };
+    await pc.setRemoteDescription(new RTCSessionDescription(p.sdp));
+    const answer = await pc.createAnswer();
+    await pc.setLocalDescription(answer);
+    liveViewSend({ type: 'answer', to: p.from, from: liveViewParentId, sdp: pc.localDescription });
+  }catch(e){
+    liveViewSetStatus(p.studentId, 'Camera unavailable');
+  }
+}
+function liveViewPollAll(){
+  Object.keys(liveViewSessions).forEach(id=> liveViewPollStudent(id, liveViewSessions[id]));
+}
+async function liveViewPollStudent(studentId, sess){
+  const card = document.querySelector('[data-live-student="' + studentId + '"]');
+  if(!card || !sess) return;
+  const prog = card.querySelector('.live-progress');
+  if(!prog) return;
+  try{
+    if(sess.kind === 'test'){
+      const a = (await storageGet(testAnswersKey(sess.dateStr, studentId))) || {};
+      let n = 0;
+      ['vocab', 'financialLit', 'statesCapitals'].forEach(k=>{ (a[k] || []).forEach(v=>{ if((v || '').toString().trim() !== '') n++; }); });
+      ['funFact', 'currentEvent', 'history', 'science', 'scenario'].forEach(k=>{ if((a[k] || '').toString().trim() !== '') n++; });
+      prog.textContent = 'Friday test · ' + n + ' answers written';
+    } else {
+      const answers = (await storageGet(worksheetAnswersKey(sess.dateStr, studentId, sess.subject))) || {};
+      const checks = (await storageGet(wsCheckKey(sess.dateStr, studentId, sess.subject))) || {};
+      const aCount = Object.values(answers).filter(v=> (v || '').toString().trim() !== '').length;
+      const cCount = Object.values(checks).filter(v=> !!v).length;
+      const label = (typeof materialSubjectLabel === 'function') ? materialSubjectLabel(sess.subject) : sess.subject;
+      prog.textContent = label + ' worksheet · ' + aCount + ' answers written · ' + cCount + ' checks marked done';
+    }
+  }catch(e){}
 }
 async function applyWorksheetGate(studentId, subject, wd, forceDayNum){
   const gateEl = document.getElementById('worksheetGate');
@@ -6244,6 +6559,7 @@ async function applyWorksheetGate(studentId, subject, wd, forceDayNum){
     if(cols) cols.style.display = '';
     if(util) util.style.display = 'block';
     wsShowMonitorBox('worksheet', util);
+    wsLiveStartSession(studentId, 'worksheet', subject);
     return;
   }
   const st = state.students.find(s=>s.id===studentId);
@@ -6262,6 +6578,7 @@ async function applyWorksheetGate(studentId, subject, wd, forceDayNum){
     if(cols) cols.style.display = '';
     if(util) util.style.display = 'block';
     wsShowMonitorBox('worksheet', util);
+    wsLiveStartSession(studentId, 'worksheet', subject);
     return;
   }
   if(cols) cols.style.display = 'none';
@@ -6537,6 +6854,7 @@ document.querySelectorAll('[data-cal-tab]').forEach(t=>{
 });
 
 document.getElementById('previewUpcomingBtn').addEventListener('click', ()=> requireEditAccess(openPreviewModal));
+document.getElementById('openLiveViewBtn').addEventListener('click', ()=> requireEditAccess(openLiveViewModal));
 document.getElementById('editTodayFromSettings').addEventListener('click', ()=>{
   document.getElementById('settingsOverlay').classList.remove('open');
   requireEditAccess(openTodayModal);
@@ -7092,7 +7410,7 @@ if(!SUPABASE_CONFIGURED){
    answers and checks autosave continuously, so after reload the student
    just reopens the worksheet. DEPLOY ORDER MATTERS: push index.html first,
    verify Pages rebuilt, THEN push version.json (see AGENTS.md). */
-const APP_VERSION = '20261028b';
+const APP_VERSION = '20261028c';
 let wsUpdatePromptShown = false;
 async function wsCheckAppVersion(){
   if(wsUpdatePromptShown) return;
