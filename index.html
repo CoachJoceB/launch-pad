@@ -218,8 +218,8 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
   .ws-g-issue .btn{font-size:12px;padding:5px 10px;}
   /* Camera-monitored worksheet indicator: top of the sticky util bar,
      beside the progress bar. The live preview proves the camera is on. */
-  #wsMonitorBox{display:flex;align-items:center;gap:10px;padding:8px 10px;margin-bottom:10px;border:1.5px solid #e8a0a0;background:#fdecea;border-radius:8px;}
-  #wsMonitorVideo{width:96px;height:54px;object-fit:cover;border-radius:6px;background:#000;flex:none;}
+  .ws-monitor-box{display:flex;align-items:center;gap:10px;padding:8px 10px;margin-bottom:10px;border:1.5px solid #e8a0a0;background:#fdecea;border-radius:8px;}
+  .ws-monitor-video{width:96px;height:54px;object-fit:cover;border-radius:6px;background:#000;flex:none;}
   .ws-monitor-text{font-size:13.5px;font-weight:700;color:#8b1a1a;display:flex;align-items:center;gap:7px;}
   .ws-monitor-dot{width:10px;height:10px;border-radius:50%;background:#d32f2f;flex:none;animation:wsMonitorBlink 1.2s infinite;}
   @keyframes wsMonitorBlink{0%,100%{opacity:1}50%{opacity:.35}}
@@ -2582,6 +2582,12 @@ async function renderBoard(){
   // the board element, so they skip this (the real board stays untouched).
   if(!document.getElementById('board-real')) destroyBoardPlayers();
   await renderBoardInner();
+  // A camera session ends when its surface leaves the board: if no unlocked
+  // Friday test form is showing and no worksheet is open, stop the camera.
+  // (A pending camera check still shows the form fields, so it counts as live.)
+  const testLive = !!document.querySelector('#testFormArea [data-testfield]');
+  const wsOpen = !!document.getElementById('worksheetOverlay') && document.getElementById('worksheetOverlay').classList.contains('open');
+  if(!testLive && !wsOpen) wsStopCamera();
   if(savedY > 0) window.scrollTo(0, savedY);
   const grids = document.querySelectorAll('.students-grid');
   savedGridLefts.forEach((left, idx)=>{
@@ -3066,7 +3072,7 @@ function afterTestSectionRender(){
   const tabsWrap = document.getElementById('testStudentTabs');
   const formArea = document.getElementById('testFormArea');
   if(!tabsWrap || !formArea) return;
-  function showStudent(id){
+  async function showStudent(id){
     activeTestStudentId = id;
     tabsWrap.querySelectorAll('.modal-tab').forEach(t=>t.classList.toggle('active', t.dataset.testtab===id));
     const student = state.students.find(s=>s.id===id);
@@ -3075,6 +3081,11 @@ function afterTestSectionRender(){
     wireTestFormInputs(formArea, id);
     wireAutoGrow(formArea);
     requestAnimationFrame(()=> wireAutoGrow(formArea));
+    // The form stays hidden until the camera check resolves, so it is never
+    // usable while the camera is blocked. (visibility keeps layout, so the
+    // auto-grow measurements above still work.)
+    formArea.style.visibility = 'hidden';
+    await wsGateTestCamera(formArea, id);
   }
   tabsWrap.querySelectorAll('.modal-tab').forEach(t=>{
     t.addEventListener('click', ()=> showStudent(t.dataset.testtab));
@@ -5655,7 +5666,7 @@ closeAllModals = function(){
     const prog = wsCurrentProgress();
     if(prog && prog.total > 0 && prog.done < prog.total){ wsShowClosePrompt(prog); return; }
   }
-  wsStopCamera();
+  wsStopWorksheetCamera();
   _origCloseAllModals();
 };
 function showToast(msg){
@@ -6043,21 +6054,49 @@ async function wsRequestCamera(){
 }
 function wsStopCamera(){
   if(wsCameraStream){ try{ wsCameraStream.getTracks().forEach(t=>t.stop()); }catch(e){} wsCameraStream = null; }
-  const box = document.getElementById('wsMonitorBox');
-  if(box) box.remove();
+  document.querySelectorAll('.ws-monitor-box').forEach(b=>b.remove());
 }
-function wsShowMonitorBox(){
-  const util = document.getElementById('wsUtilBar');
-  if(!util) return;
-  let box = document.getElementById('wsMonitorBox');
+// Closing a worksheet must not kill a Friday test session that is still on
+// the board: if the test monitor box is live, the camera keeps running and
+// only the worksheet box is removed.
+function wsStopWorksheetCamera(){
+  if(document.querySelector('[data-monitor-loc="test"]') && wsCameraStream){
+    document.querySelectorAll('[data-monitor-loc="worksheet"]').forEach(b=>b.remove());
+    return;
+  }
+  wsStopCamera();
+}
+function wsAttachMonitorVideos(){
+  if(!wsCameraStream) return;
+  document.querySelectorAll('.ws-monitor-video').forEach(v=>{
+    try{ if(v.srcObject !== wsCameraStream) v.srcObject = wsCameraStream; v.play().catch(()=>{}); }catch(e){}
+  });
+}
+function wsShowMonitorBox(loc, container){
+  if(!container) return;
+  let box = container.querySelector('[data-monitor-loc="'+loc+'"]');
   if(!box){
     box = document.createElement('div');
-    box.id = 'wsMonitorBox';
-    box.innerHTML = '<video id="wsMonitorVideo" autoplay muted playsinline></video><div class="ws-monitor-text"><span class="ws-monitor-dot"></span>Session monitored</div>';
-    util.prepend(box);
+    box.className = 'ws-monitor-box';
+    box.setAttribute('data-monitor-loc', loc);
+    box.innerHTML = '<video class="ws-monitor-video" autoplay muted playsinline></video><div class="ws-monitor-text"><span class="ws-monitor-dot"></span>Session monitored</div>';
+    container.prepend(box);
   }
-  const v = document.getElementById('wsMonitorVideo');
-  if(v && wsCameraStream){ try{ v.srcObject = wsCameraStream; v.play().catch(()=>{}); }catch(e){} }
+  wsAttachMonitorVideos();
+}
+function wsCameraLockedHTML(retryId, withClose){
+  return `<div class="card" style="max-width:560px;margin:8px auto;padding:20px;text-align:center;">
+    <div style="font-size:26px;" aria-hidden="true">\uD83D\uDCF7</div>
+    <h3 style="margin:6px 0 10px;">Camera access is required</h3>
+    <div style="font-size:14.5px;line-height:1.6;">
+      <p style="margin:0 0 8px;">This stays locked while the camera is off. The camera must be on for the whole session.</p>
+      <p style="margin:0;">If you tapped Don\u2019t Allow before, the browser remembers that choice: allow the camera for this site in your browser\u2019s site settings (Safari: website settings; Chrome and Edge: the camera icon in the address bar), then tap Try again.</p>
+    </div>
+    <div style="margin-top:16px;display:flex;gap:10px;justify-content:center;">
+      <button type="button" class="btn-warmup" id="${retryId}">Try again</button>
+      ${withClose ? '<button type="button" class="btn btn-ghost" id="gateCameraCloseBtn">Close</button>' : ''}
+    </div>
+  </div>`;
 }
 function wsShowCameraLocked(studentId, subject, wd, forceDayNum){
   const gateEl = document.getElementById('worksheetGate');
@@ -6067,24 +6106,38 @@ function wsShowCameraLocked(studentId, subject, wd, forceDayNum){
   if(cols) cols.style.display = 'none';
   if(util) util.style.display = 'none';
   gateEl.style.display = 'block';
-  gateEl.innerHTML = `<div class="card" style="max-width:560px;margin:8px auto;padding:20px;text-align:center;">
-    <div style="font-size:26px;" aria-hidden="true">\uD83D\uDCF7</div>
-    <h3 style="margin:6px 0 10px;">Camera access is required</h3>
-    <div style="font-size:14.5px;line-height:1.6;">
-      <p style="margin:0 0 8px;">This worksheet stays locked while the camera is off. The camera must be on for the whole worksheet session.</p>
-      <p style="margin:0;">If you tapped Don\u2019t Allow before, Safari remembers that choice: change it in Safari\u2019s website settings for this site, then tap Try again.</p>
-    </div>
-    <div style="margin-top:16px;display:flex;gap:10px;justify-content:center;">
-      <button type="button" class="btn-warmup" id="gateCameraRetryBtn">Try again</button>
-      <button type="button" class="btn btn-ghost" id="gateCameraCloseBtn">Close</button>
-    </div>
-  </div>`;
+  gateEl.innerHTML = wsCameraLockedHTML('gateCameraRetryBtn', true);
   document.getElementById('gateCameraRetryBtn').addEventListener('click', async ()=>{
     const ok = await wsRequestCamera();
     if(!ok){ showToast('Camera is still blocked.'); return; }
     applyWorksheetGate(studentId, subject, wd, forceDayNum);
   });
   document.getElementById('gateCameraCloseBtn').addEventListener('click', ()=>{ closeAllModals(); });
+}
+// Friday test form camera gate: the student board form only unlocks with the
+// camera on. The parent Grade Tests screen never calls this, so grading is
+// untouched. On denial the form is replaced by the locked card; Try again
+// re-renders the form from the saved test entry.
+async function wsGateTestCamera(formArea, studentId){
+  try{
+    if(wsCameraStream){ wsShowMonitorBox('test', formArea); return; }
+    const ok = await wsRequestCamera();
+    if(ok){ wsShowMonitorBox('test', formArea); return; }
+    formArea.innerHTML = wsCameraLockedHTML('testCameraRetryBtn', false);
+    document.getElementById('testCameraRetryBtn').addEventListener('click', async ()=>{
+      const ok2 = await wsRequestCamera();
+      if(!ok2){ showToast('Camera is still blocked.'); return; }
+      const student = state.students.find(s=>s.id===studentId);
+      const entry = testCache[studentId];
+      if(!student || !entry) return;
+      formArea.innerHTML = renderTestFormHTML(student, entry);
+      wireTestFormInputs(formArea, studentId);
+      wireAutoGrow(formArea);
+      wsShowMonitorBox('test', formArea);
+    });
+  } finally {
+    formArea.style.visibility = '';
+  }
 }
 async function applyWorksheetGate(studentId, subject, wd, forceDayNum){
   const gateEl = document.getElementById('worksheetGate');
@@ -6095,9 +6148,16 @@ async function applyWorksheetGate(studentId, subject, wd, forceDayNum){
   // the work is being completed or fixed after the fact.
   if(typeof currentWorksheetCtx !== 'undefined' && currentWorksheetCtx && currentWorksheetCtx.dateStr && currentWorksheetCtx.dateStr !== state.dateStr){
     stopGateTracking();
+    // Past-date edits have no caution card, but the camera rule still
+    // applies: the sheet only opens with the camera on.
+    if(!wsCameraStream){
+      const ok = await wsRequestCamera();
+      if(!ok){ wsShowCameraLocked(studentId, subject, wd, forceDayNum); return; }
+    }
     gateEl.style.display = 'none'; gateEl.innerHTML = '';
     if(cols) cols.style.display = '';
     if(util) util.style.display = 'block';
+    wsShowMonitorBox('worksheet', util);
     return;
   }
   const st = state.students.find(s=>s.id===studentId);
@@ -6115,7 +6175,7 @@ async function applyWorksheetGate(studentId, subject, wd, forceDayNum){
     gateEl.style.display = 'none'; gateEl.innerHTML = '';
     if(cols) cols.style.display = '';
     if(util) util.style.display = 'block';
-    wsShowMonitorBox();
+    wsShowMonitorBox('worksheet', util);
     return;
   }
   if(cols) cols.style.display = 'none';
