@@ -2508,6 +2508,13 @@ async function renderBoardInner(){
             await recordGrade(studentId, { date: state.dateStr, subject: 'math', label: 'Math (external site)', pct: res.pct, source: 'math-manual' });
           }
         }
+        if(key === 'reading' && turningOn){
+          const log = await promptReadingLog(studentId);
+          if(log === null) return; // cancelled: leave the check as it was
+          const entry = { title: log.title, chapter: log.chapter, startPage: log.startPage, endPage: log.endPage, ts: Date.now() };
+          await storageSet(readingLogKey(state.dateStr, studentId), entry);
+          await storageSet(readingLogLastKey(studentId), entry);
+        }
         state.checks[studentId][key] = turningOn;
         await storageSet(checksKey(state.dateStr), state.checks);
       }
@@ -3200,6 +3207,67 @@ function promptMathScore(studentId){
       inp.focus();
       inp.addEventListener('keydown', (e)=>{ if(e.key==='Enter'){ e.preventDefault(); overlay.querySelector('#mathScoreSave').click(); } });
     }
+  });
+}
+
+/* ========================= READING LOG =========================
+   When Reading is checked off, the student logs what they read. Title +
+   chapter carry forward from the last entry (a book continues across
+   days); pages start blank each day. Saved under reading-log:{date}:
+   {student} plus reading-log-last:{student} for prefill. Not a grade:
+   it never enters the gradebook. */
+function readingLogKey(dateStr, studentId){ return 'reading-log:'+dateStr+':'+studentId; }
+function readingLogLastKey(studentId){ return 'reading-log-last:'+studentId; }
+async function promptReadingLog(studentId){
+  const s = (state.students||[]).find(x=>x.id===studentId);
+  const name = s ? firstName(s.name) : 'Student';
+  let pre = { title: '', chapter: '', startPage: '', endPage: '' };
+  try {
+    const today = await storageGet(readingLogKey(state.dateStr, studentId));
+    if(today && today.title){
+      pre = { title: today.title || '', chapter: today.chapter || '', startPage: (today.startPage ?? ''), endPage: (today.endPage ?? '') };
+    } else {
+      const last = await storageGet(readingLogLastKey(studentId));
+      if(last){ pre.title = last.title || ''; pre.chapter = last.chapter || ''; }
+    }
+  } catch(e) {}
+  return new Promise((resolve)=>{
+    const overlay = document.createElement('div');
+    overlay.className = 'modal-overlay open';
+    overlay.innerHTML = '<div class="modal" style="max-width:420px;">'
+      + '<h3 style="margin-top:0;">Reading log</h3>'
+      + '<p style="font-size:13.5px;color:var(--ink-soft);">What did ' + esc(name) + ' read today? Then Reading will be marked complete.</p>'
+      + '<label>Book title</label>'
+      + '<input type="text" id="readingTitleInput" value="' + escAttr(pre.title) + '" placeholder="Book title" style="width:100%;padding:10px;border:1.5px solid var(--line-light);border-radius:8px;font-family:\'Oswald\',sans-serif;font-size:16px;">'
+      + '<label>Chapter</label>'
+      + '<input type="text" id="readingChapterInput" value="' + escAttr(pre.chapter) + '" placeholder="Chapter" style="width:100%;padding:10px;border:1.5px solid var(--line-light);border-radius:8px;font-family:\'Oswald\',sans-serif;font-size:16px;">'
+      + '<label>Start page</label>'
+      + '<input type="number" id="readingStartInput" min="0" step="1" inputmode="numeric" value="' + pre.startPage + '" placeholder="Start page" style="width:100%;padding:10px;border:1.5px solid var(--line-light);border-radius:8px;font-family:\'Oswald\',sans-serif;font-size:16px;">'
+      + '<label>End page</label>'
+      + '<input type="number" id="readingEndInput" min="0" step="1" inputmode="numeric" value="' + pre.endPage + '" placeholder="End page" style="width:100%;padding:10px;border:1.5px solid var(--line-light);border-radius:8px;font-family:\'Oswald\',sans-serif;font-size:16px;">'
+      + '<div style="display:flex;gap:8px;margin-top:14px;flex-wrap:wrap;">'
+      + '<button type="button" class="btn btn-primary" id="readingLogSave">Save</button>'
+      + '<button type="button" class="btn btn-ghost" id="readingLogCancel">Cancel</button>'
+      + '</div></div>';
+    document.body.appendChild(overlay);
+    const done = (val)=>{ overlay.remove(); resolve(val); };
+    overlay.querySelector('#readingLogSave').addEventListener('click', ()=>{
+      const title = (overlay.querySelector('#readingTitleInput').value || '').trim();
+      if(!title){ showToast('Please enter the book title.'); overlay.querySelector('#readingTitleInput').focus(); return; }
+      const chapter = (overlay.querySelector('#readingChapterInput').value || '').trim();
+      const sp = overlay.querySelector('#readingStartInput').value;
+      const ep = overlay.querySelector('#readingEndInput').value;
+      const startPage = sp === '' ? '' : parseInt(sp, 10);
+      const endPage = ep === '' ? '' : parseInt(ep, 10);
+      done({ title, chapter, startPage: isNaN(startPage) ? '' : startPage, endPage: isNaN(endPage) ? '' : endPage });
+    });
+    overlay.querySelector('#readingLogCancel').addEventListener('click', ()=> done(null));
+    ['#readingTitleInput','#readingChapterInput','#readingStartInput','#readingEndInput'].forEach(sel=>{
+      const inp = overlay.querySelector(sel);
+      if(inp) inp.addEventListener('keydown', (e)=>{ if(e.key==='Enter'){ e.preventDefault(); overlay.querySelector('#readingLogSave').click(); } });
+    });
+    const titleInp = overlay.querySelector('#readingTitleInput');
+    if(titleInp) titleInp.focus();
   });
 }
 
@@ -5039,7 +5107,7 @@ function wsResponsesHTML(worksheet, answers, checks){
   return parts.join('') + (total ? `<div style="font-size:11.5px;color:var(--ink-soft);margin-top:4px;">${answered} of ${total} questions answered</div>` : '');
 }
 
-function buildFullDayHTML(dateObj, content, checks, weekWords, wsResponses, ceResponses){
+function buildFullDayHTML(dateObj, content, checks, weekWords, wsResponses, ceResponses, readingLogs){
   let devo = content.devotional || {};
   const wd = dateObj.getDay();
   const isTestDay = wd===5;
@@ -5131,6 +5199,14 @@ function buildFullDayHTML(dateObj, content, checks, weekWords, wsResponses, ceRe
         ${body || '<div style="font-size:12.5px;color:var(--ink-soft);margin-top:4px;">No answers written yet.</div>'}
       </div>`;
     }).join('') : '';
+    const logForStudent = (readingLogs && readingLogs[s.id]) || null;
+    let readingLogHTML = '';
+    if(logForStudent && logForStudent.title){
+      const hasStart = logForStudent.startPage !== '' && logForStudent.startPage != null;
+      const hasEnd = logForStudent.endPage !== '' && logForStudent.endPage != null;
+      const pages = (hasStart && hasEnd) ? `, pp. ${logForStudent.startPage}-${logForStudent.endPage}` : (hasStart ? `, p. ${logForStudent.startPage}` : '');
+      readingLogHTML = `<div class="mini-lbl" style="margin-top:12px;">Reading log</div><div style="font-size:13px;margin-top:4px;">📖 ${esc(logForStudent.title)}${logForStudent.chapter ? `, ch. ${esc(logForStudent.chapter)}` : ''}${pages}</div>`;
+    }
     const editWsBtnHTML = isTestDay
       ? `<button type="button" class="btn btn-ghost" data-editws="${s.id}" data-subject="friday" data-date="${toDateStr(dateObj)}" style="font-size:12.5px;padding:7px 14px;margin-top:10px;">✏️ Edit Friday review test</button>`
       : (wd>=1 && wd<=4 ? `<button type="button" class="btn btn-ghost" data-editws="${s.id}" data-subject="${(wd===1||wd===2)?'history':'science'}" data-date="${toDateStr(dateObj)}" style="font-size:12.5px;padding:7px 14px;margin-top:10px;">✏️ Edit ${(wd===1||wd===2)?'History':'Science'} worksheet</button>` : '');
@@ -5151,6 +5227,7 @@ function buildFullDayHTML(dateObj, content, checks, weekWords, wsResponses, ceRe
         <div class="mini-lbl">Vocabulary ${isTestDay ? '— Test' : '('+grade+' grade)'}</div>
         ${vocabHTML}
         ${academicsHTML}
+        ${readingLogHTML}
         ${editWsBtnHTML}
       </div>
     </div>`;
@@ -5403,7 +5480,16 @@ async function openArchivedDay(dstr){
       if(r && (r.headline || r.summary)) ceResponses[s.id] = r;
     }
   } catch(e) {}
-  openDayLightbox(dateObj, content, checks, weekWords, false, wsResponses, ceResponses);
+  // Reading-log entries for that day (one per student, when they checked
+  // Reading off). Same load pattern as the current-event responses.
+  let readingLogs = {};
+  try {
+    for(const s of (content.students || state.students || [])){
+      const r = await storageGet(readingLogKey(dstr, s.id));
+      if(r && r.title) readingLogs[s.id] = r;
+    }
+  } catch(e) {}
+  openDayLightbox(dateObj, content, checks, weekWords, false, wsResponses, ceResponses, readingLogs);
 }
 
 function stepArchivedDay(dir){
@@ -5595,7 +5681,7 @@ async function loadUpcomingTab(){
 }
 
 /* ---- Day detail lightbox + image download ---- */
-function openDayLightbox(dateObj, content, checks, weekWords, isUpcoming, wsResponses, ceResponses){
+function openDayLightbox(dateObj, content, checks, weekWords, isUpcoming, wsResponses, ceResponses, readingLogs){
   const title = dateObj.toLocaleDateString('en-US',{weekday:'long', month:'long', day:'numeric'});
   document.getElementById('lightboxTitle').textContent = title;
   document.getElementById('lightboxSub').textContent = isUpcoming
@@ -5616,7 +5702,7 @@ function openDayLightbox(dateObj, content, checks, weekWords, isUpcoming, wsResp
   }
   if(posEl) posEl.textContent = hasNav ? ('Archived day ' + (archiveNavIdx+1) + ' of ' + archiveDateList.length + ' \u00b7 arrows or swipe to browse') : '';
   const contentEl = document.getElementById('lightboxContent');
-  contentEl.innerHTML = buildFullDayHTML(dateObj, content, checks, weekWords, wsResponses, ceResponses);
+  contentEl.innerHTML = buildFullDayHTML(dateObj, content, checks, weekWords, wsResponses, ceResponses, readingLogs);
   // Accordion: one student open at a time; tap a header to switch.
   contentEl.querySelectorAll('[data-arch-toggle]').forEach(head=>{
     head.addEventListener('click', ()=>{
