@@ -7085,11 +7085,64 @@ if(!SUPABASE_CONFIGURED){
   document.getElementById('board').innerHTML = `<div class="weekend-card"><h2>Couldn't load the cloud library</h2><p style="margin-bottom:16px;">The page couldn't reach its cloud connection. Check your internet connection, then try again.</p><button type="button" class="btn-warmup" onclick="location.reload()">Try again</button></div>`;
 }
 
+/* ================= APP UPDATE PROMPT =================
+   A deploy cannot reach pages that are already open, so the page polls a
+   tiny version file. When a newer version appears it shows a 3-second
+   "about to update" countdown and reloads to the new build. Work is safe:
+   answers and checks autosave continuously, so after reload the student
+   just reopens the worksheet. DEPLOY ORDER MATTERS: push index.html first,
+   verify Pages rebuilt, THEN push version.json (see AGENTS.md). */
+const APP_VERSION = '20261028b';
+let wsUpdatePromptShown = false;
+async function wsCheckAppVersion(){
+  if(wsUpdatePromptShown) return;
+  try{
+    const r = await fetch('version.json?_=' + Date.now(), { cache: 'no-store' });
+    if(!r.ok) return;
+    const data = await r.json();
+    if(!data || !data.version || data.version === APP_VERSION) return;
+    wsUpdatePromptShown = true;
+    wsShowUpdatePrompt(data.version);
+  }catch(e){}
+}
+function wsReloadForUpdate(ver){
+  try{
+    const u = new URL(location.href);
+    u.searchParams.set('v', ver);
+    location.href = u.toString();
+  }catch(e){ location.reload(); }
+}
+function wsShowUpdatePrompt(newVer){
+  const overlay = document.createElement('div');
+  overlay.className = 'modal-overlay open';
+  overlay.id = 'updateOverlay';
+  overlay.innerHTML = '<div class="modal" style="max-width:420px;text-align:center;">'
+    + '<h3 style="margin-top:0;">This page is about to update</h3>'
+    + '<p style="font-size:14.5px;line-height:1.6;">Your work is saved. The page will reload with the newest version.</p>'
+    + '<div id="updateCountdown" style="font-size:64px;font-weight:700;font-family:\'Oswald\',sans-serif;margin:8px 0;">3</div>'
+    + '</div>';
+  document.body.appendChild(overlay);
+  const target = Date.now() + 3000;
+  const tick = ()=>{
+    const remain = Math.max(0, Math.ceil((target - Date.now()) / 1000));
+    const el = document.getElementById('updateCountdown');
+    if(el) el.textContent = remain;
+    if(Date.now() >= target){ wsReloadForUpdate(newVer); }
+    else setTimeout(tick, 200);
+  };
+  tick();
+}
+function wsStartVersionPolling(){
+  setTimeout(wsCheckAppVersion, 30000);
+  setInterval(wsCheckAppVersion, 180000);
+}
+
 /* App boot — only runs after the session PIN unlock, so no student
    names, grades, schedules, lessons, or written work ever render
    (or save) for a locked visitor. */
 function bootApp(){
   startLiveTyping();
+  wsStartVersionPolling();
   document.getElementById('board').innerHTML = `<div class="weekend-card"><h2>Loading Plan…</h2><p>Connecting to the cloud plan.</p></div>`;
   // Never strand on the loader: if the cloud fetch hangs or fails, show an
   // error card with a retry instead of "Loading Plan…" forever.
