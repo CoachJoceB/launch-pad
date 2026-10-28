@@ -6135,7 +6135,7 @@ function gatePillHTML(studentId, subject){
    Playback is tracked second by second and only continuous playing time
    counts, so dragging to the end does not unlock the worksheet. */
 let wsGateCache = {}; // studentId -> {caution:bool, watched:bool, acc:sec, pos:sec, dur:sec}
-let gatePlayer = null, gateTicker = null, gateAcc = 0, gateLast = -1, gateDone = false;
+let gatePlayer = null, gateTicker = null, gateAcc = 0, gateLast = -1, gateDone = false, gateLiveDenied = false;
 let gateCtx = null; // {studentId, subject} of the video gate currently on screen
 let gatePos = 0, gateLastSaveAcc = 0;
 
@@ -6171,7 +6171,7 @@ function stopGateTracking(){
   if(gateCtx && !gateDone && gateAcc > 0) saveGateProgress();
   if(gateTicker){ clearInterval(gateTicker); gateTicker = null; }
   if(gatePlayer && gatePlayer.destroy){ try { gatePlayer.destroy(); } catch(e){} }
-  gatePlayer = null; gateAcc = 0; gateLast = -1; gateDone = false; gatePos = 0; gateCtx = null;
+  gatePlayer = null; gateAcc = 0; gateLast = -1; gateDone = false; gatePos = 0; gateCtx = null; gateLiveDenied = false;
 }
 let ytApiPromise = null;
 function loadYouTubeAPI(){
@@ -6619,6 +6619,36 @@ async function wsLiveStartSession(studentId, kind, subject){
   Object.keys(wsLiveParents).forEach(pid=>{ if(Date.now() - wsLiveParents[pid] < 20000) wsLiveOfferTo(pid); });
   wsLiveStartSnapshots();
 }
+/* Video-start feed: the parent wants to watch from the moment a lesson
+   video starts playing, not just from worksheet reveal. Board videos
+   have no camera at all, and gate videos play before the worksheet
+   reveals, so both video tickers call this on first playback. A video
+   session only starts when no other session is live (a worksheet or
+   test session is never overwritten by a video), and a denied camera
+   means no feed but the video still plays: the worksheet itself still
+   requires the camera at reveal. Returns true when a feed is live or
+   another session already is, false only when the camera was denied. */
+let wsLiveVideoStarting = null;
+async function wsLiveVideoStart(studentId, subject, container){
+  if(!studentId) return false;
+  if(wsLiveSession) return true;
+  if(wsLiveVideoStarting === studentId) return null;
+  wsLiveVideoStarting = studentId;
+  try{
+    if(!wsCameraStream){
+      const ok = await wsRequestCamera();
+      if(!ok) return false;
+    }
+    if(container) wsShowMonitorBox('video', container);
+    wsLiveStartSession(studentId, 'video', subject);
+    return true;
+  } finally {
+    if(wsLiveVideoStarting === studentId) wsLiveVideoStarting = null;
+  }
+}
+function wsLiveVideoEnd(studentId){
+  if(wsLiveSession && wsLiveSession.kind === 'video' && wsLiveSession.studentId === studentId) wsLiveEndSession();
+}
 function wsLiveEndSession(){
   if(wsLiveSession) wsLiveSend({ type: 'session-end', from: wsLiveDeviceId, studentId: wsLiveSession.studentId });
   wsLiveSession = null;
@@ -6779,7 +6809,8 @@ async function liveViewOnMessage(p){
   if(p.type === 'session'){
     liveViewSessions[p.studentId] = { kind: p.kind, subject: p.subject, dateStr: p.dateStr, deviceId: p.from };
     liveViewEnsureCard(p.studentId);
-    liveViewSetStatus(p.studentId, 'Live: ' + (p.kind === 'test' ? 'Friday test' : (typeof materialSubjectLabel === 'function' ? materialSubjectLabel(p.subject) : p.subject) + ' worksheet'));
+    const subjLabel = (typeof materialSubjectLabel === 'function') ? materialSubjectLabel(p.subject) : p.subject;
+    liveViewSetStatus(p.studentId, 'Live: ' + (p.kind === 'test' ? 'Friday test' : p.kind === 'video' ? subjLabel + ' video' : subjLabel + ' worksheet'));
     liveViewPollStudent(p.studentId, liveViewSessions[p.studentId]);
   } else if(p.type === 'session-end'){
     delete liveViewSessions[p.studentId];
@@ -6843,7 +6874,10 @@ async function liveViewPollStudent(studentId, sess){
   const prog = card.querySelector('.live-progress');
   if(!prog) return;
   try{
-    if(sess.kind === 'test'){
+    if(sess.kind === 'video'){
+      const label = (typeof materialSubjectLabel === 'function') ? materialSubjectLabel(sess.subject) : sess.subject;
+      prog.textContent = label + ' video · watching now';
+    } else if(sess.kind === 'test'){
       const a = (await storageGet(testAnswersKey(sess.dateStr, studentId))) || {};
       let n = 0;
       ['vocab', 'financialLit', 'statesCapitals'].forEach(k=>{ (a[k] || []).forEach(v=>{ if((v || '').toString().trim() !== '') n++; }); });
@@ -7000,6 +7034,7 @@ function initGatePlayer(video, onComplete, resume){
         if(!gatePlayer || !gatePlayer.getCurrentTime) return;
         const ps = gatePlayer.getPlayerState ? gatePlayer.getPlayerState() : -1;
         if(ps === 1){
+          if(!gateLiveDenied && gateCtx) wsLiveVideoStart(gateCtx.studentId, gateCtx.subject, document.getElementById('worksheetGate')).then(r=>{ if(r === false) gateLiveDenied = true; });
           const t = gatePlayer.getCurrentTime();
           const dur = gatePlayer.getDuration() || 0;
           if(gateLast >= 0){
@@ -7121,6 +7156,7 @@ function activateVidBox(box){
       if(!player || !player.getCurrentTime) return;
       const ps = player.getPlayerState ? player.getPlayerState() : -1;
       if(ps === 1){
+        if(!st.liveDenied && st.studentId) wsLiveVideoStart(st.studentId, st.subject, box.closest('.student-card')).then(r=>{ if(r === false) st.liveDenied = true; });
         const t = player.getCurrentTime();
         const dur = player.getDuration() || 0;
         if(dur) st.dur = dur;
@@ -7141,6 +7177,7 @@ function activateVidBox(box){
 function finishBoardVideo(box, st){
   if(st.done) return;
   st.done = true;
+  wsLiveVideoEnd(st.studentId);
   if(st.ticker){ clearInterval(st.ticker); st.ticker = null; }
   saveBoardGateProgress(st);
   restoreVidFacade(box);
@@ -7729,7 +7766,7 @@ if(!SUPABASE_CONFIGURED){
    answers and checks autosave continuously, so after reload the student
    just reopens the worksheet. DEPLOY ORDER MATTERS: push index.html first,
    verify Pages rebuilt, THEN push version.json (see AGENTS.md). */
-const APP_VERSION = '20261028f';
+const APP_VERSION = '20261028g';
 let wsUpdatePromptShown = false;
 async function wsCheckAppVersion(){
   if(wsUpdatePromptShown) return;
