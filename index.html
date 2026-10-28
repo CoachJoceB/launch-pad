@@ -7410,7 +7410,7 @@ if(!SUPABASE_CONFIGURED){
    answers and checks autosave continuously, so after reload the student
    just reopens the worksheet. DEPLOY ORDER MATTERS: push index.html first,
    verify Pages rebuilt, THEN push version.json (see AGENTS.md). */
-const APP_VERSION = '20261028d';
+const APP_VERSION = '20261028e';
 let wsUpdatePromptShown = false;
 async function wsCheckAppVersion(){
   if(wsUpdatePromptShown) return;
@@ -7452,7 +7452,7 @@ function wsShowUpdatePrompt(newVer){
 }
 function wsStartVersionPolling(){
   setTimeout(wsCheckAppVersion, 30000);
-  setInterval(wsCheckAppVersion, 180000);
+  setInterval(wsCheckAppVersion, 60000);
 }
 
 /* App boot — only runs after the session PIN unlock, so no student
