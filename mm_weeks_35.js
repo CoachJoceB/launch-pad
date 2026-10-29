@@ -797,11 +797,7 @@ const MM_WEEKS_35 = [
             "type": "shortanswer",
             "instructions": "Write a paragraph of 4 to 6 sentences. Then compare it with the model answer.",
             "items": [
-              {
-                "id": "h1-s1",
-                "prompt": "Describe a day in a Maya city. What would you see, hear, and do?",
-                "answer": "Model answer: In the morning I would see tall pyramids rising over the jungle and hear traders calling in the market. I might watch scribes carve glyphs into stone or priests study the sky. Farmers carry corn and beans into the city. In the evening, families gather while the city glows with torchlight."
-              }
+              
             ]
           },
           {
@@ -2924,11 +2920,6 @@ const MM_WEEKS_35 = [
             "instructions": "Answer these questions about the reading.",
             "items": [
               {
-                "id": "h5-c1",
-                "question": "Why did Eastern Woodlands tribes build their villages near rivers and lakes?",
-                "answer": "The soil there was rich for farming, and fish were plenty to catch."
-              },
-              {
                 "id": "h5-c2",
                 "question": "Why might several related families of one clan want to live together in a longhouse?",
                 "answer": "Related families living together could share work, food, and safety under one roof."
@@ -3159,11 +3150,6 @@ const MM_WEEKS_35 = [
             "type": "comprehension",
             "instructions": "Answer these questions about the reading.",
             "items": [
-              {
-                "id": "s5-c1",
-                "question": "Put the stages of a flowering plant's life in order.",
-                "answer": "Seed, sprout, seedling, adult plant, flower, fruit, seed."
-              },
               {
                 "id": "s5-c2",
                 "question": "A seed does not need light yet because it lives off its packed food. Why is that packed food important?",
@@ -4973,21 +4959,12 @@ const MM_WEEKS_35 = [
             "type": "shortanswer",
             "instructions": "Write a paragraph of 4 to 6 sentences. Then compare it with the model answer.",
             "items": [
-              {
-                "id": "h1-s1",
-                "prompt": "Explain why European sailors risked sailing into the unknown ocean. What did they hope to gain?",
-                "answer": "Model answer: Europeans wanted spices, silk, and gold from Asia, but land routes were slow and dangerous. New caravels and tools like the compass let sailors travel farther. Kings paid for voyages hoping for wealth and new lands. Sailors risked storms and hunger for riches, adventure, or because they were forced to go."
-              }
+              
             ]
           },
           {
             "instructions": "Answer these questions about the reading.",
             "items": [
-              {
-                "answer": "The land routes were long and dangerous, and a sea route would make traders rich with spices, silk, and gold.",
-                "id": "h8-0-c1",
-                "question": "Why did Europeans want a sea route to Asia in the 1400s?"
-              },
               {
                 "answer": "They helped sailors navigate far from shore without getting lost. The compass found north and the astrolabe measured the stars.",
                 "id": "h8-0-c2",
@@ -5207,11 +5184,7 @@ const MM_WEEKS_35 = [
             "type": "shortanswer",
             "instructions": "Write 3 to 4 sentences. Then compare with the model answer.",
             "items": [
-              {
-                "id": "s1-s1",
-                "prompt": "Explain the difference between a food chain and a food web. Why is a web stronger?",
-                "answer": "Model answer: A food chain shows one path of energy, while a food web connects many chains into a map of who eats whom. A web is stronger because each animal has backup foods. If rabbits disappear, a fox can hunt mice. But if too many links break at once, the whole web trembles."
-              }
+              
             ]
           },
           {
@@ -6325,11 +6298,7 @@ const MM_WEEKS_35 = [
             "type": "shortanswer",
             "instructions": "Write a paragraph of 4 to 6 sentences. Then compare it with the model answer.",
             "items": [
-              {
-                "id": "h1-s1",
-                "prompt": "Describe a day at a Spanish mission. Who was there and what did they do?",
-                "answer": "Model answer: The day began before sunrise with prayers led by priests. Native people worked the fields, built walls, and learned crafts like weaving. The mission grew corn and raised cattle. But many were forced to stay and punished for leaving. Disease spread, and some Native people resisted, like the Pueblo revolt of 1680."
-              }
+              
             ]
           },
           {
@@ -7329,11 +7298,6 @@ const MM_WEEKS_35 = [
               "instructions": "Answer each question in your own words using the reading.",
               "items": [
                 {
-                  "id": "s11-0-c1",
-                  "question": "How do cacti save water?",
-                  "answer": "They store water in thick stems, and their waxy skin slows evaporation."
-                },
-                {
                   "id": "s11-0-c2",
                   "question": "Why do many desert animals hide during the day and come out at night?",
                   "answer": "The day is too hot and dry, so they stay cool and save water by moving at night."
@@ -8034,11 +7998,6 @@ const MM_WEEKS_35 = [
               "type": "comprehension",
               "instructions": "Answer each question in your own words using the reading.",
               "items": [
-                {
-                  "id": "s12-0-c1",
-                  "question": "Which layer holds the tallest trees, and who travels there?",
-                  "answer": "The emergent layer. Eagles and monkeys travel there."
-                },
                 {
                   "id": "s12-0-c2",
                   "question": "Why would cutting down many rainforest trees cause the rain to stop?",
@@ -9143,11 +9102,6 @@ const MM_WEEKS_35 = [
               "type": "comprehension",
               "instructions": "Answer each question in your own words using the reading.",
               "items": [
-                {
-                  "id": "h14-0-c1",
-                  "question": "What were the Middle Colonies called, and why?",
-                  "answer": "They were called the breadbasket because they grew so much wheat."
-                },
                 {
                   "id": "h14-0-c2",
                   "question": "Why did New Englanders become fishers, shipbuilders, and traders instead of farmers?",
@@ -10870,11 +10824,6 @@ const MM_WEEKS_35 = [
               "type": "comprehension",
               "instructions": "Answer these questions about the reading.",
               "items": [
-                {
-                  "id": "s16-1-c1",
-                  "question": "How many bones are in each hand and each foot?",
-                  "answer": "There are 27 bones in each hand and 26 in each foot."
-                },
                 {
                   "id": "s16-1-c2",
                   "question": "Why do you think scientists group the 206 bones instead of counting them one by one?",
@@ -12857,11 +12806,6 @@ const MM_WEEKS_35 = [
               "instructions": "Answer these questions about the reading.",
               "items": [
                 {
-                  "id": "s19-0-c1",
-                  "question": "How many chambers does your heart have, and what do they do?",
-                  "answer": "The heart has four chambers. The two on top receive blood, and the two on the bottom pump it out."
-                },
-                {
                   "id": "s19-0-c2",
                   "question": "Why can you feel your pulse in your wrist?",
                   "answer": "Each beat of your heart pushes blood through your body, and you can feel that push in the vessels at your wrist."
@@ -13002,16 +12946,6 @@ const MM_WEEKS_35 = [
               "type": "comprehension",
               "instructions": "Answer these questions about the reading.",
               "items": [
-                {
-                  "id": "s19-1-c1",
-                  "question": "How do you measure your pulse at your wrist?",
-                  "answer": "Press two fingers on your wrist and count the beats for 15 seconds, then multiply by four."
-                },
-                {
-                  "id": "s19-1-c2",
-                  "question": "Why does your pulse speed up after exercise?",
-                  "answer": "Your working muscles need more oxygen, so your heart beats faster to deliver it."
-                },
                 {
                   "id": "s19-1-c3",
                   "question": "The reading says, 'Athletes often have slower resting pulses because their strong hearts pump more blood per beat.' What does resting mean in this sentence?",
@@ -13571,11 +13505,6 @@ const MM_WEEKS_35 = [
                   "answer": "Air enters through your nose and mouth, travels down your windpipe, and splits into two tubes leading to your lungs."
                 },
                 {
-                  "id": "s20-0-c2",
-                  "question": "Why do you breathe faster when you exercise?",
-                  "answer": "Your working muscles need more oxygen, so your lungs take in air faster."
-                },
-                {
                   "id": "s20-0-c3",
                   "question": "The reading says, 'Inside, tiny air sacs called alveoli pass oxygen into your blood and collect carbon dioxide to breathe out.' What does alveoli mean in this sentence?",
                   "answer": "Alveoli are the tiny air sacs in your lungs where oxygen enters the blood and waste gas leaves it."
@@ -13715,11 +13644,6 @@ const MM_WEEKS_35 = [
                   "id": "s20-1-c1",
                   "question": "How can you estimate your lung capacity with a balloon?",
                   "answer": "Take a deep breath, blow once into the balloon, and measure around its widest part."
-                },
-                {
-                  "id": "s20-1-c2",
-                  "question": "Why does exercise increase lung capacity over time?",
-                  "answer": "The body adapts to needing more oxygen, so the lungs learn to hold more air."
                 },
                 {
                   "id": "s20-1-c3",
@@ -15740,11 +15664,6 @@ const MM_WEEKS_35 = [
                 "question": "How do scientists measure soil layers, and what do they record?"
               },
               {
-                "answer": "Sandy soil drains too fast, clay holds water too tight, and loam is a mix of both.",
-                "id": "s23-1-c2",
-                "question": "Why is loam the best soil for gardens?"
-              },
-              {
                 "answer": "They can tell whether soil is healthy. Good soil holds its shape, then crumbles like cake.",
                 "id": "s23-1-c3",
                 "question": "The reading says your fingers can grade soil. What power do your hands have, based on the squeeze test?"
@@ -17385,11 +17304,6 @@ const MM_WEEKS_35 = [
             "instructions": "Answer these questions about the reading.",
             "items": [
               {
-                "answer": "Stepping down after two terms. Many wanted him to be king, but he went home to his farm, setting the example that presidents serve and then leave.",
-                "id": "h26-0-c1",
-                "question": "What was Washington's hardest choice, according to the reading, and why did it matter?"
-              },
-              {
                 "answer": "Most rulers hold on to power, but Washington gave it up voluntarily. The reading calls it his most radical act and one of America's most important traditions.",
                 "id": "h26-0-c2",
                 "question": "Why does the reading say kings cling but Washington walked away?"
@@ -17669,11 +17583,6 @@ const MM_WEEKS_35 = [
           {
             "instructions": "Answer these questions about the reading.",
             "items": [
-              {
-                "answer": "Magma is hot melted rock underground. Lava is the same rock once it reaches the surface.",
-                "id": "s26-0-c1",
-                "question": "What is the difference between magma and lava?"
-              },
               {
                 "answer": "Pressure builds in the magma chamber until it forces its way up through a vent, releasing the pressure.",
                 "id": "s26-0-c2",
@@ -18377,11 +18286,6 @@ const MM_WEEKS_35 = [
           {
             "instructions": "Answer these questions about the reading.",
             "items": [
-              {
-                "answer": "An animal or plant is buried quickly in mud or sand, and over millions of years minerals seep into bones or wood and turn them to stone.",
-                "id": "s27-0-c1",
-                "question": "How do most fossils form?"
-              },
               {
                 "answer": "They are a window into the Ice Age, with mammoth and saber-toothed cat bones still pulled from the tar, and a warning because the tar still traps animals today.",
                 "id": "s27-0-c2",
@@ -21940,11 +21844,6 @@ const MM_WEEKS_35 = [
             "instructions": "Answer these questions about the reading.",
             "items": [
               {
-                "answer": "Surface currents are driven by wind. Deep currents are driven by differences in temperature and saltiness.",
-                "id": "s32-1-c1",
-                "question": "What drives surface currents, and what drives deep currents?"
-              },
-              {
                 "answer": "It carries warm water from the Gulf of Mexico up past Europe, keeping Europe milder than it should be.",
                 "id": "s32-1-c2",
                 "question": "How does the Gulf Stream change the weather in Europe?"
@@ -22502,11 +22401,6 @@ const MM_WEEKS_35 = [
           {
             "instructions": "Answer these questions about the reading.",
             "items": [
-              {
-                "answer": "Jupiter is the largest, bigger than all other planets combined. Mercury is the smallest.",
-                "id": "s33-0-c1",
-                "question": "Which planet is the largest, and which is the smallest?"
-              },
               {
                 "answer": "Scientists found thousands of similar icy worlds beyond Neptune, and Pluto is smaller than Earth's moon, so the new evidence changed its label. Science changes its mind when new evidence arrives.",
                 "id": "s33-0-c2",
@@ -23674,11 +23568,6 @@ const MM_WEEKS_35 = [
             "instructions": "Answer these questions about the reading.",
             "items": [
               {
-                "answer": "It was not a real railroad. It was a secret network of safe houses, helpers, and hidden routes that guided enslaved people to freedom.",
-                "id": "h35-0-c1",
-                "question": "What was the Underground Railroad, and what was it not?"
-              },
-              {
                 "answer": "Because the journey was dangerous. Slave catchers hunted them, and being caught meant terrible punishment, so night travel and codes kept them hidden.",
                 "id": "h35-0-c2",
                 "question": "Why did conductors travel by night and use coded songs?"
@@ -24666,11 +24555,6 @@ const MM_WEEKS_35 = [
           {
             "instructions": "Answer these questions about the reading.",
             "items": [
-              {
-                "answer": "Earth's rotation. Earth spins once every 24 hours, so when your side faces the sun it is daytime, and when it turns away it is night.",
-                "id": "s36-0-c1",
-                "question": "What causes day and night?"
-              },
               {
                 "answer": "Because in summer your hemisphere tilts toward the sun, giving longer days and more direct warmth.",
                 "id": "s36-0-c2",
@@ -26474,11 +26358,6 @@ const MM_WEEKS_35 = [
             "instructions": "Answer these questions about the reading.",
             "items": [
               {
-                "answer": "After Gettysburg, the Confederacy was always retreating, because the South lost so many men it could never fully recover.",
-                "id": "h39-0-c1",
-                "question": "Why was Gettysburg called the turning point of the war?"
-              },
-              {
                 "answer": "Its short, powerful words about freedom and equality said more than the two-hour speech of the main speaker that day, proving that saying less can mean more.",
                 "id": "h39-0-c2",
                 "question": "Why do you think the Gettysburg Address became so famous even though it was only 272 words long?"
@@ -26707,11 +26586,6 @@ const MM_WEEKS_35 = [
           {
             "instructions": "Answer these questions about the reading.",
             "items": [
-              {
-                "answer": "A mixture is two or more materials stirred together but not joined, and you can still see the parts. In a solution, one material dissolves completely into another so you cannot see it.",
-                "id": "s39-0-c1",
-                "question": "What is the difference between a mixture and a solution?"
-              },
               {
                 "answer": "The solute, like sugar, is dissolved so completely that it is invisible, but it is still there because you can taste it.",
                 "id": "s39-0-c2",
@@ -27524,11 +27398,6 @@ const MM_WEEKS_35 = [
           {
             "instructions": "Answer these questions about the reading.",
             "items": [
-              {
-                "answer": "The metal conducts heat away from your hand faster than wood does.",
-                "id": "s40-1-c1",
-                "question": "Why does a metal spoon left in a room feel colder than a wooden spoon in the same room?"
-              },
               {
                 "answer": "So convection carries the warm air upward through the room.",
                 "id": "s40-1-c2",
@@ -29923,11 +29792,6 @@ const MM_WEEKS_35 = [
           {
             "instructions": "Answer these questions about the reading.",
             "items": [
-              {
-                "answer": "More than 12 million.",
-                "id": "h44-0-c1",
-                "question": "How many immigrants passed through Ellis Island between 1892 and 1954?"
-              },
               {
                 "answer": "Doctors inspected each person for illness, marking coats with chalk for further checks. Most passed in a day, but some waited weeks.",
                 "id": "h44-0-c2",
@@ -32699,11 +32563,6 @@ const MM_WEEKS_35 = [
             "instructions": "Answer these questions about the reading.",
             "items": [
               {
-                "answer": "Drought in the Plains turned farmland to dust, and storms of dirt buried homes and forced families to flee west.",
-                "id": "h48-0-c1",
-                "question": "What was the dust bowl?"
-              },
-              {
                 "answer": "Hungry and scared, but perhaps hopeful too, since people helped their neighbors and hoped for better days.",
                 "id": "h48-0-c2",
                 "question": "How do you think a child felt standing in a breadline in 1932?"
@@ -34331,11 +34190,6 @@ const MM_WEEKS_35 = [
           {
             "instructions": "Answer these questions about the reading.",
             "items": [
-              {
-                "answer": "Ask what the problem is, imagine many solutions, plan the best one, create a prototype, test it, and improve the design.",
-                "id": "s50-0-c1",
-                "question": "What are the steps of the engineering design process, in order?"
-              },
               {
                 "answer": "Real engineers almost never succeed on the first try. Each failure teaches how to improve the next version.",
                 "id": "s50-0-c2",
