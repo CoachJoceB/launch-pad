@@ -235,6 +235,11 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
   .live-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;}
   .live-card{border:1.5px solid var(--line-light);border-radius:10px;padding:12px;background:#fff;}
   .live-card-head{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:8px;}
+  /* Parent live view is a full-screen surface with a student switcher. */
+  #liveViewOverlay{padding:0;}
+  #liveViewOverlay .modal{width:100%;max-width:none;height:100dvh;max-height:none;border-radius:0;margin:0;display:flex;flex-direction:column;}
+  #liveViewOverlay #liveViewContent{flex:1;overflow-y:auto;min-height:0;}
+  .live-switch{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;}
   .live-status{font-size:12px;font-weight:700;color:var(--ink-soft);}
   .live-empty{font-size:13px;color:var(--ink-soft);line-height:1.5;}
   .live-video{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:8px;background:#000;display:block;}
@@ -696,7 +701,8 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
 <div class="modal-overlay" id="liveViewOverlay">
   <div class="modal wide">
     <h3>📺 Parent Live View</h3>
-    <div class="sub">Live cameras, worksheet snapshots, and progress while the kids work. Feeds appear as each student opens a monitored worksheet or test. Tap a card to enlarge it, tap again to shrink it. Nothing is recorded.</div>
+    <div class="sub">Live cameras, worksheet snapshots, and progress while the kids work. Feeds appear as each student opens a monitored worksheet or test. Use the buttons below to switch between students. Nothing is recorded.</div>
+    <div class="live-switch" id="liveStudentSwitch"></div>
     <div id="liveViewContent"></div>
     <div class="modal-actions">
       <button class="btn btn-ghost" id="liveViewReloadBtn" type="button">↻ Reload view</button>
@@ -972,15 +978,26 @@ async function storageGet(key){
     catch(e2){ console.error('storage get failed', e2); return null; }
   }
 }
+async function storageSetOnce(key,value){
+  const {error} = await withCallTimeout(
+    sb.from('command_center').upsert({ key, value, updated_at: new Date().toISOString() }), 12000, 'set ' + key);
+  if(error) throw error;
+  return true;
+}
 async function storageSet(key,value){
   if(!isUnlocked()){ console.warn('storage write blocked: board is locked'); return false; }
   if(!sb) return false;
   try{
-    const {error} = await withCallTimeout(
-      sb.from('command_center').upsert({ key, value, updated_at: new Date().toISOString() }), 12000, 'set ' + key);
-    if(error) throw error;
-    return true;
-  }catch(e){ console.error('storage set failed', e); return false; }
+    return await storageSetOnce(key,value);
+  }catch(e){
+    // One retry, same as reads: a transient stall or dropped connection
+    // on a phone usually succeeds the second time. Before this, a single
+    // failed write silently lost whatever was being typed.
+    console.warn('storage set retrying', key, e && e.message);
+    await new Promise(r=> setTimeout(r, 700));
+    try{ return await storageSetOnce(key,value); }
+    catch(e2){ console.error('storage set failed', e2); return false; }
+  }
 }
 async function storageDelete(key){
   if(!isUnlocked()){ console.warn('storage delete blocked: board is locked'); return; }
@@ -2985,9 +3002,9 @@ async function loadTestForStudent(student){
 
 async function saveTestAnswers(studentId){
   const entry = testCache[studentId];
-  if(!entry) return;
+  if(!entry) return true;
   entry.answers.savedAt = new Date().toISOString();
-  await storageSet(testAnswersKey(state.dateStr, studentId), entry.answers);
+  return storageSet(testAnswersKey(state.dateStr, studentId), entry.answers);
 }
 
 function renderTestFormHTML(student, entry){
@@ -4435,24 +4452,59 @@ async function wsFlushWorksheetSaves(){
     const ov = document.getElementById('worksheetOverlay');
     const ctx = (typeof currentWorksheetCtx !== 'undefined') ? currentWorksheetCtx : null;
     const sid = (typeof wsActiveStudent !== 'undefined') ? wsActiveStudent : null;
-    if(!ov || !ov.classList.contains('open') || !ctx || !sid) return;
+    if(!ov || !ov.classList.contains('open') || !ctx || !sid) return true;
     const entry = worksheetCache[sid];
-    if(!entry) return;
+    if(!entry) return true;
     ov.querySelectorAll('[data-wsfield]').forEach(el=>{
       if(el.type === 'checkbox') entry.answers[el.dataset.wsfield] = el.checked ? 'x' : '';
       else entry.answers[el.dataset.wsfield] = el.value;
     });
-    await storageSet(worksheetAnswersKey(ctx.dateStr, sid, ctx.subject), entry.answers);
-  }catch(e){}
+    let ok = await storageSet(worksheetAnswersKey(ctx.dateStr, sid, ctx.subject), entry.answers);
+    const checks = (typeof wsChecksCache !== 'undefined') ? wsChecksCache[sid] : null;
+    if(checks) ok = (await storageSet(wsCheckKey(ctx.dateStr, sid, ctx.subject), checks)) && ok;
+    return ok;
+  }catch(e){ return false; }
 }
 async function wsFlushTestSaves(){
   try{
-    for(const sid of Object.keys(testInputSaveTimers)){
-      clearTimeout(testInputSaveTimers[sid]);
-      delete testInputSaveTimers[sid];
-      await saveTestAnswers(sid);
+    let ok = true;
+    const sids = new Set([...Object.keys(testInputSaveTimers), ...Object.keys(testCache)]);
+    for(const sid of sids){
+      if(testInputSaveTimers[sid]){ clearTimeout(testInputSaveTimers[sid]); delete testInputSaveTimers[sid]; }
+      if(testCache[sid]) ok = (await saveTestAnswers(sid)) && ok;
     }
-  }catch(e){}
+    return ok;
+  }catch(e){ return false; }
+}
+async function wsFlushBoardSaves(){
+  // The board DOM is the source of truth here: the in-memory response
+  // map lives inside the board renderer's scope, so read the fields.
+  try{
+    let ok = true;
+    const byStudent = {};
+    document.querySelectorAll('#board [data-cefield]').forEach(el=>{
+      const sid = el.dataset.student; const field = el.dataset.cefield;
+      if(!sid || !field) return;
+      const current = byStudent[sid] || (byStudent[sid] = { headline: '', summary: '' });
+      current[field] = el.value;
+    });
+    for(const sid of Object.keys(byStudent)){
+      ok = (await storageSet(currentEventResponseKey(state.dateStr, sid), byStudent[sid])) && ok;
+    }
+    return ok;
+  }catch(e){ return false; }
+}
+/* The save gate for updates and the idle lock: true only when the open
+   worksheet, the Friday test, and the board current-event fields are all
+   CONFIRMED saved to the cloud (or had nothing to save). Video progress
+   flushes best-effort alongside; it also saves itself every few seconds
+   while a video plays. */
+async function wsFlushAllWork(){
+  const a = await wsFlushWorksheetSaves();
+  const b = await wsFlushTestSaves();
+  const c = await wsFlushBoardSaves();
+  try{ await wsFlushVideoProgress(); }catch(e){}
+  return a && b && c;
 }
 function wireWorksheetFormInputs(container, studentId){
   const entry = worksheetCache[studentId];
@@ -6706,6 +6758,9 @@ function unlockAsParent(){
   wsParentSession = true;
   wsStopCamera();
   bootApp();
+  // A parent signing in lands straight in the full-screen live view;
+  // Close on that view returns to the board.
+  setTimeout(()=>{ try{ const ov = document.getElementById('liveViewOverlay'); if(ov && !ov.classList.contains('open')) openLiveViewModal(); }catch(e){} }, 1200);
 }
 async function showNamePicker(){
   const overlay = document.getElementById('namePickerOverlay');
@@ -6769,8 +6824,7 @@ async function idleLock(){
   const overlay = document.getElementById('idleOverlay');
   if(overlay) overlay.classList.remove('open');
   idleClear();
-  await wsFlushWorksheetSaves();
-  await wsFlushTestSaves();
+  await wsFlushAllWork();
   destroyBoardPlayers();
   try{ closeAllModals(true); }catch(e){}
   try{ wsStopCamera(); }catch(e){}
@@ -7029,6 +7083,28 @@ let liveViewHeartbeat = null;
 let liveViewPollTimer = null;
 let liveViewSessions = {}; // studentId -> {kind, subject, dateStr, deviceId}
 let liveViewPCs = {}; // deviceId -> {pc, studentId}
+let liveViewFilter = 'all';
+function liveViewRenderSwitch(){
+  const box = document.getElementById('liveStudentSwitch');
+  if(!box) return;
+  const names = [{ id: 'all' }].concat(state.students || []);
+  box.innerHTML = names.map(s=>{
+    const active = liveViewFilter === s.id;
+    const label = s.id === 'all' ? 'All students' : liveStudentName(s.id);
+    return '<button type="button" class="btn ' + (active ? 'btn-primary' : 'btn-ghost') + '" data-liveswitch="' + s.id + '" style="font-size:13px;padding:7px 16px;">' + esc(label) + '</button>';
+  }).join('');
+  box.querySelectorAll('[data-liveswitch]').forEach(b=> b.addEventListener('click', ()=>{
+    liveViewFilter = b.dataset.liveswitch;
+    liveViewRenderSwitch();
+    liveViewApplyFilter();
+  }));
+}
+function liveViewApplyFilter(){
+  document.querySelectorAll('#liveViewContent .live-card').forEach(card=>{
+    const sid = card.getAttribute('data-live-student');
+    card.style.display = (liveViewFilter === 'all' || sid === liveViewFilter) ? '' : 'none';
+  });
+}
 
 function liveViewSend(payload){
   if(!liveViewChannel) return;
@@ -7051,6 +7127,8 @@ async function openLiveViewModal(){
   if(content) content.innerHTML = '<div class="live-grid">' + (state.students || []).map(s=> liveViewSkeletonHTML(s)).join('') + '</div>';
   document.getElementById('liveViewOverlay').classList.add('open');
   liveViewNotifBox();
+  liveViewRenderSwitch();
+  liveViewApplyFilter();
   liveViewParentId = 'p-' + Math.random().toString(36).slice(2, 10);
   try{
     if(typeof sb !== 'undefined' && sb){
@@ -7119,18 +7197,18 @@ function liveViewOnTyping(p){
 function liveViewRenderTypingLine(card, studentId){
   const t = liveViewTyping[studentId];
   let line = card.querySelector('.live-typing');
-  if(!t || Date.now() - t.ts > 8000){
+  if(!t || (!t.text && Date.now() - t.ts > 8000)){
     if(line) line.remove();
     return;
   }
   if(!line){
     line = document.createElement('div');
     line.className = 'live-typing';
-    line.style.cssText = 'font-size:13px;margin-top:6px;line-height:1.5;color:var(--ink-soft);';
+    line.style.cssText = 'font-size:13px;margin-top:6px;line-height:1.5;color:var(--ink);background:var(--bg-soft,#fbf9f4);border:1.5px solid var(--line-light);border-radius:8px;padding:8px 10px;max-height:190px;overflow-y:auto;white-space:pre-wrap;word-break:break-word;';
     const prog = card.querySelector('.live-progress');
     if(prog) prog.after(line); else card.appendChild(line);
   }
-  const preview = t.text ? 'Typing: \u201C' + t.text.slice(0, 90) + (t.text.length > 90 ? '\u2026' : '') + '\u201D' : 'Typing\u2026';
+  const preview = t.text ? 'Typing: \u201C' + t.text + '\u201D' : 'Typing\u2026';
   line.textContent = '✏️ ' + preview;
 }
 async function liveViewOnMessage(p){
@@ -7199,6 +7277,7 @@ async function liveViewOnOffer(p){
 function liveViewPollAll(){
   Object.keys(liveViewSessions).forEach(id=> liveViewPollStudent(id, liveViewSessions[id]));
   liveViewRenderActivity();
+  liveViewApplyFilter();
 }
 async function liveViewPollStudent(studentId, sess){
   const card = document.querySelector('[data-live-student="' + studentId + '"]');
@@ -8153,7 +8232,7 @@ if(!SUPABASE_CONFIGURED){
    answers and checks autosave continuously, so after reload the student
    just reopens the worksheet. DEPLOY ORDER MATTERS: push index.html first,
    verify Pages rebuilt, THEN push version.json (see AGENTS.md). */
-const APP_VERSION = '20261029a';
+const APP_VERSION = '20261029b';
 let wsUpdatePromptShown = false;
 async function wsCheckAppVersion(){
   if(wsUpdatePromptShown) return;
@@ -8179,19 +8258,50 @@ function wsShowUpdatePrompt(newVer){
   overlay.id = 'updateOverlay';
   overlay.innerHTML = '<div class="modal" style="max-width:420px;text-align:center;">'
     + '<h3 style="margin-top:0;">This page is about to update</h3>'
-    + '<p style="font-size:14.5px;line-height:1.6;">Your work is saved. The page will reload with the newest version.</p>'
+    + '<p style="font-size:14.5px;line-height:1.6;">Your work is saved first. Only then does the page reload with the newest version.</p>'
     + '<div id="updateCountdown" style="font-size:64px;font-weight:700;font-family:\'Oswald\',sans-serif;margin:8px 0;">3</div>'
+    + '<p id="updateStatus" style="font-size:13.5px;line-height:1.5;color:var(--ink-soft);margin:6px 0 0;"></p>'
+    + '<button type="button" class="btn btn-primary" id="updateKeepWorking" style="display:none;margin-top:12px;">Keep working (update later)</button>'
     + '</div>';
   document.body.appendChild(overlay);
+  overlay.querySelector('#updateKeepWorking').addEventListener('click', ()=>{
+    overlay.remove();
+    wsUpdatePromptShown = false;
+  });
   const target = Date.now() + 3000;
   const tick = ()=>{
     const remain = Math.max(0, Math.ceil((target - Date.now()) / 1000));
     const el = document.getElementById('updateCountdown');
     if(el) el.textContent = remain;
-    if(Date.now() >= target){ (async ()=>{ await wsFlushWorksheetSaves(); await wsFlushTestSaves(); await wsFlushVideoProgress(); wsReloadForUpdate(newVer); })(); }
+    if(Date.now() >= target){ wsRunUpdateSave(newVer); }
     else setTimeout(tick, 200);
   };
   tick();
+}
+/* An update never reloads over unsaved work: keep retrying the confirmed
+   save until it lands. If the connection stays down, the prompt offers
+   "Keep working" instead of reloading, and the next version poll (about
+   a minute later) tries the whole thing again. */
+async function wsRunUpdateSave(newVer){
+  const cd = document.getElementById('updateCountdown');
+  const st = document.getElementById('updateStatus');
+  if(cd) cd.style.display = 'none';
+  const started = Date.now();
+  while(true){
+    if(!document.getElementById('updateOverlay')) return;
+    if(st) st.textContent = 'Saving your work\u2026';
+    let ok = false;
+    try{ ok = await wsFlushAllWork(); }catch(e){}
+    if(ok){ wsReloadForUpdate(newVer); return; }
+    if(Date.now() - started > 45000){
+      if(st) st.textContent = 'Still cannot save \u2014 the connection looks down. Your work is safe on this page. Keep working and the update will try again in a minute.';
+      const kb = document.getElementById('updateKeepWorking');
+      if(kb) kb.style.display = '';
+      return;
+    }
+    if(st) st.textContent = 'Saving your work\u2026 the connection is slow, retrying.';
+    await new Promise(r=> setTimeout(r, 3000));
+  }
 }
 function wsStartVersionPolling(){
   setTimeout(wsCheckAppVersion, 30000);
