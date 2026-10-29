@@ -2986,11 +2986,6 @@ const MM_WEEKS_68 = [
             "instructions": "Answer in complete sentences.",
             "items": [
               {
-                "id": "s5-0-c1",
-                "question": "What is cellular respiration, and where does it happen?",
-                "answer": "Model answer: Respiration burns sugar with oxygen inside the mitochondria, releasing energy the cell can use. It is the mirror image of photosynthesis."
-              },
-              {
                 "id": "s5-0-c2",
                 "question": "Why do you pant after a race?",
                 "answer": "Model answer: Your mitochondria need more oxygen to make more ATP for your hardworking muscles, so your breathing quickens to deliver air."
@@ -4800,11 +4795,6 @@ const MM_WEEKS_68 = [
             "instructions": "Answer in complete sentences.",
             "items": [
               {
-                "id": "h8-1-c1",
-                "question": "Out of about 300,000 people in Athens, how many could vote, and who was shut out?",
-                "answer": "Model answer: Only about 30,000 could vote. Women, enslaved people, and foreigners could not enter the assembly."
-              },
-              {
                 "id": "h8-1-c2",
                 "question": "Why was Athens's direct democracy sometimes 'reckless'?",
                 "answer": "Model answer: The assembly could be swayed by a great speaker one day and reverse itself the next. Juries of 500 held one-day trials with no lawyers, so justice was passionate but unpredictable."
@@ -4927,11 +4917,6 @@ const MM_WEEKS_68 = [
                 "id": "s8-0-c1",
                 "question": "What do the letters BB, Bb, and bb mean for eye color in the simple model?",
                 "answer": "Model answer: Capital B stands for dominant brown eyes and lowercase b for recessive blue. BB or Bb gives brown eyes because one capital letter is enough, while only bb gives blue eyes."
-              },
-              {
-                "id": "s8-0-c2",
-                "question": "Why can two brown-eyed parents have a blue-eyed child?",
-                "answer": "Model answer: Both parents can carry a hidden recessive copy. If the child gets the recessive copy from each parent, the hidden trait appears."
               },
               {
                 "id": "s8-0-c3",
@@ -7624,11 +7609,6 @@ const MM_WEEKS_68 = [
                 "answer": "Model answer: The three domains are Bacteria, Archaea, and Eukarya. Humans are eukaryotes, along with every mushroom and oak tree."
               },
               {
-                "id": "s12-1-c2",
-                "question": "How does a dichotomous key work?",
-                "answer": "Model answer: It asks yes-or-no questions, like whether an organism has a backbone or feathers. Each answer leads to the next question until only one species remains."
-              },
-              {
                 "id": "s12-1-c3",
                 "question": "DNA showed that fungi are closer to animals than to plants. What does this reveal about the tree of life?",
                 "answer": "Model answer: It reveals the tree is not finished: new tools keep redrawing it, and every genome read sharpens the picture."
@@ -8824,11 +8804,6 @@ const MM_WEEKS_68 = [
             "instructions": "Answer in complete sentences.",
             "items": [
               {
-                "id": "s14-0-c1",
-                "question": "Why is a virus not considered truly alive?",
-                "answer": "Model answer: A virus cannot eat, grow, or reproduce on its own. It is a tiny package of genetic instructions in a protein coat that must hijack a cell's machinery to make copies of itself."
-              },
-              {
                 "id": "s14-0-c2",
                 "question": "According to the reading, how do coughs and sneezes spread illnesses like the flu?",
                 "answer": "Model answer: Coughs and sneezes launch virus-packed droplets into the air, and touching a contaminated surface and then your face can also carry viruses inside you."
@@ -9288,11 +9263,6 @@ const MM_WEEKS_68 = [
                 "answer": "Model answer: A moat slowed attackers before they reached the walls. A drawbridge could be raised to seal the gate. Arrow slits let defenders shoot while staying hidden."
               },
               {
-                "id": "h15-0-c2",
-                "question": "Why did builders switch from wooden towers to stone castles?",
-                "answer": "Model answer: Attackers learned to burn wooden towers down, so builders needed a material that could not be burned. Stone walls, towers, and keeps resisted fire and lasted far longer."
-              },
-              {
                 "id": "h15-0-c3",
                 "question": "The reading says the Moors' Alhambra in Spain blended 'strong defenses with beautiful design.' What does this reveal about what castles meant to the people who built them?",
                 "answer": "Model answer: It reveals that castles were not only for fighting. They were statements of power and culture, built to impress visitors as much as to stop attackers."
@@ -9544,11 +9514,6 @@ const MM_WEEKS_68 = [
             "type": "comprehension",
             "instructions": "Answer in complete sentences.",
             "items": [
-              {
-                "id": "s15-0-c1",
-                "question": "When you run across a field, which body systems work together, according to the reading?",
-                "answer": "Model answer: The nervous system sends the signal to move, the muscular and skeletal systems carry it out, the respiratory system brings in more oxygen, the circulatory system pumps that oxygen to the muscles, and the skin releases sweat to cool the body."
-              },
               {
                 "id": "s15-0-c2",
                 "question": "Why does an infection in the lungs make the heart work harder?",
@@ -10232,11 +10197,6 @@ const MM_WEEKS_68 = [
             "type": "comprehension",
             "instructions": "Answer in complete sentences.",
             "items": [
-              {
-                "id": "s16-0-c1",
-                "question": "What are the two main parts of the nervous system?",
-                "answer": "Model answer: The central nervous system, which is the brain and spinal cord, and the peripheral nervous system, the network of nerves branching out to every part of the body."
-              },
               {
                 "id": "s16-0-c2",
                 "question": "Why does pulling your hand away from something hot happen before you think about it?",
@@ -11060,11 +11020,6 @@ const MM_WEEKS_68 = [
             "instructions": "Answer in complete sentences.",
             "items": [
               {
-                "id": "s17-1-c1",
-                "question": "What is carrying capacity?",
-                "answer": "Model answer: Carrying capacity is the largest population an environment can support over time."
-              },
-              {
                 "id": "s17-1-c2",
                 "question": "Why does a population that overshoots its carrying capacity crash?",
                 "answer": "Model answer: Food runs short, waste builds up, and disease spreads more easily, so deaths rise until the environment recovers. Deer on a small island, for example, can eat every green plant and then starve."
@@ -11387,11 +11342,6 @@ const MM_WEEKS_68 = [
             "instructions": "Answer in complete sentences.",
             "items": [
               {
-                "id": "h18-0-c1",
-                "question": "What does the word 'Renaissance' mean, and where did it begin?",
-                "answer": "Model answer: Renaissance means rebirth. It began in Italy's wealthy trading cities around the 1300s."
-              },
-              {
                 "id": "h18-0-c2",
                 "question": "Why did rich merchant families matter so much to the Renaissance?",
                 "answer": "Model answer: They paid artists and thinkers to create beautiful works, funding the art, scholarship, and rediscovery of ancient writings that defined the age."
@@ -11522,11 +11472,6 @@ const MM_WEEKS_68 = [
                 "answer": "Model answer: He was a painter, inventor, scientist, and engineer. He painted the Mona Lisa and The Last Supper."
               },
               {
-                "id": "h18-1-c2",
-                "question": "Why did Leonardo dissect human bodies?",
-                "answer": "Model answer: To learn how muscles work so he could paint them accurately. He studied the body with the same careful eye he used for water, birds, and light."
-              },
-              {
                 "id": "h18-1-c3",
                 "question": "The notebook page reads: 'The bird's wing moves in two ways, up and down and forward. I will study how air holds it up. If I understand the wing, I may build one for man.' What does this reveal about how Leonardo thought?",
                 "answer": "Model answer: It reveals the scientific method in action: observe closely, ask how it works, then imagine building it. For Leonardo, art and science were two ways of paying close attention to the world."
@@ -11631,11 +11576,6 @@ const MM_WEEKS_68 = [
             "type": "comprehension",
             "instructions": "Answer in complete sentences.",
             "items": [
-              {
-                "id": "s18-0-c1",
-                "question": "What is the leading cause of extinction worldwide, according to the reading?",
-                "answer": "Model answer: Habitat destruction, such as clearing forests for farms or cities, is the leading cause of extinction worldwide."
-              },
               {
                 "id": "s18-0-c2",
                 "question": "Why did rabbits released in Australia become such a disaster?",
@@ -11759,11 +11699,6 @@ const MM_WEEKS_68 = [
             "type": "comprehension",
             "instructions": "Answer in complete sentences.",
             "items": [
-              {
-                "id": "s18-1-c1",
-                "question": "What happened when wolves were reintroduced to Yellowstone in 1995?",
-                "answer": "Model answer: Their return balanced the park's elk herds and even changed river patterns."
-              },
               {
                 "id": "s18-1-c2",
                 "question": "Why is conservation hopeful, according to the reading?",
@@ -12302,11 +12237,6 @@ const MM_WEEKS_68 = [
             "type": "comprehension",
             "instructions": "Answer in complete sentences.",
             "items": [
-              {
-                "id": "s19-0-c1",
-                "question": "How fast do tectonic plates move?",
-                "answer": "Model answer: They move only a few centimeters per year, about as fast as your fingernails grow."
-              },
               {
                 "id": "s19-0-c2",
                 "question": "Why did few scientists believe Wegener in 1912, and what later convinced them?",
@@ -13709,11 +13639,6 @@ const MM_WEEKS_68 = [
             "instructions": "Answer in complete sentences.",
             "items": [
               {
-                "id": "s21-0-c1",
-                "question": "What is the difference between magma and lava?",
-                "answer": "Model answer: Magma is hot melted rock underground. When it reaches the surface, it is called lava."
-              },
-              {
                 "id": "s21-0-c2",
                 "question": "Why do shield volcanoes have gentle slopes while stratovolcanoes are steep?",
                 "answer": "Model answer: Runny lava spreads into wide, gentle shields. Thick, sticky lava and ash build tall, steep cones like Mount St. Helens."
@@ -14148,16 +14073,6 @@ const MM_WEEKS_68 = [
             "type": "comprehension",
             "instructions": "Answer in complete sentences.",
             "items": [
-              {
-                "id": "h22-0-c1",
-                "question": "Describe the three legs of the triangular trade.",
-                "answer": "Model answer: European ships carried guns and cloth to Africa and traded them for captive people. Then they sailed the Middle Passage to the Americas, where enslaved Africans were sold to work on plantations. The ships returned to Europe loaded with sugar, tobacco, and cotton."
-              },
-              {
-                "id": "h22-0-c2",
-                "question": "How did enslaved Africans resist during the Middle Passage?",
-                "answer": "Model answer: Some refused to eat, some rose up against crews, and most held onto their languages, music, and beliefs, keeping their cultures alive across the ocean."
-              },
               {
                 "id": "h22-0-c3",
                 "question": "The reading says 'the trade never fully broke the human spirit it tried to crush.' What does this reveal?",
@@ -15093,11 +15008,6 @@ const MM_WEEKS_68 = [
             "instructions": "Answer in complete sentences.",
             "items": [
               {
-                "id": "s23-0-c1",
-                "question": "What is the difference between mechanical and chemical weathering?",
-                "answer": "Model answer: Mechanical weathering breaks rock into smaller pieces without changing what it is made of, like water freezing in cracks and prying rocks apart. Chemical weathering changes the minerals themselves, like slightly acidic rain dissolving limestone."
-              },
-              {
                 "id": "s23-0-c2",
                 "question": "Why does weathering work fastest in deserts and wet tropics?",
                 "answer": "Model answer: In deserts, daily heating and cooling crack rocks apart. In wet tropics, heavy rain and warmth speed chemical breakdown."
@@ -15541,11 +15451,6 @@ const MM_WEEKS_68 = [
             "instructions": "Answer in complete sentences.",
             "items": [
               {
-                "id": "h24-0-c1",
-                "question": "What did Enlightenment thinkers believe should guide human life?",
-                "answer": "Model answer: Reason: clear thinking based on facts and logic, instead of tradition or unquestioned authority."
-              },
-              {
                 "id": "h24-0-c2",
                 "question": "Why were the claims that 'all people are born with rights' radical in their world?",
                 "answer": "Model answer: The world was ruled by kings who claimed God gave them power. Saying governments exist to protect rights, and that people could change a failing government, challenged the whole order."
@@ -15908,11 +15813,6 @@ const MM_WEEKS_68 = [
             "type": "comprehension",
             "instructions": "Answer in complete sentences.",
             "items": [
-              {
-                "id": "s24-1-c1",
-                "question": "What is the principle of superposition?",
-                "answer": "Model answer: In sedimentary rock, the oldest layers are on the bottom and the youngest on top, so a fossil in a lower layer is older than one above it."
-              },
               {
                 "id": "s24-1-c2",
                 "question": "How do trilobites and the iridium layer each help geologists date rock?",
@@ -16452,11 +16352,6 @@ const MM_WEEKS_68 = [
             "instructions": "Answer in complete sentences.",
             "items": [
               {
-                "id": "s25-0-c1",
-                "question": "How does a fossil form?",
-                "answer": "Model answer: An organism is buried quickly by sediment before scavengers or decay can destroy it. Over millions of years, minerals seep into the remains and harden them into rock."
-              },
-              {
                 "id": "s25-0-c2",
                 "question": "What can a fossil fish on a mountaintop and dinosaur trackways each tell scientists?",
                 "answer": "Model answer: A fossil fish on a mountaintop proves the rock was once under the sea. Trackways show how dinosaurs walked, how fast they moved, and whether they traveled in herds."
@@ -16587,11 +16482,6 @@ const MM_WEEKS_68 = [
             "type": "comprehension",
             "instructions": "Answer in complete sentences.",
             "items": [
-              {
-                "id": "s25-1-c1",
-                "question": "What is a half-life?",
-                "answer": "Model answer: A half-life is the time it takes for half of the atoms in a radioactive sample to decay into stable forms."
-              },
               {
                 "id": "s25-1-c2",
                 "question": "If a rock starts with 100 atoms of a radioactive element, about how many remain after three half-lives?",
@@ -17173,11 +17063,6 @@ const MM_WEEKS_68 = [
                 "answer": "Model answer: Surface currents are powered mainly by wind. Earth's rotation bends these flows into giant circular patterns called gyres, one turning in each ocean basin."
               },
               {
-                "id": "s26-0-c2",
-                "question": "Why do some of the world's richest fisheries sit above upwelling zones?",
-                "answer": "Model answer: Deep water rising to the surface brings nutrients that feed plankton, fish, and entire food webs."
-              },
-              {
                 "id": "s26-0-c3",
                 "question": "The reading compares currents to 'trade winds that once carried revolutionary ideas across oceans.' What does this reveal?",
                 "answer": "Model answer: It reveals that currents are highways. Like winds carried ideas, currents carry the ingredients of life, heat, and nutrients, to every corner of the sea."
@@ -17295,11 +17180,6 @@ const MM_WEEKS_68 = [
             "type": "comprehension",
             "instructions": "Answer in complete sentences.",
             "items": [
-              {
-                "id": "s26-1-c1",
-                "question": "How does the Gulf Stream affect Western Europe's climate?",
-                "answer": "Model answer: It carries tropical heat toward the poles, keeping Western Europe far milder than other places at the same latitude. Without it, London would have winters more like those of northern Canada."
-              },
               {
                 "id": "s26-1-c2",
                 "question": "What happens around the world during El Nino?",
@@ -18571,11 +18451,6 @@ const MM_WEEKS_68 = [
                 "answer": "Model answer: The mean was about 96.7 and the median was 93; they disagreed because one bad reading of 120 degrees, probably a broken thermometer, pulled the mean upward while the median resisted the outlier."
               },
               {
-                "id": "s28-1-c2",
-                "question": "Why do scientists often prefer the median when a data set has an outlier?",
-                "answer": "Model answer: Because the median is the middle value in the ordered list, so a single extreme value cannot drag it around the way it drags the mean."
-              },
-              {
                 "id": "s28-1-c3",
                 "question": "The reading says, “When a map says a city averages 72.4 degrees in April, that decimal comes from years of patient measuring, added and divided with care.” What does this passage reveal about climate data?",
                 "answer": "Model answer: It reveals that climate numbers are built from thousands of careful readings over many years, so even a precise-looking decimal represents patient, repeated work rather than a single measurement."
@@ -19591,11 +19466,6 @@ const MM_WEEKS_68 = [
                 "answer": "Model answer: The Asante fought the British in a series of wars, the Zulu crushed a British army at Isandlwana in 1879, and Samori Toure resisted the French for sixteen years."
               },
               {
-                "id": "h30-1-c2",
-                "question": "How did Emperor Menelik II prepare Ethiopia for the Italian invasion?",
-                "answer": "Model answer: He spent years modernizing his army with rifles and artillery while Italian officials plotted to make Ethiopia a colony."
-              },
-              {
                 "id": "h30-1-c3",
                 "question": "The conference records declared that claims must be backed by “effective occupation, so that trade and civilization may advance.” What does this passage reveal about Europe's attitude?",
                 "answer": "Model answer: It reveals that Europe saw Africa as empty land waiting to be taken and dressed up conquest in the language of trade and civilization, an attitude Adwa answered when Ethiopia's army crushed the Italians in a single day."
@@ -19814,11 +19684,6 @@ const MM_WEEKS_68 = [
             "type": "comprehension",
             "instructions": "Answer in complete sentences.",
             "items": [
-              {
-                "id": "s30-1-c1",
-                "question": "If 9 of Africa's 54 countries are major oil producers, what percent is that?",
-                "answer": "Model answer: About 17 percent (9 divided by 54, times 100)."
-              },
               {
                 "id": "s30-1-c2",
                 "question": "Why do resource maps use percents instead of listing millions of tons?",
@@ -20442,11 +20307,6 @@ const MM_WEEKS_68 = [
             "instructions": "Answer in complete sentences.",
             "items": [
               {
-                "id": "s31-1-c1",
-                "question": "Why does the periodic table list chlorine's atomic mass as about 35.5 instead of a whole number?",
-                "answer": "Model answer: Because chlorine comes in two isotopes: about three out of four atoms have a mass of 35 and about one out of four has a mass of 37, and 35.5 is the weighted average of the blend."
-              },
-              {
                 "id": "s31-1-c2",
                 "question": "Show the math: how do you get 35.5 from chlorine's two isotopes?",
                 "answer": "Model answer: Multiply 35 by 3/4 and 37 by 1/4, then add: 26.25 plus 9.25 equals 35.5."
@@ -21068,11 +20928,6 @@ const MM_WEEKS_68 = [
             "type": "comprehension",
             "instructions": "Answer in complete sentences.",
             "items": [
-              {
-                "id": "s32-1-c1",
-                "question": "About what percent of the 118 known elements are metals, and about what percent are nonmetals?",
-                "answer": "Model answer: About 94 elements, or roughly 80 percent, are metals; about 18 elements, or roughly 15 percent, are nonmetals."
-              },
               {
                 "id": "s32-1-c2",
                 "question": "Where are the metalloids found on the periodic table, and how do they behave?",
@@ -22949,11 +22804,6 @@ const MM_WEEKS_68 = [
             "instructions": "Answer in complete sentences.",
             "items": [
               {
-                "id": "s35-1-c1",
-                "question": "If the math predicts 50 grams of product but you collect 40 grams, what is the percent yield?",
-                "answer": "Model answer: 80 percent (40 divided by 50, times 100)."
-              },
-              {
                 "id": "s35-1-c2",
                 "question": "Why is the actual yield usually less than the theoretical yield?",
                 "answer": "Model answer: Because some product sticks to the glassware, some escapes as gas, and some reactants never finish reacting."
@@ -24201,11 +24051,6 @@ const MM_WEEKS_68 = [
             "instructions": "Answer in complete sentences.",
             "items": [
               {
-                "id": "s37-1-c1",
-                "question": "If a reaction starts with 10 grams of one reactant and 5 grams of another, what must the products weigh in total?",
-                "answer": "Model answer: 15 grams in total, because input always equals output."
-              },
-              {
                 "id": "s37-1-c2",
                 "question": "In the reading's example, 12 grams of reactants make products that are 2/3 solid and 1/3 gas. How many grams of each form?",
                 "answer": "Model answer: 8 grams of solid (2/3 of 12) and 4 grams of gas (1/3 of 12), which add back to 12."
@@ -25441,11 +25286,6 @@ const MM_WEEKS_68 = [
             "instructions": "Answer in complete sentences.",
             "items": [
               {
-                "id": "s39-1-c1",
-                "question": "If a weapons stockpile grows from 1,000 to 10,000 warheads, what is the percent change?",
-                "answer": "Model answer: 900 percent (9,000 divided by 1,000, times 100)."
-              },
-              {
                 "id": "s39-1-c2",
                 "question": "Why does the Cold War weapons graph bend upward steeply instead of rising in a straight line?",
                 "answer": "Model answer: Because the growth accelerated: each decade added more weapons than the last, so the curve bends upward in the signature shape of acceleration."
@@ -26079,16 +25919,6 @@ const MM_WEEKS_68 = [
             "instructions": "Answer in complete sentences.",
             "items": [
               {
-                "id": "s40-1-c1",
-                "question": "What is the equation for Newton's second law?",
-                "answer": "Model answer: Force equals mass times acceleration, or F = m times a."
-              },
-              {
-                "id": "s40-1-c2",
-                "question": "Why does a full shopping cart need a bigger push than an empty one to speed up the same amount?",
-                "answer": "Model answer: Because it has more mass, and the second law says a heavier object needs a bigger force for the same acceleration."
-              },
-              {
                 "id": "s40-1-c3",
                 "question": "The reading says a rocket rises because it pushes hot gas downward and the gas pushes the rocket upward. What does this example reveal about the third law?",
                 "answer": "Model answer: It reveals that forces always come in pairs acting on two different objects. The rocket and the gas push on each other with equal and opposite force, and the reaction is what lifts the rocket."
@@ -26468,11 +26298,6 @@ const MM_WEEKS_68 = [
             "instructions": "Answer in complete sentences.",
             "items": [
               {
-                "id": "h41-1-c1",
-                "question": "What did Nasser do to the Suez Canal in 1956?",
-                "answer": "Model answer: He nationalized it, taking control of the waterway from Britain and France so that tolls went to Egypt."
-              },
-              {
                 "id": "h41-1-c2",
                 "question": "Why did people in the Middle East see the mandates as \"a new kind of colonial rule\"?",
                 "answer": "Model answer: Because Britain and France drew borders as they pleased and ruled the lands themselves while only promising eventual independence, so it felt like the old colonial pattern under a new name."
@@ -26588,11 +26413,6 @@ const MM_WEEKS_68 = [
             "instructions": "Answer in complete sentences.",
             "items": [
               {
-                "id": "s41-0-c1",
-                "question": "What is the coefficient of friction?",
-                "answer": "Model answer: It is a number that measures friction. It is the ratio of the friction force to the force pressing the surfaces together, which scientists call the normal force."
-              },
-              {
                 "id": "s41-0-c2",
                 "question": "Why is friction not always the enemy?",
                 "answer": "Model answer: Because car tires grip the road through friction, athletes need grip from their shoes, and brake pads use friction to turn motion into heat. Without friction, every car would slide like it was on ice."
@@ -26707,11 +26527,6 @@ const MM_WEEKS_68 = [
                 "id": "s41-1-c1",
                 "question": "What happens to air resistance when you double your speed?",
                 "answer": "Model answer: The air pushes back about four times as hard."
-              },
-              {
-                "id": "s41-1-c2",
-                "question": "Why does a crumpled paper ball fall faster than a flat sheet of the same paper?",
-                "answer": "Model answer: Because the flat sheet catches a lot of air, creating more drag, while the ball is compact and streamlined so less air piles up against it."
               },
               {
                 "id": "s41-1-c3",
@@ -27230,11 +27045,6 @@ const MM_WEEKS_68 = [
             "type": "comprehension",
             "instructions": "Answer in complete sentences.",
             "items": [
-              {
-                "id": "s42-0-c1",
-                "question": "In science, when is work done?",
-                "answer": "Model answer: Work is done when a force moves an object over a distance. The formula is work equals force times distance, measured in joules."
-              },
               {
                 "id": "s42-0-c2",
                 "question": "Why does carrying a backpack across a level hallway do almost no scientific work on the pack?",
@@ -27987,11 +27797,6 @@ const MM_WEEKS_68 = [
             "instructions": "Answer in complete sentences.",
             "items": [
               {
-                "id": "s43-1-c1",
-                "question": "About how much of a gasoline car's fuel energy actually moves the car?",
-                "answer": "Model answer: Only about one quarter. The rest becomes waste heat and sound."
-              },
-              {
                 "id": "s43-1-c2",
                 "question": "Why do electric cars do better than gasoline cars, according to the reading?",
                 "answer": "Model answer: Because they turn most of their battery energy into motion, wasting far less as heat."
@@ -28637,11 +28442,6 @@ const MM_WEEKS_68 = [
                 "answer": "Model answer: Wave speed equals frequency times wavelength."
               },
               {
-                "id": "s44-1-c2",
-                "question": "Why can you hear the thump of a neighbor's bass music through walls but not the high notes?",
-                "answer": "Model answer: Because low bass notes have long wavelengths, which bend around obstacles, while high-pitched sounds have short wavelengths that are easily blocked."
-              },
-              {
                 "id": "s44-1-c3",
                 "question": "The reading says scientists \"measure the universe\" with this formula by studying light waves \"stretched by motion.\" What does that reveal about the formula's power?",
                 "answer": "Model answer: It reveals that one simple formula works everywhere, from concert halls to distant galaxies. By reading how stretched a galaxy's light waves are, astronomers can find its speed without ever touching it."
@@ -28929,11 +28729,6 @@ const MM_WEEKS_68 = [
                 "id": "h45-0-c1",
                 "question": "What were the mandates, and who created them?",
                 "answer": "Model answer: After World War I, Britain and France carved up the fallen Ottoman Empire and created mandates in Palestine, Syria, Lebanon, and Iraq, ruling these lands while promising eventual independence."
-              },
-              {
-                "id": "h45-0-c2",
-                "question": "Why did oil make the Middle East so important to the world?",
-                "answer": "Model answer: Because the world ran on oil, and vast petroleum reserves lay under the deserts of Saudi Arabia, Iraq, Kuwait, and Iran, so whoever controlled the oil could shape the world's economy."
               },
               {
                 "id": "h45-0-c3",
@@ -29694,11 +29489,6 @@ const MM_WEEKS_68 = [
             "instructions": "Answer in complete sentences.",
             "items": [
               {
-                "id": "h46-1-c1",
-                "question": "When and where was Eatonville founded, and what made it remarkable?",
-                "answer": "Model answer: In 1887 in Florida. It was one of the first Black towns in America to incorporate, with its own mayor, council, and laws."
-              },
-              {
                 "id": "h46-1-c2",
                 "question": "Why did the founders of Eatonville not wait for fair treatment from others?",
                 "answer": "Model answer: Because they had just come out of slavery and were building new lives. Instead of waiting, they bought land, built homes and churches, and ran their own government."
@@ -30354,11 +30144,6 @@ const MM_WEEKS_68 = [
             "type": "comprehension",
             "instructions": "Answer in complete sentences.",
             "items": [
-              {
-                "id": "h47-1-c1",
-                "question": "What did the 13th, 14th, and 15th Amendments do?",
-                "answer": "Model answer: The 13th ended slavery. The 14th declared that all persons born in the United States are citizens and promised equal protection of the laws. The 15th said the right to vote could not be denied because of race."
-              },
               {
                 "id": "h47-1-c2",
                 "question": "Why is the Constitution called a living document?",
@@ -31552,11 +31337,6 @@ const MM_WEEKS_68 = [
             "instructions": "Answer in complete sentences.",
             "items": [
               {
-                "id": "h49-0-c1",
-                "question": "What does the 19th Amendment say?",
-                "answer": "Model answer: It says the right of citizens of the United States to vote shall not be denied or abridged on account of sex."
-              },
-              {
                 "id": "h49-0-c2",
                 "question": "Why did the suffragists' bold tactics matter?",
                 "answer": "Model answer: Because picketing the White House and hunger strikes in prison embarrassed the nation into action, proving that persistent, peaceful pressure can rewrite the Constitution."
@@ -31787,11 +31567,6 @@ const MM_WEEKS_68 = [
                 "id": "s49-0-c1",
                 "question": "What happens when you bring two north poles of magnets together?",
                 "answer": "Model answer: They repel, or push away. Opposite poles attract and like poles repel."
-              },
-              {
-                "id": "s49-0-c2",
-                "question": "Why does a compass needle point north?",
-                "answer": "Model answer: Because Earth is a giant magnet, and the compass needle is a tiny magnet lining up with Earth's magnetic field."
               },
               {
                 "id": "s49-0-c3",
@@ -32225,11 +32000,6 @@ const MM_WEEKS_68 = [
             "instructions": "Answer in complete sentences.",
             "items": [
               {
-                "id": "h50-0-c1",
-                "question": "Where do most bills die, and why?",
-                "answer": "Model answer: In committee. The small group of lawmakers studies the bill, holds hearings, and debates every line, and most bills are quietly forgotten there."
-              },
-              {
                 "id": "h50-0-c2",
                 "question": "What is a filibuster, and how can it be broken?",
                 "answer": "Model answer: A long speech or delay tactic in the Senate to block a vote. It takes 60 of 100 senators to break one."
@@ -32337,11 +32107,6 @@ const MM_WEEKS_68 = [
             "type": "comprehension",
             "instructions": "Answer in complete sentences.",
             "items": [
-              {
-                "id": "h50-1-c1",
-                "question": "What did John Lewis mean by \"good trouble\"?",
-                "answer": "Model answer: Peaceful, principled disruption that forces the nation to face injustice, like sit-ins on the House floor to demand votes."
-              },
               {
                 "id": "h50-1-c2",
                 "question": "How did Lewis's life show the full journey of a law?",
@@ -32583,11 +32348,6 @@ const MM_WEEKS_68 = [
             "type": "comprehension",
             "instructions": "Answer in complete sentences.",
             "items": [
-              {
-                "id": "s50-1-c1",
-                "question": "What is one iteration in engineering?",
-                "answer": "Model answer: One round of test, measure, change, and test again, like folding a paper airplane, measuring its flight, changing one fold, and testing again."
-              },
               {
                 "id": "s50-1-c2",
                 "question": "Why do engineers change only one thing between iterations?",
@@ -32868,11 +32628,6 @@ const MM_WEEKS_68 = [
             "instructions": "Answer in complete sentences.",
             "items": [
               {
-                "id": "h51-0-c1",
-                "question": "How many electoral votes does a candidate need to win the presidency?",
-                "answer": "Model answer: 270, a majority of the 538 total."
-              },
-              {
                 "id": "h51-0-c2",
                 "question": "Why do candidates campaign hardest in swing states?",
                 "answer": "Model answer: Because most states award all their electors to the statewide winner, so winning California by one vote or one million earns the same electors. Close states decide the outcome."
@@ -32980,11 +32735,6 @@ const MM_WEEKS_68 = [
             "type": "comprehension",
             "instructions": "Answer in complete sentences.",
             "items": [
-              {
-                "id": "h51-1-c1",
-                "question": "What did Chisholm mean by \"unbought and unbossed\"?",
-                "answer": "Model answer: She refused to trade her principles for favors. She spoke bluntly about poverty, racism, and the Vietnam War and would not be controlled by party leaders."
-              },
               {
                 "id": "h51-1-c2",
                 "question": "Why did Chisholm run for president in 1972 if she knew she would not win?",
@@ -33230,11 +32980,6 @@ const MM_WEEKS_68 = [
                 "id": "s51-1-c1",
                 "question": "What should you record in your table after each test?",
                 "answer": "Model answer: The version number, what you changed, and whether the egg survived or cracked, plus which part of the design hit first."
-              },
-              {
-                "id": "s51-1-c2",
-                "question": "Why should you change only one thing between tests?",
-                "answer": "Model answer: So the test measures the design change, not your improvising. Changing one thing lets you know which change helped most."
               },
               {
                 "id": "s51-1-c3",
@@ -33622,11 +33367,6 @@ const MM_WEEKS_68 = [
             "instructions": "Answer in complete sentences.",
             "items": [
               {
-                "id": "h52-1-c1",
-                "question": "What were Obama's parents' backgrounds?",
-                "answer": "Model answer: His father was a student from Kenya in East Africa. His mother was a young woman from Kansas."
-              },
-              {
                 "id": "h52-1-c2",
                 "question": "Why did crowds from Nairobi to Berlin celebrate Obama's 2008 election?",
                 "answer": "Model answer: Because his story, a son of Kenya and Kansas who became the first Black president, seemed to prove that old barriers could fall."
@@ -33747,11 +33487,6 @@ const MM_WEEKS_68 = [
             "instructions": "Answer in complete sentences.",
             "items": [
               {
-                "id": "s52-0-c1",
-                "question": "What makes a good showcase question?",
-                "answer": "Model answer: One you can test at home with simple materials that compares two things, like which paper airplane design flies farthest or whether warm water dissolves sugar faster."
-              },
-              {
                 "id": "s52-0-c2",
                 "question": "Why should you test each version at least three times and keep everything the same except one thing?",
                 "answer": "Model answer: For fairness. Repeated trials make the results reliable, and changing only one thing lets you know what caused the difference."
@@ -33867,11 +33602,6 @@ const MM_WEEKS_68 = [
             "type": "comprehension",
             "instructions": "Answer in complete sentences.",
             "items": [
-              {
-                "id": "s52-1-c1",
-                "question": "What are the four parts of a strong presentation?",
-                "answer": "Model answer: Your question, your method in brief, your results with a graph or chart, and your conclusion."
-              },
               {
                 "id": "s52-1-c2",
                 "question": "Why should you not throw out data that surprises you?",
