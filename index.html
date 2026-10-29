@@ -2595,6 +2595,7 @@ async function renderBoardInner(){
         }
         state.checks[studentId][key] = turningOn;
         await storageSet(checksKey(state.dateStr), state.checks);
+        wsScheduleWidgetPublish();
         if(turningOn){
           playChaChing();
           const lbl = materialSubjectLabel(key);
@@ -8215,6 +8216,7 @@ async function loadAndRender(){
   if(savedScrollY > 0){
     window.scrollTo(0, savedScrollY);
   }
+  wsScheduleWidgetPublish();
 }
 
 if(!SUPABASE_CONFIGURED){
@@ -8232,7 +8234,7 @@ if(!SUPABASE_CONFIGURED){
    answers and checks autosave continuously, so after reload the student
    just reopens the worksheet. DEPLOY ORDER MATTERS: push index.html first,
    verify Pages rebuilt, THEN push version.json (see AGENTS.md). */
-const APP_VERSION = '20261029b';
+const APP_VERSION = '20261029c';
 let wsUpdatePromptShown = false;
 async function wsCheckAppVersion(){
   if(wsUpdatePromptShown) return;
@@ -8302,6 +8304,61 @@ async function wsRunUpdateSave(newVer){
     if(st) st.textContent = 'Saving your work\u2026 the connection is slow, retrying.';
     await new Promise(r=> setTimeout(r, 3000));
   }
+}
+/* Home Screen widget feed: a small summary of today's completion,
+   refreshed whenever the board renders or a check flips. The Scriptable
+   widget on the parent's phone signs in with the family login and reads
+   this one key. First names and counts only. */
+let wsWidgetPublishTimer = null;
+function wsScheduleWidgetPublish(){
+  if(wsWidgetPublishTimer) return;
+  wsWidgetPublishTimer = setTimeout(()=>{ wsWidgetPublishTimer = null; wsPublishWidgetSummary(); }, 4000);
+}
+async function wsPublishWidgetSummary(){
+  try{
+    if(state.dateStr !== toDateStr(getSchoolDate(new Date()))) return;
+    const dstr = state.dateStr;
+    const isFriday = getSchoolDate(new Date()).getDay() === 5;
+    const cards = [...document.querySelectorAll('#board .student-card')];
+    const students = [];
+    for(let i = 0; i < (state.students || []).length; i++){
+      const s = state.students[i];
+      const card = cards[i];
+      let done = 0, total = 0;
+      if(card){
+        total = card.querySelectorAll('.check[data-subj], .check[data-seutask], .check-mini').length;
+        done = card.querySelectorAll('.check[data-subj].checked, .check[data-seutask].checked, .check-mini.checked').length;
+      }
+      const gbRaw = (await storageGet(gradebookKey(s.id))) || {};
+      const entries = Object.values(gbRaw.entries || {});
+      const hasGrade = (subj, source) => entries.some(e => e.date === dstr && e.subject === subj && e.source === source);
+      const subjStatus = async (subj) => {
+        if(hasGrade(subj, 'worksheet')) return 'done';
+        const ans = (await storageGet(worksheetAnswersKey(dstr, s.id, subj))) || {};
+        return Object.values(ans).some(v => (v || '').toString().trim() !== '') ? 'progress' : 'todo';
+      };
+      let test = null;
+      if(isFriday){
+        if(hasGrade('history', 'friday-review') || hasGrade('science', 'friday-review')) test = 'done';
+        else {
+          const ta = (await storageGet(testAnswersKey(dstr, s.id))) || {};
+          const any = Object.values(ta).some(v => Array.isArray(v) ? v.some(x => (x || '').toString().trim() !== '') : (v || '').toString().trim() !== '');
+          test = any ? 'progress' : 'todo';
+        }
+      }
+      const startTs = await storageGet(dayStartKey(dstr, s.id));
+      students.push({
+        name: liveStudentName(s.id),
+        started: startTs ? new Date(startTs).toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' }) : '',
+        done: done, total: total,
+        allDone: total > 0 && done === total,
+        history: await subjStatus('history'),
+        science: await subjStatus('science'),
+        test: test
+      });
+    }
+    await storageSet('widget:today', { date: dstr, updatedAt: Date.now(), students: students });
+  }catch(e){}
 }
 function wsStartVersionPolling(){
   setTimeout(wsCheckAppVersion, 30000);
