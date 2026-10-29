@@ -291,7 +291,6 @@ const MM_WEEKS_912 = [
           ]}
         ,
           {type: "comprehension", instructions: "Answer each question in 3-5 sentences, using evidence from the reading.", items: [
-            {id: "s2-0-c1", question: "Why was Virchow's claim that all cells come from preexisting cells 'revolutionary'?", answer: "Because it meant life does not spontaneously appear: every cell in the body descends from earlier cells in an unbroken chain. The claim rules out spontaneous generation and grounds biology in continuity."},
             {id: "s2-0-c2", question: "How does the reading use the house analogy to explain organelles?", answer: "It says organelles divide labor the way rooms divide a house: mitochondria burn fuel to make ATP, chloroplasts capture sunlight, the endoplasmic reticulum folds and ships proteins, the Golgi apparatus packages them, lysosomes digest waste, and the nucleus serves as the control room holding DNA."},
             {id: "s2-0-c3", question: "Evaluate how the reading connects last week's chemistry lesson to cell structure.", answer: "It notes that every organelle is wrapped in membrane made of the phospholipids studied last week, presenting this as proof that the chemistry of life scales up into the structure of life. The same molecules that dissolve in water now form the compartments of the cell."}
           ]},
@@ -674,7 +673,6 @@ const MM_WEEKS_912 = [
         ,
           {type: "comprehension", instructions: "Answer each question in 3-5 sentences, using evidence from the reading.", items: [
             {id: "s4-0-c1", question: "Why does the reading emphasize that the oxygen you breathe is a 'byproduct'?", answer: "Because in the light-dependent reactions, chlorophyll captures photons and uses their energy to split water molecules, releasing oxygen as waste. The reading stresses that the air's oxygen is a leftover of photosynthesis, not its purpose, which was storing energy in the ATP and NADPH batteries."},
-            {id: "s4-0-c2", question: "How do the two stages of photosynthesis depend on each other?", answer: "The light-dependent reactions in the thylakoid membranes charge the ATP and NADPH batteries by splitting water, and the Calvin cycle in the stroma spends those batteries to fix carbon dioxide into G3P and then glucose. Without the first stage's energy carriers, the second stage cannot run."},
             {id: "s4-0-c3", question: "Evaluate the significance of RuBisCO being 'the most abundant protein on Earth.'", answer: "It shows how central carbon fixation is to life: every plant, alga, and photosynthetic bacterium relies on RuBisCO to grab carbon dioxide from the air and fasten it onto a five-carbon molecule. The single most common protein on the planet exists to feed the Calvin cycle."}
           ]},
           {type: "argument", instructions: "Write two paragraphs defending or challenging the thesis.", items: [
@@ -993,7 +991,6 @@ const MM_WEEKS_912 = [
         ,
           {type: "comprehension", instructions: "Answer each question in 3-5 sentences, using evidence from the reading.", items: [
             {id: "h6-0-c1", question: "Why does the author call Pennsylvania's pluralism 'deliberate'?", answer: "Because William Penn founded it in 1681 as a holy experiment, with a Frame of Government promising liberty of conscience to all who believed in God. The colony actively recruited diverse settlers, including English Quakers, German Mennonites and Lutherans, Scots-Irish Presbyterians, Welsh Baptists, and Jews."},
-            {id: "h6-0-c2", question: "How does Franklin's 1751 complaint reveal the limits of his own tolerance?", answer: "He worried that Germans would 'Germanize' Pennsylvania instead of being Anglified, claiming they could never adopt English language or customs 'any more than they can acquire our Complexion.' The reading uses it to show that even the colony's most enlightened man drew the line at cultural comfort."},
             {id: "h6-0-c3", question: "Evaluate the author's claim that Middle Colony pluralism was 'real, broad, and profitable, and also bounded.'", answer: "It was real, with a dozen languages heard on a single Philadelphia street and family-labor farms earning the breadbasket nickname, and it was profitable. But it was bounded by race, since Philadelphia merchants traded in enslaved people, by language, and by the prejudices of even its most enlightened men."}
           ]},
           {type: "argument", instructions: "Write two paragraphs defending or challenging the thesis.", items: [
@@ -5259,7 +5256,6 @@ const MM_WEEKS_912 = [
         ]}
       ,
           {type: "comprehension", instructions: "Answer each question in 2-3 complete sentences, citing evidence from the reading.", items: [
-            {id: "h30-1-c1", question: "Why did Lincoln wait for a battlefield victory before issuing the Preliminary Emancipation Proclamation?", answer: "So that emancipation would look like strength rather than desperation. Antietam, the bloodiest single day in American history with over 22,000 casualties, ended in a strategic Union victory when Lee's invasion of Maryland was turned back, and five days later Lincoln issued the proclamation."},
             {id: "h30-1-c2", question: "How did the proclamation change the war's meaning even though it freed no one immediately and exempted the Border States?", answer: "It transformed the war into a fight against slavery, which kept Britain and France from recognizing the Confederacy, and it aligned official Washington with what the contraband camps had already done, catching up to people who had freed themselves."},
             {id: "h30-1-c3", question: "What tension does Lincoln's letter to Horace Greeley reveal about his priorities?", answer: "Lincoln wrote that his paramount object was saving the Union, not freeing or destroying slavery, yet he had already decided emancipation was a military necessity. The letter shows politics and principle pulling in the same direction for different reasons: Union victory required striking at slavery."}
           ]},
@@ -6436,7 +6432,6 @@ const MM_WEEKS_912 = [
           ]}
         ,
           {type: "comprehension", instructions: "Answer each question in 2-3 complete sentences, citing evidence from the reading.", items: [
-            {id: "s36-0-c1", question: "Why does raising the temperature speed up a reaction, according to collision theory?", answer: "Higher temperature makes particles move faster and hit harder, so more collisions carry the minimum energy needed to react, called the activation energy. That increases the number of effective collisions."},
             {id: "s36-0-c2", question: "How does a catalyst speed up a reaction without being used up?", answer: "It provides an alternate reaction path with lower activation energy, so the reaction runs faster while the catalyst itself is not consumed. Enzymes in the body are biological catalysts, which is why food digests in hours instead of decades."},
             {id: "s36-0-c3", question: "Why must reaction orders be found by experiment rather than guessed from the balanced equation?", answer: "The exponents in a rate law describe how the rate actually depends on concentration, which is an observed relationship. They cannot be derived from the equation's coefficients, so chemists must change one concentration at a time and watch what happens to the rate."}
           ]},
@@ -7032,7 +7027,7 @@ const MM_WEEKS_912 = [
           {type: "comprehension", instructions: "Answer each question in 2-3 complete sentences, citing evidence from the reading.", items: [
             {id: "s39-0-c1", question: "Why does a car circling a track at steady speed have constantly changing velocity?", answer: "Velocity includes direction as well as speed. The car's speed is constant at 60 kilometers per hour, but its direction keeps turning, so its velocity changes continuously."},
             {id: "s39-0-c2", question: "How does the walking example distinguish distance from displacement?", answer: "Walk 40 meters east and then 30 meters west: the path traveled is the distance, 70 meters, but the straight-line change from start to finish is the displacement, only 10 meters east."},
-            {id: "s39-0-c3", question: "Why is the slope of a position-time graph equal to the velocity?", answer: "Slope is change in position divided by change in time, which is exactly the definition of velocity. A steep slope means fast motion, a flat line means the object is at rest, and a negative slope means motion back toward the origin."}
+            
           ]},
           {type: "argument", instructions: "Write a thesis-driven argument of two paragraphs. State your claim clearly, support it with evidence from the reading and your research, and address one counterargument.", items: [
             {id: "s39-0-a1", prompt: "Defend or challenge this thesis: Learning to read graphs (slope as velocity) matters more than memorizing definitions because graphs turn pictures into measurements. Write two paragraphs with a clear thesis.", guidance: "Thesis to defend or challenge: graphical literacy outranks definitional recall. Use evidence from the reading (learning to read the slope turns a picture into a measurement, the first step toward predicting motion; engineers, traffic planners, and air traffic controllers using these descriptions) plus research on visual learning in physics. Address this counterargument: without definitions, graph reading is pattern matching without understanding. Explain what understanding a graph actually requires."}
@@ -7524,7 +7519,6 @@ const MM_WEEKS_912 = [
           ]}
         ,
           {type: "comprehension", instructions: "Answer each question using evidence from this section's reading.", items: [
-            {id: "h42-0-c1", question: "Why does the reading call the stock market crash of 1929 a symptom rather than the disease?", answer: "Beneath the roaring surface, American farms had been in a depression for most of the decade as crop prices collapsed, factories produced more goods than workers' wages could buy, and the banking system was a house of cards. Thousands of small banks had gambled depositors' money on stocks and shaky loans, and when the market fell more than 9,000 banks failed."},
             {id: "h42-0-c2", question: "How did the absence of federal deposit insurance turn bank failures into destroyed life savings?", answer: "There was no federal deposit insurance, so a lost bank meant lost life savings. Ordinary families who had deposited savings in the failed banks lost everything, and with credit drying up overnight, businesses that depended on borrowed money laid off workers by the millions."},
             {id: "h42-0-c3", question: "How did government policy make the downturn worse instead of better?", answer: "The Smoot-Hawley Tariff of 1930 raised taxes on imported goods to record levels, and foreign nations answered with tariffs of their own, strangling world trade. The Federal Reserve, fearing inflation, kept money tight when the economy needed it loose."}
           ]},
@@ -9374,7 +9368,6 @@ const MM_WEEKS_912 = [
         ]}
       ,
           {type: "comprehension", instructions: "Answer each question using evidence from this section's reading.", items: [
-            {id: "s51-1-c1", question: "Why might the median be more honest than the mean?", answer: "The median is the middle value when data is ordered, so one extreme value cannot drag it off course the way it drags the average. Summarizing each condition with mean, median, mode, and range guards against misleading averages."},
             {id: "s51-1-c2", question: "Why is confusing correlation with causation the most common trap in science?", answer: "If ice cream sales and drownings rise together, one does not cause the other; both rise because summer heat drives both. The trap leads investigators to claim causes their data cannot support."},
             {id: "s51-1-c3", question: "Why is a disproven hypothesis still a successful investigation?", answer: "If the method was sound, honest results advance knowledge even when they contradict the prediction. Naming limitations, such as a small sample or uncontrolled measurements, is part of that honesty, because every real study has them."}
           ]},
