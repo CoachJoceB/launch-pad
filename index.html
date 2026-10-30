@@ -1166,14 +1166,22 @@ function friendlyAuthError(error){
 function addSignOutButton(){
   if(document.getElementById('signOutBtn')) return;
   const b = document.createElement('button');
-  b.id = 'signOutBtn'; b.type = 'button'; b.textContent = 'Sign out';
-  b.style.cssText = 'position:fixed;right:12px;bottom:12px;z-index:60;font-size:12px;padding:8px 12px;border-radius:8px;border:1px solid #CBD5E1;background:#fff;color:#5A6B84;cursor:pointer;';
+  b.id = 'signOutBtn'; b.type = 'button';
+  b.className = 'icon-btn labeled';
+  b.title = 'Sign out'; b.setAttribute('aria-label', 'Sign out');
+  b.innerHTML = '🚪 <span class="lbl">Sign out</span>';
   b.addEventListener('click', async ()=>{
     try{ sessionStorage.removeItem(LOCK_KEY); }catch(e){}
     try{ await sb.auth.signOut(); }catch(e){}
     showLoginScreen();
   });
-  document.body.appendChild(b);
+  const settingsBtn = document.getElementById('openSettings');
+  if(settingsBtn && settingsBtn.parentNode){
+    settingsBtn.parentNode.insertBefore(b, settingsBtn.nextSibling);
+  } else {
+    const sbRight = document.querySelector('.sb-right');
+    if(sbRight) sbRight.appendChild(b); else document.body.appendChild(b);
+  }
 }
 
 const CURRENT_EVENT_APPLY_IT = 'What\u2019s one thing from today\u2019s episode that could actually affect a decision you make this week?';
@@ -8234,7 +8242,7 @@ if(!SUPABASE_CONFIGURED){
    answers and checks autosave continuously, so after reload the student
    just reopens the worksheet. DEPLOY ORDER MATTERS: push index.html first,
    verify Pages rebuilt, THEN push version.json (see AGENTS.md). */
-const APP_VERSION = '20261029c';
+const APP_VERSION = '20261030a';
 let wsUpdatePromptShown = false;
 async function wsCheckAppVersion(){
   if(wsUpdatePromptShown) return;
