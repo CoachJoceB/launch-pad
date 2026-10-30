@@ -984,8 +984,35 @@ async function storageSetOnce(key,value){
   if(error) throw error;
   return true;
 }
+/* ===================== OVERWRITE GUARD =====================
+   storageGet returns null BOTH for "no row saved yet" and for "the read
+   failed" (offline, timeout). A worksheet or test opened during a failed
+   read therefore starts from an empty default — and its first autosave
+   used to write that empty state over the student's real saved answers
+   (Dillon's science worksheet, Oct 29, 2026). The guard breaks that path:
+   loaders that feed a save path use storageGetStrict, which can tell a
+   failed read from a genuine miss. A key whose load failed is protected:
+   storageSet/storageDelete refuse to touch it until a later load of the
+   same key succeeds. The saved cloud record is never overwritten by a
+   session that could not read it. */
+async function storageGetStrict(key){
+  if(!sb) return { ok:false, value:null };
+  try{
+    return { ok:true, value: await storageGetOnce(key) };
+  }catch(e){
+    console.warn('storage get (strict) retrying', key, e && e.message);
+    await new Promise(r=> setTimeout(r, 700));
+    try{ return { ok:true, value: await storageGetOnce(key) }; }
+    catch(e2){ console.error('storage get (strict) failed', key, e2); return { ok:false, value:null }; }
+  }
+}
+const saveProtectedKeys = new Set();
+function protectKeyFromOverwrite(key){ saveProtectedKeys.add(key); }
+function unprotectKey(key){ saveProtectedKeys.delete(key); }
+function isSaveProtected(key){ return saveProtectedKeys.has(key); }
 async function storageSet(key,value){
   if(!isUnlocked()){ console.warn('storage write blocked: board is locked'); return false; }
+  if(isSaveProtected(key)){ console.warn('storage write blocked: overwrite guard (this record failed to load)', key); return false; }
   if(!sb) return false;
   try{
     return await storageSetOnce(key,value);
@@ -1001,6 +1028,7 @@ async function storageSet(key,value){
 }
 async function storageDelete(key){
   if(!isUnlocked()){ console.warn('storage delete blocked: board is locked'); return; }
+  if(isSaveProtected(key)){ console.warn('storage delete blocked: overwrite guard (this record failed to load)', key); return; }
   if(!sb) return;
   try{ await withCallTimeout(sb.from('command_center').delete().eq('key',key), 12000, 'delete ' + key); }catch(e){ console.error('storage delete failed', e); }
 }
@@ -2993,7 +3021,16 @@ const testInputSaveTimers = {}; // debounced autosave while typing in the test f
 async function loadTestForStudent(student){
   const mon = mondayOfWeek(state.schoolDate);
   const test = await buildWeeklyTest(student.grade, mon, student.id);
-  const saved = (await storageGet(testAnswersKey(state.dateStr, student.id))) || defaultTestAnswers();
+  // Strict load + overwrite guard, same as worksheets: a failed read must
+  // not start the test from blank defaults that a save would write back.
+  const tKey = testAnswersKey(state.dateStr, student.id);
+  const tRes = await storageGetStrict(tKey);
+  if(tRes.ok) unprotectKey(tKey);
+  else {
+    protectKeyFromOverwrite(tKey);
+    showToast('Could not reach the cloud for saved test answers. Your saved work is protected and will reappear when the connection is back. Anything typed now will not be saved.');
+  }
+  const saved = (tRes.ok && tRes.value) ? tRes.value : defaultTestAnswers();
   while(saved.vocab.length < test.vocab.length) saved.vocab.push('');
   while(saved.financialLit.length < test.financialLit.length) saved.financialLit.push('');
   while(saved.statesCapitals.length < test.statesCapitals.length) saved.statesCapitals.push('');
@@ -3012,6 +3049,8 @@ async function loadTestForStudent(student){
 async function saveTestAnswers(studentId){
   const entry = testCache[studentId];
   if(!entry) return true;
+  // Overwrite guard: never write back a test entry whose load failed.
+  if(isSaveProtected(testAnswersKey(state.dateStr, studentId))) return true;
   entry.answers.savedAt = new Date().toISOString();
   return storageSet(testAnswersKey(state.dateStr, studentId), entry.answers);
 }
@@ -4468,9 +4507,17 @@ async function wsFlushWorksheetSaves(){
       if(el.type === 'checkbox') entry.answers[el.dataset.wsfield] = el.checked ? 'x' : '';
       else entry.answers[el.dataset.wsfield] = el.value;
     });
-    let ok = await storageSet(worksheetAnswersKey(ctx.dateStr, sid, ctx.subject), entry.answers);
+    // Overwrite guard: an entry whose load failed has nothing trustworthy
+    // to write — skip it and count it as handled, so close/lock/update
+    // flows are not stalled by a record that must not be touched.
+    const aKey = worksheetAnswersKey(ctx.dateStr, sid, ctx.subject);
+    let ok = true;
+    if(!isSaveProtected(aKey)) ok = await storageSet(aKey, entry.answers);
     const checks = (typeof wsChecksCache !== 'undefined') ? wsChecksCache[sid] : null;
-    if(checks) ok = (await storageSet(wsCheckKey(ctx.dateStr, sid, ctx.subject), checks)) && ok;
+    if(checks){
+      const cKey = wsCheckKey(ctx.dateStr, sid, ctx.subject);
+      if(!isSaveProtected(cKey)) ok = (await storageSet(cKey, checks)) && ok;
+    }
     return ok;
   }catch(e){ return false; }
 }
@@ -4800,11 +4847,27 @@ async function openWorksheetModal(subject, lesson, preferredStudentId, weekdayNu
   wsChecksCache = {};
   wsGateCache = {};
   const wsBhm = dayPart.bhm || lesson.blackHistoryMoment || null;
+  let wsLoadFailed = false;
   for(const s of worksheetStudents){
-    const saved = (await storageGet(worksheetAnswersKey(effDateStr, s.id, subject))) || defaultWorksheetAnswers(worksheet);
+    const aKey = worksheetAnswersKey(effDateStr, s.id, subject);
+    const cKey = wsCheckKey(effDateStr, s.id, subject);
+    const gKey = wsGateKey(effDateStr, s.id, subject);
+    // Strict loads: a failed read must never look like "no saved work",
+    // or this session's saves would overwrite the real record (overwrite
+    // guard). Failed keys are protected until a later load succeeds.
+    const aRes = await storageGetStrict(aKey);
+    const cRes = await storageGetStrict(cKey);
+    const gRes = await storageGetStrict(gKey);
+    if(aRes.ok) unprotectKey(aKey); else { protectKeyFromOverwrite(aKey); wsLoadFailed = true; }
+    if(cRes.ok) unprotectKey(cKey); else { protectKeyFromOverwrite(cKey); wsLoadFailed = true; }
+    if(gRes.ok) unprotectKey(gKey); else { protectKeyFromOverwrite(gKey); wsLoadFailed = true; }
+    const saved = (aRes.ok && aRes.value) ? aRes.value : defaultWorksheetAnswers(worksheet);
     worksheetCache[s.id] = { worksheet: worksheet, answers: saved, bhm: wsBhm, studentId: s.id };
-    wsChecksCache[s.id] = (await storageGet(wsCheckKey(effDateStr, s.id, subject))) || {};
-    wsGateCache[s.id] = (await storageGet(wsGateKey(effDateStr, s.id, subject))) || {};
+    wsChecksCache[s.id] = (cRes.ok && cRes.value) || {};
+    wsGateCache[s.id] = (gRes.ok && gRes.value) || {};
+  }
+  if(wsLoadFailed){
+    showToast('Could not reach the cloud for saved answers. Your saved work is protected and will reappear when the connection is back. Anything typed now will not be saved.');
   }
 
   function showStudent(id){
@@ -8242,7 +8305,7 @@ if(!SUPABASE_CONFIGURED){
    answers and checks autosave continuously, so after reload the student
    just reopens the worksheet. DEPLOY ORDER MATTERS: push index.html first,
    verify Pages rebuilt, THEN push version.json (see AGENTS.md). */
-const APP_VERSION = '20261030a';
+const APP_VERSION = '20261030b';
 let wsUpdatePromptShown = false;
 async function wsCheckAppVersion(){
   if(wsUpdatePromptShown) return;
