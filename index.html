@@ -5996,10 +5996,61 @@ closeAllModals = function(force){
     const prog = wsCurrentProgress();
     if(prog && prog.total > 0 && prog.done < prog.total){ wsShowClosePrompt(prog); return; }
   }
+  // Leaving the worksheet always goes through the save gate first: a
+  // visible "Saving..." state stays up until the flush is CONFIRMED, and
+  // only then does the screen close. (Force closes skip the gate because
+  // their callers — idle lock, version update — already awaited a flush.)
+  if(!force && ov && ov.classList.contains('open')){ wsCloseWithSaveGate(); return; }
   wsFlushWorksheetSaves();
   wsStopWorksheetCamera();
   _origCloseAllModals();
 };
+/* The worksheet save gate: block the screen with a Saving state, flush
+   the open worksheet (which first pulls every field's current value, so
+   text typed but never blurred is included), and close only on a
+   confirmed save. On failure the student stays put with a plain choice:
+   try again, or close anyway knowing this session's typing may be lost.
+   An overwrite-guard-protected entry counts as handled inside the flush,
+   so a protected record never traps the student here. */
+let wsSaveGateRunning = false;
+async function wsCloseWithSaveGate(){
+  if(wsSaveGateRunning) return;
+  wsSaveGateRunning = true;
+  let overlay = document.getElementById('wsSaveGateOverlay');
+  if(!overlay){
+    overlay = document.createElement('div');
+    overlay.id = 'wsSaveGateOverlay';
+    overlay.className = 'modal-overlay open';
+    overlay.style.zIndex = '80';
+    document.body.appendChild(overlay);
+  }
+  overlay.innerHTML = '<div class="modal" style="max-width:400px;text-align:center;">'
+    + '<h3 style="margin-top:0;">Saving your work\u2026</h3>'
+    + '<p style="font-size:14px;line-height:1.55;color:var(--ink-soft);">Hold on while your answers save. The screen will close when the save is confirmed.</p>'
+    + '</div>';
+  let ok = false;
+  try{ ok = await wsFlushWorksheetSaves(); }catch(e){}
+  wsSaveGateRunning = false;
+  if(ok){
+    overlay.remove();
+    wsStopWorksheetCamera();
+    _origCloseAllModals();
+    return;
+  }
+  overlay.innerHTML = '<div class="modal" style="max-width:440px;">'
+    + '<h3 style="margin-top:0;">Your work is not saved yet</h3>'
+    + '<p style="font-size:14px;line-height:1.55;">The save could not be confirmed, the connection may be down. Your answers are still on this screen. Try again, or close anyway and what you typed this time may be lost.</p>'
+    + '<div style="display:flex;gap:8px;margin-top:14px;flex-wrap:wrap;">'
+    + '<button type="button" class="btn btn-primary" id="wsSaveRetry">Try saving again</button>'
+    + '<button type="button" class="btn btn-ghost" id="wsSaveCloseAnyway">Close anyway</button>'
+    + '</div></div>';
+  overlay.querySelector('#wsSaveRetry').addEventListener('click', ()=>{ wsCloseWithSaveGate(); });
+  overlay.querySelector('#wsSaveCloseAnyway').addEventListener('click', ()=>{
+    overlay.remove();
+    wsStopWorksheetCamera();
+    _origCloseAllModals();
+  });
+}
 function showToast(msg){
   const t = document.getElementById('toast');
   t.textContent = msg; t.classList.add('show');
@@ -8305,7 +8356,7 @@ if(!SUPABASE_CONFIGURED){
    answers and checks autosave continuously, so after reload the student
    just reopens the worksheet. DEPLOY ORDER MATTERS: push index.html first,
    verify Pages rebuilt, THEN push version.json (see AGENTS.md). */
-const APP_VERSION = '20261030b';
+const APP_VERSION = '20261030c';
 let wsUpdatePromptShown = false;
 async function wsCheckAppVersion(){
   if(wsUpdatePromptShown) return;
