@@ -3223,7 +3223,18 @@ function afterTestSectionRender(){
   const formArea = document.getElementById('testFormArea');
   if(!tabsWrap || !formArea) return;
   async function showStudent(id){
+    // A student device is signed in as one kid (the name pick): the test
+    // stays on that kid. Any switch aimed elsewhere — a sibling tab tap,
+    // a re-render falling back to the first student, an update reload —
+    // is redirected back, so nobody can end up typing into someone
+    // else's test. Parent sessions (no signed-in student) switch freely.
+    if(sessionStudentId && id !== sessionStudentId && state.students.some(s=>s.id===sessionStudentId)){
+      const me = state.students.find(s=>s.id===sessionStudentId);
+      showToast('You are signed in as ' + firstName(me.name) + ', so the test stays on your name.');
+      id = sessionStudentId;
+    }
     activeTestStudentId = id;
+    try{ sessionStorage.setItem('mm-active-test-student', id); }catch(e){}
     tabsWrap.querySelectorAll('.modal-tab').forEach(t=>t.classList.toggle('active', t.dataset.testtab===id));
     const student = state.students.find(s=>s.id===id);
     const entry = testCache[id];
@@ -3243,7 +3254,13 @@ function afterTestSectionRender(){
   });
   // Reopen on the student who was being tested, not always the first —
   // the periodic sync re-render must not yank the test back to tab one.
-  const initialTestStudent = (activeTestStudentId && state.students.some(s=>s.id===activeTestStudentId))
+  // On a student device the signed-in kid wins outright; the last open
+  // test student is also kept in sessionStorage so a page reload (app
+  // update) reopens the same test instead of resetting to tab one.
+  if(!activeTestStudentId){ try{ activeTestStudentId = sessionStorage.getItem('mm-active-test-student'); }catch(e){} }
+  const initialTestStudent = (sessionStudentId && state.students.some(s=>s.id===sessionStudentId))
+    ? sessionStudentId
+    : (activeTestStudentId && state.students.some(s=>s.id===activeTestStudentId))
     ? activeTestStudentId : (state.students[0] && state.students[0].id);
   if(initialTestStudent) showStudent(initialTestStudent);
 }
@@ -4833,7 +4850,10 @@ async function openWorksheetModal(subject, lesson, preferredStudentId, weekdayNu
     worksheetStudents = worksheetStudents.filter(s=>s.id===preferredStudentId);
   }
   const tabsWrap = document.getElementById('worksheetStudentTabs');
-  const defaultId = worksheetStudents[0].id;
+  // On a student device, open on the signed-in kid's sheet, not the
+  // first student's — the old first-student default could put a kid on
+  // a sibling's worksheet until they noticed and tapped their own tab.
+  const defaultId = (sessionStudentId && worksheetStudents.some(s=>s.id===sessionStudentId)) ? sessionStudentId : worksheetStudents[0].id;
   // Hide tabs when there's only one student (no switching needed)
   if(worksheetStudents.length <= 1){
     tabsWrap.innerHTML = '';
@@ -4871,6 +4891,14 @@ async function openWorksheetModal(subject, lesson, preferredStudentId, weekdayNu
   }
 
   function showStudent(id){
+    // Same stay-on-your-name rule as the Friday test: on a student
+    // device, a tap on a sibling's tab redirects back to the signed-in
+    // kid's sheet. Parent sessions switch freely.
+    if(sessionStudentId && id !== sessionStudentId && worksheetStudents.some(s=>s.id===sessionStudentId)){
+      const me = worksheetStudents.find(s=>s.id===sessionStudentId);
+      showToast('You are signed in as ' + firstName(me.name) + ', so this stays on your sheet.');
+      id = sessionStudentId;
+    }
     wsActiveStudent = id;
     paintReading(id);
     tabsWrap.querySelectorAll('.modal-tab').forEach(t=>t.classList.toggle('active', t.dataset.wstab===id));
@@ -8356,7 +8384,7 @@ if(!SUPABASE_CONFIGURED){
    answers and checks autosave continuously, so after reload the student
    just reopens the worksheet. DEPLOY ORDER MATTERS: push index.html first,
    verify Pages rebuilt, THEN push version.json (see AGENTS.md). */
-const APP_VERSION = '20261030c';
+const APP_VERSION = '20261030d';
 let wsUpdatePromptShown = false;
 async function wsCheckAppVersion(){
   if(wsUpdatePromptShown) return;
