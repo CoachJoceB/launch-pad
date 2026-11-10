@@ -961,7 +961,7 @@ function withCallTimeout(promise, ms, label){
 }
 async function storageGetOnce(key){
   const {data, error} = await withCallTimeout(
-    sb.from('command_center').select('value').eq('key',key).maybeSingle(), 9000, 'get ' + key);
+    sb.from('command_center').select('value').eq('key',key).maybeSingle(), 7000, 'get ' + key);
   if(error) throw error;
   return data ? data.value : null;
 }
@@ -980,7 +980,7 @@ async function storageGet(key){
 }
 async function storageSetOnce(key,value){
   const {error} = await withCallTimeout(
-    sb.from('command_center').upsert({ key, value, updated_at: new Date().toISOString() }), 12000, 'set ' + key);
+    sb.from('command_center').upsert({ key, value, updated_at: new Date().toISOString() }), 7000, 'set ' + key);
   if(error) throw error;
   return true;
 }
@@ -1010,10 +1010,46 @@ const saveProtectedKeys = new Set();
 function protectKeyFromOverwrite(key){ saveProtectedKeys.add(key); }
 function unprotectKey(key){ saveProtectedKeys.delete(key); }
 function isSaveProtected(key){ return saveProtectedKeys.has(key); }
+/* Once a key has loaded successfully in this page session, a later load
+   failure must not lock its saves again: this session already holds a
+   good in-memory copy, usually fresher than the cloud because this
+   device has been saving into it. Protection is for sessions that
+   never got a good copy to merge against. The board loaders re-run on
+   every 90-second poll, and locking on each network blip made saves
+   flap off and on all day (the Nov 10 "autosave is not working"
+   report). */
+const keysLoadedOkOnce = new Set();
+function guardGoodLoad(key){ keysLoadedOkOnce.add(key); unprotectKey(key); }
+function guardFailedLoad(key){ if(!keysLoadedOkOnce.has(key)) protectKeyFromOverwrite(key); }
+/* Merge a freshly recovered cloud record UNDER what this session
+   holds: any non-empty value typed or marked this session wins,
+   everything else keeps the cloud value. Save flows use it when they
+   heal a record whose original load failed, so the union of both
+   copies is what finally lands. */
+function mergeAnswersUnder(local, cloud){
+  if(!cloud || typeof cloud !== 'object') return local;
+  const out = {};
+  const keys = new Set([...Object.keys(cloud), ...Object.keys(local || {})]);
+  for(const k of keys){
+    const lv = local ? local[k] : undefined;
+    const cv = cloud[k];
+    if(Array.isArray(lv) || Array.isArray(cv)){
+      const la = Array.isArray(lv) ? lv : [];
+      const ca = Array.isArray(cv) ? cv : [];
+      const len = Math.max(la.length, ca.length);
+      out[k] = Array.from({length: len}, (_, i) => (la[i] !== undefined && la[i] !== '' && la[i] !== null) ? la[i] : (ca[i] !== undefined ? ca[i] : ''));
+    }
+    else if(lv !== undefined && lv !== '' && lv !== null) out[k] = lv;
+    else if(cv !== undefined) out[k] = cv;
+    else out[k] = lv;
+  }
+  return out;
+}
 async function storageSet(key,value){
   if(!isUnlocked()){ console.warn('storage write blocked: board is locked'); return false; }
   if(isSaveProtected(key)){ console.warn('storage write blocked: overwrite guard (this record failed to load)', key); return false; }
   if(!sb) return false;
+  window.__writesInFlight = (window.__writesInFlight || 0) + 1;
   try{
     return await storageSetOnce(key,value);
   }catch(e){
@@ -1024,7 +1060,7 @@ async function storageSet(key,value){
     await new Promise(r=> setTimeout(r, 700));
     try{ return await storageSetOnce(key,value); }
     catch(e2){ console.error('storage set failed', e2); return false; }
-  }
+  } finally { window.__writesInFlight--; }
 }
 async function storageDelete(key){
   if(!isUnlocked()){ console.warn('storage delete blocked: board is locked'); return; }
@@ -1489,13 +1525,16 @@ let collapseState = {}; // in-memory only, per session
 async function loadAll(){
   // Independent reads run together — the sequential version made a slow
   // connection do a dozen round trips before anything could render.
-  const [tzVal, cwVal, rawStudentsVal, labelsVal, buzzerVal, maxTriesVal] = await Promise.all([
-    storageGet(TIMEZONE_KEY), storageGet(CONTENT_WEEKS_KEY), storageGet(STUDENTS_KEY),
+  const [tzVal, cwVal, rawStudentsRes, labelsVal, buzzerVal, maxTriesVal] = await Promise.all([
+    storageGet(TIMEZONE_KEY), storageGet(CONTENT_WEEKS_KEY), storageGetStrict(STUDENTS_KEY),
     storageGet(LABELS_KEY), storageGet(BUZZER_KEY), storageGet(MAX_TRIES_KEY)
   ]);
   state.timezone = tzVal || defaultTimezone();
   state.contentWeeks = cwVal || defaultContentWeeks();
-  const rawStudents = rawStudentsVal || defaultStudents();
+  // A failed students read keeps the roster this session already has;
+  // falling back to the built-in defaults would render the wrong kids
+  // and point their saves at the wrong records.
+  const rawStudents = rawStudentsRes.ok ? (rawStudentsRes.value || defaultStudents()) : ((state.students && state.students.length) ? state.students : defaultStudents());
   state.students = rawStudents.map(normalizeStudent);
   // Personal Info / Phone Numbers sections default to collapsed to save
   // screen space; only set the default once per session so a manual expand
@@ -1558,12 +1597,18 @@ async function loadAll(){
   // Overwrite guard, same rule as the worksheets: a failed read must never
   // look like "nothing saved yet". A failed key is protected, so no save
   // this session can overwrite the real day plan or the day's check marks.
-  if(oRes.ok) unprotectKey(dayKey(dstr)); else protectKeyFromOverwrite(dayKey(dstr));
-  if(cRes.ok) unprotectKey(checksKey(dstr)); else { protectKeyFromOverwrite(checksKey(dstr)); showToast('Could not load today\'s check marks. They are protected and will reappear when the connection is back.'); }
-  state.todayOverride = oRes.value;
+  if(oRes.ok){ guardGoodLoad(dayKey(dstr)); state.todayOverride = oRes.value; } else guardFailedLoad(dayKey(dstr));
+  if(cRes.ok){ guardGoodLoad(checksKey(dstr)); state.checks = cRes.value || {}; }
+  else {
+    guardFailedLoad(checksKey(dstr));
+    // Keep the in-memory copy: replacing it with an empty object here
+    // is what made a failed reload LOOK like deleted work, and the
+    // next check tap would then have saved that empty state for real.
+    if(!state.checks) state.checks = {};
+    showToast('Could not refresh today\'s check marks. Your work is still here and will sync when the connection is back.');
+  }
   // checks is keyed by studentId -> {subjectId: bool}, so each kid has
   // independent completion tracking for their own academics.
-  state.checks = cRes.value || {};
   state.students.forEach(s=>{ if(!state.checks[s.id]) state.checks[s.id] = {}; });
 
   // AUTO-SAVE: the first time a school day is viewed, snapshot the ENTIRE
@@ -2275,8 +2320,10 @@ async function renderBoardInner(){
   if(!isTestDay){
     for(const s of state.students){
       const ceRes = await storageGetStrict(currentEventResponseKey(state.dateStr, s.id));
-      if(ceRes.ok) unprotectKey(currentEventResponseKey(state.dateStr, s.id)); else protectKeyFromOverwrite(currentEventResponseKey(state.dateStr, s.id));
-      currentEventResponses[s.id] = ceRes.value || {headline:'', summary:''};
+      state.ceCache = state.ceCache || {};
+      if(ceRes.ok){ guardGoodLoad(currentEventResponseKey(state.dateStr, s.id)); state.ceCache[s.id] = ceRes.value || {headline:'', summary:''}; }
+      else guardFailedLoad(currentEventResponseKey(state.dateStr, s.id));
+      currentEventResponses[s.id] = state.ceCache[s.id] || {headline:'', summary:''};
     }
   }
 
@@ -2813,13 +2860,13 @@ async function openUpcomingDayPreview(dateObj, targetContainer){
     // snapshot, today's checkmarks, or this week's Friday test words.
     const pvO = await storageGetStrict(dayKey(state.dateStr));
     const pvC = await storageGetStrict(checksKey(state.dateStr));
-    if(pvO.ok) unprotectKey(dayKey(state.dateStr)); else protectKeyFromOverwrite(dayKey(state.dateStr));
-    if(pvC.ok) unprotectKey(checksKey(state.dateStr)); else protectKeyFromOverwrite(checksKey(state.dateStr));
-    state.todayOverride = pvO.value;
-    state.checks = pvC.value || {};
-  state.gradebook = {};
+    if(pvO.ok){ guardGoodLoad(dayKey(state.dateStr)); state.todayOverride = pvO.value; } else guardFailedLoad(dayKey(state.dateStr));
+    if(pvC.ok){ guardGoodLoad(checksKey(state.dateStr)); state.checks = pvC.value || {}; } else { guardFailedLoad(checksKey(state.dateStr)); if(!state.checks) state.checks = {}; }
   await Promise.all(state.students.map(async (s)=>{
-    state.gradebook[s.id] = (await storageGet(gradebookKey(s.id))) || { entries: {} };
+    const gRes = await storageGetStrict(gradebookKey(s.id));
+    state.gradebook = state.gradebook || {};
+    if(gRes.ok){ guardGoodLoad(gradebookKey(s.id)); state.gradebook[s.id] = gRes.value || { entries: {} }; }
+    else { guardFailedLoad(gradebookKey(s.id)); if(!state.gradebook[s.id]) state.gradebook[s.id] = { entries: {} }; }
   }));
     if(d.getDay() === 5){
       try { state.weekWords = await computeWeekWordsFor(mondayOfWeek(d)); } catch(e){}
@@ -3041,9 +3088,9 @@ async function loadTestForStudent(student){
   // not start the test from blank defaults that a save would write back.
   const tKey = testAnswersKey(state.dateStr, student.id);
   const tRes = await storageGetStrict(tKey);
-  if(tRes.ok) unprotectKey(tKey);
+  if(tRes.ok) guardGoodLoad(tKey);
   else {
-    protectKeyFromOverwrite(tKey);
+    guardFailedLoad(tKey);
     showToast('Could not reach the cloud for saved test answers. Your saved work is protected and will reappear when the connection is back. Anything typed now will not be saved.');
   }
   const saved = (tRes.ok && tRes.value) ? tRes.value : defaultTestAnswers();
@@ -3467,8 +3514,8 @@ async function loadGradebook(studentId){
     const fresh = { entries: {} };
     state.gradebook[studentId] = fresh;
     const gRes = await storageGetStrict(gradebookKey(studentId));
-    if(gRes.ok){ unprotectKey(gradebookKey(studentId)); if(gRes.value && gRes.value.entries) fresh.entries = gRes.value.entries; }
-    else protectKeyFromOverwrite(gradebookKey(studentId));
+    if(gRes.ok){ guardGoodLoad(gradebookKey(studentId)); if(gRes.value && gRes.value.entries) fresh.entries = gRes.value.entries; }
+    else guardFailedLoad(gradebookKey(studentId));
   }
   if(!state.gradebook[studentId].entries) state.gradebook[studentId].entries = {};
   return state.gradebook[studentId];
@@ -4541,17 +4588,32 @@ async function wsFlushWorksheetSaves(){
       if(el.type === 'checkbox') entry.answers[el.dataset.wsfield] = el.checked ? 'x' : '';
       else entry.answers[el.dataset.wsfield] = el.value;
     });
-    // Overwrite guard: an entry whose load failed has nothing trustworthy
-    // to write — skip it and count it as handled, so close/lock/update
-    // flows are not stalled by a record that must not be touched.
+    // Overwrite guard heal: if this entry's load failed when the sheet
+    // opened, its cloud record is locked. Re-read the record NOW: when
+    // the connection is back, merge the cloud copy under what was typed
+    // this session and unlock, so the save the student is waiting on
+    // can actually land. The old flow retried the same refused write
+    // forever, which read as a dead "Try saving again" button. Still
+    // unreachable: stay locked and count as handled rather than write.
     const aKey = worksheetAnswersKey(ctx.dateStr, sid, ctx.subject);
-    let ok = true;
-    if(!isSaveProtected(aKey)) ok = await storageSet(aKey, entry.answers);
-    const checks = (typeof wsChecksCache !== 'undefined') ? wsChecksCache[sid] : null;
-    if(checks){
-      const cKey = wsCheckKey(ctx.dateStr, sid, ctx.subject);
-      if(!isSaveProtected(cKey)) ok = (await storageSet(cKey, checks)) && ok;
+    const cKey = wsCheckKey(ctx.dateStr, sid, ctx.subject);
+    if(isSaveProtected(aKey)){
+      const heal = await storageGetStrict(aKey);
+      if(heal.ok){ entry.answers = mergeAnswersUnder(entry.answers, heal.value || {}); guardGoodLoad(aKey); }
     }
+    if(isSaveProtected(cKey)){
+      const healC = await storageGetStrict(cKey);
+      if(healC.ok && typeof wsChecksCache !== 'undefined' && wsChecksCache[sid]){
+        wsChecksCache[sid] = mergeAnswersUnder(wsChecksCache[sid], healC.value || {});
+        guardGoodLoad(cKey);
+      }
+    }
+    let ok = true;
+    const jobs = [];
+    if(!isSaveProtected(aKey)) jobs.push(storageSet(aKey, entry.answers).then(r => { if(!r) ok = false; }));
+    const checks = (typeof wsChecksCache !== 'undefined') ? wsChecksCache[sid] : null;
+    if(checks && !isSaveProtected(cKey)) jobs.push(storageSet(cKey, checks).then(r => { if(!r) ok = false; }));
+    await Promise.all(jobs);
     return ok;
   }catch(e){ return false; }
 }
@@ -4561,7 +4623,17 @@ async function wsFlushTestSaves(){
     const sids = new Set([...Object.keys(testInputSaveTimers), ...Object.keys(testCache)]);
     for(const sid of sids){
       if(testInputSaveTimers[sid]){ clearTimeout(testInputSaveTimers[sid]); delete testInputSaveTimers[sid]; }
-      if(testCache[sid]) ok = (await saveTestAnswers(sid)) && ok;
+      if(testCache[sid]){
+        // Same heal as the worksheet flush: a protected test record
+        // re-reads and merges before saving, instead of the session's
+        // typing being silently dropped.
+        const tKey = testAnswersKey(state.dateStr, sid);
+        if(isSaveProtected(tKey)){
+          const heal = await storageGetStrict(tKey);
+          if(heal.ok){ testCache[sid].answers = mergeAnswersUnder(testCache[sid].answers, heal.value || {}); guardGoodLoad(tKey); }
+        }
+        ok = (await saveTestAnswers(sid)) && ok;
+      }
     }
     return ok;
   }catch(e){ return false; }
@@ -4880,29 +4952,38 @@ async function openWorksheetModal(subject, lesson, preferredStudentId, weekdayNu
     tabsWrap.innerHTML = worksheetStudents.map((s)=>`<div class="modal-tab ${s.id===defaultId?'active':''}" data-wstab="${s.id}">${esc(s.name)}</div>`).join('');
   }
 
+  // Clear the previous sheet's DOM first: its fields still carry
+  // data-wsfield attributes, and the save flush reads every matching
+  // field under the overlay. Left in place, a reopened sheet's flush
+  // would pull the OLD sheet's values over the new sheet's answers.
+  const wsFormStale = document.getElementById('worksheetFormArea');
+  if(wsFormStale) wsFormStale.innerHTML = '';
+  const wsUtilStale = document.getElementById('wsUtilBar');
+  if(wsUtilStale) wsUtilStale.innerHTML = '';
   worksheetCache = {};
   wsChecksCache = {};
   wsGateCache = {};
   const wsBhm = dayPart.bhm || lesson.blackHistoryMoment || null;
   let wsLoadFailed = false;
-  for(const s of worksheetStudents){
+  // All students and all three records load in parallel: the sequential
+  // version stacked up to nine timed reads on a slow connection before
+  // the sheet could even open.
+  await Promise.all(worksheetStudents.map(async (s)=>{
     const aKey = worksheetAnswersKey(effDateStr, s.id, subject);
     const cKey = wsCheckKey(effDateStr, s.id, subject);
     const gKey = wsGateKey(effDateStr, s.id, subject);
     // Strict loads: a failed read must never look like "no saved work",
     // or this session's saves would overwrite the real record (overwrite
     // guard). Failed keys are protected until a later load succeeds.
-    const aRes = await storageGetStrict(aKey);
-    const cRes = await storageGetStrict(cKey);
-    const gRes = await storageGetStrict(gKey);
-    if(aRes.ok) unprotectKey(aKey); else { protectKeyFromOverwrite(aKey); wsLoadFailed = true; }
-    if(cRes.ok) unprotectKey(cKey); else { protectKeyFromOverwrite(cKey); wsLoadFailed = true; }
-    if(gRes.ok) unprotectKey(gKey); else { protectKeyFromOverwrite(gKey); wsLoadFailed = true; }
+    const [aRes, cRes, gRes] = await Promise.all([ storageGetStrict(aKey), storageGetStrict(cKey), storageGetStrict(gKey) ]);
+    if(aRes.ok) guardGoodLoad(aKey); else { guardFailedLoad(aKey); wsLoadFailed = true; }
+    if(cRes.ok) guardGoodLoad(cKey); else { guardFailedLoad(cKey); wsLoadFailed = true; }
+    if(gRes.ok) guardGoodLoad(gKey); else { guardFailedLoad(gKey); wsLoadFailed = true; }
     const saved = (aRes.ok && aRes.value) ? aRes.value : defaultWorksheetAnswers(worksheet);
     worksheetCache[s.id] = { worksheet: worksheet, answers: saved, bhm: wsBhm, studentId: s.id };
     wsChecksCache[s.id] = (cRes.ok && cRes.value) || {};
     wsGateCache[s.id] = (gRes.ok && gRes.value) || {};
-  }
+  }));
   if(wsLoadFailed){
     showToast('Could not reach the cloud for saved answers. Your saved work is protected and will reappear when the connection is back. Anything typed now will not be saved.');
   }
@@ -6410,7 +6491,7 @@ async function preloadGatePeek(){
     if(!subj) return;
     await Promise.all((state.students || []).map(async (s)=>{
       const gRes = await storageGetStrict(wsGateKey(state.dateStr, s.id, subj));
-      if(gRes.ok) unprotectKey(wsGateKey(state.dateStr, s.id, subj)); else protectKeyFromOverwrite(wsGateKey(state.dateStr, s.id, subj));
+      if(gRes.ok) guardGoodLoad(wsGateKey(state.dateStr, s.id, subj)); else guardFailedLoad(wsGateKey(state.dateStr, s.id, subj));
       const rec = (gRes.ok && gRes.value) || {};
       wsMergeGatePeek(state.dateStr + '|' + subj + '|' + s.id, rec);
     }));
@@ -8419,7 +8500,7 @@ if(!SUPABASE_CONFIGURED){
    answers and checks autosave continuously, so after reload the student
    just reopens the worksheet. DEPLOY ORDER MATTERS: push index.html first,
    verify Pages rebuilt, THEN push version.json (see AGENTS.md). */
-const APP_VERSION = '20261109a';
+const APP_VERSION = '20261110a';
 let wsUpdatePromptShown = false;
 async function wsCheckAppVersion(){
   if(wsUpdatePromptShown) return;
@@ -8582,6 +8663,7 @@ function bootApp(){
   // Poll for changes made from other devices (e.g. you edit on your phone,
   // the kids' display picks it up within a minute).
   setInterval(async ()=>{
+    if(window.__writesInFlight > 0) return; // never rebuild the board over a save that has not landed yet
     const ae = document.activeElement;
     if(ae && /^(TEXTAREA|INPUT)$/.test(ae.tagName) && document.getElementById('board').contains(ae)) return; // don't rebuild the board mid-typing
     if(Object.values(vidPlayers).some(st=>{ try{ return !!(st.player && st.player.getPlayerState && st.player.getPlayerState() === 1); }catch(e){ return false; } })) return; // don't rebuild mid-video
