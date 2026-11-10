@@ -1554,11 +1554,16 @@ async function loadAll(){
   }
   state.cycleStartMonday = cycleStart;
 
-  const [overrideVal, checksVal] = await Promise.all([ storageGet(dayKey(dstr)), storageGet(checksKey(dstr)) ]);
-  state.todayOverride = overrideVal;
+  const [oRes, cRes] = await Promise.all([ storageGetStrict(dayKey(dstr)), storageGetStrict(checksKey(dstr)) ]);
+  // Overwrite guard, same rule as the worksheets: a failed read must never
+  // look like "nothing saved yet". A failed key is protected, so no save
+  // this session can overwrite the real day plan or the day's check marks.
+  if(oRes.ok) unprotectKey(dayKey(dstr)); else protectKeyFromOverwrite(dayKey(dstr));
+  if(cRes.ok) unprotectKey(checksKey(dstr)); else { protectKeyFromOverwrite(checksKey(dstr)); showToast('Could not load today\'s check marks. They are protected and will reappear when the connection is back.'); }
+  state.todayOverride = oRes.value;
   // checks is keyed by studentId -> {subjectId: bool}, so each kid has
   // independent completion tracking for their own academics.
-  state.checks = checksVal || {};
+  state.checks = cRes.value || {};
   state.students.forEach(s=>{ if(!state.checks[s.id]) state.checks[s.id] = {}; });
 
   // AUTO-SAVE: the first time a school day is viewed, snapshot the ENTIRE
@@ -2269,7 +2274,9 @@ async function renderBoardInner(){
   const currentEventResponses = {};
   if(!isTestDay){
     for(const s of state.students){
-      currentEventResponses[s.id] = (await storageGet(currentEventResponseKey(state.dateStr, s.id))) || {headline:'', summary:''};
+      const ceRes = await storageGetStrict(currentEventResponseKey(state.dateStr, s.id));
+      if(ceRes.ok) unprotectKey(currentEventResponseKey(state.dateStr, s.id)); else protectKeyFromOverwrite(currentEventResponseKey(state.dateStr, s.id));
+      currentEventResponses[s.id] = ceRes.value || {headline:'', summary:''};
     }
   }
 
@@ -2804,8 +2811,12 @@ async function openUpcomingDayPreview(dateObj, targetContainer){
     state.dateStr = toDateStr(d);
     // The preview day must render its OWN plan: never today's frozen
     // snapshot, today's checkmarks, or this week's Friday test words.
-    state.todayOverride = await storageGet(dayKey(state.dateStr));
-    state.checks = (await storageGet(checksKey(state.dateStr))) || {};
+    const pvO = await storageGetStrict(dayKey(state.dateStr));
+    const pvC = await storageGetStrict(checksKey(state.dateStr));
+    if(pvO.ok) unprotectKey(dayKey(state.dateStr)); else protectKeyFromOverwrite(dayKey(state.dateStr));
+    if(pvC.ok) unprotectKey(checksKey(state.dateStr)); else protectKeyFromOverwrite(checksKey(state.dateStr));
+    state.todayOverride = pvO.value;
+    state.checks = pvC.value || {};
   state.gradebook = {};
   await Promise.all(state.students.map(async (s)=>{
     state.gradebook[s.id] = (await storageGet(gradebookKey(s.id))) || { entries: {} };
@@ -2872,7 +2883,12 @@ async function moveSubject(name, direction, studentId){
    (courses.html), keys prefixed "seu:", and shows anything due today
    right inside the daily board. Tapping a task toggles it done in the
    shared data, same as it would in the planner itself. */
-async function seuGet(key){ return storageGet('seu:'+key); }
+async function seuGet(key){
+  const r = await storageGetStrict('seu:'+key);
+  if(r.ok){ unprotectKey('seu:'+key); return r.value; }
+  protectKeyFromOverwrite('seu:'+key);
+  return null;
+}
 async function seuSet(key, val){ return storageSet('seu:'+key, val); }
 
 async function loadSeuToday(){
@@ -3450,8 +3466,9 @@ async function loadGradebook(studentId){
     // tick share ONE object instead of racing separate copies.
     const fresh = { entries: {} };
     state.gradebook[studentId] = fresh;
-    const stored = await storageGet(gradebookKey(studentId));
-    if(stored && stored.entries) fresh.entries = stored.entries;
+    const gRes = await storageGetStrict(gradebookKey(studentId));
+    if(gRes.ok){ unprotectKey(gradebookKey(studentId)); if(gRes.value && gRes.value.entries) fresh.entries = gRes.value.entries; }
+    else protectKeyFromOverwrite(gradebookKey(studentId));
   }
   if(!state.gradebook[studentId].entries) state.gradebook[studentId].entries = {};
   return state.gradebook[studentId];
@@ -6392,7 +6409,9 @@ async function preloadGatePeek(){
     const subj = (wd === 1 || wd === 2) ? 'history' : (wd === 3 || wd === 4) ? 'science' : null;
     if(!subj) return;
     await Promise.all((state.students || []).map(async (s)=>{
-      const rec = await storageGet(wsGateKey(state.dateStr, s.id, subj)) || {};
+      const gRes = await storageGetStrict(wsGateKey(state.dateStr, s.id, subj));
+      if(gRes.ok) unprotectKey(wsGateKey(state.dateStr, s.id, subj)); else protectKeyFromOverwrite(wsGateKey(state.dateStr, s.id, subj));
+      const rec = (gRes.ok && gRes.value) || {};
       wsMergeGatePeek(state.dateStr + '|' + subj + '|' + s.id, rec);
     }));
   } catch(e){}
@@ -6429,7 +6448,21 @@ function gateVideoFor(student, subject, wd){
   } catch(e){ return null; }
 }
 async function saveWsGate(studentId, subject){
-  try { await storageSet(wsGateKey(state.dateStr, studentId, subject), wsGateCache[studentId] || {}); } catch(e){}
+  try {
+    // Merge with the peek record first (it only ever moves forward), so a
+    // save from this side can never rewind watch progress the board
+    // player already banked, or the other way around.
+    const g = Object.assign({}, wsGateCache[studentId] || {});
+    const pk = gatePeekCache[state.dateStr + '|' + subject + '|' + studentId];
+    if(pk){
+      g.acc = Math.max(g.acc || 0, pk.acc || 0);
+      g.pos = Math.max(g.pos || 0, pk.pos || 0);
+      g.dur = Math.max(g.dur || 0, pk.dur || 0);
+      if(pk.watched) g.watched = true;
+      wsGateCache[studentId] = g;
+    }
+    await storageSet(wsGateKey(state.dateStr, studentId, subject), g);
+  } catch(e){}
   // Keep the board's peek cache in step so the lesson card pill is current.
   wsMergeGatePeek(state.dateStr + '|' + subject + '|' + studentId, wsGateCache[studentId] || {});
 }
@@ -7699,9 +7732,11 @@ function saveBoardGateProgress(st){
   if(!st || !st.studentId || !st.subject) return;
   const key = state.dateStr + '|' + st.subject + '|' + st.studentId;
   const rec = gatePeekCache[key] || (gatePeekCache[key] = {});
-  rec.acc = Math.floor(st.acc);
-  rec.pos = Math.floor(st.pos);
-  if(st.dur) rec.dur = Math.floor(st.dur);
+  // Video progress only ever moves forward (the same rule the peek merge
+  // uses): a fresh player starting at zero must never rewind the record.
+  rec.acc = Math.max(rec.acc || 0, Math.floor(st.acc) || 0);
+  rec.pos = Math.max(rec.pos || 0, Math.floor(st.pos) || 0);
+  if(st.dur) rec.dur = Math.max(rec.dur || 0, Math.floor(st.dur));
   if(st.done) rec.watched = true;
   st.lastSaveAcc = st.acc;
   return storageSet(wsGateKey(state.dateStr, st.studentId, st.subject), rec);
@@ -8384,7 +8419,7 @@ if(!SUPABASE_CONFIGURED){
    answers and checks autosave continuously, so after reload the student
    just reopens the worksheet. DEPLOY ORDER MATTERS: push index.html first,
    verify Pages rebuilt, THEN push version.json (see AGENTS.md). */
-const APP_VERSION = '20261030d';
+const APP_VERSION = '20261109a';
 let wsUpdatePromptShown = false;
 async function wsCheckAppVersion(){
   if(wsUpdatePromptShown) return;
