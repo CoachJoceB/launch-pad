@@ -4958,8 +4958,10 @@ async function openWorksheetModal(subject, lesson, preferredStudentId, weekdayNu
   // would pull the OLD sheet's values over the new sheet's answers.
   const wsFormStale = document.getElementById('worksheetFormArea');
   if(wsFormStale) wsFormStale.innerHTML = '';
-  const wsUtilStale = document.getElementById('wsUtilBar');
-  if(wsUtilStale) wsUtilStale.innerHTML = '';
+  // The utility bar is NOT cleared: it holds fixed page structure (the
+  // vocab, progress, and plan boxes and its Hide toggle) that the open
+  // flow writes into but never recreates. Clearing it deleted those
+  // boxes and broke every worksheet open (board and Planner alike).
   worksheetCache = {};
   wsChecksCache = {};
   const wsPrevGateCache = wsGateCache;
@@ -8548,7 +8550,7 @@ if(!SUPABASE_CONFIGURED){
    answers and checks autosave continuously, so after reload the student
    just reopens the worksheet. DEPLOY ORDER MATTERS: push index.html first,
    verify Pages rebuilt, THEN push version.json (see AGENTS.md). */
-const APP_VERSION = '20261110b';
+const APP_VERSION = '20261110c';
 let wsUpdatePromptShown = false;
 async function wsCheckAppVersion(){
   if(wsUpdatePromptShown) return;
