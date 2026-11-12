@@ -675,7 +675,10 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
     <div id="wsUtilBar" style="display:none;">
       <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:4px;">
         <div class="mini-lbl" style="margin:0;">&#128218; New words &middot; Progress &middot; Today&rsquo;s plan</div>
-        <button type="button" id="wsUtilToggle" class="btn btn-primary" aria-expanded="true" style="font-size:12px;font-weight:700;padding:5px 14px;border-radius:999px;box-shadow:0 2px 6px rgba(0,0,0,.12);">&#9650; Hide</button>
+        <span style="display:flex;gap:8px;align-items:center;">
+          <button type="button" id="wsSaveNowBtn" class="btn btn-primary" style="font-size:12px;font-weight:700;padding:5px 14px;border-radius:999px;box-shadow:0 2px 6px rgba(0,0,0,.12);">&#128190; Save now</button>
+          <button type="button" id="wsUtilToggle" class="btn btn-primary" aria-expanded="true" style="font-size:12px;font-weight:700;padding:5px 14px;border-radius:999px;box-shadow:0 2px 6px rgba(0,0,0,.12);">&#9650; Hide</button>
+        </span>
       </div>
       <div id="wsUtilBody">
         <div id="wsUtilVocab" style="margin-bottom:6px;"></div>
@@ -3278,13 +3281,15 @@ async function renderTestSection(){
   for(const s of state.students){ await loadTestForStudent(s); }
 
   const tabsHTML = state.students.map((s,i)=>`<div class="modal-tab ${i===0?'active':''}" data-testtab="${s.id}">${esc(s.name)}</div>`).join('');
-  return `<div class="modal-tabs" id="testStudentTabs">${tabsHTML}</div><div id="testFormArea"></div>`;
+  return `<div style="display:flex;justify-content:flex-end;margin-bottom:8px;"><button type="button" id="testSaveNowBtn" class="btn btn-primary" style="font-size:12px;font-weight:700;padding:5px 14px;border-radius:999px;box-shadow:0 2px 6px rgba(0,0,0,.12);">&#128190; Save now</button></div><div class="modal-tabs" id="testStudentTabs">${tabsHTML}</div><div id="testFormArea"></div>`;
 }
 
 function afterTestSectionRender(){
   const tabsWrap = document.getElementById('testStudentTabs');
   const formArea = document.getElementById('testFormArea');
   if(!tabsWrap || !formArea) return;
+  const testSaveBtn = document.getElementById('testSaveNowBtn');
+  if(testSaveBtn) testSaveBtn.addEventListener('click', ()=>{ wsRunManualSave(testSaveBtn, 'test'); });
   async function showStudent(id){
     // A student device is signed in as one kid (the name pick): the test
     // stays on that kid. Any switch aimed elsewhere — a sibling tab tap,
@@ -4434,6 +4439,9 @@ function wsSyncStickyOffsets(){
 document.getElementById('wsUtilToggle').addEventListener('click', ()=>{
   wsSetUtilCollapsed(!document.getElementById('wsUtilBody').classList.contains('collapsed'));
 });
+document.getElementById('wsSaveNowBtn').addEventListener('click', ()=>{
+  wsRunManualSave(document.getElementById('wsSaveNowBtn'), 'worksheet');
+});
 window.addEventListener('resize', wsSyncStickyOffsets);
 
 // Matching: cross used letters off the word bank as kids type them. Scoped
@@ -4655,6 +4663,50 @@ async function wsFlushBoardSaves(){
     }
     return ok;
   }catch(e){ return false; }
+}
+/* Manual Save button (worksheet + Friday test): autosave runs in the
+   background, but the kids get a button they can press to force a save
+   right now — and, just as importantly, an honest answer about whether
+   it landed. The flushes count a guard-locked record as "handled" (it
+   cannot be written), so the button checks protection itself after the
+   flush instead of trusting the flush's true: a locked or failed save
+   reports "Not saved" and the work stays on the device. */
+async function wsRunManualSave(btn, kind){
+  if(!btn || btn.disabled) return;
+  btn.disabled = true;
+  const idleLabel = '\uD83D\uDCBE Save now';
+  btn.textContent = 'Saving\u2026';
+  btn.style.background = '';
+  let ok = false, locked = false;
+  try{
+    if(kind === 'test'){
+      ok = await wsFlushTestSaves();
+      const sid = (typeof activeTestStudentId !== 'undefined') ? activeTestStudentId : null;
+      if(sid) locked = isSaveProtected(testAnswersKey(state.dateStr, sid));
+    } else {
+      ok = await wsFlushWorksheetSaves();
+      const ctx = (typeof currentWorksheetCtx !== 'undefined') ? currentWorksheetCtx : null;
+      const sid = (typeof wsActiveStudent !== 'undefined') ? wsActiveStudent : null;
+      if(ctx && sid){
+        locked = isSaveProtected(worksheetAnswersKey(ctx.dateStr, sid, ctx.subject))
+              || isSaveProtected(wsCheckKey(ctx.dateStr, sid, ctx.subject));
+      }
+    }
+  }catch(e){ ok = false; }
+  const time = new Date().toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
+  if(ok && !locked){
+    btn.textContent = '\u2713 Saved ' + time;
+    btn.style.background = 'var(--green)';
+    if(btn._resetTimer) clearTimeout(btn._resetTimer);
+    btn._resetTimer = setTimeout(()=>{ if(btn.isConnected){ btn.textContent = idleLabel; btn.style.background = ''; } }, 5000);
+  } else {
+    btn.textContent = '\u26A0\uFE0F Not saved \u2014 tap to try again';
+    btn.style.background = '#b3261e';
+    showToast(locked
+      ? 'Could not reach the cloud. Your work is still on this device and is protected. Tap Save again when the connection is back.'
+      : 'Save did not go through. Your work is still on this device. Tap Save again to retry.');
+  }
+  btn.disabled = false;
 }
 /* The save gate for updates and the idle lock: true only when the open
    worksheet, the Friday test, and the board current-event fields are all
@@ -8550,7 +8602,7 @@ if(!SUPABASE_CONFIGURED){
    answers and checks autosave continuously, so after reload the student
    just reopens the worksheet. DEPLOY ORDER MATTERS: push index.html first,
    verify Pages rebuilt, THEN push version.json (see AGENTS.md). */
-const APP_VERSION = '20261110c';
+const APP_VERSION = '20261112a';
 let wsUpdatePromptShown = false;
 async function wsCheckAppVersion(){
   if(wsUpdatePromptShown) return;
