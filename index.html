@@ -4981,6 +4981,15 @@ async function openWorksheetModal(subject, lesson, preferredStudentId, weekdayNu
     }
   });
   wsCloseWarned = false;
+  // Keep the previous sheet's in-memory answers until the new load
+  // lands: after an idle timeout the reopen wipes the caches and, when
+  // the connection is still down, the strict load fails and the sheet
+  // would open on empty defaults — silently dropping everything typed
+  // before the timeout that never reached the cloud. The preserved copy
+  // is only reused for the SAME student/date/subject below.
+  const wsPrevCtx = currentWorksheetCtx;
+  const wsPrevCache = worksheetCache;
+  const wsPrevChecks = wsChecksCache;
   currentWorksheetCtx = { subject, lesson, dateStr: effDateStr };
   document.getElementById('worksheetTitle').textContent = materialSubjectLabel(subject) + (forceDayNum ? ' Self Test' : ' Worksheet');
   let datePrefix = '';
@@ -5056,16 +5065,17 @@ async function openWorksheetModal(subject, lesson, preferredStudentId, weekdayNu
     if(aRes.ok) guardGoodLoad(aKey); else { guardFailedLoad(aKey); wsLoadFailed = true; }
     if(cRes.ok) guardGoodLoad(cKey); else { guardFailedLoad(cKey); wsLoadFailed = true; }
     if(gRes.ok) guardGoodLoad(gKey); else { guardFailedLoad(gKey); wsLoadFailed = true; }
-    const saved = (aRes.ok && aRes.value) ? aRes.value : defaultWorksheetAnswers(worksheet);
+    const sameSheet = wsPrevCtx && wsPrevCtx.subject === subject && wsPrevCtx.dateStr === effDateStr;
+    const saved = (aRes.ok && aRes.value) ? aRes.value : (sameSheet && wsPrevCache[s.id] ? wsPrevCache[s.id].answers : defaultWorksheetAnswers(worksheet));
     worksheetCache[s.id] = { worksheet: worksheet, answers: saved, bhm: wsBhm, studentId: s.id };
-    wsChecksCache[s.id] = (cRes.ok && cRes.value) || {};
+    wsChecksCache[s.id] = (cRes.ok && cRes.value) || (sameSheet && wsPrevChecks[s.id] ? wsPrevChecks[s.id] : {});
     // Union-merge, never replace: an unlock or progress earned this
     // session must survive a stale cloud copy or a failed load, or the
     // video gate resurrects a video the student already finished.
     wsGateCache[s.id] = mergeGateRecords(wsPrevGateCache[s.id] || {}, (gRes.ok && gRes.value) || {});
   }));
   if(wsLoadFailed){
-    showToast('Could not reach the cloud for saved answers. Your saved work is protected and will reappear when the connection is back. Anything typed now will not be saved.');
+    showToast('Could not reach the cloud for saved answers. Your saved work is protected and will reappear when the connection is back. Anything typed now stays on this device and will save when the connection returns.');
   }
 
   function showStudent(id){
@@ -8628,7 +8638,7 @@ if(!SUPABASE_CONFIGURED){
    answers and checks autosave continuously, so after reload the student
    just reopens the worksheet. DEPLOY ORDER MATTERS: push index.html first,
    verify Pages rebuilt, THEN push version.json (see AGENTS.md). */
-const APP_VERSION = '20261116a';
+const APP_VERSION = '20261116b';
 let wsUpdatePromptShown = false;
 async function wsCheckAppVersion(){
   if(wsUpdatePromptShown) return;
