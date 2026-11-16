@@ -2687,7 +2687,7 @@ async function renderBoardInner(){
           await storageSet(readingLogLastKey(studentId), entry);
         }
         state.checks[studentId][key] = turningOn;
-        await storageSet(checksKey(state.dateStr), state.checks);
+        await wsGuardedSet(checksKey(state.dateStr), state.checks);
         wsScheduleWidgetPublish();
         if(turningOn){
           playChaChing();
@@ -3115,10 +3115,11 @@ async function loadTestForStudent(student){
 async function saveTestAnswers(studentId){
   const entry = testCache[studentId];
   if(!entry) return true;
-  // Overwrite guard: never write back a test entry whose load failed.
-  if(isSaveProtected(testAnswersKey(state.dateStr, studentId))) return true;
+  // A protected test record heals (re-read + merge + unlock) instead of
+  // being skipped, or the Friday test's autosave never lands — the same
+  // gap the worksheet autosave had.
   entry.answers.savedAt = new Date().toISOString();
-  return storageSet(testAnswersKey(state.dateStr, studentId), entry.answers);
+  return wsGuardedSet(testAnswersKey(state.dateStr, studentId), entry.answers);
 }
 
 function renderTestFormHTML(student, entry){
@@ -3977,7 +3978,7 @@ function renderWorksheetFormHTML(entry, checks){
 
 async function wsSaveChecks(studentId){
   const checks = wsChecksCache[studentId] || {};
-  await storageSet(wsCheckKey(currentWorksheetCtx.dateStr, studentId, currentWorksheetCtx.subject), checks);
+  await wsGuardedSet(wsCheckKey(currentWorksheetCtx.dateStr, studentId, currentWorksheetCtx.subject), checks);
 }
 
 function wsClearMark(container, itemId, entry, checks, studentId){
@@ -4708,6 +4709,27 @@ async function wsRunManualSave(btn, kind){
   }
   btn.disabled = false;
 }
+/* Autosave writes go through here instead of storageSet directly. When
+   a record is guard-locked (its open load failed on a bad connection),
+   storageSet refuses every write silently, so autosave never lands for
+   the rest of the session — while the manual Save button works, because
+   its flush heals first. Heal the same way (re-read, merge the cloud
+   copy under this session's values, unlock), then save. Still
+   unreachable: the write is skipped and the work stays in memory for
+   the next keystroke's autosave, the Save button, or the close gate. */
+async function wsGuardedSet(key, value){
+  if(isSaveProtected(key)){
+    const heal = await storageGetStrict(key);
+    if(heal.ok){
+      const merged = mergeAnswersUnder(value, heal.value || {});
+      if(value && typeof value === 'object') Object.assign(value, merged);
+      guardGoodLoad(key);
+    } else {
+      return false;
+    }
+  }
+  return storageSet(key, value);
+}
 /* The save gate for updates and the idle lock: true only when the open
    worksheet, the Friday test, and the board current-event fields are all
    CONFIRMED saved to the cloud (or had nothing to save). Video progress
@@ -4747,7 +4769,7 @@ function wireWorksheetFormInputs(container, studentId){
     container.querySelectorAll('[data-wsgroup="'+gi+'"] [data-wsfield]').forEach(el=>{
       el.addEventListener('change', async ()=>{
         entry.answers[el.dataset.wsfield] = el.checked ? 'x' : '';
-        await storageSet(worksheetAnswersKey(currentWorksheetCtx.dateStr, studentId, currentWorksheetCtx.subject), entry.answers);
+        await wsGuardedSet(worksheetAnswersKey(currentWorksheetCtx.dateStr, studentId, currentWorksheetCtx.subject), entry.answers);
         refresh();
       });
     });
@@ -4767,14 +4789,14 @@ function wireWorksheetFormInputs(container, studentId){
       const saveKey = worksheetAnswersKey(currentWorksheetCtx.dateStr, studentId, currentWorksheetCtx.subject);
       const saveAnswers = entry.answers;
       clearTimeout(wsTextSaveTimer);
-      wsTextSaveTimer = setTimeout(()=>{ storageSet(saveKey, saveAnswers); }, 500);
+      wsTextSaveTimer = setTimeout(()=>{ wsGuardedSet(saveKey, saveAnswers); }, 500);
     });
     el.addEventListener('change', async ()=>{
       clearTimeout(wsTextSaveTimer);
       const editSeq = ++wsSeq;
       const itemId = el.dataset.wsitem;
       entry.answers[el.dataset.wsfield] = el.value;
-      await storageSet(worksheetAnswersKey(currentWorksheetCtx.dateStr, studentId, currentWorksheetCtx.subject), entry.answers);
+      await wsGuardedSet(worksheetAnswersKey(currentWorksheetCtx.dateStr, studentId, currentWorksheetCtx.subject), entry.answers);
       if(itemId && (wsCheckSeq[itemId]||0) <= editSeq) wsClearMark(container, itemId, entry, checks, studentId);
     });
   });
@@ -4786,7 +4808,7 @@ function wireWorksheetFormInputs(container, studentId){
       const itemId = btn.dataset.wsitem;
       const field = btn.getAttribute('data-wstf') || btn.getAttribute('data-wschoice');
       entry.answers[field] = btn.dataset.val;
-      await storageSet(worksheetAnswersKey(currentWorksheetCtx.dateStr, studentId, currentWorksheetCtx.subject), entry.answers);
+      await wsGuardedSet(worksheetAnswersKey(currentWorksheetCtx.dateStr, studentId, currentWorksheetCtx.subject), entry.answers);
       const sibAttr = btn.hasAttribute('data-wstf') ? 'data-wstf' : 'data-wschoice';
       container.querySelectorAll('['+sibAttr+'="'+field+'"]').forEach(b=>{
         b.classList.toggle('btn-primary', b===btn);
@@ -6223,12 +6245,16 @@ async function wsCloseWithSaveGate(){
   }
   overlay.innerHTML = '<div class="modal" style="max-width:440px;">'
     + '<h3 style="margin-top:0;">Your work is not saved yet</h3>'
-    + '<p style="font-size:14px;line-height:1.55;">The save could not be confirmed, the connection may be down. Your answers are still on this screen. Try again, or close anyway and what you typed this time may be lost.</p>'
+    + '<p style="font-size:14px;line-height:1.55;">The save could not be confirmed, the connection may be down. Your answers are still on this screen. Try again, go back to your worksheet and tap Save now, or close anyway and what you typed this time may be lost.</p>'
     + '<div style="display:flex;gap:8px;margin-top:14px;flex-wrap:wrap;">'
     + '<button type="button" class="btn btn-primary" id="wsSaveRetry">Try saving again</button>'
+    + '<button type="button" class="btn btn-ghost" id="wsSaveBack">\u2190 Back to worksheet</button>'
     + '<button type="button" class="btn btn-ghost" id="wsSaveCloseAnyway">Close anyway</button>'
     + '</div></div>';
   overlay.querySelector('#wsSaveRetry').addEventListener('click', ()=>{ wsCloseWithSaveGate(); });
+  // Back to the worksheet: the sheet was never closed, so the work is
+  // still on the page and the student can tap Save now there instead.
+  overlay.querySelector('#wsSaveBack').addEventListener('click', ()=>{ overlay.remove(); });
   overlay.querySelector('#wsSaveCloseAnyway').addEventListener('click', ()=>{
     overlay.remove();
     wsStopWorksheetCamera();
@@ -8602,7 +8628,7 @@ if(!SUPABASE_CONFIGURED){
    answers and checks autosave continuously, so after reload the student
    just reopens the worksheet. DEPLOY ORDER MATTERS: push index.html first,
    verify Pages rebuilt, THEN push version.json (see AGENTS.md). */
-const APP_VERSION = '20261112a';
+const APP_VERSION = '20261116a';
 let wsUpdatePromptShown = false;
 async function wsCheckAppVersion(){
   if(wsUpdatePromptShown) return;
